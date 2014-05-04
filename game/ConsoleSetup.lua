@@ -9,6 +9,7 @@ local printDebugSettings = {}
 
 -- switches
 printDebugSettings["stuff"] = false
+printDebugSettings["mathTest"] = true
 
 --------------------------------
 -- Functions

@@ -5,6 +5,8 @@
 
 -- add shit to the stuff
 require("ConsoleSetup")
+require("Math")
+
 
 
 -- game start
@@ -12,6 +14,7 @@ function love.load()
 	-- load shit
 	-- build shit
 	-- take a shit --> no really --> go take a shit
+	require("MathTest")
 end 
 
 
@@ -30,8 +33,6 @@ function love.update(dt)
 		frameCount = 0
 		time =  time - (1/updateRate)
 	end 
-
-	printDebug{"shit is nutz", "stuff"}
 
 end 
 
