@@ -1,0 +1,11 @@
+
+Kills
+----------
+- Killing brings on a state
+- That state can alter a characters available actions, speed, etc
+
+Modes
+------------
+-FullSet - all character types: pawn, rook, knight, bishop, queen, king
+-HalfSet - 3 tiers you get 1,except for pawns, from each tier: (pawns)(rook)(knight)(bishop)(queen)(king)
+
