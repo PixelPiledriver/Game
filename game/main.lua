@@ -15,7 +15,7 @@ local box2 = Box:New
 	x = 200,
 	y = 200,
 	color = {255, 0, 0, 255},
-	
+
 	keys = 
 	{
 		left = "left",
@@ -29,6 +29,7 @@ local box2 = Box:New
 -- game start
 -- runs only once
 function love.load()
+	love.window.setFullscreen(false, "desktop")
 	require("MathTest")
 end 
 
@@ -47,6 +48,11 @@ end
 function love.keypressed(key)
 	box1:Input(key)
 	box2:Input(key)
+
+	-- exit game
+	if(key == "escape") then
+		love.event.quit()
+	end 
 end
 
 
