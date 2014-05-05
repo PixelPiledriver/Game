@@ -19,6 +19,12 @@ function Player:New(data)
 	object.height = data.height or 32
 	object.color = data.color or {255,255,255,255}
 	object.speed = data.speed or 5
+	object.useFrame = data.useFrame or false
+	object.frame = data.frame or nil
+	object.sheet = data.sheet or nil
+	object.angle = data.angle or 0
+	object.xScale = data.xScale or 1
+	object.yScale = data.yScale or 1
 
 	-- controls
 	object.keys =
@@ -34,8 +40,15 @@ function Player:New(data)
 	-- Functions
 	-------------
 	function object:Draw()
-		love.graphics.setColor(self.color)
-		love.graphics.draw(self.sprite, self.x, self.y)
+
+		if(self.useFrame) then
+			love.graphics.setColor(self.color)
+			love.graphics.draw(self.sheet, self.frame, self.x, self.y, self.angle, self.xScale, self.yScale)
+		else
+			love.graphics.setColor(self.color)
+			love.graphics.draw(self.sprite, self.x, self.y, self.angle, self.xScale, self.yScale)
+		end 
+
 	end 
 
 	-- only used for press and release
