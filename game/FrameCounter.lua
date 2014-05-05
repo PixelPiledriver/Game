@@ -10,6 +10,7 @@ FrameCounter.printDeltaTime = false
 -- variables
 FrameCounter.x = 10
 FrameCounter.y = 10
+FrameCounter.color = {0, 255, 0, 255}
 
 
 local time = 0
@@ -37,11 +38,13 @@ function FrameCounter:Update(dt)
 end 
 
 
+-- draw the fps to screen
 function FrameCounter:Draw()
 	if(self.active == false) then
 		return
 	end 
 
+	love.graphics.setColor(self.color)
 	love.graphics.print("FPS:" .. math.floor(fps), self.x, self.y)
 
 	if(self.printDeltaTime) then

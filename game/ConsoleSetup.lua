@@ -41,3 +41,10 @@ local printAtRuntime = true
 if(printAtRuntime) then
 	io.stdout:setvbuf("no")
 end 
+
+
+
+-- notes
+-------------------
+-- should probly add global switches for love.graphic.print as well
+-- will do that later
