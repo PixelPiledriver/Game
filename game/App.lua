@@ -12,9 +12,7 @@ function App:QuitGameInput(key)
 end 
 
 function App:Input(key)
-	
 	self:QuitGameInput(key)
-
 end 
 
 

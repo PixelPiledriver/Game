@@ -1,5 +1,8 @@
 -- basic object with sprite, input, etc
 
+
+local Animation = require("Animation")
+
 -- use to create more instances
 local Player = {}
 
@@ -20,8 +23,10 @@ function Player:New(data)
 	object.color = data.color or {255,255,255,255}
 	object.speed = data.speed or 5
 	object.useFrame = data.useFrame or false
+	object.useAnimation = data.useAnimation or false
 	object.frame = data.frame or nil
 	object.sheet = data.sheet or nil
+	object.animation = data.animation or nil
 	object.angle = data.angle or 0
 	object.xScale = data.xScale or 1
 	object.yScale = data.yScale or 1
@@ -39,11 +44,14 @@ function Player:New(data)
 	-------------
 	-- Functions
 	-------------
+
 	function object:Draw()
 
 		if(self.useFrame) then
 			love.graphics.setColor(self.color)
 			love.graphics.draw(self.sheet, self.frame, self.x, self.y, self.angle, self.xScale, self.yScale)
+		elseif(self.useAnimation) then
+			self.animation:Draw(self)
 		else
 			love.graphics.setColor(self.color)
 			love.graphics.draw(self.sprite, self.x, self.y, self.angle, self.xScale, self.yScale)
