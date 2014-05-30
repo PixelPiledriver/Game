@@ -37,7 +37,7 @@ Sprites.pawn.sheet = love.graphics.newImage("graphics/pawnSheet.png")
 Sprites.pawn.sheet:setFilter("nearest", "nearest")
 
 -- create frames
--- eventually will change to create animations
+-- eventually will change to create animationsd
 -- but this is just some shit for now :P
 Sprites.pawn.idle = MakeFrame
 {
@@ -92,7 +92,7 @@ Sprites.pawn.animation1 = Animation:New
 							Sprites.pawn.idle
 						},
 
-	delays = {20, 3, 12, 3},
+	delays = {10, 10, 10, 10},
 	speed = 1,
 }
 

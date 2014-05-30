@@ -58,8 +58,8 @@ function Animation:New(data)
 
 		love.graphics.draw(self.sheet, self.frames[self.currentFrame], objectData.x, objectData.y, objectData.angle, objectData.xScale, objectData.yScale)
 
-		self:UpdateFrameTime()
-	end 
+		self:UpdateFrameTime(
+)	end 
 
 
 	return object
