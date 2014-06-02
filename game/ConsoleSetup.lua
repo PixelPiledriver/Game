@@ -5,15 +5,18 @@
 -- flip on and off anytime
 -- add a new switch by adding a string index
 -- printDebug.["Name"]
+
+
 local printDebugSettings = {}
 
 -- switches
 printDebugSettings["stuff"] = false
 printDebugSettings["mathTest"] = true
+printDebugSettings["animation"] = false
 
---------------------------------
+--------------
 -- Functions
-----------------------------
+--------------
 
 -- alternative print with global switches
 -- {"message", "typeName"}
@@ -30,9 +33,9 @@ end
 
 
 
----------------------------
--- run on require
---------------------------------
+-------------------
+-- Run on Require
+-------------------
 
 -- switch to print to console
 local printAtRuntime = true

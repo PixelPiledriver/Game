@@ -11,6 +11,7 @@ local Sprites = {}
 -- Functions
 ------------------
 
+-- make a single frame
 local function MakeFrame(data)
 	local f = {}
 
@@ -22,6 +23,43 @@ local function MakeFrame(data)
 	f.imageHeight = data.imageHeight or 128
 
 	return love.graphics.newQuad(f.x, f.y, f.width, f.height, f.imageWidth, f.imageHeight)
+end
+
+-- make multiple frames
+local function MakeFrames(data)
+
+	local frames = {}
+
+	local yFrame = 0 
+	local xFrame = 0
+
+	for i=0, data.totalFrames-1 do
+		local f = {}
+
+		f.x = data.x + (data.width * xFrame)
+		f.y = data.y + (data.height * yFrame)
+		f.width = data.width or 1
+		f.height = data.height or 1
+		f.imageWidth = data.imageWidth or 128
+		f.imageHeight = data.imageHeight or 128
+
+		frames[#frames + 1] = MakeFrame(f)
+
+		printDebug{"xFrame:" .. xFrame .. ", yFrame:" .. yFrame, "animation"}
+	
+		xFrame = xFrame + 1
+
+		if(data.x + (data.width * xFrame) >= data.imageWidth) then
+			xFrame = 0
+			yFrame = yFrame + 1
+		end 
+
+	end 
+
+	printDebug{"frames:" .. #frames, "animation"}
+
+	return frames
+
 end 
 
 
@@ -37,8 +75,8 @@ Sprites.pawn.sheet = love.graphics.newImage("graphics/pawnSheet.png")
 Sprites.pawn.sheet:setFilter("nearest", "nearest")
 
 -- create frames
--- eventually will change to create animationsd
--- but this is just some shit for now :P
+-- these exist to be used
+-- you can add frames to a table to make an animation
 Sprites.pawn.idle = MakeFrame
 {
 	x = 0,
@@ -79,13 +117,32 @@ Sprites.pawn.damage = MakeFrame
 	imageHeight = 128	
 }
 
+Sprites.pawn.multi = MakeFrames
+{
+	totalFrames = 4,
+	x = 0,
+	y = 0,
+	width = 64,
+	height = 64,
+	imageWidth = 128,
+	imageHeight = 128	
+}
 
+
+-- Animations
 Sprites.pawn.animation1 = Animation:New
 {
 	name = "stuff",
 
 	sheet = Sprites.pawn.sheet,
 	frames =	{
+							-- multiple frames all in one table
+							--Sprites.pawn.multi[1],
+							--Sprites.pawn.multi[2],
+							--Sprites.pawn.multi[3],
+							--Sprites.pawn.multi[4]
+
+							-- individual frames in seperate variables
 							Sprites.pawn.walk, 
 							Sprites.pawn.damage, 
 							Sprites.pawn.attack, 
@@ -95,5 +152,7 @@ Sprites.pawn.animation1 = Animation:New
 	delays = {10, 10, 10, 10},
 	speed = 1,
 }
+
+
 
 return Sprites

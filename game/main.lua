@@ -71,6 +71,12 @@ local pawn2 = Player:New
 
 }
 
+local box1 = Box:New
+{
+	x = 200,
+	y = 200
+}
+
 
 
 
@@ -101,7 +107,7 @@ end
 function love.keypressed(key)
 	App:Input(key)
 	pawn:Input(key)
-	pawn:Input(key)
+	pawn2:Input(key)
 end
 
 
@@ -111,6 +117,7 @@ function love.draw()
 
 	pawn2:Draw()
 	pawn:Draw()
+	box1:Draw()
 	
 	
 end 

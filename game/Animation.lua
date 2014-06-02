@@ -6,6 +6,15 @@ local Animation = {}
 
 function Animation:New(data)
 
+	-----------
+	-- Fails
+	-----------
+	-- number of delays does not match number of frames
+	if(#data.frames ~= #data.delays) then
+		printDebug{"Delays and Frames count not the same!", "animation"}
+		return
+	end
+
 	----------
 	-- Create
 	----------
@@ -15,7 +24,7 @@ function Animation:New(data)
 	object.colors = data.colors or nil
 
 	object.sheet = data.sheet or nil
-	object.frames = data.frames or nil
+	object.frames = data.frames or nil -- table of frames
 	object.currentFrame = 1
 	
 	object.speedTime = 1
@@ -23,11 +32,22 @@ function Animation:New(data)
 	object.delayTime = 1
 	object.delays = data.delays
 
+	object.loopMax = data.loopMax or 0
+	object.loopCount = 0
+
+	object.active = true
+
 	-------------
 	-- Functions
 	-------------
 	-- update the frame based on the animation speed and frame delay
 	function object:UpdateFrameTime()
+
+		-- animation should be playing?
+		if(self.active == false) then
+			return
+		end 
+
 		self.speedTime = self.speedTime + 1
 
 		-- next frame?
@@ -41,9 +61,21 @@ function Animation:New(data)
 			end 
 		end 
 
-		-- end of animation? --> need to add loop and stop options here
+		-- end of animation?
 		if(self.currentFrame > #self.frames) then
+
 			self.currentFrame = 1
+
+			-- loop?
+			if(self.loopMax > 0) then
+				self.loopCount = self.loopCount + 1
+
+				if(self.loopCount == self.loopMax) then
+					self.active = false
+				end 
+
+			end 
+
 		end 
 
 	end 
@@ -58,8 +90,8 @@ function Animation:New(data)
 
 		love.graphics.draw(self.sheet, self.frames[self.currentFrame], objectData.x, objectData.y, objectData.angle, objectData.xScale, objectData.yScale)
 
-		self:UpdateFrameTime(
-)	end 
+		self:UpdateFrameTime()	
+	end 
 
 
 	return object
@@ -74,3 +106,4 @@ return Animation
 
 
 
+	
