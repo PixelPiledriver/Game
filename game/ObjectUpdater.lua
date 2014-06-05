@@ -4,18 +4,34 @@
 
 local ObjectUpdater = {}
 ObjectUpdater.objects = {}
+ObjectUpdater.cameras = {}
 
 -------------
 --Functions
 -------------
 
 -- add a new object to the list
-function ObjectUpdater:Add(object)
-	self.objects[#self.objects+1] = object
+-- {a,b,c,...} --> table of objects
+function ObjectUpdater:Add(objects)
+	for i=1, #objects do
+		self.objects[#self.objects+1] = objects[i]
+	end 
+end 
+
+function ObjectUpdater:AddCamera(cam)
+	self.cameras[#self.cameras+1] = cam
 end 
 
 -- update all objects
 function ObjectUpdater:Update()
+	
+	-- cameras
+	for i=1, #self.cameras do
+		self.cameras[i]:Update()
+	end  
+	
+
+	-- objects
 	for i=1, #self.objects do
 
 		if(self.objects[i].Update) then
@@ -23,9 +39,17 @@ function ObjectUpdater:Update()
 		end 
 
 	end 
+
 end
 
 function ObjectUpdater:RepeatedInput()
+
+	-- cameras
+	for i=1, #self.cameras do
+		self.cameras[i]:RepeatedInput()
+	end  
+
+	-- objects
 	for i=1, #self.objects do
 
 		if(self.objects[i].RepeatedInput) then
@@ -46,6 +70,13 @@ function ObjectUpdater:Input(key)
 end 
 
 function ObjectUpdater:Draw()
+	
+	-- cameras
+	for i=1, #self.cameras do
+		self.cameras[i]:Draw()
+	end  
+
+	-- objects
 	for i=1, #self.objects do
 
 		if(self.objects[i].Draw) then
@@ -53,6 +84,8 @@ function ObjectUpdater:Draw()
 		end 
 
 	end 
+
+
 end 
 
 

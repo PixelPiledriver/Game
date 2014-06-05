@@ -12,6 +12,7 @@ local Box = require("Box")
 local Player = require("Player")
 local Sprites = require("Sprites")
 local ObjectUpdater = require("ObjectUpdater")
+local Camera = require("Camera")
 
 --------------
 -- Objects
@@ -50,19 +51,22 @@ local box1 = Box:New
 	y = 200
 }
 
-ObjectUpdater:Add(pawn)
-ObjectUpdater:Add(pawn2)
-ObjectUpdater:Add(box1)
+ObjectUpdater:Add{pawn, pawn2, box1}
+ObjectUpdater:AddCamera(Camera)
 
 
--- game start
--- runs only once
+
+--------------------------
+-- Functions / Callbacks
+--------------------------
+
+-- runs once on startup
 function love.load()
 	-- graphics setup
 	love.window.setFullscreen(false, "desktop")
 	love.graphics.setBackgroundColor(100,100,100)
 
-	require("MathTest")
+	require("MathTest") --> wtf?
 
 end 
 

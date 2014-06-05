@@ -6,6 +6,7 @@ local FrameCounter = {}
 -- switches
 FrameCounter.active = true
 FrameCounter.printDeltaTime = false
+FrameCounter.printLoveFPS = true
 
 -- variables
 FrameCounter.x = 10
@@ -48,7 +49,11 @@ function FrameCounter:Draw()
 	love.graphics.print("FPS:" .. math.floor(fps), self.x, self.y)
 
 	if(self.printDeltaTime) then
-		love.graphics.print("DT:" .. deltaTime, self.x, self.y+16)
+		love.graphics.print("DT:" .. deltaTime, self.x, self.y + 32)
+	end 
+
+	if(self.printLoveFPS) then
+		love.graphics.print("LoveFPS:" .. love.timer.getFPS(), self.x, self.y + 16)
 	end 
 
 end 
