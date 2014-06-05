@@ -22,8 +22,6 @@ function Player:New(data)
 	object.height = data.height or 32
 	object.color = data.color or {255,255,255,255}
 	object.speed = data.speed or 5
-	object.useFrame = data.useFrame or false
-	object.useAnimation = data.useAnimation or false
 	object.frame = data.frame or nil
 	object.sheet = data.sheet or nil
 	object.animation = data.animation or nil
@@ -47,13 +45,11 @@ function Player:New(data)
 
 	function object:Draw()
 
-		if(self.useFrame) then
+		-- what type of graphic does the object have
+		if(self.frame) then
 			self.frame:Draw(self)
-		elseif(self.useAnimation) then
+		elseif(self.animation) then
 			self.animation:Draw(self)
-		else
-			love.graphics.setColor(self.color)
-			love.graphics.draw(self.sprite, self.x, self.y, self.angle, self.xScale, self.yScale)
 		end 
 
 	end 

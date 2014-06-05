@@ -11,6 +11,7 @@ local App = require("App")
 local Box = require("Box")
 local Player = require("Player")
 local Sprites = require("Sprites")
+local ObjectUpdater = require("ObjectUpdater")
 
 --------------
 -- Objects
@@ -22,43 +23,15 @@ local pawn = Player:New
 	x = 200,
 	y = 300,
 	
-	useFrame = true,
-	sheet = Sprites.pawn.sheet,
-	frame = Sprites.pawn.attack,
-	
+	frame = Sprites.pawn.damage,
 	color = {255,255,255,255}
 }
-
---[[
-local pawn2 = Player:New
-{
-	x = 300,
-	y = 300,
-	color = {255, 100, 100, 255},
-
-	useFrame = true,
-	sheet = Sprites.pawn.sheet,
-	frame = Sprites.pawn.damage,
-	
-	xScale = -1, -- flip this dude, this is junk code that will be removed
-
-	keys = 
-	{
-		left = "left",
-		right = "right",
-		up = "up",
-		down = "down"
-	}
-
-}
---]]
 
 local pawn2 = Player:New
 {
 	x = 400,
 	y = 400,
-	color = {1,1,1,1},
-	useAnimation = true,
+	color = {1,1,1,1}, 
 	animation = Sprites.pawn.animation1,
 
 	keys = 
@@ -77,8 +50,9 @@ local box1 = Box:New
 	y = 200
 }
 
-
-
+ObjectUpdater:Add(pawn)
+ObjectUpdater:Add(pawn2)
+ObjectUpdater:Add(box1)
 
 
 -- game start
@@ -98,28 +72,22 @@ function love.update(dt)
 	deltaTime = dt
 	FrameCounter:Update(dt)
 
-	pawn:RepeatedInput()
-	pawn2:RepeatedInput()
+	ObjectUpdater:Update()
+	ObjectUpdater:RepeatedInput()
 end 
 
 
 -- input
 function love.keypressed(key)
 	App:Input(key)
-	pawn:Input(key)
-	pawn2:Input(key)
+	ObjectUpdater:Input(key)
 end
 
 
 -- draw call
 function love.draw()
 	FrameCounter:Draw()
-
-	pawn2:Draw()
-	pawn:Draw()
-	box1:Draw()
-	
-	
+	ObjectUpdater:Draw()
 end 
 
 
