@@ -15,14 +15,37 @@ local Sprites = {}
 local function MakeFrame(data)
 	local f = {}
 
+	------------
+	-- Create
+	------------
+
 	f.x = data.x or 0
 	f.y = data.y or 0
 	f.width = data.width or 1
 	f.height = data.height or 1
 	f.imageWidth = data.imageWidth or 128
 	f.imageHeight = data.imageHeight or 128
+	f.sheet = Sprites.currentSheet
 
-	return love.graphics.newQuad(f.x, f.y, f.width, f.height, f.imageWidth, f.imageHeight)
+	f.frame = love.graphics.newQuad(f.x, f.y, f.width, f.height, f.imageWidth, f.imageHeight)
+
+	-------------
+	-- Function
+	-------------
+
+	function f:Draw(objectData)
+
+		if(objectData.color) then
+			love.graphics.setColor(objectData.color)
+		else
+			love.graphics.setColor({255,255,255,255})
+		end 
+
+		love.graphics.draw(self.sheet, self.frame, objectData.x, objectData.y, objectData.angle, objectData.xScale, objectData.yScale)
+
+	end 
+
+	return f
 end
 
 -- make multiple frames
@@ -74,9 +97,15 @@ Sprites.pawn = {}
 Sprites.pawn.sheet = love.graphics.newImage("graphics/pawnSheet.png")
 Sprites.pawn.sheet:setFilter("nearest", "nearest")
 
+
 -- create frames
 -- these exist to be used
 -- you can add frames to a table to make an animation
+
+-- the sprite sheet that you want to make frames from needs to be set
+-- so that the frame can set it to its parent
+Sprites.currentSheet = Sprites.pawn.sheet
+
 Sprites.pawn.idle = MakeFrame
 {
 	x = 0,
@@ -84,7 +113,7 @@ Sprites.pawn.idle = MakeFrame
 	width = 64,
 	height = 64,
 	imageWidth = 128,
-	imageHeight = 128
+	imageHeight = 128,
 }
 
 Sprites.pawn.attack = MakeFrame

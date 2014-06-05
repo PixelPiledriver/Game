@@ -48,8 +48,7 @@ function Player:New(data)
 	function object:Draw()
 
 		if(self.useFrame) then
-			love.graphics.setColor(self.color)
-			love.graphics.draw(self.sheet, self.frame, self.x, self.y, self.angle, self.xScale, self.yScale)
+			self.frame:Draw(self)
 		elseif(self.useAnimation) then
 			self.animation:Draw(self)
 		else

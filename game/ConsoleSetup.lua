@@ -13,6 +13,7 @@ local printDebugSettings = {}
 printDebugSettings["stuff"] = false
 printDebugSettings["mathTest"] = true
 printDebugSettings["animation"] = false
+printDebugSettings["Health"] = true
 
 --------------
 -- Functions

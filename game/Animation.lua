@@ -12,7 +12,7 @@ function Animation:New(data)
 	-- number of delays does not match number of frames
 	if(#data.frames ~= #data.delays) then
 		printDebug{"Delays and Frames count not the same!", "animation"}
-		return
+		return 
 	end
 
 	----------
@@ -88,7 +88,7 @@ function Animation:New(data)
 			love.graphics.setColor({255,255,255,255})
 		end 
 
-		love.graphics.draw(self.sheet, self.frames[self.currentFrame], objectData.x, objectData.y, objectData.angle, objectData.xScale, objectData.yScale)
+		love.graphics.draw(self.sheet, self.frames[self.currentFrame].frame, objectData.x, objectData.y, objectData.angle, objectData.xScale, objectData.yScale)
 
 		self:UpdateFrameTime()	
 	end 
