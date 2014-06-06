@@ -15,6 +15,18 @@ Camera.zoom = {x=1, y=1}
 
 Camera.zoomSpeed = 0.01
 Camera.moveSpeed = 2
+Camera.rotSpeed = 0.01
+
+Camera.shake =
+{
+	xMax = 0,
+	yMax = 0,
+	xOffset = 0,
+	yOffset = 0,
+	reduce = 0
+} 
+
+Camera.UpdateShake = function() end 
 
 
 	Camera.keys =
@@ -26,14 +38,15 @@ Camera.moveSpeed = 2
 		zoomIn = "[",
 		zoomOut = "o",
 		rotLeft = ",",
-		rotRight = "/"
+		rotRight = "/",
+		shake1 = "z",
 	}
 
 --------------
 -- Functions
 --------------
 function Camera:Update()
-
+	self:UpdateShake()
 end 
 
 -- manually control the camera
@@ -69,16 +82,30 @@ function Camera:RepeatedInput()
 	end 
 
 	-- rotate
+	if(love.keyboard.isDown(self.keys.rotLeft)) then
+		self.rot = self.rot + self.rotSpeed
+	end 
+
+	if(love.keyboard.isDown(self.keys.rotRight)) then
+		self.rot = self.rot - self.rotSpeed
+	end 
+
+	-- shake
+	if(love.keyboard.isDown(self.keys.shake1)) then
+		self:Shake{xMax = 10, yMax= 10}
+	end 
 
 
 
 end
 
+-- draw all objects based on camera transformation
 function Camera:Draw()
 	love.graphics.rotate(self.rot)
 	love.graphics.scale(self.zoom.x, self.zoom.y)
-	love.graphics.translate(Camera.pos.x, Camera.pos.y)
 
+	local pos = self:CalculatePos()
+	love.graphics.translate(pos.x, pos.y)
 end 
 
 -- move camera from current pos
@@ -95,7 +122,40 @@ function Camera:SetPos(data)
 	self.pos.y = data.y or self.pos.y
 end 
 
+function Camera:CalculatePos()
+	local pos = {x=0, y=0}
 
+	pos.x = self.pos.x + self.shake.xOffset
+	pos.y = self.pos.y + self.shake.yOffset
+
+	return pos
+end 
+
+-- set the shake table
+-- should add support for multiple tables
+-- {x, y, duration}
+function Camera:Shake(data)
+	self.shake.xMax = data.xMax or 1
+	self.shake.yMax = data.yMax or 1
+	self.shake.xOffset = 0
+	self.shake.yOffset = 0
+	self.shake.reduce = 0.99
+end 
+
+-- shakes the camera based on the current shake table
+function Camera:UpdateShake()
+
+	-- offset camera
+	self.shake.xOffset = love.math.random(-self.shake.xMax, self.shake.xMax)
+	self.shake.yOffset = love.math.random(-self.shake.yMax, self.shake.yMax)
+
+	-- reduce shake
+	self.shake.xMax = self.shake.xMax * self.shake.reduce
+	self.shake.yMax = self.shake.yMax * self.shake.reduce
+
+
+	-- need to add duration into this
+end 
 
 
 
