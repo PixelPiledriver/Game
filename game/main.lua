@@ -5,7 +5,7 @@
 
 -- Requires --> load and run shit in other files
 require("DeltaTime")
-require("ConsoleSetup")
+require("PrintDebug")
 local FrameCounter = require("FrameCounter")
 local App = require("App")
 local Box = require("Box")
