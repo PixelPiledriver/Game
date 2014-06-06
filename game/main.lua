@@ -13,6 +13,8 @@ local Player = require("Player")
 local Sprites = require("Sprites")
 local ObjectUpdater = require("ObjectUpdater")
 local Camera = require("Camera")
+local AudioSystem = require("AudioSystem")
+local Sound = require("Sound")
 
 --------------
 -- Objects
@@ -53,9 +55,6 @@ local box1 = Box:New
 
 ObjectUpdater:Add{pawn, pawn2, box1}
 ObjectUpdater:AddCamera(Camera)
-
-
-
 --------------------------
 -- Functions / Callbacks
 --------------------------
@@ -66,8 +65,11 @@ function love.load()
 	love.window.setFullscreen(false, "desktop")
 	love.graphics.setBackgroundColor(100,100,100)
 
-	require("MathTest") --> wtf?
+	--audio test
+	bgMusic = Sound:NewStream("SuperMarioWorld.mp3")
+	AudioSystem:Play(bgMusic)
 
+	require("MathTest") --> wtf?
 end 
 
 
