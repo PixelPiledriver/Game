@@ -13,7 +13,6 @@ local Player = require("Player")
 local Sprites = require("Sprites")
 local ObjectUpdater = require("ObjectUpdater")
 local Camera = require("Camera")
-local AudioSystem = require("AudioSystem")
 local Sound = require("Sound")
 
 --------------
@@ -65,10 +64,13 @@ function love.load()
 	love.window.setFullscreen(false, "desktop")
 	love.graphics.setBackgroundColor(100,100,100)
 
-	--audio test
-	bgMusic = Sound:NewStream("SuperMarioWorld.mp3")
-	AudioSystem:Play(bgMusic)
-
+-- audio testing
+--[[	source = Sound.CreateSoundSource("WilhelmScream.ogg")
+	Sound.SetVolume(source, 0.5)
+	print(Sound.GetVolume(source))
+	Sound.ToggleLooping(source)
+	Sound.PlaySource(source)
+]]
 	require("MathTest") --> wtf?
 end 
 
@@ -80,6 +82,11 @@ function love.update(dt)
 
 	ObjectUpdater:Update()
 	ObjectUpdater:RepeatedInput()
+
+	if(love.keyboard.isDown("q")) then
+		Sound.PlayStreamLoop("SuperMarioWorld.mp3")
+	end
+
 end 
 
 
