@@ -17,6 +17,9 @@ Camera.zoomSpeed = 0.01
 Camera.moveSpeed = 2
 Camera.rotSpeed = 0.01
 
+Camera.moveNodes = {}
+Camera.moveIndex = 0
+
 Camera.shake =
 {
 	xMax = 0,
@@ -26,7 +29,6 @@ Camera.shake =
 	reduce = 0
 } 
 
-Camera.UpdateShake = function() end 
 
 
 	Camera.keys =
@@ -47,6 +49,7 @@ Camera.UpdateShake = function() end
 --------------
 function Camera:Update()
 	self:UpdateShake()
+	self:UpdateMoveNodes()
 end 
 
 -- manually control the camera
@@ -93,8 +96,8 @@ function Camera:RepeatedInput()
 	-- shake
 	if(love.keyboard.isDown(self.keys.shake1)) then
 		self:Shake{xMax = 10, yMax= 10}
-	end 
-
+	end
+	-- node 
 
 
 end
@@ -113,7 +116,8 @@ end
 function Camera:Move(data)
 	self.pos.x = self.pos.x + (data.x or 0)
 	self.pos.y = self.pos.y + (data.y or 0)
-end 
+end
+
 
 -- set camera pos directly
 -- {x,y}
@@ -137,9 +141,11 @@ end
 function Camera:Shake(data)
 	self.shake.xMax = data.xMax or 1
 	self.shake.yMax = data.yMax or 1
+	self.shake.reduce = data.reduce or 0.98
+
 	self.shake.xOffset = 0
 	self.shake.yOffset = 0
-	self.shake.reduce = 0.99
+
 end 
 
 -- shakes the camera based on the current shake table
@@ -155,6 +161,24 @@ function Camera:UpdateShake()
 
 
 	-- need to add duration into this
+end 
+
+function Camera:SetMoveNode(data)
+	local node = {}
+	node.x = data.x or self.pos.x
+	node.y = data.y or self.pos.y
+
+	self.targetNodes[#self.targetNodes + 1] = node
+end 
+
+function Camera:UpdateMoveNodes()
+	if(#self.moveNodes == 0) then
+		return 
+	end 
+
+	self.pos.x = self.pos.x + (self.moveNodes[self.moveIndex].x - self.pos.x)
+	self.pos.y = self.pos.y + (self.moveNodes[self.moveIndex].y - self.pos.y)
+
 end 
 
 
