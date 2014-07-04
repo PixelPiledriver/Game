@@ -89,6 +89,8 @@ end
 -- Robot dude
 ------------------
 Sprites.dude = {}
+Sprites.dude.red = {}
+Sprites.dude.blue = {}
 Sprites.dude.sheet = love.graphics.newImage("graphics/dude.png")
 Sprites.dude.sheet:setFilter("nearest", "nearest")
 Sprites.currentSheet = Sprites.dude.sheet
@@ -100,7 +102,38 @@ Sprites.dude.idle = MakeFrame
 	width = 32,
 	height = 32,
 	imageWidth = 128,
-	imageHeight = 128,
+	imageHeight = 128,	
+}
+
+Sprites.dude.blue.idle = MakeFrame
+{
+	x = 32,
+	y = 0,
+	width = 32,
+	height = 32,
+	imageWidth = 128,
+	imageHeight = 128,	
+}
+
+-- bullet
+Sprites.dude.bullet = MakeFrame
+{
+	x = 0,
+	y = 32,
+	width = 32,
+	height = 32,
+	imageWidth = 128,
+	imageHeight = 128
+}
+
+Sprites.dude.bulletBlue = MakeFrame
+{
+	x = 32,
+	y = 32,
+	width = 32,
+	height = 32,
+	imageWidth = 128,
+	imageHeight = 128
 }
 
 

@@ -5,6 +5,7 @@
 local ObjectUpdater = {}
 ObjectUpdater.objects = {}
 ObjectUpdater.cameras = {}
+ObjectUpdater.destroyObjects = false
 
 -------------
 --Functions
@@ -18,12 +19,38 @@ function ObjectUpdater:Add(objects)
 	end 
 end 
 
+function ObjectUpdater:ClearDestroyedObjects()
+
+	if(self.destroyObjects == false) then
+		return
+	end 
+
+	local temp = self.objects
+	self.objects = nil
+	self.objects = {}
+
+	for i=1, #temp do
+		if(temp[i].destroy == nil) then
+			self:Add{temp[i]}
+		end 
+	end
+
+	temp = nil
+
+	self.destroyObjects = false
+
+end 
+
 function ObjectUpdater:AddCamera(cam)
 	self.cameras[#self.cameras+1] = cam
 end 
 
 -- update all objects
 function ObjectUpdater:Update()
+
+	-- destroy
+	self:ClearDestroyedObjects()
+
 	
 	-- cameras
 	for i=1, #self.cameras do
@@ -39,6 +66,8 @@ function ObjectUpdater:Update()
 		end 
 
 	end 
+
+
 
 end
 

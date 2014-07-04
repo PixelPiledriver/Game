@@ -1,8 +1,11 @@
 -- basic object with sprite, input, etc
 
 
+local ObjectUpdater = require("ObjectUpdater")
 local Animation = require("Animation")
 local Controller = require("Controller")
+local Bullet = require("Bullet")
+local Sprites = require("Sprites")
 
 -- use to create more instances
 local Player = {}
@@ -23,13 +26,16 @@ function Player:New(data)
 	object.width = data.width or 32
 	object.height = data.height or 32
 	object.color = data.color or {255,255,255,255}
-	object.speed = data.speed or 5
+	object.speed = data.speed or 2
 	object.frame = data.frame or nil
 	object.sheet = data.sheet or nil
 	object.animation = data.animation or nil
 	object.angle = data.angle or 0
 	object.xScale = data.xScale or 1
 	object.yScale = data.yScale or 1
+	object.xShootPos = data.xShootPos or 25
+	object.yShootPos = data.yShootPos or 0
+	object.shootDirection = data.shootDirection or 1
 
 	-- controls
 	object.keys =
@@ -82,6 +88,40 @@ function Player:New(data)
 		self.y = self.y + self.speed
 	end 
 
+	-- shoot bullets
+
+	object.reloadMaxTime = 10
+	object.reloadTime = 0
+	function object:Shoot()
+
+		self.reloadTime = self.reloadTime + 1
+
+		-- unable to shoot?
+		if(self.reloadTime < self.reloadMaxTime) then
+			return
+		end 
+
+		if(self.shootDirection == -1) then
+			Bullet:New
+				{
+					frame = Sprites.dude.bulletBlue,
+					speed = -5,
+					lifespan = 30,
+					shooter = self,
+				}
+		else
+			Bullet:New
+			{
+				frame = Sprites.dude.bullet,
+				speed = 5,
+				lifespan = 30,
+				shooter = self,
+			}
+		end 
+
+		self.reloadTime = 0
+
+	end 
 
 	-- only used for down
 	function object:RepeatedInput()
@@ -106,7 +146,8 @@ function Player:New(data)
 	end 
 
 
-	-- 
+	-- xbox controller
+	-- need to make if available
 	function object:ControllerInput()
 
 		-- up
@@ -129,8 +170,16 @@ function Player:New(data)
 			self:MoveRight()
 		end 
 
+		-- shoot
+		if(self.controller:Button("X")) then
+			self:Shoot()
+		end 
+
+
 	end
 
+	-- add new object to updater
+	ObjectUpdater:Add{object}
 
 	-- done creating player object
 	return object

@@ -7,11 +7,11 @@
 require("DeltaTime")
 require("PrintDebug")
 local FrameCounter = require("FrameCounter")
+local ObjectUpdater = require("ObjectUpdater")
 local App = require("App")
 local Box = require("Box")
 local Player = require("Player")
 local Sprites = require("Sprites")
-local ObjectUpdater = require("ObjectUpdater")
 local Camera = require("Camera")
 local Sound = require("Sound")
 local Controller = require("Controller")
@@ -21,13 +21,26 @@ local Controller = require("Controller")
 --------------
 
 -- will move object loader to own file soon :P
-local pawn = Player:New
+local redRobot = Player:New
 {
 	x = 200,
 	y = 300,
 	
 	frame = Sprites.dude.idle,
 	color = {255,255,255,255}
+}
+
+local blueRobot = Player:New
+{
+	x = 400,
+	y = 300,
+	
+	frame = Sprites.dude.blue.idle,
+	color = {255,255,255,255},
+
+	xShootPos = -25,
+	shootDirection = -1
+
 }
 
 --[[
@@ -58,8 +71,11 @@ local box1 = Box:New
 }
 --]]
 
-ObjectUpdater:Add{pawn, pawn2, box1}
+--ObjectUpdater:Add{pawn, pawn2, box1}
+
 ObjectUpdater:AddCamera(Camera)
+
+
 --------------------------
 -- Functions / Callbacks
 --------------------------
