@@ -185,3 +185,11 @@ Sprites.pawn.animation1 = Animation:New
 
 
 return Sprites
+
+
+
+
+
+--Notes
+
+--

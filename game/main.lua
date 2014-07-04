@@ -14,6 +14,7 @@ local Sprites = require("Sprites")
 local ObjectUpdater = require("ObjectUpdater")
 local Camera = require("Camera")
 local Sound = require("Sound")
+local Controller = require("Controller")
 
 --------------
 -- Objects
@@ -86,6 +87,8 @@ function love.update(dt)
 	if(love.keyboard.isDown("q")) then
 		Sound.PlayStreamLoop("SuperMarioWorld.mp3")
 	end
+
+	Controller.Update()
 
 end 
 
