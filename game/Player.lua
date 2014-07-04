@@ -47,8 +47,18 @@ function Player:New(data)
 	}
 
 	-- controller
-	object.controller = Controller:GetUnclaimedController()
-	print(object.controller)
+	object.useController = false
+	if(Controller:Count() > 0) then
+		object.controller = Controller:GetUnclaimedController()
+
+		-- claimed a controller?
+		if(object.controller) then 
+			object.useController = true
+		end 
+
+
+
+	end
 
 
 	-------------
@@ -148,7 +158,24 @@ function Player:New(data)
 
 	-- xbox controller
 	-- need to make if available
+
+	object.controls = 
+	{
+		gamepad =
+		{
+			up = "up",
+			down = "down",
+			left = "left",
+			right = "right",
+			shoot = "X",
+		}
+	}
+
 	function object:ControllerInput()
+
+		if(self.useController == false) then
+			return
+		end 
 
 		-- up
 		if(self.controller:Button("up")) then

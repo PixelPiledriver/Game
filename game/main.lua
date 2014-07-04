@@ -39,7 +39,15 @@ local blueRobot = Player:New
 	color = {255,255,255,255},
 
 	xShootPos = -25,
-	shootDirection = -1
+	shootDirection = -1,
+
+	keys = 
+	{
+		left = "left",
+		right = "right",
+		up = "up",
+		down = "down"
+	}
 
 }
 

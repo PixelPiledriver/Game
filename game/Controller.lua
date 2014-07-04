@@ -171,6 +171,13 @@ function Controller:Setup()
 
 end
 
+
+-- returns the number of controllers connected
+function Controller:Count()
+	return #controllers
+end 
+
+
 -- returns a controller that no one else is using
 function Controller:GetUnclaimedController()
 
@@ -182,6 +189,8 @@ function Controller:GetUnclaimedController()
 
 		end 
 	end 
+
+	return nil
 	
 end 
 
