@@ -26,7 +26,7 @@ local pawn = Player:New
 	x = 200,
 	y = 300,
 	
-	frame = Sprites.pawn.damage,
+	frame = Sprites.dude.idle,
 	color = {255,255,255,255}
 }
 
@@ -50,11 +50,13 @@ local pawn2 = Player:New
 
 --]]
 
+--[[
 local box1 = Box:New
 {
 	x = 200,
 	y = 200
 }
+--]]
 
 ObjectUpdater:Add{pawn, pawn2, box1}
 ObjectUpdater:AddCamera(Camera)

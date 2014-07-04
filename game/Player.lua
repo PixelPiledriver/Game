@@ -106,6 +106,7 @@ function Player:New(data)
 	end 
 
 
+	-- 
 	function object:ControllerInput()
 
 		-- up

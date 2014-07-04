@@ -85,6 +85,24 @@ local function MakeFrames(data)
 
 end 
 
+------------------
+-- Robot dude
+------------------
+Sprites.dude = {}
+Sprites.dude.sheet = love.graphics.newImage("graphics/dude.png")
+Sprites.dude.sheet:setFilter("nearest", "nearest")
+Sprites.currentSheet = Sprites.dude.sheet
+
+Sprites.dude.idle = MakeFrame
+{
+	x = 0,
+	y = 0,
+	width = 32,
+	height = 32,
+	imageWidth = 128,
+	imageHeight = 128,
+}
+
 
 
 ------------------
@@ -156,7 +174,6 @@ Sprites.pawn.multi = MakeFrames
 	imageWidth = 128,
 	imageHeight = 128	
 }
-
 
 -- Animations
 Sprites.pawn.animation1 = Animation:New
