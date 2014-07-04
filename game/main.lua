@@ -30,6 +30,7 @@ local pawn = Player:New
 	color = {255,255,255,255}
 }
 
+--[[
 local pawn2 = Player:New
 {
 	x = 400,
@@ -46,6 +47,8 @@ local pawn2 = Player:New
 	}
 
 }
+
+--]]
 
 local box1 = Box:New
 {

@@ -59,56 +59,10 @@ function Controller:ButtonTest(controller)
 
 end 
 
+
 -------------
 -- Sticks
 -------------
-function Controller:Setup()
-
-
-	for i=1, #getControllers do
-
-		print("controller" .. i .. " setup")
-
-		controllers[#controllers + 1] = {}
-
-		controllers[#controllers].controller = getControllers[i]
-
-		controllers[#controllers].playerName = "Player" .. i
-
-		controllers[#controllers].leftStick = 
-		{
-			x =
-			{
-				axis = 1,
-				lastValue = 0
-			},
-
-			y =
-			{
-				axis = 2,
-				lastValue = 0
-			}
-		}
-
-		controllers[#controllers].rightStick = 
-		{
-			x =
-			{
-				axis = 3,
-				lastValue = 0
-			},
-
-			y =
-			{
-				axis = 4,
-				lastValue = 0
-			}
-		}
-
-	end
-
-end
-
 
 function Controller:SticksTest(controller)
 
@@ -147,6 +101,89 @@ function Controller:SticksTest(controller)
 
 
 end
+
+------------------
+-- Functions
+------------------
+
+-- init controllers
+-- this will need to be called again if a controller is synced during play
+-- altho it will need some modifications for that to work properly
+-- I'll do it later :P
+function Controller:Setup()
+
+	for i=1, #getControllers do
+
+		print("controller" .. i .. " setup")
+
+		-- add controller
+		controllers[#controllers + 1] = {}
+
+
+		local object = controllers[#controllers]
+
+		-- setup
+		object.claimed = false
+		object.controller = getControllers[i]
+		object.playerName = "Controller" .. i
+
+		-- sticks
+		object.leftStick = 
+		{
+			x =
+			{
+				axis = 1,
+				lastValue = 0
+			},
+
+			y =
+			{
+				axis = 2,
+				lastValue = 0
+			}
+		}
+
+		object.rightStick = 
+		{
+			x =
+			{
+				axis = 3,
+				lastValue = 0
+			},
+
+			y =
+			{
+				axis = 4,
+				lastValue = 0
+			}
+		}
+
+		-- functions
+		function object:Button(button)
+			if(self.controller:isDown(buttons[button].value)) then
+				return true
+		end
+	
+		end 
+
+
+	end
+
+end
+
+-- returns a controller that no one else is using
+function Controller:GetUnclaimedController()
+
+	for i=1, #controllers do
+		if(controllers[i].claimed == false) then
+
+			controllers[i].claimed = true
+			return controllers[i]
+
+		end 
+	end 
+	
+end 
 
 
 -- quick test controller input

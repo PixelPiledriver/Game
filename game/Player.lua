@@ -2,9 +2,11 @@
 
 
 local Animation = require("Animation")
+local Controller = require("Controller")
 
 -- use to create more instances
 local Player = {}
+
 
 
 -- create instance
@@ -38,6 +40,10 @@ function Player:New(data)
 		down = data.keys and data.keys.down or "s",
 	}
 
+	-- controller
+	object.controller = Controller:GetUnclaimedController()
+	print(object.controller)
+
 
 	-------------
 	-- Functions
@@ -59,31 +65,77 @@ function Player:New(data)
 
 	end 
 
+	-- movement
+	function object:MoveLeft()
+		self.x = self.x - self.speed
+	end 
+
+	function object:MoveRight()
+		self.x = self.x + self.speed
+	end 
+
+	function object:MoveUp()
+		self.y = self.y - self.speed
+	end 
+
+	function object:MoveDown()
+		self.y = self.y + self.speed
+	end 
+
+
 	-- only used for down
 	function object:RepeatedInput()
 
 		-- simple controls
 		if(love.keyboard.isDown(self.keys.left)) then
-			self.x = self.x - self.speed
+			self:MoveLeft()
 		end 
 
 		if(love.keyboard.isDown(self.keys.right)) then
-			self.x = self.x + self.speed
+			self:MoveRight()
 		end 
 
 		if(love.keyboard.isDown(self.keys.up)) then
-			self.y = self.y - self.speed
+			self:MoveUp()
 		end 
 
 		if(love.keyboard.isDown(self.keys.down)) then
-			self.y = self.y + self.speed
+			self:MoveDown()
 		end
+
 	end 
 
 
+	function object:ControllerInput()
+
+		-- up
+		if(self.controller:Button("up")) then
+			self:MoveUp()
+		end 
+
+		-- down
+		if(self.controller:Button("down")) then
+			self:MoveDown()
+		end 
+
+		-- left
+		if(self.controller:Button("left")) then
+			self:MoveLeft()
+		end 
+
+		-- right
+		if(self.controller:Button("right")) then
+			self:MoveRight()
+		end 
+
+	end
+
+
+	-- done creating player object
 	return object
 
 end 
 
 
+-- done with static
 return Player

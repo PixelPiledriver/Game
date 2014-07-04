@@ -52,11 +52,22 @@ function ObjectUpdater:RepeatedInput()
 	-- objects
 	for i=1, #self.objects do
 
+		-- keyboard input
 		if(self.objects[i].RepeatedInput) then
 			self.objects[i]:RepeatedInput()
 		end 
 
+		-- controller input
+		if(self.objects[i].ControllerInput) then
+			self.objects[i]:ControllerInput()
+		end 
+
+
+
 	end 
+
+
+
 end 
 
 function ObjectUpdater:Input(key)
