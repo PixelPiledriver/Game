@@ -20,6 +20,7 @@ function Box:New(data)
 	object.height = data.height or 32
 	object.color = data.color or {255,255,255,255}
 	object.speed = data.speed or 5
+	object.move = false
 
 	-- controls
 	object.keys =
@@ -46,6 +47,10 @@ function Box:New(data)
 
 	-- only used for down
 	function object:RepeatedInput()
+
+		if(self.move == false) then
+			return
+		end
 
 		-- simple controls
 		if(love.keyboard.isDown(self.keys.left)) then

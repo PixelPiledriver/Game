@@ -47,8 +47,8 @@ local blueRobot = Player:New
 		right = "right",
 		up = "up",
 		down = "down",
-		shoot = "L",
-		build = "K",
+		shoot = "=",
+		build = "-",
 	}
 
 }

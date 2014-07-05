@@ -47,6 +47,8 @@ function Player:New(data)
 		right = data.keys and data.keys.right or "d",
 		up = data.keys and data.keys.up or "w",
 		down = data.keys and data.keys.down or "s",
+		shoot = data.keys and data.keys.shoot or "q",
+		build = data.keys and data.keys.build or "e"
 	}
 
 	-- controller setup
@@ -182,6 +184,14 @@ function Player:New(data)
 		if(love.keyboard.isDown(self.keys.down)) then
 			self:MoveDown()
 		end
+
+		if(love.keyboard.isDown(self.keys.shoot)) then
+			self:Shoot()
+		end 
+
+		if(love.keyboard.isDown(self.keys.build)) then
+			self:Build()
+		end 
 
 	end 
 
