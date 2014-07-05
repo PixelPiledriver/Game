@@ -143,8 +143,8 @@ function Player:New(data)
 
 		local box1 = Box:New
 		{
-			x = self.x - (self.x % 32),
-			y = self.y - (self.y % 32),
+			x = self.x - (self.x % 32 + self.width/2),
+			y = self.y - (self.y % 32 + self.height/2),
 			color = Color[self.playerColor]
 		}
 

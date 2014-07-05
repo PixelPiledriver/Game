@@ -88,7 +88,7 @@ function love.update(dt)
 	ObjectUpdater:Update()
 	ObjectUpdater:RepeatedInput()
 
-	if(love.keyboard.isDown("q")) then
+	if(love.keyboard.isDown("1")) then
 		Sound.PlayStreamLoop("SuperMarioWorld.mp3")
 	end
 
