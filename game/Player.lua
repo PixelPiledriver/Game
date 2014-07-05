@@ -5,7 +5,9 @@ local ObjectUpdater = require("ObjectUpdater")
 local Animation = require("Animation")
 local Controller = require("Controller")
 local Bullet = require("Bullet")
+local Box = require("Box")
 local Sprites = require("Sprites")
+local Color = require("Color")
 
 -- use to create more instances
 local Player = {}
@@ -36,6 +38,7 @@ function Player:New(data)
 	object.xShootPos = data.xShootPos or 25
 	object.yShootPos = data.yShootPos or 0
 	object.shootDirection = data.shootDirection or 1
+	object.playerColor = data.playerColor or "red"
 
 	-- controls
 	object.keys =
@@ -46,7 +49,7 @@ function Player:New(data)
 		down = data.keys and data.keys.down or "s",
 	}
 
-	-- controller
+	-- controller setup
 	object.useController = false
 	if(Controller:Count() > 0) then
 		object.controller = Controller:GetUnclaimedController()
@@ -76,10 +79,10 @@ function Player:New(data)
 
 	end 
 
-	-- only used for press and release
-	function object:Input(key)
 
-	end 
+	-------------
+	-- Actions
+	---------------
 
 	-- movement
 	function object:MoveLeft()
@@ -99,9 +102,9 @@ function Player:New(data)
 	end 
 
 	-- shoot bullets
-
 	object.reloadMaxTime = 10
 	object.reloadTime = 0
+
 	function object:Shoot()
 
 		self.reloadTime = self.reloadTime + 1
@@ -133,7 +136,34 @@ function Player:New(data)
 
 	end 
 
-	-- only used for down
+	-- build blocks
+	function object:Build()
+
+		local box1 = Box:New
+		{
+			x = self.x - (self.x % 32),
+			y = self.y - (self.y % 32),
+			color = Color[self.playerColor]
+		}
+
+	end 
+
+
+
+	---------------
+	-- Input
+	---------------
+
+	-- only used for press and release
+	function object:Input(key)
+
+	end 
+
+
+	-- this is keyboard controls
+	-- need to reorganize :P
+	-- only used for isDown=pressed 
+	-- not for button down or up
 	function object:RepeatedInput()
 
 		-- simple controls
@@ -156,9 +186,7 @@ function Player:New(data)
 	end 
 
 
-	-- xbox controller
-	-- need to make if available
-
+	-- xbox controller input
 	object.controls = 
 	{
 		gamepad =
@@ -168,6 +196,7 @@ function Player:New(data)
 			left = "left",
 			right = "right",
 			shoot = "X",
+			build = "B",
 		}
 	}
 
@@ -178,28 +207,33 @@ function Player:New(data)
 		end 
 
 		-- up
-		if(self.controller:Button("up")) then
+		if(self.controller:Button(self.controls.gamepad.up)) then
 			self:MoveUp()
 		end 
 
 		-- down
-		if(self.controller:Button("down")) then
+		if(self.controller:Button(self.controls.gamepad.down)) then
 			self:MoveDown()
 		end 
 
 		-- left
-		if(self.controller:Button("left")) then
+		if(self.controller:Button(self.controls.gamepad.left)) then
 			self:MoveLeft()
 		end 
 
 		-- right
-		if(self.controller:Button("right")) then
+		if(self.controller:Button(self.controls.gamepad.right)) then
 			self:MoveRight()
 		end 
 
 		-- shoot
-		if(self.controller:Button("X")) then
+		if(self.controller:Button(self.controls.gamepad.shoot)) then
 			self:Shoot()
+		end 
+
+		-- build
+		if(self.controller:Button(self.controls.gamepad.build)) then
+			self:Build()
 		end 
 
 

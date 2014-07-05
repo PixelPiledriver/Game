@@ -27,7 +27,7 @@ local redRobot = Player:New
 	y = 300,
 	
 	frame = Sprites.dude.idle,
-	color = {255,255,255,255}
+	playerColor = "darkRed"
 }
 
 local blueRobot = Player:New
@@ -36,7 +36,7 @@ local blueRobot = Player:New
 	y = 300,
 	
 	frame = Sprites.dude.blue.idle,
-	color = {255,255,255,255},
+	playerColor = "blue",
 
 	xShootPos = -25,
 	shootDirection = -1,
@@ -46,40 +46,15 @@ local blueRobot = Player:New
 		left = "left",
 		right = "right",
 		up = "up",
-		down = "down"
+		down = "down",
+		shoot = "L",
+		build = "K",
 	}
 
 }
 
---[[
-local pawn2 = Player:New
-{
-	x = 400,
-	y = 400,
-	color = {1,1,1,1}, 
-	animation = Sprites.pawn.animation1,
 
-	keys = 
-	{
-		left = "left",
-		right = "right",
-		up = "up",
-		down = "down"
-	}
 
-}
-
---]]
-
---[[
-local box1 = Box:New
-{
-	x = 200,
-	y = 200
-}
---]]
-
---ObjectUpdater:Add{pawn, pawn2, box1}
 
 ObjectUpdater:AddCamera(Camera)
 
@@ -135,3 +110,37 @@ function love.draw()
 	ObjectUpdater:Draw()
 end 
 
+
+
+
+-- Notes
+---------------------------------------
+
+
+--[[
+local pawn2 = Player:New
+{
+	x = 400,
+	y = 400,
+	color = {1,1,1,1}, 
+	animation = Sprites.pawn.animation1,
+
+	keys = 
+	{
+		left = "left",
+		right = "right",
+		up = "up",
+		down = "down"
+	}
+
+}
+
+--]]
+
+--[[
+local box1 = Box:New
+{
+	x = 200,
+	y = 200
+}
+--]]

@@ -2,6 +2,7 @@
 
 -- static of object
 -- use to create more instances
+local ObjectUpdater = require("ObjectUpdater")
 local Box = {}
 
 
@@ -64,6 +65,7 @@ function Box:New(data)
 		end
 	end 
 
+	ObjectUpdater:Add{object}
 
 	return object
 

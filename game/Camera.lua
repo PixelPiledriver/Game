@@ -163,6 +163,10 @@ function Camera:UpdateShake()
 	-- need to add duration into this
 end 
 
+
+-- i dont think this actually does anything
+-- or has been tested yet
+-- fuck off :P
 function Camera:SetMoveNode(data)
 	local node = {}
 	node.x = data.x or self.pos.x

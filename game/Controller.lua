@@ -11,7 +11,6 @@ local controllers = {}
 -------------
 -- Buttons
 -------------
-
 -- table of button values
 local buttons = 
 {
@@ -47,8 +46,6 @@ local buttons =
 	}
 }
 
-
-
 function Controller:ButtonTest(controller)
 
 	for i=1, #buttons.buttonsList do
@@ -61,9 +58,16 @@ end
 
 
 -------------
+-- Triggers
+-------------
+function Controller:TriggerTest(controller)
+	
+end
+
+
+-------------
 -- Sticks
 -------------
-
 function Controller:SticksTest(controller)
 
   
@@ -158,6 +162,19 @@ function Controller:Setup()
 			}
 		}
 
+		object.rightTrigger =
+		{
+			axis = 5,
+			lastValue = 0
+		}
+
+		object.leftTrigger =
+		{
+			axis = 6,
+			lastValue = 0
+		}
+
+
 		-- functions
 		function object:Button(button)
 			if(self.controller:isDown(buttons[button].value)) then
@@ -201,6 +218,7 @@ function Controller:Update()
 	for i=1, #controllers do
 		Controller:SticksTest(controllers[i])
 		Controller:ButtonTest(controllers[i])
+		Controller:TriggerTest(controllers[i])
 	end 
 
 end 
@@ -208,7 +226,9 @@ end
 
 -- Vibration
 -------------------------
--- Doesnt work :(
+-- Doesnt work :(s
+-- hopefully will work in next update of SDL
+-- which is what Love2D is built with
 
 -- setup
 Controller:Setup()
