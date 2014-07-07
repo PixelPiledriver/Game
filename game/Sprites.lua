@@ -23,9 +23,9 @@ local function MakeFrame(data)
 	f.y = data.y or 0
 	f.width = data.width or 1
 	f.height = data.height or 1
-	f.imageWidth = data.imageWidth or 128
-	f.imageHeight = data.imageHeight or 128
-	f.sheet = Sprites.currentSheet
+	f.imageWidth = Sprites.currentSheet.width
+	f.imageHeight = Sprites.currentSheet.height
+	f.sheet = Sprites.currentSheet.object
 
 	f.frame = love.graphics.newQuad(f.x, f.y, f.width, f.height, f.imageWidth, f.imageHeight)
 
@@ -88,21 +88,26 @@ end
 ------------------
 -- Robot dude
 ------------------
+-- objects
 Sprites.dude = {}
 Sprites.dude.red = {}
 Sprites.dude.blue = {}
-Sprites.dude.sheet = love.graphics.newImage("graphics/dude.png")
-Sprites.dude.sheet:setFilter("nearest", "nearest")
+
+-- sheet
+Sprites.dude.sheet = {}
+Sprites.dude.sheet.object = love.graphics.newImage("graphics/dude.png")
+Sprites.dude.sheet.width = 256
+Sprites.dude.sheet.height = 256
+Sprites.dude.sheet.object:setFilter("nearest", "nearest")
 Sprites.currentSheet = Sprites.dude.sheet
 
+-- frames
 Sprites.dude.idle = MakeFrame
 {
 	x = 0,
 	y = 0,
 	width = 32,
 	height = 32,
-	imageWidth = 128,
-	imageHeight = 128,	
 }
 
 Sprites.dude.blue.idle = MakeFrame
@@ -132,11 +137,19 @@ Sprites.dude.bulletBlue = MakeFrame
 	y = 32,
 	width = 32,
 	height = 32,
-	imageWidth = 128,
-	imageHeight = 128
 }
 
-
+-------------------
+-- Block Building
+-------------------
+Sprites.block = {}
+Sprites.block.red = MakeFrame
+{
+	x = 0,
+	y = 96,
+	width = 32,
+	height = 32
+}
 
 ------------------
 -- Pawn
@@ -145,17 +158,20 @@ Sprites.pawn = {}
 
 
 -- create sprite sheet
-Sprites.pawn.sheet = love.graphics.newImage("graphics/pawnSheet.png")
-Sprites.pawn.sheet:setFilter("nearest", "nearest")
+Sprites.pawn.sheet = {}
+Sprites.pawn.sheet.object = love.graphics.newImage("graphics/pawnSheet.png")
+Sprites.pawn.sheet.object:setFilter("nearest", "nearest")
+Sprites.pawn.sheet.width = 128
+Sprites.pawn.sheet.height = 128
+
+-- the sprite sheet that you want to make frames from needs to be set
+-- so that the frame can set it to its parent
+Sprites.currentSheet = Sprites.pawn.sheet
 
 
 -- create frames
 -- these exist to be used
 -- you can add frames to a table to make an animation
-
--- the sprite sheet that you want to make frames from needs to be set
--- so that the frame can set it to its parent
-Sprites.currentSheet = Sprites.pawn.sheet
 
 Sprites.pawn.idle = MakeFrame
 {
@@ -241,5 +257,20 @@ return Sprites
 
 
 --Notes
+-------------------------------
+-- need to integrate the shit I made in Corona into this
 
---
+
+
+
+
+
+
+
+
+
+
+
+
+
+

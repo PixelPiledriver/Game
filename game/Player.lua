@@ -6,6 +6,7 @@ local Animation = require("Animation")
 local Controller = require("Controller")
 local Bullet = require("Bullet")
 local Box = require("Box")
+local Block = require("Block")
 local Sprites = require("Sprites")
 local Color = require("Color")
 
@@ -141,11 +142,20 @@ function Player:New(data)
 	-- build blocks
 	function object:Build()
 
+		--[[
 		local box1 = Box:New
 		{
-			x = self.x - (self.x % 32 + self.width/2),
-			y = self.y - (self.y % 32 + self.height/2),
+			x = (self.x - (self.x % 32)) + self.width/2,
+			y = (self.y - (self.y % 32)) + self.height/2,
 			color = Color[self.playerColor]
+		}
+		--]]
+
+		local block = Block:New
+		{
+			x = (self.x - (self.x % 32)) + self.width/2,
+			y = (self.y - (self.y % 32)) + self.height/2,
+			frame = Sprites.block.red
 		}
 
 	end 
