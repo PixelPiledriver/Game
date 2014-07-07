@@ -15,6 +15,7 @@ local Sprites = require("Sprites")
 local Camera = require("Camera")
 local Sound = require("Sound")
 local Controller = require("Controller")
+local PlayerSkins = require("PlayerSkins")
 
 --------------
 -- Objects
@@ -26,8 +27,8 @@ local redRobot = Player:New
 	x = 200,
 	y = 300,
 	
-	frame = Sprites.dude.idle,
-	playerColor = "darkRed"
+	frame = Sprites.dude.red.idle,
+	skin = PlayerSkins.red
 }
 
 local blueRobot = Player:New
@@ -36,7 +37,7 @@ local blueRobot = Player:New
 	y = 300,
 	
 	frame = Sprites.dude.blue.idle,
-	playerColor = "blue",
+	skin = PlayerSkins.blue,
 
 	xShootPos = -25,
 	shootDirection = -1,

@@ -9,6 +9,7 @@ local Box = require("Box")
 local Block = require("Block")
 local Sprites = require("Sprites")
 local Color = require("Color")
+local PlayerSkins = require("PlayerSkins")
 
 -- use to create more instances
 local Player = {}
@@ -31,7 +32,6 @@ function Player:New(data)
 	object.color = data.color or {255,255,255,255}
 	object.speed = data.speed or 2
 	object.frame = data.frame or nil
-	object.sheet = data.sheet or nil
 	object.animation = data.animation or nil
 	object.angle = data.angle or 0
 	object.xScale = data.xScale or 1
@@ -40,6 +40,10 @@ function Player:New(data)
 	object.yShootPos = data.yShootPos or 0
 	object.shootDirection = data.shootDirection or 1
 	object.playerColor = data.playerColor or "red"
+
+	object.skin = data.skin
+
+
 
 	-- controls
 	object.keys =
@@ -62,8 +66,6 @@ function Player:New(data)
 			object.useController = true
 		end 
 
-
-
 	end
 
 
@@ -74,8 +76,9 @@ function Player:New(data)
 	function object:Draw()
 
 		-- what type of graphic does the object have
+		-- this is bullshit and needs to be re worked
 		if(self.frame) then
-			self.frame:Draw(self)
+			self.skin.idle:Draw(self)
 		elseif(self.animation) then
 			self.animation:Draw(self)
 		end 
@@ -120,7 +123,7 @@ function Player:New(data)
 		if(self.shootDirection == -1) then
 			Bullet:New
 				{
-					frame = Sprites.dude.bulletBlue,
+					frame = self.skin.bullet,
 					speed = -5,
 					lifespan = 30,
 					shooter = self,
@@ -128,7 +131,7 @@ function Player:New(data)
 		else
 			Bullet:New
 			{
-				frame = Sprites.dude.bullet,
+				frame = self.skin.bullet,
 				speed = 5,
 				lifespan = 30,
 				shooter = self,
@@ -142,20 +145,11 @@ function Player:New(data)
 	-- build blocks
 	function object:Build()
 
-		--[[
-		local box1 = Box:New
-		{
-			x = (self.x - (self.x % 32)) + self.width/2,
-			y = (self.y - (self.y % 32)) + self.height/2,
-			color = Color[self.playerColor]
-		}
-		--]]
-
 		local block = Block:New
 		{
 			x = (self.x - (self.x % 32)) + self.width/2,
 			y = (self.y - (self.y % 32)) + self.height/2,
-			frame = Sprites.block.red
+			frame = self.skin.block
 		}
 
 	end 
@@ -270,3 +264,24 @@ end
 
 -- done with static
 return Player
+
+
+
+
+
+
+
+
+
+
+-- Notes
+---------------
+
+		--[[
+		local box1 = Box:New
+		{
+			x = (self.x - (self.x % 32)) + self.width/2,
+			y = (self.y - (self.y % 32)) + self.height/2,
+			color = Color[self.playerColor]
+		}
+		--]]

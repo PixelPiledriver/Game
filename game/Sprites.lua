@@ -92,6 +92,8 @@ end
 Sprites.dude = {}
 Sprites.dude.red = {}
 Sprites.dude.blue = {}
+Sprites.bullet = {}
+
 
 -- sheet
 Sprites.dude.sheet = {}
@@ -102,7 +104,7 @@ Sprites.dude.sheet.object:setFilter("nearest", "nearest")
 Sprites.currentSheet = Sprites.dude.sheet
 
 -- frames
-Sprites.dude.idle = MakeFrame
+Sprites.dude.red.idle = MakeFrame
 {
 	x = 0,
 	y = 0,
@@ -121,7 +123,7 @@ Sprites.dude.blue.idle = MakeFrame
 }
 
 -- bullet
-Sprites.dude.bullet = MakeFrame
+Sprites.bullet.red = MakeFrame
 {
 	x = 0,
 	y = 32,
@@ -131,7 +133,7 @@ Sprites.dude.bullet = MakeFrame
 	imageHeight = 128
 }
 
-Sprites.dude.bulletBlue = MakeFrame
+Sprites.bullet.blue = MakeFrame
 {
 	x = 32,
 	y = 32,
@@ -146,6 +148,14 @@ Sprites.block = {}
 Sprites.block.red = MakeFrame
 {
 	x = 0,
+	y = 96,
+	width = 32,
+	height = 32
+}
+
+Sprites.block.blue = MakeFrame
+{
+	x = 32,
 	y = 96,
 	width = 32,
 	height = 32
