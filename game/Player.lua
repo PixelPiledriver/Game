@@ -10,6 +10,9 @@ local Block = require("Block")
 local Sprites = require("Sprites")
 local Color = require("Color")
 local PlayerSkins = require("PlayerSkins")
+local Collision = require("Collision")
+local CollisionLists = require("CollisionLists")
+local Game = require("Game")
 
 -- use to create more instances
 local Player = {}
@@ -30,19 +33,23 @@ function Player:New(data)
 	object.width = data.width or 32
 	object.height = data.height or 32
 	object.color = data.color or {255,255,255,255}
+	object.playerColor = data.playerColor or "red"
 	object.speed = data.speed or 2
+
 	object.frame = data.frame or nil
 	object.animation = data.animation or nil
+
 	object.angle = data.angle or 0
 	object.xScale = data.xScale or 1
 	object.yScale = data.yScale or 1
 	object.xShootPos = data.xShootPos or 25
 	object.yShootPos = data.yShootPos or 0
 	object.shootDirection = data.shootDirection or 1
-	object.playerColor = data.playerColor or "red"
+	
+	object.name = data.name
+	object.collisionList =  CollisionLists[object.name]
 
 	object.skin = data.skin
-
 
 
 	-- controls
@@ -67,6 +74,20 @@ function Player:New(data)
 		end 
 
 	end
+
+
+	---------------
+	-- Collision
+	---------------
+	object.collision = Collision:New
+	{
+		width = 32,
+		height = 32,
+		shape = "rect",
+		color = Color[object.playerColor],
+		name = object.name,
+		parent = object
+	}
 
 
 	-------------
@@ -123,18 +144,22 @@ function Player:New(data)
 		if(self.shootDirection == -1) then
 			Bullet:New
 				{
+					name = self.playerColor .. "Bullet",
 					frame = self.skin.bullet,
 					speed = -5,
-					lifespan = 30,
+					lifespan = 60,
 					shooter = self,
+					collisionList = self.collisionList.bullet
 				}
 		else
 			Bullet:New
 			{
+				name = self.playerColor .. "Bullet",
 				frame = self.skin.bullet,
 				speed = 5,
-				lifespan = 30,
+				lifespan = 60,
 				shooter = self,
+				collisionList = self.collisionList.bullet
 			}
 		end 
 
@@ -149,8 +174,12 @@ function Player:New(data)
 		{
 			x = (self.x - (self.x % 32)) + self.width/2,
 			y = (self.y - (self.y % 32)) + self.height/2,
-			frame = self.skin.block
+			frame = self.skin.block,
+			builder = self,
+			collisionList = self.collisionList.block
 		}
+
+
 
 	end 
 

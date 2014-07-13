@@ -16,6 +16,10 @@ local Camera = require("Camera")
 local Sound = require("Sound")
 local Controller = require("Controller")
 local PlayerSkins = require("PlayerSkins")
+local Color = require("Color")
+local Collision = require("Collision")
+local CollisionManager = require("CollisionManager")
+local CollisionLists = require("CollisionLists")
 
 --------------
 -- Objects
@@ -24,20 +28,27 @@ local PlayerSkins = require("PlayerSkins")
 -- will move object loader to own file soon :P
 local redRobot = Player:New
 {
+	name = "redRobot",
 	x = 200,
 	y = 300,
 	
 	frame = Sprites.dude.red.idle,
-	skin = PlayerSkins.red
+	skin = PlayerSkins.red,
+	
+	playerColor = "red"
 }
+
+
 
 local blueRobot = Player:New
 {
+	name = "blueRobot",
 	x = 400,
 	y = 300,
 	
 	frame = Sprites.dude.blue.idle,
 	skin = PlayerSkins.blue,
+	playerColor = "blue",
 
 	xShootPos = -25,
 	shootDirection = -1,
@@ -54,6 +65,39 @@ local blueRobot = Player:New
 
 }
 
+
+local box1 = Box:New
+{
+	x = 200,
+	y = 200,
+	color = Color.green
+}
+
+
+
+local Steve = Collision:New
+{
+	x = 200,
+	y = 200,
+	width = 32,
+	height = 32,
+	shape = "rect",
+	color = Color.blue,
+	name = "Steve",
+	collisionList = {"Greg"}
+}
+
+
+local Greg = Collision:New
+{
+	x = 100,
+	y = 100,
+	width = 32,
+	height = 32,
+	shape = "rect",
+	mouse = true,
+	name = "Greg"
+}
 
 
 
@@ -94,6 +138,8 @@ function love.update(dt)
 	end
 
 	Controller.Update()
+
+	CollisionManager:Update()
 
 end 
 

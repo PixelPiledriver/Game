@@ -2,6 +2,8 @@
 -- holds all objects in a table and updates them
 
 
+local CollisionManager = require("CollisionManager")
+
 local ObjectUpdater = {}
 ObjectUpdater.objects = {}
 ObjectUpdater.cameras = {}
@@ -17,6 +19,25 @@ function ObjectUpdater:Add(objects)
 	for i=1, #objects do
 		self.objects[#self.objects+1] = objects[i]
 	end 
+
+	-- need to put in a real object counter
+	-- use the fuckin in game print component
+	--print(#self.objects)
+end 
+
+-- destroy a single object
+-- also adds collision of object to destroy if it has one
+function ObjectUpdater:Destroy(obj)
+	
+	obj.destroy = true
+	self.destroyObjects = true
+
+	if(obj.collision) then
+		obj.collision.destroy = true
+		CollisionManager.destroyObjects = true
+	end
+
+	printDebug{obj.name or "Thing" .. " destroyed", "Collision"}
 end 
 
 function ObjectUpdater:ClearDestroyedObjects()
@@ -30,10 +51,14 @@ function ObjectUpdater:ClearDestroyedObjects()
 	self.objects = {}
 
 	for i=1, #temp do
-		if(temp[i].destroy == nil) then
+
+		if(temp[i].destroy == nil or temp[i].destroy == false) then
 			self:Add{temp[i]}
 		end 
+
 	end
+
+	CollisionManager:ClearDestroyedObjects()
 
 	temp = nil
 

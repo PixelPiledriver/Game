@@ -11,9 +11,14 @@ local printDebugSettings = {}
 
 -- switches
 printDebugSettings["stuff"] = false
-printDebugSettings["mathTest"] = true
+printDebugSettings["mathTest"] = false
 printDebugSettings["animation"] = false
-printDebugSettings["Health"] = true
+printDebugSettings["Health"] = false
+printDebugSettings["Collision"] = false
+printDebugSettings["Collision2"] = false
+printDebugSettings["Collision3"] = false
+printDebugSettings["CollisionList"] = false
+
 
 --------------
 -- Functions

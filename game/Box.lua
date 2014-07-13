@@ -36,8 +36,10 @@ function Box:New(data)
 	-- Functions
 	-------------
 	function object:Draw()
+		love.graphics.setWireframe(true)
 		love.graphics.setColor(self.color)
 		love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+		love.graphics.setWireframe(false)
 	end 
 
 	-- only used for press and release
