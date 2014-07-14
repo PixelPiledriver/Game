@@ -29,6 +29,8 @@ function Bullet:New(data)
 	object.speed = data.speed or 10
 	object.damage = data.damage or 10
 
+	object.type = "bullet"
+
 	-- collision
 	object.collision = Collision:New
 	{

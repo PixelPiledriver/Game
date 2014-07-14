@@ -98,8 +98,8 @@ Sprites.bullet = {}
 -- sheet
 Sprites.dude.sheet = {}
 Sprites.dude.sheet.object = love.graphics.newImage("graphics/dude.png")
-Sprites.dude.sheet.width = 256
-Sprites.dude.sheet.height = 256
+Sprites.dude.sheet.width = 640
+Sprites.dude.sheet.height = 640
 Sprites.dude.sheet.object:setFilter("nearest", "nearest")
 Sprites.currentSheet = Sprites.dude.sheet
 

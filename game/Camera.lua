@@ -19,6 +19,7 @@ Camera.rotSpeed = 0.01
 
 Camera.moveNodes = {}
 Camera.moveIndex = 0
+Camera.maxShake = 100
 
 Camera.shake =
 {
@@ -26,7 +27,7 @@ Camera.shake =
 	yMax = 0,
 	xOffset = 0,
 	yOffset = 0,
-	reduce = 0
+	reduce = 0,
 } 
 
 
@@ -147,6 +148,14 @@ function Camera:Shake(data)
 	self.shake.yOffset = 0
 
 end 
+
+function Camera:AddShake(data)
+	self.shake.xMax = self.shake.xMax + data.x
+	self.shake.yMax = self.shake.yMax + data.y
+
+	self.shake.reduce = data.reduce or 0.98
+
+end
 
 -- shakes the camera based on the current shake table
 function Camera:UpdateShake()

@@ -13,6 +13,7 @@ local PlayerSkins = require("PlayerSkins")
 local Collision = require("Collision")
 local CollisionLists = require("CollisionLists")
 local Game = require("Game")
+local BlockMap = require("BlockMap")
 
 -- use to create more instances
 local Player = {}
@@ -50,6 +51,7 @@ function Player:New(data)
 	object.collisionList =  CollisionLists[object.name]
 
 	object.skin = data.skin
+	object.type = "player"
 
 
 	-- controls
@@ -170,14 +172,27 @@ function Player:New(data)
 	-- build blocks
 	function object:Build()
 
-		local block = Block:New
-		{
-			x = (self.x - (self.x % 32)) + self.width/2,
-			y = (self.y - (self.y % 32)) + self.height/2,
-			frame = self.skin.block,
-			builder = self,
-			collisionList = self.collisionList.block
-		}
+		local x = self.x - (self.x % 32)
+		local y = self.y - (self.y % 32)
+
+		if(BlockMap:SpaceEmpty{x = x, y = y}) then
+
+			printDebug{"Block built", "Build"}
+			local block = Block:New
+			{
+				x = x + self.width/2,
+				y = y + self.height/2,
+				xIndex = x / BlockMap.blockSize,
+				yIndex = y / BlockMap.blockSize,
+
+				frame = self.skin.block,
+				builder = self,
+				collisionList = self.collisionList.block
+			}
+
+			BlockMap:Add{x = x, y = y, block = block}
+
+		end 
 
 
 

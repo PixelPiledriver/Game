@@ -4,6 +4,8 @@
 
 local ObjectUpdater = require("ObjectUpdater")
 local Collision = require("Collision")
+local BlockMap = require("BlockMap")
+local Camera = require("Camera")
 
 local Block = {}
 
@@ -17,6 +19,10 @@ function Block:New(data)
 
 	object.x = data.x
 	object.y = data.y
+	object.xIndex = data.xIndex
+	object.yIndex = data.yIndex
+	print("New block xIndex:" .. object.xIndex)
+	print("New block yIndex:" .. object.yIndex)
 	object.frame = data.frame
 	object.color = {255,255,255,255}
 
@@ -24,6 +30,7 @@ function Block:New(data)
 	object.completion = 0
 	object.health = 100
 	object.collisionList = data.collisionList or nil
+	object.type = "block"
 
 	---------------
 	-- Collision
@@ -72,14 +79,14 @@ function Block:New(data)
 
 
 	function object:Destroy()
-
+		BlockMap:Remove{x = self.xIndex, y = self.yIndex}
+		Camera:AddShake{x = 5, y= 5}
 	end 
 
 
 	function object:Update()
 
 	end 
-
 
 
 	ObjectUpdater:Add{object}

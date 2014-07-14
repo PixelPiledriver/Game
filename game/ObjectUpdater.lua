@@ -22,12 +22,17 @@ function ObjectUpdater:Add(objects)
 
 	-- need to put in a real object counter
 	-- use the fuckin in game print component
-	--print(#self.objects)
+	print(#self.objects)
 end 
 
 -- destroy a single object
--- also adds collision of object to destroy if it has one
+-- also adds collision of object to destroy list if it has one
 function ObjectUpdater:Destroy(obj)
+	
+	if(obj.Destroy) then
+		obj:Destroy()
+	end 
+
 	
 	obj.destroy = true
 	self.destroyObjects = true
