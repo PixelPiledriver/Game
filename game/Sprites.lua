@@ -5,11 +5,16 @@
 local Animation = require("Animation")
 
 local Sprites = {}
+Sprites.data = {}
 
 
 ------------------
 -- Functions
 ------------------
+
+---------------------------------------------
+--New shit
+---------------------------------------------
 
 -- make a single frame
 local function MakeFrame(data)
@@ -48,42 +53,81 @@ local function MakeFrame(data)
 	return f
 end
 
--- make multiple frames
-local function MakeFrames(data)
 
-	local frames = {}
 
-	local yFrame = 0 
-	local xFrame = 0
+-- adds a sprite to the given table
+-- smooths the process of creating sprites
 
-	for i=0, data.totalFrames-1 do
-		local f = {}
 
-		f.x = data.x + (data.width * xFrame)
-		f.y = data.y + (data.height * yFrame)
-		f.width = data.width or 1
-		f.height = data.height or 1
-		f.imageWidth = data.imageWidth or 128
-		f.imageHeight = data.imageHeight or 128
+local function MakeSprites(data)
+	local vertical = data.vertical or false
 
-		frames[#frames + 1] = MakeFrame(f)
+	-- add sprites to existing obj?
+	-- create object name if it doesnt exist
+	if(data.objName) then
+		if(Sprites[data.objName] == nil) then
+			Sprites[data.objName] = {}
+		end 
+	end
 
-		printDebug{"xFrame:" .. xFrame .. ", yFrame:" .. yFrame, "animation"}
-	
-		xFrame = xFrame + 1
+	-- create sprite data for each name given
+	for i=1, #data.spriteNames do
 
-		if(data.x + (data.width * xFrame) >= data.imageWidth) then
-			xFrame = 0
-			yFrame = yFrame + 1
+		local x
+		local y
+
+		if(vertical) then
+			x = data.x
+			y = data.y + (i-1) * data.height
+		else
+			x = data.x + (i-1) * data.width
+			y = data.y
+		end 
+
+		-- create the sprite data
+
+		-- add the sprite data as frame data to the sprite table
+				
+		if(data.objName) then
+			--Sprites[data.bundle][#Sprites[data.bundle]+1] = data.names[i]
+			Sprites[data.objName][data.spriteNames[i]] = MakeFrame
+			{
+				x = x,
+				y = y,
+				width = data.width,
+				height = data.height,
+			}
 		end 
 
 	end 
 
-	printDebug{"frames:" .. #frames, "animation"}
+end
 
-	return frames
 
-end 
+-- sprite sheet load
+-- sheet
+Sprites.sheet = {}
+Sprites.sheet.object = love.graphics.newImage("graphics/dude.png")
+Sprites.sheet.width = 640
+Sprites.sheet.height = 640
+Sprites.sheet.object:setFilter("nearest", "nearest")
+Sprites.currentSheet = Sprites.sheet
+
+MakeSprites
+{
+	vertical = true,
+	t = sheetFrames,
+	x = 0,
+	y = 16,
+	width = 32,
+	height = 16,
+	spriteNames = 
+	{
+		"testPink", "testGreen", "testOrange", "granite", "blotchy", "icy", "icy2", "icy3"
+	},
+	objName = "bricks"
+}
+
 
 ------------------
 -- Robot dude
@@ -122,7 +166,10 @@ Sprites.dude.blue.idle = MakeFrame
 	imageHeight = 128,	
 }
 
--- bullet
+-------------
+-- Bullet
+-------------
+
 Sprites.bullet.red = MakeFrame
 {
 	x = 0,
@@ -141,9 +188,9 @@ Sprites.bullet.blue = MakeFrame
 	height = 32,
 }
 
--------------------
--- Block Building
--------------------
+------------
+-- Block
+------------
 Sprites.block = {}
 Sprites.block.red = MakeFrame
 {
@@ -161,80 +208,31 @@ Sprites.block.blue = MakeFrame
 	height = 32
 }
 
-------------------
--- Pawn
-------------------
-Sprites.pawn = {}
 
 
--- create sprite sheet
-Sprites.pawn.sheet = {}
-Sprites.pawn.sheet.object = love.graphics.newImage("graphics/pawnSheet.png")
-Sprites.pawn.sheet.object:setFilter("nearest", "nearest")
-Sprites.pawn.sheet.width = 128
-Sprites.pawn.sheet.height = 128
-
--- the sprite sheet that you want to make frames from needs to be set
--- so that the frame can set it to its parent
-Sprites.currentSheet = Sprites.pawn.sheet
 
 
--- create frames
--- these exist to be used
--- you can add frames to a table to make an animation
 
-Sprites.pawn.idle = MakeFrame
-{
-	x = 0,
-	y = 0,
-	width = 64,
-	height = 64,
-	imageWidth = 128,
-	imageHeight = 128,
-}
 
-Sprites.pawn.attack = MakeFrame
-{
-	x = 0,
-	y = 64,
-	width = 64,
-	height = 64,
-	imageWidth = 128,
-	imageHeight = 128
-}
 
-Sprites.pawn.walk = MakeFrame
-{
-	x = 64,
-	y = 0,
-	width = 64,
-	height = 64,
-	imageWidth = 128,
-	imageHeight = 128
-}
 
-Sprites.pawn.damage = MakeFrame
-{
-	x = 64,
-	y = 64,
-	width = 64,
-	height = 64,
-	imageWidth = 128,
-	imageHeight = 128	
-}
 
-Sprites.pawn.multi = MakeFrames
-{
-	totalFrames = 4,
-	x = 0,
-	y = 0,
-	width = 64,
-	height = 64,
-	imageWidth = 128,
-	imageHeight = 128	
-}
 
--- Animations
+return Sprites
+
+
+
+
+
+--Notes
+-------------------------------
+--[[
+-- need to integrate the shit I made in Corona into this
+
+
+
+
+-- Animation example
 Sprites.pawn.animation1 = Animation:New
 {
 	name = "stuff",
@@ -260,15 +258,17 @@ Sprites.pawn.animation1 = Animation:New
 
 
 
-return Sprites
 
 
 
 
 
---Notes
--------------------------------
--- need to integrate the shit I made in Corona into this
+
+
+
+
+
+--]]
 
 
 
