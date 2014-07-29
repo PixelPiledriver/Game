@@ -6,6 +6,7 @@
 -- Requires --> load and run shit in other files
 require("DeltaTime")
 require("PrintDebug")
+require("DebugText")
 local FrameCounter = require("FrameCounter")
 local ObjectUpdater = require("ObjectUpdater")
 local App = require("App")
@@ -154,7 +155,9 @@ end
 -- draw call
 function love.draw()
 	FrameCounter:Draw()
+	DebugText:Draw()
 	ObjectUpdater:Draw()
+
 end 
 
 

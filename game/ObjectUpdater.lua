@@ -22,7 +22,7 @@ function ObjectUpdater:Add(objects)
 
 	-- need to put in a real object counter
 	-- use the fuckin in game print component
-	print(#self.objects)
+	--print(#self.objects)
 end 
 
 -- destroy a single object
@@ -33,7 +33,6 @@ function ObjectUpdater:Destroy(obj)
 		obj:Destroy()
 	end 
 
-	
 	obj.destroy = true
 	self.destroyObjects = true
 
@@ -59,7 +58,12 @@ function ObjectUpdater:ClearDestroyedObjects()
 
 		if(temp[i].destroy == nil or temp[i].destroy == false) then
 			self:Add{temp[i]}
+		else
+			if(temp[i].collision) then
+				CollisionManager:Destroy(temp[i].collision)
+			end 
 		end 
+
 
 	end
 
@@ -73,6 +77,13 @@ end
 
 function ObjectUpdater:AddCamera(cam)
 	self.cameras[#self.cameras+1] = cam
+end 
+
+function ObjectUpdater:PrintDebugText()
+	DebugText:Text("")
+	DebugText:Text("ObjectUpdater")
+	DebugText:Text("------------------")
+	DebugText:Text(#self.objects)
 end 
 
 -- update all objects
@@ -96,6 +107,9 @@ function ObjectUpdater:Update()
 		end 
 
 	end 
+
+	-- debug text
+	self:PrintDebugText()
 
 
 

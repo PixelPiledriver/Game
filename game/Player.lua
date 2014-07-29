@@ -96,6 +96,14 @@ function Player:New(data)
 	-- Functions
 	-------------
 
+	function object:PrintDebugText()
+		DebugText:PrintObject(self)
+	end 
+
+	function object:Update()
+		self:PrintDebugText()
+	end 
+
 	function object:Draw()
 
 		-- what type of graphic does the object have

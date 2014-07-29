@@ -1,7 +1,9 @@
 -- draw text info to screen
 -- need to make a console too
 
-local DebugText = {}
+local Color = require("Color")
+
+DebugText = {}
 
 
 
@@ -9,8 +11,9 @@ local DebugText = {}
 -------------
 DebugText.type = 
 {
-	controller = true
-	player = false	
+	controller = true,
+	player = false,
+	generic = true
 }
 
 
@@ -18,8 +21,8 @@ DebugText.type =
 DebugText.texts = {}
 
 -- position shit
-DebugText.xStart = 16
-DebugText.yStart = 16
+DebugText.xStart = 8
+DebugText.yStart = 64
 DebugText.xSpace = 16
 DebugText.ySpace = 16
 
@@ -28,11 +31,17 @@ DebugText.ySpace = 16
 -- Functions
 ----------------
 
+function DebugText:Text(txt)
+	self.texts[#self.texts + 1] = {text = txt}
+end 
+
 -- add a new text to be drawn
 -- {message, type, color, pos}
-function DebugText:Text(data)
+function DebugText:TextTable(data)
 
-	if(self.type[data.type] == false)
+	local textType = data.type or "generic"
+
+	if(self.type[DebugText.type] == false) then
 		return
 	end 
 
@@ -40,14 +49,25 @@ function DebugText:Text(data)
 
 end
 
+
+
+function DebugText:PrintObject(data)
+
+	self:Text("")
+	self:Text("Name: " .. data.name)
+	self:Text("X: " .. data.x)
+	self:Text("Y: " .. data.y)
+end
+
 -- draw all texts
-function DebutText:Draw()
+function DebugText:Draw()
 
 	for i=1, #self.texts do
-		love.graphics.setColor(self.texts[i].color)
-		love.graphics.print("LoveFPS:" .. love.timer.getFPS(), self.xStart, self.yStart + (self.ySpace * (i-1) ) )
+		love.graphics.setColor(self.texts[i].color or Color.white)
+		love.graphics.print(self.texts[i].text, self.xStart, self.yStart + (self.ySpace * (i-1) ) )
 	end 
 
+	self.ClearTexts()
 end 
 
 -- clears all texts
@@ -68,5 +88,3 @@ end
 
 
 
-
-return DebugText
