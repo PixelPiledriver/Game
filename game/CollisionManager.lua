@@ -9,6 +9,7 @@ CollisionManager.names = {}
 CollisionManager.destroyList = {}
 
 
+
 ----------------------
 -- Variables
 ----------------------
@@ -130,7 +131,7 @@ end
 -- Functions
 ---------------
 
--- add a new object name
+-- add a new object name to ordered table of names --> straight array
 function CollisionManager:AddName(name)
 	local add = true
 
@@ -147,7 +148,7 @@ function CollisionManager:AddName(name)
 end 
 
 
--- add a new object
+-- add a new object to object table --> unordered, sorted by name
 function CollisionManager:Add(object)
 	--self.objects[#self.objects + 1] = object
 
@@ -158,13 +159,12 @@ function CollisionManager:Add(object)
 		self:AddName(object.name)
 	end 
 
-	print(object.name)
-
 	-- add object to table by name
 	self.objects[object.name][#self.objects[object.name] + 1] = object
 
 end
 
+-- mark an object type to be destroyed on the next clear
 function CollisionManager:Destroy(obj)
 
 	local add = true
@@ -190,7 +190,7 @@ end
 
 function CollisionManager:ClearDestroyedObjects()
 
-	self:PrintDestroyList()
+	--self:PrintDestroyList()
 	
 	-- only re-add objects that are not to be destroyed
 	for i=1, #self.destroyList do
@@ -201,73 +201,47 @@ function CollisionManager:ClearDestroyedObjects()
 		for j=1, #temp do
 
 			if(temp[j].destroy == nil or temp[j].destroy == false) then
-				print("Add")
+				printDebug("Add", "Collision")
 				self:Add(temp[j])
 			else
-				print("remove")
+				printDebug("remove", "Collision")
 				temp[j] = nil
 			end 
 
 		end 
 	end
 
-	
 	-- remove slots and names for object types that there are none of
 	local tempNames = {}
-	--print("Names: " .. #self.names)
 
 	for i=1, #self.names do
-		--print(self.objects[self.names[i]])
+
 		if(self.objects[self.names[i]] and #self.objects[self.names[i]] > 0) then	
-			--print("name readded")
 			tempNames[#tempNames + 1] = self.names[i]			
 		end 
+
 	end 
 
-	--print("TempNames: " .. #tempNames)
-
+	-- set names to newly built table
 	self.names = nil
 	self.names = tempNames
-
 
 	-- remove all names from destroy list
 	self.destroyList = nil
 	self.destroyList = {}
 
-	-- set object table to newly cleared table
+	-- clear temp object table
+	-- no need to set objects to this because they are added in the loop
 	temp = nil
 
+	-- done
 	self.destroyObjects = false
 
-	printDebug{"Collision destroyed", "Collision"}
-
-
-
-
--- Old 
-----------------
---[[
-	local temp = self.objects
-	self.objects = nil
-	self.objects = {}
-
-	for i=1, #temp do
-		if(temp[i].destroy == nil or temp[i].destroy == false) then
-			self:Add(temp[i])
-		end 
-
-	end
-	
-	temp = nil
-
-	self.destroyObjects = false
-
-	printDebug{"Collision destroyed", "Collision"}
-	--]]
 end
 
 
-
+-- runs collision checks on all objects
+-- with objects they are able to collide with
 function CollisionManager:CheckForCollisions()
 
 	-- for each object type -- by name
@@ -300,40 +274,18 @@ function CollisionManager:CheckForCollisions()
 
 	end 
 
-
-
-	--[[
-	for a=1, #self.objects do
-
-		for b=a+1, #self.objects do
-		
-			-- continue loop
-			repeat
-
-				
-				--self:PointToPoint(self.objects[a], self.objects[b])
-
-				if(self:RectToRect(self.objects[a], self.objects[b])) then
-					self.objects[a]:CollisionWith{other = self.objects[b]}
-					self.objects[b]:CollisionWith{other = self.objects[a]}
-
-					printDebug{self.objects[a].name .. " +collision+ " .. self.objects[b].name, "Collision"}
-				end 
-
-			until true
-
-		end
-
-	end
-
-
-	--]]
-
 end 
 
 
-function CollisionManager:PrintDebugText()
+CollisionManager.printDebugTextActive = true
 
+-- prints data to screen
+function CollisionManager:PrintDebugText()
+	if(self.printDebugTextActive == false) then
+		return
+	end 
+
+	-- header
 	DebugText:Text("")
 	DebugText:Text("Collision Manager")
 	DebugText:Text("------------------------")
@@ -348,13 +300,11 @@ function CollisionManager:PrintDebugText()
 
 	end 
 
-	-- destroy list
-
-
 end 
 
+-- do stuff
 function CollisionManager:Update()
-	--self:CheckForCollisions()
+	self:CheckForCollisions()
 	self:PrintDebugText()
 end 
 
