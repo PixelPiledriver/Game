@@ -35,10 +35,15 @@ function Collision:New(data)
 	-- stuff
 	object.draw = data.draw or true
 	object.destroy = false
-	object.collision = false
+	object.collided = false
+
+	-- objects that only hit once use this
+	object.oneCollision = data.oneCollision or false
+	object.firstCollision = false
 
 	object.parent = data.parent or nil
 	object.name = data.name
+	object.type = "collision"
 
 	-- movment
 	object.mouse = data.mouse or false
@@ -80,14 +85,21 @@ function Collision:New(data)
 		printDebug{self.collisionList, "Collision3"}
 		printDebug{data.other.collisionList, "Collision3"}
 
+		-- what does this do?
+		--[[
 		if(self.collisionList) then
 			if(self:CheckCollisionList(data) == false) then
 				self.collision = false
 				return
 			end
 		end
+		--]]
 
-		self.collision = true
+		self.collided = true
+
+		if(self.oneCollision) then
+			self.firstCollision = true
+		end
 
 		-- do action
 		if(self.parent and self.parent.OnCollision) then
@@ -101,7 +113,7 @@ function Collision:New(data)
 			return
 		end 
 
-		love.graphics.setColor( self.collision and self.collisionColor or self.color)
+		love.graphics.setColor( self.collided and self.collisionColor or self.color)
 		love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
 
 	end 
@@ -129,7 +141,7 @@ function Collision:New(data)
 	function object:Update()
 		self:FollowMouse()
 		self:FollowParent()
-		self.collision = false
+		self.collided = false
 	end 
 
 	CollisionManager:Add(object)

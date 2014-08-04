@@ -27,7 +27,7 @@ function Bullet:New(data)
 
 	-- bullet stats
 	object.speed = data.speed or 10
-	object.damage = data.damage or 10
+	object.damage = data.damage or 1
 
 	object.type = "bullet"
 
@@ -38,7 +38,8 @@ function Bullet:New(data)
 		parent = object,
 		width = object.frame.width,
 		height = object.frame.height,
-		collisionList = data.collisionList or nil
+		collisionList = data.collisionList or nil,
+		oneCollision = true
 	}
 
 

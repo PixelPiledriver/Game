@@ -246,33 +246,88 @@ function CollisionManager:CheckForCollisions()
 
 	-- for each object type -- by name
 
-	for t=1, #self.names do
+	for n=1, #self.names do
 
 		-- for each object of type
-		for a=1, #self.objects[self.names[t]] do
+		local objList = self.objects[self.names[n]]
 
-			-- for each in collision list of a
-			for c=1, #self.objects[self.names[t]][a].collisionList do
+		for a=1, #objList do
+
+			local obj = objList[a]
+
+			for c=1, #obj.collisionList do
+				local collisionObjectName = obj.collisionList[c]
+
+				if(self.objects[collisionObjectName]) then
+
+					repeat
+
+						for b=1, #self.objects[collisionObjectName] do
+
+							local B = self.objects[collisionObjectName][b]
+							local A = obj
+
+							-- only collide once?
+							if((A.oneCollision and A.firstCollision) or (B.oneCollision and B.firstCollision)) then
+								break
+							end 
+
+							if(self:RectToRect(A, B)) then
+
+								A:CollisionWith{other = B}
+								B:CollisionWith{other = A}
+
+								--printDebug{A.name .. " +collision+ " .. B.name, "Collision"}
+							end 
+
+						end 
+
+					until true
+
+				end 
+
+			end 
 			
-				for b=1, #self.objects[self.objects[self.names[t]][a].collisionList[c]] do
+			
+
+		end 
+
+	end 
+--[==[
+			local obj = objList[a]
+
+			repeat
+
+				if(obj.collisionList == nil) then
+					break
+				end 
+
+				-- for each in collision list of a
+				for c=1, #obj.collisionList do
 				
-					local B = self.objects[self.objects[self.names[t]][a].collisionList[c]][b]
-					local A = self.objects[self.names[t]][a]
 
-					if(self:RectToRect(A, B)) then
-						A:CollisionWith{other = B}
-						B:CollisionWith{other = A}
+					for b=1, #objList[obj.collisionList[c]] do
+					
+						local B = objList[obj.collisionList[c]][b]
+						local A = obj
 
-						printDebug{A.name .. " +collision+ " .. B.name, "Collision"}
-					end 
+						if(self:RectToRect(A, B)) then
+							A:CollisionWith{other = B}
+							B:CollisionWith{other = A}
+
+							printDebug{A.name .. " +collision+ " .. B.name, "Collision"}
+						end 
+
+					end
 
 				end
 
-			end
+			until true
 
 		end
 
 	end 
+	--]==]
 
 end 
 

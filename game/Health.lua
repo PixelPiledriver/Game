@@ -17,32 +17,36 @@ function Health:New(data)
 	object.max = data.max or 100
 	object.min = data.min or 0
 	object.start = data.start or 100
-	object.hp = object.start
+	object.hp = 100
 
 	---------------
 	-- Functions
 	---------------
 	function object:Damage(attack)
-		object.hp = object.hp = attack.damage
-		object:UpdateCheck()
+		self.hp = self.hp - attack.damage
+		self:UpdateCheck()
 
-		printDebug{object.hp, "Health"}
+		printDebug{self.hp, "Health"}
 
 	end
 
 	function object:UpdateCheck()
-		if(object.hp < object.min) then 
-			object.hp = object.min
+		if(self.hp < self.min) then 
+			self.hp = self.min
 		end
 
-		if(object.hp > object.max) then 
-			object.hp = object.max
+		if(self.hp > self.max) then 
+			self.hp = self.max
 		end 
 
 	end 
 
 	function object:Death()
 		printDebug{"fucking dead!", "Health"}
+	end 
+
+	function object:GetHealth()
+		return self.hp
 	end 
 
 	return object

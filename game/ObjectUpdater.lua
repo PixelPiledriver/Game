@@ -60,6 +60,7 @@ function ObjectUpdater:ClearDestroyedObjects()
 			self:Add{temp[i]}
 		else
 			if(temp[i].collision) then
+		
 				CollisionManager:Destroy(temp[i].collision)
 			end 
 		end 
@@ -83,7 +84,7 @@ function ObjectUpdater:PrintDebugText()
 	DebugText:Text("")
 	DebugText:Text("ObjectUpdater")
 	DebugText:Text("------------------")
-	DebugText:Text(#self.objects)
+	DebugText:Text("Objs: " .. #self.objects)
 end 
 
 -- update all objects

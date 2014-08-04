@@ -10,6 +10,66 @@ CollisionLists.redRobot =
 {
 	robot =
 	{
+		"blueBullet",
+		"blueRobot",
+		"redBlock"
+	},
+
+	bullet = 
+	{
+		"blueRobot",
+		"blueBlock"
+	},
+
+	block =
+	{
+		"redRobot",
+		"blueBullet"
+	}
+
+}
+
+CollisionLists.blueRobot =
+{
+	robot =
+	{
+		"redBullet",
+		"redRobot",
+		"blueBlock"
+	},
+
+	bullet = 
+	{
+		["redRobot"] = "player",
+		["redBlock"] = "block",
+
+	},
+
+	block =
+	{
+		["blueRobot"] = "player",
+		["redBullet"] = "bullet"
+	}
+
+}
+
+return CollisionLists
+
+
+
+
+
+
+
+
+
+--------------------------------------------
+
+--[[
+CollisionLists.redRobot =
+{
+	robot =
+	{
 		["blueBullet"] = "bullet",
 		["blueRobot"] = "player",
 		["redBlock"] = "block",
@@ -30,21 +90,7 @@ CollisionLists.redRobot =
 
 }
 
-CollisionLists.blueRobot =
-{
-	bullet = 
-	{
-		["redRobot"] = "player",
-		["redBlock"] = "block",
 
-	},
 
-	block =
-	{
-		["blueRobot"] = "player",
-		["redBullet"] = "bullet"
-	}
 
-}
-
-return CollisionLists
+--]]

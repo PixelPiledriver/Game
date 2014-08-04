@@ -14,6 +14,7 @@ local Collision = require("Collision")
 local CollisionLists = require("CollisionLists")
 local Game = require("Game")
 local BlockMap = require("BlockMap")
+local Health = require("Health")
 
 -- use to create more instances
 local Player = {}
@@ -48,10 +49,12 @@ function Player:New(data)
 	object.shootDirection = data.shootDirection or 1
 	
 	object.name = data.name
-	object.collisionList =  CollisionLists[object.name]
+	object.collisionList = CollisionLists[object.name]
 
 	object.skin = data.skin
 	object.type = "player"
+
+	object.health =  Health:New{}
 
 
 	-- controls
@@ -81,6 +84,7 @@ function Player:New(data)
 	---------------
 	-- Collision
 	---------------
+	
 	object.collision = Collision:New
 	{
 		width = 32,
@@ -88,8 +92,20 @@ function Player:New(data)
 		shape = "rect",
 		color = Color[object.playerColor],
 		name = object.name,
-		parent = object
+		parent = object,
+		collisionList = object.collisionList.robot
 	}
+
+
+	function object:OnCollision(data)
+		
+		-- Bullet
+		if(data.other.parent.type == "bullet") then
+			self.health:Damage(data.other.parent)
+		end 
+
+		--print(self.health:GetHealth())
+	end 
 
 
 	-------------
@@ -98,6 +114,7 @@ function Player:New(data)
 
 	function object:PrintDebugText()
 		DebugText:PrintObject(self)
+		DebugText:Text("HP:" ..self.health.hp)
 	end 
 
 	function object:Update()

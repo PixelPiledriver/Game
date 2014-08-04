@@ -97,7 +97,8 @@ local Greg = Collision:New
 	height = 32,
 	shape = "rect",
 	mouse = true,
-	name = "Greg"
+	name = "Greg",
+	collisionList = {"Steve"}
 }
 
 
