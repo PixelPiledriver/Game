@@ -16,22 +16,50 @@ function Bullet:New(data)
 	--------------
 	-- Variables
 	--------------
-	object.frame = data.frame or nil
-	
+	if(data.bulletType) then
+		
+		object.frame = data.frame
+		object.bulletType = data.bulletType
 
-	object.lifespan = data.lifespan or -1
+		-- pos
+		object.x = data.shooter.x + data.shooter.xShootPos
+		object.y = data.shooter.y + data.shooter.yShootPos
 
-	-- pos
-	object.x = data.shooter.x + data.shooter.xShootPos
-	object.y = data.shooter.y + data.shooter.yShootPos
+		-- direction
+		object.xSpeed = data.direction.x or 0
+		object.ySpeed = data.direction.y or 0
 
-	-- bullet stats
-	object.speed = data.speed or 10
-	object.damage = data.damage or 1
+		-- bullet stats
+		object.speed = object.bulletType.speed
+		object.damage = object.bulletType.damage
+		object.lifespan = object.bulletType.lifespan
+
+	else
+
+		-- sprite
+		object.frame = data.frame or nil
+		
+		-- pos
+		object.x = data.shooter.x + data.shooter.xShootPos
+		object.y = data.shooter.y + data.shooter.yShootPos
+
+		-- direction
+		object.xSpeed = data.xSpeed or 0
+		object.ySpeed = data.ySpeed or 0
+
+		-- bullet stats
+		object.speed = data.speed or 10
+		object.damage = data.damage or 1
+		object.lifespan = data.lifespan or -1
+	end
 
 	object.type = "bullet"
 
-	-- collision
+
+	--------------
+	-- Collision
+	---------------
+
 	object.collision = Collision:New
 	{
 		name = data.shooter.playerColor .. "Bullet",
@@ -43,13 +71,17 @@ function Bullet:New(data)
 	}
 
 
+	function object:OnCollision(data)
+		self.lifespan = 0
+	end 
 
 	--------------
 	-- Functions
 	--------------
 
 	function object:Move()
-		self.x = self.x + self.speed
+		self.x = self.x + (self.xSpeed * self.speed)
+		self.y = self.y + (self.ySpeed * self.speed)
 	end 
 
 	function object:Life()
@@ -67,24 +99,28 @@ function Bullet:New(data)
 
 	end 
 
+	function object:OutOfBounds()
+		-- off screen
+
+		-- right
+		--if(self.x > )
+		-- bottom
+		-- left
+		-- top
+		
+
+	end 
+
 	function object:Update()
 		self:Move()
 		self:Life()
+		self:OutOfBounds()
 	end
 
 	function object:Draw()
 		self.frame:Draw(self)
 	end 
 
-	---------------
-	-- Collision
-	---------------
-
-
-	-- need to put in check for type and if it should collide or not
-	function object:OnCollision(data)
-		self.lifespan = 0
-	end 
 
 	-- add new object to updater
 	ObjectUpdater:Add{object}

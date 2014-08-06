@@ -9,6 +9,7 @@ require("PrintDebug")
 require("DebugText")
 local FrameCounter = require("FrameCounter")
 local ObjectUpdater = require("ObjectUpdater")
+local Window = require("Window")
 local App = require("App")
 local Box = require("Box")
 local Player = require("Player")
@@ -21,6 +22,7 @@ local Color = require("Color")
 local Collision = require("Collision")
 local CollisionManager = require("CollisionManager")
 local CollisionLists = require("CollisionLists")
+local Guns = require("Guns")
 
 --------------
 -- Objects
@@ -36,7 +38,8 @@ local redRobot = Player:New
 	frame = Sprites.dude.red.idle,
 	skin = PlayerSkins.red,
 	
-	playerColor = "red"
+	playerColor = "red",
+	gun = Guns.laserRifle
 }
 
 
@@ -62,8 +65,9 @@ local blueRobot = Player:New
 		down = "down",
 		shoot = "=",
 		build = "-",
-	}
+	},
 
+	gun = Guns.laserRifle
 }
 
 

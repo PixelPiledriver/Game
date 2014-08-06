@@ -11,7 +11,8 @@ PlayerSkins.red =
 {
 	idle = Sprites.dude.red.idle,
 	bullet = Sprites.bullet.red,
-	block = Sprites.block.red
+	block = Sprites.block.red,
+	color = red
 }
 
 -- blue
@@ -20,6 +21,7 @@ PlayerSkins.blue =
 	idle = Sprites.dude.blue.idle,
 	bullet = Sprites.bullet.blue,
 	block = Sprites.block.blue,
+	color = blue
 }
 
 

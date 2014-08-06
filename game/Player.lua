@@ -15,6 +15,7 @@ local CollisionLists = require("CollisionLists")
 local Game = require("Game")
 local BlockMap = require("BlockMap")
 local Health = require("Health")
+local Guns = require("Guns")
 
 -- use to create more instances
 local Player = {}
@@ -38,6 +39,10 @@ function Player:New(data)
 	object.playerColor = data.playerColor or "red"
 	object.speed = data.speed or 2
 
+	object.direction = "none"
+	object.xDirection = 1
+	object.yDirection = 0
+
 	object.frame = data.frame or nil
 	object.animation = data.animation or nil
 
@@ -47,6 +52,9 @@ function Player:New(data)
 	object.xShootPos = data.xShootPos or 25
 	object.yShootPos = data.yShootPos or 0
 	object.shootDirection = data.shootDirection or 1
+
+	object.xStick = 0
+	object.yStick = 0
 	
 	object.name = data.name
 	object.collisionList = CollisionLists[object.name]
@@ -56,6 +64,9 @@ function Player:New(data)
 
 	object.health =  Health:New{}
 
+	-- weapon
+	object.gun = data.gun or Guns.laserRifle
+	--object.rateOfFire = object.gun.rateOfFire
 
 	-- controls
 	object.keys =
@@ -112,13 +123,23 @@ function Player:New(data)
 	-- Functions
 	-------------
 
+	
+
 	function object:PrintDebugText()
-		DebugText:PrintObject(self)
-		DebugText:Text("HP:" ..self.health.hp)
+		
+		DebugText:TextTable
+		{
+			{text = "", obj = "Player" },
+			{text = "Name: " .. data.name},
+			{text = "X: " .. data.x},
+			{text = "Y: " .. data.y},
+			{text = "HP:" ..self.health.hp},
+			{text = "Gun: " .. self.gun.name},
+			{text = "Direction: " .. self.direction}
+		}
 	end 
 
 	function object:Update()
-		self:PrintDebugText()
 	end 
 
 	function object:Draw()
@@ -155,43 +176,42 @@ function Player:New(data)
 		self.y = self.y + self.speed
 	end 
 
-	-- shoot bullets
-	object.reloadMaxTime = 10
-	object.reloadTime = 0
+
+	-- used for 4 directional movement
+	-- put in options for movement types
+	-- need to get hud buttons for changing options at runtime
+	function object:SetDirection(dir)
+
+		object.direction = dir
+
+		if(dir == "left") then
+			self.xDirection = -1
+			self.yDirection = 0
+		end 
+
+		if(dir == "right") then
+			self.xDirection = 1
+			self.yDirection = 0
+		end
+
+		if(dir == "up") then
+			self.xDirection = 0
+			self.yDirection = -1
+		end 
+
+		if(dir == "down") then
+			self.xDirection = 0
+			self.yDirection = 1
+		end
+
+
+
+	end 
 
 	function object:Shoot()
 
-		self.reloadTime = self.reloadTime + 1
-
-		-- unable to shoot?
-		if(self.reloadTime < self.reloadMaxTime) then
-			return
-		end 
-
-		if(self.shootDirection == -1) then
-			Bullet:New
-				{
-					name = self.playerColor .. "Bullet",
-					frame = self.skin.bullet,
-					speed = -5,
-					lifespan = 60,
-					shooter = self,
-					collisionList = self.collisionList.bullet
-				}
-		else
-			Bullet:New
-			{
-				name = self.playerColor .. "Bullet",
-				frame = self.skin.bullet,
-				speed = 5,
-				lifespan = 60,
-				shooter = self,
-				collisionList = self.collisionList.bullet
-			}
-		end 
-
-		self.reloadTime = 0
-
+		self.gun:Shoot(self)
+	
 	end 
 
 	-- build blocks
@@ -244,18 +264,22 @@ function Player:New(data)
 		-- simple controls
 		if(love.keyboard.isDown(self.keys.left)) then
 			self:MoveLeft()
+			self:SetDirection("left")
 		end 
 
 		if(love.keyboard.isDown(self.keys.right)) then
 			self:MoveRight()
+			self:SetDirection("right")
 		end 
 
 		if(love.keyboard.isDown(self.keys.up)) then
 			self:MoveUp()
+			self:SetDirection("up")
 		end 
 
 		if(love.keyboard.isDown(self.keys.down)) then
 			self:MoveDown()
+			self:SetDirection("down")
 		end
 
 		if(love.keyboard.isDown(self.keys.shoot)) then
@@ -289,6 +313,9 @@ function Player:New(data)
 			return
 		end 
 
+		--------------
+		-- D-Pad
+		--------------
 		-- up
 		if(self.controller:Button(self.controls.gamepad.up)) then
 			self:MoveUp()
@@ -308,6 +335,15 @@ function Player:New(data)
 		if(self.controller:Button(self.controls.gamepad.right)) then
 			self:MoveRight()
 		end 
+
+		----------------
+		-- Sticks
+		----------------
+		self.xStick = self.controller.leftStick.x.lastValue
+
+		----------------
+		-- Buttons
+		----------------
 
 		-- shoot
 		if(self.controller:Button(self.controls.gamepad.shoot)) then
@@ -353,4 +389,42 @@ return Player
 			y = (self.y - (self.y % 32)) + self.height/2,
 			color = Color[self.playerColor]
 		}
+		--]]
+
+
+
+
+				--[[
+		self.rateOfFire = self.rateOfFire + 1
+
+		-- unable to shoot?
+		if(self.rateOfFire < self.gun.rateOfFire) then
+			return
+		end 
+
+		if(self.shootDirection == -1) then
+			Bullet:New
+				{
+					name = self.playerColor .. "Bullet",
+					frame = self.skin.bullet,
+					xSpeed = -1,
+					bulletType = self.gun.bullet,
+					shooter = self,
+					collisionList = self.collisionList.bullet
+				}
+
+
+		else
+			Bullet:New
+			{
+				name = self.playerColor .. "Bullet",
+				frame = self.skin.bullet,
+				xSpeed = 1,
+				bulletType = self.gun.bullet,
+				shooter = self,
+				collisionList = self.collisionList.bullet
+			}
+		end 
+
+		self.rateOfFire = 0
 		--]]

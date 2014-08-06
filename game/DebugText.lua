@@ -5,19 +5,26 @@ local Color = require("Color")
 
 DebugText = {}
 
-
+-- on or off
+DebugText.active = true
 
 -- types
 -------------
 DebugText.type = 
 {
-	controller = true,
-	player = false,
-	generic = true
+	Player = false,
+	Bullet = false,
+	Block = false,
+	Controller = true,
+	Window = false,
+	ObjectUpdater = false,
+	CollisionManager = false,
+		
+	Generic = true,
 }
 
 
--- text to draw next frame
+-- all text messages that need to be drawn on the next frame
 DebugText.texts = {}
 
 -- position shit
@@ -31,17 +38,22 @@ DebugText.ySpace = 16
 -- Functions
 ----------------
 
+function DebugText:Update()
+	-- nuthin to do here for now I guess :P
+end 
+
+-- add a single line
 function DebugText:Text(txt)
-	self.texts[#self.texts + 1] = {text = txt}
+	self.texts[#self.texts + 1] = { {text = txt, color = Color.white} }
 end 
 
 -- add a new text to be drawn
--- {message, type, color, pos}
+-- { {text ,color,obj}, {text,color}, ... } 
 function DebugText:TextTable(data)
 
-	local textType = data.type or "generic"
+	local textType = data[1].obj or "Generic"
 
-	if(self.type[DebugText.type] == false) then
+	if(self.type[textType] == false) then
 		return
 	end 
 
@@ -49,10 +61,9 @@ function DebugText:TextTable(data)
 
 end
 
-
-
+-- generic object print
+-- this function isnt really needed anymore
 function DebugText:PrintObject(data)
-
 	self:Text("")
 	self:Text("Name: " .. data.name)
 	self:Text("X: " .. data.x)
@@ -62,16 +73,27 @@ end
 -- draw all texts
 function DebugText:Draw()
 
+	-- use index for sub items in text tables
+	local index = 1
+
+	-- for each text item
 	for i=1, #self.texts do
-		love.graphics.setColor(self.texts[i].color or Color.white)
-		love.graphics.print(self.texts[i].text, self.xStart, self.yStart + (self.ySpace * (i-1) ) )
+
+		-- for each text message in item
+		for t=1, #self.texts[i] do
+			love.graphics.setColor(self.texts[i][t].color or Color.white)
+			love.graphics.print(self.texts[i][t].text, self.xStart, self.yStart + (self.ySpace * (index-1) ) )
+
+			index = index + 1
+		end 
+
 	end 
 
+	-- remove all texts for next frame
 	self.ClearTexts()
 end 
 
 -- clears all texts
--- per frame
 function DebugText:ClearTexts()
 
 	for i=1, #DebugText.texts do
@@ -83,7 +105,10 @@ end
 
 
 
-
+-- Notes
+-------------
+-- need to add button for scrolling up and down text
+-- since lots of objects overflows vertically
 
 
 

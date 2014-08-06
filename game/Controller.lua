@@ -50,7 +50,8 @@ function Controller:ButtonTest(controller)
 
 	for i=1, #buttons.buttonsList do
 		if(controller.controller:isDown(buttons[buttons.buttonsList[i]].value)) then
-			print(controller.playerName .. " " .. buttons[buttons.buttonsList[i]].name)
+			controller.pressedButtons[buttons.buttonsList[i]] = true
+			printDebug{controller.playerName .. " " .. buttons[buttons.buttonsList[i]].name, "Controller"}
 		end
 	end
 
@@ -79,13 +80,13 @@ function Controller:SticksTest(controller)
 	-- x
 	if(math.abs(controller.leftStick.x.lastValue - controller.controller:getAxis(controller.leftStick.x.axis)) > minDifference ) then	
 		controller.leftStick.x.lastValue = controller.controller:getAxis(controller.leftStick.x.axis)
-		print(controller.playerName .. " Left X: " .. controller.controller:getAxis(controller.leftStick.x.axis))
+		printDebug{controller.playerName .. " Left X: " .. controller.controller:getAxis(controller.leftStick.x.axis), "Controller"}
 	end
 
 	-- y
 	if(math.abs(controller.leftStick.y.lastValue - controller.controller:getAxis(controller.leftStick.y.axis)) > minDifference ) then	
 		controller.leftStick.y.lastValue = controller.controller:getAxis(controller.leftStick.y.axis)
-		print(controller.playerName .. " Left Y: " .. controller.controller:getAxis(controller.leftStick.y.axis))
+		printDebug{controller.playerName .. " Left Y: " .. controller.controller:getAxis(controller.leftStick.y.axis), "Controller"}
 	end
 
 
@@ -94,13 +95,13 @@ function Controller:SticksTest(controller)
 	-- x
  	if(math.abs(controller.rightStick.x.lastValue - controller.controller:getAxis(controller.rightStick.x.axis)) > minDifference ) then
 		controller.rightStick.x.lastValue = controller.controller:getAxis(controller.rightStick.x.axis)
-		print(controller.playerName .. " Right X: " .. controller.controller:getAxis(controller.rightStick.x.axis))
+		printDebug{controller.playerName .. " Right X: " .. controller.controller:getAxis(controller.rightStick.x.axis), "Controller"}
 	end
 
 	-- y
 	if(math.abs(controller.rightStick.y.lastValue - controller.controller:getAxis(controller.rightStick.y.axis)) > minDifference ) then	
 		controller.rightStick.y.lastValue = controller.controller:getAxis(controller.rightStick.y.axis)
-		print(controller.playerName .. " Right Y: " .. controller.controller:getAxis(controller.rightStick.y.axis))
+		printDebug{controller.playerName .. " Right Y: " .. controller.controller:getAxis(controller.rightStick.y.axis), "Controller"}
 	end
 
 
@@ -118,7 +119,7 @@ function Controller:Setup()
 
 	for i=1, #getControllers do
 
-		print("controller" .. i .. " setup")
+		printDebug{"controller" .. i .. " setup", "Controller"}
 
 		-- add controller
 		controllers[#controllers + 1] = {}
@@ -130,6 +131,28 @@ function Controller:Setup()
 		object.claimed = false
 		object.controller = getControllers[i]
 		object.playerName = "Controller" .. i
+
+		object.pressedButtons = 
+		{
+			A = false,
+			B = false,
+			X = false,
+			Y = false,
+
+			up = false,
+			down = false,
+			left = false,
+			right = false,
+
+			start = false,
+			back = false,
+			Xbox = false,
+
+			LB = false,
+			RB = false,
+			L3 = false,
+			R3 = false
+		}
 
 		-- sticks
 		object.leftStick = 
@@ -175,14 +198,63 @@ function Controller:Setup()
 		}
 
 
-		-- functions
+		------------------
+		-- Functions
+		------------------
 		function object:Button(button)
 			if(self.controller:isDown(buttons[button].value)) then
+				
+				if(self.pressedButtons[buttons[button].name] == false) then
+					printDebug{"hold that button bitch", "Controller"}
+					self.pressedButtons[buttons[button].name] = true
+				end 
+
 				return true
+
+			end
 		end
-	
+
+		function object:PrintDebugText()
+			DebugText:TextTable
+			{
+				{text = "", obj = "Controller"},
+				{text = self.playerName},
+
+				{text = "LeftStick:"},
+				{text = "-------------"},
+				{text = "X:" .. self.leftStick.x.lastValue},
+				{text = "Y:" .. self.leftStick.y.lastValue},
+
+				{text = "Buttons"},
+				{text = "-------------"},
+				{text = "A: " .. tostring(self.pressedButtons["A"])},
+				{text = "B: " .. tostring(self.pressedButtons["B"])},
+				{text = "X: " .. tostring(self.pressedButtons["X"])},
+				{text = "Y: " .. tostring(self.pressedButtons["Y"])},
+				{text = "Y: " .. tostring(self.pressedButtons["Y"])},
+
+				{text = "start: " .. tostring(self.pressedButtons["start"])},
+				{text = "back: " .. tostring(self.pressedButtons["back"])},
+				{text = "Xbox: " .. tostring(self.pressedButtons["Xbox"])},
+
+				{text = "RB: " .. tostring(self.pressedButtons["RB"])},
+				{text = "LB: " .. tostring(self.pressedButtons["LB"])},
+				{text = "L3: " .. tostring(self.pressedButtons["L3"])},
+				{text = "R3: " .. tostring(self.pressedButtons["R3"])},
+
+				{text = "up: " .. tostring(self.pressedButtons["up"])},
+				{text = "down: " .. tostring(self.pressedButtons["down"])},
+				{text = "left: " .. tostring(self.pressedButtons["left"])},
+				{text = "right: " .. tostring(self.pressedButtons["right"])},
+
+			}
 		end 
 
+		function object:ClearButtonsPressed()
+			for i=1, #buttons.buttonsList do
+				self.pressedButtons[buttons.buttonsList[i]] = false
+			end 
+		end 
 
 	end
 
@@ -218,8 +290,11 @@ function Controller:Update()
 	for i=1, #controllers do
 		Controller:SticksTest(controllers[i])
 		Controller:ButtonTest(controllers[i])
-		Controller:TriggerTest(controllers[i])
+		controllers[i]:PrintDebugText()
+		controllers[i]:ClearButtonsPressed()
 	end 
+
+
 
 end 
 
@@ -260,3 +335,11 @@ local player1 = controllers[1]
 print(player1:getName())
 print(player1:getButtonCount())
 --]]
+
+
+
+
+-- Tests
+		--Controller:SticksTest(controllers[i])
+		--Controller:ButtonTest(controllers[i])
+		--Controller:TriggerTest(controllers[i])

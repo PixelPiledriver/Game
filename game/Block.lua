@@ -6,6 +6,7 @@ local ObjectUpdater = require("ObjectUpdater")
 local Collision = require("Collision")
 local BlockMap = require("BlockMap")
 local Camera = require("Camera")
+local Health = require("Health")
 
 local Block = {}
 
@@ -21,16 +22,17 @@ function Block:New(data)
 	object.y = data.y
 	object.xIndex = data.xIndex
 	object.yIndex = data.yIndex
-	print("New block xIndex:" .. object.xIndex)
-	print("New block yIndex:" .. object.yIndex)
+	printDebug{"New block xIndex:" .. object.xIndex, "Build"}
+	printDebug{"New block yIndex:" .. object.yIndex, "Build"}
 	object.frame = data.frame
 	object.color = {255,255,255,255}
 
 	object.buildTime = data.buildTime or 100
 	object.completion = 0
-	object.health = 100
 	object.collisionList = data.collisionList or nil
 	object.type = "block"
+
+	object.health = Health:New{}
 
 	---------------
 	-- Collision
@@ -71,8 +73,8 @@ function Block:New(data)
 	function object:OnCollision(data)
 		
 		-- is object of bullet type?
-		if(self.collisionList[data.other.name] == "bullet") then
-			self:Damage(data)
+		if(data.other.parent.type == "bullet") then
+			self.health:Damage(data.other.parent)
 		end 
 
 	end 
@@ -86,6 +88,17 @@ function Block:New(data)
 
 	function object:Update()
 
+	end 
+
+
+	function object:PrintDebugText()
+		DebugText:TextTable
+		{
+			{text = "", obj = "Block"},
+			{text = "Block"},
+			{text = "----------"},
+			{text = "HP: " .. self.health.hp}
+		}
 	end 
 
 

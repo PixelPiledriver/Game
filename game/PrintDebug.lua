@@ -18,7 +18,8 @@ printDebugSettings["Collision"] = false
 printDebugSettings["Collision2"] = false
 printDebugSettings["Collision3"] = false
 printDebugSettings["CollisionList"] = false
-printDebugSettings["Build"] = true
+printDebugSettings["Build"] = false
+printDebugSettings["Controller"] = false
 
 
 --------------

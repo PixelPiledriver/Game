@@ -332,10 +332,11 @@ function CollisionManager:CheckForCollisions()
 end 
 
 
-CollisionManager.printDebugTextActive = true
+CollisionManager.printDebugTextActive = false
 
 -- prints data to screen
 function CollisionManager:PrintDebugText()
+	
 	if(self.printDebugTextActive == false) then
 		return
 	end 

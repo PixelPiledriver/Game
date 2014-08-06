@@ -80,11 +80,16 @@ function ObjectUpdater:AddCamera(cam)
 	self.cameras[#self.cameras+1] = cam
 end 
 
+
+
 function ObjectUpdater:PrintDebugText()
-	DebugText:Text("")
-	DebugText:Text("ObjectUpdater")
-	DebugText:Text("------------------")
-	DebugText:Text("Objs: " .. #self.objects)
+	DebugText:TextTable
+	{
+		{text = "", obj = "ObjectUpdater"},
+		{text = "ObjectUpdater"},
+		{text = "------------------"},
+		{text = "Objs: " .. #self.objects}
+	}
 end 
 
 -- update all objects
@@ -103,14 +108,27 @@ function ObjectUpdater:Update()
 	-- objects
 	for i=1, #self.objects do
 
+		-- update
 		if(self.objects[i].Update) then
 			self.objects[i]:Update()
 		end 
 
+		-- debug text per object
+		if(DebugText.active) then
+
+			if(self.objects[i].PrintDebugText) then
+					self.objects[i]:PrintDebugText()
+				
+			end 
+
+		end 
+
 	end 
 
-	-- debug text
-	self:PrintDebugText()
+	-- print debug text for manager
+	if(DebugText.active) then
+		self:PrintDebugText()
+	end
 
 
 
