@@ -46,7 +46,7 @@ local function MakeFrame(data)
 			love.graphics.setColor({255,255,255,255})
 		end 
 
-		love.graphics.draw(self.sheet, self.frame, objectData.x, objectData.y, objectData.angle, objectData.xScale, objectData.yScale)
+		love.graphics.draw(self.sheet, self.frame, objectData.x, objectData.y - (objectData.yOffset or 0), objectData.angle, objectData.xScale, objectData.yScale)
 
 	end 
 

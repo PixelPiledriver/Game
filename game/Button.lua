@@ -28,6 +28,13 @@ function Button:New(data)
 	----------------
 
 
+	function object:Update()
+	end
+
+	function object:OnCollision()
+	end 
+
+
 	ObjectUpdater:Add{object}
 
 	return object

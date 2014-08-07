@@ -49,10 +49,25 @@ local buttons =
 function Controller:ButtonTest(controller)
 
 	for i=1, #buttons.buttonsList do
+
+		local down = false
+
+		-- button Down
+		----------
 		if(controller.controller:isDown(buttons[buttons.buttonsList[i]].value)) then
-			controller.pressedButtons[buttons.buttonsList[i]] = true
+			controller.buttons[buttons.buttonsList[i]].pressed = true
+			down = true
 			printDebug{controller.playerName .. " " .. buttons[buttons.buttonsList[i]].name, "Controller"}
 		end
+
+		-- button Up
+		-----------------
+		if(down == false ) then
+			if(controller.buttons[buttons.buttonsList[i]].lastValue == true) then
+				print(buttons.buttonsList[i] .. " UP!")
+			end
+		end
+
 	end
 
 end 
@@ -111,6 +126,17 @@ end
 -- Functions
 ------------------
 
+function Controller:NewButtonTable(name)
+	local b =
+	{
+		name = name,
+		pressed = false,
+		lastValue = false,
+	}
+
+	return b
+end 
+
 -- init controllers
 -- this will need to be called again if a controller is synced during play
 -- altho it will need some modifications for that to work properly
@@ -132,26 +158,26 @@ function Controller:Setup()
 		object.controller = getControllers[i]
 		object.playerName = "Controller" .. i
 
-		object.pressedButtons = 
+		object.buttons = 
 		{
-			A = false,
-			B = false,
-			X = false,
-			Y = false,
+			A = self:NewButtonTable("A"),
+			B = self:NewButtonTable("B"),
+			X = self:NewButtonTable("X"),
+			Y = self:NewButtonTable("Y"),
 
-			up = false,
-			down = false,
-			left = false,
-			right = false,
+			up = self:NewButtonTable("up"),
+			down = self:NewButtonTable("down"),
+			left = self:NewButtonTable("left"),
+			right = self:NewButtonTable("right"),
 
-			start = false,
-			back = false,
-			Xbox = false,
+			start = self:NewButtonTable("start"),
+			back = self:NewButtonTable("back"),
+			Xbox = self:NewButtonTable("Xbox"),
 
-			LB = false,
-			RB = false,
-			L3 = false,
-			R3 = false
+			LB = self:NewButtonTable("LB"),
+			RB = self:NewButtonTable("RB"),
+			L3 = self:NewButtonTable("L3"),
+			R3 = self:NewButtonTable("R3")
 		}
 
 		-- sticks
@@ -201,12 +227,13 @@ function Controller:Setup()
 		------------------
 		-- Functions
 		------------------
-		function object:Button(button)
+
+		-- press button
+		function object:ButtonDown(button)
 			if(self.controller:isDown(buttons[button].value)) then
 				
-				if(self.pressedButtons[buttons[button].name] == false) then
-					printDebug{"hold that button bitch", "Controller"}
-					self.pressedButtons[buttons[button].name] = true
+				if(self.buttons[buttons[button].name] == false) then
+					self.buttons[buttons[button].name].pressed = true
 				end 
 
 				return true
@@ -214,7 +241,37 @@ function Controller:Setup()
 			end
 		end
 
+		-- release button
+		function object:ButtonUp(button)
+
+			if(self.buttons[buttons[button]].pressed == false ) then
+				if(self.buttons[buttons[button]].lastValue == true) then
+					print(buttons.buttonsList[i] .. " UP!")
+				end
+			end
+
+		end 
+
+		-- clears and stores from last frame
+		function object:ClearButtonsPressed()
+
+			-- for each button
+			for i=1, #buttons.buttonsList do
+
+				-- get current button
+				local b = self.buttons[buttons.buttonsList[i]]
+
+				-- store value for next frame
+				b.lastValue = b.pressed
+
+				-- clear
+				b.pressed = false
+			end 
+
+		end 
+
 		function object:PrintDebugText()
+
 			DebugText:TextTable
 			{
 				{text = "", obj = "Controller"},
@@ -227,37 +284,31 @@ function Controller:Setup()
 
 				{text = "Buttons"},
 				{text = "-------------"},
-				{text = "A: " .. tostring(self.pressedButtons["A"])},
-				{text = "B: " .. tostring(self.pressedButtons["B"])},
-				{text = "X: " .. tostring(self.pressedButtons["X"])},
-				{text = "Y: " .. tostring(self.pressedButtons["Y"])},
-				{text = "Y: " .. tostring(self.pressedButtons["Y"])},
+				{text = "A: " .. tostring(self.buttons["A"])},
+				
+				{text = "B: " .. tostring(self.buttons["B"])},
+				{text = "X: " .. tostring(self.buttons["X"])},
+				{text = "Y: " .. tostring(self.buttons["Y"])},
+				{text = "Y: " .. tostring(self.buttons["Y"])},
 
-				{text = "start: " .. tostring(self.pressedButtons["start"])},
-				{text = "back: " .. tostring(self.pressedButtons["back"])},
-				{text = "Xbox: " .. tostring(self.pressedButtons["Xbox"])},
+				{text = "start: " .. tostring(self.buttons["start"])},
+				{text = "back: " .. tostring(self.buttons["back"])},
+				{text = "Xbox: " .. tostring(self.buttons["Xbox"])},
 
-				{text = "RB: " .. tostring(self.pressedButtons["RB"])},
-				{text = "LB: " .. tostring(self.pressedButtons["LB"])},
-				{text = "L3: " .. tostring(self.pressedButtons["L3"])},
-				{text = "R3: " .. tostring(self.pressedButtons["R3"])},
+				{text = "RB: " .. tostring(self.buttons["RB"])},
+				{text = "LB: " .. tostring(self.buttons["LB"])},
+				{text = "L3: " .. tostring(self.buttons["L3"])},
+				{text = "R3: " .. tostring(self.buttons["R3"])},
 
-				{text = "up: " .. tostring(self.pressedButtons["up"])},
-				{text = "down: " .. tostring(self.pressedButtons["down"])},
-				{text = "left: " .. tostring(self.pressedButtons["left"])},
-				{text = "right: " .. tostring(self.pressedButtons["right"])},
-
+				{text = "up: " .. tostring(self.buttons["up"])},
+				{text = "down: " .. tostring(self.buttons["down"])},
+				{text = "left: " .. tostring(self.buttons["left"])},
+				{text = "right: " .. tostring(self.buttons["right"])},
 			}
-		end 
 
-		function object:ClearButtonsPressed()
-			for i=1, #buttons.buttonsList do
-				self.pressedButtons[buttons.buttonsList[i]] = false
-			end 
 		end 
 
 	end
-
 end
 
 

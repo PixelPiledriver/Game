@@ -16,6 +16,7 @@ local Game = require("Game")
 local BlockMap = require("BlockMap")
 local Health = require("Health")
 local Guns = require("Guns")
+local Map = require("Map")
 
 -- use to create more instances
 local Player = {}
@@ -33,6 +34,7 @@ function Player:New(data)
 	object.sprite = data.sprite or nil
 	object.x = data.x or 100
 	object.y = data.y or 100
+	object.yOffset = 0
 	object.width = data.width or 32
 	object.height = data.height or 32
 	object.color = data.color or {255,255,255,255}
@@ -64,6 +66,9 @@ function Player:New(data)
 
 	object.health =  Health:New{}
 
+	object.mapX = 0
+	object.mapY = 0
+
 	-- weapon
 	object.gun = data.gun or Guns.laserRifle
 	--object.rateOfFire = object.gun.rateOfFire
@@ -76,7 +81,8 @@ function Player:New(data)
 		up = data.keys and data.keys.up or "w",
 		down = data.keys and data.keys.down or "s",
 		shoot = data.keys and data.keys.shoot or "q",
-		build = data.keys and data.keys.build or "e"
+		build = data.keys and data.keys.build or "e",
+		jump = data.keys and data.keys.jump or " "
 	}
 
 	-- controller setup
@@ -91,6 +97,20 @@ function Player:New(data)
 
 	end
 
+	-- shadow
+	local shadowHeight = 6
+	local shadowWidth = object.width - 12
+	object.shadow = Box:New
+	{
+		x = object.x + 6,
+		y = object.y + object.height - shadowHeight,
+	 	width = shadowWidth,
+	 	height = shadowHeight,
+		color = {0,0,0,100},
+		fill = true
+	}
+
+
 
 	---------------
 	-- Collision
@@ -104,7 +124,8 @@ function Player:New(data)
 		color = Color[object.playerColor],
 		name = object.name,
 		parent = object,
-		collisionList = object.collisionList.robot
+		collisionList = object.collisionList.robot,
+		draw = false
 	}
 
 
@@ -123,8 +144,6 @@ function Player:New(data)
 	-- Functions
 	-------------
 
-	
-
 	function object:PrintDebugText()
 		
 		DebugText:TextTable
@@ -135,11 +154,47 @@ function Player:New(data)
 			{text = "Y: " .. data.y},
 			{text = "HP:" ..self.health.hp},
 			{text = "Gun: " .. self.gun.name},
-			{text = "Direction: " .. self.direction}
+			{text = "Direction: " .. self.direction},
+			{text = "Map { " .. self.mapX .. ", " .. self.mapY .. "}"},
+			{text = "Y Offset: " .. self.yOffset}
 		}
 	end 
 
+	function object:DoMapStuff()
+
+		self.mapX = (( (self.x) - (self.x % Map.tileWidth)) / Map.tileWidth) + 1
+		self.mapY = (( (self.y + self.height) - (self.y % Map.tileHeight)) / Map.tileHeight) + 1
+	
+		Map:ObjectInTile(self)
+	end 
+
+	local gravity = 1
+	object.yJump = 0
+	function object:JumpUpdate()
+
+		self.yOffset = self.yOffset + self.yJump
+
+		if(self.yOffset > 0 ) then
+			self.yJump = self.yJump - gravity
+		end
+
+		if(self.yOffset < 0 ) then
+			self.yOffset = 0
+			self.yJump = 0
+		end 
+		
+	end 
+
+	function object:Shadow()
+		self.shadow.x = self.x + 6
+		self.shadow.y = self.y + self.height - self.shadow.height
+
+	end 
+
 	function object:Update()
+		self:DoMapStuff()
+		self:JumpUpdate()
+		self:Shadow()
 	end 
 
 	function object:Draw()
@@ -177,6 +232,15 @@ function Player:New(data)
 	end 
 
 
+
+
+	function object:Jump(j)
+		self.yJump = j
+	end 
+	
+
+
+
 	-- used for 4 directional movement
 	-- put in options for movement types
 	-- need to get hud buttons for changing options at runtime
@@ -203,8 +267,6 @@ function Player:New(data)
 			self.xDirection = 0
 			self.yDirection = 1
 		end
-
-
 
 	end 
 
@@ -245,12 +307,25 @@ function Player:New(data)
 
 
 
+
 	---------------
 	-- Input
 	---------------
 
 	-- only used for press and release
 	function object:Input(key)
+
+		if(key == "d") then 
+			--self:MoveRight()
+		end
+
+		if(key == "a") then
+			--self:MoveLeft()
+		end 
+
+		if(key == " ") then
+			self.yJump = 10
+		end 
 
 	end 
 
@@ -280,6 +355,10 @@ function Player:New(data)
 		if(love.keyboard.isDown(self.keys.down)) then
 			self:MoveDown()
 			self:SetDirection("down")
+		end
+
+		if(love.keyboard.isDown(self.keys.jump)) then
+			print("jump")
 		end
 
 		if(love.keyboard.isDown(self.keys.shoot)) then
@@ -317,22 +396,22 @@ function Player:New(data)
 		-- D-Pad
 		--------------
 		-- up
-		if(self.controller:Button(self.controls.gamepad.up)) then
+		if(self.controller:ButtonDown(self.controls.gamepad.up)) then
 			self:MoveUp()
 		end 
 
 		-- down
-		if(self.controller:Button(self.controls.gamepad.down)) then
+		if(self.controller:ButtonDown(self.controls.gamepad.down)) then
 			self:MoveDown()
 		end 
 
 		-- left
-		if(self.controller:Button(self.controls.gamepad.left)) then
+		if(self.controller:ButtonDown(self.controls.gamepad.left)) then
 			self:MoveLeft()
 		end 
 
 		-- right
-		if(self.controller:Button(self.controls.gamepad.right)) then
+		if(self.controller:ButtonDown(self.controls.gamepad.right)) then
 			self:MoveRight()
 		end 
 
@@ -346,12 +425,12 @@ function Player:New(data)
 		----------------
 
 		-- shoot
-		if(self.controller:Button(self.controls.gamepad.shoot)) then
+		if(self.controller:ButtonDown(self.controls.gamepad.shoot)) then
 			self:Shoot()
 		end 
 
 		-- build
-		if(self.controller:Button(self.controls.gamepad.build)) then
+		if(self.controller:ButtonDown(self.controls.gamepad.build)) then
 			self:Build()
 		end 
 

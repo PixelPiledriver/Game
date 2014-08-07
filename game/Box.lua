@@ -21,6 +21,8 @@ function Box:New(data)
 	object.color = data.color or {255,255,255,255}
 	object.speed = data.speed or 5
 	object.move = false
+	object.fill = data.fill or false
+	object.draw = data.draw or true
 
 	-- controls
 	object.keys =
@@ -36,10 +38,22 @@ function Box:New(data)
 	-- Functions
 	-------------
 	function object:Draw()
-		love.graphics.setWireframe(true)
+
+		if(self.draw == false) then
+			return
+		end
+
+		if(self.fill == false) then
+			love.graphics.setWireframe(true)
+		end 
+
 		love.graphics.setColor(self.color)
 		love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
-		love.graphics.setWireframe(false)
+
+		if(self.fill == false) then
+			love.graphics.setWireframe(false)
+		end 
+
 	end 
 
 	-- only used for press and release

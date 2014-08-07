@@ -85,9 +85,12 @@ function Block:New(data)
 		Camera:AddShake{x = 5, y= 5}
 	end 
 
+	function object:CheckStatus()
+		
+	end
 
 	function object:Update()
-
+		self:CheckStatus()
 	end 
 
 

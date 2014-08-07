@@ -12,13 +12,14 @@ DebugText.active = true
 -------------
 DebugText.type = 
 {
-	Player = false,
+	Player = true,
 	Bullet = false,
 	Block = false,
 	Controller = true,
 	Window = false,
 	ObjectUpdater = false,
 	CollisionManager = false,
+	Map = true,
 		
 	Generic = true,
 }

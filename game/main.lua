@@ -12,6 +12,9 @@ local ObjectUpdater = require("ObjectUpdater")
 local Window = require("Window")
 local App = require("App")
 local Box = require("Box")
+
+local Map = require("Map")
+
 local Player = require("Player")
 local Sprites = require("Sprites")
 local Camera = require("Camera")
@@ -73,8 +76,8 @@ local blueRobot = Player:New
 
 local box1 = Box:New
 {
-	x = 200,
-	y = 200,
+	x = 150,
+	y = 150,
 	color = Color.green
 }
 
@@ -102,7 +105,8 @@ local Greg = Collision:New
 	shape = "rect",
 	mouse = true,
 	name = "Greg",
-	collisionList = {"Steve"}
+	collisionList = {"Steve"},
+	draw = false
 }
 
 
@@ -146,6 +150,8 @@ function love.update(dt)
 	Controller.Update()
 
 	CollisionManager:Update()
+
+	Map:Update()
 
 end 
 
