@@ -41,7 +41,7 @@ local redRobot = Player:New
 	frame = Sprites.dude.red.idle,
 	skin = PlayerSkins.red,
 	
-	playerColor = "red",
+	playerColor = "darkRed",
 	gun = Guns.laserRifle
 }
 
