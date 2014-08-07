@@ -113,8 +113,8 @@ function Collision:New(data)
 			return
 		end 
 
-		--love.graphics.setColor( self.collided and self.collisionColor or self.color)
-		--love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
+		love.graphics.setColor( self.collided and self.collisionColor or self.color)
+		love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
 
 	end 
 
