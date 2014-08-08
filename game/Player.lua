@@ -32,14 +32,26 @@ function Player:New(data)
 	local object = {}
 
 	object.sprite = data.sprite or nil
+
 	object.x = data.x or 100
 	object.y = data.y or 100
-	object.yOffset = 0
+	object.z = 0
+	
+	object.gravity = 1
+
+	object.yJump = 0
+
+
+
+
 	object.width = data.width or 32
 	object.height = data.height or 32
 	object.color = data.color or {255,255,255,255}
 	object.playerColor = data.playerColor or "red"
+
 	object.speed = data.speed or 2
+	object.walkSpeed = data.walkSpeed or 2
+	object.dodgeSpeed = data.dodgeSpeed or 6
 
 	object.direction = "none"
 	object.xDirection = 1
@@ -70,8 +82,7 @@ function Player:New(data)
 	object.mapY = 0
 
 	-- weapon
-	object.gun = data.gun or Guns.laserRifle
-	--object.rateOfFire = object.gun.rateOfFire
+	object.gun = Guns:Get("laserRifle")
 
 	-- controls
 	object.keys =
@@ -84,6 +95,7 @@ function Player:New(data)
 		build = data.keys and data.keys.build or "e",
 		jump = data.keys and data.keys.jump or " "
 	}
+
 
 	-- controller setup
 	object.useController = false
@@ -125,7 +137,7 @@ function Player:New(data)
 		name = object.name,
 		parent = object,
 		collisionList = object.collisionList.robot,
-		draw = false
+		visible = false
 	}
 
 
@@ -134,9 +146,9 @@ function Player:New(data)
 		-- Bullet
 		if(data.other.parent.type == "bullet") then
 			self.health:Damage(data.other.parent)
+			self:ColorFlash()
 		end 
 
-		--print(self.health:GetHealth())
 	end 
 
 
@@ -144,19 +156,41 @@ function Player:New(data)
 	-- Functions
 	-------------
 
+	function object:ColorFlash()
+		self.color = Color.red
+	end 
+
+	function object:ColorUpdate()
+
+		--self.color = {255,255,255}
+		local colorSpeed = 20
+
+		if(Color:Equal(self.color, Color.white) == false) then
+			self.color = Color:Add
+			{
+				a = self.color, 
+				b = {colorSpeed, colorSpeed, colorSpeed},
+				loop = false
+			}
+
+		end 
+		
+
+	end 
+
 	function object:PrintDebugText()
 		
 		DebugText:TextTable
 		{
 			{text = "", obj = "Player" },
-			{text = "Name: " .. data.name},
-			{text = "X: " .. data.x},
-			{text = "Y: " .. data.y},
+			{text = "Name: " .. self.name},
+			{text = "X: " .. self.x},
+			{text = "Y: " .. self.y},
+			{text = "Z: " .. self.z},
 			{text = "HP:" ..self.health.hp},
 			{text = "Gun: " .. self.gun.name},
 			{text = "Direction: " .. self.direction},
 			{text = "Map { " .. self.mapX .. ", " .. self.mapY .. "}"},
-			{text = "Y Offset: " .. self.yOffset}
 		}
 	end 
 
@@ -168,18 +202,16 @@ function Player:New(data)
 		Map:ObjectInTile(self)
 	end 
 
-	local gravity = 1
-	object.yJump = 0
 	function object:JumpUpdate()
 
-		self.yOffset = self.yOffset + self.yJump
+		self.z = self.z + self.yJump
 
-		if(self.yOffset > 0 ) then
-			self.yJump = self.yJump - gravity
+		if(self.z > 0 ) then
+			self.yJump = self.yJump - self.gravity
 		end
 
-		if(self.yOffset < 0 ) then
-			self.yOffset = 0
+		if(self.z < 0 ) then
+			self.z = 0
 			self.yJump = 0
 		end 
 		
@@ -188,13 +220,13 @@ function Player:New(data)
 	function object:Shadow()
 		self.shadow.x = self.x + 6
 		self.shadow.y = self.y + self.height - self.shadow.height
-
 	end 
 
 	function object:Update()
 		self:DoMapStuff()
 		self:JumpUpdate()
 		self:Shadow()
+		self:ColorUpdate()
 	end 
 
 	function object:Draw()
@@ -206,6 +238,8 @@ function Player:New(data)
 		elseif(self.animation) then
 			self.animation:Draw(self)
 		end 
+
+
 
 	end 
 
@@ -231,15 +265,12 @@ function Player:New(data)
 		self.y = self.y + self.speed
 	end 
 
-
-
-
+	-- jump
 	function object:Jump(j)
-		self.yJump = j
+		if(self.z == 0) then
+			self.yJump = 10
+		end 
 	end 
-	
-
-
 
 	-- used for 4 directional movement
 	-- put in options for movement types
@@ -323,8 +354,8 @@ function Player:New(data)
 			--self:MoveLeft()
 		end 
 
-		if(key == " ") then
-			self.yJump = 10
+		if(key == self.keys.jump) then
+			self:Jump(10)
 		end 
 
 	end 
@@ -358,7 +389,7 @@ function Player:New(data)
 		end
 
 		if(love.keyboard.isDown(self.keys.jump)) then
-			print("jump")
+			
 		end
 
 		if(love.keyboard.isDown(self.keys.shoot)) then
@@ -383,6 +414,9 @@ function Player:New(data)
 			right = "right",
 			shoot = "X",
 			build = "B",
+			jump = "A",
+			dodge = "RT",
+			stop = "LT"
 		}
 	}
 
@@ -418,6 +452,7 @@ function Player:New(data)
 		----------------
 		-- Sticks
 		----------------
+		-- move
 		self.xStick = self.controller.leftStick.x.lastValue
 
 		----------------
@@ -434,6 +469,10 @@ function Player:New(data)
 			self:Build()
 		end 
 
+		-- jump
+		if(self.controller:ButtonDown(self.controls.gamepad.jump)) then
+			self:Jump(10)
+		end 
 
 	end
 

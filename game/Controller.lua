@@ -246,7 +246,7 @@ function Controller:Setup()
 
 			if(self.buttons[buttons[button]].pressed == false ) then
 				if(self.buttons[buttons[button]].lastValue == true) then
-					print(buttons.buttonsList[i] .. " UP!")
+					printDebug{buttons.buttonsList[i] .. " UP!", "Controller"}
 				end
 			end
 

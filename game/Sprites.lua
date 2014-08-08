@@ -32,6 +32,8 @@ local function MakeFrame(data)
 	f.imageHeight = Sprites.currentSheet.height
 	f.sheet = Sprites.currentSheet.object
 
+	f.draw = data.draw or true
+
 	f.frame = love.graphics.newQuad(f.x, f.y, f.width, f.height, f.imageWidth, f.imageHeight)
 
 	-------------
@@ -40,13 +42,18 @@ local function MakeFrame(data)
 
 	function f:Draw(objectData)
 
+		if(self.draw == false) then
+			return
+		end 
+
+
 		if(objectData.color) then
 			love.graphics.setColor(objectData.color)
 		else
 			love.graphics.setColor({255,255,255,255})
 		end 
 
-		love.graphics.draw(self.sheet, self.frame, objectData.x, objectData.y - (objectData.yOffset or 0), objectData.angle, objectData.xScale, objectData.yScale)
+		love.graphics.draw(self.sheet, self.frame, objectData.x, objectData.y - (objectData.z or 0), objectData.angle, objectData.xScale, objectData.yScale)
 
 	end 
 

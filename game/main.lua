@@ -68,6 +68,7 @@ local blueRobot = Player:New
 		down = "down",
 		shoot = "=",
 		build = "-",
+		jump = "rctrl"
 	},
 
 	gun = Guns.laserRifle

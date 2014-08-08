@@ -9,7 +9,7 @@ local BulletTypes = {}
 
 BulletTypes.laser = 
 {
-	damage = 1,
+	damage = 2,
 	speed = 10,
 	lifespan = 30,
 
@@ -19,6 +19,13 @@ BulletTypes.laser =
 		blue = Sprites.bullet.blue
 	}
 
+}
+
+BulletTypes.bolt =
+{
+	damage = 15,
+	speed = 40,
+	lifespan = 80
 }
 
 BulletTypes.blaster =

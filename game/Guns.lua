@@ -54,13 +54,46 @@ function Guns:New(data)
 
 end 
 
+function Guns:Get(gunName)
+	local copy = {}
+
+	for i=1, #Guns.stats do
+		copy[Guns.stats[i]] = Guns[gunName][Guns.stats[i]]
+	end
+
+
+	return copy
+end 
+
+Guns.stats =
+{
+	"name",
+	"bullet",
+	"rateOfFire",
+	"maxRateOfFire",
+	"clip",
+	"reloadTime",
+	"Shoot"
+}
+
 Guns.laserRifle = Guns:New
 {
 	name = "LaserRifle",
 	bullet = BulletTypes.laser,
-	rateOfFire = 10,
+	rateOfFire = 8,
 	clip = 20,
-	reloadTime = 100
+	reloadTime = 100,
+	ammo = -1
+}
+
+Guns.assaultRifle = Guns:New
+{
+	name = "AssaultRifle",
+	bullet = BulletTypes.laser,
+	rateOfFire = 4,
+	clip = 20,
+	reloadTime = 100,
+	ammo = 100
 }
 
 Guns.missleLauncher = Guns:New
@@ -69,7 +102,8 @@ Guns.missleLauncher = Guns:New
 	rateOfFire = 100,
 	bullet = BulletTypes.missle,
 	clip = 3,
-	reloadTime = 300
+	reloadTime = 300,
+	ammo = 20
 }
 
 

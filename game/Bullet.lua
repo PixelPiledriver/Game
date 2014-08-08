@@ -67,7 +67,8 @@ function Bullet:New(data)
 		width = object.frame.width,
 		height = object.frame.height,
 		collisionList = data.collisionList or nil,
-		oneCollision = true
+		oneCollision = true,
+		visible = false
 	}
 
 

@@ -33,7 +33,10 @@ function Collision:New(data)
 	object.collisionColor = data.collisionColor or Color.green
 
 	-- stuff
-	object.draw = data.draw or true
+	object.visible = data.visible
+	if(data.visible == nil) then
+		object.visible = true
+	end 
 	object.destroy = false
 	object.collided = false
 
@@ -109,7 +112,9 @@ function Collision:New(data)
 	end 
 
 	function object:Draw()
-		if(self.draw == false) then
+
+		-- show?
+		if(self.visible == false) then
 			return
 		end 
 

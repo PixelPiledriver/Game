@@ -17,6 +17,7 @@ Map.opacity = 150
 
 Map.x = Map.tileWidth * 2
 Map.y = Map.tileHeight * 5
+Map.z = 0
 
 Map.xStart = ((Map.x - (Map.x % Map.tileWidth)) / Map.tileWidth) + 1
 Map.yStart = ((Map.y - (Map.y % Map.tileHeight)) / Map.tileHeight) + 1
@@ -54,7 +55,7 @@ function Map:MakeTile(data)
 	object.y = data.y
 	object.yOffset = 0
 	object.objectOnTop = false
-	object.cushion = 6
+	object.cushion = 4
 
 
 	--------------
