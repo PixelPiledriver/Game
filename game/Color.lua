@@ -12,6 +12,9 @@ Color.green = {0,255,0}
 Color.white = {255,255,255}
 Color.black = {0,0,0}
 
+function Color:GetColor()
+end
+
 
 
 

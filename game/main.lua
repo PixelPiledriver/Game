@@ -74,26 +74,9 @@ local blueRobot = Player:New
 }
 
 
-local box1 = Box:New
-{
-	x = 150,
-	y = 150,
-	color = Color.green
-}
 
 
 
-local Steve = Collision:New
-{
-	x = 200,
-	y = 200,
-	width = 32,
-	height = 32,
-	shape = "rect",
-	color = Color.blue,
-	name = "Steve",
-	collisionList = {"Greg"}
-}
 
 
 local Greg = Collision:New
@@ -204,4 +187,33 @@ local box1 = Box:New
 	x = 200,
 	y = 200
 }
+--]]
+
+
+
+
+
+--[[
+
+local Steve = Collision:New
+{
+	x = 200,
+	y = 200,
+	width = 32,
+	height = 32,
+	shape = "rect",
+	color = Color.blue,
+	name = "Steve",
+	collisionList = {"Greg"}
+}
+
+
+local box1 = Box:New
+{
+	x = 150,
+	y = 150,
+	color = Color.green
+}
+
+
 --]]
