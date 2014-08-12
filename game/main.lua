@@ -26,6 +26,7 @@ local Collision = require("Collision")
 local CollisionManager = require("CollisionManager")
 local CollisionLists = require("CollisionLists")
 local Guns = require("Guns")
+local ParticleSystem = require("ParticleSystem")
 
 --------------
 -- Objects
@@ -74,9 +75,12 @@ local blueRobot = Player:New
 	gun = Guns.laserRifle
 }
 
-
-
-
+local explosion = ParticleSystem:New
+{
+	x = 100,
+	y = 100,
+	delay = 10
+}
 
 
 

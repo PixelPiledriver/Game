@@ -48,7 +48,7 @@ function Box:New(data)
 		end 
 
 		love.graphics.setColor(self.color)
-		love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+		love.graphics.rectangle("fill", self.x, self.y - (self.z or 0), self.width, self.height)
 
 		if(self.fill == false) then
 			love.graphics.setWireframe(false)

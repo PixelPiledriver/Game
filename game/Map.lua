@@ -52,10 +52,14 @@ function Map:MakeTile(data)
 	-- Variables
 	--------------
 
+	object.x = data.x
 	object.y = data.y
-	object.yOffset = 0
+	object.z = data.z
+	object.startZ = data.z
+	
 	object.objectOnTop = false
 	object.cushion = 4
+	object.cushionSpeed = 0.2
 
 
 	--------------
@@ -64,27 +68,35 @@ function Map:MakeTile(data)
 
 	function object:VerticalCushion()
 		if(object.objectOnTop) then
-			self.yOffset = self.cushion
-		else
+			self.z = self.z + self.cushionSpeed
 
-			if(self.yOffset > 0) then
-				self.yOffset = self.yOffset * 0.9
+			if(self.z > self.startZ + self.cushion) then
+				self.z = self.startZ + self.cushion
 			end 
+
+		else			
+
+			if(self.z > 0) then
+				self.z = self.z * 0.9
+			end 
+
 		end
+
+
 
 		self.objectOnTop = false
 
 	end
 
 	function object:Offset()
-		self.box.y = self.y + self.yOffset
+		self.box.y = self.y + self.z
 	end 
 
 	--------------
 	-- Manage
 	--------------
 
-	-- add to map
+	-- space in map doesnt exist? --> create it
 	if(self.tiles.x[data.xIndex] == nil) then
 		self.tiles.x[data.xIndex] = {}
 
@@ -94,6 +106,7 @@ function Map:MakeTile(data)
 
 	end 
 
+	-- add to Map
 	self.tiles.x[data.xIndex].y[data.yIndex] = object
 
 	-- add to object manager
@@ -113,10 +126,13 @@ function Map:Create()
 			{
 				x = (self.x + (x-1) * Map.tileWidth + (1 * x)) ,
 				y = (self.y + (y-1) * Map.tileHeight + (1 * y)),
+				z = x * -2,
 				width = Map.tileWidth - 1,
 				height = Map.tileHeight - 1,
 				xIndex = x,
-				yIndex = y
+				yIndex = y,
+
+
 			}
 
 		end 	
@@ -138,12 +154,12 @@ function Map:ObjectInTile(obj)
 
 	if(x < 1 or y < 1 ) then
 	
-		return
+		return nil
 	end 
 
 	if(x > self.width or y > self.height) then
 	
-		return
+		return nil
 	end
 
 	local tile = self:GetTile(x, y)
@@ -151,6 +167,8 @@ function Map:ObjectInTile(obj)
 	tile.box.color = Color[obj.playerColor]
 	tile.box.color[4] = self.opacity
 	tile.objectOnTop = true
+
+	return tile
 
 end 
 

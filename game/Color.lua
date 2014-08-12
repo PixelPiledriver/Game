@@ -12,7 +12,15 @@ Color.green = {0,255,0}
 Color.white = {255,255,255}
 Color.black = {0,0,0}
 
-function Color:GetColor()
+function Color:GetColor(name)
+	local copy =
+	{
+		Color[name][1],
+		Color[name][2],
+		Color[name][3],
+	}
+
+	return copy
 end
 
 -- compare two colors for equality

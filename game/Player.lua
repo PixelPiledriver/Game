@@ -40,7 +40,7 @@ function Player:New(data)
 	object.gravity = 1
 
 	object.yJump = 0
-
+	object.jumpNow = false
 
 
 
@@ -157,7 +157,7 @@ function Player:New(data)
 	-------------
 
 	function object:ColorFlash()
-		self.color = Color.red
+		self.color = Color:GetColor("red")
 	end 
 
 	function object:ColorUpdate()
@@ -165,7 +165,7 @@ function Player:New(data)
 		--self.color = {255,255,255}
 		local colorSpeed = 20
 
-		if(Color:Equal(self.color, Color.white) == false) then
+		if(Color:Equal(self.color, Color:GetColor("white")) == false) then
 			self.color = Color:Add
 			{
 				a = self.color, 
@@ -199,10 +199,20 @@ function Player:New(data)
 		self.mapX = (( (self.x) - (self.x % Map.tileWidth)) / Map.tileWidth) + 1
 		self.mapY = (( (self.y + self.height) - (self.y % Map.tileHeight)) / Map.tileHeight) + 1
 	
-		Map:ObjectInTile(self)
+		local tile = Map:ObjectInTile(self)
+		
+		if(tile) then 
+			self.z = -tile.z
+		end 
+		
+
 	end 
 
 	function object:JumpUpdate()
+
+		if(self.jumpNow == false) then
+			return
+		end
 
 		self.z = self.z + self.yJump
 
@@ -220,6 +230,7 @@ function Player:New(data)
 	function object:Shadow()
 		self.shadow.x = self.x + 6
 		self.shadow.y = self.y + self.height - self.shadow.height
+		self.shadow.z = self.z
 	end 
 
 	function object:Update()

@@ -21,16 +21,21 @@ function Particle:New(data)
 	{
 		x = object.x,
 		y = object.y,
-		color = data.color
+		color = data.color,
+		width = data.width,
+		height = data.height,
+		fill = true
 	}
 
 	object.xSpeed = data.xSpeed or 0
 	object.ySpeed = data.ySpeed or 1
-	object.speed = data.speed or 10
+	object.speed = data.speed or 1
 	object.damp = data.damp or 0
 
 	object.fade = data.fade or 10
-	object.fadeCount = 0
+
+	object.life = data.life or 30
+	
 
 
 	function object:Move()
@@ -42,8 +47,20 @@ function Particle:New(data)
 	end 
 
 
-	function object:Update()
+	function object:Life()
+		self.life = self.life - 1
 
+		if(self.life <= 0) then
+			ObjectUpdater:Destroy(self.box)
+			ObjectUpdater:Destroy(self)
+		end 
+
+	end 
+
+
+	function object:Update()
+		self:Move()
+		self:Life()
 	end 
 
 
