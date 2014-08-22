@@ -9,6 +9,13 @@ local Camera = {}
 --------------
 -- Create
 --------------
+
+
+-- need to make camera an object created by constructor
+function Camera:New()
+	local object = {}
+end 
+
 Camera.pos = {x=0, y=0}
 Camera.rot = 0
 Camera.zoom = {x=1, y=1}
@@ -109,11 +116,39 @@ function Camera:Draw()
 
 	local pos = self:CalculatePos()
 
-	
-	love.graphics.rotate(self.rot)
+
+	local o = 
+	{
+		x = love.graphics.getWidth() / 2,
+		y = love.graphics.getHeight() / 2
+	}
+
+	love .graphics.push()
+	love.graphics.translate(o.x + self.pos.x,o.y + self.pos.y)
 	love.graphics.scale(self.zoom.x, self.zoom.y)
-	love.graphics.translate(pos.x, pos.y)
+	love.graphics.translate(-o.x + self.pos.x,-o.y + self.pos.y)
+
+	love.graphics.rotate(self.rot)
 	
+	
+	
+	
+	
+
+end 
+
+
+function Camera:AfterDraw()
+	---[[
+	local o = 
+	{
+		x = love.graphics.getWidth() / 2,
+		y = love.graphics.getHeight() / 2
+	}
+	love.graphics.translate(o.x, o.y)
+	--]]
+
+	love.graphics.pop()
 end 
 
 -- move camera from current pos

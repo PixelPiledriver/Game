@@ -188,7 +188,11 @@ function ObjectUpdater:Draw()
 			self.objects[i]:Draw()
 		end 
 
-	end 
+	end
+
+	for i=1, #self.cameras do
+		self.cameras[i]:AfterDraw()
+	end  
 
 
 end 
