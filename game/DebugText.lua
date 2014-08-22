@@ -19,8 +19,9 @@ DebugText.type =
 	Window = false,
 	ObjectUpdater = false,
 	CollisionManager = false,
-	Map = true,
-	ParticleSystem = true,
+	Map = false,
+	ParticleSystem = false,
+	Camera = true,
 		
 	Generic = true,
 }

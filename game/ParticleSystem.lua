@@ -17,28 +17,57 @@ function ParticleSystem:New(data)
 
 	object.x = data.x or 200
 	object.y = data.y or 200
-	object.pList = {}
 	object.delay = data.delay or 10
+	
+	object.particleTable = data.particleTable or nil
+	object.index = 1
+
+	object.delay = data.delay or 0
 	object.count = 0
 
+	if(object.particleTable) then
+		object.delay = object.particleTable.delays[1]
+	end 
 
 	function object:CreateParticle()
-		
+			
+		local size = Random:MultipleOf(5, 4)
+
 		local p = Particle:New
 		{
-			x = self.x,
 			y = self.y,
 			life = 100,
 			xSpeed = 1,
 			ySpeed = 1,
-			color = Color:GetColor("green"),
-			width = 10,
-			height = 10
+			color = Color:Get("blue"),
+			width = size,
+			height = size,
+			angle = 0,
+			fade = 3
 		}
 
 		return
 
 	end
+
+	function object:CreateParticleFromTable()
+		local p = Particle:New(self.particleTable.particles[self.index])
+
+		self.index = self.index + 1
+		self.delay = self.particleTable.delays[self.index]
+
+
+		-- done with all particles in list?
+		if(self.index > #self.particleTable.particles) then
+
+			-- reset back to beginning
+			self.index = 1
+			self.delay = self.particleTable.delays[self.index]
+			
+		end 
+
+
+	end 
 
 
 	function object:PrintDebugText()
@@ -51,14 +80,26 @@ function ParticleSystem:New(data)
 		}
 	end 
 
-	function object:Update()
-		
+	function object:DelayUpdate()
+
 		self.count = self.count + 1
+
 		if(self.count > self.delay) then
 			self.count = 0
-			self:CreateParticle()
+
+			if(self.particleTable) then 
+				self:CreateParticleFromTable()
+			else
+				self:CreateParticle()	
+			end 
+			
 		end 
 
+	end 
+
+	function object:Update()
+		
+		self:DelayUpdate()
 		
 		
 	end 

@@ -5,19 +5,22 @@ local Color = {}
 
 
 
-Color.red = {255,0,0}
-Color.darkRed = {100,0,0}
-Color.blue = {0,0,255}
-Color.green = {0,255,0}
-Color.white = {255,255,255}
-Color.black = {0,0,0}
+Color.red = {255,0,0,255}
+Color.darkRed = {100,0,0,255}
+Color.blue = {0,0,255,255}
+Color.darkBlue = {0,0,100,255}
+Color.green = {0,255,0,255}
+Color.white = {255,255,255,255}
+Color.black = {0,0,0,255}
+Color.purple = {128, 0, 255, 255}
 
-function Color:GetColor(name)
+function Color:Get(name)
 	local copy =
 	{
 		Color[name][1],
 		Color[name][2],
 		Color[name][3],
+		Color[name][4]
 	}
 
 	return copy
@@ -38,11 +41,11 @@ function Color:Equal(a,b)
 		return false
 	end 
 
-
 	return true
 end 
 
 -- add two colors together
+-- {a, b}
 function Color:Add(data)
 	local newColor = {}
 
@@ -65,7 +68,6 @@ function Color:Add(data)
 		end 
 
 	end 
-
 
 	return newColor
 end 
@@ -100,7 +102,57 @@ function Color:Sub(data)
 end 
 
 
+--{color, min, max}
+function Color:Clamp(data)
 
+	-- min 	
+	if(data.color[1] < data.min) then
+		data.color[1] = data.min
+	end 
+
+	if(data.color[2] < data.min) then
+		data.color[2] = data.min
+	end 
+
+	if(data.color[3] < data.min) then
+		data.color[3] = data.min
+	end 
+
+	-- max
+	if(data.color[1] > data.max) then
+		data.color[1] = data.max
+	end 
+
+	if(data.color[2] > data.max) then
+		data.color[2] = data.max
+	end 
+
+	if(data.color[3] > data.max) then
+		data.color[3] = data.max
+	end 
+
+
+end 
+
+--{a, b, p}
+function Color:Lerp(data)
+
+	local newColor = {}
+
+	newColor[1] =  data.a[1] + ((data.b[1] - data.a[1]) * p)
+	newColor[2] =  data.a[2] + ((data.b[2] - data.a[2]) * p)
+	newColor[3] =  data.a[3] + ((data.b[3] - data.a[3]) * p)
+
+	-- alpha
+	if(data.alpha ) then
+		newColor[4] =  data.a[4] + ((data.b[4] - data.a[4]) * p)
+	else
+		newColor[4] =  data.a[4]
+	end 
+
+	return newColor
+
+end 
 
 
 

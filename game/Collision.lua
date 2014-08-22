@@ -29,8 +29,8 @@ function Collision:New(data)
 	object.radius = data.radius or nil
 
 	-- color
-	object.color = data.color or Color:GetColor("white")
-	object.collisionColor = data.collisionColor or Color:GetColor("green")
+	object.color = data.color or Color:Get("white")
+	object.collisionColor = data.collisionColor or Color:Get("green")
 
 	-- stuff
 	object.visible = data.visible

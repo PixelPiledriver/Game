@@ -49,6 +49,7 @@ Camera.shake =
 -- Functions
 --------------
 function Camera:Update()
+
 	self:UpdateShake()
 	self:UpdateMoveNodes()
 end 
@@ -105,11 +106,14 @@ end
 
 -- draw all objects based on camera transformation
 function Camera:Draw()
-	love.graphics.rotate(self.rot)
-	love.graphics.scale(self.zoom.x, self.zoom.y)
 
 	local pos = self:CalculatePos()
+
+	
+	love.graphics.rotate(self.rot)
+	love.graphics.scale(self.zoom.x, self.zoom.y)
 	love.graphics.translate(pos.x, pos.y)
+	
 end 
 
 -- move camera from current pos
@@ -194,6 +198,19 @@ function Camera:UpdateMoveNodes()
 
 end 
 
+
+function Camera:PrintDebugText()
+	DebugText:TextTable
+	{
+		{text = "", obj = "Camera" },
+		{text = "Camera"},
+		{text = "-------------------"},
+		{text = "X: " .. self.pos.x},
+		{text = "Y: " .. self.pos.y},
+		{text = "Zoom: " .. self.zoom.x}
+
+	}
+end 
 
 
 

@@ -5,6 +5,7 @@
 
 local ObjectUpdater = require("ObjectUpdater")
 local Box = require("Box")
+local Color = require("Color")
 
 local Particle = {}
 
@@ -24,7 +25,10 @@ function Particle:New(data)
 		color = data.color,
 		width = data.width,
 		height = data.height,
-		fill = true
+		fill = true,
+		angle = data.angle or 0,
+		rotatable = true,
+		spin = data.spin,
 	}
 
 	object.xSpeed = data.xSpeed or 0
@@ -32,11 +36,12 @@ function Particle:New(data)
 	object.speed = data.speed or 1
 	object.damp = data.damp or 0
 
-	object.fade = data.fade or 10
+
+	object.fade = data.fade or 0
+		
 
 	object.life = data.life or 30
 	
-
 
 	function object:Move()
 		self.x = self.x + (self.speed * self.xSpeed)
@@ -58,9 +63,24 @@ function Particle:New(data)
 	end 
 
 
+	function object:Fade()
+		if(self.fade == 0) then
+			return
+		end 
+
+		self.box.color[4] = self.box.color[4] - self.fade
+		
+		if(self.box.color[4] < 0) then
+			self.box.color[4] = 0
+		end 
+
+	end 
+
 	function object:Update()
 		self:Move()
 		self:Life()
+		self:Fade()
+
 	end 
 
 
@@ -72,7 +92,13 @@ function Particle:New(data)
 end 
 
 
+ 
+-- types
 
+Particle.spot = 
+{
+
+}
 
 
 return Particle

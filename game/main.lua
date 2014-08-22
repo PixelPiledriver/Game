@@ -27,6 +27,8 @@ local CollisionManager = require("CollisionManager")
 local CollisionLists = require("CollisionLists")
 local Guns = require("Guns")
 local ParticleSystem = require("ParticleSystem")
+require("Keyboard")
+require("Random")
 
 --------------
 -- Objects
@@ -79,7 +81,7 @@ local explosion = ParticleSystem:New
 {
 	x = 100,
 	y = 100,
-	delay = 10
+	delay = 4
 }
 
 
@@ -97,9 +99,22 @@ local Greg = Collision:New
 	draw = false
 }
 
+local rotBox = Box:New
+{
+	x = 200, 
+	y = 50,
+	width = 32,
+	height = 32,
+	rotatable = true,
+	angle = 45
+}
 
 
 ObjectUpdater:AddCamera(Camera)
+
+
+
+
 
 
 --------------------------

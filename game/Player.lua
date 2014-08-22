@@ -44,6 +44,8 @@ function Player:New(data)
 
 
 
+
+
 	object.width = data.width or 32
 	object.height = data.height or 32
 	object.color = data.color or {255,255,255,255}
@@ -133,7 +135,7 @@ function Player:New(data)
 		width = 32,
 		height = 32,
 		shape = "rect",
-		color = Color[object.playerColor],
+		color = Color:Get(object.playerColor),
 		name = object.name,
 		parent = object,
 		collisionList = object.collisionList.robot,
@@ -157,7 +159,7 @@ function Player:New(data)
 	-------------
 
 	function object:ColorFlash()
-		self.color = Color:GetColor("red")
+		self.color = Color:Get("red")
 	end 
 
 	function object:ColorUpdate()
@@ -165,7 +167,7 @@ function Player:New(data)
 		--self.color = {255,255,255}
 		local colorSpeed = 20
 
-		if(Color:Equal(self.color, Color:GetColor("white")) == false) then
+		if(Color:Equal(self.color, Color:Get("white")) == false) then
 			self.color = Color:Add
 			{
 				a = self.color, 

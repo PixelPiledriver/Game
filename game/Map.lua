@@ -41,7 +41,7 @@ function Map:MakeTile(data)
 		y = data.y,
 		width = data.width,
 		height = data.height,
-		color = Color.white,
+		color = Color:Get("white"),
 		fill = false
 	}
 
@@ -76,7 +76,7 @@ function Map:MakeTile(data)
 
 		else			
 
-			if(self.z > 0) then
+			if(self.z > self.startZ) then
 				self.z = self.z * 0.9
 			end 
 
@@ -164,7 +164,7 @@ function Map:ObjectInTile(obj)
 
 	local tile = self:GetTile(x, y)
 	
-	tile.box.color = Color[obj.playerColor]
+	tile.box.color = Color:Get(obj.playerColor)
 	tile.box.color[4] = self.opacity
 	tile.objectOnTop = true
 

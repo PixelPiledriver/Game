@@ -98,13 +98,15 @@ function ObjectUpdater:Update()
 	-- destroy
 	self:ClearDestroyedObjects()
 
-	
 	-- cameras
 	for i=1, #self.cameras do
 		self.cameras[i]:Update()
+
+		if(self.cameras[i].PrintDebugText) then
+			self.cameras[i]:PrintDebugText()
+		end
 	end  
 	
-
 	-- objects
 	for i=1, #self.objects do
 
