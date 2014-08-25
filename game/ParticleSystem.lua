@@ -35,6 +35,7 @@ function ParticleSystem:New(data)
 
 		local p = Particle:New
 		{
+			x = self.x,
 			y = self.y,
 			life = 100,
 			xSpeed = 1,
@@ -52,6 +53,8 @@ function ParticleSystem:New(data)
 
 	function object:CreateParticleFromTable()
 
+		self.particleTable.particles[self.index].x = self.x
+		self.particleTable.particles[self.index].y = self.y
 		local p = Particle:New(self.particleTable.particles[self.index])
 
 		self.index = self.index + 1

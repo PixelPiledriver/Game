@@ -88,9 +88,10 @@ local explosion = ParticleSystem:New
 }
 --]]
 
+
 local explosion2 = ParticleSystem:New
 {
-	x = 300,
+	x = 400,
 	y = 100,
 	particleTable = 
 	{
@@ -106,6 +107,7 @@ local explosion2 = ParticleSystem:New
 	}
 
 }
+
 
 
 

@@ -39,9 +39,9 @@ function Particle:New(data)
 
 	local speed = 
 	{
-		x = data.xSpeed or 0
+		x = data.xSpeed or 0,
+		y = data.ySpeed or 0
 	}
-
 
 	object.xSpeed = speed.x
 	object.ySpeed = speed.y
@@ -89,7 +89,7 @@ function Particle:New(data)
 	end 
 
 	function object:Update()
-		--self:Move()
+		self:Move()
 		self:Life()
 		self:Fade()
 
@@ -133,11 +133,11 @@ Particle.testType2 =
 	life = 100,
 	xSpeed = 1,
 	ySpeed = -1,
-	colorName = "red",
+	colorName = "blue",
 	sizeMultiple = 2,
 	sizeMultipleRange = 6,
 	angle = 0,
-	fade = 1
+	fade = 3
 }
 
 
