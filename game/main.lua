@@ -27,8 +27,9 @@ local CollisionManager = require("CollisionManager")
 local CollisionLists = require("CollisionLists")
 local Guns = require("Guns")
 local ParticleSystem = require("ParticleSystem")
+local Particle = require("Particle")
 require("Keyboard")
-require("Random")
+require("Math")
 
 --------------
 -- Objects
@@ -77,11 +78,33 @@ local blueRobot = Player:New
 	gun = Guns.laserRifle
 }
 
+
+--[[
 local explosion = ParticleSystem:New
 {
 	x = 100,
 	y = 100,
-	delay = 4
+	delay = 10
+}
+--]]
+
+local explosion2 = ParticleSystem:New
+{
+	x = 300,
+	y = 100,
+	particleTable = 
+	{
+		particles = 
+		{
+			Particle.testType, 
+			Particle.testType2
+		},
+		delays = 
+		{
+			1, 1
+		}
+	}
+
 }
 
 
@@ -114,7 +137,9 @@ ObjectUpdater:AddCamera(Camera)
 
 
 
+local vec = Math:VectorFromAngle(90)
 
+print("vec: {" .. vec.x .. ", " .. vec.y .. "}")
 
 
 --------------------------
@@ -134,7 +159,7 @@ function love.load()
 	Sound.ToggleLooping(source)
 	Sound.PlaySource(source)
 ]]
-	require("MathTest") --> wtf?
+
 end 
 
 

@@ -18,21 +18,33 @@ function Particle:New(data)
 	object.x = data.x or 100
 	object.y = data.y or 100
 
+	local size = 
+	{
+		width = data.width or Random:MultipleOf(data.sizeMultiple, data.sizeMultipleRange),
+		height = data.height or Random:MultipleOf(data.sizeMultiple, data.sizeMultipleRange),
+	}
+
 	object.box = Box:New
 	{
 		x = object.x,
 		y = object.y,
-		color = data.color,
-		width = data.width,
-		height = data.height,
+		color = data.colorName and Color:Get(data.colorName) or data.color or Color:Get("white"),
+		width = size.width,
+		height = size.height,
 		fill = true,
 		angle = data.angle or 0,
 		rotatable = true,
 		spin = data.spin,
 	}
 
-	object.xSpeed = data.xSpeed or 0
-	object.ySpeed = data.ySpeed or 1
+	local speed = 
+	{
+		x = data.xSpeed or 0
+	}
+
+
+	object.xSpeed = speed.x
+	object.ySpeed = speed.y
 	object.speed = data.speed or 1
 	object.damp = data.damp or 0
 
@@ -77,7 +89,7 @@ function Particle:New(data)
 	end 
 
 	function object:Update()
-		self:Move()
+		--self:Move()
 		self:Life()
 		self:Fade()
 
@@ -95,10 +107,39 @@ end
  
 -- types
 
-Particle.spot = 
-{
+-- returns a copy of particle type
+function Particle:Get(name)
 
+	local p = self:New(Particle[name])
+
+	return p
+
+end 
+
+Particle.testType =
+{
+	life = 100,
+	xSpeed = 1,
+	ySpeed = 0,
+	colorName = "green",
+	sizeMultiple = 2,
+	sizeMultipleRange = 6,
+	angle = 0,
+	fade = 1
 }
+
+Particle.testType2 =
+{
+	life = 100,
+	xSpeed = 1,
+	ySpeed = -1,
+	colorName = "red",
+	sizeMultiple = 2,
+	sizeMultipleRange = 6,
+	angle = 0,
+	fade = 1
+}
+
 
 
 return Particle

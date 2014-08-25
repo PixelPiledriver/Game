@@ -124,11 +124,14 @@ function Camera:Draw()
 	}
 
 	love .graphics.push()
-	love.graphics.translate(o.x + self.pos.x,o.y + self.pos.y)
-	love.graphics.scale(self.zoom.x, self.zoom.y)
-	love.graphics.translate(-o.x + self.pos.x,-o.y + self.pos.y)
 
+	love.graphics.translate(o.x + self.pos.x,o.y + self.pos.y)
 	love.graphics.rotate(self.rot)
+	love.graphics.scale(self.zoom.x, self.zoom.y)
+
+
+	love.graphics.translate(-o.x + self.pos.x,-o.y + self.pos.y)
+	
 	
 	
 	

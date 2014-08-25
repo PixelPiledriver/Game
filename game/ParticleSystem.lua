@@ -51,6 +51,7 @@ function ParticleSystem:New(data)
 	end
 
 	function object:CreateParticleFromTable()
+
 		local p = Particle:New(self.particleTable.particles[self.index])
 
 		self.index = self.index + 1
@@ -63,7 +64,7 @@ function ParticleSystem:New(data)
 			-- reset back to beginning
 			self.index = 1
 			self.delay = self.particleTable.delays[self.index]
-			
+
 		end 
 
 
@@ -88,7 +89,9 @@ function ParticleSystem:New(data)
 			self.count = 0
 
 			if(self.particleTable) then 
-				self:CreateParticleFromTable()
+				if(#self.particleTable.particles > 0) then
+					self:CreateParticleFromTable()
+				end 
 			else
 				self:CreateParticle()	
 			end 

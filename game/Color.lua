@@ -22,7 +22,7 @@ function Color:Get(name)
 		Color[name][3],
 		Color[name][4]
 	}
-
+	
 	return copy
 end
 
