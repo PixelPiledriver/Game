@@ -7,6 +7,7 @@ local ObjectUpdater = require("ObjectUpdater")
 local Box = require("Box")
 local Color = require("Color")
 local Random = require("Random")
+local DataPass = require("DataPass")
 
 local Particle = {}
 
@@ -64,15 +65,26 @@ function Particle:New(data)
 	----------------------------
 	-- Spin
 	----------------------------
-	local spin = 0 
+	local spin = DataPass:Options
+	{
+		varName = "spin",
+		data = data,
+		options =
+		{
+			{key = "spin", value = "value"},
+			{key = "spinRange", value = "range"}
+		}
+	}
 	
+	--[[
 	if(data.spin) then
 		spin = data.spin
 	end 
 
 	if(data.spinRange) then
 		spin = love.math.random(data.spinRange.min, data.spinRange.max)
-	end 
+	end
+	--]]
 
 	------------------------------
 	-- Graphics
@@ -96,12 +108,12 @@ function Particle:New(data)
 	object.colorMod = data.colorMod or nil
 
 	-------------------------
-	-- Speed and Direction
+	-- Direction
 	-------------------------
 	-- sort x and y speeds from options in data table
 	local dir = {}
 
-	-- speeds --> old dumb way to do it
+	-- direct setting of x and y components
 	if(data.xSpeed and data.ySpeed) then
 		dir.x = data.xSpeed or 0
 		dir.y = data.ySpeed or 0
@@ -127,8 +139,40 @@ function Particle:New(data)
 	------------------------
 	-- Speed
 	------------------------
-	object.speed = data.speed or 1
-	object.damp = data.damp or 1
+	local speed = nil
+
+	if(data.speed) then
+		speed = data.speed
+	end
+
+	if(data.speedRange) then
+
+	end 
+
+	object.speed = speed or 1
+
+	-- damp
+	object.speedDamp = data.speedDamp or 1
+
+
+
+	-------------------------
+	-- Life
+	-------------------------
+	local life = nil
+
+	if(data.lifeRange) then
+		life = love.math.random(data.lifeRange.min, data.lifeRange.max)
+	end 
+
+	if(data.life) then
+		life = data.life
+	end
+
+
+	object.lifeStart = life or 100
+	object.life = life or 100
+
 
 	------------------------
 	-- Other
@@ -136,8 +180,6 @@ function Particle:New(data)
 	object.fade = data.fade or 0
 	object.fadeWithLife = data.fadeWithLife or false
 
-	object.lifeStart = data.life or 50
-	object.life = data.life or 50
 	
 
 
@@ -148,7 +190,7 @@ function Particle:New(data)
 		self.box.x = self.x
 		self.box.y = self.y
 
-		self.speed = self.speed * self.damp
+		self.speed = self.speed * self.speedDamp
 	end 
 
 
@@ -260,7 +302,8 @@ Particle.testType =
 
 Particle.testType2 =
 {
-	life = 100,
+	--life = 200,
+	lifeRange = {min = 10, max = 300},
 	directionRange = {min = 0,  max = 360},
 	colorName = "random",
 	widthRange = {min= 1, max = 6},
@@ -274,3 +317,15 @@ Particle.testType2 =
 
 
 return Particle
+
+
+
+
+-- Notes
+----------------------
+
+-- curved directions
+-- change direction over life
+-- change color over life
+-- speed range
+-- life range  -----------------------DONE

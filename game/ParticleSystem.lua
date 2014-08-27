@@ -120,3 +120,27 @@ end
 
 return ParticleSystem
 
+
+
+
+
+
+
+-- Notes
+---------------------------------
+
+-- change structure from:
+-- particles = {p, p2, ...}
+-- delays = {#, #, ...}
+
+-- to:
+-- particles =
+-- {
+--	{particle = p, delay = #, count = 0},
+--	{particle = p2, delay = #, count = 0},
+--	{particle = p3, delay = #, count = 0},
+--	...
+--	...
+-- }
+
+-- this way particles 

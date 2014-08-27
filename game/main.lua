@@ -63,7 +63,6 @@ local blueRobot = Player:New
 	frame = Sprites.dude.blue.idle,
 	skin = PlayerSkins.blue,
 	playerColor = "blue",
-
 	xShootPos = -25,
 	shootDirection = -1,
 
@@ -100,12 +99,11 @@ local explosion2 = ParticleSystem:New
 	{
 		particles = 
 		{
-			Particle.testType, 
-			Particle.testType2
+			Particle.testType2, 
 		},
 		delays = 
 		{
-			2, 2
+			2,
 		}
 	}
 
