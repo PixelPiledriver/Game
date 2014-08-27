@@ -34,15 +34,6 @@ function Math:VectorFromAngle(angle)
 
 	local sin = math.sin(math.rad(angle))
 	local cos = math.cos(math.rad(angle))
-
-	if(sin < 0.00001) then
-		sin = 0
-	end 
-
-	if(cos < 0.00001) then
-		cos = 0
-	end 
-
 	
 	local v = 
 	{
@@ -50,7 +41,7 @@ function Math:VectorFromAngle(angle)
 		y = sin
 	}
 
-	--v = self:UnitVector(v)
+	v = self:UnitVector(v)
 
 	return v 
 

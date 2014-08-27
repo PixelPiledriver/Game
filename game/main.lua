@@ -4,6 +4,9 @@
 
 
 -- Requires --> load and run shit in other files
+
+require("Random")
+require("PixelTexture")
 require("DeltaTime")
 require("PrintDebug")
 require("DebugText")
@@ -91,8 +94,8 @@ local explosion = ParticleSystem:New
 
 local explosion2 = ParticleSystem:New
 {
-	x = 400,
-	y = 100,
+	x = 300,
+	y = 400,
 	particleTable = 
 	{
 		particles = 
@@ -102,13 +105,11 @@ local explosion2 = ParticleSystem:New
 		},
 		delays = 
 		{
-			1, 1
+			2, 2
 		}
 	}
 
 }
-
-
 
 
 local Greg = Collision:New

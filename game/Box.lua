@@ -110,6 +110,8 @@ function Box:New(data)
 
 	end
 
+
+	-- spin controls
 	function object:Rotate()
 
 		if(love.keyboard.isDown(self.keys.rotLeft)) then
@@ -136,7 +138,7 @@ function Box:New(data)
 	-- rotation velocity
 	function object:Spin()
 
-		self.angle = self.angle + self.spin
+		self.angle = self.angle + self.spin * 0.01
 
 	end 
 

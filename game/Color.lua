@@ -1,6 +1,8 @@
 -- use to get colors by name
 -- and other stuff
 
+local Random = require("Random")
+
 local Color = {}
 
 
@@ -13,8 +15,16 @@ Color.green = {0,255,0,255}
 Color.white = {255,255,255,255}
 Color.black = {0,0,0,255}
 Color.purple = {128, 0, 255, 255}
+Color.index = {"red", "darkRed", "blue", "darkBlue", 
+							 "green", "white", "black", "purple"}
+
 
 function Color:Get(name)
+
+	if(name == "random") then
+		name = Random:ChooseRandomlyFrom(Color.index)
+	end 
+
 	local copy =
 	{
 		Color[name][1],

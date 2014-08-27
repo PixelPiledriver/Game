@@ -70,7 +70,6 @@ function ParticleSystem:New(data)
 
 		end 
 
-
 	end 
 
 
@@ -107,7 +106,6 @@ function ParticleSystem:New(data)
 		
 		self:DelayUpdate()
 		
-		
 	end 
 
 
@@ -122,10 +120,3 @@ end
 
 return ParticleSystem
 
-
-
-
-
--- Notes
------------------------------------
--- this is dumb, i should make tables that determine when and what gets created
