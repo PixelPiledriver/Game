@@ -134,6 +134,8 @@ function Particle:New(data)
 	-- Other
 	------------------------
 	object.fade = data.fade or 0
+	object.fadeWithLife = data.fadeWithLife or false
+
 	object.lifeStart = data.life or 50
 	object.life = data.life or 50
 	
@@ -165,7 +167,18 @@ function Particle:New(data)
 
 		-- matches fade exactly with end of life
 		if(self.fadeWithLife) then
-			self.box.color[4] = self.life
+
+			local lifePercentage = Math:InverseLerp
+			{
+				a = 0, 
+				b = self.lifeStart,
+				t = self.life
+			}
+
+			self.box.color[4] = 255 * lifePercentage
+
+			return
+
 		end 
 
 		if(self.fade == 0) then
@@ -196,10 +209,7 @@ function Particle:New(data)
 		-- speed
 		if(self.colorMod.type == "speed") then
 
-
 		end 
-
-
 
 
 
@@ -243,6 +253,7 @@ Particle.testType =
 	sizeMultiple = {start= 2, range= 6},
 	angle = 0,
 	fade = 1,
+	fadeWithLife = true,
 	spinRange = {min= 0, max= 10},
 	xOffset = {min= -32, max= 32}
 }
@@ -255,7 +266,8 @@ Particle.testType2 =
 	widthRange = {min= 1, max = 6},
 	heightRange = {min= 28, max = 32},
 	angle = 0,
-	fade = 3,
+	fade = 0,
+	fadeWithLife = true,
 	spinRange = {min= 0, max= 20} 
 }
 

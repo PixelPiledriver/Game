@@ -34,7 +34,7 @@ function Math:VectorFromAngle(angle)
 
 	local sin = math.sin(math.rad(angle))
 	local cos = math.cos(math.rad(angle))
-	
+
 	local v = 
 	{
 		x = cos,
@@ -46,6 +46,21 @@ function Math:VectorFromAngle(angle)
 	return v 
 
 end 
+
+
+
+-- linear interpolation
+--{a, b, t}
+function Math:Lerp(data)
+	return data.a + ((data.b - data.a) * data.t)
+end 
+
+function Math:InverseLerp(data)
+	return  data.t/(data.a + (data.b-data.a))
+end
+
+
+
 
 
 

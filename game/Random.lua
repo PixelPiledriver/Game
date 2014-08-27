@@ -6,6 +6,10 @@
 local Random = {}
 
 
+-----------------------
+-- Functions
+-----------------------
+
 -- get a multiple of a number
 function Random:MultipleOf(number, scale)
 	return number + love.math.random(scale) * number
@@ -19,12 +23,12 @@ function Random:ChooseRandomlyFrom(data)
 	return data[index]
 end
 
--- set seed
--- new everytime we start the game
-
-
+------------
+-- Seed
+------------
 love.math.setRandomSeed(os.time())
---love.math.setRandomSeed(10)
+
+
 
 
 return Random
