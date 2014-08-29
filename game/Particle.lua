@@ -289,9 +289,11 @@ function Particle:New(data)
 
 			colorIndex = (#self.colorMod.colors + 1) - colorIndex
 
-
-			self.box.color = Color:Get(self.colorMod.colors[colorIndex])
-
+			if(self..interpolateColor) the
+				self.box.color = Color:Get(self.colorMod.colors[colorIndex])
+			else
+				self.box.color = Color:Get(self.colorMod.colors[colorIndex])
+			end
 		end
 
 
@@ -369,7 +371,8 @@ Particle.testType2 =
 	{
 		type = "life",
 		colors = {"white", "orange", "red", "darkRed"},
-	}
+	},
+	interpolateColor = true
 
 
 }
