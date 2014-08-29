@@ -11,7 +11,7 @@
 
 -- it will basically be like a custom switch
 
-
+local Random = require("Random")
 
 
 
@@ -40,15 +40,27 @@ function DataPass:Options(t)
 
 	for i=1, #t.options do
 
-		local key = t.options[i].key
+		local key = t.options[i][1]
 
 		if(t.data[key]) then
 
 			-- set value based on type
-			if(t.options[i].value == "value") then
-				return t.options[i].value
-			elseif(t.options[i].value == "range") then
+			if(t.options[i][2] == "value") then
+				return t.data[key]
+			elseif(t.options[i][2] == "range") then
 				return love.math.random(t.data[key].min, t.data[key].max)
+
+			elseif(t.options[i][2] == "multiple") then
+				return Random:MultipleOf(t.data[key].start, t.data[key].range)
+
+			elseif(t.options[i][2] == "angleToVector") then
+				return Math:VectorFromAngle(data.direction)
+
+			elseif(t.options[i][2] == "angleRangeToVector") then
+				return Math:VectorFromAngle(love.math.random(t.data.directionRange.min, t.data.directionRange.max))
+
+			else
+				return nil
 			end 
 
 			valueSet = true
@@ -73,3 +85,54 @@ end
 
 
 return DataPass
+
+
+
+
+
+
+
+
+-- Notes
+---------------------------------
+
+-- original version
+-- with names for key and type in the table
+-- removing them for now just to make it easier to type
+-- even tho it is a bit more vauge
+
+--[[
+
+
+function DataPass:Options(t)
+
+	local valueSet = false
+
+	for i=1, #t.options do
+
+		local key = t.options[i].key
+
+		if(t.data[key]) then
+
+			-- set value based on type
+			if(t.options[i].type == "value") then
+				return t.data[key]
+			elseif(t.options[i].type == "range") then
+				return love.math.random(t.data[key].min, t.data[key].max)
+			elseif(t.options[i].type == "multiple")
+			end 
+
+			valueSet = true
+
+		end 
+
+	end 
+
+	if(valueSet == false) then
+		return t.default
+	end 
+
+end 
+
+--]]
+

@@ -4,12 +4,7 @@
 
 
 Math = {}
-Random = {}
 
-
-function Random:MultipleOf(number, scale)
-	return number + love.math.random(scale) * number
-end 
 
 function Math:UnitVector(vector)
 

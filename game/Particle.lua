@@ -35,56 +35,61 @@ function Particle:New(data)
 	-------------------------
 	-- Size
 	-------------------------
-	local width = 0
-	local height = 0
+	local width = DataPass:Options
+	{
+		data = data,
+		options =
+		{
+			{"width", "value"},
+			{"widthRange", "range"},
+			{"widthMultiple", "multiple"}
+		}
+	}
 
-	-- direct
-	if(data.width) then
-		width = data.width
-	end
+	local height = DataPass:Options
+	{
+		data = data,
+		options =
+		{
+			{"height", "value"},
+			{"heightRange", "range"},
+			{"heightMultiple", "multiple"}
+		}
+	}
 
-	if(data.height) then
-		height = data.height
-	end
 
-	-- multiple
-	if(data.sizeMultiple) then
-		width = Random:MultipleOf(data.sizeMultiple.start, data.sizeMultiple.range)
-		height = Random:MultipleOf(data.sizeMultiple.start, data.sizeMultiple.range)
-	end
-
-	-- range
-	if(data.widthRange) then
-		width = love.math.random(data.widthRange.min, data.widthRange.max)
-	end 
-
-	if(data.heightRange) then
-		height = love.math.random(data.heightRange.min, data.heightRange.max)
-	end
 
 	----------------------------
 	-- Spin
 	----------------------------
 	local spin = DataPass:Options
 	{
-		varName = "spin",
 		data = data,
 		options =
 		{
-			{key = "spin", value = "value"},
-			{key = "spinRange", value = "range"}
+			{"spin", "value"},
+			{"spinRange", "range"}
 		}
 	}
-	
-	--[[
-	if(data.spin) then
-		spin = data.spin
-	end 
 
-	if(data.spinRange) then
-		spin = love.math.random(data.spinRange.min, data.spinRange.max)
-	end
-	--]]
+	-----------------
+	-- Color
+	-----------------
+	object.colorMod = data.colorMod or nil
+
+	local color = DataPass:Options
+	{
+		data = data,
+		options =
+		{
+			{"color", "value"},
+			{"colorName", "value"}
+		}
+	}
+
+	if(object.colorMod) then
+		color = object.colorMod.colors[1]
+	end 
 
 	------------------------------
 	-- Graphics
@@ -95,7 +100,7 @@ function Particle:New(data)
 	{
 		x = object.x,
 		y = object.y,
-		color = data.colorName and Color:Get(data.colorName) or data.color or Color:Get("white"),
+		color = Color:Get(color),
 		width = width,
 		height = height,
 		fill = true,
@@ -104,14 +109,28 @@ function Particle:New(data)
 		spin = spin,
 	}
 
-	-- color
-	object.colorMod = data.colorMod or nil
+	-------------------------------------
+	-- Fade
+	-------------------------------------
+	if(data.inverseFade) then
+		object.box.color[4] = 0 
+	end 
+
+
 
 	-------------------------
 	-- Direction
 	-------------------------
 	-- sort x and y speeds from options in data table
-	local dir = {}
+	local dir = DataPass:Options
+	{
+		data = data,
+		options = 
+		{
+			{"direction", "angleToVector"},
+			{"directionRange", "angleRangeToVector"}
+		}
+	}
 
 	-- direct setting of x and y components
 	if(data.xSpeed and data.ySpeed) then
@@ -119,39 +138,40 @@ function Particle:New(data)
 		dir.y = data.ySpeed or 0
 	end 
 
-	-- direction range
-	if(data.directionRange ) then
-		local vec = Math:VectorFromAngle(love.math.random(data.directionRange.min, data.directionRange.max))
-		dir.x = vec.x
-		dir.y = vec.y
-	end
-
-	-- direction
-	if(data.direction) then
-		local vec = Math:VectorFromAngle(data.direction)
-		dir.x = vec.x
-		dir.y = vec.y
-	end 
-		
 	object.xSpeed = dir.x
 	object.ySpeed = dir.y
+
+	-- rotDirection
+	object.rotDirectionEnabled = data.rotDirectionEnable or false
+	object.rotDirection = data.rotDirection or 0
+	object.rotDirectionSpeed = data.rotDirectionSpeed or 0
 
 	------------------------
 	-- Speed
 	------------------------
-	local speed = nil
-
-	if(data.speed) then
-		speed = data.speed
-	end
-
-	if(data.speedRange) then
-
-	end 
+	local speed = DataPass:Options
+	{
+		data = data,
+		options = 
+		{
+			{"speed", "value"},
+			{"speedRange", "range"}
+		}
+	}
 
 	object.speed = speed or 1
 
 	-- damp
+	local speedDamp = DataPass:Options
+	{
+		data = data,
+		options =
+		{
+			{"speedDamp", "value"},
+			{"speedDampRange", "range"}
+		}
+	}
+
 	object.speedDamp = data.speedDamp or 1
 
 
@@ -159,16 +179,15 @@ function Particle:New(data)
 	-------------------------
 	-- Life
 	-------------------------
-	local life = nil
-
-	if(data.lifeRange) then
-		life = love.math.random(data.lifeRange.min, data.lifeRange.max)
-	end 
-
-	if(data.life) then
-		life = data.life
-	end
-
+	local life = DataPass:Options
+	{
+		data = data,
+		options =
+		{
+			{"life", "value"},
+			{"lifeRange", "range"}
+		}
+	}
 
 	object.lifeStart = life or 100
 	object.life = life or 100
@@ -179,6 +198,7 @@ function Particle:New(data)
 	------------------------
 	object.fade = data.fade or 0
 	object.fadeWithLife = data.fadeWithLife or false
+	object.inverseFade = data.inverseFade or false
 
 	
 
@@ -217,7 +237,13 @@ function Particle:New(data)
 				t = self.life
 			}
 
-			self.box.color[4] = 255 * lifePercentage
+			local value = 255 * lifePercentage
+			
+			if(self.inverseFade) then
+				value = 255 - value
+			end 
+
+			self.box.color[4] = value
 
 			return
 
@@ -245,12 +271,36 @@ function Particle:New(data)
 		-- life
 		if(self.colorMod.type == "life") then
 
+			local lifePercentage = Math:InverseLerp
+			{
+				a = 0,
+				b = self.lifeStart,
+				t = self.life
+			}
+
+			--print(lifePercentage)
+			--print(#self.colorMod.colors)
+			--print(math.floor(#self.colorMod.colors * lifePercentage))
+
+			local colorIndex = math.floor(#self.colorMod.colors * lifePercentage) + 1
+			if(colorIndex > #self.colorMod.colors) then
+				colorIndex = #self.colorMod.colors
+			end 
+
+			colorIndex = (#self.colorMod.colors + 1) - colorIndex
+
+
+			self.box.color = Color:Get(self.colorMod.colors[colorIndex])
+
 		end
+
+
+
+
 
 
 		-- speed
 		if(self.colorMod.type == "speed") then
-
 		end 
 
 
@@ -292,7 +342,8 @@ Particle.testType =
 	life = 100,
 	directionRange = {min = 0, max = 360},
 	colorName = "random",
-	sizeMultiple = {start= 2, range= 6},
+	widthMultiple = {start = 1, range = 6},
+	heightMultiple = {start = 1, range = 6},
 	angle = 0,
 	fade = 1,
 	fadeWithLife = true,
@@ -303,7 +354,7 @@ Particle.testType =
 Particle.testType2 =
 {
 	--life = 200,
-	lifeRange = {min = 10, max = 300},
+	lifeRange = {min = 50, max = 300},
 	directionRange = {min = 0,  max = 360},
 	colorName = "random",
 	widthRange = {min= 1, max = 6},
@@ -311,10 +362,32 @@ Particle.testType2 =
 	angle = 0,
 	fade = 0,
 	fadeWithLife = true,
-	spinRange = {min= 0, max= 20} 
+	spinRange = {min= 1, max= 20},
+	speedRange = {min = 1, max = 3},
+	speedDamp = 0.98,
+	colorMod = 
+	{
+		type = "life",
+		colors = {"white", "orange", "red", "darkRed"},
+	}
+
+
 }
 
 
+-- all possible arguments
+--[[
+	
+	{
+		color, colorName,
+		fade, fadeWithLife, inverseFade
+		direction, directionRange
+		speed, speedRange,
+		damp, dampRange,
+	}
+
+
+--]]
 
 return Particle
 
@@ -324,8 +397,10 @@ return Particle
 -- Notes
 ----------------------
 
--- curved directions
--- change direction over life
--- change color over life
--- speed range
--- life range  -----------------------DONE
+-- curved directions 
+-- change direction over life 
+-- change color over life -- working on it
+-- speed range-------------------- done
+-- life range  ----------------------- done
+-- speed damp -------------------------done
+-- rot damp ------------------------done
