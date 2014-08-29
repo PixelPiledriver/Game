@@ -283,6 +283,9 @@ function Particle:New(data)
 			--print(math.floor(#self.colorMod.colors * lifePercentage))
 
 			local colorIndex = math.floor(#self.colorMod.colors * lifePercentage) + 1
+			local lerpValue = (#self.colorMod.colors * lifePercentage) + 1 - colorIndex 
+
+
 			if(colorIndex > #self.colorMod.colors) then
 				colorIndex = #self.colorMod.colors
 			end 
@@ -290,7 +293,11 @@ function Particle:New(data)
 			colorIndex = (#self.colorMod.colors + 1) - colorIndex
 
 			if(self..interpolateColor) the
-				self.box.color = Color:Get(self.colorMod.colors[colorIndex])
+				self.box.color = Color:Lerp
+				{
+					a = Color:Get(self.colorMod.colors[colorIndex]),
+					b = Color:Get()
+				}
 			else
 				self.box.color = Color:Get(self.colorMod.colors[colorIndex])
 			end
