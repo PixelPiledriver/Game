@@ -103,7 +103,7 @@ local explosion2 = ParticleSystem:New
 		},
 		delays = 
 		{
-			2,
+			10,
 		}
 	}
 
@@ -133,14 +133,7 @@ local rotBox = Box:New
 	angle = 45
 }
 
-
 ObjectUpdater:AddCamera(Camera)
-
-
-
-local vec = Math:VectorFromAngle(90)
-
-print("vec: {" .. vec.x .. ", " .. vec.y .. "}")
 
 
 --------------------------

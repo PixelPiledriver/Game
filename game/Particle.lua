@@ -91,6 +91,8 @@ function Particle:New(data)
 		color = object.colorMod.colors[1]
 	end 
 
+	object.interpolateColor = data.interpolateColor or false
+
 	------------------------------
 	-- Graphics
 	------------------------------
@@ -202,6 +204,20 @@ function Particle:New(data)
 
 	
 
+	----------------------------
+	-- DebugText Variables --> can disable these later
+	----------------------------
+	object.lerpValue = nil
+	object.colorIndex = nil
+	object.bIndex = nil
+	object.lifePercentage = nil
+
+
+
+	-------------------------------
+	-- Functions
+	-------------------------------
+
 
 	function object:Move()
 		self.x = self.x + (self.speed * self.xSpeed)
@@ -278,44 +294,79 @@ function Particle:New(data)
 				t = self.life
 			}
 
-			--print(lifePercentage)
-			--print(#self.colorMod.colors)
-			--print(math.floor(#self.colorMod.colors * lifePercentage))
+			-- inverse percentage
+			lifePercentage = 1 - lifePercentage
+			self.lifePercentage = lifePercentage
 
-			local colorIndex = math.floor(#self.colorMod.colors * lifePercentage) + 1
-			local lerpValue = (#self.colorMod.colors * lifePercentage) + 1 - colorIndex 
+			-- create values
+			local colorIndex = nil
+			local lerpValue = nil 
 
+			-- get a index
+			if(self.interpolateColor) then
+				colorIndex = math.floor(#self.colorMod.colors * lifePercentage)
+				lerpValue = (#self.colorMod.colors * lifePercentage) - colorIndex 
+			else
+				colorIndex = math.floor(#self.colorMod.colors * lifePercentage) + 1
+			end
 
+			-- color index weight
+			if(self.colorMod.weight == "end") then
+				colorIndex = colorIndex + 1
+			elseif(self.colorMod.weight == "start") then
+				colorIndex = colorIndex
+			end
+
+			-- index max
 			if(colorIndex > #self.colorMod.colors) then
 				colorIndex = #self.colorMod.colors
 			end 
 
-			colorIndex = (#self.colorMod.colors + 1) - colorIndex
+			-- index min
+			local indexLessThanOne = false
+			if(colorIndex < 1) then
+				colorIndex = 1
+				indexLessThanOne = true
+			end 
 
-			if(self..interpolateColor) the
+			-- interpolate color with math lerp
+			if(self.interpolateColor) then
+
+				local bIndex = nil
+
+				if(indexLessThanOne) then
+					bIndex = colorIndex
+				else
+					bIndex = colorIndex + 1
+				end
+
+				if(bIndex > #self.colorMod.colors) then
+					bIndex = #self.colorMod.colors
+				end 
+
+				self.colorIndex = colorIndex
+				self.bIndex = bIndex
+
 				self.box.color = Color:Lerp
 				{
 					a = Color:Get(self.colorMod.colors[colorIndex]),
-					b = Color:Get()
+					b = Color:Get(self.colorMod.colors[bIndex]),
+					t = lerpValue
 				}
 			else
+
+				self.colorIndex = colorIndex
 				self.box.color = Color:Get(self.colorMod.colors[colorIndex])
 			end
+
 		end
-
-
-
-
-
 
 		-- speed
 		if(self.colorMod.type == "speed") then
+
 		end 
 
-
-
 	end 
-
 
 	function object:Update()
 		self:Move()
@@ -324,6 +375,24 @@ function Particle:New(data)
 		self:ColorModulate()
 
 	end 
+
+	function object:PrintDebugText()
+
+		local colorIndex = self.colorIndex or "Not set"
+		local bIndex = self.bIndex or "Not set"
+
+		DebugText:TextTable
+		{
+			{text = "", obj = "Particle" },
+			{text = "Particle"},
+			{text = "--------------------"},
+			{text = "Life: " .. self.life},
+			{text = "LifePercentage: " .. self.lifePercentage},
+			{text = "colorIndex: " .. colorIndex},
+			{text = "bIndex: " .. bIndex},
+		}
+
+	end
 
 
 	ObjectUpdater:Add{object}
@@ -346,6 +415,10 @@ function Particle:Get(name)
 
 end 
 
+--------------------------
+-- Particles
+--------------------------
+
 Particle.testType =
 {
 	life = 100,
@@ -363,7 +436,7 @@ Particle.testType =
 Particle.testType2 =
 {
 	--life = 200,
-	lifeRange = {min = 50, max = 300},
+	lifeRange = {min = 200, max = 200},
 	directionRange = {min = 0,  max = 360},
 	colorName = "random",
 	widthRange = {min= 8, max = 32},
@@ -377,9 +450,11 @@ Particle.testType2 =
 	colorMod = 
 	{
 		type = "life",
-		colors = {"white", "orange", "red", "darkRed"},
+		colors = Color.group.ice,
+		weight = "end"
 	},
 	interpolateColor = true
+
 
 
 }
@@ -409,7 +484,8 @@ return Particle
 
 -- curved directions 
 -- change direction over life 
--- change color over life -- working on it
+-- change color based on life ------------done
+-- change color based on speed 
 -- speed range-------------------- done
 -- life range  ----------------------- done
 -- speed damp -------------------------done
