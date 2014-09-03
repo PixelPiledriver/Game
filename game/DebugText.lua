@@ -6,7 +6,7 @@ local Color = require("Color")
 DebugText = {}
 
 -- on or off
-DebugText.active = true
+DebugText.active = false
 
 -- types
 -------------
@@ -20,8 +20,9 @@ DebugText.type =
 	ObjectUpdater = false,
 	CollisionManager = false,
 	Map = false,
-	ParticleSystem = true,
+	ParticleSystem = false,
 	Camera = true,
+	Particle = false,
 		
 	Generic = true,
 }
@@ -75,6 +76,10 @@ end
 
 -- draw all texts
 function DebugText:Draw()
+
+	if(self.active == false) then
+		return
+	end 
 
 	-- use index for sub items in text tables
 	local index = 1

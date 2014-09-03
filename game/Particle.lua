@@ -57,6 +57,19 @@ function Particle:New(data)
 		}
 	}
 
+	object.width = width
+	object.height = height
+
+	----------------------------
+	-- Scale
+	----------------------------
+	object.scale = {}
+	object.scale.xSpeed = data.scale.xSpeed
+	object.scale.ySpeed = data.scale.ySpeed
+	object.scale.x = 1
+	object.scale.y = 1
+	object.scale.min = 0
+	object.scale.max = data.scale.max or 10
 
 
 	----------------------------
@@ -109,6 +122,7 @@ function Particle:New(data)
 		angle = data.angle or 0,
 		rotatable = true,
 		spin = spin,
+		draw = true
 	}
 
 	-------------------------------------
@@ -130,7 +144,9 @@ function Particle:New(data)
 		options = 
 		{
 			{"direction", "angleToVector"},
-			{"directionRange", "angleRangeToVector"}
+			{"directionRange", "angleRangeToVector"},
+			{"directionList", "randomVector"}
+
 		}
 	}
 
@@ -144,9 +160,23 @@ function Particle:New(data)
 	object.ySpeed = dir.y
 
 	-- rotDirection
-	object.rotDirectionEnabled = data.rotDirectionEnable or false
-	object.rotDirection = data.rotDirection or 0
-	object.rotDirectionSpeed = data.rotDirectionSpeed or 0
+	object.rotDirection = {}
+	object.rotDirection.enabled = data.rotDirection.enabled or false
+	object.rotDirection.angle = math.deg(Math:VectorToAngle(dir))
+	
+
+	local dirSpeed = DataPass:Options
+	{
+		data = data.rotDirection,
+		options =
+		{
+			{"speed", "value"},
+			{"speedRange", "range"}
+		}
+
+	}
+	object.rotDirection.speed = dirSpeed
+	
 
 	------------------------
 	-- Speed
@@ -227,6 +257,20 @@ function Particle:New(data)
 		self.box.y = self.y
 
 		self.speed = self.speed * self.speedDamp
+	end 
+
+	function object:RotDirection()
+		if(self.rotDirection.enable == false) then
+			return
+		end 
+
+		self.rotDirection.angle = self.rotDirection.angle + self.rotDirection.speed * 0.01
+
+		local dir = Math:AngleToVector(self.rotDirection.angle)
+		dir = Math:UnitVector(dir)
+		self.xSpeed = dir.x
+		self.ySpeed = dir.y
+
 	end 
 
 
@@ -368,12 +412,38 @@ function Particle:New(data)
 
 	end 
 
+
+	-- change size of particle over time
+	Particle.scaleSpeedReduce = 0.001
+	function object:Scale()
+
+		self.scale.x = self.scale.x + (self.scale.xSpeed * Particle.scaleSpeedReduce)
+		self.scale.y = self.scale.y + (self.scale.ySpeed * Particle.scaleSpeedReduce)
+
+		-- use original width
+		self.box.width = self.width * self.scale.x
+		self.box.height = self.height * self.scale.y
+
+		if(self.box.width < self.scale.min) then
+			self.box.width = self.scale.min
+		end 
+
+		if(self.box.height < self.scale.min) then
+			self.box.height = self.scale.min
+		end 
+
+
+	end 
+
+
+
 	function object:Update()
 		self:Move()
 		self:Life()
-		self:Fade()
 		self:ColorModulate()
-
+		self:Fade()
+		self:RotDirection()
+		self:Scale()
 	end 
 
 	function object:PrintDebugText()
@@ -430,22 +500,27 @@ Particle.testType =
 	fade = 1,
 	fadeWithLife = true,
 	spinRange = {min= 0, max= 10},
-	xOffset = {min= -32, max= 32}
+	xOffset = {min= -32, max= 32},
 }
 
 Particle.testType2 =
 {
 	--life = 200,
 	lifeRange = {min = 200, max = 200},
-	directionRange = {min = 0,  max = 360},
+	--directionRange = {min = 0,  max = 360},
+	--directionList = {90, 0, 180, 270},
+	directionList = {0,180}, --45, 135, 225, 315},
+	rotDirection = {enabled = true, dir = 0, speedRange = {min = 300, max = 500}},
 	colorName = "random",
 	widthRange = {min= 8, max = 32},
 	heightRange = {min= 8, max = 32},
 	angle = 0,
 	fade = 1,
+	--inverseFade = true,
+	scale = {xSpeed = -4, ySpeed = -4},
 	fadeWithLife = true,
 	spinRange = {min= 1, max= 20},
-	speedRange = {min = 1, max = 3},
+	speedRange = {min = 5, max = 10},
 	speedDamp = 0.98,
 	colorMod = 
 	{
@@ -455,37 +530,67 @@ Particle.testType2 =
 	},
 	interpolateColor = true
 
+}
 
+Particle.testType3 =
+{
+	lifeRange = {min = 200, max = 200},
+	directionList = {0, 90, 180, 270, 45, 135, 225, 315},
+	rotDirection = {enabled = true, dir = 0, speedRange = {min = 300, max = 500}},
+	colorName = "random",
+	widthRange = {min= 8, max = 32},
+	heightRange = {min= 8, max = 32},
+	angle = 0,
+	fade = 1,
+	scale = {xSpeed = -200, ySpeed = -200},
+	fadeWithLife = true,
+	spinRange = {min= 0, max= 0},
+	speedRange = {min = 0, max = 0},
+	speedDamp = 0.98,
+	colorMod = 
+	{
+		type = "life",
+		colors = Color.group.ice,
+		weight = "end"
+	},
+	interpolateColor = true
 
 }
 
-
--- all possible arguments
---[[
-	
-	{
-		color, colorName,
-		fade, fadeWithLife, inverseFade
-		direction, directionRange
-		speed, speedRange,
-		damp, dampRange,
-	}
-
-
---]]
-
 return Particle
 
+
+
+-- all possible arguments
+-- for a new particle
+--[[
+local particle = Particle:New
+{
+	color, colorName,
+	interpolateColor,
+	colorMod
+	fade, fadeWithLife, 
+	inverseFade
+	direction, directionRange
+	speed, speedRange, speedDamp
+	damp, dampRange,
+	spin, spinRange,
+}
+--]]
 
 
 
 -- Notes
 ----------------------
 
--- curved directions 
--- change direction over life 
+-- curved directions ----------------- done
+-- change direction over life ----------- done
 -- change color based on life ------------done
+-- rotDirection starts to other defined direction ----- done
+-- fade over life table
 -- change color based on speed 
+-- 
+-- direction list --------------------done
 -- speed range-------------------- done
 -- life range  ----------------------- done
 -- speed damp -------------------------done

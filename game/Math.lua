@@ -24,7 +24,7 @@ function Math:UnitVector(vector)
 end 
 
 
-function Math:VectorFromAngle(angle)
+function Math:AngleToVector(angle)
 
 
 	local sin = math.sin(math.rad(angle))
@@ -42,6 +42,17 @@ function Math:VectorFromAngle(angle)
 
 end 
 
+function Math:VectorToAngle(vector)
+
+	local v = {}
+	v.x = 1
+	v.y = 0
+
+	local angle = math.atan2(vector.y,vector.x) - math.atan2(v.y,v.x)
+
+	return angle
+
+end 
 
 
 -- linear interpolation

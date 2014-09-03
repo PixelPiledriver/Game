@@ -187,9 +187,14 @@ Color.group.ice =
 	"white", "cyan", "blue", "darkBlue"	
 }
 
-Color.group.peppermin =
+Color.group.peppermint =
 {
 	"white", "red", "white", "red", "white", "red", "white", "red", "white", "red",
+}
+
+Color.group.slowRed =
+{
+	"white", "red"	
 }
 
 function Color:Get(name)

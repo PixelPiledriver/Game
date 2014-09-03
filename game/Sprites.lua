@@ -8,9 +8,14 @@ local Sprites = {}
 Sprites.data = {}
 
 
-------------------
--- Functions
-------------------
+
+
+
+-----------------------------
+-- Variables
+-----------------------------
+-- stops all spritesfrom drawing
+Sprites.drawNone = true
 
 ---------------------------------------------
 --New shit
@@ -37,15 +42,18 @@ local function MakeFrame(data)
 	f.frame = love.graphics.newQuad(f.x, f.y, f.width, f.height, f.imageWidth, f.imageHeight)
 
 	-------------
-	-- Function
+	-- Functions
 	-------------
 
 	function f:Draw(objectData)
 
-		if(self.draw == false) then
+		if(self.drawNone) then
 			return
 		end 
 
+		if(self.draw == false) then
+			return
+		end 
 
 		if(objectData.color) then
 			love.graphics.setColor(objectData.color)

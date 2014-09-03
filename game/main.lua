@@ -93,8 +93,8 @@ local explosion = ParticleSystem:New
 
 local explosion2 = ParticleSystem:New
 {
-	x = 350,
-	y = 420,
+	x = love.graphics.getWidth() * 0.5 - 32,
+	y = love.graphics.getHeight() * 0.5,
 	particleTable = 
 	{
 		particles = 
@@ -103,13 +103,14 @@ local explosion2 = ParticleSystem:New
 		},
 		delays = 
 		{
-			10,
+			0,
 		}
 	}
 
 }
 
 
+--[[
 local Greg = Collision:New
 {
 	x = 100,
@@ -122,6 +123,7 @@ local Greg = Collision:New
 	collisionList = {"Steve"},
 	draw = false
 }
+--]]
 
 local rotBox = Box:New
 {

@@ -20,14 +20,16 @@ function Box:New(data)
 	object.speed = data.speed or 5
 	object.move = false
 
-	-- look
+	-- size
 	object.width = data.width or 32
 	object.height = data.height or 32
+
+	-- color
 	object.color = data.color or {255,255,255,255}
 	
-	
+	-- draw
 	object.fill = data.fill or false
-	object.draw = data.draw or true
+	object.draw = data.draw or false
 
 	-- rotation
 	object.angle = data.angle or 0
@@ -50,6 +52,7 @@ function Box:New(data)
 	-------------
 	-- Functions
 	-------------
+
 	function object:Draw()
 
 		if(self.draw == false) then
@@ -116,12 +119,10 @@ function Box:New(data)
 
 		if(love.keyboard.isDown(self.keys.rotLeft)) then
 			self.spin = self.spin - 0.01
-			--self.angle = self.angle - 0.1
 		end 
 
 		if(love.keyboard.isDown(self.keys.rotRight)) then
 			self.spin = self.spin + 0.01 
-			--self.angle = self.angle + 0.1
 		end 
 
 	end 

@@ -54,11 +54,16 @@ function DataPass:Options(t)
 				return Random:MultipleOf(t.data[key].start, t.data[key].range)
 
 			elseif(t.options[i][2] == "angleToVector") then
-				return Math:VectorFromAngle(data.direction)
+				return Math:AngleToVector(data.direction)
 
 			elseif(t.options[i][2] == "angleRangeToVector") then
-				return Math:VectorFromAngle(love.math.random(t.data.directionRange.min, t.data.directionRange.max))
+				return Math:VectorFromAngle(love.math.random(t.data[key].min, t.data[key].max))
 
+			elseif(t.options[i][2] == "randomVector") then
+				local a = Random:ChooseRandomlyFrom(t.data[key])
+				local dir = Math:AngleToVector(a)
+				return dir
+			
 			else
 				return nil
 			end 
