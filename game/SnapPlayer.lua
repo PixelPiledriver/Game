@@ -17,8 +17,7 @@ local BlockMap = require("BlockMap")
 local Health = require("Health")
 local Guns = require("Guns")
 local Map = require("Map")
-local SnapGrid = require("SnapGrid")
-local Timer = require("Timer")
+
 -- use to create more instances
 local Player = {}
 
@@ -43,7 +42,9 @@ function Player:New(data)
 	object.yJump = 0
 	object.jumpNow = false
 
-	object.GridMovementTimer = Timer:New()
+
+
+
 
 	object.width = data.width or 32
 	object.height = data.height or 32
@@ -260,7 +261,7 @@ function Player:New(data)
 	-- Actions
 	---------------
 
-	-- simple movement
+	-- movement
 	function object:MoveLeft()
 		self.x = self.x - self.speed
 	end 
@@ -276,23 +277,6 @@ function Player:New(data)
 	function object:MoveDown()
 		self.y = self.y + self.speed
 	end 
-
-	-- Grid Movement
-	-- function object:MoveLeft()
-	-- 	self.x = self.x - SnapGrid.cellWidth
-	-- end 
-
-	-- function object:MoveRight()
-	-- 	self.x = self.x + SnapGrid.cellWidth
-	-- end 
-
-	-- function object:MoveUp()
-	-- 	self.y = self.y - SnapGrid.cellHeight
-	-- end 
-
-	-- function object:MoveDown()
-	-- 	self.y = self.y + SnapGrid.cellHeight
-	-- end 
 
 	-- jump
 	function object:Jump(j)
@@ -376,19 +360,11 @@ function Player:New(data)
 	function object:Input(key)
 
 		if(key == "d") then 
-			self:MoveRight()
+			--self:MoveRight()
 		end
 
 		if(key == "a") then
-			self:MoveLeft()
-		end 
-
-		if(key == "w") then 
-			self:MoveUp()
-		end
-
-		if(key == "s") then
-			self:MoveDown()
+			--self:MoveLeft()
 		end 
 
 		if(key == self.keys.jump) then
@@ -403,6 +379,7 @@ function Player:New(data)
 	-- only used for isDown=pressed 
 	-- not for button down or up
 	function object:RepeatedInput()
+
 		-- simple controls
 		if(love.keyboard.isDown(self.keys.left)) then
 			love.timer.getTime();
@@ -424,39 +401,6 @@ function Player:New(data)
 			self:MoveDown()
 			self:SetDirection("down")
 		end
-
-		-- Grid Snap Movement
-		-- if(self.GridMovementTimer:TimeElapsedMs(100)) then			
-		-- 	if(love.keyboard.isDown(self.keys.left)) then
-		-- 		self:MoveLeft()
-		-- 		self:SetDirection("left")
-		-- 		self.GridMovementTimer:ResetTimer()
-		-- 	end
-		-- end 
-
-		-- if(self.GridMovementTimer:TimeElapsedMs(100)) then
-		-- 	if(love.keyboard.isDown(self.keys.right)) then
-		-- 		self:MoveRight()
-		-- 		self:SetDirection("right")
-		-- 		self.GridMovementTimer:ResetTimer()
-		-- 	end
-		-- end 
-
-		-- if(self.GridMovementTimer:TimeElapsedMs(100)) then
-		-- 	if(love.keyboard.isDown(self.keys.up)) then
-		-- 		self:MoveUp()
-		-- 		self:SetDirection("up")
-		-- 		self.GridMovementTimer:ResetTimer()
-		-- 	end
-		-- end 
-
-		-- if(self.GridMovementTimer:TimeElapsedMs(100)) then
-		-- 	if(love.keyboard.isDown(self.keys.down)) then
-		-- 		self:MoveDown()
-		-- 		self:SetDirection("down")
-		-- 		self.GridMovementTimer:ResetTimer()
-		-- 	end
-		-- end
 
 		if(love.keyboard.isDown(self.keys.jump)) then
 			
@@ -558,61 +502,3 @@ end
 -- done with static
 return Player
 
-
-
-
-
-
-
-
-
-
--- Notes
----------------
-
-		--[[
-		local box1 = Box:New
-		{
-			x = (self.x - (self.x % 32)) + self.width/2,
-			y = (self.y - (self.y % 32)) + self.height/2,
-			color = Color[self.playerColor]
-		}
-		--]]
-
-
-
-
-				--[[
-		self.rateOfFire = self.rateOfFire + 1
-
-		-- unable to shoot?
-		if(self.rateOfFire < self.gun.rateOfFire) then
-			return
-		end 
-
-		if(self.shootDirection == -1) then
-			Bullet:New
-				{
-					name = self.playerColor .. "Bullet",
-					frame = self.skin.bullet,
-					xSpeed = -1,
-					bulletType = self.gun.bullet,
-					shooter = self,
-					collisionList = self.collisionList.bullet
-				}
-
-
-		else
-			Bullet:New
-			{
-				name = self.playerColor .. "Bullet",
-				frame = self.skin.bullet,
-				xSpeed = 1,
-				bulletType = self.gun.bullet,
-				shooter = self,
-				collisionList = self.collisionList.bullet
-			}
-		end 
-
-		self.rateOfFire = 0
-		--]]

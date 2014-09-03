@@ -31,6 +31,8 @@ local CollisionLists = require("CollisionLists")
 local Guns = require("Guns")
 local ParticleSystem = require("ParticleSystem")
 local Particle = require("Particle")
+require("SnapGrid")
+
 require("Keyboard")
 require("Math")
 

@@ -132,13 +132,10 @@ function Map:Create()
 				xIndex = x,
 				yIndex = y,
 
-
 			}
 
 		end 	
 	end 
-
-
 
 function Map:GetTile(x,y)
 	return self.tiles.x[x].y[y]
