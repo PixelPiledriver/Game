@@ -17,14 +17,16 @@ local BlockMap = require("BlockMap")
 local Health = require("Health")
 local Guns = require("Guns")
 local Map = require("Map")
+local SnapGrid = require("SnapGrid")
+local Timer = require("Timer")
 
 -- use to create more instances
-local Player = {}
+local SnapPlayer = {}
 
 
 
 -- create instance
-function Player:New(data)
+function SnapPlayer:New(data)
 
 	----------
 	-- Create
@@ -42,6 +44,7 @@ function Player:New(data)
 	object.yJump = 0
 	object.jumpNow = false
 
+	object.GridMovementTimer = Timer:New()
 
 	object.width = data.width or 32
 	object.height = data.height or 32
@@ -193,19 +196,16 @@ function Player:New(data)
 		}
 	end 
 
-	function object:DoMapStuff()
-
-		self.mapX = (( (self.x) - (self.x % Map.tileWidth)) / Map.tileWidth) + 1
-		self.mapY = (( (self.y + self.height) - (self.y % Map.tileHeight)) / Map.tileHeight) + 1
+	-- function object:DoMapStuff()
+	-- 	self.mapX = (( (self.x) - (self.x % Map.tileWidth)) / Map.tileWidth) + 1
+	-- 	self.mapY = (( (self.y + self.height) - (self.y % Map.tileHeight)) / Map.tileHeight) + 1
 	
-		local tile = Map:ObjectInTile(self)
+	-- 	local tile = Map:ObjectInTile(self)
 		
-		if(tile) then 
-			self.z = -tile.z
-		end 
-		
-
-	end 
+	-- 	if(tile) then 
+	-- 		self.z = -tile.z
+	-- 	end 		
+	-- end 
 
 	function object:JumpUpdate()
 
@@ -233,7 +233,7 @@ function Player:New(data)
 	end 
 
 	function object:Update()
-		self:DoMapStuff()
+		--self:DoMapStuff()
 		self:JumpUpdate()
 		self:Shadow()
 		self:ColorUpdate()
@@ -258,21 +258,21 @@ function Player:New(data)
 	-- Actions
 	---------------
 
-	-- movement
+	-- Grid Movement
 	function object:MoveLeft()
-		self.x = self.x - self.speed
+		self.x = self.x - SnapGrid.cellWidth
 	end 
 
 	function object:MoveRight()
-		self.x = self.x + self.speed
+		self.x = self.x + SnapGrid.cellWidth
 	end 
 
 	function object:MoveUp()
-		self.y = self.y - self.speed
+		self.y = self.y - SnapGrid.cellHeight
 	end 
 
 	function object:MoveDown()
-		self.y = self.y + self.speed
+		self.y = self.y + SnapGrid.cellHeight
 	end 
 
 	-- jump
@@ -376,28 +376,39 @@ function Player:New(data)
 	-- only used for isDown=pressed 
 	-- not for button down or up
 	function object:RepeatedInput()
-
-		-- simple controls
-		if(love.keyboard.isDown(self.keys.left)) then
-			love.timer.getTime();
-			self:MoveLeft()
-			self:SetDirection("left")
+		-- Grid Snap Movement
+		if(self.GridMovementTimer:TimeElapsedMs(100)) then			
+			if(love.keyboard.isDown(self.keys.left)) then
+				self:MoveLeft()
+				self:SetDirection("left")
+				self.GridMovementTimer:ResetTimer()
+			end
 		end 
 
-		if(love.keyboard.isDown(self.keys.right)) then
-			self:MoveRight()
-			self:SetDirection("right")
+		if(self.GridMovementTimer:TimeElapsedMs(100)) then
+			if(love.keyboard.isDown(self.keys.right)) then
+				self:MoveRight()
+				self:SetDirection("right")
+				self.GridMovementTimer:ResetTimer()
+			end
 		end 
 
-		if(love.keyboard.isDown(self.keys.up)) then
-			self:MoveUp()
-			self:SetDirection("up")
+		if(self.GridMovementTimer:TimeElapsedMs(100)) then
+			if(love.keyboard.isDown(self.keys.up)) then
+				self:MoveUp()
+				self:SetDirection("up")
+				self.GridMovementTimer:ResetTimer()
+			end
 		end 
 
-		if(love.keyboard.isDown(self.keys.down)) then
-			self:MoveDown()
-			self:SetDirection("down")
+		if(self.GridMovementTimer:TimeElapsedMs(100)) then
+			if(love.keyboard.isDown(self.keys.down)) then
+				self:MoveDown()
+				self:SetDirection("down")
+				self.GridMovementTimer:ResetTimer()
+			end
 		end
+
 
 		if(love.keyboard.isDown(self.keys.jump)) then
 			
@@ -497,5 +508,5 @@ end
 
 
 -- done with static
-return Player
+return SnapPlayer
 

@@ -33,8 +33,8 @@ require("PrintDebug")
 require("Random")
 
 -- List of Levels
-local TestLevel = require("TestLevel")
-local SnapGridTestLevel = require("SnapGridTestLevel")
+local TestLevel = require("levels/TestLevel")
+local SnapGridTestLevel = require("levels/SnapGridTestLevel")
 --------------------------
 -- Functions / Callbacks
 --------------------------

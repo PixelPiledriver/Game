@@ -276,22 +276,7 @@ function Player:New(data)
 		self.y = self.y + self.speed
 	end 
 
-	-- Grid Movement
-	-- function object:MoveLeft()
-	-- 	self.x = self.x - SnapGrid.cellWidth
-	-- end 
 
-	-- function object:MoveRight()
-	-- 	self.x = self.x + SnapGrid.cellWidth
-	-- end 
-
-	-- function object:MoveUp()
-	-- 	self.y = self.y - SnapGrid.cellHeight
-	-- end 
-
-	-- function object:MoveDown()
-	-- 	self.y = self.y + SnapGrid.cellHeight
-	-- end 
 
 	-- jump
 	function object:Jump(j)
@@ -423,39 +408,6 @@ function Player:New(data)
 			self:MoveDown()
 			self:SetDirection("down")
 		end
-
-		-- Grid Snap Movement
-		-- if(self.GridMovementTimer:TimeElapsedMs(100)) then			
-		-- 	if(love.keyboard.isDown(self.keys.left)) then
-		-- 		self:MoveLeft()
-		-- 		self:SetDirection("left")
-		-- 		self.GridMovementTimer:ResetTimer()
-		-- 	end
-		-- end 
-
-		-- if(self.GridMovementTimer:TimeElapsedMs(100)) then
-		-- 	if(love.keyboard.isDown(self.keys.right)) then
-		-- 		self:MoveRight()
-		-- 		self:SetDirection("right")
-		-- 		self.GridMovementTimer:ResetTimer()
-		-- 	end
-		-- end 
-
-		-- if(self.GridMovementTimer:TimeElapsedMs(100)) then
-		-- 	if(love.keyboard.isDown(self.keys.up)) then
-		-- 		self:MoveUp()
-		-- 		self:SetDirection("up")
-		-- 		self.GridMovementTimer:ResetTimer()
-		-- 	end
-		-- end 
-
-		-- if(self.GridMovementTimer:TimeElapsedMs(100)) then
-		-- 	if(love.keyboard.isDown(self.keys.down)) then
-		-- 		self:MoveDown()
-		-- 		self:SetDirection("down")
-		-- 		self.GridMovementTimer:ResetTimer()
-		-- 	end
-		-- end
 
 		if(love.keyboard.isDown(self.keys.jump)) then
 			

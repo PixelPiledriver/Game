@@ -20,6 +20,8 @@ local TestLevel = {}
 
 -- On Level Start
 function TestLevel:Load()
+
+	Map:Create() 
 	--Map:ToggleMapDraw()
 	local redRobot = Player:New
 	{
@@ -120,7 +122,7 @@ end
 
 -- On Level Update
 function TestLevel:Update()
-	Map:Update()
+	TestLevelMap:Update()
 end
 
 -- On Level End
