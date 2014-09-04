@@ -29,7 +29,7 @@ function Box:New(data)
 	
 	-- draw
 	object.fill = data.fill or false
-	object.draw = data.draw or false
+	object.draw = data.draw or true
 
 	-- rotation
 	object.angle = data.angle or 0

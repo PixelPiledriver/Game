@@ -43,9 +43,6 @@ function Player:New(data)
 	object.jumpNow = false
 
 
-
-
-
 	object.width = data.width or 32
 	object.height = data.height or 32
 	object.color = data.color or {255,255,255,255}

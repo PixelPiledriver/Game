@@ -141,6 +141,14 @@ function Map:GetTile(x,y)
 	return self.tiles.x[x].y[y]
 end 
 
+function Map:ToggleMapDraw()
+	for x=1, #self.tiles.x do
+		for y=1, #self.tiles.x[x].y do
+ 			Map:GetTile(x,y).box.draw = not Map:GetTile(x,y).box.draw
+		end 
+	end  
+end
+
 function Map:ObjectInTile(obj)
 
 	local x = obj.mapX - self.xStart + 1
@@ -197,7 +205,7 @@ function Map:Update()
 	for x=1, #self.tiles.x do
 		for y=1, #self.tiles.x[x].y do
 
-			local tile = self.tiles.x[x].y[y]
+			local tile = Map:GetTile(x,y)
 			
 			tile:VerticalCushion()
 			tile:Offset()
@@ -207,10 +215,9 @@ function Map:Update()
 
 end 
 
-Map:Create()
-
-
-
-
+-- Map is currently set to be created and draw
+-- To toggle the map draw, require Map.lua and call 
+-- Map:ToggleMapDraw() in your level file
 
 return Map
+

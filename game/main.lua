@@ -1,145 +1,40 @@
-
 -- dis iz the main file nigga!!
 -- dont be fuckin round wit my mainz!!!!!
 
+-- i fucked wit yo mainz - adam
+-- (•_•)
+-- ( •_•)>⌐■-■
+-- (⌐■_■)
+-- DEAL WITH IT
 
 -- Requires --> load and run shit in other files
 
-require("Random")
-require("PixelTexture")
-require("DeltaTime")
-require("PrintDebug")
-require("DebugText")
-local FrameCounter = require("FrameCounter")
-local ObjectUpdater = require("ObjectUpdater")
-local Window = require("Window")
+
+-- Only requires that are globally necessary should be listed here
 local App = require("App")
-local Box = require("Box")
-
-local Map = require("Map")
-
-local Player = require("Player")
-local Sprites = require("Sprites")
 local Camera = require("Camera")
-local Sound = require("Sound")
 local Controller = require("Controller")
-local PlayerSkins = require("PlayerSkins")
 local Color = require("Color")
 local Collision = require("Collision")
 local CollisionManager = require("CollisionManager")
 local CollisionLists = require("CollisionLists")
-local Guns = require("Guns")
-local ParticleSystem = require("ParticleSystem")
-local Particle = require("Particle")
-require("SnapGrid")
+local FrameCounter = require("FrameCounter")
+local ObjectUpdater = require("ObjectUpdater")
+local Sound = require("Sound")
+local Window = require("Window")
 
+--Utility requires
+require("DebugText")
+require("DeltaTime")
 require("Keyboard")
 require("Math")
+require("PixelTexture")
+require("PrintDebug")
+require("Random")
 
---------------
--- Objects
---------------
-
--- will move object loader to own file soon :P
-local redRobot = Player:New
-{
-	name = "redRobot",
-	x = 200,
-	y = 300,
-	
-	frame = Sprites.dude.red.idle,
-	skin = PlayerSkins.red,
-	
-	playerColor = "darkRed",
-	gun = Guns.laserRifle
-}
-
-
-
-local blueRobot = Player:New
-{
-	name = "blueRobot",
-	x = 400,
-	y = 300,
-	
-	frame = Sprites.dude.blue.idle,
-	skin = PlayerSkins.blue,
-	playerColor = "blue",
-	xShootPos = -25,
-	shootDirection = -1,
-
-	keys = 
-	{
-		left = "left",
-		right = "right",
-		up = "up",
-		down = "down",
-		shoot = "=",
-		build = "-",
-		jump = "rctrl"
-	},
-
-	gun = Guns.laserRifle
-}
-
-
---[[
-local explosion = ParticleSystem:New
-{
-	x = 100,
-	y = 100,
-	delay = 10
-}
---]]
-
-
-local explosion2 = ParticleSystem:New
-{
-	x = love.graphics.getWidth() * 0.5 - 32,
-	y = love.graphics.getHeight() * 0.5,
-	particleTable = 
-	{
-		particles = 
-		{
-			Particle.testType2, 
-		},
-		delays = 
-		{
-			0,
-		}
-	}
-
-}
-
-
---[[
-local Greg = Collision:New
-{
-	x = 100,
-	y = 100,
-	width = 32,
-	height = 32,
-	shape = "rect",
-	mouse = true,
-	name = "Greg",
-	collisionList = {"Steve"},
-	draw = false
-}
---]]
-
-local rotBox = Box:New
-{
-	x = 200, 
-	y = 50,
-	width = 32,
-	height = 32,
-	rotatable = true,
-	angle = 45
-}
-
-ObjectUpdater:AddCamera(Camera)
-
-
+-- List of Levels
+local TestLevel = require("TestLevel")
+local SnapGridTestLevel = require("SnapGridTestLevel")
 --------------------------
 -- Functions / Callbacks
 --------------------------
@@ -149,15 +44,10 @@ function love.load()
 	-- graphics setup
 	love.window.setFullscreen(false, "desktop")
 	love.graphics.setBackgroundColor(100,100,100)
-
--- audio testing
---[[	source = Sound.CreateSoundSource("WilhelmScream.ogg")
-	Sound.SetVolume(source, 0.5)
-	print(Sound.GetVolume(source))
-	Sound.ToggleLooping(source)
-	Sound.PlaySource(source)
-]]
-
+	-- manual camera object
+	ObjectUpdater:AddCamera(Camera)
+	-- Load your level here
+	SnapGridTestLevel:Load() 
 end 
 
 
@@ -169,16 +59,8 @@ function love.update(dt)
 	ObjectUpdater:Update()
 	ObjectUpdater:RepeatedInput()
 
-	if(love.keyboard.isDown("1")) then
-		Sound.PlayStreamLoop("SuperMarioWorld.mp3")
-	end
-
 	Controller.Update()
-
 	CollisionManager:Update()
-
-	Map:Update()
-
 end 
 
 
@@ -194,15 +76,11 @@ function love.draw()
 	FrameCounter:Draw()
 	DebugText:Draw()
 	ObjectUpdater:Draw()
-
 end 
-
-
 
 
 -- Notes
 ---------------------------------------
-
 
 --[[
 local pawn2 = Player:New
@@ -257,6 +135,5 @@ local box1 = Box:New
 	y = 150,
 	color = Color.green
 }
-
 
 --]]
