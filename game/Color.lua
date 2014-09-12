@@ -187,6 +187,11 @@ Color.group.ice =
 	"white", "cyan", "blue", "darkBlue"	
 }
 
+Color.group.forest =
+{
+	"white", "yellow", "green", "darkGreen"
+}
+
 Color.group.peppermint =
 {
 	"white", "red", "white", "red", "white", "red", "white", "red", "white", "red",
@@ -196,6 +201,43 @@ Color.group.slowRed =
 {
 	"white", "red"	
 }
+
+Color.group.whiteToBlack =
+{
+	"white", "black"
+}
+
+Color.group.blackToWhite =
+{
+	"black", "white"
+}
+
+Color.group.blackWhiteFlash =
+{
+	"black", "white", "black", "white", "black", "white", "black", "white", "black", "white",	
+}
+
+Color.group.rainbow =
+{
+	"red", "green", "blue", "orange", "purple", "yellow" 
+}
+
+Color.group.pretty = 
+{
+	"white", "pink", "salmon", "darkSalmon", "purple"
+}
+
+Color.group.fire =
+{
+	"white", "yellow", "orange", "red", "darkRed", "black"
+}
+
+Color.group.fire2 =
+{
+	"yellow", "maroon"
+	
+}
+
 
 function Color:Get(name)
 
@@ -345,7 +387,7 @@ end
 
 
 
-
+love.graphics.setBackgroundColor(Color.black)
 
 
 

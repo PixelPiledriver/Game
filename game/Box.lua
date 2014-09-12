@@ -28,7 +28,7 @@ function Box:New(data)
 	object.color = data.color or {255,255,255,255}
 	
 	-- draw
-	object.fill = data.fill or false
+	object.fill = data.fill or true
 	object.draw = data.draw or false
 
 	-- rotation
@@ -138,9 +138,7 @@ function Box:New(data)
 
 	-- rotation velocity
 	function object:Spin()
-
 		self.angle = self.angle + self.spin * 0.01
-
 	end 
 
 

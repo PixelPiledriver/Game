@@ -17,52 +17,35 @@ function ParticleSystem:New(data)
 
 	object.x = data.x or 200
 	object.y = data.y or 200
-	object.delay = data.delay or 10
+
+
+	object.followMouse = data.followMouse or false
 	
 	object.particleTable = data.particleTable or nil
-	object.index = 1
-
-	object.delay = data.delay or 0
-	object.count = 0
-
-	if(object.particleTable) then
-		object.delay = object.particleTable.delays[1]
+	for i=1, #object.particleTable do 
+		object.particleTable[i].count = 0
 	end 
 
-	function object:CreateParticle()
-			
-		local size = Random:MultipleOf(5, 4)
 
-		local p = Particle:New
-		{
-			x = self.x,
-			y = self.y,
-			life = 100,
-			xSpeed = 1,
-			ySpeed = 1,
-			color = Color:Get("blue"),
-			width = size,
-			height = size,
-			angle = 0,
-			fade = 3
-		}
+	object.index = 1
 
-		return
+	object.count = 0
 
-	end
+
+
 
 	function object:CreateParticleFromTable()
 
-		self.particleTable.particles[self.index].x = self.x
-		self.particleTable.particles[self.index].y = self.y
-		local p = Particle:New(self.particleTable.particles[self.index])
+		self.particleTable[self.index].x = self.x
+		self.particleTable[self.index].y = self.y
+		local p = Particle:New(self.particleTable[self.index])
 
 		self.index = self.index + 1
 		self.delay = self.particleTable.delays[self.index]
 
 
 		-- done with all particles in list?
-		if(self.index > #self.particleTable.particles) then
+		if(self.index > #self.particleTable) then
 
 			-- reset back to beginning
 			self.index = 1
@@ -83,7 +66,7 @@ function ParticleSystem:New(data)
 		}
 	end 
 
-	function object:DelayUpdate()
+	function object:DelayTimer()
 
 		self.count = self.count + 1
 
@@ -91,21 +74,45 @@ function ParticleSystem:New(data)
 			self.count = 0
 
 			if(self.particleTable) then 
-				if(#self.particleTable.particles > 0) then
+				if(#self.particleTable > 0) then
 					self:CreateParticleFromTable()
 				end 
 			else
-				self:CreateParticle()	
+				self:CreateParticle(self.particleTable[i].particle)	
 			end 
 			
 		end 
 
 	end 
 
+	function object:ParticleUpdate()
+		for i=1, #self.particleTable do
+			self.particleTable[i].count = self.particleTable[1].count + 1
+
+			if(self.particleTable[i].count >= self.particleTable[i].delay) then
+				self.particleTable[i].particle.x = self.x
+				self.particleTable[i].particle.y = self.y
+				local p = Particle:New(self.particleTable[i].particle)		
+				self.particleTable[i].count = 0
+			end 	
+		
+		end
+	end
+
+	function object:FollowMouse()
+		if(self.followMouse == nil) then
+			return
+		end 
+
+		self.x = love.mouse.getX()
+		self.y = love.mouse.getY()
+
+	end
+
 	function object:Update()
 		
-		self:DelayUpdate()
-		
+		self:ParticleUpdate()
+		self:FollowMouse()
 	end 
 
 
@@ -115,10 +122,59 @@ function ParticleSystem:New(data)
 
 end 
 
+-- Particle Systems
+
+local delay = 0
+ParticleSystem.systems = {}
+
+ParticleSystem.systems.fire1 = 
+{
+	x = love.graphics.getWidth() * 0.5 - 32,
+	y = love.graphics.getHeight() * 0.5,
+	followMouse = true,
+	particleTable = 
+	{
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+	}
+
+}
+
+ParticleSystem.systems.grid1 = 
+{
+	x = love.graphics.getWidth() * 0.5 - 32,
+	y = love.graphics.getHeight() * 0.5,
+	followMouse = true,
+	particleTable = 
+	{
+		{particle = Particle.grid, delay = delay},
+		{particle = Particle.grid, delay = delay},
+		{particle = Particle.grid, delay = delay},
+		{particle = Particle.grid, delay = delay},
+		{particle = Particle.grid, delay = delay},
+		{particle = Particle.grid, delay = delay},
+		{particle = Particle.grid, delay = delay},
+		{particle = Particle.grid, delay = delay},
+		{particle = Particle.grid, delay = delay},
+		{particle = Particle.grid, delay = delay},
+		{particle = Particle.grid, delay = delay},
+		{particle = Particle.grid, delay = delay},
 
 
+	}
+}
 
 return ParticleSystem
+
+
 
 
 

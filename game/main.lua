@@ -33,10 +33,13 @@ local ParticleSystem = require("ParticleSystem")
 local Particle = require("Particle")
 require("Keyboard")
 require("Math")
+local Shape = require("Shape")
 
 --------------
 -- Objects
 --------------
+
+local cross = Shape:New(Shape.cross)
 
 -- will move object loader to own file soon :P
 local redRobot = Player:New
@@ -90,24 +93,7 @@ local explosion = ParticleSystem:New
 }
 --]]
 
-
-local explosion2 = ParticleSystem:New
-{
-	x = love.graphics.getWidth() * 0.5 - 32,
-	y = love.graphics.getHeight() * 0.5,
-	particleTable = 
-	{
-		particles = 
-		{
-			Particle.testType2, 
-		},
-		delays = 
-		{
-			0,
-		}
-	}
-
-}
+local fireBall = ParticleSystem:New(ParticleSystem.systems.grid1)
 
 
 --[[
@@ -176,6 +162,8 @@ function love.update(dt)
 	CollisionManager:Update()
 
 	Map:Update()
+
+	love.graphics.clear()
 
 end 
 

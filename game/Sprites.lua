@@ -47,7 +47,7 @@ local function MakeFrame(data)
 
 	function f:Draw(objectData)
 
-		if(self.drawNone) then
+		if(Sprites.drawNone) then
 			return
 		end 
 
