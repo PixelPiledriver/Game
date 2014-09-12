@@ -28,8 +28,8 @@ function Box:New(data)
 	object.color = data.color or {255,255,255,255}
 	
 	-- draw
-	object.fill = data.fill or true
-	object.draw = data.draw or false
+	object.fill = data.fill or false
+	object.draw = data.draw or true
 
 	-- rotation
 	object.angle = data.angle or 0

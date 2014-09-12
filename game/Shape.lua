@@ -15,11 +15,16 @@ function Shape:New(data)
 
 	local object = {}
 
+	object.x = data.x or 100
+	object.y = data.y or 100
 	object.boxes = {}
 
 	print("stuff")
 
+
 	for i=1, #data.boxes do
+		data.boxes[i].x = object.x + data.boxes[i].x
+		data.boxes[i].y = object.y + data.boxes[i].y
 		object.boxes[#object.boxes+1] = Box:New(data.boxes[i])
 	end 
 
@@ -35,7 +40,6 @@ Shape.cross = Shape:New
 {
 	boxes =
 	{
-		Box:New
 		{
 		  x = 100,
 		  y = 100,
@@ -48,7 +52,6 @@ Shape.cross = Shape:New
 			draw = true
 		},
 
-		Box:New
 		{
 			x = 100,
 		  y = 100,
@@ -63,6 +66,9 @@ Shape.cross = Shape:New
 
 	}
 }
+
+
+
 
 
 return Shape 
