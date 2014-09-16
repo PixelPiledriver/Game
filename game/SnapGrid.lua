@@ -9,6 +9,7 @@ local Color = require("Color")
 
 local SnapGrid = {}
 
+SnapGrid.board = {}
 SnapGrid.cellWidth = 37
 SnapGrid.cellHeight = 22
 
@@ -27,13 +28,15 @@ function SnapGrid:CreateCell(data)
 		height = data.height,
 		color = Color:Get("red"),
 		fill = false
-	}	
+	}
+	return gridCell
 end
 
 function SnapGrid:CreateBoard()
 	for ix=1, self.boardWidth do
 		for iy=1, self.boardHeight do
-			self:CreateCell
+			-- Create cell and append it to the table of cells in a board
+			self.board[#self.board + 1] = self:CreateCell
 			{
 				x = self.x + (ix * SnapGrid.cellWidth),
 				y = self.y + (iy * SnapGrid.cellHeight),

@@ -28,16 +28,21 @@ local SnapPlayer = {}
 -- create instance
 function SnapPlayer:New(data)
 
-	----------
+	---------- 
 	-- Create
 	----------
 	local object = {}
 
 	object.sprite = data.sprite or nil
 
+
+
 	object.x = data.x or 100
 	object.y = data.y or 100
 	object.z = 0
+
+	object.gridX = data.gridX or 1
+	object.gridY = data.gridY or 1
 	
 	object.gravity = 1
 
@@ -240,7 +245,6 @@ function SnapPlayer:New(data)
 	end 
 
 	function object:Draw()
-
 		-- what type of graphic does the object have
 		-- this is bullshit and needs to be re worked
 		if(self.frame) then
@@ -248,9 +252,6 @@ function SnapPlayer:New(data)
 		elseif(self.animation) then
 			self.animation:Draw(self)
 		end 
-
-
-
 	end 
 
 
@@ -376,32 +377,27 @@ function SnapPlayer:New(data)
 	-- only used for isDown=pressed 
 	-- not for button down or up
 	function object:RepeatedInput()
-		-- Grid Snap Movement
+		-- Grid Snap Movement		
 		if(self.GridMovementTimer:TimeElapsedMs(100)) then			
+			--If there is a tile to the immediate left of the player, allow them to mov
 			if(love.keyboard.isDown(self.keys.left)) then
 				self:MoveLeft()
 				self:SetDirection("left")
 				self.GridMovementTimer:ResetTimer()
 			end
-		end 
 
-		if(self.GridMovementTimer:TimeElapsedMs(100)) then
 			if(love.keyboard.isDown(self.keys.right)) then
 				self:MoveRight()
 				self:SetDirection("right")
 				self.GridMovementTimer:ResetTimer()
 			end
-		end 
 
-		if(self.GridMovementTimer:TimeElapsedMs(100)) then
 			if(love.keyboard.isDown(self.keys.up)) then
 				self:MoveUp()
 				self:SetDirection("up")
 				self.GridMovementTimer:ResetTimer()
 			end
-		end 
 
-		if(self.GridMovementTimer:TimeElapsedMs(100)) then
 			if(love.keyboard.isDown(self.keys.down)) then
 				self:MoveDown()
 				self:SetDirection("down")

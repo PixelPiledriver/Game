@@ -3,12 +3,10 @@
 -- Class for timer objects
 -- writen by Adam Balk, August 2014
 --*******************************************************************--
-
 local SnapGrid = require("SnapGrid") 
 local SnapPlayer = require("SnapPlayer")
 local Sprites = require("Sprites")
 local PlayerSkins = require("PlayerSkins")
-
 local Guns = require("Guns")
 
 local SnapGridTestLevel = {}
