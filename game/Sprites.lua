@@ -14,7 +14,7 @@ Sprites.data = {}
 -----------------------------
 -- Variables
 -----------------------------
--- stops all spritesfrom drawing
+-- stops all sprites from drawing
 Sprites.drawNone = false
 
 ---------------------------------------------

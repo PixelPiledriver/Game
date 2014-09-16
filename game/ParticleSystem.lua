@@ -15,6 +15,9 @@ function ParticleSystem:New(data)
 	local object = {}
 
 
+	object.name = data.name or "???"
+	object.type = "particleSystem"
+
 	object.x = data.x or 200
 	object.y = data.y or 200
 
@@ -126,6 +129,21 @@ end
 
 local delay = 0
 ParticleSystem.systems = {}
+
+
+ParticleSystem.systems.objCount =
+{
+	name = "objCounter",
+	x = love.graphics.getWidth() * 0.5 - 32,
+	y = love.graphics.getHeight() * 0.5,
+	followMouse = true,
+
+	particleTable = 
+	{
+		{particle = Particle.fire1, delay = 100},
+	}
+}
+
 
 ParticleSystem.systems.fire1 = 
 {

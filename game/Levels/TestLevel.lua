@@ -15,6 +15,8 @@ local PlayerSkins = require("PlayerSkins")
 local ParticleSystem = require("ParticleSystem")
 local Sprites = require("Sprites")
 local ObjectUpdater = require("ObjectUpdater")
+local Shape = require("Shape")
+
 
 -- Table to hold Level objects
 local TestLevel = {}
@@ -22,35 +24,28 @@ local TestLevel = {}
 -- On Level Start
 function TestLevel:Load()
 
-	print("faggot")
-	local Shape = require("Shape")
+	
 
 	--------------
 	-- Objects
 	--------------
-
-	local cross = Shape:New(Shape.cross)
-
-
-
-
-
-
-	local fireBall = ParticleSystem:New(ParticleSystem.systems.fire1)
+	local box = Box:New
+	{
+		name = "BoxBuddy",
+		x = 100,
+		y = 100
+	}
 
 
-
-
-
-
-	ObjectUpdater:AddCamera(Camera)
-
+	--local cross = Shape:New(Shape.cross)
+	--local fireBall = ParticleSystem:New(ParticleSystem.systems.objCount)
+	--ObjectUpdater:AddCamera(Camera)
 
 end
 
 -- On Level Update
 function TestLevel:Update()
-	Map:Update()
+	--Map:Update()
 end
 
 -- On Level End

@@ -16,6 +16,9 @@ function Camera:New()
 	local object = {}
 end 
 
+
+Camera.name = "Camera"
+
 Camera.pos = {x=0, y=0}
 Camera.rot = 0
 Camera.zoom = {x=1, y=1}

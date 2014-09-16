@@ -70,12 +70,14 @@ function Player:New(data)
 	object.xStick = 0
 	object.yStick = 0
 	
-	object.name = data.name
+	object.name = data.name or "???"
+	object.type = "player"
+
+
 	object.collisionList = CollisionLists[object.name]
 
 	object.skin = data.skin
-	object.type = "player"
-
+	
 	object.health =  Health:New{}
 
 	object.mapX = 0

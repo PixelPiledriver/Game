@@ -13,7 +13,6 @@
 -- Only requires that are globally necessary should be listed here
 local App = require("App")
 local Map = require("Map")
-
 local Camera = require("Camera")
 local Controller = require("Controller")
 local Color = require("Color")
@@ -24,6 +23,7 @@ local FrameCounter = require("FrameCounter")
 local ObjectUpdater = require("ObjectUpdater")
 local Sound = require("Sound")
 local Window = require("Window")
+local Graphics = require("Graphics")
 
 --Utility requires
 require("DebugText")
@@ -31,13 +31,13 @@ require("DeltaTime")
 require("Keyboard")
 require("Math")
 
-require("PixelTexture")
+--require("PixelTexture")
 require("PrintDebug")
 require("Random")
 
 -- List of Levels
 local TestLevel = require("levels/TestLevel")
-local SnapGridTestLevel = require("levels/SnapGridTestLevel")
+--local SnapGridTestLevel = require("levels/SnapGridTestLevel")
 
 
 --------------------------
@@ -47,12 +47,11 @@ local SnapGridTestLevel = require("levels/SnapGridTestLevel")
 -- runs once on startup
 function love.load()
 
-	-- graphics setup
-	love.window.setFullscreen(false, "desktop")
-	love.graphics.setBackgroundColor(100,100,100)
+	-- yep
+	Graphics:Setup()
 
 	-- manual camera object
-	ObjectUpdater:AddCamera(Camera)
+	--ObjectUpdater:AddCamera(Camera)
 
 	-- Load your level here
 	TestLevel:Load() 
@@ -92,61 +91,3 @@ function love.draw()
 end 
 
 
--- Notes
----------------------------------------
-
---[[
-local pawn2 = Player:New
-{
-	x = 400,
-	y = 400,
-	color = {1,1,1,1}, 
-	animation = Sprites.pawn.animation1,
-
-	keys = 
-	{
-		left = "left",
-		right = "right",
-		up = "up",
-		down = "down"
-	}
-
-}
-
---]]
-
---[[
-local box1 = Box:New
-{
-	x = 200,
-	y = 200
-}
---]]
-
-
-
-
-
---[[
-
-local Steve = Collision:New
-{
-	x = 200,
-	y = 200,
-	width = 32,
-	height = 32,
-	shape = "rect",
-	color = Color.blue,
-	name = "Steve",
-	collisionList = {"Greg"}
-}
-
-
-local box1 = Box:New
-{
-	x = 150,
-	y = 150,
-	color = Color.green
-}
-
---]]

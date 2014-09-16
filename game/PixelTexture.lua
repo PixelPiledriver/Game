@@ -14,6 +14,9 @@ function PixelTexture:New(data)
 
 	local object = {}
 
+	object.name = data.name or "???"
+	object.objType = "PixelTexture"
+
 	object.image = love.image.newImageData(data.width, data.height)
 
 
@@ -60,6 +63,7 @@ end
 -- Test Shit
 ----------------------
 
+--[[
 local p = PixelTexture:New
 {
 	width = 32,
@@ -90,7 +94,7 @@ p:Encode
 	type = "png"
 }
 
-
+--]]
 
 
 -- return static

@@ -15,8 +15,10 @@ function Box:New(data)
 	local object = {}
 
 	-- position
-	object.x = data.x or 100
-	object.y = data.y or 100
+	object.x = data.x or 0
+	object.y = data.y or 0
+	object.xStart = object.x
+	object.yStart = object.y
 	object.speed = data.speed or 5
 	object.move = false
 
@@ -47,6 +49,10 @@ function Box:New(data)
 		rotLeft = data.rotatable and data.keys and data.keys.rotLeft or "q",
 		rotRight = data.rotatable and data.keys and data.keys.rotLeft or "e",
 	}
+
+	-- other
+	object.name = data.name or "*Nameless*"
+	object.objType = "Box"
 
 
 	-------------

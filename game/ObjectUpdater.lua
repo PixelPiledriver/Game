@@ -16,13 +16,11 @@ ObjectUpdater.destroyObjects = false
 -- add a new object to the list
 -- {a,b,c,...} --> table of objects
 function ObjectUpdater:Add(objects)
+
 	for i=1, #objects do
 		self.objects[#self.objects+1] = objects[i]
 	end 
 
-	-- need to put in a real object counter
-	-- use the fuckin in game print component
-	--print(#self.objects)
 end 
 
 -- destroy a single object
@@ -88,8 +86,14 @@ function ObjectUpdater:PrintDebugText()
 		{text = "", obj = "ObjectUpdater"},
 		{text = "ObjectUpdater"},
 		{text = "------------------"},
-		{text = "Objs: " .. #self.objects}
+		{text = "Objs: " .. #self.objects},
+		{text = "------------------"},
 	}
+
+	for i=1, #self.objects do
+		DebugText:Text((self.objects[i].name or "*no .name*") .. " -- " .. self.objects[i].objType or "*no .objType*")
+	end 
+
 end 
 
 -- update all objects
@@ -196,6 +200,7 @@ function ObjectUpdater:Draw()
 
 
 end 
+
 
 
 

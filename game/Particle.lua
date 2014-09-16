@@ -9,12 +9,24 @@ local Color = require("Color")
 local Random = require("Random")
 local DataPass = require("DataPass")
 local Value = require("Value")
+local Shape = require("Shape")
+
+
+
+
 local Particle = {}
+
 
 
 function Particle:New(data)
 
 	local object = {}
+
+	-----------------------------
+	-- Other
+	-----------------------------
+	object.name = data.name or "???"
+	object.type = "particle"
 
 	-----------------------------
 	-- Pos
@@ -28,7 +40,6 @@ function Particle:New(data)
 		local vert = data.verts.Get()
 		object.x = data.x + vert[1] * data.vertSpace
 		object.y = data.y + vert[2] * data.vertSpace
-		
 	end 
 
 	-----------------------------
@@ -47,7 +58,6 @@ function Particle:New(data)
 	object.scale.y = data.scale.y and data.scale.y.Get() or 1
 	object.scale.min = 0
 	object.scale.max = data.scale.max or 10
-
 
 	----------------------------
 	-- Spin
@@ -86,6 +96,7 @@ function Particle:New(data)
 	-----------------------------
 	-- Box
 	-----------------------------
+
 	object.box = Box:New
 	{
 		x = object.x,
@@ -99,6 +110,11 @@ function Particle:New(data)
 		spin = object.spin,
 		draw = true
 	}
+
+	object.shape = Shape:Get("cross")
+
+	
+
 
 	-----------------------------
 	-- Fade
@@ -186,8 +202,18 @@ function Particle:New(data)
 		self.x = self.x + (self.speed * self.xSpeed)
 		self.y = self.y + (self.speed * self.ySpeed)
 
-		self.box.x = self.x
-		self.box.y = self.y
+		if(self.box) then
+			self.box.x = self.x
+			self.box.y = self.y
+		end 
+
+	
+		if(self.shape) then 
+			self.shape.x = self.x
+			self.shape.y = self.y
+			self.shape:SetPos()
+		end
+
 
 		self.speed = self.speed * self.speedDamp
 	end 
@@ -226,6 +252,7 @@ function Particle:New(data)
 
 		if(self.life <= 0) then
 			ObjectUpdater:Destroy(self.box)
+			ObjectUpdater:Destroy(self.shape)
 			ObjectUpdater:Destroy(self)
 		end 
 

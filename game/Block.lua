@@ -18,6 +18,9 @@ function Block:New(data)
 
 	local object = {}
 
+	object.name = data.name or "???"
+	object.type = "block"
+
 	object.x = data.x
 	object.y = data.y
 	object.xIndex = data.xIndex
@@ -30,7 +33,7 @@ function Block:New(data)
 	object.buildTime = data.buildTime or 100
 	object.completion = 0
 	object.collisionList = data.collisionList or nil
-	object.type = "block"
+	
 
 	object.health = Health:New{}
 
