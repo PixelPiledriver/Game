@@ -51,7 +51,7 @@ function love.load()
 	Graphics:Setup()
 
 	-- manual camera object
-	--ObjectUpdater:AddCamera(Camera)
+	ObjectUpdater:AddCamera(Camera)
 
 	-- Load your level here
 	TestLevel:Load() 

@@ -162,6 +162,12 @@ ParticleSystem.systems.fire1 =
 		{particle = Particle.fire1, delay = delay},
 		{particle = Particle.fire1, delay = delay},
 		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+		{particle = Particle.fire1, delay = delay},
+
+	
 	}
 
 }

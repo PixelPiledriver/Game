@@ -18,6 +18,10 @@ function Collision:New(data)
 	-- Variables
 	-----------------
 
+	-- other
+	object.name = data.name or "???"
+	object.type = "collision"
+
 	-- pos
 	object.x = data.x or -100
 	object.y = data.y or -100

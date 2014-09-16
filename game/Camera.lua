@@ -17,7 +17,8 @@ function Camera:New()
 end 
 
 
-Camera.name = "Camera"
+Camera.name = "MainCam"
+Camera.type = "Camera"
 
 Camera.pos = {x=0, y=0}
 Camera.rot = 0

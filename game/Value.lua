@@ -1,5 +1,5 @@
 -- Value.lua
--- create values using useful functions pre wrapped by named
+-- create values using useful functions pre wrapped by name
 
 local Random = require("Random")
 
@@ -139,3 +139,6 @@ return Value
 
 -- every value type needs a get function
 
+-- make sense?
+-- no?
+-- well fuck off then!!!

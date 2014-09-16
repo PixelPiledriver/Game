@@ -4,7 +4,7 @@ local FrameCounter = {}
 
 
 -- switches
-FrameCounter.active = false
+FrameCounter.active = true
 FrameCounter.printDeltaTime = false
 FrameCounter.printLoveFPS = true
 

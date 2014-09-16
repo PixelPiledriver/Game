@@ -13,6 +13,9 @@ function Button:New(data)
 	-- Variables
 	----------------
 
+	object.name = data.name or "???"
+	object.type = "button"
+
 	object.x = data.x or 0
 	object.y = data.y or 0
 

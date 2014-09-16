@@ -37,9 +37,9 @@ function TestLevel:Load()
 	}
 
 
-	--local cross = Shape:New(Shape.cross)
-	--local fireBall = ParticleSystem:New(ParticleSystem.systems.objCount)
-	--ObjectUpdater:AddCamera(Camera)
+--	local cross = Shape:New(Shape.cross)
+	local fireBall = ParticleSystem:New(ParticleSystem.systems.fire1)
+	ObjectUpdater:AddCamera(Camera)
 
 end
 

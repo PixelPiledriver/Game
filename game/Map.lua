@@ -35,6 +35,9 @@ function Map:MakeTile(data)
 
 	local object = {}
 
+	object.name = data.name or "???"
+	object.type = "tile"
+
 	object.box = Box:New
 	{
 		x = data.x,

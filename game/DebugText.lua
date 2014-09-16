@@ -6,26 +6,26 @@ local Color = require("Color")
 DebugText = {}
 
 -- on or off
-DebugText.active = true
+DebugText.active = false
 
 -- types
 -------------
 DebugText.type = 
 {
-	Player = true,
-	Bullet = true,
-	Block = true,
-	Controller = true,
-	Window = true,
+	Player = false,
+	Bullet = false,
+	Block = false,
+	Controller = false,
+	Window = false,
 	ObjectUpdater = true,
-	CollisionManager = true,
-	Map = true,
-	ParticleSystem = true,
-	Camera = true,
-	Particle = true,
-	Shape = true,
+	CollisionManager = false,
+	Map = false,
+	ParticleSystem = false,
+	Camera = false,
+	Particle = false,
+	Shape = false,
 		
-	Generic = true,
+	Generic = false,
 }
 
 

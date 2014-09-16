@@ -14,6 +14,9 @@ function Health:New(data)
 	--------------
 	local object = {}
 
+	object.name = data.name or "???"
+	object.type = "health"
+
 	object.max = data.max or 100
 	object.min = data.min or 0
 	object.start = data.start or 100

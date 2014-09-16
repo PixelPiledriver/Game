@@ -178,6 +178,7 @@ function Particle:New(data)
 	-------------------------
 	object.life = data.life.Get() or 100
 	object.lifeStart = object.life
+	object.lifeSpeed = data.lifeSpeed.Get() or 1
 	
 
 
@@ -248,11 +249,18 @@ function Particle:New(data)
 
 
 	function object:Life()
-		self.life = self.life - 1
+		self.life = self.life - self.lifeSpeed
 
 		if(self.life <= 0) then
+
+			self.life = 0
+
 			ObjectUpdater:Destroy(self.box)
-			ObjectUpdater:Destroy(self.shape)
+			
+			if(self.shape) then
+				ObjectUpdater:Destroy(self.shape)
+			end
+
 			ObjectUpdater:Destroy(self)
 		end 
 
@@ -527,6 +535,7 @@ Particle.grid =
 Particle.fire1 =
 {
 	life = Value:Range{min = 200, max = 200},
+	lifeSpeed = Value:Range{min = 1, max = 5},
 	width = Value:Range{min= 8, max = 32},
 	height = Value:Random{values = {2, 22, 34, 12}},
 	spin = Value:Range{min = 10, max = 20},
@@ -569,7 +578,7 @@ Particle.fire1 =
 			Color.group.fire,
 			Color.group.fire,
 			Color.group.fire,
-			Color.group.fire2			
+			Color.group.fire2,
 		}
 	},
 

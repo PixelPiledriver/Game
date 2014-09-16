@@ -13,7 +13,9 @@ function Guns:New(data)
 
 	local object = {}
 
-	object.name = data.name or "Gun"
+	object.name = data.name or "???"
+	object.type = "gun"
+
 	object.bullet = data.bullet or BulletTypes.laser
 	object.maxRateOfFire = data.rateOfFire or 10
 	object.rateOfFire = 0

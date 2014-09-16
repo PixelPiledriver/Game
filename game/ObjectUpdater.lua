@@ -81,6 +81,7 @@ end
 
 
 function ObjectUpdater:PrintDebugText()
+
 	DebugText:TextTable
 	{
 		{text = "", obj = "ObjectUpdater"},
@@ -91,7 +92,7 @@ function ObjectUpdater:PrintDebugText()
 	}
 
 	for i=1, #self.objects do
-		DebugText:Text((self.objects[i].name or "*no .name*") .. " -- " .. self.objects[i].objType or "*no .objType*")
+	--	DebugText:Text((self.objects[i].name or "*no .name*") .. " -- " .. (self.objects[i].type or "*no .type*"))
 	end 
 
 end 

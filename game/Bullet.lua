@@ -13,6 +13,9 @@ function Bullet:New(data)
 
 	local object = {}
 
+	object.name = data.name or "???"
+	object.type = "bullet"
+
 	--------------
 	-- Variables
 	--------------
@@ -53,7 +56,7 @@ function Bullet:New(data)
 		object.lifespan = data.lifespan or -1
 	end
 
-	object.type = "bullet"
+
 
 
 	--------------

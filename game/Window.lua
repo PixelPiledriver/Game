@@ -10,8 +10,7 @@ local Window = {}
 
 
 Window.name = "GameWindow"
-Window.objType = "Window"
-
+Window.type = "Window"
 
 
 function Window:PrintDebugText()

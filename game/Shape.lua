@@ -90,13 +90,15 @@ end
 
 Shape.cross = 
 {
+	name = "cross",
 	boxes =
 	{
 		{
-			x = 4.5,
+			name = "cross1",
+			x = 9.5,
 			y = 0,
 			width = 1,
-			height = 10,
+			height = 20,
 			color = Color:Get("blue"),
 
 			rotatable = true,
@@ -106,9 +108,10 @@ Shape.cross =
 		},
 
 		{
+			name = "cross2",
 			x = 0,
-			y = 4.5,
-			width = 10,
+			y = 9.5,
+			width = 20,
 			height = 1,
 			color = Color:Get("darkBlue"),
 			spin = 3, 
