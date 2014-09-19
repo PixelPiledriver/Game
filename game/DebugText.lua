@@ -6,7 +6,7 @@ local Color = require("Color")
 DebugText = {}
 
 -- on or off
-DebugText.active = false
+DebugText.active = true
 
 -- types
 -------------
@@ -17,7 +17,7 @@ DebugText.type =
 	Block = false,
 	Controller = false,
 	Window = false,
-	ObjectUpdater = true,
+	ObjectUpdater = false,
 	CollisionManager = false,
 	Map = false,
 	ParticleSystem = false,
@@ -25,6 +25,7 @@ DebugText.type =
 	Particle = false,
 	Shape = false,
 		
+	SnapPlayer = true,
 	Generic = false,
 }
 

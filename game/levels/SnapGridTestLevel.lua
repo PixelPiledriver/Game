@@ -13,14 +13,22 @@ local Guns = require("Guns")
 
 local SnapGridTestLevel = {}
 
+
+
 function SnapGridTestLevel:Load()
 	SnapGrid:CreateBoard()
+
+	local gridX = 1
+	local gridY = 1
 	local redRobot = SnapPlayer:New
 	{
 		name = "redRobot",
-		x = 40,
-		y = 33,
-		
+
+		gridX = gridX,
+		gridY = gridY,
+
+--		x = gridX * SnapGrid.cellWidth,
+--		y = gridY * SnapGrid.cellHeight,
 		frame = Sprites.dude.red.idle,
 		skin = PlayerSkins.red,
 		

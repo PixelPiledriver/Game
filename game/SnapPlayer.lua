@@ -1,6 +1,5 @@
 -- basic object with sprite, input, etc
 
-
 local ObjectUpdater = require("ObjectUpdater")
 local Animation = require("Animation")
 local Controller = require("Controller")
@@ -35,14 +34,12 @@ function SnapPlayer:New(data)
 
 	object.sprite = data.sprite or nil
 
-
-
-	object.x = data.x or 100
-	object.y = data.y or 100
+	object.x = data.x or SnapGrid.x + SnapGrid.cellWidth -- This is a dumb hack. Currently necessary to allign SnapPlayer with SnapGrid 4sumrzn 
+	object.y = data.y or SnapGrid.y
 	object.z = 0
 
-	object.gridX = data.gridX or 1
-	object.gridY = data.gridY or 1
+	object.gridX = data.gridX or 0
+	object.gridY = data.gridY or 0
 	
 	object.gravity = 1
 
@@ -189,15 +186,11 @@ function SnapPlayer:New(data)
 		
 		DebugText:TextTable
 		{
-			{text = "", obj = "Player" },
-			{text = "Name: " .. self.name},
+			{text = "", obj = "SnapPlayer" },
 			{text = "X: " .. self.x},
 			{text = "Y: " .. self.y},
-			{text = "Z: " .. self.z},
-			{text = "HP:" ..self.health.hp},
-			{text = "Gun: " .. self.gun.name},
-			{text = "Direction: " .. self.direction},
-			{text = "Map { " .. self.mapX .. ", " .. self.mapY .. "}"},
+			{text = "gridX: " .. self.gridX},
+			{text = "gridY: " .. self.gridY}
 		}
 	end 
 
@@ -261,19 +254,31 @@ function SnapPlayer:New(data)
 
 	-- Grid Movement
 	function object:MoveLeft()
-		self.x = self.x - SnapGrid.cellWidth
+		if(self.gridX > 1) then
+			self.gridX = self.gridX - 1
+			self.x = self.x - SnapGrid.cellWidth
+		end
 	end 
 
 	function object:MoveRight()
-		self.x = self.x + SnapGrid.cellWidth
+		if(self.gridX < SnapGrid.boardWidth) then
+			self.gridX = self.gridX + 1
+			self.x = self.x + SnapGrid.cellWidth
+		end
 	end 
 
 	function object:MoveUp()
-		self.y = self.y - SnapGrid.cellHeight
+		if(self.gridY > 1) then
+			self.gridY = self.gridY - 1
+			self.y = self.y - SnapGrid.cellHeight
+		end
 	end 
 
 	function object:MoveDown()
-		self.y = self.y + SnapGrid.cellHeight
+		if(self.gridY < SnapGrid.boardHeight) then
+			self.gridY = self.gridY + 1
+			self.y = self.y + SnapGrid.cellHeight
+		end
 	end 
 
 	-- jump

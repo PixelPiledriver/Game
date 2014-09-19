@@ -9,7 +9,6 @@
 
 -- Requires --> load and run shit in other files
 
-
 -- Only requires that are globally necessary should be listed here
 local App = require("App")
 local Map = require("Map")
@@ -31,7 +30,6 @@ require("DeltaTime")
 require("Keyboard")
 require("Math")
 
---require("PixelTexture")
 require("PrintDebug")
 require("Random")
 
