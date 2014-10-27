@@ -17,13 +17,14 @@ DebugText.type =
 	Block = false,
 	Controller = false,
 	Window = false,
-	ObjectUpdater = true,
+	ObjectUpdater = false,
 	CollisionManager = false,
 	Map = false,
 	ParticleSystem = false,
 	Camera = false,
 	Particle = false,
 	Shape = false,
+	SinCounter = true,
 		
 	Generic = false,
 }

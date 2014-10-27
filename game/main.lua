@@ -38,6 +38,7 @@ require("Random")
 -- List of Levels
 local TestLevel = require("levels/TestLevel")
 --local SnapGridTestLevel = require("levels/SnapGridTestLevel")
+local PixelDrawLevel = require("levels/PixelDrawLevel")
 
 
 --------------------------
@@ -54,7 +55,8 @@ function love.load()
 	ObjectUpdater:AddCamera(Camera)
 
 	-- Load your level here
-	TestLevel:Load() 
+	PixelDrawLevel:Load() 
+	--TestLevel:Load()
 end 
 
 

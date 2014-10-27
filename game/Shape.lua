@@ -80,8 +80,10 @@ end
 -- Static Functions
 -----------------------
 
-function Shape:Get(shapeName)
-	return self:New(self[shapeName])
+function Shape:Get(data)
+	self[data.shapeName].x = data.x or 0
+	self[data.shapeName].y = data.y or 0
+	return self:New(self[data.shapeName])
 end 
 
 -----------------------
@@ -122,6 +124,8 @@ Shape.cross =
 
 	}
 }
+
+
 
 
 

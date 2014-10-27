@@ -189,7 +189,7 @@ function Player:New(data)
 			{text = "X: " .. self.x},
 			{text = "Y: " .. self.y},
 			{text = "Z: " .. self.z},
-			{text = "HP:" ..self.health.hp},
+			{text = "HP:" .. self.health.hp},
 			{text = "Gun: " .. self.gun.name},
 			{text = "Direction: " .. self.direction},
 			{text = "Map { " .. self.mapX .. ", " .. self.mapY .. "}"},

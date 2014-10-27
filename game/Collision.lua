@@ -64,6 +64,13 @@ function Collision:New(data)
 	object.vertCenter = data.vertCenter or false
 	object.horzCenter = data.horzCenter or false
 
+	-- draw
+	object.draw = data.draw
+	if(object.draw == nil) then
+		object.draw = true
+	end 
+
+
 	
 	-----------------
 	-- Functions
@@ -118,7 +125,7 @@ function Collision:New(data)
 	function object:Draw()
 
 		-- show?
-		if(self.visible == false) then
+		if(self.draw == false) then
 			return
 		end 
 

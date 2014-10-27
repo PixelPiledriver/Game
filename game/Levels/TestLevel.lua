@@ -16,7 +16,9 @@ local ParticleSystem = require("ParticleSystem")
 local Sprites = require("Sprites")
 local ObjectUpdater = require("ObjectUpdater")
 local Shape = require("Shape")
-
+local Polygon = require("Polygon")
+local Color = require("Color")
+local SinCounter = require("SinCounter")
 
 -- Table to hold Level objects
 local TestLevel = {}
@@ -29,18 +31,58 @@ function TestLevel:Load()
 	--------------
 	-- Objects
 	--------------
-	local box = Box:New
+	local box1 = Box:New
 	{
 		name = "BoxBuddy",
 		x = 100,
 		y = 100
 	}
 
+	local box2 = Box:New
+	{
+		x = 200,
+		y = 200,
+		xScale = 1,
+		yScale = 1,
 
---	local cross = Shape:New(Shape.cross)
+		spin = 0
+	}
+
+
+	--local cross = Shape:New(Shape.cross)
+
 	local fireBall = ParticleSystem:New(ParticleSystem.systems.fire1)
+
 	ObjectUpdater:AddCamera(Camera)
 
+	--local sc = SinCounter:New{speed = 0.01}
+
+
+	local lerpTest = Math:Lerp
+	{
+		a = -10,
+		b = 10,
+		t = 0
+	}
+
+	print(lerpTest)
+
+--[[
+	local poly = Polygon:New
+	{
+		color = Color:Get("darkBlue"),
+		fill = false,
+		verts =
+		{
+			{x=0, y=0},
+			{x=32, y=0},
+			{x=32, y=32},
+			{x=100, y=100},
+			{x=23, y=0}
+		}
+	}
+--]]
+	
 end
 
 -- On Level Update

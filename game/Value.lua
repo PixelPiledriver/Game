@@ -142,3 +142,9 @@ return Value
 -- make sense?
 -- no?
 -- well fuck off then!!!
+
+
+-- need to write a get function that covers whether or not the value is a table or just a normal value
+-- something like:
+-- Value:Get(var) --> return (var and (#var > 0) and var:get) or (var and var) or nill
+-- that seems about right, just need to test it

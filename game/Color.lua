@@ -253,7 +253,7 @@ function Color:Get(name)
 		Color[name][4]
 	}
 	
-	return copy
+	return copy, name
 end
 
 -- compare two colors for equality
@@ -364,7 +364,7 @@ function Color:Clamp(data)
 
 end 
 
---{a, b, p}
+--{a, b, t}
 function Color:Lerp(data)
 
 	local newColor = {}

@@ -167,10 +167,24 @@ ParticleSystem.systems.fire1 =
 		{particle = Particle.fire1, delay = delay},
 		{particle = Particle.fire1, delay = delay},
 
-	
+
 	}
 
 }
+
+ParticleSystem.systems.flip = 
+{
+	x = love.graphics.getWidth() * 0.5 - 32,
+	y = love.graphics.getHeight() * 0.5,
+	followMouse = true,
+	particleTable = 
+	{
+		{particle = Particle.flipper, delay = delay},
+	}
+}
+
+
+
 
 ParticleSystem.systems.grid1 = 
 {

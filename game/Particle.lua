@@ -60,6 +60,14 @@ function Particle:New(data)
 	object.scale.max = data.scale.max or 10
 
 	----------------------------
+	-- Flip
+	----------------------------
+	object.xFlip = data.xFlip and data.xFlip:Get() or 0
+	object.yFlip = data.yFlip and data.yFlip:Get() or 0
+	object.xFlipDamp = data.xFlipDamp and data.xFlipDamp:Get() or 0
+	object.yFlipDamp = data.yFlipDamp and data.yFlipDamp:Get() or 0
+
+	----------------------------
 	-- Spin
 	----------------------------
 	object.spin = data.spin and data.spin.Get() or 0
@@ -108,10 +116,12 @@ function Particle:New(data)
 		angle = object.angle,
 		rotatable = true,
 		spin = object.spin,
-		draw = true
+		draw = true,
+		xFlip = object.xFlip,
+		yFlip = object.yFlip,
 	}
 
-	object.shape = Shape:Get("cross")
+	--object.shape = Shape:Get("cross")
 
 	
 
@@ -284,7 +294,7 @@ function Particle:New(data)
 			
 			if(self.inverseFade == true) then
 				value = 255 - value
-				print(self.alphaStart)
+				
 				--value = self.alphaStart - (value * (self.alphaStart/255))
 			end 
 
@@ -424,6 +434,8 @@ function Particle:New(data)
 		self.box.spin = self.box.spin * self.spinDamp
 	end 
 
+	function object:Flip()
+	end
 
 	function object:Update()
 		self:Move()
@@ -433,6 +445,7 @@ function Particle:New(data)
 		self:RotDirection()
 		self:Scale()
 		self:Spin()
+		self:Flip()
 	end 
 
 	function object:PrintDebugText()
@@ -452,6 +465,17 @@ function Particle:New(data)
 		}
 
 	end
+
+	function object:Destroy()
+
+		if(self.box) then
+			ObjectUpdater:Destroy(self.box)
+		end 
+
+		if(self.shape) then
+			ObjectUpdater:Destroy(self.shape)
+		end
+	end 
 
 
 	ObjectUpdater:Add{object}
@@ -530,8 +554,6 @@ Particle.grid =
 	interpolateColor = true
 }
 
-
-
 Particle.fire1 =
 {
 	life = Value:Range{min = 200, max = 200},
@@ -552,6 +574,12 @@ Particle.fire1 =
 	rotDirection = Value:Range{min = -500, max = 500},
 	rotDirectionLerp = {speed = Value:Value(0.005), angle = Value:Value(270)},
 	fadeWithLife = true,
+	xFlip = Value:FloatRange{min = 0, max = 0.4},
+	yFlip = Value:FloatRange{min = 0, max = 0.4},
+	xFlipDamp = Value:FloatRange{min = 0.92, max = 0.98},
+	yFlipDamp = Value:FloatRange{min = 0.92, max = 0.98},
+
+
 
 	scale = 
 	{
@@ -584,6 +612,63 @@ Particle.fire1 =
 
 	interpolateColor = true
 }
+
+
+Particle.flipper =
+{
+	life = Value:Range{min = 200, max = 200},
+	lifeSpeed = Value:Range{min = 1, max = 5},
+	width = Value:Range{min= 8, max = 32},
+	height = Value:Random{values = {2, 22, 34, 12}},
+	spin = Value:Range{min = 10, max = 20},
+	spinDamp = Value:FloatRange{min = 0.99, max = 1},
+	speed = Value:FloatRange{min = 0, max = 3},
+	speedDamp = Value:FloatRange{min = 0.93, max = 0.99},
+	angle = Value:Value(0),
+	color = Value:Value("random"),
+	xOffset = Value:Range{min = 0, max = 0},---love.graphics.getWidth()/2, max = love.graphics.getWidth()/2},
+	yOffset = Value:Range{min = 0, max = 0},---love.graphics.getHeight()/2, max = love.graphics.getHeight()/2},
+	inverseFade = Value:Random{values = {false}},
+	fill = Value:Random{values = {false, true}},
+	direction= Value:RandomAngleToVector{values = {0, 90, 180}}, --45, 135, 225, 315},
+	rotDirection = Value:Range{min = -500, max = 500},
+	rotDirectionLerp = {speed = Value:Value(0.005), angle = Value:Value(270)},
+	fadeWithLife = true,
+
+	flip = Value:Value(1),
+
+	scale = 
+	{
+		xSpeed = -4, 
+		ySpeed = -4, 
+		x = Value:FloatRange{min = 0.3, max = 1}, 
+		y = Value:FloatRange{min = 0.3, max = 1}, 
+	},
+	
+	colorMod = 
+	{
+		type = "life",
+		weight = "end"
+	},
+	
+	colors = Value:Random
+	{
+		values = 
+		{
+			Color.group.fire,
+			Color.group.fire,
+			Color.group.fire,
+			Color.group.fire,
+			Color.group.fire,
+			Color.group.fire,
+			Color.group.fire,
+			Color.group.fire2,
+		}
+	},
+
+	interpolateColor = true
+}
+
 
 
 
@@ -646,6 +731,8 @@ local particle = Particle:New
 -- life range  ----------------------- done
 -- speed damp -------------------------done
 -- rot damp ------------------------done
+-- flip in z space rotation --> use the scale component and change it to work
+
 
 
 
