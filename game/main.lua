@@ -9,7 +9,6 @@
 
 -- Requires --> load and run shit in other files
 
-
 -- Only requires that are globally necessary should be listed here
 local App = require("App")
 local Map = require("Map")
@@ -31,14 +30,16 @@ require("DeltaTime")
 require("Keyboard")
 require("Math")
 
---require("PixelTexture")
 require("PrintDebug")
 require("Random")
 
 -- List of Levels
 local TestLevel = require("levels/TestLevel")
+
 --local SnapGridTestLevel = require("levels/SnapGridTestLevel")
 local PixelDrawLevel = require("levels/PixelDrawLevel")
+local SnapGridTestLevel = require("levels/SnapGridTestLevel")
+
 
 
 --------------------------
@@ -55,8 +56,12 @@ function love.load()
 	ObjectUpdater:AddCamera(Camera)
 
 	-- Load your level here
+
 	PixelDrawLevel:Load() 
 	--TestLevel:Load()
+
+	--SnapGridTestLevel:Load() 
+
 end 
 
 

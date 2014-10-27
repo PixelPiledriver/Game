@@ -6,7 +6,7 @@ local Color = require("Color")
 DebugText = {}
 
 -- on or off
-DebugText.active = false
+DebugText.active = true
 
 -- types
 -------------
@@ -24,8 +24,9 @@ DebugText.type =
 	Camera = false,
 	Particle = false,
 	Shape = false,
-	SinCounter = true,
+	SinCounter = false,
 		
+	SnapPlayer = true,
 	Generic = false,
 }
 
