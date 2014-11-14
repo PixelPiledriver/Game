@@ -13,8 +13,9 @@ local Graphics = {}
 
 function Graphics:Setup()
 		-- graphics setup
+
 	love.window.setFullscreen(false, "desktop")
-	love.graphics.setBackgroundColor(Color:Get("gray"))
+	love.graphics.setBackgroundColor(Color:AsTable(Color:Get("gray")))
 
 end 
 

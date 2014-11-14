@@ -9,17 +9,82 @@ local Palette = require("Palette")
 local Value = require("Value")
 local Button = require("Button")
 local Collision = require("Collision")
+local Mouse = require("Mouse")
+local mouse = Mouse:New{}
+local Point = require("Point")
+
+local Line = require("Line")
 
 local PixelDrawLevel = {}
 
 
+local pix = PixelTexture:New
+{
+	width = 256,
+	height = 256,
+	filename = "RandPixels"
+}
 
 
+-- draws and writes pixels to a png
+-- this is just testing function
+-- so feel free to go crazy and change how pixels are drawn
+function MakePixels()
+
+	pix:Clear()
+
+	for i=1, 15 do
+
+		pix:DirectionalStroke
+		{
+			x = Value:Range{min = 0, max = 128},
+			y = Value:Range{min = 0, max = 128},
+			length = Value:Range{min = 5, max = 900},
+			angle = Value:Range{min = 0, max = 360},
+			rot = Value:Range{min = -1, max = 1},
+			rotVelocity = Value:Range{min = -20, max = 20},
+			speed = Value:Value(1),
+			--color = Value:Value("random"),
+			color = Value:Random{values = {"blue"}},
+			brush = Value:Random{values = {PixelBrush.x2}},
+			--fade = Value:Value(0.99)
+		}
+
+	end
+
+	pix:XSymmetry()
+	pix:YSymmetry() 
+
+end 
 
 
 
 function PixelDrawLevel:Load()
 
+
+	-- line
+	----------------------------------------
+	local line1 = Line:New
+	{
+		a = {x = 400, y = 400},
+		b = {x = 500, y = 420},
+		width = 10,
+		color = "black",
+		life = 200,
+		fade = true,
+		fadeWithLife = true
+	}
+
+	local point1 = Point:New
+	{
+		x = 200,
+		y = 200,
+		color = "blue",
+		life = 100,
+		fade = true,
+		fadeWithLife = true,
+		sizeSpeed = 1
+	}
 
 	-- palette
 	-------------------------------------------
@@ -37,87 +102,6 @@ function PixelDrawLevel:Load()
 
 	-- pixel generation stuff
 	-------------------------------------------
-	local pix = PixelTexture:New
-	{
-		width = 256,
-		height = 256,
-		filename = "RandPixels"
-	}
-
---[[
-	for i = 1, 80, 2 do
-		pix:Cluster
-		{
-			x = 64 + love.math.random(-32, 32),
-			y = 20 + i, 
-			xRange = love.math.random(0,30),
-			yRange = 3,
-			color = pal2.colors,
-			brush = {PixelBrush.x1, PixelBrush.x2, PixelBrush.x4},
-			count = 200,
-		}
-	end 
-
-
-	pix:XSymmetry()
-	pix:YSymmetry()
---]]
-
---[[
-	pix:LerpStroke
-	{
-		a = {x=20,y=20},
-		b = {x=100, y=100},
-		color = pal2.colors,
-		brush = {PixelBrush.x1, PixelBrush.x2, PixelBrush.x4},
-		xCurve = 0.5,
-		yCurve = -0.5
-	}
---]]
-
---[[
-	pix:DirectionalStroke
-	{
-		x = Value:Value(64),
-		y = Value:Value(32),
-		length = Value:Value(800),
-		angle = Value:Value(0),
-		rot = Value:Value(1.5),
-		rotVelocity = Value:Value(44),
-		speed = Value:Value(1),
-		color = Value:Value("random"),
-		brush = Value:Random{values = {PixelBrush.x1, PixelBrush.x2, PixelBrush.x4}},
-		fade = Value:Value(0.99)
-	}
-
-
- 
-	for i=1, 15 do
-		pix:DirectionalStroke
-		{
-			x = Value:Range{min = 0, max = 128},
-			y = Value:Range{min = 0, max = 128},
-			length = Value:Range{min = 5, max = 900},
-			angle = Value:Range{min = 0, max = 360},
-			rot = Value:Range{min = -1, max = 1},
-			rotVelocity = Value:Range{min = -20, max = 20},
-			speed = Value:Value(1),
-			--color = Value:Value("random"),
-			color = Value:Random{values = {"blue"}},
-			brush = Value:Random{values = {PixelBrush.x1, PixelBrush.x2}},
-			--fade = Value:Value(0.99)
-		}
-
-	end 
-	--]]
-
-
-	pix:XSymmetry()
-	--pix:YSymmetry()
-
-	
-	--pix:SaveToFileByIndex()
-
 
 	local button1 = Button:New
 	{
@@ -126,25 +110,23 @@ function PixelDrawLevel:Load()
 		text = "Save Pixels",
 		func = 
 		function()
+			MakePixels()
 			pix:SaveToFileByIndex()
-
-			print("YAY!")
 		end 
-
 	}
 
-	-- collision
-	local mouseCollision = Collision:New
+	local quitButton = Button:New
 	{
-		x = 0,
-		y = 0,
-		width = 32,
-		height = 32,
-		shape = "rect",
-		name = "MiniMouse",
-		mouse = true,
-		collisionList = {},
+	  x = 400,
+	  y = 0,
+	  text = "Quit",
+		func = 
+		function()	  
+			love.event.quit()
+		end
+
 	}
+
 
 end 
 
@@ -254,6 +236,59 @@ return PixelDrawLevel
 	print("Pixel[" .. pixel.r .. "," .. pixel.g .. "," .. pixel.b .. "," .. pixel.a .. "]")
 
 	
+	--]]
+
+
+
+
+-- more pixel drawing stuff
+
+
+	--[[
+	for i = 1, 80, 2 do
+		pix:Cluster
+		{
+			x = 64 + love.math.random(-32, 32),
+			y = 20 + i, 
+			xRange = love.math.random(0,30),
+			yRange = 3,
+			color = pal2.colors,
+			brush = {PixelBrush.x1, PixelBrush.x2, PixelBrush.x4},
+			count = 200,
+		}
+	end 
+
+
+	pix:XSymmetry()
+	pix:YSymmetry()
+--]]
+
+--[[
+	pix:LerpStroke
+	{
+		a = {x=20,y=20},
+		b = {x=100, y=100},
+		color = pal2.colors,
+		brush = {PixelBrush.x1, PixelBrush.x2, PixelBrush.x4},
+		xCurve = 0.5,
+		yCurve = -0.5
+	}
+--]]
+
+--[[
+	pix:DirectionalStroke
+	{
+		x = Value:Value(64),
+		y = Value:Value(32),
+		length = Value:Value(800),
+		angle = Value:Value(0),
+		rot = Value:Value(1.5),
+		rotVelocity = Value:Value(44),
+		speed = Value:Value(1),
+		color = Value:Value("random"),
+		brush = Value:Random{values = {PixelBrush.x1, PixelBrush.x2, PixelBrush.x4}},
+		fade = Value:Value(0.99)
+	}
 	--]]
 
 

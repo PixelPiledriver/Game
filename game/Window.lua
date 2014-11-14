@@ -9,7 +9,7 @@ local ObjectUpdater = require("ObjectUpdater")
 local Window = {}
 
 
-Window.name = "GameWindow"
+Window.name = "..."
 Window.type = "Window"
 
 

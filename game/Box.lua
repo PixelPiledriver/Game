@@ -1,8 +1,10 @@
 -- Box.lua
--- box/cube/square graphic object
+-- box/cube/square graphic o
 
 local ObjectUpdater = require("ObjectUpdater")
 local SinCounter = require("SinCounter")
+local Life = require("Life")
+local Fade = require("Fade")
 
 
 local Box = {}
@@ -15,74 +17,88 @@ function Box:New(data)
 	----------
 	-- Create
 	----------
-	local object = {}
+	local o = {}
 
 	-- other
-	object.name = data.name or "???"
-	object.type = "box"
+	o.name = data.name or "..."
+	o.type = "Box"
 
 	-- position
-	object.x = data.x or 0
-	object.y = data.y or 0
-	object.xStart = object.x
-	object.yStart = object.y
-	object.speed = data.speed or 5
-	object.move = false
+	o.x = data.x or 0
+	o.y = data.y or 0
+	o.xStart = o.x
+	o.yStart = o.y
+	o.speed = data.speed or 5
+	o.move = false
 
 	-- size
-	object.width = data.width or 32
-	object.height = data.height or 32
+	o.width = data.width or 32
+	o.height = data.height or 32
 
 	-- color
-	object.color = data.color or {255,255,255,255}
+	o.color = data.color or {255,255,255,255}
 	
 	-- draw
-	object.fill = data.fill or false
-	object.draw = data.draw or true
+	o.fill = data.fill or false
+	o.draw = data.draw or true
 
 	-- rotation
-	object.angle = data.angle or 0
-	object.pivot = data.pivot or {x = 0.5, y = 0.5} -- 0 to 1 range
-	object.spin = data.spin or 0
+	o.angle = data.angle or 0
+	o.pivot = data.pivot or {x = 0.5, y = 0.5} -- 0 to 1 range
+	o.spin = data.spin or 0
 
 	if(data.spin) then
-		object.rotatable = true
+		o.rotatable = true
 	else
-		object.rotatable = false
+		o.rotatable = false
 	end 
 
 	-- scale
-	object.xScale = data.xScale or 1
-	object.yScale = data.yScale or 1
-	object.xScaleStatic = object.xScale
-	object.yScaleStatic = object.yScale
-	object.xScaleSpeed = data.xScaleSpeed or 0
-	object.yScaleSpeed = data.yScaleSpeed or 0
+	o.xScale = data.xScale or 1
+	o.yScale = data.yScale or 1
+	o.xScaleStatic = o.xScale
+	o.yScaleStatic = o.yScale
+	o.xScaleSpeed = data.xScaleSpeed or 0
+	o.yScaleSpeed = data.yScaleSpeed or 0
 
 	if(data.xScale or data.yScale) then
-		object.scaleable = true
+		o.scaleable = true
 	else
-		object.scaleable = false
+		o.scaleable = false
 	end 
 
 	-- flip
-
-	object.xFlip = SinCounter:New
+	o.xFlip = SinCounter:New
 	{
 		speed = data.xFlip or 0,
 		damp = 0.95
 	}
 
-	object.yFlip = SinCounter:New
+	o.yFlip = SinCounter:New
 	{
 		speed = data.yFlip or 0,
 		damp = 0.95
 	}
 
+	-- Components
+	o.lifeComp = Life:New
+	{
+		life = data.life,
+		maxLife = data.maxLife,
+		drain = data.drain,
+		parent = o
+	}
+
+	o.fadeComp = Fade:New
+	{
+		active = false,
+		parent = o
+	}
 
 
+	-- remove this shit as a component
 	-- controls
-	object.keys =
+	o.keys =
 	{
 		left = data.keys and data.keys.left or "a",
 		right = data.keys and data.keys.right or "d",
@@ -99,7 +115,7 @@ function Box:New(data)
 	-- Functions
 	-------------
 
-	function object:Draw()
+	function o:Draw()
 
 		if(self.draw == false) then
 			return
@@ -130,11 +146,11 @@ function Box:New(data)
 	end 
 
 	-- only used for press and release
-	function object:Input(key)
+	function o:Input(key)
 
 	end 
 
-	function object:Move()
+	function o:Move()
 
 		if(self.move == false) then
 			return
@@ -162,7 +178,7 @@ function Box:New(data)
 
 
 	-- spin controls
-	function object:Rotate()
+	function o:Rotate()
 
 		if(love.keyboard.isDown(self.keys.rotLeft)) then
 			self.spin = self.spin - 0.01
@@ -175,7 +191,7 @@ function Box:New(data)
 	end 
 
 	-- only used for down
-	function object:RepeatedInput()
+	function o:RepeatedInput()
 
 		self:Rotate()
 		self:Move()
@@ -184,12 +200,12 @@ function Box:New(data)
 
 
 	-- rotation velocity
-	function object:Spin()
+	function o:Spin()
 		self.angle = self.angle + self.spin * 0.01
 	end 
 
 	-- flip like paper
-	function object:Flip()
+	function o:Flip()
 
 		--self.xScale = self.xScaleStatic * self.xFlip:Get()
 		
@@ -218,21 +234,21 @@ function Box:New(data)
 		--self.yScale = self.yFlip:Get()
 	end
 
-	function object:Scale()
+	function o:Scale()
 		self.xScale = self.xScale + (self.xScaleSpeed * 0.01)
 		self.yScale = self.yScale + (self.yScaleSpeed * 0.01)
 		self.xScaleStatic = self.xScale
 		self.yScaleStatic = self.yScale
 	end 
 
-	function object:Update()
+	function o:Update()
 		self:Spin() 
 		self:Scale()
 		self:Flip()
 	end 
 
 	
-	function object:Destroy()
+	function o:Destroy()
 		if(self.xFlip) then
 			ObjectUpdater:Destroy(self.xFlip)
 		end 
@@ -243,9 +259,9 @@ function Box:New(data)
 
 	end 
 
-	ObjectUpdater:Add{object}
+	ObjectUpdater:Add{o}
 
-	return object
+	return o
 
 end 
 

@@ -34,11 +34,12 @@ require("PrintDebug")
 require("Random")
 
 -- List of Levels
-local TestLevel = require("levels/TestLevel")
+--local TestLevel = require("levels/TestLevel")
 
 --local SnapGridTestLevel = require("levels/SnapGridTestLevel")
 local PixelDrawLevel = require("levels/PixelDrawLevel")
-local SnapGridTestLevel = require("levels/SnapGridTestLevel")
+--local SnapGridTestLevel = require("levels/SnapGridTestLevel")
+--local TextWriteLevel = require("levels/TextWriteLevel")
 
 
 
@@ -57,8 +58,9 @@ function love.load()
 
 	-- Load your level here
 
-	PixelDrawLevel:Load() 
 	--TestLevel:Load()
+	PixelDrawLevel:Load()
+	--TextWriteLevel:Load()
 
 	--SnapGridTestLevel:Load() 
 

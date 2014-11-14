@@ -11,7 +11,7 @@ local Collision = {}
 
 function Collision:New(data)
 
-	local object = {}
+	local o = {}
 
 
 	-----------------
@@ -19,55 +19,56 @@ function Collision:New(data)
 	-----------------
 
 	-- other
-	object.name = data.name or "???"
-	object.type = "collision"
+	o.name = data.name or "..."
+	o.type = "Collision"
 
 	-- pos
-	object.x = data.x or -100
-	object.y = data.y or -100
+	o.x = data.x or -100
+	o.y = data.y or -100
+
+	o.offsetX = o.x
+	o.offsetY = o.y
 
 	-- shape
-	object.shape = data.shape or "rect"-- point, rect only for now
-	object.width = data.width or nil
-	object.height = data.height or nil
-	object.radius = data.radius or nil
+	o.shape = data.shape or "rect"-- point, rect only for now
+	o.width = data.width or nil
+	o.height = data.height or nil
+	o.radius = data.radius or nil
 
 	-- color
-	object.color = data.color or Color:Get("white")
-	object.collisionColor = data.collisionColor or Color:Get("green")
+	o.color = data.color or Color:AsTable(Color:Get("white"))
+	o.collisionColor = data.collisionColor or Color:AsTable(Color:Get("green"))
 
 	-- stuff
-	object.visible = data.visible
+	o.visible = data.visible
 	if(data.visible == nil) then
-		object.visible = true
+		o.visible = true
 	end 
-	object.destroy = false
-	object.collided = false
+	o.destroy = false
+	o.collided = false
 
-	-- objects that only hit once use this
-	object.oneCollision = data.oneCollision or false
-	object.firstCollision = false
+	-- os that only hit once use this
+	o.oneCollision = data.oneCollision or false
+	o.firstCollision = false
 
-	object.parent = data.parent or nil
-	object.name = data.name
-	object.type = "collision"
+	o.parent = data.parent or nil
 
 	-- movment
-	object.mouse = data.mouse or false
-	object.followParent = object.parent and true or false
+	o.mouse = data.mouse or false
+	o.followParent = o.parent and true or false
 
 	-- collision list
-	-- others that this object can collide with
-	object.collisionList = data.collisionList or nil
+	-- others that this o can collide with
+	o.collisionList = data.collisionList or nil
 
 	-- alignment
-	object.vertCenter = data.vertCenter or false
-	object.horzCenter = data.horzCenter or false
+	o.vertCenter = data.vertCenter or false
+	o.horzCenter = data.horzCenter or false
 
 	-- draw
-	object.draw = data.draw
-	if(object.draw == nil) then
-		object.draw = true
+	o.draw = data.draw
+	if(o.draw == nil) then
+		o.draw = true
 	end 
 
 
@@ -76,7 +77,7 @@ function Collision:New(data)
 	-- Functions
 	-----------------
 
-	function object:CheckCollisionList(data)
+	function o:CheckCollisionList(data)
 		
 		if(self.collisionList == nil) then
 			printDebug{"FALSE", "CollisionList"}
@@ -94,7 +95,7 @@ function Collision:New(data)
 
 	end 
 
-	function object:CollisionWith(data)
+	function o:CollisionWith(data)
 
 		printDebug{self.collisionList, "Collision3"}
 		printDebug{data.other.collisionList, "Collision3"}
@@ -122,7 +123,7 @@ function Collision:New(data)
 
 	end 
 
-	function object:Draw()
+	function o:Draw()
 
 		-- show?
 		if(self.draw == false) then
@@ -134,17 +135,17 @@ function Collision:New(data)
 
 	end 
 
-	function object:FollowMouse()
+	function o:FollowMouse()
 		if(self.mouse == false) then
 			return
 		end 
 
-			self.x = love.mouse.getX()
-			self.y = love.mouse.getY()
+			self.x = love.mouse.getX() + self.offsetX
+			self.y = love.mouse.getY() + self.offsetY
 		
 	end 
 
-	function object:FollowParent()
+	function o:FollowParent()
 		if(self.followParent == false) then
 			return
 		end
@@ -154,16 +155,16 @@ function Collision:New(data)
 
 	end 
 
-	function object:Update()
+	function o:Update()
 		self:FollowMouse()
 		self:FollowParent()
 		self.collided = false
 	end 
 
-	CollisionManager:Add(object)
-	ObjectUpdater:Add{object}
+	CollisionManager:Add(o)
+	ObjectUpdater:Add{o}
 
-	return object
+	return o
 
 end
 
@@ -186,7 +187,7 @@ return Collision
 -- when you get back
 -- commit collision
 -- then re write it to be sorted by name
--- so objects only check for objects on their collision list
+-- so os only check for os on their collision list
 -- this should reduce the number of collision checks by a lot
 
 -- also display a collision check counter

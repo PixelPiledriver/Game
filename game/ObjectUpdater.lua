@@ -91,9 +91,23 @@ function ObjectUpdater:PrintDebugText()
 		{text = "------------------"},
 	}
 
+	local objectNames = {}
+	objectNames[1] = {text = "", obj = "ObjectUpdater"}
+
 	for i=1, #self.objects do
-	--	DebugText:Text((self.objects[i].name or "*no .name*") .. " -- " .. (self.objects[i].type or "*no .type*"))
+
+		local oName = self.objects[i].name or "..."
+		local oType = self.objects[i].type or "___"
+
+		objectNames[#objectNames + 1] = {}
+		objectNames[#objectNames].text = oName .. " " .. oType
+		--DebugText:Text((self.objects[i].name or "*no .name*") .. " -- " .. (self.objects[i].type or "*no .type*"))	
 	end 
+
+	DebugText:TextTable(objectNames)
+
+
+
 
 end 
 

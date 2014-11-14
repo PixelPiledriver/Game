@@ -14,23 +14,28 @@ local Palette = {}
 --{colors, }
 function Palette:New(data)
 
-	local object = {}
+	local o = {}
 
 
 	---------------
 	-- Create
 	---------------
-	object.colors = data.colors or {}
+	o.colors = data.colors or {}
 
 	-- size = max, not just length of color table
-	object.size = data.size or 0 
+	o.size = data.size or 0 
+
+	-- Other
+	-------------------
+	o.name = data.name or "..."
+	o.type = "Palette"
 
 
 	-----------------
 	-- Functions
 	-----------------
 
-	function object:Clear()
+	function o:Clear()
 		self.colors = nil
 		self.colors = {}
 
@@ -38,13 +43,13 @@ function Palette:New(data)
 		self.index = {}
 	end 
 
-	function object:Get(index)
+	function o:Get(index)
 		return self.colors[index]
 	end 
 
 
 	-- {size}
-	function object:Random(data)
+	function o:Random(data)
 		self:Clear()
 
 		for i=1, data.size do
@@ -54,7 +59,7 @@ function Palette:New(data)
 
 	-- create linear palette from colorA -> size ->colorB lerp
 	-- {a, b, size}
-	function object:Linear(data)
+	function o:Linear(data)
 		self:Clear()
 
 		self.colors[1], self.index[1] = Color:Get(data.a)
@@ -74,7 +79,7 @@ function Palette:New(data)
 
 
 
-	return object
+	return o
 
 end 
 

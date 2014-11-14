@@ -12,22 +12,35 @@ DebugText.active = true
 -------------
 DebugText.type = 
 {
+	-- Managers
+	ObjectUpdater = false,
+	CollisionManager = false,
+
+	-- Objects
+	Camera = false,
 	Player = false,
 	Bullet = false,
 	Block = false,
 	Controller = false,
 	Window = false,
-	ObjectUpdater = false,
-	CollisionManager = false,
 	Map = false,
 	ParticleSystem = false,
-	Camera = false,
 	Particle = false,
-	Shape = false,
+	Mouse = false,
+	Life = false,
+	SnapPlayer = false,
+
+
+	-- Counters
 	SinCounter = false,
-		
-	SnapPlayer = true,
-	Generic = false,
+
+	-- Graphics
+	Line = false,
+	Shape = false,
+
+
+	-- other
+	Generic = true,
 }
 
 
@@ -92,7 +105,7 @@ function DebugText:Draw()
 
 		-- for each text message in item
 		for t=1, #self.texts[i] do
-			love.graphics.setColor(self.texts[i][t].color or Color.white)
+			love.graphics.setColor(self.texts[i][t].color or Color:AsTable(Color.white))
 			love.graphics.print(self.texts[i][t].text, self.xStart, self.yStart + (self.ySpace * (index-1) ) )
 
 			index = index + 1
@@ -121,6 +134,4 @@ end
 -- need to add button for scrolling up and down text
 -- since lots of objects overflows vertically
 
-
-
-
+-- add in feature to print children or parents :P

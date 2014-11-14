@@ -11,7 +11,7 @@ FrameCounter.printLoveFPS = true
 -- variables
 FrameCounter.x = 10
 FrameCounter.y = 10
-FrameCounter.color = {0, 255, 0, 255}
+FrameCounter.color = {0, 0, 0, 255}
 
 
 local time = 0

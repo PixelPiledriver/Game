@@ -4,6 +4,7 @@
 local ObjectUpdater = require("ObjectUpdater")
 local Box = require("Box")
 local Collision = require("Collision")
+local Color = require("Color")
 
 local Button = {}
 
@@ -16,8 +17,8 @@ function Button:New(data)
 	----------------
 
 	-- info
-	object.name = data.name or "???"
-	object.type = "button"
+	object.name = data.name or "..."
+	object.type = "Button"
 
 	-- pos
 	object.x = data.x or 0
@@ -28,8 +29,10 @@ function Button:New(data)
 	object.height = data.height or 50
 
 
-	--rect
-	object.useBox = data.useRect or true
+	-- rect
+	object.useBox = data.useBox or false
+
+	--[[
 	object.box =  Box:New
 	{
 		x = object.x,
@@ -37,6 +40,7 @@ function Button:New(data)
 		width = object.width,
 		height = object.height
 	}
+	--]]
 
 
 	-- collision --> this uses collision objects
@@ -48,13 +52,14 @@ function Button:New(data)
 		width = object.width,
 		height = object.height,
 		shape = "rect",
-		name = "Mike",
-		collisionList = {"MiniMouse"},
+		name = object.name,
+		collisionList = {"Mouse"},
 		parent = object
 	}
 
 	-- text
 	object.text = data.text or "Button"
+	object.textColor = data.textColor and Color:Get("data.textColor") or Color:Get("black")
 
 	-- graphics
 	object.sprite = data.sprite or nil
@@ -78,6 +83,7 @@ function Button:New(data)
 	end
 
 	function object:Draw()
+		love.graphics.setColor(Color:AsTable(self.textColor))
 		love.graphics.printf(self.text, self.x, self.y + self.height/2 - self.height/6, self.width, "center")
 	end
 

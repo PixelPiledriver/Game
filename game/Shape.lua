@@ -1,5 +1,5 @@
 -- Shape
--- object with multiple boxes inside of it
+-- o with multiple boxes inside of it
 
 
 local ObjectUpdater = require("ObjectUpdater")
@@ -15,20 +15,20 @@ local Shape = {}
 
 function Shape:New(data)
 
-	local object = {}
+	local o = {}
 
-	object.name = data.name or "???"
-	object.type = "shape"
+	o.name = data.name or "..."
+	o.type = "Shape"
 
-	object.x = data.x or 0
-	object.y = data.y or 0
-	object.boxes = {}
+	o.x = data.x or 0
+	o.y = data.y or 0
+	o.boxes = {}
 
 
 	for i=1, #data.boxes do
-		data.boxes[i].x = object.x + data.boxes[i].x
-		data.boxes[i].y = object.y + data.boxes[i].y
-		object.boxes[#object.boxes+1] = Box:New(data.boxes[i])
+		data.boxes[i].x = o.x + data.boxes[i].x
+		data.boxes[i].y = o.y + data.boxes[i].y
+		o.boxes[#o.boxes+1] = Box:New(data.boxes[i])
 	end 
 
 
@@ -37,7 +37,7 @@ function Shape:New(data)
 	-------------------
 
 	--{x, y}
-	function object:SetPos()
+	function o:SetPos()
 
 		for i=1, #self.boxes do
 			self.boxes[i].x = self.x + self.boxes[i].xStart
@@ -46,7 +46,7 @@ function Shape:New(data)
 
 	end 
 
-	function object:PrintDebugText()
+	function o:PrintDebugText()
 		DebugText:TextTable
 		{
 			{text = "", obj = "Shape" },
@@ -57,21 +57,21 @@ function Shape:New(data)
 		}
 	end 
 
-	function object:Update()
+	function o:Update()
 		self:SetPos()
 	end 
 
 
-	function object:Destroy()
+	function o:Destroy()
 		for i=1, #self.boxes do
 			ObjectUpdater:Destroy(self.boxes[i])
 		end 
 		
 	end 
 
-	ObjectUpdater:Add{object}
+	ObjectUpdater:Add{o}
 
-	return object
+	return o
 end 
 
 

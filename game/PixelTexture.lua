@@ -17,8 +17,8 @@ function PixelTexture:New(data)
 
 	local object = {}
 
-	object.name = data.name or "???"
-	object.objType = "PixelTexture"
+	object.name = data.name or "..."
+	object.type = "PixelTexture"
 
 
 	object.filename = data.filename or "image"
@@ -341,6 +341,15 @@ function PixelTexture:New(data)
 	function object:MapPixelTest()
 		self.image:mapPixel(self.MapPixelTestFunction)
 	end
+
+
+	function object.ClearFunction(x,y,r,g,b,a)
+		return 0,0,0,0
+	end 
+
+	function object:Clear()
+		self.image:mapPixel(self.ClearFunction)
+	end 
 
 
 	function object.XGradientFunction(x,y,r,g,b,a)

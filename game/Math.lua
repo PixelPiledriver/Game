@@ -61,10 +61,21 @@ function Math:Lerp(data)
 	return data.a + ((data.b - data.a) * data.t)
 end 
 
+-- {a, b, t}
 function Math:InverseLerp(data)
 	return  data.t/(data.a + (data.b-data.a))
 end
 
+--{a={x,y}, b={x,y}}
+function Math:TestEqualityPoints(data)
+
+	if(data.a.x == data.b.x and data.a.y == data.b.y) then
+		return true
+	end 
+
+	return false
+
+end 
 
 
 
