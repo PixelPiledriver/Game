@@ -6,19 +6,27 @@ local Collision = require("Collision")
 
 local Bullet = {}
 
-
--- create
+----------------
+-- Static Vars
+----------------
+Bullet.name = "Bullet"
+Bullet.oType = "Static"
+Bullet.dataType = "GameObject Constructor"
 
 function Bullet:New(data)
 
+	---------------------
+	-- Create
+	---------------------
+
 	local object = {}
 
+	-- object
 	object.name = data.name or "???"
-	object.type = "bullet"
+	object.oType = "Bullet"
+	object.dataType = "GameObject"
 
-	--------------
-	-- Variables
-	--------------
+	-- vars
 	if(data.bulletType) then
 		
 		object.frame = data.frame
@@ -55,7 +63,6 @@ function Bullet:New(data)
 		object.damage = data.damage or 1
 		object.lifespan = data.lifespan or -1
 	end
-
 
 
 
@@ -134,16 +141,6 @@ function Bullet:New(data)
 
 end 
 
-
-
-
-
-
-
-
-
-
-
-
+ObjectUpdater:AddStatic(Bullet)
 
 return Bullet

@@ -2,15 +2,22 @@
 -- keeps track of all blocks in game
 -- pos, type, who owns them, etc
 
+local ObjectUpdater = require("ObjectUpdater")
 
 local BlockMap = {}
 
 
+--------------
+-- Vars
+----------------
+
+-- object
+BlockMap.name = "BlockMap"
+BlockMap.oType = "Static"
+BlockMap.dataType = "Map"
+
 BlockMap.blocks = { {} }
-
 BlockMap.blockSize = 32
-
-
 
 -- needs to be a two dimensional table
 function BlockMap:Add(data)
@@ -46,8 +53,6 @@ function BlockMap:SpaceEmpty(data)
 end 
 
 
-
-
-
+ObjectUpdater:AddStatic(BlockMap)
 
 return BlockMap

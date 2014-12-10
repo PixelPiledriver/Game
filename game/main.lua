@@ -23,12 +23,16 @@ local ObjectUpdater = require("ObjectUpdater")
 local Sound = require("Sound")
 local Window = require("Window")
 local Graphics = require("Graphics")
+local Shader = require("Shader")
+local Draw = require("Draw")
+
 
 --Utility requires
 require("DebugText")
 require("DeltaTime")
 require("Keyboard")
 require("Math")
+require("TableSort")
 
 require("PrintDebug")
 require("Random")
@@ -52,8 +56,10 @@ function love.load()
 
 	-- yep
 	Graphics:Setup()
+	love.graphics.setShader(Shader.britShader)
 
 	-- manual camera object
+	local mainCamera = Camera:New()
 	ObjectUpdater:AddCamera(Camera)
 
 	-- Load your level here

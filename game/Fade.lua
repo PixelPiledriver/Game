@@ -7,6 +7,15 @@ local ObjectUpdater = require("ObjectUpdater")
 
 local Fade = {}
 
+-----------------
+-- Static Vars
+-----------------
+
+Fade.name = "Fade"
+Fade.oType = "Static"
+Fade.dataType = "Component Constructor"
+
+
 function Fade:New(data)
 
 	local o = {}
@@ -18,6 +27,7 @@ function Fade:New(data)
 	-- o
 	o.name = data.name or "..."
 	o.type = "Fade"
+	o.dataType = "Component"
 
 	-- vars
 	o.fade = data.fade or 255
@@ -94,5 +104,6 @@ function Fade:New(data)
 	return o
 end
 
+ObjectUpdater:AddStatic(Fade)
 
 return Fade

@@ -1,17 +1,22 @@
 -- Line.lua
 
+------------------
+-- Requires
+------------------
 local ObjectUpdater = require("ObjectUpdater")
 local Color = require("Color")
 local Life = require("Life")
 local Fade = require("Fade")
 
 
-
 local Line = {}
 
------------------------------------------------------
--- New o
------------------------------------------------------
+-----------------
+-- Static Vars
+-----------------
+Line.name = "Line"
+Line.oType = "Static"
+Line.dataType = "Graphics Constructor"
 
 -- {a = {x,y}, b = {x,y}, width, color}
 function Line:New(data)
@@ -25,6 +30,7 @@ function Line:New(data)
 	-- object
 	o.name = data.name or "..."
 	o.type = "Line"
+	o.dataType = "Graphics"
 
 
 	-- start
@@ -40,9 +46,6 @@ function Line:New(data)
 	-- graphics
 	o.color = data.color and Color:Get(data.color) or Color:Get("black")
 	o.width = data.width or 1
-
-
-
 
 	------------------------
 	-- Components
@@ -64,6 +67,8 @@ function Line:New(data)
 			fadeWithLife = data.fadeWithLife or false
 		}
 	end 
+
+	o.components = {"Life", "Fade"}
 
 	-----------------
 	-- Functions
@@ -96,7 +101,13 @@ function Line:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Fade)
+
+		for i=1, #self.components do
+			if(self[self.components[i]]) then
+				ObjectUpdater:Destroy(self[self.components[i]])
+			end 
+		end 
+
 	end 
 
 

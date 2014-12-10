@@ -8,19 +8,25 @@ local Color = require("Color")
 
 local Collision = {}
 
+-----------------
+-- Static Vars
+-----------------
+
+Collision.name = "Collision"
+Collision.oType = "Static"
+Collision.dataType = "Object Constructor"
 
 function Collision:New(data)
 
+	-----------------
+	-- Create
+	-----------------
 	local o = {}
 
-
-	-----------------
-	-- Variables
-	-----------------
-
-	-- other
+	-- object
 	o.name = data.name or "..."
 	o.type = "Collision"
+	o.dataType = "Object"
 
 	-- pos
 	o.x = data.x or -100
@@ -161,19 +167,34 @@ function Collision:New(data)
 		self.collided = false
 	end 
 
+
+	function o:PrintDebugText()
+
+
+		local parent = self.parent and self.parent.name or "no parent"		
+
+		DebugText:TextTable
+		{
+			{text = "", obj = "Collision"},
+			{text = "Collision"},
+			{text = "-----------"},
+			{text = "Width: " .. self.width},
+			{text = "Height: " .. self.height},
+			{text = "Parent: " .. parent}
+		}
+
+	end 
+
 	CollisionManager:Add(o)
 	ObjectUpdater:Add{o}
 
 	return o
 
+
 end
 
 
-
-
-
-
-
+ObjectUpdater:AddStatic(Collision)
 
 
 return Collision

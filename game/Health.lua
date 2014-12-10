@@ -1,31 +1,38 @@
 -- Health.lua
 -- health component for objects that need to take damage
 
-
+local ObjectUpdater = require("ObjectUpdater")
 
 local Health = {}
 
+------------------
+-- Static Vars
+------------------
 
+Health.name = "Health"
+Health.oType = "Static"
+Health.dataType = "Component Constructor"
 
 function Health:New(data)
 
 	-------------
 	-- Create
 	--------------
-	local object = {}
+	local o = {}
 
-	object.name = data.name or "???"
-	object.type = "health"
+	o.name = data.name or "???"
+	o.type = "Health"
+	o.dataType = "Component"
 
-	object.max = data.max or 100
-	object.min = data.min or 0
-	object.start = data.start or 100
-	object.hp = 100
+	o.max = data.max or 100
+	o.min = data.min or 0
+	o.start = data.start or 100
+	o.hp = 100
 
 	---------------
 	-- Functions
 	---------------
-	function object:Damage(attack)
+	function o:Damage(attack)
 		self.hp = self.hp - attack.damage
 		self:UpdateCheck()
 
@@ -33,7 +40,7 @@ function Health:New(data)
 
 	end
 
-	function object:UpdateCheck()
+	function o:UpdateCheck()
 		if(self.hp < self.min) then 
 			self.hp = self.min
 		end
@@ -44,15 +51,15 @@ function Health:New(data)
 
 	end 
 
-	function object:Death()
+	function o:Death()
 		printDebug{"fucking dead!", "Health"}
 	end 
 
-	function object:GetHealth()
+	function o:GetHealth()
 		return self.hp
 	end 
 
-	return object
+	return o
 
 end 
 
@@ -60,6 +67,6 @@ end
 
 
 
-
+ObjectUpdater:AddStatic(Health)
 
 return Health

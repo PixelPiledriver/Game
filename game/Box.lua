@@ -9,6 +9,14 @@ local Fade = require("Fade")
 
 local Box = {}
 
+-------------------
+-- Static Vars
+-------------------
+
+Box.name = "Box"
+Box.oType = "Static"
+Box.dataType = "Graphics Constructor"
+
 
 
 -- create instance
@@ -21,7 +29,8 @@ function Box:New(data)
 
 	-- other
 	o.name = data.name or "..."
-	o.type = "Box"
+	o.oType = "Box"
+	o.dataType = "Graphics"
 
 	-- position
 	o.x = data.x or 0
@@ -80,7 +89,9 @@ function Box:New(data)
 		damp = 0.95
 	}
 
+	-------------------------
 	-- Components
+	-------------------------
 	o.lifeComp = Life:New
 	{
 		life = data.life,
@@ -107,8 +118,6 @@ function Box:New(data)
 		rotLeft = data.rotatable and data.keys and data.keys.rotLeft or "q",
 		rotRight = data.rotatable and data.keys and data.keys.rotLeft or "e",
 	}
-
-
 
 
 	-------------
@@ -265,11 +274,6 @@ function Box:New(data)
 
 end 
 
-
-
-
-
-
-
+ObjectUpdater:AddStatic(Box)
 
 return Box

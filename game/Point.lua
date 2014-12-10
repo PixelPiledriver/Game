@@ -3,14 +3,16 @@
 
 local ObjectUpdater = require("ObjectUpdater")
 local Color = require("Color")
+
+-- components
 local Fade = require("Fade")
 local Life = require("Life")
 local Size = require("Size")
+local Pos = require("Pos")
 
 love.graphics.setPointStyle("rough")
 
 local Point = {}
-
 
 function Point:New(data)
 
@@ -22,20 +24,26 @@ function Point:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.type = "Point"
-
+	o.oType = "Point"
+	o.dataType = "Graphics"
 
 	-- vars
-	o.x = data.x or 100
-	o.y = data.y or 100
 	o.size = data. size or 10
-	o.color = data.color and Color:Get(data.color) or  Color:Get("red")
 
 
+	local colorType = data.colorType or "name"
+
+	if(colorType == "name") then
+		o.color = data.color and Color:Get(data.color) or Color:Get("red")
+	elseif(colorType == "new") then
+		o.color = data.color
+	end 
 
 	------------------------
 	-- Components
 	------------------------
+	o.Pos = Pos:New(data.pos)
+
 	if(data.fade) then	
 		o.Fade = Fade:New
 		{
@@ -61,26 +69,52 @@ function Point:New(data)
 			parent = o,
 			size = data.size
 		}
-	end 
+	end
 
+	o.components = {"Pos", "Fade", "Size", "Life"}
 
 	---------------
 	-- Functions
 	---------------
 
+	function o:PrintDebugText()
+
+		local life = self.Life and self.Life.life or 0
+
+		DebugText:TextTable
+		{
+			{text = "", obj = "Point" },
+			{text = "Name: " .. self.name},
+			{text = "Type: " .. self.oType},
+			{text = "Pos: {" .. self.Pos.x .. ", " .. self.Pos.y .. "}"},
+		}
+
+	end 
+
+
 	function o:Update()
 	end 
+
 
 	function o:Draw()
 		love.graphics.setColor(Color:AsTable(self.color))
 		love.graphics.setPointSize(self.size)
-		love.graphics.point(self.x, self.y)
+		love.graphics.point(self.Pos.x, self.Pos.y)
 	end 
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Fade)
-		ObjectUpdater:Destroy(self.Size)
+
+		for i=1, #self.components do
+			if(self[self.components[i]]) then
+				ObjectUpdater:Destroy(self[self.components[i]])
+			end 
+		end 
+
+
+		--ObjectUpdater:Destroy(self.Fade)
+		--ObjectUpdater:Destroy(self.Size)
+		--ObjectUpdater:Destroy(self.Pos)
 	end 
 
 

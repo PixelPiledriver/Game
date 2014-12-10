@@ -1,20 +1,49 @@
+-- DebugText.lua
+-----------------------------------------------
 -- draw text info to screen
+-- add --> funciton o:PrintDebugText()
+-- to your object type to print to this
+-- DebugText is a Global --> use anywhere
+
 -- need to make a console too
 
 local Color = require("Color")
+local ObjectUpdater = require("ObjectUpdater")
 
 DebugText = {}
 
--- on or off
+----------------------
+-- Create
+----------------------
+
+-- object
+DebugText.name = "DebugText"
+DebugText.oType = "Static"
+DebugText.dataType = "Manager"
+
+-- On or Off
 DebugText.active = true
 
--- types
--------------
-DebugText.type = 
+-- all text messages that need to be drawn on the next frame
+DebugText.texts = {}
+
+----------------------
+-- Print Type Flags
+----------------------
+-- flip these on and off 
+-- to run o:PrintDebugText() for named object type
+-- changed 'type' to 'messageType'
+-------------------------------------------------------
+DebugText.messageType = 
 {
 	-- Managers
-	ObjectUpdater = false,
+	ObjectUpdater = true,
 	CollisionManager = false,
+
+
+	-- Statics
+	ButtonStatic = true,
+	ShaderStatic = true,
 
 	-- Objects
 	Camera = false,
@@ -29,7 +58,9 @@ DebugText.type =
 	Mouse = false,
 	Life = false,
 	SnapPlayer = false,
-
+	Pos = false,
+	Collision = false,
+	Button = false,
 
 	-- Counters
 	SinCounter = false,
@@ -37,15 +68,14 @@ DebugText.type =
 	-- Graphics
 	Line = false,
 	Shape = false,
+	Point = false,
 
-
-	-- other
-	Generic = true,
+	-- Other
+	Generic = false
 }
 
 
--- all text messages that need to be drawn on the next frame
-DebugText.texts = {}
+
 
 -- position shit
 DebugText.xStart = 8
@@ -60,6 +90,7 @@ DebugText.ySpace = 16
 
 function DebugText:Update()
 	-- nuthin to do here for now I guess :P
+	-- but would now update as a static
 end 
 
 -- add a single line
@@ -73,7 +104,7 @@ function DebugText:TextTable(data)
 
 	local textType = data[1].obj or "Generic"
 
-	if(self.type[textType] == false) then
+	if(self.messageType[textType] == false) then
 		return
 	end 
 
@@ -81,8 +112,27 @@ function DebugText:TextTable(data)
 
 end
 
+
+-- optional text altering
+-- {text, x, y, rot, xScale, yScale, 
+--	xOffset, yOffset, xShear, yShear}
+function LovePrint(data)
+	local text = data.text or "NoText"
+	local x = data.x or 0
+	local y = data.y or 0
+	local rot = data.rot or 0
+	local xScale = data.xScale or 1
+	local yScale = data.yScale or 1
+	local xOffset = data.xOffset or 0
+	local yOffset = data.yOffset or 0
+	local xShear = data.xShear or 0
+	local yShear = data.yShear or 0
+	love.graphics.print(text, x, y, rot, xScale, yScale, xOffset, yOffset, xShear, yShear)
+end 
+
 -- generic object print
 -- this function isnt really needed anymore
+-- DEPRICATED 11-17-2014!!
 function DebugText:PrintObject(data)
 	self:Text("")
 	self:Text("Name: " .. data.name)
@@ -106,7 +156,13 @@ function DebugText:Draw()
 		-- for each text message in item
 		for t=1, #self.texts[i] do
 			love.graphics.setColor(self.texts[i][t].color or Color:AsTable(Color.white))
-			love.graphics.print(self.texts[i][t].text, self.xStart, self.yStart + (self.ySpace * (index-1) ) )
+			LovePrint
+			{
+				text = self.texts[i][t].text,
+				x = self.xStart,
+				y = self.yStart + (self.ySpace * (index-1) ),
+			}
+			--love.graphics.print(self.texts[i][t].text, self.xStart, self.yStart + (self.ySpace * (index-1) ) )
 
 			index = index + 1
 		end 
@@ -114,6 +170,7 @@ function DebugText:Draw()
 	end 
 
 	-- remove all texts for next frame
+	-- only texts that are constantly passed are drawn
 	self.ClearTexts()
 end 
 
@@ -127,6 +184,7 @@ function DebugText:ClearTexts()
 end 
 
 
+ObjectUpdater:AddStatic(DebugText)
 
 
 -- Notes
@@ -135,3 +193,5 @@ end
 -- since lots of objects overflows vertically
 
 -- add in feature to print children or parents :P
+
+-- DebugText is a Global

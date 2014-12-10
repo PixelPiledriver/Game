@@ -1,26 +1,36 @@
 -- checks all the collision objects for collisions
 
+-- Requires
+-----------------
+-- local ObjectUpdater = require("ObjectUpdater")
+-- leave out for now
+-- cannot put a manager in a manager or some shit
+
 local CollisionManager = {}
-
-
-
-CollisionManager.objects = {}
-CollisionManager.names = {}
-CollisionManager.destroyList = {}
-
 
 
 ----------------------
 -- Variables
 ----------------------
 
-CollisionManager.destroyObjects = false
+-- object
+CollisionManager.name = "CollisionManager"
+CollisionManager.oType = "Static"
+CollisionManager.dataType = "Manager"
 
+-- lists
+CollisionManager.objects = {}
+CollisionManager.names = {}
+CollisionManager.destroyList = {}
+
+-- flags
+CollisionManager.destroyObjects = false
 
 -------------------------
 -- Collision Functions
 -------------------------
 
+-- {a = {x,y}, b = {x,y}}
 function CollisionManager:PointToPoint(a, b)
 
 	if(a.x == b.x and a.y == b.y) then
@@ -31,6 +41,7 @@ function CollisionManager:PointToPoint(a, b)
 	return false
 end
 
+-- {point = {x,y}, rect = {x,y,width,height} }
 function CollisionManager:PointToRect(point, rect)
 	if(point.x > rect.x and point.x < rect.x + rect.width and point.y > rect.y ) then
 		return true
@@ -39,6 +50,7 @@ function CollisionManager:PointToRect(point, rect)
 	return false
 end 
 
+-- {a = {x,y,width,height}, b = {}}
 function CollisionManager:RectToRect(a, b)
 	local rect1, rect2
 
@@ -126,7 +138,6 @@ function CollisionManager:RectToRect(a, b)
 
 end 
 
-
 ---------------
 -- Functions
 ---------------
@@ -182,12 +193,17 @@ function CollisionManager:Destroy(obj)
 
 end 
 
+-- does what is says
+--> this should be ported to work with DebugText
 function CollisionManager:PrintDestroyList()
 	for i=1, #self.destroyList do
 		print(self.destroyList[i])
 	end 
 end
 
+-- removes all destroyed objects
+-- from the lists
+-- this does not include Statics --> are not destroyed --> for now
 function CollisionManager:ClearDestroyedObjects()
 
 	--self:PrintDestroyList()
@@ -334,7 +350,8 @@ end
 
 CollisionManager.printDebugTextActive = false
 
--- prints data to screen
+
+-- :P
 function CollisionManager:PrintDebugText()
 	
 	if(self.printDebugTextActive == false) then
@@ -358,7 +375,7 @@ function CollisionManager:PrintDebugText()
 
 end 
 
--- do stuff
+
 function CollisionManager:Update()
 	self:CheckForCollisions()
 	self:PrintDebugText()
@@ -367,10 +384,9 @@ end
 
 
 
-
-
-
-
+-- leave out for now
+-- cannot put a manager in a manager or some shit
+--ObjectUpdater:AddStatic(CollisionManager)
 
 
 

@@ -1,12 +1,36 @@
--- PixelTexture
+-- PixelTexture.lua
+-----------------------------------------------
+-- PIXEL ROBOT
+-- creates a pixel image
+-- call Draw functions generate pixels
+-- use with Brush.lua, Shape.lua, Palette.lua
+-- then Save to a PNG
 
+----------------
+-- Requires
+----------------
+local ObjectUpdater = require("ObjectUpdater")
+local Pos = require("Pos")
+local Scale = require("Scale")
 local Color = require("Color")
 local Value = require("Value")
 local Random = require("Random")
 
+
+
 local PixelTexture = {}
 
+----------------
+-- Static Vars
+----------------
 
+PixelTexture.name = "PixelTexture"
+PixelTexture.oType  = "Static"
+PixelTexture.dataType = "Graphics Construtor"
+
+PixelTexture.other = nil
+
+PixelTexture.selectedPalette = nil
 
 -- {name, width, height}
 function PixelTexture:New(data)
@@ -15,50 +39,105 @@ function PixelTexture:New(data)
 	-- Create
 	-------------------
 
-	local object = {}
+	local o = {}
 
-	object.name = data.name or "..."
-	object.type = "PixelTexture"
-
-
-	object.filename = data.filename or "image"
-	object.image = love.image.newImageData(data.width, data.height)
-
-	object.saveIndex = 0
-	object.width = data.width
-	object.height = data.height
+	o.name = data.name or "..."
+	o.type = "PixelTexture"
+	o.datatype = "Graphics Object"
 
 
+	o.filename = data.filename or "image"
+	o.image = love.image.newImageData(data.width, data.height)
+	o.texture = nil
 
+	o.saveIndex = 0
+	o.width = data.width
+	o.height = data.height
+
+	print(o.width/2)
+
+	o.draw = data.draw or false
+
+
+	------------------------
+	-- Components
+	------------------------
+	local defaultPos = 
+	{
+		x = 0, 
+		y = 0,
+		z = 0,
+		speed = {x=0,y=0}
+	}
+
+	o.Pos = Pos:New(data.pos or defaultPos)
+
+
+	local defaultScale =
+	{
+		x = 1,
+		y = 1
+	}
+
+	o.Scale = Scale:New(data.scale or defaultScale)
 
 
 	---------------------
 	-- Functions
 	---------------------
 
+
+	function o:Draw()
+		if(self.draw == false or self.texture == nil) then
+			return
+		end 
+
+
+		love.graphics.setColor(Color:AsTable(Color:Get("white")))
+		Draw:Draw
+		{
+			object = self.texture,
+			x = self.Pos.x,
+			y = self.Pos.y,
+			xScale = self.Scale.x,
+			yScale = self.Scale.y
+		}
+
+		--love.graphics.draw(self.texture, self.Pos.x, self.Pos.y, self.Scale)
+	end 
+
+	-- do stuff
+	function o:Update()
+
+	end 
+
+	-- creates the texture from this objects pixels
+	-- set draw to true to make this a object on screen
+	function o:CreateTexture()
+		self.texture = nil
+		self.texture = love.graphics.newImage(self.image)
+		self.texture:setFilter("nearest", "nearest")
+	end 
+
 	----------------------------------------------------------------------------------------------
 	-- Draw
 	----------------------------------------------------------------------------------------------
 	-- set a single pixel
 	-- {x, y, color}
-	function object:Pixel(data)
+	function o:Pixel(data)
 
 		if(data.x >= self.width or data.x < 0 or data.y >= self.height or data.y < 0) then
 			return
 		end 
 
-		local color = nil
-		if(data.color[1] == nil) then
-			color = Color:Get(data.color)
-		else
-			color = data.color
-		end 
-		self.image:setPixel(data.x, data.y, color[1], color[2], color[3], color[4])
+		local color = data.color or Color:Get("red")
+
+		self.image:setPixel(data.x, data.y, color.r, color.g, color.b, color.a)
 
 	end 
 
 	-- {x, y, color}
-	function object:Box(data)
+	function o:Box(data)
 
 		for x=1, data.width do
 			for y=1, data.height do
@@ -91,7 +170,7 @@ function PixelTexture:New(data)
 	-- draws line across texture
 	-- can slice multiple times
 	--{ x = {#,#,...}, y = {#,#,...}, xBorder, yBorder}
-	function object:Slice(data)
+	function o:Slice(data)
 
 		-- x
 		if(data.x) then
@@ -152,7 +231,7 @@ function PixelTexture:New(data)
 
 
 	-- {x, y, brush}
-	function object:Brush(data)
+	function o:Brush(data)
 		
 		for x=1, data.brush.width do
 			for y=1, data.brush.height do
@@ -194,7 +273,7 @@ function PixelTexture:New(data)
 
 
 	-- {x, y, color, brush, xRange, yRange, count}
-	function object:Cluster(data)
+	function o:Cluster(data)
 		
 		for i = 1, data.count do
 
@@ -226,7 +305,7 @@ function PixelTexture:New(data)
 	end 
 
 	--{a={x,y}, b{x,y}, brush, color}
-	function object:LerpStroke(data)
+	function o:LerpStroke(data)
 		local lerp = 0
 		
 		repeat
@@ -272,7 +351,7 @@ function PixelTexture:New(data)
 	local useRotVelocityScale = true
 
 	-- {x, y, direction, speed, rot, rotVelocity, length, brush, color, fade}
-	function object:DirectionalStroke(data)
+	function o:DirectionalStroke(data)
 
 		local x = data.x and data.x:Get() or 0
 		local y = data.y and data.y:Get() or 0
@@ -301,6 +380,7 @@ function PixelTexture:New(data)
 			local color = data.color and Color:Get(data.color:Get()) or Color:Get("red")
 
 			local brush = data.brush and data.brush:Get() or PixelBrush.x1
+
 
 
 			direction = Math:AngleToVector(angle)
@@ -334,95 +414,194 @@ function PixelTexture:New(data)
 	----------------------------------------------------------------------------
 	-- Map Pixel Functions
 	----------------------------------------------------------------------------
-	function object.MapPixelTestFunction(x,y,r,g,b,a)
+	function o.MapPixelTestFunction(x,y,r,g,b,a)
 		return r,g,b,a
 	end
 
-	function object:MapPixelTest()
+	function o:MapPixelTest()
 		self.image:mapPixel(self.MapPixelTestFunction)
 	end
 
 
-	function object.ClearFunction(x,y,r,g,b,a)
+	function o.ClearFunction(x,y,r,g,b,a)
 		return 0,0,0,0
 	end 
 
-	function object:Clear()
+	function o:Clear()
 		self.image:mapPixel(self.ClearFunction)
+	end
+
+	o.washColor = Color:Get("red")
+	function o.WashFunction(x,y,r,g,b,a)
+		return o.washColor.r, o.washColor.g, o.washColor.b, o.washColor.a
+	end 
+
+	function o:Wash()
+		self.image:mapPixel(self.WashFunction)
 	end 
 
 
-	function object.XGradientFunction(x,y,r,g,b,a)
-		local l = Math:InverseLerp{a=0, b= object.width, t = x}
+	function o.XGradientFunction(x,y,r,g,b,a)
+		local l = Math:InverseLerp{a=0, b= o.width, t = x}
 		local xp = l * 255
+
 		return xp,xp,xp,255
 	end 
 
-	function object:XGradient()
+	function o:XGradient()
 		self.image:mapPixel(self.XGradientFunction)
 	end 
 
-
-	function object.XSymmetryFunction(x,y,r,g,b,a)
-
-		local xp = x
-
-		if(x > object.width/2) then
-			xp = object.width/2 - (x - (object.width/2)) + 1
+	function o.TestTextureIndexingFunction(x,y,r,g,b,a)
+			
+	
+		if(x == 0) then
+			r = 255
+			g = 0
+			b = 0
 		end 
 
-		return object.image:getPixel(xp, y)
 
+		if(x == o.width-1) then
+			r = 0
+			g = 0
+			b = 255
+		end 
+
+
+		return r,g,b,a
 	end 
-	
-	function object:XSymmetry()
-		self.image:mapPixel(self.XSymmetryFunction)
-		self:XScroll()
-	end
 
-	function object.XScrollFunction(x,y,r,g,b,a)
+	function o:TestTextureIndexing()
+		self.image:mapPixel(self.TestTextureIndexingFunction)
+	end 
+
+	function o.XScrollFunction(x,y,r,g,b,a)
 
 		local xi = x + 1
-		if(xi >= object.width) then
+		if(xi >= o.width) then
 			xi = x
 		end 
-		return object.image:getPixel(xi,y)
+		return o.image:getPixel(xi,y)
 	end 
 
-	function object:XScroll()
+	function o:XScroll()
 		self.image:mapPixel(self.XScrollFunction)
 	end 
 
-	function object.YScrollFunction(x,y,r,g,b,a)
+	function o.YScrollFunction(x,y,r,g,b,a)
 		local yi = y + 1
-		if(yi >= object.height) then
+		if(yi >= o.height) then
 			yi = y
 		end
 
-		return object.image:getPixel(x,yi)
+		return o.image:getPixel(x,yi)
 	end 
 
-	function object:YScroll()
+	function o:YScroll()
 		self.image:mapPixel(self.YScrollFunction)
 	end 
 
-	function object.YSymmetryFunction(x,y,r,g,b,a)
-		local yp = y
+	function o.XSymmetryFunction(x,y,r,g,b,a)
 
-		if(y > object.height/2) then
-			yp = object.height/2 - (y - (object.height/2)) + 1
+		local xp = x
+
+		if(x > o.width/2-1) then
+			xp = (o.width/2) - ((x - (o.width/2)) + 1) -- oh wait no thats right lol
 		end 
 
-		return object.image:getPixel(x,yp)
+		--return r,g,b,a--o.image:getPixel(xp, y)return r,g,b,a
+		return o.image:getPixel(xp, y)
+
 	end
 
-	function object:YSymmetry()
+
+	-- half black half white
+	-- for testing masks right now
+	function o.SplitFunction(x,y,r,g,b,a)
+
+		local finalColor = nil
+
+
+		if(x < o.width/2) then
+			finalColor = {255,255,255,255}
+		else
+			finalColor = {0,0,0,255}
+		end
+
+		return finalColor[1], finalColor[2], finalColor[3], finalColor[4]
+
+	end 
+
+	function o:Split()
+		self.image:mapPixel(self.SplitFunction)
+	end
+
+	
+	function o:XSymmetry()
+		self.image:mapPixel(self.XSymmetryFunction)
+		--self:XScroll()
+	end
+
+
+	function o.YSymmetryFunction(x,y,r,g,b,a)
+		local yp = y
+
+		if(y > o.height/2-1) then
+			yp = (o.height/2) - ((y - (o.height/2)) + 1)
+		end 
+
+		return o.image:getPixel(x,yp)
+	end
+
+	function o:YSymmetry()
 		self.image:mapPixel(self.YSymmetryFunction)
-		self:YScroll()
+	end 
+
+
+	function o.AllRandomFunction(x,y,r,g,b,a)
+		local color = Color:Get("random")
+		return color.r, color.g, color.b, color.a
+	end 
+
+	function o:AllRandom()
+		self.image:mapPixel(self.AllRandomFunction)
+	end
+
+
+	function o.AllRandomFromPaletteFunction(x,y,r,g,b,a)
+		local color = PixelTexture.selectedPalette:GetRandom()
+		return color.r, color.g, color.b, color.a
+	end 
+
+	function o:AllRandomFromPalette(p)
+		PixelTexture.selectedPalette = p
+		self.image:mapPixel(self.AllRandomFromPaletteFunction)
 	end 
 
 
 
+
+	function o.MaskFunction(x,y,r,g,b,a)
+
+		local r,g,b,a = PixelTexture.other.image:getPixel(x,y)
+
+		local finalColor = nil
+
+		if(Color:Equal( {r,g,b,a} , {0,0,0,255})) then
+			finalColor = {0,0,0,255}
+		else
+			local rO, gO, bO, aO = o.image:getPixel(x,y)
+			finalColor = {rO, gO, bO, aO}
+		end
+
+		return finalColor[1], finalColor[2], finalColor[3], finalColor[4]
+	end 
+
+	function o:Mask(pixTex)
+		PixelTexture.other = pixTex
+		self.image:mapPixel(self.MaskFunction)
+	end
 
 
 	--------------------------------------------------------------
@@ -430,18 +609,18 @@ function PixelTexture:New(data)
 	--------------------------------------------------------------
 	-- save image to file
 	-- defaults to AppData/Love/Game
-	function object:SaveToFile(data)
+	function o:SaveToFile(data)
 		self.image:encode(data.filename, png)
 	end
 
-	function object:SaveToFileByIndex()
+	function o:SaveToFileByIndex()
 		self.image:encode(self.filename .. self.saveIndex .. ".png", "png")
 		self.saveIndex = self.saveIndex + 1
 	end 
 
+	ObjectUpdater:Add{o}
 
-
-	return object
+	return o
 
 end 
 
@@ -501,8 +680,8 @@ return PixelTexture
 
 -- pixel brush
 ------------------------------------
--- object is a shape of pixels that can be stamped multiple times onto a pixel texture
--- should code as seperate object that can be created
+-- o is a shape of pixels that can be stamped multiple times onto a pixel texture
+-- should code as seperate o that can be created
 
 
 -- vertex cluster
@@ -527,13 +706,22 @@ return PixelTexture
 -- randomize values for curves <-- use bezier
 -- use rotational direction to draw complex random lines
 
--- Draw functions as objects
+-- Draw functions as os
 -----------------------------------------
--- at some point convert the drawing functions over to objects.
+-- at some point convert the drawing functions over to os.
 -- That way they can all update together over time instead of locking into a loop until they are done.
 -- This gives the potential for watching the strokes be created one at a time or all together.
 
 
 -- mix colors on set pixel
 ---------------------------------------------
--- lowe alpha overwrites pixels instead of blending with them, fix that shit
+-- lower alpha overwrites pixels instead of blending with them, fix that shit
+
+
+-- Pixel Robot
+-------------------------------------
+-- Random pixel generator
+-- characters
+-- Educational and useful
+-- Composition theory
+-- Creates a daily image that you get to rate and tweak

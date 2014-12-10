@@ -1,5 +1,26 @@
 -- Notes.lua
 
+-- track shit that needs to be coded in the future
+
+
+-- Palettes
+-----------------------
+-- make drawable
+-- clickable --> change color
+-- cuz Preece said so
+
+-- Add new functions for generating palette
+-- contrast control
+-- Bilinear --> etc
+
+-- Buttons
+------------------------
+-- Add bool buttons --> check boxes, for options
+
+
+-- Components
+-------------------------
+--adding a component could be a function, just pass the data and parent tables
 
 
 -- old junk code goes here

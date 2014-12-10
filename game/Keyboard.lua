@@ -1,6 +1,10 @@
 -- Keyboard
 -- wrapper for love.keyboard
 
+-- WTF BRO
+-- this file does nothing at all
+-- >:L
+
 -- lets make this global just for fun
 
 Keyboard = {}

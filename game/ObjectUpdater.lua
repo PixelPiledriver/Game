@@ -1,17 +1,43 @@
 -- ObjectUpdater.lua
 -- holds all objects in a table and updates them
+-- objects, statics, special types
 
-
+--------------
+-- Requires
+--------------
 local CollisionManager = require("CollisionManager")
 
+
 local ObjectUpdater = {}
+---------------
+-- Create
+---------------
+
+-- object
+ObjectUpdater.name = "ObjectUpdater"
+ObjectUpdater.otype = "Static"
+ObjectUpdater.dataType = "Manager"
+
+-- tables
+ObjectUpdater.statics = {}
 ObjectUpdater.objects = {}
 ObjectUpdater.cameras = {}
+
+-- flags
 ObjectUpdater.destroyObjects = false
+
+-- debug
+ObjectUpdater.printAllObjectsInDebugText = true
+ObjectUpdater.printAllStaticsInDebugText = false
 
 -------------
 --Functions
 -------------
+
+function ObjectUpdater:AddStatic(staticObject)
+	self.statics[#self.statics + 1] = staticObject
+
+end 
 
 -- add a new object to the list
 -- {a,b,c,...} --> table of objects
@@ -22,6 +48,8 @@ function ObjectUpdater:Add(objects)
 	end 
 
 end 
+
+
 
 -- destroy a single object
 -- also adds collision of object to destroy list if it has one
@@ -87,26 +115,50 @@ function ObjectUpdater:PrintDebugText()
 		{text = "", obj = "ObjectUpdater"},
 		{text = "ObjectUpdater"},
 		{text = "------------------"},
-		{text = "Objs: " .. #self.objects},
+		{text = "Total Statics: " .. #self.statics},
+		{text = "Total Objs: " .. #self.objects},
 		{text = "------------------"},
 	}
 
-	local objectNames = {}
-	objectNames[1] = {text = "", obj = "ObjectUpdater"}
+	if(ObjectUpdater.printAllStaticsInDebugText) then
+		local staticNames = {}
+		staticNames[1] = {text = "", obj = "ObjectUpdater"}
+		staticNames[2] = {text = "Statics"}
+		staticNames[3] = {text = "------------"}
 
-	for i=1, #self.objects do
+		for i=1, #self.statics do
+			local sName = self.statics[i].name or "..."
+			local sOType = self.statics[i].oType or "___"
+			local sDataType = self.statics[i].dataType or "***" 
 
-		local oName = self.objects[i].name or "..."
-		local oType = self.objects[i].type or "___"
+			staticNames[#staticNames+1] = {}
+			staticNames[#staticNames].text = sName .. " | " .. sOType .. " | " .. sDataType
 
-		objectNames[#objectNames + 1] = {}
-		objectNames[#objectNames].text = oName .. " " .. oType
-		--DebugText:Text((self.objects[i].name or "*no .name*") .. " -- " .. (self.objects[i].type or "*no .type*"))	
+		end 
+
+		DebugText:TextTable(staticNames)
+
 	end 
 
-	DebugText:TextTable(objectNames)
+	if(ObjectUpdater.printAllObjectsInDebugText) then
+		local objectNames = {}
+		objectNames[1] = {text = "", obj = "ObjectUpdater"}
+
+		for i=1, #self.objects do
+
+			local oName = self.objects[i].name or "..."
+			local oType = self.objects[i].oType or "___"
+			local oDataType = self.objects[i].dataType or "***"
 
 
+			objectNames[#objectNames + 1] = {}
+			objectNames[#objectNames].text = oName .. "| " .. oType .. " | " .. oDataType
+			
+		end 
+
+		DebugText:TextTable(objectNames)
+			
+	end 
 
 
 end 
@@ -125,6 +177,21 @@ function ObjectUpdater:Update()
 			self.cameras[i]:PrintDebugText()
 		end
 	end  
+
+	-- statics
+	for i=1 , #self.statics do
+
+		-- update
+		if(self.statics[i].Update) then
+			self.statics[i].Update()
+		end 
+
+		-- debug text
+		if(self.statics[i].PrintDebugText) then
+			self.statics[i]:PrintDebugText()
+		end
+
+	end
 	
 	-- objects
 	for i=1, #self.objects do
@@ -219,5 +286,19 @@ end
 
 
 
-
 return ObjectUpdater
+
+
+
+
+--	Notes
+----------------------
+-- should probly update this to create
+-- updater objects that you can add objects to
+-- that way they all run the same and just have different lists
+--> :D
+
+
+-- Junk code
+-----------------
+--DebugText:Text((self.objects[i].name or "*no .name*") .. " -- " .. (self.objects[i].otype or "*no .otype*"))	

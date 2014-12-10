@@ -1,8 +1,8 @@
 -- Bullet types
 -- different kinds of bullets with stats and stuff
 
-
 local Sprites = require("Sprites")
+
 
 local BulletTypes = {}
 

@@ -20,6 +20,7 @@ function Mouse:New(data)
 	-- object
 	o.name = data.name or "..."
 	o.type = "Mouse"
+	o.dataType = "Control Object"
 
 	-- 
 	o.totalDistanceTraveled = 0
@@ -53,6 +54,7 @@ function Mouse:New(data)
 		name = o.type,
 		mouse = true,
 		collisionList = {},
+		parent = o
 	}
 	
 	----------------------------------

@@ -1,6 +1,17 @@
 -- manages using controllers
 
+local ObjectUpdater = require("ObjectUpdater")
+
+
 local Controller = {}
+
+----------------
+-- Static Vars
+----------------
+
+Controller.name = "Controller"
+Controller.oType = "Static"
+Controller.dataType = "Input Constructor & Manager"
 
 
 -- get all available controllers
@@ -77,7 +88,7 @@ end
 -- Triggers
 -------------
 function Controller:TriggerTest(controller)
-	
+-- :D
 end
 
 
@@ -141,6 +152,8 @@ end
 -- this will need to be called again if a controller is synced during play
 -- altho it will need some modifications for that to work properly
 -- I'll do it later :P
+-- also need to make this based on calling Controller:New()
+-- currents structure is a bit wonk >:L
 function Controller:Setup()
 
 	for i=1, #getControllers do
@@ -358,6 +371,8 @@ end
 
 -- setup
 Controller:Setup()
+
+ObjectUpdater:AddStatic(Controller)
 
 return Controller
 

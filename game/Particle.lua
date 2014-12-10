@@ -7,7 +7,6 @@ local ObjectUpdater = require("ObjectUpdater")
 local Box = require("Box")
 local Color = require("Color")
 local Random = require("Random")
-local DataPass = require("DataPass")
 local Value = require("Value")
 local Shape = require("Shape")
 
@@ -699,20 +698,6 @@ local particle = Particle:New
 
 
 
--- backup
-------------------------------
-
-	--[[
-	local spin = DataPass:Options
-	{
-		data = data,
-		options =
-		{
-			{"spin", "value"},
-			{"spinRange", "range"}
-		}
-	}
-	--]]
 
 
 -- Notes
@@ -814,11 +799,21 @@ Particle.testType4 =
 
 }
 
-
-
-
-
-
-
-
 --]]
+
+
+------------------------------
+-- Junk Code
+------------------------------
+
+	--[[
+	local spin = DataPass:Options
+	{
+		data = data,
+		options =
+		{
+			{"spin", "value"},
+			{"spinRange", "range"}
+		}
+	}
+	--]]

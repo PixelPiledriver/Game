@@ -19,11 +19,11 @@ function Shape:New(data)
 
 	o.name = data.name or "..."
 	o.type = "Shape"
+	o.dataType = "Graphics"
 
 	o.x = data.x or 0
 	o.y = data.y or 0
 	o.boxes = {}
-
 
 	for i=1, #data.boxes do
 		data.boxes[i].x = o.x + data.boxes[i].x

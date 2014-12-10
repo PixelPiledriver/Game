@@ -1,16 +1,22 @@
 -- use to get colors by name
 -- and other stuff
 
+local ObjectUpdater = require("ObjectUpdater")
 local Random = require("Random")
 
 local Color = {}
 
+----------------------
+-- Static Vars
+----------------------
 
+Color.name = "Color"
+Color.oType = "Static"
+Color.dataType = "Graphics Constructor"
 
------------------------------------
+----------------------
 -- Colors
------------------------------------
-
+----------------------
 
 Color.maroon = 
 {
@@ -1352,6 +1358,7 @@ Color.group.fire2 =
 }
 
 
+-- return copy of given named color
 function Color:Get(name)
 
 	if(name == "random") then
@@ -1364,12 +1371,49 @@ function Color:Get(name)
 		g = Color[name].g,
 		b = Color[name].b,
 		a = Color[name].a,
-		name = name
+		name = name,
+		oType = "Color",
+		dataType = "Graphics"
 	}
 	
-	return copy, name
+	return copy
 end
 
+--create a new color object
+function Color:New(data)
+
+	-----------------
+	-- Create
+	-----------------
+	local o = {}
+
+
+	-- object
+	o.name = data.name or "..."
+	o.oType = "Color"
+	o.dataType = "Graphics"
+
+
+	o.r = data.r or 256
+	o.g = data.g or 256
+	o.b = data.b or 256
+	o.a = data.a or 256
+
+
+	function o:PrintSelf()
+		print("Color: [" .. self.r .. ", " .. self.g .. ", " .. self.b .. ", " .. self.a .. "]")
+	end
+
+	-- get brightness value of color
+	function o:Luminance()
+		return (self.r + self.g + self.b) / 3
+	end
+
+	return o
+
+end 
+
+-- return color as table for love.graphics.setColor(color)
 function Color:AsTable(data)
 
 	local copy =
@@ -1382,7 +1426,29 @@ function Color:AsTable(data)
 
 	return copy
 	
-end 
+end
+
+
+
+-- return the brightness of the color
+function Color:Luminance(c)
+	return (c.r + c.g + c.b) / 3
+end
+
+-- return invert color of given color
+function Color:GetInverted(c)
+	
+	local newColor = Color:New
+	{
+		r = 255 - c.r,
+		g =	255 - c.g,
+		b = 255 - c.b,
+	}
+
+	return newColor
+	
+end  
+
 
 -- compare two colors for equality
 function Color:Equal(a,b)
@@ -1514,13 +1580,7 @@ end
 
 
 
-
-love.graphics.setBackgroundColor(Color:AsTable(Color.black))
-
-
-
-
-
+ObjectUpdater:AddStatic(Color)
 
 -- done
 return Color

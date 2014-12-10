@@ -1,7 +1,5 @@
 -- Blocks that the player builds
 
-
-
 local ObjectUpdater = require("ObjectUpdater")
 local Collision = require("Collision")
 local BlockMap = require("BlockMap")
@@ -10,6 +8,12 @@ local Health = require("Health")
 
 local Block = {}
 
+---------------------
+-- Static Vars
+---------------------
+Block.name = "Bonnie"
+Block.oType = "BlockStatic"
+Block.DataType = "GameObject Constructor"
 
 -------------
 -- Create
@@ -18,8 +22,9 @@ function Block:New(data)
 
 	local object = {}
 
-	object.name = data.name or "???"
-	object.type = "block"
+	object.name = data.name or "..."
+	object.oType = "Block"
+	object.dataType = "GameObject"
 
 	object.x = data.x
 	object.y = data.y
@@ -34,7 +39,6 @@ function Block:New(data)
 	object.completion = 0
 	object.collisionList = data.collisionList or nil
 	
-
 	object.health = Health:New{}
 
 	---------------
@@ -116,9 +120,7 @@ end
 
 
 
-
-
-
+ObjectUpdater:AddStatic(Block)
 
 return Block
 

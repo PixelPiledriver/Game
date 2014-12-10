@@ -1,4 +1,9 @@
--- DataPass
+-- DataPass.Lua
+
+-- -!!!!!!!!!!!!!!!!!!!!!!!!!!!-
+-- 		DEPRICATED 11-17-2014
+-- -!!!!!!!!!!!!!!!!!!!!!!!!!!!-
+
 -- use to build structures that pass data from one table to another
 
 

@@ -5,6 +5,19 @@ local Random = require("Random")
 
 local Value = {}
 
+-- pass in a table that uses Value objects
+-- in a function call will return the 
+-- table with v:Get() run on all values
+-- this is a very good thing --> standardizes objects 
+-- they no longer need to get value inside their constructor
+-- {var, ..., index = {"namesOfVars", ...}
+function Value:GetTable(data)
+	for i=1, #data.index do
+		data[data.index[i]] = data[data.index[i]]:Get()
+	end 
+
+	return data
+end 
 
 -- (value)
 function Value:Value(v)

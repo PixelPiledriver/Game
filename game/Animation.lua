@@ -1,11 +1,26 @@
 -- makes animations from sprite frames
 -- should handle itself for drawing
 
+
+local ObjectUpdater = require("ObjectUpdater")
+
 local Animation = {}
+
+-----------------
+-- Static Vars
+-----------------
+
+-- obj
+Animation.name = "Animation"
+Animation.oType = "Static"
+Animation.dataType = "Data Constructor"
 
 
 function Animation:New(data)
-
+	
+	
+	-- bug checking stuff --> should really add this stuff to more files :P
+	-- but should organize it in some way
 	-----------
 	-- Fails
 	-----------
@@ -15,33 +30,37 @@ function Animation:New(data)
 		return 
 	end
 
-	----------
+	--------------
 	-- Create
-	----------
-	local object = {}
+	--------------
+	local o = {}
 
-	object.name = data.name or nil
-	object.colors = data.colors or nil
+	-- object
+	o.name = data.name or "..."
+	o.oType = "Animation"
+	o.dataType = "Graphics"
 
-	object.sheet = data.sheet or nil
-	object.frames = data.frames or nil -- table of frames
-	object.currentFrame = 1
+	o.colors = data.colors or nil
+
+	o.sheet = data.sheet or nil
+	o.frames = data.frames or nil -- table of frames
+	o.currentFrame = 1
 	
-	object.speedTime = 1
-	object.speed = data.speed
-	object.delayTime = 1
-	object.delays = data.delays
+	o.speedTime = 1
+	o.speed = data.speed
+	o.delayTime = 1
+	o.delays = data.delays
 
-	object.loopMax = data.loopMax or 0
-	object.loopCount = 0
+	o.loopMax = data.loopMax or 0
+	o.loopCount = 0
 
-	object.active = true
+	o.active = true
 
 	-------------
 	-- Functions
 	-------------
 	-- update the frame based on the animation speed and frame delay
-	function object:UpdateFrameTime()
+	function o:UpdateFrameTime()
 
 		-- animation should be playing?
 		if(self.active == false) then
@@ -80,7 +99,7 @@ function Animation:New(data)
 
 	end 
 
-	function object:Draw(objectData)
+	function o:Draw(oData)
 
 		if(self.colors) then
 			love.graphics.setColor(self.colors[self.currentFrame])
@@ -88,19 +107,18 @@ function Animation:New(data)
 			love.graphics.setColor({255,255,255,255})
 		end 
 
-		love.graphics.draw(self.sheet, self.frames[self.currentFrame].frame, objectData.x, objectData.y, objectData.angle, objectData.xScale, objectData.yScale)
+		love.graphics.draw(self.sheet, self.frames[self.currentFrame].frame, oData.x, oData.y, oData.angle, oData.xScale, oData.yScale)
 
 		self:UpdateFrameTime()	
 	end 
 
-
-	return object
+	ObjectUpdater:Add{o}
+	return o
 
 end 
 
 
-
-
+ObjectUpdater:AddStatic(Animation)
 
 return Animation
 
