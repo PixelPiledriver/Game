@@ -45,6 +45,7 @@ function Textfile:New(data)
 	function object:Read()
 		self.text = love.filesystem.read(self.filename)
 	end 
+	
 	-- reads each line into a seperate index of a table
 	function object:ReadLines()
 		for line in love.filesystem.lines(self.filename) do

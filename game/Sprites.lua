@@ -1,6 +1,8 @@
+-- Sprites.lua
 -- load sprites here
 -- just messy shit for now
 -- no biggie
+-- need to clean this garbage up at some point
 
 local Animation = require("Animation")
 

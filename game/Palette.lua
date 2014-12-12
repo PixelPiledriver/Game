@@ -17,6 +17,24 @@ local ObjectUpdater = require("ObjectUpdater")
 
 local Palette = {}
 
+
+
+
+---------------------------
+-- Static Functions
+---------------------------
+
+-- create a new random palette
+-- {size}
+function Palette:NewRandom(data)
+
+	local p = Palette:New{}
+	p:Random{size = data.size}
+
+	return p
+
+end 
+
 --{colors, name, draw, size}
 function Palette:New(data)
 
@@ -28,7 +46,7 @@ function Palette:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.type = "Palette"
+	o.oType = "Palette"
 	o.dataType = "Graphics"
 
 	-- vars
@@ -64,16 +82,6 @@ function Palette:New(data)
 		Pos:AddComponent(o, defaultPos)
 	end
 
-	-----------------
-	-- Functions
-	-----------------
-
-	function o:Clear()
-		self.colors = nil
-		self.colors = {}
-	end 
-
-
 	----------------------
 	-- Sorting Functions
 	-----------------------
@@ -87,8 +95,6 @@ function Palette:New(data)
 	end 
 
 	function o:SortByFunc(name)
-
-		print(self.colors[1].Luminance)
 
 		TableSort:SortByFunc
 		{
@@ -216,8 +222,15 @@ function Palette:New(data)
 	end 
 
 	-----------------------------
-	-- Create Functions
+	-- Create Functions -- create a palette and add colors to it
+
 	-----------------------------
+
+	-- stuff to run on any type of palette after its been created
+	-- needs to be made optional --> will do later :P
+	function o:AfterCreatePass(data)
+		self:SortByFunc("Luminance")
+	end 
 
 	-- all random from named colors
 	-- {size}
@@ -226,7 +239,10 @@ function Palette:New(data)
 
 		for i=1, data.size do
 			self.colors[i] = Color:Get("random")
-		end 
+		end
+
+		self:AfterCreatePass()
+
 	end
 
 
@@ -247,107 +263,107 @@ function Palette:New(data)
 			}
 		end 
 
+		self:AfterCreatePass()
+
 	end
 
 	-- pass in the colors you want to set the palette
 	-- and then the indexes where each one will be placed
 	-- this lets you easily choose the number of colors to interpolate between them
 	-- {colors={"name",...}, indexs={#,...}}
-		function o:Interpolated(data)
-			self:Clear()
+	-- this mimics the ProMotion adjust palette feature
+	function o:Interpolated(data)
+		self:Clear()
 
-			for i=1, #data.colors do
-				self.colors[data.indexes[i]] = Color:Get(data.colors[i])
-			end
+		for i=1, #data.colors do
+			self.colors[data.indexes[i]] = Color:Get(data.colors[i])
+		end
 
-			for i=1, #data.indexes-1 do
+		for i=1, #data.indexes-1 do
 
-				local count = 1
-				local k = data.indexes[i+1]
+			local count = 1
+			local k = data.indexes[i+1]
 
-				for j= data.indexes[i]+1, k-1 do
+			for j= data.indexes[i]+1, k-1 do
 
-					self.colors[j] = Color:Lerp
-					{
-						a = self.colors[data.indexes[i]],
-						b = self.colors[data.indexes[i+1]],
-						t = 1/(k - data.indexes[i]) * count
-						--t = 0.5
-						--t = 1/(data.indexes[i+1] - data.indexes[i]) * (k-(k-j)-1)
-						--t = 1/3 - 1 * (k - j)
-					}
+				self.colors[j] = Color:Lerp
+				{
+					a = self.colors[data.indexes[i]],
+					b = self.colors[data.indexes[i+1]],
+					t = 1/(k - data.indexes[i]) * count
+					--t = 0.5
+					--t = 1/(data.indexes[i+1] - data.indexes[i]) * (k-(k-j)-1)
+					--t = 1/3 - 1 * (k - j)
+				}
 
-					count = count + 1
-				end 
-
+				count = count + 1
 			end 
 
 		end 
 
+		self:AfterCreatePass()
 
-		function o:Update()
-			
+	end 
+
+	-----------------
+	-- Obejct Functions
+	-----------------
+
+	-- remove all colors
+	function o:Clear()
+		self.colors = nil
+		self.colors = {}
+	end 
+
+	function o:Update()
+		
+	end 
+
+	function o:Draw()
+		
+		if(self.draw == false) then
+		
+			return 
 		end 
 
-		function o:Draw()
-			
-			if(self.draw == false) then
-			
-				return 
-			end 
-
-			for i=1, #self.colors do
-				love.graphics.setColor(Color:AsTable(self.colors[i]))
-				love.graphics.rectangle("fill", self.Pos.x, self.Pos.y + ( (i-1) * self.width), self.width, self.width)
-			end 
-
+		for i=1, #self.colors do
+			love.graphics.setColor(Color:AsTable(self.colors[i]))
+			love.graphics.rectangle("fill", self.Pos.x, self.Pos.y + ( (i-1) * self.width), self.width, self.width)
 		end 
 
-
-		-- prints out rgba of all colors in palette
-		-- not super useful but good for quick tests
-		function o:PrintSelf()
-			print("Palette")
-			print("Colors:")
-			print(#self.colors)
-			for i=1, #self.colors do
-				local r,g,b,a = self.colors[i].r, self.colors[i].g, self.colors[i].b,self.colors[i].a			
-				print("{" .. r .. "," .. g .. "," .. b .. "," .. a .. "}")
-			end
-
-			print("Stats:")
-			print("Lightest:" .. self.lightest)
-			print("Darkest:" .. self.darkest)
-			print("MostRed:" .. self.mostRed)
-			print("MostGreen:" .. self.mostGreen)
-			print("MostBlue:" .. self.mostBlue)
-
-		end 
+	end 
 
 
+	-- prints out rgba of all colors in palette
+	-- not super useful but good for quick tests
+	function o:PrintSelf()
+		print("Palette")
+		print("Colors:")
+		print(#self.colors)
+		for i=1, #self.colors do
+			local r,g,b,a = self.colors[i].r, self.colors[i].g, self.colors[i].b,self.colors[i].a			
+			print("{" .. r .. "," .. g .. "," .. b .. "," .. a .. "}")
+		end
 
+		print("Stats:")
+		print("Lightest:" .. self.lightest)
+		print("Darkest:" .. self.darkest)
+		print("MostRed:" .. self.mostRed)
+		print("MostGreen:" .. self.mostGreen)
+		print("MostBlue:" .. self.mostBlue)
 
+	end 
 
 
 
 	ObjectUpdater:Add{o}
-
 
 	return o
 
 end 
 
 
--- create a new random palette
--- {size}
-function Palette:NewRandom(data)
 
-	local p = Palette:New{}
-	p:Random{size = data.size}
-
-	return p
-
-end 
 
 
 

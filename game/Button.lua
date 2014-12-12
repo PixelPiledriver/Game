@@ -25,7 +25,16 @@ Button.ySpace = 8
 
 Button.repeatFunction = 1
 
+Button.buttonBeingDragged = false
 
+-- {table, table}
+function Button:NewObjectAction(data, object)
+	local b = Button:New(data)
+	b[data.objectName] = object
+end 
+
+
+-- {x, y, width, height, useBox = bool, repeatable = bool, actionObjects = table}
 function Button:New(data)
 
 	local o = {}
@@ -52,6 +61,10 @@ function Button:New(data)
 	-- repeat
 	o.repeatable = data.repeatable or false
 
+	-- object to act upon
+	-- pass in the number of objects needed for the button to work
+	o.object = nil
+	o.objName = data.objName or nil
 
 	-- flags
 	o.moveable = true
@@ -133,17 +146,15 @@ function Button:New(data)
 				self.clicked = true
 
 				if(self.lastClicked == false) then
-					if(self.func) then
 
+					if(self.func) then
 						if(self.repeatable) then
 							for i=1, Button.repeatFunction do
-								self.func()
-								
+								self.func()	
 							end
 						else
 							self.func()
 						end 
-
 					else
 						print("this button has no function")
 					end 
@@ -166,20 +177,28 @@ function Button:New(data)
 
 	end 
 
+	-- right click to drag a button
 	function o:ClickToMove()
 
-		if(self.hover == true)then
-			
+
+		if(self.hover == true and Button.buttonBeingDragged == false) then
 			if(love.mouse.isDown("r")) then
 				self.move = true
-				self.lastX = love.mouse.getX() - self.x
-				self.lastY = love.mouse.getY() - self.y
+				Button.buttonBeingDragged = true
 			end 
 		end 
+
+		if(self.move == true) then
+			self.move = true
+			self.lastX = love.mouse.getX() - self.x
+			self.lastY = love.mouse.getY() - self.y
+		end 
+
 
 		-- drop
 		if(self.move == true and love.mouse.isDown("r") == false) then
 			self.move = false
+			Button.buttonBeingDragged = false
 		end 
 
 	end 
@@ -290,6 +309,23 @@ Button.valueTest =
 	end
 }
 
+Button.wash =
+{
+	text = "Wash",
+	func = function()
+		pix:Wash()
+	end 
+}
+
+Button.actionTest =
+{
+	text = "ActionObject",
+	objName = "a",
+	func = function(a)
+		a = a + 5
+		print(a)
+	end 
+}
 
 ---------------------
 -- Static Functions
@@ -305,5 +341,17 @@ function Button:PrintDebugText()
 end 
 
 ObjectUpdater:AddStatic(Button)
+
+
+-----------------------------
+-- Button Library
+-----------------------------
+-- premade buttons go here that can be deployed into any scene
+-- buttons need and extra variable that lets you pass in an object for them to work on
+-- assuming they need one
+-- objects needed for buttons to works will be genericized into a table maybe?
+
+
+
 
 return Button

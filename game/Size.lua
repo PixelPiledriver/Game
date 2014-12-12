@@ -17,7 +17,7 @@ function Size:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.type = "Size"
+	o.oType = "Size"
 	o.dataType = "Component"
 
 	-- vars

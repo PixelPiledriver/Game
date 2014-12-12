@@ -5,6 +5,9 @@
 local ObjectUpdater = require("ObjectUpdater")
 local Box = require("Box")
 local Color = require("Color")
+
+
+
 local Shape = {}
 
 
@@ -18,8 +21,8 @@ function Shape:New(data)
 	local o = {}
 
 	o.name = data.name or "..."
-	o.type = "Shape"
-	o.dataType = "Graphics"
+	o.oType = "Shape"
+	o.dataType = "Graphics Object"
 
 	o.x = data.x or 0
 	o.y = data.y or 0

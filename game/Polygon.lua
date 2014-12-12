@@ -1,11 +1,9 @@
--- Polygon
+-- Polygon.lua
 -- oooooooooooooooooo
 -- triiiiiiiiiiiiiiiiiiiiiiiangles
 -- we need triiiiiiiiiiiiiiiiiiiiiiiangles
 
 local Color = require("Color")
-
-
 local ObjectUpdater = require("ObjectUpdater")
 
 
@@ -17,6 +15,11 @@ local Polygon = {}
 function Polygon:New(data)
 
 	local object = {}
+
+	object.name = "..."
+	object.oType = "Polygon"
+	object.dataType = "Graphics Object"
+
 
 	object.verts = data.verts or 0
 

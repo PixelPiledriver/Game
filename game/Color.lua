@@ -1365,15 +1365,13 @@ function Color:Get(name)
 		name = Random:ChooseRandomlyFrom(Color.index)
 	end 
 
-	local copy =
+	local copy = Color:New
 	{
 		r = Color[name].r,
 		g = Color[name].g,
 		b = Color[name].b,
 		a = Color[name].a,
 		name = name,
-		oType = "Color",
-		dataType = "Graphics"
 	}
 	
 	return copy
@@ -1401,7 +1399,7 @@ function Color:New(data)
 
 
 	function o:PrintSelf()
-		print("Color: [" .. self.r .. ", " .. self.g .. ", " .. self.b .. ", " .. self.a .. "]")
+		print( ((self.name .. ": ") or "Color: ") .. "[" .. self.r .. ", " .. self.g .. ", " .. self.b .. ", " .. self.a .. "]")
 	end
 
 	-- get brightness value of color
@@ -1409,9 +1407,17 @@ function Color:New(data)
 		return (self.r + self.g + self.b) / 3
 	end
 
+	-- probly need to add to ObjectUpdater
+
 	return o
 
 end 
+
+
+-----------------------------
+-- Static Functions
+-- many of these need to be converted to object functions
+-----------------------------
 
 -- return color as table for love.graphics.setColor(color)
 function Color:AsTable(data)
@@ -1561,11 +1567,12 @@ end
 --{a, b, t}
 function Color:Lerp(data)
 
-	local newColor = {}
-
-	newColor.r =  data.a.r + ((data.b.r - data.a.r) * data.t)
-	newColor.g =  data.a.g + ((data.b.g - data.a.g) * data.t)
-	newColor.b =  data.a.b + ((data.b.b - data.a.b) * data.t)
+	local newColor = Color:New
+	{
+		r =  data.a.r + ((data.b.r - data.a.r) * data.t),
+		g =  data.a.g + ((data.b.g - data.a.g) * data.t),
+		b =  data.a.b + ((data.b.b - data.a.b) * data.t),
+	}
 
 	-- alpha
 	if(data.alpha ) then
@@ -1580,7 +1587,15 @@ end
 
 
 
+-- add static to table of other statics
 ObjectUpdater:AddStatic(Color)
+
+
+
+-- test
+local red = Color:Get("red")
+red:PrintSelf()
+
 
 -- done
 return Color

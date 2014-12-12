@@ -19,7 +19,7 @@ function Mouse:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.type = "Mouse"
+	o.oType = "Mouse"
 	o.dataType = "Control Object"
 
 	-- 
@@ -51,7 +51,7 @@ function Mouse:New(data)
 		width = o.width,
 		height = o.height,
 		shape = "rect",
-		name = o.type,
+		name = o.oType,
 		mouse = true,
 		collisionList = {},
 		parent = o

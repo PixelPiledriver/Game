@@ -26,7 +26,7 @@ function Fade:New(data)
 
 	-- o
 	o.name = data.name or "..."
-	o.type = "Fade"
+	o.oType = "Fade"
 	o.dataType = "Component"
 
 	-- vars

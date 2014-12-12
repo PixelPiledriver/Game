@@ -37,6 +37,10 @@ require("TableSort")
 require("PrintDebug")
 require("Random")
 
+-- other require stuff
+require("TestShit")
+
+
 -- List of Levels
 --local TestLevel = require("levels/TestLevel")
 

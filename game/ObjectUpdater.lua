@@ -26,9 +26,10 @@ ObjectUpdater.cameras = {}
 -- flags
 ObjectUpdater.destroyObjects = false
 
--- debug
-ObjectUpdater.printAllObjectsInDebugText = true
+-- debug text options
+ObjectUpdater.printAllObjectsInDebugText = false
 ObjectUpdater.printAllStaticsInDebugText = false
+ObjectUpdater.printTotalObjectTypes = true
 
 -------------
 --Functions
@@ -110,6 +111,7 @@ end
 
 function ObjectUpdater:PrintDebugText()
 
+	-- print basic information
 	DebugText:TextTable
 	{
 		{text = "", obj = "ObjectUpdater"},
@@ -120,6 +122,57 @@ function ObjectUpdater:PrintDebugText()
 		{text = "------------------"},
 	}
 
+	-- print all Object totals by type
+	if(ObjectUpdater.printTotalObjectTypes) then
+		local objectTypesTemp = {}
+		objectTypesTemp.index = {}
+
+		for i=1, #self.objects do
+
+			local objectType = self.objects[i].oType or "unknown"
+			
+			if(objectTypesTemp[objectType] == nil) then
+				objectTypesTemp[objectType] =
+				{
+					name = objectType,
+					total = 1
+				}
+
+				local nameFound = false
+
+				for j=1, #objectTypesTemp.index do
+					if(objectType == objectTypesTemp.index[j]) then
+						nameFound = true 
+					end 
+				end
+	
+				if(nameFound == false) then
+					objectTypesTemp.index[#objectTypesTemp.index + 1] = objectType
+				end 
+
+			else
+				objectTypesTemp[objectType].total = objectTypesTemp[objectType].total + 1
+			end 
+
+		end 
+
+
+		local totalsTextTable = {}
+		totalsTextTable[1] = {text = "", obj = "ObjectUpdater"}
+		totalsTextTable[2] = {text = "Object Totals"}
+		totalsTextTable[3] = {text = "----------------------"}
+
+		for i=1, #objectTypesTemp.index do
+			totalsTextTable[#totalsTextTable+1] = {text = objectTypesTemp[objectTypesTemp.index[i]].name .. ": " .. objectTypesTemp[objectTypesTemp.index[i]].total }
+		end
+
+		DebugText:TextTable(totalsTextTable)
+
+	end 
+
+
+
+	-- print all Statics as list
 	if(ObjectUpdater.printAllStaticsInDebugText) then
 		local staticNames = {}
 		staticNames[1] = {text = "", obj = "ObjectUpdater"}
@@ -140,6 +193,7 @@ function ObjectUpdater:PrintDebugText()
 
 	end 
 
+	-- print all Objects as list
 	if(ObjectUpdater.printAllObjectsInDebugText) then
 		local objectNames = {}
 		objectNames[1] = {text = "", obj = "ObjectUpdater"}

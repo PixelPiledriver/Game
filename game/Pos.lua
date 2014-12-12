@@ -29,7 +29,7 @@ function Pos:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.type = "Pos"
+	o.oType = "Pos"
 	o.dataType = "Component"
 
 	o.parent = data.parent

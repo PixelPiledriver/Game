@@ -28,7 +28,7 @@ end
 function TableSort:SortByFunc(data)
 
 	local function tempCompare(a,b)
-		return a[data.func]() < b[data.func]()
+		return a[data.func](a) < b[data.func](b)
 	end 
 
 	table.sort(data.t, tempCompare)

@@ -1,3 +1,4 @@
+-- Animaiton.lua
 -- makes animations from sprite frames
 -- should handle itself for drawing
 

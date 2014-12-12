@@ -42,8 +42,8 @@ DebugText.messageType =
 
 
 	-- Statics
-	ButtonStatic = true,
-	ShaderStatic = true,
+	ButtonStatic = false,
+	ShaderStatic = false,
 
 	-- Objects
 	Camera = false,

@@ -25,7 +25,7 @@ function Collision:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.type = "Collision"
+	o.oType = "Collision"
 	o.dataType = "Object"
 
 	-- pos

@@ -1,4 +1,4 @@
--- Map
+-- Map.lua
 -- base test map with tiles that show terrain and respond to player movement
 
 
@@ -36,7 +36,8 @@ function Map:MakeTile(data)
 	local object = {}
 
 	object.name = data.name or "???"
-	object.type = "tile"
+	object.oType = "tile"
+	object.dataType = "Game Object"
 
 	object.box = Box:New
 	{

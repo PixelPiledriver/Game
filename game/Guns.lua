@@ -11,23 +11,23 @@ local Guns = {}
 
 function Guns:New(data)
 
-	local object = {}
+	local o = {}
 
-	object.name = data.name or "???"
-	object.type = "gun"
+	o.name = data.name or "???"
+	o.oType = "gun"
 
-	object.bullet = data.bullet or BulletTypes.laser
-	object.maxRateOfFire = data.rateOfFire or 10
-	object.rateOfFire = 0
-	object.clip = data.clip or 10
-	object.reloadTime = data.reloadTime or 100				-- time it takes to load new ammo clip, need to add reload types
-	object.shotsFired = data.shotsFired or 1 					-- for shotguns, etc
+	o.bullet = data.bullet or BulletTypes.laser
+	o.maxRateOfFire = data.rateOfFire or 10
+	o.rateOfFire = 0
+	o.clip = data.clip or 10
+	o.reloadTime = data.reloadTime or 100				-- time it takes to load new ammo clip, need to add reload types
+	o.shotsFired = data.shotsFired or 1 					-- for shotguns, etc
 
-	object.parent =  nil 															-- owner of the gun
-	object.triggerDown = false
-	object.triggerMashing = false
+	o.parent =  nil 															-- owner of the gun
+	o.triggerDown = false
+	o.triggerMashing = false
 
-	function object:Shoot(p)
+	function o:Shoot(p)
 
 
 		self.rateOfFire = self.rateOfFire + 1
@@ -52,7 +52,7 @@ function Guns:New(data)
 
 	end 
 
-	return object
+	return o
 
 end 
 

@@ -14,6 +14,10 @@ function SinCounter:New(data)
 
 	local object = {}
 
+	object.name = "..."
+	object.oType = "SinCounter"
+	object.dataType = "Math Object"
+
 
 	object.value = 0
 	object.speed = data.speed or 0.1

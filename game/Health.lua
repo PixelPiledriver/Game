@@ -21,7 +21,7 @@ function Health:New(data)
 	local o = {}
 
 	o.name = data.name or "???"
-	o.type = "Health"
+	o.oType = "Health"
 	o.dataType = "Component"
 
 	o.max = data.max or 100

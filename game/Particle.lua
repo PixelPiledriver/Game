@@ -25,7 +25,9 @@ function Particle:New(data)
 	-- Other
 	-----------------------------
 	object.name = data.name or "???"
-	object.type = "particle"
+	object.oType = "Particle"
+	object.dataType = "Game Object"
+
 
 	-----------------------------
 	-- Pos

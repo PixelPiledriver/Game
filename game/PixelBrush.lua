@@ -13,15 +13,14 @@ function PixelBrush:New(data)
 
 	local object = {}
 
+	object.name = "..."
+	object.oType = "Brush"
+	object.dataType = "Graphics Object"
+
 	object.width = data.width
 	object.height = data.height
-
 	object.pixels = data.pixels
-
 	object.color = data.color
-
-
-
 
 	return object
 

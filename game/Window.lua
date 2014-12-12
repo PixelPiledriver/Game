@@ -10,7 +10,8 @@ local Window = {}
 
 
 Window.name = "..."
-Window.type = "Window"
+Window.oType = "Window"
+Window.dataType = "App Object"
 
 
 function Window:PrintDebugText()

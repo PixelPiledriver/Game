@@ -29,7 +29,7 @@ function Life:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.type = "Life"
+	o.oType = "Life"
 	o.dataType = "Component"
 
 	-- vars

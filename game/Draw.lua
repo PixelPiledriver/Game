@@ -5,14 +5,10 @@ Draw = {}
 
 
 
-
-
-
-
 -- calls love.graphics.draw()
 -- with a table --> use any order or optional
 -- {drawable, x, y, r, sx, sy, ox, oy, kx, ky} -- love names
--- {object, x, y, rot, xScale, yScale, xOffset, yOffset, xShear, yShear}
+-- {object, x, y, rot, xScale, yScale, xOffset, yOffset, xShear, yShear} -- actual names
 function Draw:Draw(data)
 
 	-- defaults

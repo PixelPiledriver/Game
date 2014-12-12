@@ -28,9 +28,53 @@ PixelTexture.name = "PixelTexture"
 PixelTexture.oType  = "Static"
 PixelTexture.dataType = "Graphics Construtor"
 
-PixelTexture.other = nil
+PixelTexture.mask = nil
 
 PixelTexture.selectedPalette = nil
+
+-------------------------------
+-- Static Functions
+-------------------------------
+
+-- wtf is this shit?
+-- doesnt seem like I need this?
+-- if anything this should be moved over to PixelTexture.lua
+-- and be made a static function
+-- untested, not sure if this actually works --> :P
+function ConvertPixelTextureToPoints(pix)
+	local xSpace = 7
+	local ySpace = 7
+	
+	local points = {}
+	
+	for i=1, #points do
+		points[i].Life:Kill()
+	end 
+
+	for x=0, pix.width-1 do
+		for y=0, pix.height-1 do
+
+			local r,g,b,a = pix.image:getPixel(x,y)
+			
+			local p = Point:New
+			{
+				pos =
+				{
+					x = 200 + x + (xSpace * x),
+					y = 200 + y + (ySpace * y), 
+				},
+				color = Color:New{r=r, g=g, b=b, a=a},
+				colorType = "new",
+				size = 8,
+				life = 100,
+				drain = false
+			}
+
+			points[#points+1] = p
+		end 
+	end 
+
+end 
 
 -- {name, width, height}
 function PixelTexture:New(data)
@@ -42,7 +86,7 @@ function PixelTexture:New(data)
 	local o = {}
 
 	o.name = data.name or "..."
-	o.type = "PixelTexture"
+	o.oType = "PixelTexture"
 	o.datatype = "Graphics Object"
 
 
@@ -53,8 +97,6 @@ function PixelTexture:New(data)
 	o.saveIndex = 0
 	o.width = data.width
 	o.height = data.height
-
-	print(o.width/2)
 
 	o.draw = data.draw or false
 
@@ -584,7 +626,7 @@ function PixelTexture:New(data)
 
 	function o.MaskFunction(x,y,r,g,b,a)
 
-		local r,g,b,a = PixelTexture.other.image:getPixel(x,y)
+		local r,g,b,a = PixelTexture.mask.image:getPixel(x,y)
 
 		local finalColor = nil
 
@@ -598,8 +640,9 @@ function PixelTexture:New(data)
 		return finalColor[1], finalColor[2], finalColor[3], finalColor[4]
 	end 
 
-	function o:Mask(pixTex)
-		PixelTexture.other = pixTex
+	-- (PixelTexture)
+	function o:Mask(pixTexMask)
+		PixelTexture.mask = pixTexMask
 		self.image:mapPixel(self.MaskFunction)
 	end
 

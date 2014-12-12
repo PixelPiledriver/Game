@@ -29,7 +29,7 @@ function Line:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.type = "Line"
+	o.oType = "Line"
 	o.dataType = "Graphics"
 
 
