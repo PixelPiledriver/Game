@@ -149,9 +149,7 @@ print("Pixel[" .. pixel.r .. "," .. pixel.g .. "," .. pixel.b .. "," .. pixel.a 
 
 -- palette
 -------------------------------------------
-local pal = Palette:NewRandom{size=4}
-
-
+local pal = Palette:NewRandom{size = 4}
 
 
 

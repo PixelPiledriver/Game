@@ -3,6 +3,7 @@
 
 local ObjectUpdater = require("ObjectUpdater")
 local SinCounter = require("SinCounter")
+local Color = require("Color")
 local Life = require("Life")
 local Fade = require("Fade")
 
@@ -45,10 +46,10 @@ function Box:New(data)
 	o.height = data.height or 32
 
 	-- color
-	o.color = data.color or {255,255,255,255}
+	o.color = data.color or Color:Get("white")
 	
 	-- draw
-	o.fill = data.fill or false
+	o.fill = data.fill or true
 	o.draw = data.draw or true
 
 	-- rotation
@@ -92,15 +93,20 @@ function Box:New(data)
 	-------------------------
 	-- Components
 	-------------------------
-	o.lifeComp = Life:New
+	local life = data.life or 100
+	local drain = data.drain or false
+
+
+	o.Life = Life:New
 	{
 		life = data.life,
 		maxLife = data.maxLife,
-		drain = data.drain,
+		drain = drain,
 		parent = o
 	}
 
-	o.fadeComp = Fade:New
+
+	o.Fade = Fade:New
 	{
 		active = false,
 		parent = o
@@ -134,7 +140,7 @@ function Box:New(data)
 			love.graphics.setWireframe(true)
 		end 
 
-		love.graphics.setColor(self.color)
+		love.graphics.setColor(Color:AsTable(self.color))
 
 		if(self.rotatable) then
 			love.graphics.push()
@@ -254,6 +260,23 @@ function Box:New(data)
 		self:Spin() 
 		self:Scale()
 		self:Flip()
+	end 
+
+
+
+	function o:PrintDebugText()
+
+		local life = self.Life and self.Life.life or 0
+
+		DebugText:TextTable
+		{
+			{text = "", obj = "Box" },
+			{text = "---------------------"},
+			{text = "Pos: {" .. self.x .. "," .. self.y .. "}"},
+			{text = "Life: " .. self.Life.life },
+			{text = "Fade: " .. self.Fade.fade}
+		}
+
 	end 
 
 	

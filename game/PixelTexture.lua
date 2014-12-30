@@ -30,7 +30,8 @@ PixelTexture.dataType = "Graphics Construtor"
 
 PixelTexture.mask = nil
 
-PixelTexture.selectedPalette = nil
+-- depricated this
+--PixelTexture.selectedPalette = nil
 
 -------------------------------
 -- Static Functions
@@ -98,6 +99,10 @@ function PixelTexture:New(data)
 	o.width = data.width
 	o.height = data.height
 
+	-- palette to use
+	o.palette = nil
+
+
 	o.draw = data.draw or false
 
 
@@ -160,6 +165,18 @@ function PixelTexture:New(data)
 		self.texture = love.graphics.newImage(self.image)
 		self.texture:setFilter("nearest", "nearest")
 	end 
+
+	---------------------------------------------------
+	-- Get
+	---------------------------------------------------
+	function o:GetPixel(data)
+		if(data.x >= self.width or data.x < 0 or data.y >= self.height or data.y < 0) then
+			return
+		end
+
+		return self.image:getPixel(data.x, data.y)
+	end 
+
 
 	----------------------------------------------------------------------------------------------
 	-- Draw
@@ -475,7 +492,8 @@ function PixelTexture:New(data)
 
 	o.washColor = Color:Get("red")
 	function o.WashFunction(x,y,r,g,b,a)
-		return o.washColor.r, o.washColor.g, o.washColor.b, o.washColor.a
+		--return o.washColor.r, o.washColor.g, o.washColor.b, o.washColor.a
+		return 0, 0, 0, 255
 	end 
 
 	function o:Wash()
@@ -612,16 +630,20 @@ function PixelTexture:New(data)
 
 
 	function o.AllRandomFromPaletteFunction(x,y,r,g,b,a)
-		local color = PixelTexture.selectedPalette:GetRandom()
+		local color = o.palette:GetRandom()
 		return color.r, color.g, color.b, color.a
 	end 
 
-	function o:AllRandomFromPalette(p)
-		PixelTexture.selectedPalette = p
-		self.image:mapPixel(self.AllRandomFromPaletteFunction)
+	-- gonna change this to be chosen from pixel textures palette
+	-- 
+	function o:AllRandomFromPalette()
+		if(self.palette) then
+			self.image:mapPixel(self.AllRandomFromPaletteFunction)
+		else
+			print("PixelTexture Has no palette")
+		end 
+
 	end 
-
-
 
 
 	function o.MaskFunction(x,y,r,g,b,a)

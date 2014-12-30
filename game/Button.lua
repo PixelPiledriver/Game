@@ -16,21 +16,30 @@ local Button = {}
 
 Button.name = "Button"
 Button.oType = "Static"
-Button.dataType = "Hud Constructor"
+Button.dataType = "Hud Constructor" 
 
 Button.totalCreated = 0
-Button.lastCreated = {x = 16, y = 500, width = 0, height = 0}
+Button.defaultCreated = {x = 16, y = 500, width = 0, height = 0}
+Button.lastCreated = Button.defaultCreated
 Button.xSpace = 8
 Button.ySpace = 8
+
+Button.maxColumns = 7
 
 Button.repeatFunction = 1
 
 Button.buttonBeingDragged = false
 
+
+
 -- {table, table}
-function Button:NewObjectAction(data, object)
+function Button:ActionButton(data, funcObjects)
 	local b = Button:New(data)
-	b[data.objectName] = object
+
+	for i=1, #b.funcObjectIndex do
+		b.funcObjects[b.funcObjectIndex[i]] = funcObjects[b.funcObjectIndex[i]]
+	end
+
 end 
 
 
@@ -48,6 +57,14 @@ function Button:New(data)
 	o.dataType = "HUD"
 
 	-- pos
+
+	local x = 0
+	local y = 0
+	if(Button.totalCreated == Button.maxColumns) then
+		Button.lastCreated.x = Button.defaultCreated.x
+		Button.lastCreated.y = Button.defaultCreated.y + Button.lastCreated.height + Button.ySpace
+	end 
+
 	o.x = data.x or Button.lastCreated.x + Button.lastCreated.width + Button.xSpace
 	o.y = data.y or Button.lastCreated.y
 
@@ -61,14 +78,27 @@ function Button:New(data)
 	-- repeat
 	o.repeatable = data.repeatable or false
 
-	-- object to act upon
-	-- pass in the number of objects needed for the button to work
-	o.object = nil
-	o.objName = data.objName or nil
+	-- function
+	o.func = data.func
 
+	-- objects to use in the function run when button is pressed
+	if(data.funcObjects) then
+		o.funcObjectIndex = data.funcObjects or nil
+		o.funcObjects = {}
+
+		for i=1, #o.funcObjectIndex do
+			o.funcObjects[o.funcObjectIndex[i]] = nil
+		end 
+
+	end
+	
 	-- flags
-	o.moveable = true
-	o.move = false
+	o.moveable = true    								-- can be moved
+	o.move = false       								-- currently being moved
+
+	o.toggle = data.toggle or false     -- click once to set
+	o.toggleState = false
+	o.toggleName = data.toggleName or data.text
 
 	--[[
 	o.box =  Box:New
@@ -104,7 +134,6 @@ function Button:New(data)
 
 	-- button
 	o.hover = false
-	o.func = data.func
 
 	-- clicked
 	o.clicked = false
@@ -138,6 +167,7 @@ function Button:New(data)
 		self.hover = true
 	end 
 
+	-- runs the functions for the button -----> b.func()
 	function o:ClickButton()
 
 		if(self.hover == true)then
@@ -148,16 +178,46 @@ function Button:New(data)
 				if(self.lastClicked == false) then
 
 					if(self.func) then
+
+						-- button repeats more than once
 						if(self.repeatable) then
+
 							for i=1, Button.repeatFunction do
-								self.func()	
+								if(self.funcObjectIndex == nil) then 
+									self.func()
+								else
+									self.func(self.funcObjects) -- arguments go here
+								end
 							end
+
+						-- button function runs only once
 						else
-							self.func()
+
+							if(self.funcObjectIndex == nil) then 
+								self.func()
+							else
+								self.func(self.funcObjects) -- arguments go here
+							end
+
 						end 
+
+					-- toggle button
+					elseif(self.toggle) then
+			
+						if(self.toggleState == false) then
+							self.toggleState = true
+						else 
+							self.toggleState = false 			
+						end 
+
+						-- diplay state
+						print(self.toggleState)
+
+					-- no fucntion or toggle defined --> this button is useless
 					else
 						print("this button has no function")
 					end 
+
 				end
 
 			end 
@@ -179,7 +239,6 @@ function Button:New(data)
 
 	-- right click to drag a button
 	function o:ClickToMove()
-
 
 		if(self.hover == true and Button.buttonBeingDragged == false) then
 			if(love.mouse.isDown("r")) then
@@ -223,12 +282,25 @@ function Button:New(data)
 
 	ObjectUpdater:Add{o}
 	Button.totalCreated = Button.totalCreated + 1
-	Button.lastCreated = o
+
+
+
+	if(data.saveAsLast == nil) then
+		Button.lastCreated = o
+	end 
 
 	return o
 end 
 
--- useful Buttons
+
+
+-------------------------------------
+-- Useful Buttons
+-------------------------------------
+
+
+
+
 
 Button.createPoint = 
 {
@@ -259,6 +331,9 @@ Button.createPoint =
 	end
 }
 
+-- increases the number of times
+-- the next button press will be executed
+-- if the button has Repeat enabled
 Button.repeatFunctionUp = 
 {
 	text = "Repeat Func Up",
@@ -267,6 +342,9 @@ Button.repeatFunctionUp =
 	end
 }
 
+-- decreases the number of times
+-- the next button press will be executed
+-- if the button has Repeat enabled
 Button.repeatFunctionDown = 
 {
 	text = "Repeat Func Down",
@@ -275,6 +353,7 @@ Button.repeatFunctionDown =
 	end
 }
 
+-- Ends the application
 Button.quit =
 {
   text = "Quit",
@@ -283,23 +362,6 @@ Button.quit =
 	end
 }
 
-
-Button.britUp = 
-{
-	text = "Brit Up",
-	func = function()
-		Shader.brightness = Shader.brightness + 0.1
-	end 
-}
-
-
-Button.britDown = 
-{
-	text = "Brit Down",
- 	func = function()
- 		Shader.brightness = Shader.brightness - 0.1
-	end 
-}
 
 Button.valueTest = 
 {
@@ -312,20 +374,77 @@ Button.valueTest =
 Button.wash =
 {
 	text = "Wash",
-	func = function()
-		pix:Wash()
+	funcObjects = {"pix"},
+	func = function(data)
+		data.pix:Wash()
+		data.pix:CreateTexture()
 	end 
 }
 
+Button.randPixels =
+{
+	text = "Rand Pixels",
+	funcObjects = {"pix"},
+	func = function(data)
+		--data.pix:Clear()
+		data.pix:AllRandomFromPalette()
+		data.pix:CreateTexture()
+	end 
+}
+
+Button.randPalette =
+{
+	text = "Rand Palette",
+	funcObjects = {"pal"},
+	func = function(data)
+			data.pal:Interpolated
+			{
+				colors = {"random", "random", "random"},
+				indexes = {1, 4, 7}
+			}
+	end 
+}
+
+Button.savePixels =
+{
+	text = "Save Pixels",
+	funcObjects = {"pix"},
+	func = function(data)
+		data.pix:SaveToFileByIndex()
+	end
+}
+
+-- {a}
 Button.actionTest =
 {
 	text = "ActionObject",
-	objName = "a",
-	func = function(a)
-		a = a + 5
-		print(a)
+	funcObjects = {"a"},
+	func = function(data)
+		data.a = data.a + 5
+		print(data.a)
 	end 
 }
+
+----------------------------------------------------------------
+-- Broken Buttons
+----------------------------------------------------------------
+Button.britUp = 
+{
+	text = "Brit Up",
+	func = function()
+		Shader.brightness = Shader.brightness + 0.1
+	end 
+}
+
+Button.britDown = 
+{
+	text = "Brit Down",
+ 	func = function()
+ 		Shader.brightness = Shader.brightness - 0.1
+	end 
+}
+
+
 
 ---------------------
 -- Static Functions
@@ -352,6 +471,14 @@ ObjectUpdater:AddStatic(Button)
 -- objects needed for buttons to works will be genericized into a table maybe?
 
 
-
-
 return Button
+
+
+
+-- Notes
+-----------------------------
+-- need to add toggle buttons
+	-- for tools
+	-- buttons you can click once and have them be selected until you click another button
+	-- they could be part of a "Toggle Group" so that when one is clicked the last selected pops up
+	-- and only one can be selected at a time

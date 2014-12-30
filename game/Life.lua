@@ -35,7 +35,7 @@ function Life:New(data)
 	-- vars
 	o.life = data.life or 100
 	o.maxLife = data.maxLife or o.life
-	o.drain = nil
+	o.drain = data.drain or nil
 
 	if(data.drain == nil) then
 		o.drain = true

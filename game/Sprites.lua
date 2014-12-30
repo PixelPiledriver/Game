@@ -11,8 +11,6 @@ Sprites.data = {}
 
 
 
-
-
 -----------------------------
 -- Variables
 -----------------------------
@@ -177,7 +175,7 @@ Sprites.dude.blue.idle = MakeFrame
 {
 	x = 32,
 	y = 0,
-	width = 32,
+	width = 32,a
 	height = 32,
 	imageWidth = 128,
 	imageHeight = 128,	

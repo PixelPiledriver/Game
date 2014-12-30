@@ -15,6 +15,8 @@ Fade.name = "Fade"
 Fade.oType = "Static"
 Fade.dataType = "Component Constructor"
 
+Fade.activeDefault = false
+
 
 function Fade:New(data)
 
@@ -43,10 +45,11 @@ function Fade:New(data)
 	local activeOnCreation = nil
 
 	if(data.active == nil) then
-		activeOnCreation = true
+		activeOnCreation = Fade.activeDefault
 	else
 		activeOnCreation = data.active
 	end
+
 
 	o.active = false
 	if(data.parent.color and activeOnCreation) then
@@ -62,6 +65,10 @@ function Fade:New(data)
 	end
 
 	function o:Fade()
+
+		if(self.active == false) then
+			return
+		end
 
 		-- parent has color? <-- it needs one! :)
 		if(self.parent.color == nil) then

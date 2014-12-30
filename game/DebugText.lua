@@ -37,15 +37,16 @@ DebugText.texts = {}
 DebugText.messageType = 
 {
 	-- Managers
-	ObjectUpdater = true,
+	ObjectUpdater = false,
 	CollisionManager = false,
 
 
 	-- Statics
-	ButtonStatic = false,
+	ButtonStatic = true,
 	ShaderStatic = false,
 
 	-- Objects
+	Box = false,
 	Camera = false,
 	Player = false,
 	Bullet = false,
@@ -61,6 +62,7 @@ DebugText.messageType =
 	Pos = false,
 	Collision = false,
 	Button = false,
+	DrawTools = false,
 
 	-- Counters
 	SinCounter = false,

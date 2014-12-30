@@ -1592,9 +1592,10 @@ ObjectUpdater:AddStatic(Color)
 
 
 
--- test
-local red = Color:Get("red")
-red:PrintSelf()
+-- Test
+------------------
+-- local red = Color:Get("red")
+-- red:PrintSelf()
 
 
 -- done

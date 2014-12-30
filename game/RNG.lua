@@ -1,0 +1,3 @@
+-- RNG.lua
+-- Random Number Generator
+-- fucking RNG brooooooo

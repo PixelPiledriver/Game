@@ -25,6 +25,7 @@ local Window = require("Window")
 local Graphics = require("Graphics")
 local Shader = require("Shader")
 local Draw = require("Draw")
+local DrawTools = require("DrawTools")
 
 
 --Utility requires
@@ -46,6 +47,7 @@ require("TestShit")
 
 --local SnapGridTestLevel = require("levels/SnapGridTestLevel")
 local PixelDrawLevel = require("levels/PixelDrawLevel")
+--local BoxTestLevel = require("levels/BoxTestLevel")
 --local SnapGridTestLevel = require("levels/SnapGridTestLevel")
 --local TextWriteLevel = require("levels/TextWriteLevel")
 
@@ -70,6 +72,7 @@ function love.load()
 
 	--TestLevel:Load()
 	PixelDrawLevel:Load()
+	--BoxTestLevel:Load()
 	--TextWriteLevel:Load()
 
 	--SnapGridTestLevel:Load() 

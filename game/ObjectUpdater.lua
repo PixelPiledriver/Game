@@ -28,8 +28,8 @@ ObjectUpdater.destroyObjects = false
 
 -- debug text options
 ObjectUpdater.printAllObjectsInDebugText = false
-ObjectUpdater.printAllStaticsInDebugText = false
-ObjectUpdater.printTotalObjectTypes = true
+ObjectUpdater.printAllStaticsInDebugText = true
+ObjectUpdater.printTotalObjectTypes = false
 
 -------------
 --Functions
@@ -237,7 +237,7 @@ function ObjectUpdater:Update()
 
 		-- update
 		if(self.statics[i].Update) then
-			self.statics[i].Update()
+			self.statics[i]:Update()
 		end 
 
 		-- debug text

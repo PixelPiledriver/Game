@@ -13,6 +13,7 @@ local Collision = require("Collision")
 local Mouse = require("Mouse")
 local Point = require("Point")
 local Line = require("Line")
+local DrawTools = require("DrawTools")
 
 
 -- other stuff
@@ -47,6 +48,8 @@ local pix = PixelTexture:New
 		y =8
 	}
 }
+
+DrawTools.selectedPixelTexture = pix
 
 local pix2 = PixelTexture:New
 {
@@ -94,12 +97,10 @@ pal2:Interpolated
 local selectedPalette = pal2
 
 function MakePixels()
-
 	pix:Clear()
 	pix:AllRandomFromPalette(selectedPalette)
 	pix2:Split()
 	pix:Mask(pix2)
-	
 end 
 
 
@@ -110,18 +111,44 @@ function PixelDrawLevel:Load()
 	-- pixel generation stuff
 	-------------------------------------------
 
+---------------------
 -- Buttons
+---------------------
+
+-- moving all buttons now that they have been made generic
+
+	local monkeyFace = 100
+	local actionTest = Button:ActionButton(Button.actionTest, {a = monkeyFace})
+	local randomPixels = Button:ActionButton(Button.randPixels, {pix = pix})
 
 
-	local actionTest = Button:NewObjectAction(Button.actionTest)
+	local pal1 = Palette:New
+	{
+		Pos = {x = 100, y = 100},
+		draw = true
+	}
 
 
-	local pal = nil
+
+	local toggleTest = Button:New
+	{
+		x = 400,
+		y = 100,
+		text = "toggle!",
+		toggle = true,
+		saveAsLast = false
+	}
+
+
+
+
+	local randPal = Button:ActionButton(Button.randPalette, {pal = pal1})
+
+
 	local testTexture = Button:New
 	{
 		text = "Create Pal+Pix",
 		func = function()
-
 
 			pal = nil
 			pal = Palette:New
@@ -143,10 +170,10 @@ function PixelDrawLevel:Load()
 				indexes = {1, 4, 7}
 			}
 
-
 			pal:CalculateColorStats()
 
-			selectedPalette = pal
+			--selectedPalette = pal
+			pix.palette = pal
 
 			MakePixels()
 			--pix:TestTextureIndexing()
@@ -154,6 +181,8 @@ function PixelDrawLevel:Load()
 			pix:CreateTexture()
 		end 
 	}
+
+	local savePixels = Button:ActionButton(Button.savePixels, {pix = pix})
 
 	local createPix = Button:New
 	{
@@ -165,13 +194,7 @@ function PixelDrawLevel:Load()
 		
 	}
 
-	local wash = Button:New
-	{
-		text = "Wash",
-		func = function()
-			pix:Wash()
-		end 
-	}
+	local wash = Button:ActionButton(Button.wash, {pix = pix})
 	
 	local convertPixels = Button:New
 	{
@@ -182,13 +205,7 @@ function PixelDrawLevel:Load()
 		end 
 	}
 	
-	local savePixels = Button:New
-	{
-		text = "Save Pixels",
-		func = function()
-			pix:SaveToFileByIndex()
-		end
-	}
+	
 
 
 	local valueTest = Button:New(Button.valueTest)

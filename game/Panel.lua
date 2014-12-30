@@ -1,0 +1,6 @@
+-- Panel.lua
+-- needs to be an object that holds buttons
+-- can slide in and out
+-- be summoned when needed
+-- closed when not
+-- etc
