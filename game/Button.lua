@@ -8,6 +8,7 @@ local Color = require("Color")
 local Point = require("Point")
 local Value = require("Value")
 local Shader = require("Shader")
+local Pos = require("Pos")
 
 local Button = {}
 
@@ -19,7 +20,7 @@ Button.oType = "Static"
 Button.dataType = "Hud Constructor" 
 
 Button.totalCreated = 0
-Button.defaultCreated = {x = 16, y = 500, width = 0, height = 0}
+Button.defaultCreated = {Pos = {x = 16, y = 500}, width = 0, height = 0}
 Button.lastCreated = Button.defaultCreated
 Button.xSpace = 8
 Button.ySpace = 8
@@ -31,6 +32,13 @@ Button.repeatFunction = 1
 Button.buttonBeingDragged = false
 
 
+---------------------------
+-- Static Functions
+---------------------------
+
+function Button:DefaultLast()
+	self.lastCreated = self.defaultCreated
+end 
 
 -- {table, table}
 function Button:ActionButton(data, funcObjects)
@@ -56,17 +64,31 @@ function Button:New(data)
 	o.oType = "Button"
 	o.dataType = "HUD"
 
+	o.printDebugTextActive = data.printDebugTextActive or false
+
 	-- pos
 
-	local x = 0
-	local y = 0
-	if(Button.totalCreated == Button.maxColumns) then
-		Button.lastCreated.x = Button.defaultCreated.x
-		Button.lastCreated.y = Button.defaultCreated.y + Button.lastCreated.height + Button.ySpace
-	end 
+	--local x = 0
+	--local y = 0
 
-	o.x = data.x or Button.lastCreated.x + Button.lastCreated.width + Button.xSpace
-	o.y = data.y or Button.lastCreated.y
+	-- need to fix this max columns bullshit
+	-- it doesnt work correctly at all
+	-- was just a quick fix
+	--[[
+	if(Button.totalCreated == Button.maxColumns) then
+		Button.lastCreated.Pos.x = Button.defaultCreated.Pos.x
+		Button.lastCreated.Pos.y = Button.defaultCreated.Pos.y + Button.lastCreated.height + Button.ySpace
+	end 
+	--]]
+
+	local x = data.x or Button.lastCreated.Pos.x + Button.lastCreated.width + Button.xSpace
+	local y = data.y or Button.lastCreated.Pos.y
+
+	o.Pos = Pos:New
+	{
+		x = x,
+		y = y
+	}
 
 	-- size
 	o.width = data.width or 100
@@ -79,8 +101,9 @@ function Button:New(data)
 	o.repeatable = data.repeatable or false
 
 	-- function
-	o.func = data.func
+	o.func = data.func or nil
 
+	-- function objects
 	-- objects to use in the function run when button is pressed
 	if(data.funcObjects) then
 		o.funcObjectIndex = data.funcObjects or nil
@@ -96,27 +119,62 @@ function Button:New(data)
 	o.moveable = true    								-- can be moved
 	o.move = false       								-- currently being moved
 
-	o.toggle = data.toggle or false     -- click once to set
+	-- toggle
+	o.toggle = data.toggle or false     -- click once to set --> this is the button type not state
 	o.toggleState = false
 	o.toggleName = data.toggleName or data.text
 
-	--[[
-	o.box =  Box:New
-	{
-		x = o.x,
-		y = o.y,
-		width = o.width,
-		height = o.height
-	}
-	--]]
+	-- functions for toggle type buttons
+	o.toggleOnFunc = data.toggleOnFunc or nil
+	o.toggleOffFunc = data.toggleOffFunc or nil
 
+
+	-- text
+	o.text = data.text or "Button"
+	o.textColor = data.textColor and Color:Get("data.textColor") or Color:Get("black")
+	o.drawText = true
+
+	-- graphics
+
+	-- color
+	o.color = Color:Get("white")
+	o.colors = 
+	{
+		idle = Color:Get("white"),
+		hover = Color:Get("blue"),
+		click = Color:Get("green"),
+		toggleFalse = Color:Get("white"),
+		toggleTrue = Color:Get("red")
+	}
+
+	-- sprite
+	o.sprite = data.sprite or nil
+
+	-- size to sprite
+	-- fit button to the sprite size
+	-- also stops text from drawing
+	if(o.sprite) then
+		o.sizeToSprite = true
+	else
+		o.sizeToSprite = false
+	end 
+
+	if(o.sizeToSprite) then
+		o.drawText = false --> this should probly be put somewhere else :P
+		o.width = o.sprite.width
+		o.height = o.sprite.height
+	end 
+
+	if(o.sprite) then
+		o.sprite.parent = o
+	end 
 
 	-- collision --> this uses collision os
 	-- need to also have a mouse based version
 	o.collision = Collision:New
 	{
-		x = o.x,
-		y = o.y,
+		x = o.Pos.x,
+		y = o.Pos.y,
 		width = o.width,
 		height = o.height,
 		shape = "rect",
@@ -125,15 +183,11 @@ function Button:New(data)
 		parent = o
 	}
 
-	-- text
-	o.text = data.text or "Button"
-	o.textColor = data.textColor and Color:Get("data.textColor") or Color:Get("black")
-
-	-- graphics
-	o.sprite = data.sprite or nil
-
 	-- button
 	o.hover = false
+
+	-- idle, hover, click
+	o.state = "idle"
 
 	-- clicked
 	o.clicked = false
@@ -148,27 +202,60 @@ function Button:New(data)
 		-- intended to make testing easier
 		self:ClickToMove()
 		self:UpdateMove()
+		self:OnNoCollision()
+
+
+		-- color
+		self.color = self.colors[self.state]
+		if(self.sprite) then
+			self.sprite.color = self.color
+			if(self.toggleState) then
+				self.sprite.color = self.colors["toggleTrue"]
+			end
+		end 
+
 
 
 		-- click --> do button funcition
 		self:ClickButton()
+
+		-- clear vars from last frame
 		self.hover = false
+		--self.state = "idle"
 		self.lastClicked = self.clicked
 		self.clicked = false
 
 	end
 
 	function o:Draw()
-		love.graphics.setColor(Color:AsTable(self.textColor))
-		love.graphics.printf(self.text, self.x, self.y + self.height/2 - self.height/6, self.width, "center")
+
+		-- draw text for button? --> if button has a sprite, defaults to not draw
+		-- this should not always be the case, if button has a backdrop and text goes on top
+		-- will need to fix this issue at a later time :P
+		if(self.drawText) then
+			love.graphics.setColor(Color:AsTable(self.textColor))
+			love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.height/2 - self.height/6, self.width, "center")
+		end
+
 	end
 
 	function o:OnCollision(data)
 		self.hover = true
+		self.state = "hover"
+	end 
+
+	function o:OnNoCollision()
+		if(self.collision.collidedLastFrame == true) then
+			return
+		end
+
+		self.state = "idle"
 	end 
 
 	-- runs the functions for the button -----> b.func()
 	function o:ClickButton()
+
+		local wasClicked = false
 
 		if(self.hover == true)then
 			if(love.mouse.isDown("l")) then
@@ -179,7 +266,7 @@ function Button:New(data)
 
 					if(self.func) then
 
-						-- button repeats more than once
+						-- button type = function repeats more than once
 						if(self.repeatable) then
 
 							for i=1, Button.repeatFunction do
@@ -190,7 +277,9 @@ function Button:New(data)
 								end
 							end
 
-						-- button function runs only once
+							wasClicked = true
+
+						-- button type = function runs only once
 						else
 
 							if(self.funcObjectIndex == nil) then 
@@ -199,6 +288,8 @@ function Button:New(data)
 								self.func(self.funcObjects) -- arguments go here
 							end
 
+							wasClicked = true
+
 						end 
 
 					-- toggle button
@@ -206,21 +297,38 @@ function Button:New(data)
 			
 						if(self.toggleState == false) then
 							self.toggleState = true
+
+							-- run toggle on function
+							if(self.toggleOnFunc) then
+								self:toggleOnFunc()
+							end
+
 						else 
 							self.toggleState = false 			
+
+							-- run toggle off function
+							if(self.toggleOffFunc) then
+								self:toggleOffFunc()
+							end 
+
 						end 
 
-						-- diplay state
-						print(self.toggleState)
+						wasClicked = true
 
-					-- no fucntion or toggle defined --> this button is useless
+					-- no fucntion or toggle defined --> this button is useless --> but can change in appearance
 					else
 						print("this button has no function")
+
+						wasClicked = true
 					end 
 
 				end
 
 			end 
+		end 
+
+		if(wasClicked) then
+			self.state = "clicked"
 		end 
 
 	end 
@@ -230,8 +338,8 @@ function Button:New(data)
 			return 
 		end 
 
-		self.x = love.mouse.getX()
-		self.y = love.mouse.getY()
+		self.Pos.x = love.mouse.getX()
+		self.Pos.y = love.mouse.getY()
 		self.collision.x = math.abs(love.mouse.getX() - self.lastX)
 		self.collision.y = math.abs(love.mouse.getY() - self.lastY)
 
@@ -249,8 +357,8 @@ function Button:New(data)
 
 		if(self.move == true) then
 			self.move = true
-			self.lastX = love.mouse.getX() - self.x
-			self.lastY = love.mouse.getY() - self.y
+			self.lastX = love.mouse.getX() - self.Pos.x
+			self.lastY = love.mouse.getY() - self.Pos.y
 		end 
 
 
@@ -264,8 +372,22 @@ function Button:New(data)
 
 	function o:PrintDebugText()
 
+		if(self.printDebugTextActive == false) then
+			return
+		end 
 
-		local parent = self.parent and self.parent.name or "no parent"		
+		local parent = self.parent and self.parent.name or "no parent"
+
+		local toggleInfo = nil
+		if(self.toggle) then
+			if(self.toggleState) then
+				toggleInfo = "true"
+			else
+				toggleInfo = "false"
+			end 
+		else
+			toggleInfo = "none"
+		end 
 
 		DebugText:TextTable
 		{
@@ -275,7 +397,10 @@ function Button:New(data)
 			{text = "Width: " .. self.width},
 			{text = "Height: " .. self.height},
 			{text = "Function: " .. self.text},
-			{text = "Pos: {" .. self.x .. ", " .. self.y .. "}"},
+			{text = "Pos: {" .. self.Pos.x .. ", " .. self.Pos.y .. "}"},
+			{text = "Toggle: " .. toggleInfo},
+			{text = "State: " ..self.state}
+
 		}
 
 	end 
@@ -477,8 +602,38 @@ return Button
 
 -- Notes
 -----------------------------
--- need to add toggle buttons
+-- need to add toggle buttons --> got this sort of working :D
 	-- for tools
 	-- buttons you can click once and have them be selected until you click another button
 	-- they could be part of a "Toggle Group" so that when one is clicked the last selected pops up
 	-- and only one can be selected at a time
+
+
+	-- NOTE: make table of sprites for different states of button
+	-- o.sprites = {idle, hover, click, toggleTrue, toggleFalse} --> something like that
+	-- also change sprite color on states
+	-- might do that as its own table so that it is flexible and not intertwined
+	-- o.colors = {idle, hover, click, toggleTrue, toggleFalse}
+
+	-- Table of states by name as well
+
+
+	-- Toggle buttons need to have 2 functions
+	-- one for toggling on and one for toggling off
+	-- this way when they are clicked a second time they can reverse whatever it is that they did
+	-- or do something entirely different
+
+
+
+
+
+	-- dont need this?
+	--[[
+	o.box =  Box:New
+	{
+		x = o.x,
+		y = o.y,
+		width = o.width,
+		height = o.height
+	}
+	--]]

@@ -9,6 +9,16 @@ local ObjectUpdater = require("ObjectUpdater")
 local Pos =  {}
 
 
+Pos.defaultPos = 
+{
+	x = 0, 
+	y = 0,
+	z = 0,
+	speed = {x=0,y=0}
+}
+
+
+-- is this even needed?
 -- adds component to given parent using given data
 --{parent, data}
 function Pos:AddComponent(parent, posTable)

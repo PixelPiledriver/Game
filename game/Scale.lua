@@ -18,7 +18,17 @@ Scale.name = "Scale"
 Scale.oType = "Static"
 Scale.dataType = "Component Constructor"
 
+Scale.defaultScale =
+{
+	x = 1,
+	y = 1
+}
+
+
 function Scale:New(data)
+
+
+
 
 	----------------
 	-- Create

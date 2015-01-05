@@ -61,7 +61,7 @@ DebugText.messageType =
 	SnapPlayer = false,
 	Pos = false,
 	Collision = false,
-	Button = false,
+	Button = true,
 	DrawTools = false,
 
 	-- Counters

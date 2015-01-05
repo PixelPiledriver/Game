@@ -14,6 +14,50 @@ local Mouse = require("Mouse")
 local Point = require("Point")
 local Line = require("Line")
 local DrawTools = require("DrawTools")
+local SpriteSheet = require("SpriteSheet")
+local Sprite = require("Sprite")
+
+-- DrawTools hud stuff
+-- need to move to a new file soon
+local iconSheet = SpriteSheet:New
+{
+	image = "EditorIcons.png",
+}
+
+local drawIcon = Sprite:New
+{
+	spriteSheet = iconSheet,
+	xIndex = 1,
+	yIndex = 1
+}
+
+local moveIcon = Sprite:New
+{
+	spriteSheet = iconSheet,
+	xIndex = 2,
+	yIndex = 1
+}
+
+local zoomIcon = Sprite:New
+{
+	spriteSheet = iconSheet,
+	xIndex = 3,
+	yIndex = 1
+}
+
+local colorDropIcon = Sprite:New
+{
+	spriteSheet = iconSheet,
+	xIndex = 4,
+	yIndex = 1
+}
+
+local selectIcon = Sprite:New
+{
+	spriteSheet = iconSheet,
+	xIndex = 6,
+	yIndex = 1
+}
 
 
 -- other stuff
@@ -22,7 +66,6 @@ local palPos =
 	x = 500,
 	y = 200 
 }
-
 
 
 local PixelDrawLevel = {}
@@ -45,7 +88,7 @@ local pix = PixelTexture:New
 	scale =
 	{
 		x = 8,
-		y =8
+		y = 8
 	}
 }
 
@@ -75,6 +118,7 @@ local pal2 = Palette:New
 	Pos = palPos,
 	draw = true
 }
+
 pal2:Interpolated
 {
 	colors =
@@ -130,14 +174,77 @@ function PixelDrawLevel:Load()
 
 
 
-	local toggleTest = Button:New
+	local drawButton = Button:New
 	{
 		x = 400,
 		y = 100,
 		text = "toggle!",
 		toggle = true,
-		saveAsLast = false
+		sprite = drawIcon,
+		printDebugTextActive = true,
+		toggleOnFunc = function() 
+			DrawTools:ToggleTool("Draw")
+		end,
+		toggleOffFunc = function()
+			DrawTools:ToggleTool("Draw")
+		end 
 	}
+
+	local moveButton = Button:New
+	{
+		x = 432,
+		y = 100,
+		text = "toggle!",
+		toggle = true,
+		sprite = moveIcon,
+		--printDebugTextActive = true
+		toggleOnFunc = function()
+			DrawTools:ToggleTool("Move")
+		end,
+		toggleOffFunc = function()
+			DrawTools:ToggleTool("Move")
+		end 
+	}
+
+	local zoomButton = Button:New
+	{
+		x = 464,
+		y = 100,
+		text = "toggle!",
+		toggle = true,
+		sprite = zoomIcon,
+		--printDebugTextActive = true
+	}
+
+	local colorDropButton = Button:New
+	{
+		x = 496,
+		y = 100,
+		text = "toggle!",
+		toggle = true,
+		sprite = colorDropIcon,
+		--printDebugTextActive = true
+		toggleOnFunc = function()
+			DrawTools:ToggleTool("ColorDrop")
+		end,
+		toggleOffFunc = function()
+			DrawTools:ToggleTool("ColorDrop")
+		end 
+	}
+
+	local selectButton = Button:New
+	{
+		x = 528,
+		y = 100,
+		text = "toggle!",
+		toggle = true,
+		saveAsLast = false,
+		sprite = selectIcon,
+		printDebugTextActive = true,
+	}
+	
+
+	Button:DefaultLast()
 
 
 
@@ -215,6 +322,10 @@ function PixelDrawLevel:Load()
 	local britUp = Button:New(Button.britUp)
 	local britDown = Button:New(Button.britDown)
 	local quit = Button:New(Button.quit)
+
+
+
+	
 
 end 
 

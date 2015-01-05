@@ -34,6 +34,7 @@ require("DeltaTime")
 require("Keyboard")
 require("Math")
 require("TableSort")
+require("FailNew")
 
 require("PrintDebug")
 require("Random")

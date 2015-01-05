@@ -109,24 +109,11 @@ function PixelTexture:New(data)
 	------------------------
 	-- Components
 	------------------------
-	local defaultPos = 
-	{
-		x = 0, 
-		y = 0,
-		z = 0,
-		speed = {x=0,y=0}
-	}
 
-	o.Pos = Pos:New(data.pos or defaultPos)
+	o.Pos = Pos:New(data.pos or Pos.defaultPos)
 
 
-	local defaultScale =
-	{
-		x = 1,
-		y = 1
-	}
-
-	o.Scale = Scale:New(data.scale or defaultScale)
+	o.Scale = Scale:New(data.scale or Scale.defaultScale)
 
 
 	---------------------

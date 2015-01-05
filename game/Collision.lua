@@ -52,6 +52,7 @@ function Collision:New(data)
 	end 
 	o.destroy = false
 	o.collided = false
+	o.collidedLastFrame = false
 
 	-- os that only hit once use this
 	o.oneCollision = data.oneCollision or false
@@ -156,14 +157,22 @@ function Collision:New(data)
 			return
 		end
 
-		self.x = self.parent.x
-		self.y = self.parent.y
+		if(self.parent.Pos) then
+			self.x = self.parent.Pos.x
+			self.y = self.parent.Pos.y
+		else
+			self.x = self.parent.x
+			self.y = self.parent.y
+		end 
 
 	end 
 
 	function o:Update()
 		self:FollowMouse()
 		self:FollowParent()
+
+		-- clear collision state --> and save state from last frame
+		self.collidedLastFrame = self.collided
 		self.collided = false
 	end 
 
