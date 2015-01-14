@@ -1,6 +1,22 @@
 -- Notes.lua
 
 -- track shit that needs to be coded in the future
+-- gonna put new shit at the top and push old shit down
+
+
+
+-- Window
+-------------------
+-- change size
+-- change to full screen
+-- at run time
+
+
+-- Color Selector
+-----------------------
+-- pick colors in various ways
+-- rgb, hsl, etc
+-- sliders, numbers, and color box
 
 
 -- Palettes
@@ -15,22 +31,24 @@
 
 -- Buttons
 ------------------------
--- Add bool buttons --> check boxes, for options
+-- Add bool buttons --> check boxes, for options --> done :D
 
 
 -- Components
 -------------------------
---adding a component could be a function, just pass the data and parent tables
+-- adding a component could be a function, just pass the data and parent tables
+-- this has been somewhat taken care of with the default component tables
+
+
+
+
+
+
+
+
 
 
 -- old junk code goes here
-
-
-
-
-
-
-
 
 --[[
 local pawn2 = Player:New

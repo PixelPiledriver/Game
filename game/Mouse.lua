@@ -8,6 +8,73 @@ local Collision = require("Collision")
 
 local Mouse = {}
 
+
+---------------------
+-- Static Vars
+---------------------
+Mouse.lastClickButton =
+{
+	l = false,
+	r = false,
+	m = false
+}
+
+Mouse.clickButton =
+{
+	l = false,	-- left click
+	r = false,	-- right click
+	m =	false,	-- middle click
+}
+
+
+
+---------------------
+-- Static Functions
+---------------------
+
+function Mouse:Update()
+	self:TrackClicks()
+end 
+
+
+function Mouse:TrackClicks()
+
+	self.lastClickButton.l = self.clickButton.l
+	self.lastClickButton.r = self.clickButton.r
+	self.lastClickButton.m = self.clickButton.m
+
+
+	self.clickButton.l = false
+	self.clickButton.r = false
+	self.clickButton.m = false
+
+	
+	if(love.mouse.isDown("l")) then
+		self.clickButton.l = true
+	end
+
+	if(love.mouse.isDown("r")) then
+		self.clickButton.r = true
+	end 
+
+	if(love.mouse.isDown("m")) then
+		self.clickButton.m = true
+	end
+
+
+end 
+
+function Mouse:SingleClick(mouseButton)
+
+	if(self.clickButton[mouseButton] and self.lastClickButton[mouseButton] == false) then
+		return true
+	else
+		return false
+	end
+
+end
+
+
  
 function Mouse:New(data)
 	
@@ -152,11 +219,30 @@ function Mouse:New(data)
 end
 
 
+function Mouse:PrintDebugText()
+
+	DebugText:TextTable
+	{
+		{text = "", obj = "MouseStatic"},
+		{text = "Mouse Static"},
+		{text = "---------------"},
+		{text = "Left Click: " .. Bool:ToString(Mouse.clickButton.l)},
+		{text = "Right Click: " .. Bool:ToString(Mouse.clickButton.r)},
+		{text = "Middle Click: " .. Bool:ToString(Mouse.clickButton.m)},
+	}
+
+end 
 
 
-
-
-
-
+ObjectUpdater:AddStatic(Mouse)
 
 return Mouse
+
+
+
+
+
+
+
+-- adding static vars for mouse
+-- used to detect single clicks without the need for the love single click callback

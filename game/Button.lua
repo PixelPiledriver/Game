@@ -9,6 +9,8 @@ local Point = require("Point")
 local Value = require("Value")
 local Shader = require("Shader")
 local Pos = require("Pos")
+local Mouse = require("Mouse")
+local Size = require("Size")
 
 local Button = {}
 
@@ -20,7 +22,7 @@ Button.oType = "Static"
 Button.dataType = "Hud Constructor" 
 
 Button.totalCreated = 0
-Button.defaultCreated = {Pos = {x = 16, y = 500}, width = 0, height = 0}
+Button.defaultCreated = {Pos = {x = 16, y = 500}, Size = {width = 0, height = 0}}
 Button.lastCreated = Button.defaultCreated
 Button.xSpace = 8
 Button.ySpace = 8
@@ -81,18 +83,22 @@ function Button:New(data)
 	end 
 	--]]
 
-	local x = data.x or Button.lastCreated.Pos.x + Button.lastCreated.width + Button.xSpace
+	local x = data.x or Button.lastCreated.Pos.x + Button.lastCreated.Size.width + Button.xSpace
 	local y = data.y or Button.lastCreated.Pos.y
 
+	-- Pos
 	o.Pos = Pos:New
 	{
 		x = x,
 		y = y
 	}
 
-	-- size
-	o.width = data.width or 100
-	o.height = data.height or 50
+	-- Size
+	o.Size = Size:New
+	{
+		width = data.width or 100,
+		height = data.height or 50
+	}
 
 	-- rect
 	o.useBox = data.useBox or false
@@ -161,8 +167,8 @@ function Button:New(data)
 
 	if(o.sizeToSprite) then
 		o.drawText = false --> this should probly be put somewhere else :P
-		o.width = o.sprite.width
-		o.height = o.sprite.height
+		o.Size.width = o.sprite.width
+		o.Size.height = o.sprite.height
 	end 
 
 	if(o.sprite) then
@@ -175,8 +181,8 @@ function Button:New(data)
 	{
 		x = o.Pos.x,
 		y = o.Pos.y,
-		width = o.width,
-		height = o.height,
+		width = o.Size.width,
+		height = o.Size.height,
 		shape = "rect",
 		name = o.name,
 		collisionList = {"Mouse"},
@@ -234,7 +240,7 @@ function Button:New(data)
 		-- will need to fix this issue at a later time :P
 		if(self.drawText) then
 			love.graphics.setColor(Color:AsTable(self.textColor))
-			love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.height/2 - self.height/6, self.width, "center")
+			love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2 - self.Size.height/6, self.Size.width, "center")
 		end
 
 	end
@@ -258,7 +264,8 @@ function Button:New(data)
 		local wasClicked = false
 
 		if(self.hover == true)then
-			if(love.mouse.isDown("l")) then
+			if(Mouse:SingleClick("l")) then --> single click fixed
+			--if(love.mouse.isDown("l")) then
 
 				self.clicked = true
 
@@ -380,11 +387,7 @@ function Button:New(data)
 
 		local toggleInfo = nil
 		if(self.toggle) then
-			if(self.toggleState) then
-				toggleInfo = "true"
-			else
-				toggleInfo = "false"
-			end 
+			toggleInfo = Bool:ToString(self.toggleState) 
 		else
 			toggleInfo = "none"
 		end 
@@ -394,8 +397,8 @@ function Button:New(data)
 			{text = "", obj = "Button"},
 			{text = "Button"},
 			{text = "-----------"},
-			{text = "Width: " .. self.width},
-			{text = "Height: " .. self.height},
+			{text = "Width: " .. self.Size.width},
+			{text = "Height: " .. self.Size.height},
 			{text = "Function: " .. self.text},
 			{text = "Pos: {" .. self.Pos.x .. ", " .. self.Pos.y .. "}"},
 			{text = "Toggle: " .. toggleInfo},
@@ -513,7 +516,7 @@ Button.randPixels =
 	func = function(data)
 		--data.pix:Clear()
 		data.pix:AllRandomFromPalette()
-		data.pix:CreateTexture()
+		data.pix:RefreshTexture()
 	end 
 }
 
@@ -535,7 +538,7 @@ Button.savePixels =
 	text = "Save Pixels",
 	funcObjects = {"pix"},
 	func = function(data)
-		data.pix:SaveToFileByIndex()
+		data.pix:SaveToFile()
 	end
 }
 
@@ -624,6 +627,12 @@ return Button
 	-- or do something entirely different
 
 
+	-- buttons can be roll clicked --> hold down mouse button and then hover and click will instantly happen
+	-- this is a good feature --> like visibility in photoshop, but needs to be controlled
+	-- as of right now it is accidental
+	-- need to add an option for it
+	-- Single click added to mouse
+	-- now just need to make it optional for buttons to require single click or be able to roll click
 
 
 

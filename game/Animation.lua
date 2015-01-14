@@ -4,6 +4,7 @@
 
 
 local ObjectUpdater = require("ObjectUpdater")
+local Pos = require("Pos")
 
 local Animation = {}
 
@@ -15,6 +16,7 @@ local Animation = {}
 Animation.name = "Animation"
 Animation.oType = "Static"
 Animation.dataType = "Data Constructor"
+
 
 
 function Animation:New(data)
@@ -43,12 +45,12 @@ function Animation:New(data)
 
 	o.colors = data.colors or nil
 
-	o.sheet = data.sheet or nil
+	o.spriteSheet = data.spriteSheet or nil
 	o.frames = data.frames or nil -- table of frames
 	o.currentFrame = 1
 	
 	o.speedTime = 1
-	o.speed = data.speed
+	o.speed = data.speed or 1
 	o.delayTime = 1
 	o.delays = data.delays
 
@@ -57,9 +59,19 @@ function Animation:New(data)
 
 	o.active = true
 
+	---------------
+	-- Components
+	---------------
+	o.Pos = Pos:New(data.pos or Pos.defaultPos)
+
 	-------------
 	-- Functions
 	-------------
+
+	function o:Update()
+		self:UpdateFrameTime()
+	end 
+
 	-- update the frame based on the animation speed and frame delay
 	function o:UpdateFrameTime()
 
@@ -100,6 +112,35 @@ function Animation:New(data)
 
 	end 
 
+
+	function o:Draw()
+
+		local x = 0
+		local y = 0
+		local angle = 0
+		local xScale = 3
+		local yScale = 3
+
+		if(self.parent) then
+
+			if(self.parent.Pos) then
+				x = self.parent.Pos.x + self.Pos.x
+				y = self.parent.Pos.y + self.Pos.y
+			else
+				x = self.Pos.x
+				y = self.Pos.y
+			end 
+
+		else
+			x = self.Pos.x
+			y = self.Pos.y
+		end 
+
+		love.graphics.draw(self.spriteSheet.image, self.frames[self.currentFrame].sprite, x, y, angle, xScale, yScale)
+
+	end 
+
+--[[
 	function o:Draw(oData)
 
 		if(self.colors) then
@@ -112,6 +153,7 @@ function Animation:New(data)
 
 		self:UpdateFrameTime()	
 	end 
+--]]
 
 	ObjectUpdater:Add{o}
 	return o

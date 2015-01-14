@@ -62,14 +62,6 @@ function Point:New(data)
 		}
 	end 
 
-	if(data.sizeSpeed) then
-		o.Size = Size:New
-		{
-			speed = data.sizeSpeed,
-			parent = o,
-			size = data.size
-		}
-	end
 
 	o.components = {"Pos", "Fade", "Size", "Life"}
 
@@ -110,11 +102,7 @@ function Point:New(data)
 				ObjectUpdater:Destroy(self[self.components[i]])
 			end 
 		end 
-
-
-		--ObjectUpdater:Destroy(self.Fade)
-		--ObjectUpdater:Destroy(self.Size)
-		--ObjectUpdater:Destroy(self.Pos)
+	
 	end 
 
 
@@ -123,13 +111,6 @@ function Point:New(data)
 	return o
 
 end 
-
-
-
-
-
-
-
 
 
 

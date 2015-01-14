@@ -16,47 +16,17 @@ local Line = require("Line")
 local DrawTools = require("DrawTools")
 local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
+local DrawToolsHUD = require("DrawToolsHUD")
+local Panel = require("Panel")
 
--- DrawTools hud stuff
--- need to move to a new file soon
-local iconSheet = SpriteSheet:New
-{
-	image = "EditorIcons.png",
-}
 
-local drawIcon = Sprite:New
-{
-	spriteSheet = iconSheet,
-	xIndex = 1,
-	yIndex = 1
-}
+-- animation test with new spriteStuff
+local pawnGraphics = require("AnimationTest")
 
-local moveIcon = Sprite:New
-{
-	spriteSheet = iconSheet,
-	xIndex = 2,
-	yIndex = 1
-}
 
-local zoomIcon = Sprite:New
+local panel = Panel:New
 {
-	spriteSheet = iconSheet,
-	xIndex = 3,
-	yIndex = 1
-}
-
-local colorDropIcon = Sprite:New
-{
-	spriteSheet = iconSheet,
-	xIndex = 4,
-	yIndex = 1
-}
-
-local selectIcon = Sprite:New
-{
-	spriteSheet = iconSheet,
-	xIndex = 6,
-	yIndex = 1
+	posType = "bottom"
 }
 
 
@@ -162,9 +132,6 @@ function PixelDrawLevel:Load()
 -- moving all buttons now that they have been made generic
 
 	local monkeyFace = 100
-	local actionTest = Button:ActionButton(Button.actionTest, {a = monkeyFace})
-	local randomPixels = Button:ActionButton(Button.randPixels, {pix = pix})
-
 
 	local pal1 = Palette:New
 	{
@@ -173,85 +140,36 @@ function PixelDrawLevel:Load()
 	}
 
 
-
-	local drawButton = Button:New
-	{
-		x = 400,
-		y = 100,
-		text = "toggle!",
-		toggle = true,
-		sprite = drawIcon,
-		printDebugTextActive = true,
-		toggleOnFunc = function() 
-			DrawTools:ToggleTool("Draw")
-		end,
-		toggleOffFunc = function()
-			DrawTools:ToggleTool("Draw")
-		end 
-	}
-
-	local moveButton = Button:New
-	{
-		x = 432,
-		y = 100,
-		text = "toggle!",
-		toggle = true,
-		sprite = moveIcon,
-		--printDebugTextActive = true
-		toggleOnFunc = function()
-			DrawTools:ToggleTool("Move")
-		end,
-		toggleOffFunc = function()
-			DrawTools:ToggleTool("Move")
-		end 
-	}
-
-	local zoomButton = Button:New
-	{
-		x = 464,
-		y = 100,
-		text = "toggle!",
-		toggle = true,
-		sprite = zoomIcon,
-		--printDebugTextActive = true
-	}
-
-	local colorDropButton = Button:New
-	{
-		x = 496,
-		y = 100,
-		text = "toggle!",
-		toggle = true,
-		sprite = colorDropIcon,
-		--printDebugTextActive = true
-		toggleOnFunc = function()
-			DrawTools:ToggleTool("ColorDrop")
-		end,
-		toggleOffFunc = function()
-			DrawTools:ToggleTool("ColorDrop")
-		end 
-	}
-
-	local selectButton = Button:New
-	{
-		x = 528,
-		y = 100,
-		text = "toggle!",
-		toggle = true,
-		saveAsLast = false,
-		sprite = selectIcon,
-		printDebugTextActive = true,
-	}
-	
-
 	Button:DefaultLast()
 
 
+	local eggplant = SpriteSheet:New
+	{	
+		image = "Eggplant.png",
+	}
+
+	local icons = SpriteSheet:New
+	{	
+		image = "EditorIcons.png",
+	}
 
 
+	local loadSpriteToPixTex = Button:New
+	{
+		text = "Load PNG to PixTex",
+		func = function()
+			pix:LoadFromSpriteSheet
+			{
+				spriteSheet = pawnGraphics.pawnSheet
+			}
+		end 
+
+	}
+
+	local actionTest = Button:ActionButton(Button.actionTest, {a = monkeyFace})
+	local randomPixels = Button:ActionButton(Button.randPixels, {pix = pix})
 	local randPal = Button:ActionButton(Button.randPalette, {pal = pal1})
-
-
+	
 	local testTexture = Button:New
 	{
 		text = "Create Pal+Pix",
@@ -285,18 +203,26 @@ function PixelDrawLevel:Load()
 			MakePixels()
 			--pix:TestTextureIndexing()
 
-			pix:CreateTexture()
+			pix:RefreshTexture()
 		end 
 	}
 
 	local savePixels = Button:ActionButton(Button.savePixels, {pix = pix})
+
+	local refreshSprite = Button:New
+	{
+		text = "Refresh Sprite",
+		func = function()
+			pix:RefreshSprite()
+		end
+	}
 
 	local createPix = Button:New
 	{
 		text = "Create Pix",
 		func = function()
 			MakePixels()
-			pix:CreateTexture()
+			pix:RefreshTexture()
 		end
 		
 	}
@@ -312,9 +238,6 @@ function PixelDrawLevel:Load()
 		end 
 	}
 	
-	
-
-
 	local valueTest = Button:New(Button.valueTest)
 	local createPoint = Button:New(Button.createPoint)
 	local rfUp = Button:New(Button.repeatFunctionUp)
@@ -322,10 +245,6 @@ function PixelDrawLevel:Load()
 	local britUp = Button:New(Button.britUp)
 	local britDown = Button:New(Button.britDown)
 	local quit = Button:New(Button.quit)
-
-
-
-	
 
 end 
 

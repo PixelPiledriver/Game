@@ -29,6 +29,7 @@ PixelTexture.oType  = "Static"
 PixelTexture.dataType = "Graphics Construtor"
 
 PixelTexture.mask = nil
+PixelTexture.defaultPath = "graphics/"
 
 -- depricated this
 --PixelTexture.selectedPalette = nil
@@ -90,10 +91,18 @@ function PixelTexture:New(data)
 	o.oType = "PixelTexture"
 	o.datatype = "Graphics Object"
 
-
+	--
 	o.filename = data.filename or "image"
+
+	-- create image --> this is blank pixels
 	o.image = love.image.newImageData(data.width, data.height)
-	o.texture = nil
+
+	-- create texture --> created at start so it can be refreshed, but made from blank pixels at this point
+	o.texture = love.graphics.newImage(o.image)
+	o.texture:setFilter("nearest", "nearest")
+
+	-- when loaded from a Sprite, ref is stored to it so it can be updated 
+	o.sprite = nil
 
 	o.saveIndex = 0
 	o.width = data.width
@@ -145,12 +154,64 @@ function PixelTexture:New(data)
 
 	end 
 
+
+	-------------------------------
+	-- Graphics Functions
+	-------------------------------
+
 	-- creates the texture from this objects pixels
 	-- set draw to true to make this a object on screen
-	function o:CreateTexture()
+	function o:RefreshTexture()
+		self.texture:refresh()
+	end
+
+	function o:ReCreateTexture()
 		self.texture = nil
 		self.texture = love.graphics.newImage(self.image)
 		self.texture:setFilter("nearest", "nearest")
+	end
+
+	function o:RefreshSprite()
+		self.sprite:Refresh()
+	end 
+
+
+	
+
+	--------------------------------------
+	-- Load
+	--------------------------------------
+	function o:LoadFromSpriteSheet(data)
+
+		--> fix this shit its not working correctly :P
+		--self.image = data.sprite.image:getDsata()
+		self.image = data.spriteSheet.imageData
+		
+		local sameSize = false
+		local newWidth = self.image:getWidth()
+		local newHeight = self.image:getHeight()
+
+
+		-- is new image a different size?
+		if(self.width == newWidth and self.height == newHeight) then
+			sameSize = true
+		else
+			self.width = newWidth
+			self.height = newHeight
+		end  
+
+		-- refresh or create? --> new size needs to be recreated
+		if(sameSize) then
+			self:RefreshTexture()
+		else
+			self:ReCreateTexture()
+		end
+
+		-- save filename for later
+		self.filename = data.spriteSheet.filename
+
+		self.sprite = data.spriteSheet
+
 	end 
 
 	---------------------------------------------------
@@ -661,12 +722,17 @@ function PixelTexture:New(data)
 	--------------------------------------------------------------
 	-- save image to file
 	-- defaults to AppData/Love/Game
+
 	function o:SaveToFile(data)
-		self.image:encode(data.filename, png)
+		self.image:encode(PixelTexture.defaultPath .. self.filename, "png")
+
+		if(self.sprite) then
+			self:RefreshSprite()
+		end 
 	end
 
 	function o:SaveToFileByIndex()
-		self.image:encode(self.filename .. self.saveIndex .. ".png", "png")
+		self.image:encode(PixelTexture.defaultPath .. self.filename .. self.saveIndex .. ".png", "png")
 		self.saveIndex = self.saveIndex + 1
 	end 
 
@@ -777,3 +843,20 @@ return PixelTexture
 -- Educational and useful
 -- Composition theory
 -- Creates a daily image that you get to rate and tweak
+
+
+-- old code
+----------------------------------------------
+
+-- changed this to just use :refresh()
+-- at the moment doesnt seem to have any draw backs
+-- but may need to recreate texture if size changes
+
+	-- creates the texture from this objects pixels
+	-- set draw to true to make this a object on screen
+--	function o:CreateTexture()
+		--self.texture:refresh()
+		--self.texture = nil
+		--self.texture = love.graphics.newImage(self.image)
+		--self.texture:setFilter("nearest", "nearest")
+	--end 

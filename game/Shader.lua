@@ -9,7 +9,16 @@
 
 local ObjectUpdater = require("ObjectUpdater")
 
+-- stop shaders from working on machines that cant use them
+local deactivateShaders = false
+
+if(deactivateShaders) then
+	return
+end 
+
 local Shader = {}
+
+
 
 -------------------
 -- Static Vars

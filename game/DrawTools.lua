@@ -5,6 +5,7 @@
 local ObjectUpdater = require("ObjectUpdater")
 local Color = require("Color")
 local Box = require("Box")
+local Mouse = require("Mouse")
 
 
 local DrawTools = {}
@@ -27,7 +28,8 @@ DrawTools.tools =
 	Draw = false,
 	Move = false,
 	ColorDrop = false,
-	index = {"Draw", "Move", "ColorDrop"}
+	Zoom = false,
+	index = {"Draw", "Move", "ColorDrop", "Zoom"}
 }
 
 
@@ -59,11 +61,9 @@ end
 
 function DrawTools:Update()
 
-	for i=1, #self.tools.index do
-		if(self.tools[self.tools.index[i]]) then
-			self[self.tools.index[i]](self)
-		end
-	end
+
+
+	self:UpdateTools()
 
 	--[[
 	if(self.selectedTool) then
@@ -76,6 +76,20 @@ function DrawTools:Update()
 	--self:Move()
 end
 
+function DrawTools:UpdateTools()
+
+	if(self.selectedPixelTexture == nil) then
+		return
+	end
+
+	for i=1, #self.tools.index do
+		if(self.tools[self.tools.index[i]]) then
+			self[self.tools.index[i]](self)
+		end
+	end
+
+end 
+
 function DrawTools:MousePos()
 	local x = (love.mouse.getX() - self.selectedPixelTexture.Pos.x) /	self.selectedPixelTexture.Scale.x
 	local y = (love.mouse.getY() - self.selectedPixelTexture.Pos.y) / self.selectedPixelTexture.Scale.y
@@ -83,24 +97,9 @@ function DrawTools:MousePos()
 	return x,y
 end
 
-function DrawTools:Move()
-	if(self.selectedPixelTexture == nil) then
-		return
-	end 
-
-	if(love.mouse.isDown("r")) then
-		self.selectedPixelTexture.Pos.x = love.mouse.getX()
-		self.selectedPixelTexture.Pos.y = love.mouse.getY()
-	end 
-
-end 
-
--- simple draw onto pixTex
+-- simple draw onto pixTex --> does not have solid lines :P
 function DrawTools:Draw()
 
-	if(self.selectedPixelTexture == nil) then
-		return
-	end
 
 	if(love.mouse.isDown("l")) then
 
@@ -109,34 +108,53 @@ function DrawTools:Draw()
 
 		self.selectedPixelTexture:Pixel
 		{
-			--x = love.mouse.getX() % 32,
-			--y = love.mouse.getY() % 32,
 			x = x,
 			y = y,
 			color = self.selectedColor
 		}
 
-		--print(self.selectedPixelTexture.width)
-		--print(x .. " | " .. y)
-
-
-
-		self.selectedPixelTexture:CreateTexture()
+		self.selectedPixelTexture:RefreshTexture()
 	end
 
 end
+
+-- move pixel texture around screen --> pretty ghetto at the moment :P
+function DrawTools:Move()
+
+	if(love.mouse.isDown("r")) then
+		self.selectedPixelTexture.Pos.x = love.mouse.getX()
+		self.selectedPixelTexture.Pos.y = love.mouse.getY()
+	end 
+
+end 
+
+
+-- scale the object for more or less view
+-- this tool will be changed to something different called scale
+-- however a basic version it will just be called zoom for right now :P
+function DrawTools:Zoom()
+
+	if(Mouse:SingleClick("l")) then
+		self.selectedPixelTexture.Scale.x  = self.selectedPixelTexture.Scale.x + 1
+		self.selectedPixelTexture.Scale.y  = self.selectedPixelTexture.Scale.y + 1
+	end 
+
+	if(Mouse:SingleClick("r")) then
+		self.selectedPixelTexture.Scale.x  = self.selectedPixelTexture.Scale.x - 1
+		self.selectedPixelTexture.Scale.y  = self.selectedPixelTexture.Scale.y - 1
+	end 
+
+
+end 
 
 function DrawTools:SetSelectedColor(color)
 	self.selectedColor = color
 	self.selectedColorBox.color = color
 end
 
+-- grab a color from pixel texture that mouse is hovering over
 function DrawTools:ColorDrop()
 	
-	if(self.selectedPixelTexture == nil) then
-		return
-	end
-
 	if(love.mouse.isDown("r")) then
 		local x,y = self:MousePos()
 
@@ -167,13 +185,34 @@ ObjectUpdater:AddStatic(DrawTools)
 
 
 
-
-
 return DrawTools
 
 
 -- notes
 -------------------------------------------------
+
+-- Basic Tools
+--------------------
+-- zoom --> show larger pixels but within same canvas size --> slightly difficult but meh
+-- scale --> change scale of object directly --> works but not exactly the cleanest way to do it
+-- selection --> box an area of pixels and then move it
+
+-- palette tools --> color drop from palette, re order etc
+
+-- Tool features
+-------------------------
+-- solid line drawing --> fill in speed gaps
+
+-- Brush tools --> this will take some time and will be sort of its own thing -- but writing about it here
+-------------------------
+-- brush selection --> small previews, click and draw
+-- brush creation --> draw a new brush and then use it
+
+-- flip --> x, y and selection
+-- rotate
+
+
+
 
 -- Preview Layer
 -- should make a preview layer from another pixtex and then mask it ontop of drawing

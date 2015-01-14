@@ -42,8 +42,9 @@ DebugText.messageType =
 
 
 	-- Statics
-	ButtonStatic = true,
+	ButtonStatic = false,
 	ShaderStatic = false,
+	MouseStatic = true,
 
 	-- Objects
 	Box = false,
@@ -61,7 +62,7 @@ DebugText.messageType =
 	SnapPlayer = false,
 	Pos = false,
 	Collision = false,
-	Button = true,
+	Button = false,
 	DrawTools = false,
 
 	-- Counters

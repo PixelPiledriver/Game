@@ -9,6 +9,17 @@
 
 -- Requires --> load and run shit in other files
 
+--Utility requires
+require("DebugText")
+require("DeltaTime")
+require("Keyboard")
+require("Math")
+require("TableSort")
+require("PrintDebug")
+require("Random")
+require("FailNew")
+require("Bool")
+
 -- Only requires that are globally necessary should be listed here
 local App = require("App")
 local Map = require("Map")
@@ -26,18 +37,9 @@ local Graphics = require("Graphics")
 local Shader = require("Shader")
 local Draw = require("Draw")
 local DrawTools = require("DrawTools")
+local Panel = require("Panel")
 
 
---Utility requires
-require("DebugText")
-require("DeltaTime")
-require("Keyboard")
-require("Math")
-require("TableSort")
-require("FailNew")
-
-require("PrintDebug")
-require("Random")
 
 -- other require stuff
 require("TestShit")

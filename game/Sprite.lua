@@ -22,6 +22,7 @@ Sprite.defaultXIndex = 1
 Sprite.defaultYIndex = 1
 Sprite.defaultX = 0
 Sprite.defaultY = 0
+Sprite.useSpriteSheetSpriteSize = true
 
 -- global draw toggle
 Sprite.drawNone = false
@@ -50,12 +51,13 @@ function Sprite:New(data)
 	-- vars
 	o.spriteSheet = data.spriteSheet or Sprite.defaultSpriteSheet
 
-	o.width = data.width or Sprite.defaultWidth
-	o.height = data.height or Sprite.defaultHeight
-
-	if(data.useSpriteSheetSpriteSize) then
+	-- use sprite size defined by sprite sheet?
+	if(Sprite.useSpriteSheetSpriteSize) then
 		o.width = o.spriteSheet.spriteWidth
 		o.height = o.spriteSheet.spriteHeight
+	else
+		o.width = data.width or Sprite.defaultWidth
+		o.height = data.height or Sprite.defaultHeight
 	end 
 
 	o.xIndex = data.xIndex or Sprite.defaultXIndex
@@ -86,6 +88,7 @@ function Sprite:New(data)
 
 	o.draw = data.draw or true
 
+
 	o.parent = data.parent or nil
 
 
@@ -110,6 +113,11 @@ function Sprite:New(data)
 
 		-- global draw toggle
 		if(Sprite.drawNone) then
+			return
+		end 
+
+		-- object draw toggle
+		if(self.draw == false) then
 			return
 		end 
 

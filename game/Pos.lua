@@ -61,7 +61,7 @@ function Pos:New(data)
 	-- {x, y, z}
 	function o:SetPos(data)
 		self.x = data.x or self.x
-		self.y = data.x or self.y
+		self.y = data.y or self.y
 		self.z = data.z or self.z
 	end 
 

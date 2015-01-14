@@ -90,6 +90,10 @@ function Box:New(data)
 		damp = 0.95
 	}
 
+	-- parent
+	o.parent = data.parent or nil
+	o.useParentPos = data.useParentPos or false
+
 	-------------------------
 	-- Components
 	-------------------------
@@ -141,6 +145,21 @@ function Box:New(data)
 		end 
 
 		love.graphics.setColor(Color:AsTable(self.color))
+
+		-- pos
+		local x = nil
+		local y = nil
+		local z = nil
+
+		if(self.parent and self.useParentPos ) then
+			x = self.parent.Pos.x
+			y = self.parent.Pos.y
+			z = self.parent.Pos.z
+		else
+			x = self.x
+			y = self.y
+			z = self.z
+		end 
 
 		if(self.rotatable) then
 			love.graphics.push()
