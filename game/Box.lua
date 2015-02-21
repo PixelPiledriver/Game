@@ -6,7 +6,8 @@ local SinCounter = require("SinCounter")
 local Color = require("Color")
 local Life = require("Life")
 local Fade = require("Fade")
-
+local Size = require("Size")
+local Pos = require("Pos")
 
 local Box = {}
 
@@ -17,7 +18,6 @@ local Box = {}
 Box.name = "Box"
 Box.oType = "Static"
 Box.dataType = "Graphics Constructor"
-
 
 
 -- create instance
@@ -34,16 +34,23 @@ function Box:New(data)
 	o.dataType = "Graphics"
 
 	-- position
-	o.x = data.x or 0
-	o.y = data.y or 0
-	o.xStart = o.x
-	o.yStart = o.y
+	o.Pos = Pos:New
+	{
+		x = data.x or Pos.defaultPos.x,
+		y = data.y or Pos.defaultPos.y
+	}
+
+	o.xStart = o.Pos.x
+	o.yStart = o.Pos.y
 	o.speed = data.speed or 5
 	o.move = false
 
 	-- size
-	o.width = data.width or 32
-	o.height = data.height or 32
+	o.Size = Size:New
+	{
+		width = data.width or 32,
+		height = data.height or 32
+	}
 
 	-- color
 	o.color = data.color or Color:Get("white")
@@ -163,14 +170,14 @@ function Box:New(data)
 
 		if(self.rotatable) then
 			love.graphics.push()
-			love.graphics.translate(self.x + (self.pivot.x * self.width), self.y + (self.pivot.y * self.height))
+			love.graphics.translate(self.Pos.x + (self.pivot.x * self.Size.width), self.Pos.y + (self.pivot.y * self.Size.height))
 			love.graphics.scale(self.xScale, self.yScale)
 			love.graphics.rotate(self.angle)
-			love.graphics.translate(-self.x - (self.pivot.x * self.width), -self.y - (self.pivot.y * self.height))
-			love.graphics.rectangle("fill", self.x, self.y - (self.z or 0), self.width, self.height)
+			love.graphics.translate(-self.Pos.x - (self.pivot.x * self.Size.width), -self.Pos.y - (self.pivot.y * self.Size.height))
+			love.graphics.rectangle("fill", self.Pos.x, self.Pos.y - (self.z or 0), self.Size.width, self.Size.height)
 			love.graphics.pop()
 		else 
-			love.graphics.rectangle("fill", self.x, self.y - (self.z or 0), self.width, self.height)
+			love.graphics.rectangle("fill", self.Pos.x, self.Pos.y - (self.z or 0), self.Size.width, self.Size.height)
 		end 
 
 		if(self.fill == false) then
@@ -191,19 +198,19 @@ function Box:New(data)
 		end
 
 		if(love.keyboard.isDown(self.keys.left)) then
-			self.x = self.x - self.speed
+			self.Pos.x = self.Pos.x - self.speed
 		end 
 
 		if(love.keyboard.isDown(self.keys.right)) then
-			self.x = self.x + self.speed
+			self.Pos.x = self.Pos.x + self.speed
 		end 
 
 		if(love.keyboard.isDown(self.keys.up)) then
-			self.y = self.y - self.speed
+			self.Pos.y = self.Pos.y - self.speed
 		end 
 
 		if(love.keyboard.isDown(self.keys.down)) then
-			self.y = self.y + self.speed
+			self.Pos.y = self.Pos.y + self.speed
 		end
 
 		
@@ -291,7 +298,7 @@ function Box:New(data)
 		{
 			{text = "", obj = "Box" },
 			{text = "---------------------"},
-			{text = "Pos: {" .. self.x .. "," .. self.y .. "}"},
+			{text = "Pos: {" .. self.Pos.x .. "," .. self.Pos.y .. "}"},
 			{text = "Life: " .. self.Life.life },
 			{text = "Fade: " .. self.Fade.fade}
 		}

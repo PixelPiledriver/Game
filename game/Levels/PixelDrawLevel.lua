@@ -18,7 +18,7 @@ local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
 local DrawToolsHUD = require("DrawToolsHUD")
 local Panel = require("Panel")
-
+local Box = require("Box")
 
 -- animation test with new spriteStuff
 local pawnGraphics = require("AnimationTest")
@@ -26,8 +26,58 @@ local pawnGraphics = require("AnimationTest")
 
 local panel = Panel:New
 {
-	posType = "bottom"
+	posType = "bottom",
+	name = "Test Panel"
 }
+
+local pBox = Box:New
+{
+	width = 50,
+	height = 20,
+	color = Color:Get("white")
+}
+
+local pBox2 = Box:New
+{
+	width = 50,
+	height = 20,
+	color = Color:Get("orange")
+}
+
+local pBox3 = Box:New
+{
+	width = 50,
+	height = 20,
+	color = Color:Get("yellow")
+}
+
+local pBox4 = Box:New
+{
+	width = 50,
+	height = 20,
+	color = Color:Get("lightGreen")
+}
+
+
+local button1 = Button:New
+{
+	text = "Button1",
+	func = function()
+	end
+}
+
+panel:Add(pBox)
+panel:Add(pBox2)
+panel:Add(pBox3)
+panel:Add(pBox4)
+panel:Add(pawnGraphics.sprites.idle)
+panel:Add(pawnGraphics.sprites.attack)
+panel:Add(pawnGraphics.sprites.walk)
+panel:Add(button1)
+
+--]]
+
+
 
 
 -- other stuff
@@ -38,7 +88,6 @@ local palPos =
 }
 
 
-local PixelDrawLevel = {}
 
 
 local mouse = Mouse:New{name = "mouse"}
@@ -117,6 +166,8 @@ function MakePixels()
 	pix:Mask(pix2)
 end 
 
+local PixelDrawLevel = {}
+
 
 
 function PixelDrawLevel:Load()
@@ -141,17 +192,6 @@ function PixelDrawLevel:Load()
 
 
 	Button:DefaultLast()
-
-
-	local eggplant = SpriteSheet:New
-	{	
-		image = "Eggplant.png",
-	}
-
-	local icons = SpriteSheet:New
-	{	
-		image = "EditorIcons.png",
-	}
 
 
 	local loadSpriteToPixTex = Button:New
@@ -224,7 +264,6 @@ function PixelDrawLevel:Load()
 			MakePixels()
 			pix:RefreshTexture()
 		end
-		
 	}
 
 	local wash = Button:ActionButton(Button.wash, {pix = pix})
@@ -238,13 +277,20 @@ function PixelDrawLevel:Load()
 		end 
 	}
 	
-	local valueTest = Button:New(Button.valueTest)
-	local createPoint = Button:New(Button.createPoint)
-	local rfUp = Button:New(Button.repeatFunctionUp)
-	local rfDown = Button:New(Button.repeatFunctionDown)
-	local britUp = Button:New(Button.britUp)
-	local britDown = Button:New(Button.britDown)
-	local quit = Button:New(Button.quit)
+	local hidePanel = Button:New
+	{
+		text = "Hide Panel",
+		toggle = true,
+		toggleOnFunc = function()
+			panel:ToggleDraw()
+		end,
+		toggleOffFunc = function()
+			panel:ToggleDraw()
+		end 
+	}
+
+
+
 
 end 
 

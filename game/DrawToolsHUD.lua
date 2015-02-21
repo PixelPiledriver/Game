@@ -77,6 +77,7 @@ DrawToolsHUD.moveButton = Button:New
 	x = 432,
 	y = 100,
 	text = "toggle!",
+	buttonName = "Move",
 	toggle = true,
 	sprite = DrawToolsHUD.moveIcon,
 	--printDebugTextActive = true

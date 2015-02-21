@@ -33,7 +33,7 @@ CollisionManager.destroyObjects = false
 -- {a = {x,y}, b = {x,y}}
 function CollisionManager:PointToPoint(a, b)
 
-	if(a.x == b.x and a.y == b.y) then
+	if(a.Pos.x == b.Pos.x and a.Pos.y == b.Pos.y) then
 		printDebug{"Point to Point: collision", "Collision"}
 		return true
 	end 
@@ -43,7 +43,7 @@ end
 
 -- {point = {x,y}, rect = {x,y,width,height} }
 function CollisionManager:PointToRect(point, rect)
-	if(point.x > rect.x and point.x < rect.x + rect.width and point.y > rect.y ) then
+	if(point.Pos.x > rect.Pos.x and point.Pos.x < rect.Pos.x + rect.width and point.Pos.y > rect.Pos.y ) then
 		return true
 	end
 
@@ -54,19 +54,19 @@ end
 function CollisionManager:RectToRect(a, b)
 	local rect1, rect2
 
-	if(a.x < b.x) then
+	if(a.Pos.x < b.Pos.x) then
 		rect1 = 
 		{
 			min = 
 			{	
-				x = a.x,
-				y = a.y
+				x = a.Pos.x,
+				y = a.Pos.y
 			},
 
 			max = 
 			{
-				x = a.x + a.width,
-				y = a.y + a.height
+				x = a.Pos.x + a.width,
+				y = a.Pos.y + a.height
 			}
 		}
 
@@ -74,14 +74,14 @@ function CollisionManager:RectToRect(a, b)
 		{
 			min = 
 			{	
-				x = b.x,
-				y = b.y
+				x = b.Pos.x,
+				y = b.Pos.y
 			},
 
 			max = 
 			{
-				x = b.x + b.width,
-				y = b.y + b.height
+				x = b.Pos.x + b.width,
+				y = b.Pos.y + b.height
 			}
 		}
 
@@ -90,14 +90,14 @@ function CollisionManager:RectToRect(a, b)
 		{
 			min = 
 			{	
-				x = b.x,
-				y = b.y
+				x = b.Pos.x,
+				y = b.Pos.y
 			},
 
 			max = 
 			{
-				x = b.x + b.width,
-				y = b.y + b.height
+				x = b.Pos.x + b.width,
+				y = b.Pos.y + b.height
 			}
 		}
 
@@ -105,14 +105,14 @@ function CollisionManager:RectToRect(a, b)
 		{
 			min = 
 			{	
-				x = a.x,
-				y = a.y
+				x = a.Pos.x,
+				y = a.Pos.y
 			},
 
 			max = 
 			{
-				x = a.x + a.width,
-				y = a.y + a.height
+				x = a.Pos.x + a.width,
+				y = a.Pos.y + a.height
 			}
 		}
 	end 

@@ -44,7 +44,7 @@ DebugText.messageType =
 	-- Statics
 	ButtonStatic = false,
 	ShaderStatic = false,
-	MouseStatic = true,
+	MouseStatic = false,
 
 	-- Objects
 	Box = false,
@@ -63,7 +63,7 @@ DebugText.messageType =
 	Pos = false,
 	Collision = false,
 	Button = false,
-	DrawTools = false,
+	DrawTools = true,
 
 	-- Counters
 	SinCounter = false,

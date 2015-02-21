@@ -14,6 +14,9 @@ DrawTools.name = "DrawTools"
 DrawTools.oType  = "Static"
 DrawTools.dataType = "Graphics Tools"
 
+DrawTools.monkey = false
+
+
 DrawTools.selectedPixelTexture = nil
 
 DrawTools.selectedColor = Color:Get("red")
@@ -32,15 +35,17 @@ DrawTools.tools =
 	index = {"Draw", "Move", "ColorDrop", "Zoom"}
 }
 
-
+-- displays the current selected color
+-- gonna ignore this shit for a min
 DrawTools.selectedColorBox = Box:New
 {
 	x = 200,
-	y = 100,
+	y = 0,
 	width = 50,
 	height = 50,
 	color = DrawTools.selectedColor,
 }
+
 
 
 ---------------------------
@@ -60,8 +65,6 @@ end
 
 
 function DrawTools:Update()
-
-
 
 	self:UpdateTools()
 
@@ -177,6 +180,11 @@ function DrawTools:PrintDebugText()
 		{text = "", obj = "DrawTools"},
 		{text = "DrawTools Static"},
 		{text = "-------------------------"},
+		{text = Bool:ToString(self.tools.Draw)},
+		{text = Bool:ToString(self.tools.Move)},
+		{text = Bool:ToString(self.tools.ColorDrop)},
+		{text = Bool:ToString(self.tools.Zoom)},
+		{text = Bool:ToString(self.monkey)}
 	}
 end 
 

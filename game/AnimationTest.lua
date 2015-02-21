@@ -33,8 +33,6 @@ pawnGraphics.sprites.walk = Sprite:New
 	yIndex = 1,
 }
 
-pawnGraphics.sprites.walk.Pos.x = 200
-
 pawnGraphics.sprites.attack = Sprite:New
 {
 	spriteSheet = pawnGraphics.pawnSheet,

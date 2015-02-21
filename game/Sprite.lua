@@ -6,6 +6,7 @@ local ObjectUpdater = require("ObjectUpdater")
 local SpriteSheet = require("SpriteSheet")
 local Color = require("Color")
 local Pos = require("Pos")
+local Size = require("Size")
 
 local Sprite = {}
 
@@ -51,13 +52,16 @@ function Sprite:New(data)
 	-- vars
 	o.spriteSheet = data.spriteSheet or Sprite.defaultSpriteSheet
 
+	-- Size
+	o.Size = Size:New{}
+
 	-- use sprite size defined by sprite sheet?
 	if(Sprite.useSpriteSheetSpriteSize) then
-		o.width = o.spriteSheet.spriteWidth
-		o.height = o.spriteSheet.spriteHeight
+		o.Size.width = o.spriteSheet.spriteWidth
+		o.Size.height = o.spriteSheet.spriteHeight
 	else
-		o.width = data.width or Sprite.defaultWidth
-		o.height = data.height or Sprite.defaultHeight
+		o.Size.width = data.width or Sprite.defaultWidth
+		o.Size.height = data.height or Sprite.defaultHeight
 	end 
 
 	o.xIndex = data.xIndex or Sprite.defaultXIndex
@@ -67,7 +71,7 @@ function Sprite:New(data)
 
 	-- use index?
 	if(data.xIndex) then
-		o.x = o.width * (data.xIndex - 1)
+		o.x = o.Size.width * (data.xIndex - 1)
 	-- no index
 	else 
 		o.x = data.x or Sprite.defaultX
@@ -75,7 +79,7 @@ function Sprite:New(data)
 
 	-- use index?
 	if(data.yIndex) then
-		o.y = o.height * (data.yIndex - 1)
+		o.y = o.Size.height * (data.yIndex - 1)
 	else
 		o.y = data.y or Sprite.defaultY
 	end 
@@ -84,7 +88,7 @@ function Sprite:New(data)
 	o.color = Color:Get("white")
 
 	-- create sprite from sheet
-	o.sprite = love.graphics.newQuad(o.x, o.y, o.width, o.height, o.spriteSheet.width, o.spriteSheet.height)
+	o.sprite = love.graphics.newQuad(o.x, o.y, o.Size.width, o.Size.height, o.spriteSheet.width, o.spriteSheet.height)
 
 	o.draw = data.draw or true
 

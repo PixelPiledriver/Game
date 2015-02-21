@@ -6,6 +6,13 @@ local ObjectUpdater = require("ObjectUpdater")
 
 local Size = {}
 
+----------------
+-- Static Vars
+----------------
+Size.name = "Size"
+Size.oType = "Static"
+Size.dataType = "Component Constructor"
+
 
 function Size:New(data)
 
@@ -34,8 +41,6 @@ function Size:New(data)
 	function o:Update(data)
 
 	end
-
-
 
 	ObjectUpdater:Add{o}
 

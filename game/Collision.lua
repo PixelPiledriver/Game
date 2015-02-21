@@ -5,6 +5,7 @@
 local ObjectUpdater = require("ObjectUpdater")
 local CollisionManager = require("CollisionManager")
 local Color = require("Color")
+local Pos = require("Pos")
 
 local Collision = {}
 
@@ -29,11 +30,14 @@ function Collision:New(data)
 	o.dataType = "Object"
 
 	-- pos
-	o.x = data.x or -100
-	o.y = data.y or -100
+	o.Pos = Pos:New
+	{
+		x = data.x or 100,
+		y = data.y or 100
+	}
 
-	o.offsetX = o.x
-	o.offsetY = o.y
+	o.offsetX = o.Pos.x
+	o.offsetY = o.Pos.y
 
 	-- shape
 	o.shape = data.shape or "rect"-- point, rect only for now
@@ -138,7 +142,7 @@ function Collision:New(data)
 		end 
 
 		love.graphics.setColor( self.collided and self.collisionColor or self.color)
-		love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
+		love.graphics.rectangle("line", self.Pos.x, self.Pos.y, self.width, self.height)
 
 	end 
 
@@ -147,8 +151,8 @@ function Collision:New(data)
 			return
 		end 
 
-			self.x = love.mouse.getX() + self.offsetX
-			self.y = love.mouse.getY() + self.offsetY
+			self.Pos.x = love.mouse.getX() + self.offsetX
+			self.Pos.y = love.mouse.getY() + self.offsetY
 		
 	end 
 
@@ -158,11 +162,11 @@ function Collision:New(data)
 		end
 
 		if(self.parent.Pos) then
-			self.x = self.parent.Pos.x
-			self.y = self.parent.Pos.y
+			self.Pos.x = self.parent.Pos.x
+			self.Pos.y = self.parent.Pos.y
 		else
-			self.x = self.parent.x
-			self.y = self.parent.y
+			self.Pos.x = self.parent.x
+			self.Pos.y = self.parent.y
 		end 
 
 	end 

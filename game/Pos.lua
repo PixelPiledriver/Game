@@ -8,6 +8,12 @@ local ObjectUpdater = require("ObjectUpdater")
 
 local Pos =  {}
 
+-----------------
+-- Static Vars
+-----------------
+Pos.name = "Pos"
+Pos.oType = "Static"
+Pos.dataType = "Component Constructor"
 
 Pos.defaultPos = 
 {
@@ -112,4 +118,12 @@ end
 return Pos
 
 
+
+
+-- notes
+-----------------------
+-- add a realativePoisition feature
+-- allows position of object to be updated based on an object that it "anchors to"
+-- can be called relativeObject I geuss --> because it is not necessarily relative to the parent
+-- altho in most cases it will be --> should probly default to the parent if nothing else is given
 

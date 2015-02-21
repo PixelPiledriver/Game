@@ -42,7 +42,7 @@ function Point:New(data)
 	------------------------
 	-- Components
 	------------------------
-	o.Pos = Pos:New(data.pos)
+	o.Pos = Pos:New(data.pos or Pos.defaultPos)
 
 	if(data.fade) then	
 		o.Fade = Fade:New

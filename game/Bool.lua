@@ -13,23 +13,27 @@ Bool = {}
 -- Static Functions
 ---------------------------
 
+-- converts a bool into a string
+-- main use is for printing bools to screen
 function Bool:ToString(b)
 
 	if(b) then
 		return "true"
-	else
+	else 
 		return "false"
-	end 
+	end
 
 end 
 
-
+-- toggle given bool based on current state
+-- assign the return value of give bool to bool --> weird I know but thats how it works :P
 function Bool:Toggle(b)
 	if(b) then
-		b = false
+		return false
 	else
-		b = true
+		return true
 	end 
+
 end 
 
 

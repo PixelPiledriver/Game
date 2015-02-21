@@ -4,7 +4,7 @@
 -- this is not meant to be a complex place for testing objects
 -- just for raw lua code dealing with tables and shit
 
-
+--[[
 local thing = {}
 thing.a = 10
 thing.name = "thing"
@@ -61,3 +61,4 @@ thing["PrintSelf"](thing)
 --]]
 
 
+--]]

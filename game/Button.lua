@@ -124,6 +124,7 @@ function Button:New(data)
 	-- flags
 	o.moveable = true    								-- can be moved
 	o.move = false       								-- currently being moved
+	o.draw = true
 
 	-- toggle
 	o.toggle = data.toggle or false     -- click once to set --> this is the button type not state
@@ -134,13 +135,12 @@ function Button:New(data)
 	o.toggleOnFunc = data.toggleOnFunc or nil
 	o.toggleOffFunc = data.toggleOffFunc or nil
 
-
 	-- text
 	o.text = data.text or "Button"
 	o.textColor = data.textColor and Color:Get("data.textColor") or Color:Get("black")
 	o.drawText = true
 
-	-- graphics
+	-- Graphics
 
 	-- color
 	o.color = Color:Get("white")
@@ -167,8 +167,8 @@ function Button:New(data)
 
 	if(o.sizeToSprite) then
 		o.drawText = false --> this should probly be put somewhere else :P
-		o.Size.width = o.sprite.width
-		o.Size.height = o.sprite.height
+		o.Size.width = o.sprite.Size.width
+		o.Size.height = o.sprite.Size.height
 	end 
 
 	if(o.sprite) then
@@ -220,8 +220,6 @@ function Button:New(data)
 			end
 		end 
 
-
-
 		-- click --> do button funcition
 		self:ClickButton()
 
@@ -233,8 +231,13 @@ function Button:New(data)
 
 	end
 
-	function o:Draw()
+	function o:ToggleDraw()
+		self.draw = Bool:Toggle(self.draw)
+		self.collision.draw = self.draw
+		self.drawText = self.draw
+	end 
 
+	function o:Draw()
 		-- draw text for button? --> if button has a sprite, defaults to not draw
 		-- this should not always be the case, if button has a backdrop and text goes on top
 		-- will need to fix this issue at a later time :P
@@ -633,16 +636,3 @@ return Button
 	-- need to add an option for it
 	-- Single click added to mouse
 	-- now just need to make it optional for buttons to require single click or be able to roll click
-
-
-
-	-- dont need this?
-	--[[
-	o.box =  Box:New
-	{
-		x = o.x,
-		y = o.y,
-		width = o.width,
-		height = o.height
-	}
-	--]]
