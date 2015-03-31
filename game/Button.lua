@@ -11,7 +11,7 @@ local Shader = require("Shader")
 local Pos = require("Pos")
 local Mouse = require("Mouse")
 local Size = require("Size")
-local HoverWithMouse = require("HoverWithMouse")
+local MouseHover = require("MouseHover")
 
 local Button = {}
 
@@ -209,15 +209,15 @@ function Button:New(data)
 	o.offsetFromMouseY = 0
 
 	-- hover
-	o.hover = HoverWithMouse:New
+	o.hover = MouseHover:New
 	{
 		parent = o
 	}
 
 
-	----------------
-	-- Functions
-	----------------
+	----------------------
+	-- Object Functions
+	----------------------
 	function o:Update()
 
 		-- move --> right click lets you move buttons

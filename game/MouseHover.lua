@@ -3,20 +3,21 @@
 local ObjectUpdater = require("ObjectUpdater")
 
 
-local HoverWithMouse = {}
+local MouseHover = {}
 
-function HoverWithMouse:New(data)
+function MouseHover:New(data)
 
 	local o = {}
 
 
 	o.hoverType = data.hoverType or "parentCollision"
 	o.parent = data.parent or nil
+	o.collision = data.collision or data.parent.collision or nil
 	o.hover = false
 
 	o.PrintDebugTextActive = true
 
-	
+
 
 
 	function o:Update()
@@ -29,8 +30,8 @@ function HoverWithMouse:New(data)
 		if(self.hoverType == "parentCollision") then
 
 			-- this component has a parent and collides with mouse?
-			if(self.parent and self.parent.collision and self.parent.collision:DoesCollideWith("Mouse")) then
-				if(self.parent.collision.collidedLastFrame) then
+			if(self.parent and o.collision and o.collision:DoesCollideWith("Mouse")) then
+				if(o.collision.collidedLastFrame) then
 					self.hover = true
 				else
 					self.hover = false
@@ -54,14 +55,14 @@ function HoverWithMouse:New(data)
 
 		DebugText:TextTable
 		{
-			{text = "", obj = "HoverWithMouse"},
+			{text = "", obj = "MouseHover"},
 			{text = "Hover:" .. Bool:ToString(self.hover)}
 		}
 
 		--[[
 		DebugText:TextTableSimple
 		{
-			objectType = "HoverWithMouse",
+			objectType = "MouseHover",
 			text =
 			{
 				{"Hover"},
@@ -81,4 +82,4 @@ end
 
 
 
-return HoverWithMouse
+return MouseHover

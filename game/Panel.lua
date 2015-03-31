@@ -7,6 +7,8 @@ local Box = require("Box")
 local Pos = require("Pos")
 local Size = require("Size")
 local Collision = require("Collision")
+local MouseHover = require("MouseHover")
+local MouseDrag = require("MouseDrag")
 
 
 
@@ -107,6 +109,13 @@ function Panel:New(data)
 		parent = o,
 	}
 
+	o.topFrame.Pos:SetFollow
+	{
+		follow = o.Pos,
+		x = o.topFrame.Pos.x - o.Pos.x,
+		y = o.topFrame.Pos.y - o.Pos.y
+	}
+
 	--------------------
 	-- Collision
 	--------------------
@@ -120,8 +129,30 @@ function Panel:New(data)
 		parent = o.topFrame,
 		shape = "rect",
 		collisionList = {"Mouse"},
-		
 	}
+
+	o.topCollision.Pos:SetFollow
+	{
+		follow = o.Pos,
+		x = o.topCollision.Pos.x - o.Pos.x,
+		y = o.topCollision.Pos.y - o.Pos.y
+	}
+
+
+	------------------------
+	-- Mouse Interaction
+	------------------------
+	o.hover = MouseHover:New
+	{
+		parent = o,
+		collision = o.topCollision
+	}
+
+	o.drag = MouseDrag:New
+	{
+		parent = o
+	}
+
 
 	-------------------------
 	-- Object Functions
@@ -279,15 +310,31 @@ function Panel:New(data)
 			self.Size.height = object.Size.height + (Panel.objectToPanelPad * 2)
 		end 
 
+		local x = self.Pos.x + Panel.objectToPanelPad + totalObjectsWidth + objectToObjectPad
+		local y = self.Pos.y + Panel.objectToPanelPad
+
+		local offsetX = x - self.Pos.x
+		local offsetY = y - self.Pos.y
+
+		object.Pos:SetFollow
+		{
+			follow = self.Pos,
+			x = offsetX,
+			y = offsetY
+		}
+
+		-- old panel position for new objects code
+		--[[
 		-- set position of new object into panel
-		object.Pos.x = self.Pos.x + Panel.objectToPanelPad + totalObjectsWidth + objectToObjectPad
-		object.Pos.y = self.Pos.y + Panel.objectToPanelPad
+		--object.Pos.x = self.Pos.x + Panel.objectToPanelPad + totalObjectsWidth + objectToObjectPad
+		--object.Pos.y = self.Pos.y + Panel.objectToPanelPad
 
 		object.panelPos =
 		{
 			x = object.Pos.x - self.Pos.x,
 			y = object.Pos.y - self.Pos.y,
 		}
+		--]]
 		
 		self:Refresh()
 	end 
@@ -297,7 +344,7 @@ function Panel:New(data)
 	function o:Refresh()
 		self:ApplySize()
 		self:ApplyWindowPadding()
-		self:ApplyObjectPosition()
+		--self:ApplyObjectPosition()
 		self:ApplyFramePosition()
 	end 
 

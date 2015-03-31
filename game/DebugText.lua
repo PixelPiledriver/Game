@@ -68,9 +68,8 @@ DebugText.messageType =
 
 	--Components
 	Pos = false,
-	HoverWithMouse = true,
-
-
+	MouseHover = false,
+	MouseDrag = true,
 
 	-- Counters
 	SinCounter = false,

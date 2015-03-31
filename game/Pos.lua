@@ -83,6 +83,13 @@ function Pos:New(data)
 		self.z = data.z or self.z
 	end 
 
+	function o:SetFollow(data)
+		o.followPos = data.follow or nil
+		o.followOffsetX = data.x or 0
+		o.followOffsetY = data.y or 0
+		o.followOffsetZ = data.z or 0
+	end 
+
 	-- set the rate of moving --> will probly be moved to its own component
 	function o:SetSpeed(data)
 		self.speed.x = self.speed.x
@@ -168,4 +175,6 @@ return Pos
 -- need to be able to link a Pos compoenent to another Pos component
 -- just pass it in
 -- do this next!
+-- this makes it so Pos components dont have to be updated.
+-- they just have a pos and an offset from a linked position
 	
