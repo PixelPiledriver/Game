@@ -60,10 +60,17 @@ DebugText.messageType =
 	Mouse = false,
 	Life = false,
 	SnapPlayer = false,
-	Pos = false,
+	
 	Collision = false,
 	Button = false,
-	DrawTools = true,
+	DrawTools = false,
+	Palette = false,
+
+	--Components
+	Pos = false,
+	HoverWithMouse = true,
+
+
 
 	-- Counters
 	SinCounter = false,
@@ -101,8 +108,10 @@ function DebugText:Text(txt)
 	self.texts[#self.texts + 1] = { {text = txt, color = Color.white} }
 end 
 
+
 -- add a new text to be drawn
--- { {text ,color,obj}, {text,color}, ... } 
+-- old format --> less easy to use
+-- { {text,color,obj}, {text,color}, ... } 
 function DebugText:TextTable(data)
 
 	local textType = data[1].obj or "Generic"
@@ -112,6 +121,29 @@ function DebugText:TextTable(data)
 	end 
 
 	self.texts[#self.texts + 1] = data
+
+end
+
+
+-- add a new text to be drawn
+-- this is the shorthand format --> much faster to type
+-- data is converted into a table slot to be used by DebugText
+-- { type = className, text = {string, color}
+function DebugText:TextTableSimple(data)
+
+	local textType = data.type or "Generic"
+
+	if(self.messageType[textType] == false) then
+		return
+	end 
+
+	local convertedTable = {{text = "", data.objectType}}
+
+	for i=i, #data.text do
+		convertedTable[#convertedTable+1] = {text = data.text[i][1], color = data.text[i][2] or nil }
+	end
+
+	self.texts[#self.texts + 1] = convertedTable
 
 end
 

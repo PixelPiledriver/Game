@@ -297,6 +297,7 @@ function Box:New(data)
 		DebugText:TextTable
 		{
 			{text = "", obj = "Box" },
+			{text = "Box"},
 			{text = "---------------------"},
 			{text = "Pos: {" .. self.Pos.x .. "," .. self.Pos.y .. "}"},
 			{text = "Life: " .. self.Life.life },

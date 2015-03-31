@@ -50,6 +50,7 @@ require("TestShit")
 
 --local SnapGridTestLevel = require("levels/SnapGridTestLevel")
 local PixelDrawLevel = require("levels/PixelDrawLevel")
+--local LerpLevel = require("levels/LerpLevel")
 --local BoxTestLevel = require("levels/BoxTestLevel")
 --local SnapGridTestLevel = require("levels/SnapGridTestLevel")
 --local TextWriteLevel = require("levels/TextWriteLevel")
@@ -75,6 +76,7 @@ function love.load()
 
 	--TestLevel:Load()
 	PixelDrawLevel:Load()
+	--LerpLevel:Load()
 	--BoxTestLevel:Load()
 	--TextWriteLevel:Load()
 
@@ -93,6 +95,9 @@ function love.update(dt)
 
 	Controller.Update()
 	CollisionManager:Update()
+
+	--LerpLevel:Update()
+	PixelDrawLevel:Update()
 
 	--Map:Update()
 

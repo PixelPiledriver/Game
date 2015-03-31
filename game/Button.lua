@@ -11,6 +11,7 @@ local Shader = require("Shader")
 local Pos = require("Pos")
 local Mouse = require("Mouse")
 local Size = require("Size")
+local HoverWithMouse = require("HoverWithMouse")
 
 local Button = {}
 
@@ -140,7 +141,10 @@ function Button:New(data)
 	o.textColor = data.textColor and Color:Get("data.textColor") or Color:Get("black")
 	o.drawText = true
 
+
+	--------------
 	-- Graphics
+	--------------
 
 	-- color
 	o.color = Color:Get("white")
@@ -175,8 +179,9 @@ function Button:New(data)
 		o.sprite.parent = o
 	end 
 
-	-- collision --> this uses collision os
-	-- need to also have a mouse based version
+	-- collision
+	-- this uses collision obejcts
+	-- a mouse based version with no collision might be good at some point :O
 	o.collision = Collision:New
 	{
 		x = o.Pos.x,
@@ -199,6 +204,17 @@ function Button:New(data)
 	o.clicked = false
 	o.lastClicked = false
 
+	-- mouse drag --> being coverted to a component
+	o.offsetFromMouseX = 0
+	o.offsetFromMouseY = 0
+
+	-- hover
+	o.hover = HoverWithMouse:New
+	{
+		parent = o
+	}
+
+
 	----------------
 	-- Functions
 	----------------
@@ -206,8 +222,8 @@ function Button:New(data)
 
 		-- move --> right click lets you move buttons
 		-- intended to make testing easier
-		self:ClickToMove()
-		self:UpdateMove()
+		self:ClickToDrag()
+		self:UpdateMoveToMouse()
 		self:OnNoCollision()
 
 
@@ -343,39 +359,39 @@ function Button:New(data)
 
 	end 
 
-	function o:UpdateMove()
+	function o:UpdateMoveToMouse()
 		if(self.move == false) then
 			return 
 		end 
 
-		self.Pos.x = love.mouse.getX()
-		self.Pos.y = love.mouse.getY()
-		self.collision.x = math.abs(love.mouse.getX() - self.lastX)
-		self.collision.y = math.abs(love.mouse.getY() - self.lastY)
-
+		self.Pos.x = love.mouse.getX() - self.offsetFromMouseX
+		self.Pos.y = love.mouse.getY() - self.offsetFromMouseY
 	end 
 
 	-- right click to drag a button
-	function o:ClickToMove()
+	function o:ClickToDrag()
 
+		-- right click on button? set button to move
 		if(self.hover == true and Button.buttonBeingDragged == false) then
 			if(love.mouse.isDown("r")) then
 				self.move = true
 				Button.buttonBeingDragged = true
+
+				-- set offset
+				self.offsetFromMouseX = love.mouse.getX() - self.Pos.x
+				self.offsetFromMouseY = love.mouse.getY() - self.Pos.y
 			end 
 		end 
 
-		if(self.move == true) then
-			self.move = true
-			self.lastX = love.mouse.getX() - self.Pos.x
-			self.lastY = love.mouse.getY() - self.Pos.y
-		end 
-
-
-		-- drop
+		-- let go of button? drop
 		if(self.move == true and love.mouse.isDown("r") == false) then
 			self.move = false
 			Button.buttonBeingDragged = false
+
+			-- reset offset
+			self.offsetFromMouseX = 0
+			self.offsetFromMouseY = 0
+
 		end 
 
 	end 
@@ -406,21 +422,23 @@ function Button:New(data)
 			{text = "Pos: {" .. self.Pos.x .. ", " .. self.Pos.y .. "}"},
 			{text = "Toggle: " .. toggleInfo},
 			{text = "State: " ..self.state}
-
 		}
 
 	end 
 
+
+	-- add object to list
 	ObjectUpdater:Add{o}
 	Button.totalCreated = Button.totalCreated + 1
 
-
-
+	-- store as most recent button created
 	if(data.saveAsLast == nil) then
 		Button.lastCreated = o
 	end 
 
+	-- new Button created
 	return o
+
 end 
 
 
@@ -428,8 +446,8 @@ end
 -------------------------------------
 -- Useful Buttons
 -------------------------------------
-
-
+-- premade buttons go here that can be deployed into any scene
+-- pass these as a table --> Button.New(Button.buttonName)
 
 
 
@@ -596,10 +614,7 @@ ObjectUpdater:AddStatic(Button)
 -----------------------------
 -- Button Library
 -----------------------------
--- premade buttons go here that can be deployed into any scene
--- buttons need and extra variable that lets you pass in an object for them to work on
--- assuming they need one
--- objects needed for buttons to works will be genericized into a table maybe?
+
 
 
 return Button
@@ -636,3 +651,9 @@ return Button
 	-- need to add an option for it
 	-- Single click added to mouse
 	-- now just need to make it optional for buttons to require single click or be able to roll click
+
+
+	-- this is worked on i think with action buttons <--- need to look into that
+	-- buttons need and extra variable that lets you pass in an object for them to work on
+	-- assuming they need one
+	-- objects needed for buttons to works will be genericized into a table maybe?

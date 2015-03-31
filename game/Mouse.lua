@@ -110,7 +110,7 @@ function Mouse:New(data)
 	o.width = data.width or 8
 	o.height = data.height or 8
 
-	-- collision
+	-- collision for mouse cursor
 	o.collision = Collision:New
 	{
 		x = -o.width/2,
@@ -161,6 +161,7 @@ function Mouse:New(data)
 
 	end
 
+	-- has the mouse moved since last frame?
 	function o:HasMouseMoved()
 
 		return Math:TestEqualityPoints
@@ -171,6 +172,7 @@ function Mouse:New(data)
 
 	end 
 
+	-- how fast is the mouse moving?
 	function o:CalculateSpeed()
 		self.speed.x = math.abs(self.x - self.lastX) / 1
 		self.speed.y = math.abs(self.y - self.lastY) / 1
@@ -194,6 +196,7 @@ function Mouse:New(data)
 	end 
 
 
+	-- debug info
 	function o:PrintDebugText()
 		
 		DebugText:TextTable
@@ -204,11 +207,9 @@ function Mouse:New(data)
 			{text = "Y: " .. self.y},
 			{text = "SpeedX: " .. self.speed.x},
 			{text = "SpeedY: " .. self.speed.y},
-
 		}
 		
 	end
-
 
 
 	----------

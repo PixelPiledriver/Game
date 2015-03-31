@@ -9,15 +9,14 @@
 ------------------
 -- Requires
 ------------------
+local ObjectUpdater = require("ObjectUpdater")
 local Pos = require("Pos")
 local Color = require("Color")
 local Random = require("Random")
 local Value = require("Value")
-local ObjectUpdater = require("ObjectUpdater")
+local Collison = require("Collision")
 
 local Palette = {}
-
-
 
 
 ---------------------------
@@ -53,6 +52,8 @@ function Palette:New(data)
 	o.colors = data.colors or {}
 	o.size = data.size or 0 -- size = max, not just length of color table
 	o.draw = data.draw or false -- show the palette on screen or not
+
+	--if(data.asObject) then
 
 	o.width = 32
 
@@ -316,8 +317,10 @@ function Palette:New(data)
 	end 
 
 	function o:Update()
-		
+
+		-- stuff	
 	end 
+
 
 	function o:Draw()
 		
@@ -356,6 +359,31 @@ function Palette:New(data)
 
 
 
+	function o:PrintDebugText()
+
+		local life = self.Life and self.Life.life or 0
+
+		local colorsList = {}
+		colorsList[1] = {text = "", obj = "Palette"}
+
+		for i=1, #o.colors do
+			colorsList[#colorsList + 1] = {text = "Color[" .. i .. "]" .. o.colors[i].r .. ", " .. o.colors[i].g .. ", " .. o.colors[i].b}
+		end 
+
+		DebugText:TextTable
+		{
+			{text = "", obj = "Palette" },
+			{text = "Palette"},
+			{text = "---------------------"},
+			{text = #o.colors}
+		}
+
+		DebugText:TextTable(colorsList)
+
+	end 
+
+
+
 	ObjectUpdater:Add{o}
 
 	return o
@@ -366,9 +394,7 @@ end
 
 
 
-
-
-
+--ObjectUpdater:AddStat(Pallet)
 
 
 

@@ -2,20 +2,52 @@
 -- Component
 -- makes object drag and droppable
 
-
+local ObjectUpdater = require("Object Updater")
 
 local DragWithMouse = {}
 
-DragWithMouse.name = "DrawWithMose"
+DragWithMouse.name = "DragWithMouse"
 DragWithMouse.oType = "Static"
 DragWithMouse.dataType = "Object Constructor"
 
+function DragWithMouse:New(data)
 
+	local o = {}
 
+	o.parent = data.parent
+	o.drag = false
+	o.mouseButton = data.mouseButton or "r"
 
+	-----------------------
+	-- Functions
+	-----------------------
 
+	function o:Drag()
+		
+		if(self.parent == nil) then
+			return
+		end 
 
+		if(and self.drag == false) then
+			if(love.mouse.isDown(self.mouseButton)) then
+				self.drag = true
+		end 
 
+		if(self.drag = true) then
+			--self.last
+
+		end 
+
+	end
+
+	function o:Update()
+
+	end 
+
+	ObjectUpdater:Add{o}
+
+	return o
+end
 
 
 

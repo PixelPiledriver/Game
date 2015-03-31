@@ -66,10 +66,15 @@ function Collision:New(data)
 
 	-- movment
 	o.mouse = data.mouse or false
-	o.followParent = o.parent and true or false
+
+	if(o.followParent == false) then
+		o.followParent = o.parent and true or false
+	else
+		o.followParent = data.followParent		
+	end 
 
 	-- collision list
-	-- others that this o can collide with
+	-- other objects that this object can collide with
 	o.collisionList = data.collisionList or nil
 
 	-- alignment
@@ -88,38 +93,41 @@ function Collision:New(data)
 	-- Functions
 	-----------------
 
-	function o:CheckCollisionList(data)
-		
+	-- is object by name in the collision list?
+	-- does collide with? --> its a question
+	function o:DoesCollideWith(name)
+
+		-- no collision list exists? it doesn't
 		if(self.collisionList == nil) then
-			printDebug{"FALSE", "CollisionList"}
-			
 			return false
 		end 
 
-		if(self.collisionList[data.other.name]) then
-			printDebug{"TRUE","CollisionList"}
-			
-			return true
+		for i=1, #self.collisionList do
+			if(self.collisionList[i] == name) then
+				return true
+			end 
 		end 
 
 		return false
 
+		--[[
+		-- the named object IS in the list
+		if(self.collisionList[name]) then
+			return true
+		else
+			return false
+		end
+		--]]
+
 	end 
+
+
 
 	function o:CollisionWith(data)
 
 		printDebug{self.collisionList, "Collision3"}
 		printDebug{data.other.collisionList, "Collision3"}
 
-		-- what does this do?
-		--[[
-		if(self.collisionList) then
-			if(self:CheckCollisionList(data) == false) then
-				self.collision = false
-				return
-			end
-		end
-		--]]
 
 		self.collided = true
 
@@ -225,3 +233,43 @@ return Collision
 -- this should reduce the number of collision checks by a lot
 
 -- also display a collision check counter
+
+
+
+-- what does this do?
+-- doesnt seem like its needed anymore
+--[[
+if(self.collisionList) then
+	if(self:CheckCollisionList(data) == false) then
+		self.collision = false
+		return
+	end
+end
+--]]
+
+--[[
+	-- same function as DoesObjectCollideWith
+	function o:CheckCollisionList(data)
+		
+		-- no collision list exists
+		if(self.collisionList == nil) then
+			printDebug{"FALSE", "CollisionList"}
+			
+			return false
+		end 
+
+		if(self.collisionList[data.other.name]) then
+			printDebug{"TRUE","CollisionList"}
+			
+			return true
+		end 
+
+		return false
+
+	end 
+--]]
+
+
+--printDebug{"no CollisionList", "CollisionList"}
+
+--printDebug{"TRUE","CollisionList"}
