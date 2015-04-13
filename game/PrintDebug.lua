@@ -20,6 +20,7 @@ printDebugSettings["Collision3"] = false
 printDebugSettings["CollisionList"] = false
 printDebugSettings["Build"] = false
 printDebugSettings["Controller"] = false
+printDebugSettings["MapTable"] = true
 
 
 

@@ -194,6 +194,11 @@ function Button:New(data)
 		parent = o
 	}
 
+	o.collision.Pos:LinkPosTo
+	{
+		link = o.Pos
+	}
+
 	-- button
 	o.hover = false
 

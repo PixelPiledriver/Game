@@ -18,12 +18,109 @@ local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
 local DrawToolsHUD = require("DrawToolsHUD")
 local Panel = require("Panel")
+local SimplePanel = require("SimplePanel")
 local Box = require("Box")
+local MapTable = require("MapTable")
 
 -- animation test with new spriteStuff
 local pawnGraphics = require("AnimationTest")
 
 
+--[[
+local maptable = MapTable:New
+{
+	width = 3,
+	height = 3
+}
+
+maptable:Add
+{
+	object = 27,
+	x = 1,
+	y = 1
+}
+maptable:Add
+{
+	object = 27,
+	x = 1,
+	y = 2
+}
+maptable:Add
+{
+	object = 27,
+	x = 1,
+	y = 3
+}
+
+maptable:Add
+{
+	object = "fuck",
+	x = 5, 
+	y = 3
+}
+
+maptable:Add
+{
+	object = 1234,
+	x = 2,
+	y = 6
+}
+--]]
+--print(maptable:Get{x=4, y=2})
+
+-- Grid Based panel object placement and size
+local gridPanel = SimplePanel:New
+{
+	name = "grid panel",
+	posType = "bottom",	
+}
+
+local gbox1 = Box:New
+{
+	width = 16,
+	height = 16,
+	color = Color:Get("orange")
+}
+
+local gbox2 = Box:New
+{
+	width = 16,
+	height = 16,
+	color = Color:Get("purple")
+}
+
+local gbox3 = Box:New
+{
+	width = 16,
+	height = 16,
+	color = Color:Get("white")
+}
+
+---[[
+gridPanel:Add
+{
+	object = gbox1,
+	x = 1,
+	y = 1
+}
+
+gridPanel:Add
+{
+	object = gbox2,
+	x = 2,
+	y = 1
+}
+
+gridPanel:Add
+{
+	object = gbox3,
+	x = 2,
+	y = 5
+}
+--]]
+
+-- 1st Test panel
+--[[
 local panel = Panel:New
 {
 	posType = "bottom",

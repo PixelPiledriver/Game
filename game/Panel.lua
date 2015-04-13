@@ -9,7 +9,7 @@ local Size = require("Size")
 local Collision = require("Collision")
 local MouseHover = require("MouseHover")
 local MouseDrag = require("MouseDrag")
-
+local MapTable = require("MapTable")
 
 
 local Panel = {}
@@ -64,6 +64,29 @@ function Panel:New(data)
 	o.objects = {}
 	o.objectDirection = data.objectDirection or "right"
 
+	-------------------
+	-- Object Map
+	-------------------
+	o.gridScale = data.gridScale or 32
+	o.gridPads = {}
+	o.gridPads.width =  data.gridPadWidth or 16
+	o.gridPads.height =  data.gridPadHeight or 16
+
+
+	----------------------
+	-- Panel Type
+	--[[
+		ObjectBased - adding objects to the panel expands the panel
+		MapBased
+	--]]								
+	----------------------
+	o.panelType = data.panelType or "ObjectBased"
+	o.map = MapTable:New
+	{
+		width = 2,
+		height = 2,
+	}
+
 	---------------
 	-- Components
 	---------------
@@ -95,8 +118,18 @@ function Panel:New(data)
 		parent = o,
 	}
 
-	o.box.Pos = o.Pos
-	o.box.Size = o.Size
+	o.box.Pos:LinkPosTo
+	{
+		link = o.Pos
+	}
+
+	o.box.Size:LinkSizeTo
+	{
+		link = o.Size
+	}
+
+	--o.box.Pos = o.Pos
+	--o.box.Size = o.Size
 
 	-- above panel
 	o.topFrame = Box:New
@@ -109,9 +142,9 @@ function Panel:New(data)
 		parent = o,
 	}
 
-	o.topFrame.Pos:SetFollow
+	o.topFrame.Pos:LinkPosTo
 	{
-		follow = o.Pos,
+		link = o.Pos,
 		x = o.topFrame.Pos.x - o.Pos.x,
 		y = o.topFrame.Pos.y - o.Pos.y
 	}
@@ -126,19 +159,14 @@ function Panel:New(data)
 		width = o.topFrame.Size.width,
 		height = o.topFrame.Size.height,
 		name = o.name,
-		parent = o.topFrame,
 		shape = "rect",
 		collisionList = {"Mouse"},
 	}
 
-	o.topCollision.Pos:SetFollow
+	o.topCollision.Pos:LinkPosTo
 	{
-		follow = o.Pos,
-		x = o.topCollision.Pos.x - o.Pos.x,
-		y = o.topCollision.Pos.y - o.Pos.y
+		link = o.topFrame.Pos
 	}
-
-
 	------------------------
 	-- Mouse Interaction
 	------------------------
@@ -153,15 +181,21 @@ function Panel:New(data)
 		parent = o
 	}
 
-
 	-------------------------
 	-- Object Functions
 	-------------------------
 
 	function o:Update()
-		self:Activate()
-		self:UpdatePanel()
-		self:UpdateObjects()
+
+		if(self.panelType == "ObjectBased") then
+			self:Activate()
+			self:UpdatePanel()
+			self:UpdateObjects()
+		end
+
+		if(self.panelType == "GridBased") then
+		end 
+
 	end
 
 	function o:UpdatePanel()
@@ -270,7 +304,46 @@ function Panel:New(data)
 	-----------------------
 	-- add an object to the panel
 	-- (object) <-- needs to have components
+
 	function o:Add(object)
+
+		--if(self.panelType == "ObjectBased") then
+			self:AddObjectBased(object)
+		--elseif(self.panelType == "GridBased") then
+			--self.AddGridBased(object)
+		--end
+		
+	end 
+
+	function o:AddToGrid(data)	
+
+		print("panel adding to grid")
+		print(data.object)
+
+		self.map:Add
+		{
+			object = data.object,
+			x = data.x,
+			y = data.y,
+		}
+	
+		self.width = self.map.width * self.gridScale
+		self.height = self.map.height * self.gridScale
+
+		
+--[[
+		self.map[data.x][data.y].Pos:SetFollow
+		{
+			object = self.Pos,
+			x = data.x * self.gridScale,
+			y = data.y * self.gridScale
+		}
+		--]]
+
+
+	end 
+
+	function o:AddObjectBased(object)
 
 		local totalObjectsWidth = self:GetObjectsWidth()
 		local totalPadWidth = self:GetPadWidth()
@@ -316,25 +389,13 @@ function Panel:New(data)
 		local offsetX = x - self.Pos.x
 		local offsetY = y - self.Pos.y
 
-		object.Pos:SetFollow
+		object.Pos:LinkPosTo
 		{
-			follow = self.Pos,
+			link = self.Pos,
 			x = offsetX,
 			y = offsetY
 		}
 
-		-- old panel position for new objects code
-		--[[
-		-- set position of new object into panel
-		--object.Pos.x = self.Pos.x + Panel.objectToPanelPad + totalObjectsWidth + objectToObjectPad
-		--object.Pos.y = self.Pos.y + Panel.objectToPanelPad
-
-		object.panelPos =
-		{
-			x = object.Pos.x - self.Pos.x,
-			y = object.Pos.y - self.Pos.y,
-		}
-		--]]
 		
 		self:Refresh()
 	end 
@@ -344,7 +405,6 @@ function Panel:New(data)
 	function o:Refresh()
 		self:ApplySize()
 		self:ApplyWindowPadding()
-		--self:ApplyObjectPosition()
 		self:ApplyFramePosition()
 	end 
 
@@ -417,9 +477,13 @@ return Panel
 -- can be moved around
 -- mostly for buttons but can be used for other stuff as well
 
-
 -- not gonna work on this right now :P
 -- but gonna need it eventually
+
+-- Panels should be able to be built from a grid
+-- # of objects and scale should determine how it fits objects
+-- rather than object sizes <---- optional
+-- good idea for a simpler panel setup
 
 
 
@@ -461,6 +525,23 @@ end
 
 	end
 
+--]]
 
+
+
+--[[
+
+		-- old panel position for new objects code
+		--[[
+		-- set position of new object into panel
+		--object.Pos.x = self.Pos.x + Panel.objectToPanelPad + totalObjectsWidth + objectToObjectPad
+		--object.Pos.y = self.Pos.y + Panel.objectToPanelPad
+
+		object.panelPos =
+		{
+			x = object.Pos.x - self.Pos.x,
+			y = object.Pos.y - self.Pos.y,
+		}
+		--]]
 
 --]]

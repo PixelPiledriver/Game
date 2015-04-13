@@ -55,6 +55,13 @@ function Pos:New(data)
 	o.y = data.y or 0
 	o.z = data.z or 0
 
+	-- default pos to parent
+	if(o.x == nil and o.y == nil and o.z == nil and o.parent) then
+		o.x = o.parent.Pos.x
+		o.y = o.parent.Pos.y
+		o.z = o.parent.Pos.z
+	end 
+
 	o.lastX = 0
 	o.lastY = 0
 	o.lastZ = 0
@@ -83,8 +90,8 @@ function Pos:New(data)
 		self.z = data.z or self.z
 	end 
 
-	function o:SetFollow(data)
-		o.followPos = data.follow or nil
+	function o:LinkPosTo(data)
+		o.followPos = data.link or nil
 		o.followOffsetX = data.x or 0
 		o.followOffsetY = data.y or 0
 		o.followOffsetZ = data.z or 0

@@ -7,6 +7,9 @@ local CollisionManager = require("CollisionManager")
 local Color = require("Color")
 local Pos = require("Pos")
 
+-- new need to implement
+local Size = require("Size")
+
 local Collision = {}
 
 -----------------
@@ -39,6 +42,7 @@ function Collision:New(data)
 	o.offsetX = o.Pos.x
 	o.offsetY = o.Pos.y
 
+	-- NEED TO convert thos over to use Size component
 	-- shape
 	o.shape = data.shape or "rect"-- point, rect only for now
 	o.width = data.width or nil
@@ -67,10 +71,17 @@ function Collision:New(data)
 	-- movment
 	o.mouse = data.mouse or false
 
-	if(o.followParent == false) then
-		o.followParent = o.parent and true or false
+	if(o.parent and data.followParent == nil or data.followParent == true) then
+		if(o.parent.Pos) then
+			o.Pos:LinkPosTo
+			{
+				follow = data.parent.Pos,
+				x = o.Pos.x - data.parent.Pos.x,
+				y = o.Pos.y - data.parent.Pos.y
+			}
+		end 
 	else
-		o.followParent = data.followParent		
+		-- do nothing
 	end 
 
 	-- collision list
@@ -164,24 +175,11 @@ function Collision:New(data)
 		
 	end 
 
-	function o:FollowParent()
-		if(self.followParent == false) then
-			return
-		end
 
-		if(self.parent.Pos) then
-			self.Pos.x = self.parent.Pos.x
-			self.Pos.y = self.parent.Pos.y
-		else
-			self.Pos.x = self.parent.x
-			self.Pos.y = self.parent.y
-		end 
-
-	end 
 
 	function o:Update()
 		self:FollowMouse()
-		self:FollowParent()
+		--self:FollowParent()
 
 		-- clear collision state --> and save state from last frame
 		self.collidedLastFrame = self.collided
@@ -273,3 +271,22 @@ end
 --printDebug{"no CollisionList", "CollisionList"}
 
 --printDebug{"TRUE","CollisionList"}
+
+
+--[[
+-- dont need this anymore
+function o:FollowParent()
+	if(self.followParent == false) then
+		return
+	end
+
+	if(self.parent.Pos) then
+		self.Pos.x = self.parent.Pos.x
+		self.Pos.y = self.parent.Pos.y
+	else
+		self.Pos.x = self.parent.x
+		self.Pos.y = self.parent.y
+	end 
+
+end 
+--]]

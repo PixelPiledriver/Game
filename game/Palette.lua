@@ -14,7 +14,10 @@ local Pos = require("Pos")
 local Color = require("Color")
 local Random = require("Random")
 local Value = require("Value")
-local Collison = require("Collision")
+local Collision = require("Collision")
+local MouseHover = require("MouseHover")
+local MouseDrag = require("MouseDrag")
+
 
 local Palette = {}
 
@@ -56,6 +59,7 @@ function Palette:New(data)
 	--if(data.asObject) then
 
 	o.width = 32
+	o.height = 32
 
 	---------------------
 	-- Color Stats
@@ -82,6 +86,25 @@ function Palette:New(data)
 		local defaultPos = {x = 0, y = 0}
 		Pos:AddComponent(o, defaultPos)
 	end
+
+	---[[
+	o.collision = Collision:New
+	{
+		x = o.Pos.x,
+		y = o.Pos.y,
+		width = o.width,
+		height = o.height,
+		shape = "rect",
+		name = o.name,
+		collisionList = {"Mouse"},
+	}
+	o.collision.Pos:LinkPosTo{link = o.Pos}
+
+	-------------------------
+	-- Mouse Interaction
+	-------------------------
+	o.hover = MouseHover:New{parent = o}
+	o.drag = MouseDrag:New{parent = o}
 
 	----------------------
 	-- Sorting Functions
@@ -331,7 +354,7 @@ function Palette:New(data)
 
 		for i=1, #self.colors do
 			love.graphics.setColor(Color:AsTable(self.colors[i]))
-			love.graphics.rectangle("fill", self.Pos.x, self.Pos.y + ( (i-1) * self.width), self.width, self.width)
+			love.graphics.rectangle("fill", self.Pos.x, self.Pos.y + ( (i-1) * self.height), self.width, self.height)
 		end 
 
 	end 

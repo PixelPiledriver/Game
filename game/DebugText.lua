@@ -46,6 +46,9 @@ DebugText.messageType =
 	ShaderStatic = false,
 	MouseStatic = false,
 
+	-- Data types
+	MapTable = true,
+
 	-- Objects
 	Box = false,
 	Camera = false,
