@@ -86,7 +86,7 @@ local gbox2 = Box:New
 {
 	width = 16,
 	height = 16,
-	color = Color:Get("purple")
+	color = Color:Get("black")
 }
 
 local gbox3 = Box:New
@@ -114,7 +114,7 @@ gridPanel:Add
 gridPanel:Add
 {
 	object = gbox3,
-	x = 2,
+	x = 10,
 	y = 5
 }
 --]]

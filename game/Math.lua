@@ -78,8 +78,19 @@ function Math:TestEqualityPoints(data)
 end 
 
 
+-- compares a value to a range and keeps it within
+-- {value, min, max}
+function Math:Bind(data)
+	if(data.value < data.min) then
+		return data.min
+	elseif(data.value > data.max) then
+		return data.max
+	else
+		return data.value
+	end 
 
 
+end 
 
 
 

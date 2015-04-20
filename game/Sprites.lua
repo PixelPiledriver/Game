@@ -175,7 +175,7 @@ Sprites.dude.blue.idle = MakeFrame
 {
 	x = 32,
 	y = 0,
-	width = 32,a
+	width = 32,
 	height = 32,
 	imageWidth = 128,
 	imageHeight = 128,	

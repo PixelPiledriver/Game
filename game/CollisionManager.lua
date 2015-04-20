@@ -65,8 +65,8 @@ function CollisionManager:RectToRect(a, b)
 
 			max = 
 			{
-				x = a.Pos.x + a.width,
-				y = a.Pos.y + a.height
+				x = a.Pos.x + a.Size.width,
+				y = a.Pos.y + a.Size.height
 			}
 		}
 
@@ -80,8 +80,8 @@ function CollisionManager:RectToRect(a, b)
 
 			max = 
 			{
-				x = b.Pos.x + b.width,
-				y = b.Pos.y + b.height
+				x = b.Pos.x + b.Size.width,
+				y = b.Pos.y + b.Size.height
 			}
 		}
 
@@ -96,8 +96,8 @@ function CollisionManager:RectToRect(a, b)
 
 			max = 
 			{
-				x = b.Pos.x + b.width,
-				y = b.Pos.y + b.height
+				x = b.Pos.x + b.Size.width,
+				y = b.Pos.y + b.Size.height
 			}
 		}
 
@@ -111,8 +111,8 @@ function CollisionManager:RectToRect(a, b)
 
 			max = 
 			{
-				x = a.Pos.x + a.width,
-				y = a.Pos.y + a.height
+				x = a.Pos.x + a.Size.width,
+				y = a.Pos.y + a.Size.height
 			}
 		}
 	end 

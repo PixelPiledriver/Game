@@ -9,6 +9,7 @@
 
 local Color = require("Color")
 local ObjectUpdater = require("ObjectUpdater")
+local Mouse = require("Mouse")
 
 DebugText = {}
 
@@ -44,13 +45,14 @@ DebugText.messageType =
 	-- Statics
 	ButtonStatic = false,
 	ShaderStatic = false,
-	MouseStatic = false,
+	MouseStatic = true,
+
 
 	-- Data types
-	MapTable = true,
+	MapTable = false,
 
 	-- Objects
-	Box = false,
+	Box = true,
 	Camera = false,
 	Player = false,
 	Bullet = false,
@@ -60,10 +62,13 @@ DebugText.messageType =
 	Map = false,
 	ParticleSystem = false,
 	Particle = false,
-	Mouse = false,
 	Life = false,
 	SnapPlayer = false,
 	
+	--Input
+	Mouse = true,
+	Keyboard = false,
+
 	Collision = false,
 	Button = false,
 	DrawTools = false,
@@ -72,7 +77,7 @@ DebugText.messageType =
 	--Components
 	Pos = false,
 	MouseHover = false,
-	MouseDrag = true,
+	MouseDrag = false,
 
 	-- Counters
 	SinCounter = false,
@@ -84,16 +89,23 @@ DebugText.messageType =
 
 	-- Other
 	Generic = false
+
 }
 
 
 
 
--- position shit
+-- Draw Position
 DebugText.xStart = 8
 DebugText.yStart = 64
 DebugText.xSpace = 16
 DebugText.ySpace = 16
+
+
+-- index of all messages for scrolling
+-- using  mouse wheel
+DebugText.messageIndex = 1
+
 
 
 ----------------
@@ -103,6 +115,32 @@ DebugText.ySpace = 16
 function DebugText:Update()
 	-- nuthin to do here for now I guess :P
 	-- but would now update as a static
+
+end 
+
+
+
+function DebugText:ScrollMessagesControl()
+
+	-- scroll
+	if(Mouse.wheelUp) then
+		self.messageIndex = self.messageIndex - 1
+	end 
+
+	if(Mouse.wheelDown) then
+		self.messageIndex = self.messageIndex + 1
+	end
+
+	-- set index within bounds
+	self.messageIndex = Math:Bind
+											{
+												value = self.messageIndex,
+												min = 1,
+												max = #self.texts
+											}
+
+	--print(self.messageIndex)
+
 end 
 
 -- add a single line
@@ -125,6 +163,7 @@ function DebugText:TextTable(data)
 	self.texts[#self.texts + 1] = data
 
 end
+
 
 
 -- add a new text to be drawn
@@ -177,6 +216,10 @@ function DebugText:PrintObject(data)
 	self:Text("Y: " .. data.y)
 end
 
+
+
+
+
 -- draw all texts
 function DebugText:Draw()
 
@@ -187,8 +230,10 @@ function DebugText:Draw()
 	-- use index for sub items in text tables
 	local index = 1
 
+	self:ScrollMessagesControl()
+
 	-- for each text item
-	for i=1, #self.texts do
+	for i = self.messageIndex, #self.texts do
 
 		-- for each text message in item
 		for t=1, #self.texts[i] do

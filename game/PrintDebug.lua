@@ -20,7 +20,8 @@ printDebugSettings["Collision3"] = false
 printDebugSettings["CollisionList"] = false
 printDebugSettings["Build"] = false
 printDebugSettings["Controller"] = false
-printDebugSettings["MapTable"] = true
+printDebugSettings["MapTable"] = false
+printDebugSettings["Mouse"] = false
 
 
 
@@ -31,7 +32,7 @@ printDebugSettings["MapTable"] = true
 -- alternative print with global switches
 -- {"message", "typeName"}
 function printDebug(data)
-
+	
 	if(printDebugSettings[data[2]]) then
 		print(data[1])
 	end 

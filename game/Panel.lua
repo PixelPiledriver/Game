@@ -167,6 +167,7 @@ function Panel:New(data)
 	{
 		link = o.topFrame.Pos
 	}
+
 	------------------------
 	-- Mouse Interaction
 	------------------------

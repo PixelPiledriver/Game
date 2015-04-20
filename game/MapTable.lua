@@ -52,7 +52,7 @@ function MapTable:New(data)
 					-- full slot, do nothing
 					if(self.map[x][y]) then
 						printDebug{"slot taken by:", "MapTable"}
-						printDebug{"x:" .. x ..  ", y:" .. y .. " = " .. self.map[x][y], "MapTable"}
+						--printDebug{"x:" .. x ..  ", y:" .. y .. " = " .. self.map[x][y], "MapTable"}
 
 					-- empty slot, fill with nil keyword
 					else

@@ -163,11 +163,14 @@ function Panel:New(data)
 		collisionList = {"Mouse"},
 	}
 
-	--o.topCollision.Size:LinkWidthTo{link = o.Size}
-
 	o.topCollision.Pos:LinkPosTo
 	{
 		link = o.topFrame.Pos,
+	}
+
+	o.topCollision.Size:LinkWidthTo
+	{
+		link = o.topFrame.Size
 	}
 
 	------------------------
@@ -275,3 +278,15 @@ ObjectUpdater:AddStatic(Panel)
 
 
 return Panel
+
+
+--[[ Notes
+
+- objects can be drag and dropped
+	move out of panel
+	move into panel
+	change position in panel
+
+
+
+--]]

@@ -43,11 +43,17 @@ function Collision:New(data)
 	o.offsetY = o.Pos.y
 
 	-- NEED TO convert thos over to use Size component
+	--	o.width = data.width or nil
+	--	o.height = data.height or nil
+	o.Size = Size:New
+	{
+		width = data.width or 32,
+		height = data.height or 32
+	}
+
 	-- shape
 	o.shape = data.shape or "rect"-- point, rect only for now
-	o.width = data.width or nil
-	o.height = data.height or nil
-	o.radius = data.radius or nil
+	o.radius = data.radius or nil -- should add radius
 
 	-- color
 	o.color = data.color or Color:AsTable(Color:Get("white"))
@@ -62,7 +68,7 @@ function Collision:New(data)
 	o.collided = false
 	o.collidedLastFrame = false
 
-	-- os that only hit once use this
+	-- objs that only hit once use this
 	o.oneCollision = data.oneCollision or false
 	o.firstCollision = false
 
@@ -161,7 +167,7 @@ function Collision:New(data)
 		end 
 
 		love.graphics.setColor( self.collided and self.collisionColor or self.color)
-		love.graphics.rectangle("line", self.Pos.x, self.Pos.y, self.width, self.height)
+		love.graphics.rectangle("line", self.Pos.x, self.Pos.y, self.Size.width, self.Size.height)
 
 	end 
 
@@ -197,8 +203,8 @@ function Collision:New(data)
 			{text = "", obj = "Collision"},
 			{text = "Collision"},
 			{text = "-----------"},
-			{text = "Width: " .. self.width},
-			{text = "Height: " .. self.height},
+			{text = "Width: " .. self.Size.width},
+			{text = "Height: " .. self.Size.width},
 			{text = "Parent: " .. parent}
 		}
 

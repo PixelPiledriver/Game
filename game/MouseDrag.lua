@@ -6,10 +6,19 @@ local ObjectUpdater = require("ObjectUpdater")
 
 local MouseDrag = {}
 
+-- Static Vars
+----------------------------
+
 MouseDrag.name = "MouseDrag"
 MouseDrag.oType = "Static"
 MouseDrag.dataType = "Object Constructor"
 
+MouseDrag.draggingObjects = 0
+MouseDrag.maxDraggables = 1
+
+
+
+-- Create
 function MouseDrag:New(data)
 
 	local o = {}
@@ -40,21 +49,28 @@ function MouseDrag:New(data)
 			return
 		end 
 
-		if(self.parent.hover.hover == true and self.drag == false) then
+		if(self.parent.hover.hover == true and self.drag == false and MouseDrag.draggingObjects == 0) then
 			if(love.mouse.isDown(self.mouseButton)) then
 				self.drag = true
 				self.offsetFromMouseX = love.mouse.getX() - self.parent.Pos.x
 				self.offsetFromMouseY = love.mouse.getY() - self.parent.Pos.y
+
+				-- drag limit
+				MouseDrag.draggingObjects = 1
 			end 
 		end 
 
 		-- let go of button? drop
 		if(self.drag == true and love.mouse.isDown(o.mouseButton) == false) then
+
 			self.drag = false
 
 			-- reset offset
 			self.offsetFromMouseX = 0
 			self.offsetFromMouseY = 0
+
+			-- drag limit
+			MouseDrag.draggingObjects = 0
 		end 
 
 	end

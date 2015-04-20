@@ -71,15 +71,14 @@ function Size:New(data)
 	end
 
 	function o:LinkUpdate()
+
 		if(self.linkWidth) then
 			self.width = self.linkWidth.width + self.widthOffset
 		end 
 
-		if(self.linkHeight ~= nil) then
+		if(self.linkHeight) then
 			self.height = self.linkHeight.height + self.heightOffset
 		end 
-
-		
 
 	end 
 

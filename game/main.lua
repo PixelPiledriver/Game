@@ -20,6 +20,8 @@ require("Random")
 require("FailNew")
 require("Bool")
 
+local Mouse = require("Mouse")
+
 -- Only requires that are globally necessary should be listed here
 local App = require("App")
 local Map = require("Map")
@@ -112,6 +114,10 @@ function love.keypressed(key)
 	ObjectUpdater:Input(key)
 end
 
+-- call back for mouse wheel
+function love.mousepressed(x, y, button)
+	Mouse:MousePressed(x,y,button)
+end
 
 -- draw call
 function love.draw()

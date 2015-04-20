@@ -12,11 +12,15 @@ local Mouse = {}
 ---------------------
 -- Static Vars
 ---------------------
+
+-- buttons
 Mouse.lastClickButton =
 {
 	l = false,
 	r = false,
-	m = false
+	m = false,
+	wu = false,
+	wd = false
 }
 
 Mouse.clickButton =
@@ -24,9 +28,19 @@ Mouse.clickButton =
 	l = false,	-- left click
 	r = false,	-- right click
 	m =	false,	-- middle click
+	wu = false, -- wheel up
+	wd = false, -- wheel down
 }
 
 
+
+-- wheel
+Mouse.lastWheelUp = false
+Mouse.lastWheelDown = false
+Mouse.wheelUpSkip = false
+Mouse.wheelDownSkip = false
+Mouse.wheelUp = false
+Mouse.wheelDown = false
 
 ---------------------
 -- Static Functions
@@ -36,6 +50,42 @@ function Mouse:Update()
 	self:TrackClicks()
 end 
 
+-- from love call back
+-- used to get mouse wheel input
+-- only is called back when a button is pressed
+function Mouse:MousePressed(x,y,button)
+
+	-- reset wheel
+	self.wheelUp = false
+	self.wheelDown = false
+
+	-- clicks
+	if(button == "l") then
+		printDebug{"Mouse: Left Click", "Mouse"}
+	end
+	
+	if(button == "r") then
+		printDebug{"Mouse: Right Click", "Mouse"}
+	end 
+
+	if(button == "m") then
+		printDebug{"Mouse: Middle Click", "Mouse"}
+	end 
+
+	-- mouse wheel
+	if(button == "wu") then
+		self.wheelUp = true
+ 		printDebug{"Mouse: Wheel Up", "Mouse"}
+	end 
+
+	if(button == "wd") then
+		self.wheelDown = true
+ 		printDebug{"Mouse: Wheel Down", "Mouse"}
+	end
+
+
+end 
+
 
 function Mouse:TrackClicks()
 
@@ -43,10 +93,33 @@ function Mouse:TrackClicks()
 	self.lastClickButton.r = self.clickButton.r
 	self.lastClickButton.m = self.clickButton.m
 
-
+	-- buttons
 	self.clickButton.l = false
 	self.clickButton.r = false
 	self.clickButton.m = false
+
+	-- wheel
+	if(self.wheelUp and self.wheelUpSkip == false) then
+		self.wheelUpSkip = true
+	else
+		self.wheelUp = false
+		self.wheelUpSkip = false
+	end 
+
+	self.lastWheelUp = self.wheelUp
+
+	if(self.wheelDown and self.wheelDownSkip == false) then
+		self.wheelDownSkip = true
+	else 
+		self.wheelDown = false
+		self.wheelDownSkip = false
+	end 
+
+	self.lastWheelDown = self.wheelDown
+
+
+
+
 
 	
 	if(love.mouse.isDown("l")) then
@@ -59,11 +132,13 @@ function Mouse:TrackClicks()
 
 	if(love.mouse.isDown("m")) then
 		self.clickButton.m = true
+		--print("middle click")
 	end
-
 
 end 
 
+-- reads the mouse only once
+-- this can be removed for the MousePressed callback I think
 function Mouse:SingleClick(mouseButton)
 
 	if(self.clickButton[mouseButton] and self.lastClickButton[mouseButton] == false) then
@@ -207,6 +282,8 @@ function Mouse:New(data)
 			{text = "Y: " .. self.y},
 			{text = "SpeedX: " .. self.speed.x},
 			{text = "SpeedY: " .. self.speed.y},
+			{}
+
 		}
 		
 	end
@@ -230,6 +307,8 @@ function Mouse:PrintDebugText()
 		{text = "Left Click: " .. Bool:ToString(Mouse.clickButton.l)},
 		{text = "Right Click: " .. Bool:ToString(Mouse.clickButton.r)},
 		{text = "Middle Click: " .. Bool:ToString(Mouse.clickButton.m)},
+		{text = "Wheel Up: " .. Bool:ToString(Mouse.wheelUp)},
+		{text = "Wheel Down: " .. Bool:ToString(Mouse.wheelDown)}
 	}
 
 end 

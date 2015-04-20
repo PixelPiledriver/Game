@@ -281,7 +281,22 @@ function ObjectUpdater:RepeatedInput()
 	-- cameras
 	for i=1, #self.cameras do
 		self.cameras[i]:RepeatedInput()
-	end  
+	end
+
+	-- statics
+	for i=1 , #self.statics do
+
+		-- update
+		if(self.statics[i].RepeatedInput) then
+			self.statics[i]:RepeatedInput()
+		end 
+
+		-- debug text
+		if(self.statics[i].ControllerInput) then
+			self.statics[i]:ControllerInput()
+		end
+
+	end
 
 	-- objects
 	for i=1, #self.objects do
@@ -305,6 +320,18 @@ function ObjectUpdater:RepeatedInput()
 end 
 
 function ObjectUpdater:Input(key)
+
+	-- statics
+	for i=1 , #self.statics do
+
+		-- update
+		if(self.statics[i].RepeatedInput) then
+			self.statics[i]:RepeatedInput()
+		end
+
+	end
+
+	-- objects
 	for i=1, #self.objects do
 
 		if(self.objects[i].Input) then
@@ -312,6 +339,7 @@ function ObjectUpdater:Input(key)
 		end 
 
 	end 
+
 end 
 
 function ObjectUpdater:Draw()
