@@ -42,10 +42,18 @@ function Size:New(data)
 	o.linkWidth = nil
 	o.linkHeight = nil
 
+	--------------------
+	-- Functions
+	--------------------
+
 	function o:Set(width, height)
 		self.width = width
 		self.height = height
 	end
+
+	function o:GetWidth()
+		return self.width
+	end 
 
 	function o:LinkSizeTo(data)
 		self.linkWidth = data.link
@@ -71,6 +79,10 @@ function Size:New(data)
 	end
 
 	function o:LinkUpdate()
+
+		local w = 0
+		local h = 0
+
 
 		if(self.linkWidth) then
 			self.width = self.linkWidth.width + self.widthOffset

@@ -12,6 +12,7 @@ local Collision = require("Collision")
 local MouseHover = require("MouseHover")
 local MouseDrag = require("MouseDrag")
 local MapTable = require("MapTable")
+local Button = require("Button")
 
 
 local Panel = {}
@@ -187,6 +188,31 @@ function Panel:New(data)
 		parent = o
 	}
 
+	-- Open/Close Button
+	---------------------------
+
+	o.openCloseButton = Button:New
+	{
+		name = "panel close",
+		text = "x",
+		x = 100,
+		y = 100,
+		func = function()
+			Bool:Toggle(o.active)
+		end,
+
+		printDebugTextActive = true
+		
+	}
+
+	---[[
+	o.openCloseButton.Pos:LinkPosTo
+	{
+		link = o.Pos,
+		x = o.topFrame.Size.width,
+		y = 0
+	}
+	--]]
 	-------------------------
 	-- Object Functions
 	-------------------------
@@ -261,6 +287,7 @@ function Panel:New(data)
 			{text = "-------------------------"},
 			{text = #self.objects}
 		}
+
 	end 
 
 
@@ -287,6 +314,7 @@ return Panel
 	move into panel
 	change position in panel
 
+- a open and close button in the top right of the panel
 
 
 --]]

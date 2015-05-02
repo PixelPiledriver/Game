@@ -45,16 +45,15 @@ DebugText.messageType =
 	-- Statics
 	ButtonStatic = false,
 	ShaderStatic = false,
-	MouseStatic = true,
+	MouseStatic = false,
 
 
 	-- Data types
 	MapTable = false,
 
 	-- Objects
-	Box = true,
+	Box = false,
 	Camera = false,
-	Player = false,
 	Bullet = false,
 	Block = false,
 	Controller = false,
@@ -66,11 +65,11 @@ DebugText.messageType =
 	SnapPlayer = false,
 	
 	--Input
-	Mouse = true,
-	Keyboard = false,
+	Mouse = false,
+	Keyboard = true,
 
 	Collision = false,
-	Button = false,
+	Button = true,
 	DrawTools = false,
 	Palette = false,
 
@@ -105,8 +104,7 @@ DebugText.ySpace = 16
 -- index of all messages for scrolling
 -- using  mouse wheel
 DebugText.messageIndex = 1
-
-
+DebugText.lineIndex = 1
 
 ----------------
 -- Functions
@@ -122,7 +120,7 @@ end
 
 function DebugText:ScrollMessagesControl()
 
-	-- scroll
+	-- scroll object message index
 	if(Mouse.wheelUp) then
 		self.messageIndex = self.messageIndex - 1
 	end 
@@ -131,7 +129,7 @@ function DebugText:ScrollMessagesControl()
 		self.messageIndex = self.messageIndex + 1
 	end
 
-	-- set index within bounds
+	-- set index within bounds of given min and max
 	self.messageIndex = Math:Bind
 											{
 												value = self.messageIndex,
@@ -139,7 +137,21 @@ function DebugText:ScrollMessagesControl()
 												max = #self.texts
 											}
 
-	--print(self.messageIndex)
+  -- scroll each line of the first object message
+  if(Keyboard:Key("2")) then
+  	self.lineIndex = self.lineIndex + 1
+  end 
+
+  if(Keyboard:Key("1")) then
+  	self.lineIndex = self.lineIndex - 1
+  end
+
+  self.lineIndex = Math:Bind
+  								 {
+  								   value = self.lineIndex,
+  								   min = 1,
+  								   max = #self.texts[self.messageIndex]
+  								 }
 
 end 
 
@@ -236,7 +248,16 @@ function DebugText:Draw()
 	for i = self.messageIndex, #self.texts do
 
 		-- for each text message in item
-		for t=1, #self.texts[i] do
+
+		local lineIndex = 0
+
+		if(i == self.messageIndex) then
+			lineIndex = self.lineIndex
+		else
+			lineIndex = 1
+		end 
+
+		for t = lineIndex, #self.texts[i] do
 			love.graphics.setColor(self.texts[i][t].color or Color:AsTable(Color.white))
 			LovePrint
 			{
@@ -270,10 +291,18 @@ ObjectUpdater:AddStatic(DebugText)
 
 
 -- Notes
--------------
--- need to add button for scrolling up and down text
--- since lots of objects overflows vertically
+------------- 
+-- DONE!
+	-- need to add button for scrolling up and down text
+	-- since lots of objects overflows vertically
 
--- add in feature to print children or parents :P
+-- DONE! --> put a better way to control it tho :|
+	-- need to be able to scroll thru each line of text of a single printed object
+	-- add an alternate way to control it
+	-- eventually add debug hud for this shit like some buttons and a panel :P
 
--- DebugText is a Global
+-- NEED
+	-- add in feature to print children or parents :P
+
+-- Other
+	-- DebugText is a Global, no need to require, just use

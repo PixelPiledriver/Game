@@ -421,6 +421,7 @@ function Button:New(data)
 			{text = "", obj = "Button"},
 			{text = "Button"},
 			{text = "-----------"},
+			{text = "Name: " .. self.name},
 			{text = "Width: " .. self.Size.width},
 			{text = "Height: " .. self.Size.height},
 			{text = "Function: " .. self.text},
@@ -598,7 +599,13 @@ Button.britDown =
 	end 
 }
 
-
+Button.debugTextOnOff =
+{
+	text = "DebugText",
+	func = function()
+		DebugText.active = false
+	end 
+}
 
 ---------------------
 -- Static Functions
