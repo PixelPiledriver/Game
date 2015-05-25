@@ -5,6 +5,15 @@
 
 
 
+
+-- Other
+----------------
+-- do we need a Link type?
+-- an object that allows another to stay updated with an objects values?
+-- perhaps prototype that and see if its helpful in some way
+
+
+
 -- Window
 -------------------
 -- change size

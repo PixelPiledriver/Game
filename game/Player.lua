@@ -370,7 +370,7 @@ function Player:New(data)
 	---------------
 
 	-- only used for press and release
-	function o:Input(key)
+	function o:InputUpdate(key, inputype)
 
 		if(key == "d") then 
 			self:MoveRight()
@@ -522,7 +522,9 @@ end
 -- done with static
 return Player
 
-
+-- Notes
+--------------
+-- pull out all the controller bullshit and move to its own component
 
 
 

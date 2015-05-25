@@ -280,7 +280,7 @@ function ObjectUpdater:RepeatedInput()
 
 	-- cameras
 	for i=1, #self.cameras do
-		self.cameras[i]:RepeatedInput()
+		self.cameras[i].Input:RepeatedInputUpdate()
 	end
 
 	-- statics
@@ -319,14 +319,14 @@ function ObjectUpdater:RepeatedInput()
 
 end 
 
-function ObjectUpdater:Input(key)
+function ObjectUpdater:InputUpdate(key, inputType)
 
 	-- statics
 	for i=1 , #self.statics do
 
 		-- update
-		if(self.statics[i].RepeatedInput) then
-			self.statics[i]:RepeatedInput()
+		if(self.statics[i].Input) then
+			self.statics[i].Input:InputUpdate(key, inputType)
 		end
 
 	end
@@ -335,7 +335,7 @@ function ObjectUpdater:Input(key)
 	for i=1, #self.objects do
 
 		if(self.objects[i].Input) then
-			self.objects[i]:Input(key)
+			self.objects[i].Input:InputUpdate(key, inputType)
 		end 
 
 	end 
@@ -375,6 +375,11 @@ return ObjectUpdater
 
 --	Notes
 ----------------------
+-- Need to have priority lists that update in order
+-- also need to have something that controls draw order
+-- a seperate list that pulls from object updater but in a different order
+-- maybe when objects update they should submit their draw order
+
 -- should probly update this to create
 -- updater objects that you can add objects to
 -- that way they all run the same and just have different lists

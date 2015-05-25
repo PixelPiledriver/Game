@@ -8,6 +8,7 @@ local Life = require("Life")
 local Fade = require("Fade")
 local Size = require("Size")
 local Pos = require("Pos")
+local Input = require("Input")
 
 local Box = {}
 
@@ -136,6 +137,8 @@ function Box:New(data)
 		rotRight = data.rotatable and data.keys and data.keys.rotLeft or "e",
 	}
 
+	o.Input = Input:New{}
+
 
 	-------------
 	-- Functions
@@ -186,10 +189,6 @@ function Box:New(data)
 
 	end 
 
-	-- only used for press and release
-	function o:Input(key)
-
-	end 
 
 	function o:Move()
 
@@ -301,7 +300,7 @@ function Box:New(data)
 			{text = "---------------------"},
 			{text = "Pos: {" .. self.Pos.x .. "," .. self.Pos.y .. "}"},
 			{text = "Life: " .. self.Life.life },
-			{text = "Fade: " .. self.Fade.fade}
+			{text = "Fade: " .. self.Fade.fade} 
 		}
 
 	end 
@@ -317,6 +316,19 @@ function Box:New(data)
 		end 
 
 	end 
+
+	--[[
+	o.Input = Input:New
+	{
+		{"a", "press", 
+		func = function()
+			o.Pos:Move{x = 10}
+		end 
+		}
+	}
+	--]]
+
+
 
 	ObjectUpdater:Add{o}
 

@@ -56,6 +56,7 @@ local PixelDrawLevel = require("levels/PixelDrawLevel")
 --local BoxTestLevel = require("levels/BoxTestLevel")
 --local SnapGridTestLevel = require("levels/SnapGridTestLevel")
 --local TextWriteLevel = require("levels/TextWriteLevel")
+--local BoxLevel = require("levels/BoxLevel")
 
 
 
@@ -71,7 +72,6 @@ function love.load()
 	love.graphics.setShader(Shader.britShader)
 
 	-- manual camera object
-	local mainCamera = Camera:New()
 	ObjectUpdater:AddCamera(Camera)
 
 	-- Load your level here
@@ -81,6 +81,7 @@ function love.load()
 	--LerpLevel:Load()
 	--BoxTestLevel:Load()
 	--TextWriteLevel:Load()
+	--BoxLevel:Load()
 
 	--SnapGridTestLevel:Load() 
 
@@ -100,6 +101,7 @@ function love.update(dt)
 
 	--LerpLevel:Update()
 	PixelDrawLevel:Update()
+	--BoxLevel:Update()
 
 	--Map:Update()
 
@@ -110,8 +112,11 @@ end
 
 -- input
 function love.keypressed(key)
-	App:Input(key)
-	ObjectUpdater:Input(key)
+	ObjectUpdater:InputUpdate(key, "press")
+end
+
+function love.keyreleased(key)
+	ObjectUpdater:InputUpdate(key, "release")
 end
 
 -- call back for mouse wheel

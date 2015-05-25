@@ -55,6 +55,10 @@ function Size:New(data)
 		return self.width
 	end 
 
+	function o:GetHeight()
+		return self.height
+	end 
+
 	function o:LinkSizeTo(data)
 		self.linkWidth = data.link
 		self.linkHeight = data.link
@@ -109,3 +113,5 @@ return Size
 -- Notes
 -------------------------------------------------
 -- gonna repurpose this into a component for formatting dimensions of objects
+
+-- need to prove that assigning a get function to a link is a way to get up to date values

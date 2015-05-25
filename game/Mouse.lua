@@ -199,6 +199,19 @@ function Mouse:New(data)
 		parent = o
 	}
 	
+
+	---------------------
+	-- Get
+	---------------------
+	function o:GetX()
+		--return love.mouse.getX()
+		return self.x
+	end
+
+	function o:GetY()
+		return self.y
+	end 
+
 	----------------------------------
 	-- Functions
 	----------------------------------
@@ -294,6 +307,7 @@ function Mouse:New(data)
 	----------
 	ObjectUpdater:Add{o}
 
+	return o
 end
 
 

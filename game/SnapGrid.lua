@@ -20,6 +20,7 @@ SnapGrid.x = 0
 SnapGrid.y = 0
 
 function SnapGrid:CreateCell(data)
+--[[
 	local gridCell = Box:New
 	{
 		x = data.x,		
@@ -29,6 +30,7 @@ function SnapGrid:CreateCell(data)
 		color = Color:Get("red"),
 		fill = false
 	}
+--]]
 	gridCell.gridPosX = 0
 	gridCell.gridPosY = 0
 	return gridCell

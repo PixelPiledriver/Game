@@ -29,7 +29,7 @@ function MapTable:New(data)
 			end 
 		end 
 				
-		print(self.map[1][1])
+		--print(self.map[1][1])
 	end 
 
 	o:BlankMap()
@@ -75,7 +75,7 @@ function MapTable:New(data)
 	-- place object into slot in map
 	function o:Add(data)
 
-		print("add to map")
+		--print("add to map")
 
 		-- grow X?
 		if(data.x > self.width) then
@@ -106,15 +106,15 @@ function MapTable:New(data)
 
 		-- x doesnt exist?
 		if(self.map[data.x] == nil) then
-			print("create X")
+			--print("create X")
 			self.map[data.x] = {}
 		end
 
 		-- slot is empty so put object inside?
 		--if(self.map[data.x][data.y] == "_nil") then 
-			print("yes")
+			--print("yes")
 			self.map[data.x][data.y] = data.object
-			print(self.map[data.x][data.y])
+			--print(self.map[data.x][data.y])
 		--end
 
 	end 

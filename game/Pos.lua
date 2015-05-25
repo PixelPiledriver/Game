@@ -179,9 +179,15 @@ return Pos
 -- can be called relativeObject I geuss --> because it is not necessarily relative to the parent
 -- altho in most cases it will be --> should probly default to the parent if nothing else is given
 
--- need to be able to link a Pos compoenent to another Pos component
 -- just pass it in
 -- do this next!
 -- this makes it so Pos components dont have to be updated.
 -- they just have a pos and an offset from a linked position
+
+-- TO DO
+-- move functions
+-- pretty basic shit
+
+-- DONE --> as the Link type of object
+-- need to be able to link a Pos compoenent to another Pos component
 	

@@ -4,6 +4,7 @@
 -- but just work with one for now
 
 local ObjectUpdater = require("ObjectUpdater")
+local Input = require("Input")
 
 local Camera = {}
 
@@ -47,7 +48,7 @@ Camera.keys =
 	zoomOut = "o",
 	rotLeft = ",",
 	rotRight = "/",
-	shake1 = "z",
+	shakeSoft = "z",
 }
 
 
@@ -106,10 +107,12 @@ function Camera:New()
 		self:UpdateMoveNodes()
 	end 
 
+
+	
+
 	-- manually control the camera
 	-- test bullshit
 	function o:RepeatedInput()
-
 		-- move
 		if(love.keyboard.isDown(self.keys.left)) then
 			self.pos.x = self.pos.x + self.moveSpeed
@@ -152,8 +155,6 @@ function Camera:New()
 			self:Shake{xMax = 10, yMax= 10}
 		end
 		-- node 
-
-
 	end
 
 	-- draw all objects based on camera transformation
@@ -299,55 +300,69 @@ function Camera:Update()
 	self:UpdateMoveNodes()
 end 
 
--- manually control the camera
--- test bullshit
-function Camera:RepeatedInput()
 
-	-- move
-	if(love.keyboard.isDown(self.keys.left)) then
-		self.pos.x = self.pos.x + self.moveSpeed
-	end 
+-----------------
+-- Actions
+-----------------
 
-	if(love.keyboard.isDown(self.keys.right)) then
-		self.pos.x = self.pos.x - self.moveSpeed
-	end 
+function Camera:MoveLeft()
+	self.pos.x = self.pos.x + self.moveSpeed
+end 
 
-	if(love.keyboard.isDown(self.keys.up)) then
-		self.pos.y = self.pos.y + self.moveSpeed
-	end 
-	
-	if(love.keyboard.isDown(self.keys.down)) then
-		self.pos.y = self.pos.y - self.moveSpeed
-	end 
-
-	-- zoom
-	if(love.keyboard.isDown(self.keys.zoomIn)) then
-		self.zoom.x = self.zoom.x + self.zoomSpeed
-		self.zoom.y = self.zoom.y + self.zoomSpeed
-	end 
-
-	if(love.keyboard.isDown(self.keys.zoomOut)) then
-		self.zoom.x = self.zoom.x - self.zoomSpeed
-		self.zoom.y = self.zoom.y - self.zoomSpeed
-	end 
-
-	-- rotate
-	if(love.keyboard.isDown(self.keys.rotLeft)) then
-		self.rot = self.rot + self.rotSpeed
-	end 
-
-	if(love.keyboard.isDown(self.keys.rotRight)) then
-		self.rot = self.rot - self.rotSpeed
-	end 
-
-	-- shake
-	if(love.keyboard.isDown(self.keys.shake1)) then
-		self:Shake{xMax = 10, yMax= 10}
-	end
-	-- node 
-
-
+function Camera:MoveRight()
+	self.pos.x = self.pos.x - self.moveSpeed
 end
+
+function Camera:MoveUp()
+	self.pos.y = self.pos.y + self.moveSpeed
+end 
+
+function Camera:MoveDown()
+	self.pos.y = self.pos.y - self.moveSpeed
+end 
+
+function Camera:ZoomIn()
+	self.zoom.x = self.zoom.x + self.zoomSpeed
+	self.zoom.y = self.zoom.y + self.zoomSpeed
+end 
+
+function Camera:ZoomOut()
+	self.zoom.x = self.zoom.x - self.zoomSpeed
+	self.zoom.y = self.zoom.y - self.zoomSpeed
+end
+
+function Camera:RotLeft()
+	self.rot = self.rot + self.rotSpeed
+end 
+
+function Camera:RotRight()
+	self.rot = self.rot - self.rotSpeed
+end 
+
+-- not working, not sure why will fix later :P
+function Camera:ShakeSoft()
+	self:Shake{xMax = 10, yMax= 10}
+end
+
+
+Camera.Input = Input:New
+{
+	parent = Camera,
+	keys =
+	{
+		{Camera.keys.left, "hold", Camera.MoveLeft},
+		{Camera.keys.right, "hold", Camera.MoveRight},
+		{Camera.keys.up, "hold", Camera.MoveUp},
+		{Camera.keys.down, "hold", Camera.MoveDown},
+		{Camera.keys.zoomIn, "hold", Camera.ZoomIn},
+		{Camera.keys.zoomOut, "hold", Camera.ZoomOut},
+		{Camera.keys.rotLeft, "hold", Camera.RotLeft},
+		{Camera.keys.rotRight, "hold", Camera.RotRight},
+		{Camera.keys.shakeSoft, "hold", Camera.ShakeSoft}
+	}
+}
+
+
 
 -- draw all objects based on camera transformation
 function Camera:Draw()
@@ -477,8 +492,8 @@ function Camera:PrintDebugText()
 		{text = "-------------------"},
 		{text = "X: " .. self.pos.x},
 		{text = "Y: " .. self.pos.y},
-		{text = "Zoom: " .. self.zoom.x}
-
+		{text = "Zoom: " .. self.zoom.x},
+		{text = "Rot: " .. self.rot}
 	}
 end 
 
@@ -486,3 +501,67 @@ end
 --ObjectUpdater:AddStatic(Camera)
 
 return Camera
+
+-- Notes
+--------------
+-- Camera only operates as a static currently
+-- the New function is fucked and is not even used
+-- everything in thats static in this object needs to be moved over to New
+
+
+
+-- Old Code
+-------------------------------------
+--[[
+
+-- manually control the camera
+-- test bullshit
+function Camera:RepeatedInput()
+
+	-- move
+	if(love.keyboard.isDown(self.keys.left)) then
+		self.pos.x = self.pos.x + self.moveSpeed
+	end 
+
+	if(love.keyboard.isDown(self.keys.right)) then
+		self.pos.x = self.pos.x - self.moveSpeed
+	end 
+
+	if(love.keyboard.isDown(self.keys.up)) then
+		self.pos.y = self.pos.y + self.moveSpeed
+	end 
+	
+	if(love.keyboard.isDown(self.keys.down)) then
+		self.pos.y = self.pos.y - self.moveSpeed
+	end 
+
+	-- zoom
+	if(love.keyboard.isDown(self.keys.zoomIn)) then
+		self.zoom.x = self.zoom.x + self.zoomSpeed
+		self.zoom.y = self.zoom.y + self.zoomSpeed
+	end 
+
+	if(love.keyboard.isDown(self.keys.zoomOut)) then
+		self.zoom.x = self.zoom.x - self.zoomSpeed
+		self.zoom.y = self.zoom.y - self.zoomSpeed
+	end 
+
+	-- rotate
+	if(love.keyboard.isDown(self.keys.rotLeft)) then
+		self.rot = self.rot + self.rotSpeed
+	end 
+
+	if(love.keyboard.isDown(self.keys.rotRight)) then
+		self.rot = self.rot - self.rotSpeed
+	end 
+
+	-- shake
+	if(love.keyboard.isDown(self.keys.shake1)) then
+		self:Shake{xMax = 10, yMax= 10}
+	end
+	-- node 
+
+
+end
+
+--]]

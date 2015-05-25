@@ -10,6 +10,7 @@
 local Color = require("Color")
 local ObjectUpdater = require("ObjectUpdater")
 local Mouse = require("Mouse")
+local Input = require("Input")
 
 DebugText = {}
 
@@ -41,15 +42,15 @@ DebugText.messageType =
 	ObjectUpdater = false,
 	CollisionManager = false,
 
-
 	-- Statics
 	ButtonStatic = false,
 	ShaderStatic = false,
 	MouseStatic = false,
-
+	InputTextStatic = false,
 
 	-- Data types
 	MapTable = false,
+	Link = false,
 
 	-- Objects
 	Box = false,
@@ -57,23 +58,28 @@ DebugText.messageType =
 	Bullet = false,
 	Block = false,
 	Controller = false,
-	Window = false,
+	Window = true,
 	Map = false,
 	ParticleSystem = false,
 	Particle = false,
 	Life = false,
 	SnapPlayer = false,
 	
-	--Input
+	-- Text
+	InputText = true,
+
+	-- Input
 	Mouse = false,
-	Keyboard = true,
+	Keyboard = false,
 
-	Collision = false,
-	Button = true,
+	-- HUD
+	Button = false,
+
+	-- Tools
 	DrawTools = false,
-	Palette = false,
-
+	
 	--Components
+	Collision = false,
 	Pos = false,
 	MouseHover = false,
 	MouseDrag = false,
@@ -85,6 +91,7 @@ DebugText.messageType =
 	Line = false,
 	Shape = false,
 	Point = false,
+	Palette = false,
 
 	-- Other
 	Generic = false
@@ -117,7 +124,6 @@ function DebugText:Update()
 end 
 
 
-
 function DebugText:ScrollMessagesControl()
 
 	-- scroll object message index
@@ -146,14 +152,18 @@ function DebugText:ScrollMessagesControl()
   	self.lineIndex = self.lineIndex - 1
   end
 
-  self.lineIndex = Math:Bind
-  								 {
-  								   value = self.lineIndex,
-  								   min = 1,
-  								   max = #self.texts[self.messageIndex]
-  								 }
+  if(#self.texts > 0) then
+	  self.lineIndex = Math:Bind
+	  								 {
+	  								   value = self.lineIndex,
+	  								   min = 1,
+	  								   max = #self.texts[self.messageIndex]
+	  								 }
+	end 
 
-end 
+end  
+
+
 
 -- add a single line
 function DebugText:Text(txt)
@@ -177,7 +187,6 @@ function DebugText:TextTable(data)
 end
 
 
-
 -- add a new text to be drawn
 -- this is the shorthand format --> much faster to type
 -- data is converted into a table slot to be used by DebugText
@@ -199,6 +208,7 @@ function DebugText:TextTableSimple(data)
 	self.texts[#self.texts + 1] = convertedTable
 
 end
+
 
 
 -- optional text altering
@@ -230,12 +240,14 @@ end
 
 
 
-
-
 -- draw all texts
 function DebugText:Draw()
 
 	if(self.active == false) then
+		return
+	end
+
+	if(#self.texts < 1) then
 		return
 	end 
 
@@ -247,16 +259,24 @@ function DebugText:Draw()
 	-- for each text item
 	for i = self.messageIndex, #self.texts do
 
-		-- for each text message in item
-
+		-- line index controls how many sub messages are printed 
 		local lineIndex = 0
 
+		-- top message to be printed?
 		if(i == self.messageIndex) then
+
+			-- print messages starting from selected index
 			lineIndex = self.lineIndex
+
+		-- not top message?
 		else
+
+			-- print all sub messages
 			lineIndex = 1
+
 		end 
 
+		-- for each text message in item
 		for t = lineIndex, #self.texts[i] do
 			love.graphics.setColor(self.texts[i][t].color or Color:AsTable(Color.white))
 			LovePrint
@@ -286,7 +306,6 @@ function DebugText:ClearTexts()
 
 end 
 
-
 ObjectUpdater:AddStatic(DebugText)
 
 
@@ -306,3 +325,53 @@ ObjectUpdater:AddStatic(DebugText)
 
 -- Other
 	-- DebugText is a Global, no need to require, just use
+
+	-- Input wont work here because texts need to be gathered first....
+	-- hrmmm weid... not sure what to do about that at this point :(
+
+
+
+-- Old Code
+----------------------------
+--[[
+
+function DebugText:ScrollMessagesControl()
+
+	-- scroll object message index
+	if(Mouse.wheelUp) then
+		self.messageIndex = self.messageIndex - 1
+	end 
+
+	if(Mouse.wheelDown) then
+		self.messageIndex = self.messageIndex + 1
+	end
+
+	-- set index within bounds of given min and max
+	self.messageIndex = Math:Bind
+											{
+												value = self.messageIndex,
+												min = 1,
+												max = #self.texts
+											}
+
+  -- scroll each line of the first object message
+  if(Keyboard:Key("2")) then
+  	self.lineIndex = self.lineIndex + 1
+  end 
+
+  if(Keyboard:Key("1")) then
+  	self.lineIndex = self.lineIndex - 1
+  end
+
+  if(#self.texts > 0) then
+	  self.lineIndex = Math:Bind
+	  								 {
+	  								   value = self.lineIndex,
+	  								   min = 1,
+	  								   max = #self.texts[self.messageIndex]
+	  								 }
+	end 
+
+end 
+
+--]]

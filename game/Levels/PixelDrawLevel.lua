@@ -21,54 +21,71 @@ local Panel = require("Panel")
 local SimplePanel = require("SimplePanel")
 local Box = require("Box")
 local MapTable = require("MapTable")
+local Link = require("Link")
+local InputText = require("InputText")
+local pawnGraphics = require("AnimationTest") -- animation test with new spriteStuff
 
--- animation test with new spriteStuff
-local pawnGraphics = require("AnimationTest")
+
+-- test shit code and stuff
+
+local inputTextTest = InputText:New
+{
+	keys =
+	{
+		"q","w","e","r","t","y",
+		"u","i","o","p","a","s",
+		"d","f","g","h","j","k",
+		"l","z","x","c","v","b","n","m"
+	}
+}
+
+local mouse = Mouse:New{name = "mouse"}
+
+local billy = Box:New
+{
+	x = 200,
+	y = 200,
+	width = 16,
+	height = 16,
+	color = Color:Get("salmon")
+}
+
+local heightLink = Link:New
+{
+	a = {
+				o = billy,
+				comp = "Size",
+				var = "height"
+			},
+	b = {
+				o = mouse,
+				var = "y",
+			},
+	type = "value"
+}
+
+local xLink = Link:New
+{
+	a = {
+				o = billy,
+				comp = "Pos",
+				var = "x",
+			},
+	b = {
+				o = mouse,
+				var = "x"
+			},
+
+	type = "value"
+}
+
+
+
+
 
 
 
 --[[
-local maptable = MapTable:New
-{
-	width = 3,
-	height = 3
-}
-
-maptable:Add
-{
-	object = 27,
-	x = 1,
-	y = 1
-}
-maptable:Add
-{
-	object = 27,
-	x = 1,
-	y = 2
-}
-maptable:Add
-{
-	object = 27,
-	x = 1,
-	y = 3
-}
-
-maptable:Add
-{
-	object = "fuck",
-	x = 5, 
-	y = 3
-}
-
-maptable:Add
-{
-	object = 1234,
-	x = 2,
-	y = 6
-}
---]]
---print(maptable:Get{x=4, y=2})
-
 -- Grid Based panel object placement and size
 local gridPanel = SimplePanel:New
 {
@@ -186,9 +203,6 @@ local palPos =
 }
 
 
-
-
-local mouse = Mouse:New{name = "mouse"}
 
 local pix = PixelTexture:New
 {
@@ -397,6 +411,10 @@ end
 
 
 function PixelDrawLevel:Update()
+
+
+	
+
 end
 
 
@@ -409,10 +427,6 @@ return PixelDrawLevel
 
 -- Notes
 ------------------------------------------------------
-
-
-
-
 
 
 

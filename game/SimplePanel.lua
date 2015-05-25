@@ -218,7 +218,6 @@ function Panel:New(data)
 	-------------------------
 
 	function o:Update()
-
 	end 
 
 	function o:Draw()
