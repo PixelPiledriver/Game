@@ -110,6 +110,9 @@ end
 
 
 function ObjectUpdater:PrintDebugText()
+	if(DebugText.messageType["ObjectUpdater"] == false) then
+		return
+	end 
 
 	-- print basic information
 	DebugText:TextTable
@@ -267,12 +270,10 @@ function ObjectUpdater:Update()
 
 	end 
 
-	-- print debug text for manager
+	-- print debug text for Object updater
 	if(DebugText.active) then
 		self:PrintDebugText()
 	end
-
-
 
 end
 
