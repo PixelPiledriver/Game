@@ -2,7 +2,6 @@
 -- draw stuff on pixel textures
 
 
-local ObjectUpdater = require("ObjectUpdater")
 local Color = require("Color")
 local Box = require("Box")
 local Mouse = require("Mouse")

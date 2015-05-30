@@ -3,7 +3,6 @@
 -- use to fade out basic os and control their alpha
 -- might merge this with a SuperColor class in the future
 
-local ObjectUpdater = require("ObjectUpdater")
 
 local Fade = {}
 

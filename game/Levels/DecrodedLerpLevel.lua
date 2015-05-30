@@ -2,7 +2,6 @@
 -- draw the pixels and stuff
 
 
-local ObjectUpdater = require("ObjectUpdater")
 local PixelTexture = require("PixelTexture")
 local PixelBrush = require("PixelBrush")
 local Color = require("Color")

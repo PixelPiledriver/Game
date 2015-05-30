@@ -1,7 +1,6 @@
 -- Box.lua
 -- box/cube/square graphic o
 
-local ObjectUpdater = require("ObjectUpdater")
 local SinCounter = require("SinCounter")
 local Color = require("Color")
 local Life = require("Life")
@@ -138,6 +137,12 @@ function Box:New(data)
 	}
 
 	o.Input = Input:New{}
+
+	DrawList:Submit
+	{
+		o = o,
+		depth = data.depth or 1
+	}
 
 
 	-------------

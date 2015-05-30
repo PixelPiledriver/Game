@@ -4,7 +4,7 @@
 -- this is not a health component for players/enemies
 -- do not confuse it for that --> BITCH! >:D
 
-local ObjectUpdater = require("ObjectUpdater")
+
 
 
 local Life = {}

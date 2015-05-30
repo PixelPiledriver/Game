@@ -1,7 +1,6 @@
 -- Button
 -- click on it and it does stuff
 
-local ObjectUpdater = require("ObjectUpdater")
 local Box = require("Box")
 local Collision = require("Collision")
 local Color = require("Color")

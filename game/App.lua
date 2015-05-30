@@ -2,7 +2,6 @@
 -- do game application stuff
 -- control the window, blah blah blah
 
-local ObjectUpdater = require("ObjectUpdater")
 local Input = require("Input")
 
 local App = {}
@@ -56,7 +55,6 @@ return App
 -- do game application stuff
 -- control the window, blah blah blah
 
-local ObjectUpdater = require("ObjectUpdater")
 local Input = require("Input")
 
 local App = {}

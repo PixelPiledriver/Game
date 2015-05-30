@@ -3,7 +3,7 @@
 -- object that links two objects values together
 
 
-local ObjectUpdater = require("ObjectUpdater")
+
 
 local Link = {}
 
@@ -119,7 +119,7 @@ return Link
 -- object that links two objects values together
 
 
-local ObjectUpdater = require("ObjectUpdater")
+
 
 local Link = {}
 

@@ -23,8 +23,6 @@ function TableSort:SortByVar(data)
 
 end
 
-
-
 function TableSort:SortByFunc(data)
 
 	local function tempCompare(a,b)
@@ -34,6 +32,17 @@ function TableSort:SortByFunc(data)
 	table.sort(data.t, tempCompare)
 
 end
+
+--{index table of strings}
+function TableSort:SortByString(t)
+
+	local function tempCompare(a,b)
+		return a < b
+	end
+
+	table.sort(t, tempCompare)
+
+end 
 
 
 
@@ -141,6 +150,20 @@ table.sort( stuff, CompareStuff1)
 
 for i=1, #stuff do 
 	print(stuff[i].g)
+end 
+
+
+
+
+local stringSort = 
+{
+	11, 123, 4, 6, 9, 1, 20, 50, 55 ,2020, 0, 292, 3, 8, 6, 6, 7
+}
+
+TableSort:SortByString(stringSort)
+
+for i=1, #stringSort do
+	print(stringSort[i])
 end 
 
 

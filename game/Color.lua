@@ -1,7 +1,6 @@
 -- use to get colors by name
 -- and other stuff
 
-local ObjectUpdater = require("ObjectUpdater")
 local Random = require("Random")
 
 local Color = {}

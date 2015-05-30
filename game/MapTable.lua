@@ -2,7 +2,7 @@
 -- 2 dimensional table to add and get things from
 -- fuckin dope as shiiiiiiiit!!!!
 
-local ObjectUpdater = require("ObjectUpdater")
+
 
 local MapTable = {}
 

@@ -2,7 +2,7 @@
 -- Component
 -- makes object drag and droppable
 
-local ObjectUpdater = require("ObjectUpdater")
+
 
 local MouseDrag = {}
 

@@ -2,7 +2,7 @@
 -- draw the pixels and stuff
 
 
-local ObjectUpdater = require("ObjectUpdater")
+
 local Color = require("Color")
 local Box = require("Box")
 

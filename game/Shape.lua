@@ -2,7 +2,6 @@
 -- o with multiple boxes inside of it
 
 
-local ObjectUpdater = require("ObjectUpdater")
 local Box = require("Box")
 local Color = require("Color")
 

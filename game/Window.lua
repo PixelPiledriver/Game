@@ -4,7 +4,6 @@
 ----------------
 -- Requires
 ----------------
-local ObjectUpdater = require("ObjectUpdater")
 local Random = require("Random")
 
 

@@ -2,7 +2,6 @@
 -- does stuff and checks if shit is hitting shit
 
 
-local ObjectUpdater = require("ObjectUpdater")
 local CollisionManager = require("CollisionManager")
 local Color = require("Color")
 local Pos = require("Pos")

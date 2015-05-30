@@ -3,7 +3,6 @@
 -- in the future will be able to create multiple cameras
 -- but just work with one for now
 
-local ObjectUpdater = require("ObjectUpdater")
 local Input = require("Input")
 
 local Camera = {}

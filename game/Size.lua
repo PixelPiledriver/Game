@@ -2,7 +2,6 @@
 -- changes the size of an object over time
 -- ONLY FOR POINTS
 
-local ObjectUpdater = require("ObjectUpdater")
 
 local Size = {}
 

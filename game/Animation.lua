@@ -3,7 +3,6 @@
 -- should handle itself for drawing
 
 
-local ObjectUpdater = require("ObjectUpdater")
 local Pos = require("Pos")
 
 local Animation = {}

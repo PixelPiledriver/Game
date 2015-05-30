@@ -1,7 +1,7 @@
 -- Health.lua
 -- health component for objects that need to take damage
 
-local ObjectUpdater = require("ObjectUpdater")
+
 
 local Health = {}
 

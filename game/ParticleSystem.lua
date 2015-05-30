@@ -1,7 +1,6 @@
 -- shoots out particles
 -- omg son that shit is crazy
 
-local ObjectUpdater = require("ObjectUpdater")
 local Particle = require("Particle")
 local Color = require("Color")
 

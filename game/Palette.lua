@@ -9,7 +9,6 @@
 ------------------
 -- Requires
 ------------------
-local ObjectUpdater = require("ObjectUpdater")
 local Pos = require("Pos")
 local Color = require("Color")
 local Random = require("Random")

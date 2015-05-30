@@ -1,7 +1,7 @@
 --InputText.lua
 
 
-local ObjectUpdater = require("ObjectUpdater")
+
 local Keyboard = require("Keyboard")
 local Input = require("Input")
 

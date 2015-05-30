@@ -5,7 +5,6 @@
 -- or the entire image
 -- might need to change the name
 
-local ObjectUpdater = require("ObjectUpdater")
 
 
 local SpriteSheet = {}

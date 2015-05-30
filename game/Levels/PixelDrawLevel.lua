@@ -2,7 +2,6 @@
 -- draw the pixels and stuff
 
 
-local ObjectUpdater = require("ObjectUpdater")
 local PixelTexture = require("PixelTexture")
 local PixelBrush = require("PixelBrush")
 local Color = require("Color")
@@ -16,6 +15,7 @@ local Line = require("Line")
 local DrawTools = require("DrawTools")
 local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
+local pawnGraphics = require("AnimationTest") -- animation test with new spriteStuff
 local DrawToolsHUD = require("DrawToolsHUD")
 local Panel = require("Panel")
 local SimplePanel = require("SimplePanel")
@@ -23,10 +23,12 @@ local Box = require("Box")
 local MapTable = require("MapTable")
 local Link = require("Link")
 local InputText = require("InputText")
-local pawnGraphics = require("AnimationTest") -- animation test with new spriteStuff
-
 
 -- test shit code and stuff
+
+
+
+local boxy = Box:New{}
 
 local inputTextTest = InputText:New
 {

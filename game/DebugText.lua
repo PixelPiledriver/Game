@@ -8,7 +8,6 @@
 -- need to make a console too
 
 local Color = require("Color")
-local ObjectUpdater = require("ObjectUpdater")
 local Mouse = require("Mouse")
 local Input = require("Input")
 
@@ -41,6 +40,8 @@ DebugText.messageType =
 	-- Managers
 	ObjectUpdater = false,
 	CollisionManager = false,
+
+	DrawList = true,
 
 	-- Statics
 	ButtonStatic = false,

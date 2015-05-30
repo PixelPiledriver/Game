@@ -3,7 +3,7 @@
 
 
 local Box = require("Box")
-local ObjectUpdater = require("ObjectUpdater")
+
 local Color = require("Color")
 local Map = {}
 

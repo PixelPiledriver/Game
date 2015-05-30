@@ -1,7 +1,6 @@
 -- Point.lua
 -- basic point graphic object
 
-local ObjectUpdater = require("ObjectUpdater")
 local Color = require("Color")
 
 -- components

@@ -1,6 +1,5 @@
 -- Blocks that the player builds
 
-local ObjectUpdater = require("ObjectUpdater")
 local Collision = require("Collision")
 local BlockMap = require("BlockMap")
 local Camera = require("Camera")

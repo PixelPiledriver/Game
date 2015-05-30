@@ -8,7 +8,8 @@
 local CollisionManager = require("CollisionManager")
 
 
-local ObjectUpdater = {}
+ObjectUpdater = {}
+
 ---------------
 -- Create
 ---------------
@@ -369,18 +370,20 @@ end
 
 
 
-return ObjectUpdater
-
-
-
-
 --	Notes
 ----------------------
+-- Global
+-- changed ObjectUpdater to a global
+-- since so many files use it
+-- need to remove all require calls to it
+
+-- Working --> Draw List
 -- Need to have priority lists that update in order
 -- also need to have something that controls draw order
 -- a seperate list that pulls from object updater but in a different order
 -- maybe when objects update they should submit their draw order
 
+-- Working
 -- should probly update this to create
 -- updater objects that you can add objects to
 -- that way they all run the same and just have different lists

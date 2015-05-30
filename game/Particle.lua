@@ -3,7 +3,6 @@
 -- KERPOW
 
 
-local ObjectUpdater = require("ObjectUpdater")
 local Box = require("Box")
 local Color = require("Color")
 local Random = require("Random")

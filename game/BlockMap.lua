@@ -2,7 +2,6 @@
 -- keeps track of all blocks in game
 -- pos, type, who owns them, etc
 
-local ObjectUpdater = require("ObjectUpdater")
 
 local BlockMap = {}
 

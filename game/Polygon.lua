@@ -4,7 +4,6 @@
 -- we need triiiiiiiiiiiiiiiiiiiiiiiangles
 
 local Color = require("Color")
-local ObjectUpdater = require("ObjectUpdater")
 
 
 

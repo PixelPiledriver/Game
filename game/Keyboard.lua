@@ -3,7 +3,7 @@
 
 -- lets make this global just for fun
 
-local ObjectUpdater = require("ObjectUpdater")
+
 local Key = require("Key")
 
 Keyboard = {}

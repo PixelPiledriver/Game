@@ -2,7 +2,6 @@
 -- redo of sprite loading code
 -- want to try and rewrite it cuz the old stuff is a little weird
 
-local ObjectUpdater = require("ObjectUpdater")
 local SpriteSheet = require("SpriteSheet")
 local Color = require("Color")
 local Pos = require("Pos")

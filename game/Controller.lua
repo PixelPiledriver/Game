@@ -1,6 +1,5 @@
 -- manages using controllers
 
-local ObjectUpdater = require("ObjectUpdater")
 
 
 local Controller = {}

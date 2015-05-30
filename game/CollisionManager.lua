@@ -2,9 +2,7 @@
 
 -- Requires
 -----------------
--- local ObjectUpdater = require("ObjectUpdater")
--- leave out for now
--- cannot put a manager in a manager or some shit
+
 
 local CollisionManager = {}
 

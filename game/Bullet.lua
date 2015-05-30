@@ -1,7 +1,6 @@
 -- simple bullet
 
 
-local ObjectUpdater = require("ObjectUpdater")
 local Collision = require("Collision")
 
 local Bullet = {}

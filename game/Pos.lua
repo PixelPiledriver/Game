@@ -3,7 +3,6 @@
 -- component
 -- control position of object
 
-local ObjectUpdater = require("ObjectUpdater")
 
 
 local Pos =  {}

@@ -3,7 +3,6 @@
 -- Panel.lua
 
 -- requires
-local ObjectUpdater = require("ObjectUpdater")
 local Color = require("Color")
 local Box = require("Box")
 local Pos = require("Pos")

@@ -2,7 +2,7 @@
 -- stuff about the mouse and shit
 
 
-local ObjectUpdater = require("ObjectUpdater")
+
 local Line = require("Line")
 local Collision = require("Collision")
 

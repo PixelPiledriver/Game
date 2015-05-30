@@ -10,6 +10,8 @@
 -- Requires --> load and run shit in other files
 
 --Utility requires
+require("ObjectUpdater")
+require("DrawList")
 require("DebugText")
 require("DeltaTime")
 require("Keyboard")
@@ -32,7 +34,6 @@ local Collision = require("Collision")
 local CollisionManager = require("CollisionManager")
 local CollisionLists = require("CollisionLists")
 local FrameCounter = require("FrameCounter")
-local ObjectUpdater = require("ObjectUpdater")
 local Sound = require("Sound")
 local Window = require("Window")
 local Graphics = require("Graphics")

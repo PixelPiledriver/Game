@@ -7,7 +7,6 @@
 -- then work on an canvas swapping pipeline
 
 
-local ObjectUpdater = require("ObjectUpdater")
 
 -- stop shaders from working on machines that cant use them
 local deactivateShaders = false

@@ -5,7 +5,6 @@
 
 
 
-local ObjectUpdater = require("ObjectUpdater")
 local SinCounter = {}
 
 

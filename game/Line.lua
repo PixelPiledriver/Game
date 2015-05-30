@@ -3,7 +3,6 @@
 ------------------
 -- Requires
 ------------------
-local ObjectUpdater = require("ObjectUpdater")
 local Color = require("Color")
 local Life = require("Life")
 local Fade = require("Fade")

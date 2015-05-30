@@ -1,7 +1,6 @@
 -- Player.lua
 -- basic o with sprite, input, etc
 
-local ObjectUpdater = require("ObjectUpdater")
 local Animation = require("Animation")
 local Controller = require("Controller")
 local Bullet = require("Bullet")

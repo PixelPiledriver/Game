@@ -1,7 +1,6 @@
 -- Game
 -- shit about the game
 
-local ObjectUpdater = require("ObjectUpdater")
 
 local Game = {}
 

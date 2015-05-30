@@ -5,7 +5,6 @@
 ---------------
 -- Requires
 ---------------
-local ObjectUpdater = require("ObjectUpdater")
 
 
 local Scale = {}

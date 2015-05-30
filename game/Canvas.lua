@@ -2,7 +2,6 @@
 -- off screen render target
 -- dont think this does anything yet
 
-local ObjectUpdater = require("ObjectUpdater")
 
 
 local Canvas = {}
