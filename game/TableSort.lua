@@ -44,7 +44,30 @@ function TableSort:SortByString(t)
 
 end 
 
+-- returns a table of only variables that have unique values
+function TableSort:UniqueVars(t)
+	
+	local tempTable = {}
 
+	for i=1, #t do
+
+		local unique = true
+
+		for j=1, #tempTable do
+			if(t[i] == t[j]) then
+				unique = false
+			end 
+		end
+
+		if(unique) then
+			tempTable[#tempTable + 1] = t[i]
+		end
+
+	end 
+
+	return tempTable
+
+end
 
 
 -- Test Sort by Function

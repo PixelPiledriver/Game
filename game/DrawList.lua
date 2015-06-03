@@ -5,11 +5,13 @@
 
 DrawList = {}
 
---DrawList.submittedObjects
---DrawList.finalDrawOrder
+DrawList.mode = {}
+DrawList.mode.options = {"static", "submit", "sort"}
+DrawList.mode.selected = "submit"
 
 DrawList.objects = {}
 DrawList.objects.depthIndex = {}
+DrawList.loops = 0
 
 function DrawList:CreateDepth(depth)
 
@@ -19,6 +21,7 @@ function DrawList:CreateDepth(depth)
 
 end 
 
+-- add an object to be drawn at given depth
 function DrawList:Submit(data)
 	self:CreateDepth(data.depth)
 	self.objects[data.depth][#self.objects[data.depth] + 1] = data.o
@@ -26,14 +29,53 @@ function DrawList:Submit(data)
 	-- store depths in use
 	self.objects.depthIndex[#self.objects.depthIndex + 1] = data.depth
 
-	print(self.objects[self.objects.depthIndex[1]][1].oType)
+	--print(self.objects[self.objects.depthIndex[1]][1].oType)
 end 
+
+-- removes all objects
+-- used for per frame submit style draw list
+function DrawList:Clear()
+
+	local depthIndex = TableSort:UniqueVars(self.objects.depthIndex)
+
+
+
+	-- remove each depth
+	for i=1, #depthIndex do
+
+		-- remove each object
+		
+		for j=1, #self.objects[depthIndex[i]] do
+			self.objects[depthIndex[i]][j] = nil
+		end 
+
+		self.objects[depthIndex[i]] = nil
+	end 
+
+	self.objects.depthIndex = nil
+	self.objects.depthIndex = {}
+end
 
 function DrawList:SortDepthIndex()
 
 	TableSort:SortByString(self.objects.depthIndex)
 
 end 
+
+function DrawList:Draw()
+
+	for i=1, #self.objects.depthIndex do
+		for j=1, #self.objects[self.objects.depthIndex[i]] do
+			self.objects[self.objects.depthIndex[i]][j]:Draw()
+		end 
+	end
+
+	DrawList:Clear()
+
+	DrawList.loops = DrawList.loops + 1
+	--print(DrawList.loops)
+end 
+
 
 function DrawList:PrintDebugText()
 
@@ -72,6 +114,29 @@ ObjectUpdater:AddStatic(DrawList)
 -- try a couple different variations of draw order structure
 -- I'd like to do an indexed version that uses no sorting
 
--- there should maybe be a way to make sure you cant submit an object more than once.... or should there? I dunno
+-- there should maybe be a way to make sure you cant submit an object more than once.... 
+-- or should there? I dunno
 
 -- need to hook this up to ObjectUpdater and get draw calls based on this and nothing else
+-- actually I might just call this directly from the call back
+-- no need to even go thru ObjectUpdater
+
+-- what to do when an object is deleted?
+-- how will it be removed from the list?
+
+-- I want to do 2 variations of DrawList:
+
+-- static DrawList
+-- 	objects submit once and are drawn
+-- 	nil objects are removed from drawList
+-- 	makes it so a new list does not need to be reformed
+-- 	but also makes updating sorting a bit weird
+
+-- per frame DrawList
+-- 	all objects submit to be drawn EVERY frame
+-- 	draw all objects
+-- 	then clear the draw list
+-- 	this ensures that sorting is always up to date
+-- 	but will probly take more processing -> perhaps not a big deal tho
+
+

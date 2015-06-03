@@ -149,6 +149,22 @@ function Box:New(data)
 	-- Functions
 	-------------
 
+	function o:Update()
+		self:Spin() 
+		self:Scale()
+		self:Flip()
+		self:SubmitDraw()
+	end 
+
+
+	function o:SubmitDraw()
+		DrawList:Submit
+		{
+			o = o,
+			depth = 1
+		}
+	end 
+
 	function o:Draw()
 
 		if(self.draw == false) then
@@ -285,14 +301,6 @@ function Box:New(data)
 		self.xScaleStatic = self.xScale
 		self.yScaleStatic = self.yScale
 	end 
-
-	function o:Update()
-		self:Spin() 
-		self:Scale()
-		self:Flip()
-	end 
-
-
 
 	function o:PrintDebugText()
 

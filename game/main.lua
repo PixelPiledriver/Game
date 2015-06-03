@@ -129,7 +129,12 @@ end
 function love.draw()
 	FrameCounter:Draw()
 	DebugText:Draw()
-	ObjectUpdater:Draw()
+
+	-- out for now
+	-- hooking up DrawList
+	--ObjectUpdater:Draw()
+	
+	DrawList:Draw()
 end 
 
 
