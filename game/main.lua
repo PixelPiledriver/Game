@@ -106,8 +106,9 @@ function love.update(dt)
 
 	--Map:Update()
 
-	love.graphics.clear()
 
+
+	love.graphics.clear()
 end 
 
 

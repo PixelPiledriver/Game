@@ -160,7 +160,7 @@ function Box:New(data)
 	function o:SubmitDraw()
 		DrawList:Submit
 		{
-			o = o,
+			o = self,
 			depth = 1
 		}
 	end 

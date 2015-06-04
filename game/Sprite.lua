@@ -107,7 +107,15 @@ function Sprite:New(data)
 
 
 	function o:Update()
-		-- nothing to do here yet
+		self:SubmitDraw()
+	end 
+
+	function o:SubmitDraw()
+		DrawList:Submit
+		{
+			o = self,
+			depth = 2
+		}
 	end 
 
 

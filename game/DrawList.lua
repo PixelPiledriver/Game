@@ -11,7 +11,12 @@ DrawList.mode.selected = "submit"
 
 DrawList.objects = {}
 DrawList.objects.depthIndex = {}
-DrawList.loops = 0
+DrawList.objects.lastDepthIndex = nil
+
+
+function DrawList:Update()
+	DrawList:Clear()
+end 
 
 function DrawList:CreateDepth(depth)
 
@@ -38,8 +43,6 @@ function DrawList:Clear()
 
 	local depthIndex = TableSort:UniqueVars(self.objects.depthIndex)
 
-
-
 	-- remove each depth
 	for i=1, #depthIndex do
 
@@ -52,28 +55,27 @@ function DrawList:Clear()
 		self.objects[depthIndex[i]] = nil
 	end 
 
+	self.objects.lastDepthIndex = nil
+	self.objects.lastDepthIndex = self.objects.depthIndex
 	self.objects.depthIndex = nil
 	self.objects.depthIndex = {}
 end
 
 function DrawList:SortDepthIndex()
-
 	TableSort:SortByString(self.objects.depthIndex)
-
 end 
 
 function DrawList:Draw()
 
-	for i=1, #self.objects.depthIndex do
-		for j=1, #self.objects[self.objects.depthIndex[i]] do
-			self.objects[self.objects.depthIndex[i]][j]:Draw()
+	local depthIndex = TableSort:UniqueVars(self.objects.depthIndex)
+	TableSort:SortByString(depthIndex)
+
+	for i=1, #depthIndex do
+		for j=1, #self.objects[depthIndex[i]] do
+			self.objects[depthIndex[i]][j]:Draw()
 		end 
 	end
 
-	DrawList:Clear()
-
-	DrawList.loops = DrawList.loops + 1
-	--print(DrawList.loops)
 end 
 
 
@@ -81,13 +83,14 @@ function DrawList:PrintDebugText()
 
 	local depthIndexString = ""
 
-	for i=1, #self.objects.depthIndex do
+	for i=1, #self.objects.lastDepthIndex do
 		if(i == 1) then
-			depthIndexString = depthIndexString .. self.objects.depthIndex[i]
+			depthIndexString = depthIndexString .. self.objects.lastDepthIndex[i]
 		else
-			depthIndexString = depthIndexString .. ", " .. self.objects.depthIndex[i]
+			depthIndexString = depthIndexString .. ", " .. self.objects.lastDepthIndex[i]
 		end 
 	end
+
 
 
 	DebugText:TextTable
@@ -138,5 +141,16 @@ ObjectUpdater:AddStatic(DrawList)
 -- 	then clear the draw list
 -- 	this ensures that sorting is always up to date
 -- 	but will probly take more processing -> perhaps not a big deal tho
+
+
+-- WORKS - but is annoying to add a submite function to each object
+-- not that big of a deal I guess
+-- might create a draw component to handle shit like that
+-- but most draw funcitions are fairly different
+-- so maybe I wont make a universal component for that
+
+-- also I just realized that the index method I've created doesnt work
+-- for 0 or negative values :|
+-- maybe not the worst thing in the world but its def weird
 
 
