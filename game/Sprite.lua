@@ -114,7 +114,7 @@ function Sprite:New(data)
 		DrawList:Submit
 		{
 			o = self,
-			depth = 2
+			depth = 4
 		}
 	end 
 

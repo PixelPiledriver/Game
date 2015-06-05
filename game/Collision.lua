@@ -189,6 +189,16 @@ function Collision:New(data)
 		-- clear collision state --> and save state from last frame
 		self.collidedLastFrame = self.collided
 		self.collided = false
+
+		o:SubmitDraw()
+	end 
+
+	function o:SubmitDraw()
+		DrawList:Submit
+		{
+			o = self,
+			depth = 3
+		}
 	end 
 
 

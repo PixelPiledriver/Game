@@ -138,13 +138,6 @@ function Box:New(data)
 
 	o.Input = Input:New{}
 
-	DrawList:Submit
-	{
-		o = o,
-		depth = data.depth or 1
-	}
-
-
 	-------------
 	-- Functions
 	-------------

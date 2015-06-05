@@ -54,7 +54,7 @@ function TableSort:UniqueVars(t)
 		local unique = true
 
 		for j=1, #tempTable do
-			if(t[i] == t[j]) then
+			if(t[i] == tempTable[j]) then
 				unique = false
 			end 
 		end

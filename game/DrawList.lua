@@ -13,9 +13,30 @@ DrawList.objects = {}
 DrawList.objects.depthIndex = {}
 DrawList.objects.lastDepthIndex = nil
 
+DrawList.layers = 
+{
+	Skybox = 1,
+	Backdrop = 2,
+	Objects = 3,
+	Collision = 5,
+	Hud = 4,
+	DebugText = 6,
+}
+
 
 function DrawList:Update()
-	DrawList:Clear()
+	self:UpdateMode()
+end 
+
+function DrawList:UpdateMode()
+	if(self.mode.selected == "submit") then
+		self:Clear()
+	end 
+end 
+
+
+function DrawList:GetLayer(name)
+	return DrawList.layers[name]
 end 
 
 function DrawList:CreateDepth(depth)
@@ -143,7 +164,7 @@ ObjectUpdater:AddStatic(DrawList)
 -- 	but will probly take more processing -> perhaps not a big deal tho
 
 
--- WORKS - but is annoying to add a submite function to each object
+-- WORKS - but is annoying to add a submit function to each object
 -- not that big of a deal I guess
 -- might create a draw component to handle shit like that
 -- but most draw funcitions are fairly different
@@ -152,5 +173,18 @@ ObjectUpdater:AddStatic(DrawList)
 -- also I just realized that the index method I've created doesnt work
 -- for 0 or negative values :|
 -- maybe not the worst thing in the world but its def weird
+
+-- NEEDED
+-- "layering" seperate from "depth"
+-- the current implementation is actually layering and does not sort by a
+-- depth value
+-- objects could submit their y or z value
+-- that would actually work with what I already have but I want to have
+-- a layering structure on top as well for different draw spaces and object types
+-- hud, debug, text, sprites, skybox, etc
+
+
+-- NEEDED
+-- predefined layer values as names
 
 

@@ -100,13 +100,7 @@ function love.update(dt)
 	Controller.Update()
 	CollisionManager:Update()
 
-	--LerpLevel:Update()
 	PixelDrawLevel:Update()
-	--BoxLevel:Update()
-
-	--Map:Update()
-
-
 
 	love.graphics.clear()
 end 
@@ -128,14 +122,16 @@ end
 
 -- draw call
 function love.draw()
-	FrameCounter:Draw()
-	DebugText:Draw()
-
 	-- out for now
 	-- hooking up DrawList
 	--ObjectUpdater:Draw()
 	
 	DrawList:Draw()
+
+	DebugText:Draw()
+
+	-- this needs to be made into a static
+	FrameCounter:Draw()
 end 
 
 
