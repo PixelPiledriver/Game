@@ -219,7 +219,7 @@ function Panel:New(data)
 	function o:Update()
 	end 
 
-	function o:Draw()
+	function o:DrawCall()
 		love.graphics.setColor(Color:AsTable(Panel.defaultPanelColor))
 		LovePrint
 		{

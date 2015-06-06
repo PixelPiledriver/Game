@@ -8,6 +8,7 @@ local Fade = require("Fade")
 local Size = require("Size")
 local Pos = require("Pos")
 local Input = require("Input")
+local Draw = require("Draw")
 
 local Box = {}
 
@@ -138,6 +139,13 @@ function Box:New(data)
 
 	o.Input = Input:New{}
 
+	-- new draw component -> seems to work fine
+	o.Draw = Draw:New
+	{
+		parent = o, 
+		depth = DrawList:GetLayer("Objects")
+	}
+
 	-------------
 	-- Functions
 	-------------
@@ -146,10 +154,10 @@ function Box:New(data)
 		self:Spin() 
 		self:Scale()
 		self:Flip()
-		self:SubmitDraw()
+		--self:SubmitDraw()
 	end 
 
-
+--[[
 	function o:SubmitDraw()
 		DrawList:Submit
 		{
@@ -157,8 +165,9 @@ function Box:New(data)
 			depth = 1
 		}
 	end 
+--]]
 
-	function o:Draw()
+	function o:DrawCall()
 
 		if(self.draw == false) then
 			return

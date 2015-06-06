@@ -344,7 +344,7 @@ function Palette:New(data)
 	end 
 
 
-	function o:Draw()
+	function o:DrawCall()
 		
 		if(self.draw == false) then
 		

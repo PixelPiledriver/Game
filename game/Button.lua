@@ -11,6 +11,7 @@ local Pos = require("Pos")
 local Mouse = require("Mouse")
 local Size = require("Size")
 local MouseHover = require("MouseHover")
+local Draw = require("Draw")
 
 local Button = {}
 
@@ -83,6 +84,10 @@ function Button:New(data)
 	end 
 	--]]
 
+	---------------
+	-- Components
+	---------------
+
 	local x = data.x or Button.lastCreated.Pos.x + Button.lastCreated.Size.width + Button.xSpace
 	local y = data.y or Button.lastCreated.Pos.y
 
@@ -99,6 +104,15 @@ function Button:New(data)
 		width = data.width or 100,
 		height = data.height or 50
 	}
+
+	o.Draw = Draw:New
+	{
+		parent = o,
+		depth = DrawList:GetLayer("Hud")
+	}
+
+
+	-- other options and stuff
 
 	-- rect
 	o.useBox = data.useBox or false
@@ -251,13 +265,17 @@ function Button:New(data)
 
 	end
 
+	function o:SubmitDraw()
+
+	end 
+
 	function o:ToggleDraw()
 		self.draw = Bool:Toggle(self.draw)
 		self.collision.draw = self.draw
 		self.drawText = self.draw
 	end 
 
-	function o:Draw()
+	function o:DrawCall()
 		-- draw text for button? --> if button has a sprite, defaults to not draw
 		-- this should not always be the case, if button has a backdrop and text goes on top
 		-- will need to fix this issue at a later time :P

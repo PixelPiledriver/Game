@@ -15,12 +15,17 @@ DrawList.objects.lastDepthIndex = nil
 
 DrawList.layers = 
 {
-	Skybox = 1,
-	Backdrop = 2,
-	Objects = 3,
-	Collision = 5,
-	Hud = 4,
-	DebugText = 6,
+	Skybox = {value = 1, active = true},
+	Backdrop = {value = 2, active = true},
+	Objects = {value = 3, active = true},
+	Collision = {value = 4, active = true},
+	Hud = {value = 5, active = true},
+	DebugText = {value = 6, active = true},
+
+	index = 
+	{
+		"Skybox", "Backdrop", "Objects", "Collision", "Hud", "DebugText"
+	}
 }
 
 
@@ -36,7 +41,7 @@ end
 
 
 function DrawList:GetLayer(name)
-	return DrawList.layers[name]
+	return DrawList.layers[name].value
 end 
 
 function DrawList:CreateDepth(depth)
@@ -92,9 +97,25 @@ function DrawList:Draw()
 	TableSort:SortByString(depthIndex)
 
 	for i=1, #depthIndex do
-		for j=1, #self.objects[depthIndex[i]] do
-			self.objects[depthIndex[i]][j]:Draw()
-		end 
+		
+		repeat
+
+			-- is this layer/depth active?
+			if(self.layers[self.layers.index[depthIndex[i]]].active == false) then
+
+				break
+			end
+
+			-- draw each object in this layer
+			for j=1, #self.objects[depthIndex[i]] do
+				
+				-- currently just calls DrawCall directly
+				-- but should probly go thru Draw component
+				self.objects[depthIndex[i]][j]:DrawCall() 
+
+			end 
+
+		until true
 	end
 
 end 
@@ -183,8 +204,11 @@ ObjectUpdater:AddStatic(DrawList)
 -- a layering structure on top as well for different draw spaces and object types
 -- hud, debug, text, sprites, skybox, etc
 
-
 -- NEEDED
--- predefined layer values as names
+-- toggle layers and depths to draw or not draw
+-- mostly for debug purposes
 
+
+-- DONE
+-- predefined layer values as names
 

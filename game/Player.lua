@@ -252,7 +252,7 @@ function Player:New(data)
 		self:ColorUpdate()
 	end 
 
-	function o:Draw()
+	function o:DrawCall()
 
 		-- what type of graphic does the o have
 		-- this is bullshit and needs to be re worked

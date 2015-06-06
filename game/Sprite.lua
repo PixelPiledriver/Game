@@ -120,7 +120,7 @@ function Sprite:New(data)
 
 
 	-- draw sprite
-	function o:Draw()
+	function o:DrawCall()
 
 		-- global draw toggle
 		if(Sprite.drawNone) then

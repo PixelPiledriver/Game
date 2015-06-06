@@ -14,7 +14,7 @@ local Scale = require("Scale")
 local Color = require("Color")
 local Value = require("Value")
 local Random = require("Random")
-
+local Draw = require("Draw")
 
 
 local PixelTexture = {}
@@ -129,7 +129,7 @@ function PixelTexture:New(data)
 	---------------------
 
 
-	function o:Draw()
+	function o:DrawCall()
 		if(self.draw == false or self.texture == nil) then
 			return
 		end 

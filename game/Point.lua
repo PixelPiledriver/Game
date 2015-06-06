@@ -87,7 +87,7 @@ function Point:New(data)
 	end 
 
 
-	function o:Draw()
+	function o:DrawCall()
 		love.graphics.setColor(Color:AsTable(self.color))
 		love.graphics.setPointSize(self.size)
 		love.graphics.point(self.Pos.x, self.Pos.y)
