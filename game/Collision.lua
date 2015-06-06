@@ -158,7 +158,7 @@ function Collision:New(data)
 
 	end 
 
-	function o:Draw()
+	function o:DrawCall()
 
 		-- show?
 		if(self.draw == false) then

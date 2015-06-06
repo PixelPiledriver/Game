@@ -111,8 +111,8 @@ function Animation:New(data)
 
 	end 
 
-
-	function o:Draw()
+ 
+	function o:DrawCall()
 
 		local x = 0
 		local y = 0

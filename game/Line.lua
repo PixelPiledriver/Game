@@ -76,7 +76,7 @@ function Line:New(data)
 	function o:Update()
 	end 
 
-	function o:Draw()
+	function o:DrawCall()
 		love.graphics.setLineWidth(self.width)
 		love.graphics.setColor(Color:AsTable(self.color))
 		love.graphics.line(self.a.x, self.a.y, self.b.x, self.b.y)
