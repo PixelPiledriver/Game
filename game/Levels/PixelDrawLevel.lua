@@ -28,66 +28,14 @@ local InputText = require("InputText")
 
 
 
-local boxy = Box:New{}
-
-local inputTextTest = InputText:New
-{
-	keys =
-	{
-		"q","w","e","r","t","y",
-		"u","i","o","p","a","s",
-		"d","f","g","h","j","k",
-		"l","z","x","c","v","b","n","m"
-	}
-}
-
 local mouse = Mouse:New{name = "mouse"}
 
-local billy = Box:New
-{
-	x = 200,
-	y = 200,
-	width = 16,
-	height = 16,
-	color = Color:Get("salmon")
-}
-
-local heightLink = Link:New
-{
-	a = {
-				o = billy,
-				comp = "Size",
-				var = "height"
-			},
-	b = {
-				o = mouse,
-				var = "y",
-			},
-	type = "value"
-}
-
-local xLink = Link:New
-{
-	a = {
-				o = billy,
-				comp = "Pos",
-				var = "x",
-			},
-	b = {
-				o = mouse,
-				var = "x"
-			},
-
-	type = "value"
-}
 
 
 
 
 
-
-
---[[
+---[[
 -- Grid Based panel object placement and size
 local gridPanel = SimplePanel:New
 {
@@ -137,62 +85,7 @@ gridPanel:Add
 	x = 10,
 	y = 5
 }
---]]
 
--- 1st Test panel
---[[
-local panel = Panel:New
-{
-	posType = "bottom",
-	name = "Test Panel"
-}
-
-local pBox = Box:New
-{
-	width = 50,
-	height = 20,
-	color = Color:Get("white")
-}
-
-local pBox2 = Box:New
-{
-	width = 50,
-	height = 20,
-	color = Color:Get("orange")
-}
-
-local pBox3 = Box:New
-{
-	width = 50,
-	height = 20,
-	color = Color:Get("yellow")
-}
-
-local pBox4 = Box:New
-{
-	width = 50,
-	height = 20,
-	color = Color:Get("lightGreen")
-}
-
-
-local button1 = Button:New
-{
-	text = "Button1",
-	func = function()
-	end
-}
-
-panel:Add(pBox)
-panel:Add(pBox2)
-panel:Add(pBox3)
-panel:Add(pBox4)
-panel:Add(pawnGraphics.sprites.idle)
-panel:Add(pawnGraphics.sprites.attack)
-panel:Add(pawnGraphics.sprites.walk)
-panel:Add(button1)
-
---]]
 
 
 
@@ -434,6 +327,122 @@ return PixelDrawLevel
 
 
 
+-- old test shit
+--[[
+
+
+local boxy = Box:New{}
+
+local inputTextTest = InputText:New
+{
+	keys =
+	{
+		"q","w","e","r","t","y",
+		"u","i","o","p","a","s",
+		"d","f","g","h","j","k",
+		"l","z","x","c","v","b","n","m"
+	}
+}
 
 
 
+local billy = Box:New
+{
+	x = 200,
+	y = 200,
+	width = 16,
+	height = 16,
+	color = Color:Get("salmon")
+}
+
+local heightLink = Link:New
+{
+	a = {
+				o = billy,
+				comp = "Size",
+				var = "height"
+			},
+	b = {
+				o = mouse,
+				var = "y",
+			},
+	type = "value"
+}
+
+local xLink = Link:New
+{
+	a = {
+				o = billy,
+				comp = "Pos",
+				var = "x",
+			},
+	b = {
+				o = mouse,
+				var = "x"
+			},
+
+	type = "value"
+}
+
+
+
+
+
+--]]
+
+--]]
+
+-- 1st Test panel
+--[[
+local panel = Panel:New
+{
+	posType = "bottom",
+	name = "Test Panel"
+}
+
+local pBox = Box:New
+{
+	width = 50,
+	height = 20,
+	color = Color:Get("white")
+}
+
+local pBox2 = Box:New
+{
+	width = 50,
+	height = 20,
+	color = Color:Get("orange")
+}
+
+local pBox3 = Box:New
+{
+	width = 50,
+	height = 20,
+	color = Color:Get("yellow")
+}
+
+local pBox4 = Box:New
+{
+	width = 50,
+	height = 20,
+	color = Color:Get("lightGreen")
+}
+
+
+local button1 = Button:New
+{
+	text = "Button1",
+	func = function()
+	end
+}
+
+panel:Add(pBox)
+panel:Add(pBox2)
+panel:Add(pBox3)
+panel:Add(pBox4)
+panel:Add(pawnGraphics.sprites.idle)
+panel:Add(pawnGraphics.sprites.attack)
+panel:Add(pawnGraphics.sprites.walk)
+panel:Add(button1)
+
+--]]

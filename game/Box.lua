@@ -140,11 +140,13 @@ function Box:New(data)
 	o.Input = Input:New{}
 
 	-- new draw component -> seems to work fine
-	o.Draw = Draw:New
+	local defaultDraw =
 	{
 		parent = o, 
 		depth = DrawList:GetLayer("Objects")
 	}
+
+	o.Draw = Draw:New(data.Draw or defaultDraw)
 
 	-------------
 	-- Functions
@@ -154,7 +156,6 @@ function Box:New(data)
 		self:Spin() 
 		self:Scale()
 		self:Flip()
-		--self:SubmitDraw()
 	end 
 
 --[[

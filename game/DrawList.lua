@@ -205,9 +205,11 @@ ObjectUpdater:AddStatic(DrawList)
 -- hud, debug, text, sprites, skybox, etc
 
 -- NEEDED
--- toggle layers and depths to draw or not draw
--- mostly for debug purposes
+-- convert layer names to value interally instead of having to call GetLayer from the outside
 
+-- DONE - sorta
+-- toggleable layers and depths to draw or not draw
+-- mostly for debug purposes
 
 -- DONE
 -- predefined layer values as names
