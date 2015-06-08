@@ -48,12 +48,19 @@ pawnGraphics.animations.walk = Animation:New
 	frames = 
 	{
 		pawnGraphics.sprites.idle, 
+		pawnGraphics.sprites.walk,
+		pawnGraphics.sprites.idle, 
 		pawnGraphics.sprites.walk
 	},
 	
 	delays =
 	{
-		10, 10
+		10, 10, 10, 10,
+	},
+
+	colors =
+	{
+		"mistyRose", "olive", "thistle", "plum"
 	}
 }
 

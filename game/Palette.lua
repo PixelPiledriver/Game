@@ -16,6 +16,7 @@ local Value = require("Value")
 local Collision = require("Collision")
 local MouseHover = require("MouseHover")
 local MouseDrag = require("MouseDrag")
+local Draw = require("Draw")
 
 
 local Palette = {}
@@ -98,6 +99,12 @@ function Palette:New(data)
 		collisionList = {"Mouse"},
 	}
 	o.collision.Pos:LinkPosTo{link = o.Pos}
+
+	o.Draw = Draw:New
+	{
+		parent = o,
+		depth = DrawList:GetLayer("Hud") -- should change this to process string internally :P
+	}
 
 	-------------------------
 	-- Mouse Interaction

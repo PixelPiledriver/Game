@@ -9,6 +9,7 @@ local Collision = require("Collision")
 local MouseHover = require("MouseHover")
 local MouseDrag = require("MouseDrag")
 local MapTable = require("MapTable")
+local Draw = require("Draw")
 
 
 local Panel = {}
@@ -106,6 +107,12 @@ function Panel:New(data)
 			y = love.window.getHeight() - o.Size.height - Panel.windowBorderSpace
 		}
 	end
+
+	o.Draw = Draw:New
+	{
+		parent = o,
+		depth = DrawList:GetLayer("Hud")
+	}
 
 	-------------------------------
 	-- Graphics

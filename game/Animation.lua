@@ -3,7 +3,10 @@
 -- should handle itself for drawing
 
 
+local Color = require("Color")
 local Pos = require("Pos")
+local Draw = require("Draw")
+
 
 local Animation = {}
 
@@ -42,7 +45,8 @@ function Animation:New(data)
 	o.oType = "Animation"
 	o.dataType = "Graphics"
 
-	o.colors = data.colors or nil
+	-- color per frame
+	o.colors = data.colors or "poop"
 
 	o.spriteSheet = data.spriteSheet or nil
 	o.frames = data.frames or nil -- table of frames
@@ -62,6 +66,12 @@ function Animation:New(data)
 	-- Components
 	---------------
 	o.Pos = Pos:New(data.pos or Pos.defaultPos)
+
+	o.Draw = Draw:New
+	{
+		parent = o,
+		depth = DrawList:GetLayer("Objects")
+	}
 
 	-------------
 	-- Functions
@@ -114,6 +124,11 @@ function Animation:New(data)
  
 	function o:DrawCall()
 
+		-- color
+		love.graphics.setColor(Color:AsTable(Color:Get(self.colors[self.currentFrame])))
+
+		-- transform
+		-- needs to be changed to processed by component
 		local x = 0
 		local y = 0
 		local angle = 0

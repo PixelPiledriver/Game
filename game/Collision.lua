@@ -5,6 +5,7 @@
 local CollisionManager = require("CollisionManager")
 local Color = require("Color")
 local Pos = require("Pos")
+local Draw = require("Draw")
 
 -- new need to implement
 local Size = require("Size")
@@ -31,6 +32,12 @@ function Collision:New(data)
 	o.oType = "Collision"
 	o.dataType = "Object"
 
+
+	---------------
+	-- Components
+	---------------
+
+
 	-- pos
 	o.Pos = Pos:New
 	{
@@ -48,6 +55,12 @@ function Collision:New(data)
 	{
 		width = data.width or 32,
 		height = data.height or 32
+	}
+
+	o.Draw = Draw:New
+	{
+		parent = o,
+		depth = DrawList:GetLayer("Collision")
 	}
 
 	-- shape
@@ -190,15 +203,6 @@ function Collision:New(data)
 		self.collidedLastFrame = self.collided
 		self.collided = false
 
-		o:SubmitDraw()
-	end 
-
-	function o:SubmitDraw()
-		DrawList:Submit
-		{
-			o = self,
-			depth = 3
-		}
 	end 
 
 

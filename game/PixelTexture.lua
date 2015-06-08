@@ -120,8 +120,13 @@ function PixelTexture:New(data)
 
 	o.Pos = Pos:New(data.pos or Pos.defaultPos)
 
-
 	o.Scale = Scale:New(data.scale or Scale.defaultScale)
+
+	o.Draw = Draw:New
+	{
+		parent = o,
+		depth = DrawList:GetLayer("Objects")
+	}
 
 
 	---------------------
@@ -226,7 +231,7 @@ function PixelTexture:New(data)
 
 
 	----------------------------------------------------------------------------------------------
-	-- Draw
+	-- Draw Functions
 	----------------------------------------------------------------------------------------------
 	-- set a single pixel
 	-- {x, y, color}
