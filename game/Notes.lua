@@ -6,8 +6,22 @@
 
 
 
+-- NEED
+-------------
+
+-- Object creator factory
+
+-- Input list 
+-- only check objects with input component during input call back 
+-- like draw list
+
+
 -- Other
 ----------------
+
+
+
+-- DONE
 -- do we need a Link type?
 -- an object that allows another to stay updated with an objects values?
 -- perhaps prototype that and see if its helpful in some way
@@ -30,6 +44,8 @@
 
 -- Palettes
 -----------------------
+
+-- DONE
 -- make drawable
 -- clickable --> change color
 -- cuz Preece said so

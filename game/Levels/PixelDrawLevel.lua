@@ -9,7 +9,6 @@ local Palette = require("Palette")
 local Value = require("Value")
 local Button = require("Button")
 local Collision = require("Collision")
-local Mouse = require("Mouse")
 local Point = require("Point")
 local Line = require("Line")
 local DrawTools = require("DrawTools")
@@ -23,6 +22,7 @@ local Box = require("Box")
 local MapTable = require("MapTable")
 local Link = require("Link")
 local InputText = require("InputText")
+local ParticleSystem = require("ParticleSystem")
 
 -- test shit code and stuff
 
@@ -30,12 +30,19 @@ local InputText = require("InputText")
 
 local mouse = Mouse:New{name = "mouse"}
 
+local billy = Box:New
+{
+	x = 500,
+	y = 200,
+	width = 16,
+	height = 16,
+	color = Color:Get("black")
+}
 
 
 
 
-
----[[
+--[[
 -- Grid Based panel object placement and size
 local gridPanel = SimplePanel:New
 {
@@ -86,7 +93,7 @@ gridPanel:Add
 	y = 5
 }
 
-
+--]]
 
 
 
@@ -308,7 +315,6 @@ end
 function PixelDrawLevel:Update()
 
 
-	
 
 end
 
@@ -352,7 +358,7 @@ local billy = Box:New
 	y = 200,
 	width = 16,
 	height = 16,
-	color = Color:Get("salmon")
+	color = Color:Get("peru")
 }
 
 local heightLink = Link:New

@@ -10,17 +10,17 @@ DrawList.mode.options = {"static", "submit", "sort"}
 DrawList.mode.selected = "submit"
 
 DrawList.objects = {}
-DrawList.objects.depthIndex = {}
-DrawList.objects.lastDepthIndex = nil
+DrawList.objects.layerIndex = {}
+DrawList.objects.lastLayerIndex = nil
 
 DrawList.layers = 
 {
-	Skybox = {value = 1, active = true},
-	Backdrop = {value = 2, active = true},
+	Skybox = {value = 1, active = false},
+	Backdrop = {value = 2, active = false},
 	Objects = {value = 3, active = true},
-	Collision = {value = 4, active = true},
-	Hud = {value = 5, active = true},
-	DebugText = {value = 6, active = true},
+	Collision = {value = 4, active = false},
+	Hud = {value = 5, active = false},
+	DebugText = {value = 6, active = false},
 
 	index = 
 	{
@@ -44,74 +44,91 @@ function DrawList:GetLayer(name)
 	return DrawList.layers[name].value
 end 
 
-function DrawList:CreateDepth(depth)
+function DrawList:CreateLayer(layer)
 
-	if(self.objects[depth] == nil) then
-		self.objects[depth] = {}
+	if(self.objects[layer] == nil) then
+		self.objects[layer] = {}
+	end 
+
+end 
+
+function DrawList:CreateDepth(layer, depth)
+
+	self:CreateLayer(layer)
+
+	if(self.objects[layer][depth] == nil) then
+		self.objects[layer][depth] = {}
 	end 
 
 end 
 
 -- add an object to be drawn at given depth
 function DrawList:Submit(data)
-	self:CreateDepth(data.depth)
-	self.objects[data.depth][#self.objects[data.depth] + 1] = data.o
+
+	local layer = data.layer
+	local depth = data.depth
+
+	self:CreateLayer(depth)
+	self.objects[depth][#self.objects[depth] + 1] = data.o
 
 	-- store depths in use
-	self.objects.depthIndex[#self.objects.depthIndex + 1] = data.depth
+	self.objects.layerIndex[#self.objects.layerIndex + 1] = depth
 
-	--print(self.objects[self.objects.depthIndex[1]][1].oType)
+	--print(self.objects[self.objects.layerIndex[1]][1].oType)
 end 
 
 -- removes all objects
 -- used for per frame submit style draw list
 function DrawList:Clear()
 
-	local depthIndex = TableSort:UniqueVars(self.objects.depthIndex)
+	local layerIndex = TableSort:UniqueVars(self.objects.layerIndex)
 
 	-- remove each depth
-	for i=1, #depthIndex do
+	for i=1, #layerIndex do
 
 		-- remove each object
 		
-		for j=1, #self.objects[depthIndex[i]] do
-			self.objects[depthIndex[i]][j] = nil
+		for j=1, #self.objects[layerIndex[i]] do
+			self.objects[layerIndex[i]][j] = nil
 		end 
 
-		self.objects[depthIndex[i]] = nil
+		self.objects[layerIndex[i]] = nil
 	end 
 
-	self.objects.lastDepthIndex = nil
-	self.objects.lastDepthIndex = self.objects.depthIndex
-	self.objects.depthIndex = nil
-	self.objects.depthIndex = {}
+	self.objects.lastLayerIndex = nil
+	self.objects.lastLayerIndex = self.objects.layerIndex
+	self.objects.layerIndex = nil
+	self.objects.layerIndex = {}
 end
 
-function DrawList:SortDepthIndex()
-	TableSort:SortByString(self.objects.depthIndex)
+function DrawList:SortLayerIndex()
+	TableSort:SortByString(self.objects.layerIndex)
 end 
 
 function DrawList:Draw()
 
-	local depthIndex = TableSort:UniqueVars(self.objects.depthIndex)
-	TableSort:SortByString(depthIndex)
+	local layerIndex = TableSort:UniqueVars(self.objects.layerIndex)
+	TableSort:SortByString(layerIndex)
 
-	for i=1, #depthIndex do
+	for i=1, #layerIndex do
 		
 		repeat
 
 			-- is this layer/depth active?
-			if(self.layers[self.layers.index[depthIndex[i]]].active == false) then
+			if(self.layers[self.layers.index[layerIndex[i]]].active == false) then
 
 				break
 			end
 
 			-- draw each object in this layer
-			for j=1, #self.objects[depthIndex[i]] do
+			for j=1, #self.objects[layerIndex[i]] do
 				
 				-- currently just calls DrawCall directly
 				-- but should probly go thru Draw component
-				self.objects[depthIndex[i]][j]:DrawCall() 
+				--self.objects[layerIndex[i]][j]:DrawCall() 
+				self.objects[layerIndex[i]][j].Draw:Draw()
+
+				
 
 			end 
 
@@ -123,13 +140,13 @@ end
 
 function DrawList:PrintDebugText()
 
-	local depthIndexString = ""
+	local layerIndexString = ""
 
-	for i=1, #self.objects.lastDepthIndex do
+	for i=1, #self.objects.lastLayerIndex do
 		if(i == 1) then
-			depthIndexString = depthIndexString .. self.objects.lastDepthIndex[i]
+			layerIndexString = layerIndexString .. self.objects.lastLayerIndex[i]
 		else
-			depthIndexString = depthIndexString .. ", " .. self.objects.lastDepthIndex[i]
+			layerIndexString = layerIndexString .. ", " .. self.objects.lastLayerIndex[i]
 		end 
 	end
 
@@ -141,7 +158,7 @@ function DrawList:PrintDebugText()
 		{text = "Draw"},
 		{text = "---------------------"},
 		{text = "Depth Index:"},
-		{text = depthIndexString}
+		{text = layerIndexString}
 	}
 end
 
@@ -213,4 +230,9 @@ ObjectUpdater:AddStatic(DrawList)
 
 -- DONE
 -- predefined layer values as names
+
+-- NEEDED
+-- a LAST slot to draw a selected object on top of all others in its layer
+-- also a FIRST for the opposite end, just cuz I might need it
+-- last is way more important and useful tho
 

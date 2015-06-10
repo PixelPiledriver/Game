@@ -36,7 +36,6 @@ function ParticleSystem:New(data)
 
 
 
-
 	function object:CreateParticleFromTable()
 
 		self.particleTable[self.index].x = self.x
@@ -238,3 +237,8 @@ return ParticleSystem
 -- }
 
 -- this way particles 
+
+-- BUG
+-- apparently particles are broken
+-- need to fix that shit
+-- wtf

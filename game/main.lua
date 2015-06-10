@@ -1,12 +1,3 @@
--- dis iz the main file nigga!!
--- dont be fuckin round wit my mainz!!!!!
-
--- i fucked wit yo mainz - adam
--- (•_•)
--- ( •_•)>⌐■-■
--- (⌐■_■)
--- DEAL WITH IT
-
 -- Requires --> load and run shit in other files
 
 --Utility requires
@@ -21,8 +12,7 @@ require("PrintDebug")
 require("Random")
 require("FailNew")
 require("Bool")
-
-local Mouse = require("Mouse")
+require("Mouse")
 
 -- Only requires that are globally necessary should be listed here
 local App = require("App")

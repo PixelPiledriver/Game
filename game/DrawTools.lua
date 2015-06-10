@@ -4,7 +4,6 @@
 
 local Color = require("Color")
 local Box = require("Box")
-local Mouse = require("Mouse")
 
 
 local DrawTools = {}

@@ -7,3 +7,20 @@
 local Levels = {}
 
 
+
+
+
+
+
+
+
+-- Notes
+-----------
+
+-- NEEDED
+-- default level to load
+-- level choice menu
+-- load a selected level
+-- create a new level at runtime
+-- save whats in level at runtime
+-- restart current level

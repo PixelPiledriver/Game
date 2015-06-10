@@ -142,8 +142,9 @@ function Box:New(data)
 	-- new draw component -> seems to work fine
 	local defaultDraw =
 	{
-		parent = o, 
-		depth = DrawList:GetLayer("Objects")
+		parent = o,
+		layer = "Objects",
+		depth = "Objects",
 	}
 
 	o.Draw = Draw:New(data.Draw or defaultDraw)

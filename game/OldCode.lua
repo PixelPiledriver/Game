@@ -225,6 +225,15 @@ pal2:Linear
 
 
 
+-- dis iz the main file nigga!!
+-- dont be fuckin round wit my mainz!!!!!
+
+-- i fucked wit yo mainz - adam
+-- (•_•)
+-- ( •_•)>⌐■-■
+-- (⌐■_■)
+-- DEAL WITH IT
+
 
 
 

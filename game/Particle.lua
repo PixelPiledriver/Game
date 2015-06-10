@@ -704,6 +704,12 @@ local particle = Particle:New
 -- Notes
 ----------------------
 
+
+-- BUG
+-- apparently particles are broken
+-- need to fix that shit
+-- wtf
+
 -- curved directions ----------------- done
 -- change direction over life ----------- done
 -- change color based on life ------------done

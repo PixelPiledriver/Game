@@ -9,7 +9,6 @@
 local Box = require("Box")
 local Color = require("Color")
 local Link = require("Link")
-local Mouse = require("Mouse")
 
 -- Table to hold Level objects
 local BoxLevel = {}

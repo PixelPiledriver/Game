@@ -6,7 +6,7 @@
 local Line = require("Line")
 local Collision = require("Collision")
 
-local Mouse = {}
+Mouse = {}
 
 
 ---------------------
@@ -329,8 +329,6 @@ end
 
 
 ObjectUpdater:AddStatic(Mouse)
-
-return Mouse
 
 
 

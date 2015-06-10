@@ -70,7 +70,7 @@ function Animation:New(data)
 	o.Draw = Draw:New
 	{
 		parent = o,
-		depth = DrawList:GetLayer("Objects")
+		depth = "Objects"
 	}
 
 	-------------

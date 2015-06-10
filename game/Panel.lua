@@ -111,7 +111,7 @@ function Panel:New(data)
 	o.Draw = Draw:New
 	{
 		parent = o,
-		depth = DrawList:GetLayer("Hud")
+		depth = "Hud"
 	}
 
 	-------------------------------

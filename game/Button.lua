@@ -8,7 +8,6 @@ local Point = require("Point")
 local Value = require("Value")
 local Shader = require("Shader")
 local Pos = require("Pos")
-local Mouse = require("Mouse")
 local Size = require("Size")
 local MouseHover = require("MouseHover")
 local Draw = require("Draw")
@@ -108,7 +107,7 @@ function Button:New(data)
 	o.Draw = Draw:New
 	{
 		parent = o,
-		depth = DrawList:GetLayer("Hud")
+		depth = "Hud"
 	}
 
 

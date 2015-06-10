@@ -8,7 +8,6 @@
 -- need to make a console too
 
 local Color = require("Color")
-local Mouse = require("Mouse")
 local Input = require("Input")
 
 DebugText = {}
