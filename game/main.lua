@@ -1,6 +1,14 @@
--- Requires --> load and run stuff in other files
+-- main.lua
 
---Utility requires
+-- Purpose
+--------------------------------------
+-- entry point of the program
+-- every thing starts here
+-- contains all Callbacks for looping
+
+----------------------
+-- Utilities
+----------------------
 require("ObjectUpdater")
 require("DrawList")
 require("DebugText")
@@ -14,7 +22,9 @@ require("FailNew")
 require("Bool")
 require("Mouse")
 
--- Only requires that are globally necessary should be listed here
+---------------------------------
+-- Create Important Data Types 
+---------------------------------
 local App = require("App")
 local Map = require("Map")
 local Camera = require("Camera")
@@ -32,104 +42,111 @@ local Draw = require("Draw")
 local DrawTools = require("DrawTools")
 local Panel = require("Panel")
 
--- other require stuff
+----------------------
+-- Run Test Code
+----------------------
 require("TestCode")
 
 
--- List of Levels
---local TestLevel = require("levels/TestLevel")
-
---local SnapGridTestLevel = require("levels/SnapGridTestLevel")
+----------------------------
+-- Vars
+----------------------------
+-- Level -- change how this works-->REFACTOR
 local PixelDrawLevel = require("levels/PixelDrawLevel")
---local LerpLevel = require("levels/LerpLevel")
---local BoxTestLevel = require("levels/BoxTestLevel")
---local SnapGridTestLevel = require("levels/SnapGridTestLevel")
---local TextWriteLevel = require("levels/TextWriteLevel")
---local BoxLevel = require("levels/BoxLevel")
+
+
+----------------
+-- Callbacks
+----------------
+
+	------------
+	-- Run
+	------------
+
+	-- runs once on startup
+	function love.load()
+
+		-- Graphics 
+		Graphics:Setup()
+		love.graphics.setShader(Shader.britShader) -->MOVE
+
+		-- manual camera object -->REFACTOR
+		ObjectUpdater:AddCamera(Camera)
+
+		-- Load your level here
+		PixelDrawLevel:Load()
+
+	end 
+
+
+	-- frame step
+	function love.update(dt)
+		deltaTime = dt
+		FrameCounter:Update(dt)
+
+		ObjectUpdater:Update()
+		ObjectUpdater:RepeatedInput()
+
+		Controller.Update()
+		CollisionManager:Update()
+
+		PixelDrawLevel:Update()
+
+		-- Post Update
+		PostUpdate(dt)
+		
+		-- this should happen somewhere else
+		-- Window.lua, Graphics.lua or something ->MOVE to Graphics.lua
+		love.graphics.clear()
+
+	end 
+
+	-- after all objects have updated
+	-- a special list of objects that depend 
+	-- on calculations made in Update are updated
+	function PostUpdate(dt)
+		ObjectUpdater:PostUpdate()
+		DrawList:PostUpdate()
+	end 
+
+	-----------
+	-- Input 
+	-----------
+
+	function love.keypressed(key)
+		ObjectUpdater:InputUpdate(key, "press")
+	end
+
+	function love.keyreleased(key)
+		ObjectUpdater:InputUpdate(key, "release")
+	end
+
+	-- call back for mouse wheel
+	function love.mousepressed(x, y, button)
+		Mouse:MousePressed(x,y,button)
+	end
+
+	---------------
+	-- Graphics
+	---------------
+
+	function love.draw()
+		DrawList:Draw()
+		DebugText:Draw()
+
+		-- this needs to be made into a static object
+		-- doesnt make sense to have it on it's own here anymore ->MOVE
+		FrameCounter:Draw()
+	end 
 
 
 
---------------------------
--- Functions / Callbacks
---------------------------
-
--- runs once on startup
-function love.load()
-
-	-- yep
-	Graphics:Setup()
-	love.graphics.setShader(Shader.britShader)
-
-	-- manual camera object
-	ObjectUpdater:AddCamera(Camera)
-
-	-- Load your level here
-
-	--TestLevel:Load()
-	PixelDrawLevel:Load()
-	--LerpLevel:Load()
-	--BoxTestLevel:Load()
-	--TextWriteLevel:Load()
-	--BoxLevel:Load()
-
-	--SnapGridTestLevel:Load() 
-
-end 
 
 
--- frame step
-function love.update(dt)
-	deltaTime = dt
-	FrameCounter:Update(dt)
+-- Notes
+---------------------------------------
+-- probly need a PostDraw as well -->NEED
 
-	ObjectUpdater:Update()
-	ObjectUpdater:RepeatedInput()
 
-	Controller.Update()
-	CollisionManager:Update()
-
-	PixelDrawLevel:Update()
-
-	-- Post Update
-	PostUpdate(dt)
-	
-	love.graphics.clear()
-
-end 
-
-function PostUpdate(dt)
-
-	ObjectUpdater:PostUpdate()
-	DrawList:PostUpdate()
-
-end 
-
--- input
-function love.keypressed(key)
-	ObjectUpdater:InputUpdate(key, "press")
-end
-
-function love.keyreleased(key)
-	ObjectUpdater:InputUpdate(key, "release")
-end
-
--- call back for mouse wheel
-function love.mousepressed(x, y, button)
-	Mouse:MousePressed(x,y,button)
-end
-
--- draw call
-function love.draw()
-	-- out for now
-	-- hooking up DrawList
-	--ObjectUpdater:Draw()
-	
-	DrawList:Draw()
-
-	DebugText:Draw()
-
-	-- this needs to be made into a static
-	FrameCounter:Draw()
-end 
 
 

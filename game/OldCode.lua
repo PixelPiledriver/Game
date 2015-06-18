@@ -254,52 +254,69 @@ end
 
 -- Collision Manager
 -------------------------------------------------------------------------
---[==[
-			local obj = objList[a]
 
-			repeat
+local obj = objList[a]
 
-				if(obj.collisionList == nil) then
-					break
-				end 
+repeat
 
-				-- for each in collision list of a
-				for c=1, #obj.collisionList do
-				
+	if(obj.collisionList == nil) then
+		break
+	end 
 
-					for b=1, #objList[obj.collisionList[c]] do
-					
-						local B = objList[obj.collisionList[c]][b]
-						local A = obj
+	-- for each in collision list of a
+	for c=1, #obj.collisionList do
+	
 
-						if(self:RectToRect(A, B)) then
-							A:CollisionWith{other = B}
-							B:CollisionWith{other = A}
+		for b=1, #objList[obj.collisionList[c]] do
+		
+			local B = objList[obj.collisionList[c]][b]
+			local A = obj
 
-							printDebug{A.name .. " +collision+ " .. B.name, "Collision"}
-						end 
+			if(self:RectToRect(A, B)) then
+				A:CollisionWith{other = B}
+				B:CollisionWith{other = A}
 
-					end
-
-				end
-
-			until true
+				printDebug{A.name .. " +collision+ " .. B.name, "Collision"}
+			end 
 
 		end
 
-	end 
-	--]==]
+	end
+
+until true
+
+end
+
+end 
 
 
 
 
+-- Levels
+-----------------------------------------------------------------------------------------------------
+local TestLevel = require("levels/TestLevel")
+local SnapGridTestLevel = require("levels/SnapGridTestLevel")
+local LerpLevel = require("levels/LerpLevel")
+local BoxTestLevel = require("levels/BoxTestLevel")
+local SnapGridTestLevel = require("levels/SnapGridTestLevel")
+local TextWriteLevel = require("levels/TextWriteLevel")
+local BoxLevel = require("levels/BoxLevel")
+
+
+LerpLevel:Load()
+BoxTestLevel:Load()
+TextWriteLevel:Load()
+BoxLevel:Load()
+SnapGridTestLevel:Load() 
 
 
 
-
-
-
-
+--ObjectUpdater
+------------------------------------------------------------------------------------------
+-- this is def no longer needed ->DELETE
+-- out for now
+-- hooking up DrawList
+ObjectUpdater:Draw()
 
 
 
