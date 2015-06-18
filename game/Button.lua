@@ -107,7 +107,7 @@ function Button:New(data)
 	o.Draw = Draw:New
 	{
 		parent = o,
-		depth = "Hud"
+		layer = "Hud"
 	}
 
 

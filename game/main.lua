@@ -92,9 +92,19 @@ function love.update(dt)
 
 	PixelDrawLevel:Update()
 
+	-- Post Update
+	PostUpdate(dt)
+	
 	love.graphics.clear()
+
 end 
 
+function PostUpdate(dt)
+
+	ObjectUpdater:PostUpdate()
+	DrawList:PostUpdate()
+
+end 
 
 -- input
 function love.keypressed(key)

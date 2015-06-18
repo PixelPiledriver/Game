@@ -103,7 +103,7 @@ function Palette:New(data)
 	o.Draw = Draw:New
 	{
 		parent = o,
-		depth = "Hud" -- should change this to process string internally :P
+		layer = "Hud"
 	}
 
 	-------------------------

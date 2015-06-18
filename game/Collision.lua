@@ -60,7 +60,7 @@ function Collision:New(data)
 	o.Draw = Draw:New
 	{
 		parent = o,
-		depth = "Collision"
+		layer = "Collision"
 	}
 
 	-- shape

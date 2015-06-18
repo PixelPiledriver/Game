@@ -140,14 +140,21 @@ function Box:New(data)
 	o.Input = Input:New{}
 
 	-- new draw component -> seems to work fine
+	function o:GetDepth()
+		return self.Pos.y
+	end 
+
 	local defaultDraw =
 	{
 		parent = o,
 		layer = "Objects",
-		depth = "Objects",
+		GetDepth = o.GetDepth,
+		first = data.first or false,
+		last = data.last or false,
 	}
 
 	o.Draw = Draw:New(data.Draw or defaultDraw)
+	
 
 	-------------
 	-- Functions
@@ -159,15 +166,6 @@ function Box:New(data)
 		self:Flip()
 	end 
 
---[[
-	function o:SubmitDraw()
-		DrawList:Submit
-		{
-			o = self,
-			depth = 1
-		}
-	end 
---]]
 
 	function o:DrawCall()
 
@@ -317,7 +315,8 @@ function Box:New(data)
 			{text = "---------------------"},
 			{text = "Pos: {" .. self.Pos.x .. "," .. self.Pos.y .. "}"},
 			{text = "Life: " .. self.Life.life },
-			{text = "Fade: " .. self.Fade.fade} 
+			{text = "Fade: " .. self.Fade.fade},
+			{text = "Depth: " .. self.Draw.depth}
 		}
 
 	end 

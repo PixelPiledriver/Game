@@ -90,7 +90,7 @@ function PixelTexture:New(data)
 	o.oType = "PixelTexture"
 	o.datatype = "Graphics Object"
 
-	--
+	
 	o.filename = data.filename or "image"
 
 	-- create image --> this is blank pixels
@@ -125,7 +125,7 @@ function PixelTexture:New(data)
 	o.Draw = Draw:New
 	{
 		parent = o,
-		depth = "Objects"
+		layer = "Objects"
 	}
 
 

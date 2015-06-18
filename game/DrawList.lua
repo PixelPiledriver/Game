@@ -6,12 +6,15 @@
 DrawList = {}
 
 DrawList.mode = {}
-DrawList.mode.options = {"static", "submit", "sort"}
-DrawList.mode.selected = "submit"
+DrawList.mode.options = {"Static", "Submit", "Sort"}
+DrawList.mode.selected = "Submit"
 
 DrawList.objects = {}
 DrawList.objects.layerIndex = {}
 DrawList.objects.lastLayerIndex = nil
+
+DrawList.drawnThisFrame = 0
+
 
 DrawList.layers = 
 {
@@ -31,65 +34,135 @@ DrawList.layers =
 
 function DrawList:Update()
 	self:UpdateMode()
+	print(self.drawnThisFrame)
+	self.drawnThisFrame = 0
 end 
 
+-- update functions for different modes
+-- currently only Submit is implemented
 function DrawList:UpdateMode()
-	if(self.mode.selected == "submit") then
+	if(self.mode.selected == "Submit") then
 		self:Clear()
 	end 
 end 
 
-
+-- get a layers value by name
 function DrawList:GetLayer(name)
 	return DrawList.layers[name].value
 end 
 
+-- Create a layer in the DrawList
 function DrawList:CreateLayer(layer)
 
+	-- layer doesnt exist? --> create layer
 	if(self.objects[layer] == nil) then
 		self.objects[layer] = {}
+
+		-- unordered list of all submitted objects, waiting to be sorted
+		self.objects[layer].sort = {}
+
+		-- finalized list in order
+		self.objects[layer].draw = {}
+
+		-- draws behind all other objects in this layer
+		self.objects[layer].first = nil
+
+		-- draws on top of all other objects in this layer
+		self.objects[layer].last = nil
+
 	end 
 
 end 
 
-function DrawList:CreateDepth(layer, depth)
-
-	self:CreateLayer(layer)
-
-	if(self.objects[layer][depth] == nil) then
-		self.objects[layer][depth] = {}
-	end 
-
-end 
-
--- add an object to be drawn at given depth
+-- add an object to be drawn at given layer
 function DrawList:Submit(data)
 
-	local layer = data.layer
-	local depth = data.depth
+	-- make layer if it doesn't exist
+	self:CreateLayer(data.layer)
 
-	self:CreateLayer(depth)
-	self.objects[depth][#self.objects[depth] + 1] = data.o
+	-- stack object on top
+	-- there is no sorting yet :|
+	self.objects[data.layer].sort[#self.objects[data.layer].sort + 1] = data
 
-	-- store depths in use
-	self.objects.layerIndex[#self.objects.layerIndex + 1] = depth
+	-- store layers in use
+	self.objects.layerIndex[#self.objects.layerIndex + 1] = data.layer
 
-	--print(self.objects[self.objects.layerIndex[1]][1].oType)
+end 
+
+-- sets the given object to draw first
+-- need to add a feature that lets you bump the first object with a new one
+function DrawList:SubmitFirst(data)
+	self:CreateLayer(data.layer)
+	self.objects[data.layer].first = data
+end 
+ 
+-- sets the given object to draw last
+function DrawList:SubmitLast(data)
+	self:CreateLayer(data.layer)
+	self.objects[data.layer].last = data
+end 
+
+-- after the Update call, all objects have submitted here to be drawn
+-- now its time to sort them and stuff
+function DrawList:PostUpdate()
+
+	self:CompressAndSortLayerList()
+	self:Sort()
+
+end 
+
+-- removes duplicate indexs of layers in use
+function DrawList:CompressAndSortLayerList()
+
+	local layerIndex = TableSort:UniqueVars(self.objects.layerIndex)
+	TableSort:SortByString(layerIndex)
+
+	self.objects.layerIndex = nil
+	self.objects.layerIndex = layerIndex
+end 
+
+-- sorts all objects per layer by their depth value
+-- depth is calculated by each object and passed in
+-- so while sorting can always be done 
+-- it may not be sorted based on the same type of depth
+function DrawList:Sort()
+
+	local function tempCompare(a,b)
+		return a.depth < b.depth
+	end
+
+
+	for i=1, #self.objects.layerIndex do
+
+		local layerIndex = self.objects.layerIndex[i]
+
+		table.sort(self.objects[layerIndex].sort, tempCompare)
+
+		for j=1, #self.objects[layerIndex].sort do
+			self.objects[layerIndex].draw[#self.objects[layerIndex].draw + 1] = self.objects[layerIndex].sort[j] 
+		end 
+
+	end 
+			
 end 
 
 -- removes all objects
 -- used for per frame submit style draw list
 function DrawList:Clear()
 
-	local layerIndex = TableSort:UniqueVars(self.objects.layerIndex)
+	local layerIndex = self.objects.layerIndex
 
 	-- remove each depth
 	for i=1, #layerIndex do
 
 		-- remove each object
 		
-		for j=1, #self.objects[layerIndex[i]] do
-			self.objects[layerIndex[i]][j] = nil
+		for j=1, #self.objects[layerIndex[i]].draw do
+			self.objects[layerIndex[i]].draw[j] = nil
+		end 
+
+		for j=1, #self.objects[layerIndex[i]].sort do
+			self.objects[layerIndex[i]].sort[j] = nil
 		end 
 
 		self.objects[layerIndex[i]] = nil
@@ -101,36 +174,43 @@ function DrawList:Clear()
 	self.objects.layerIndex = {}
 end
 
-function DrawList:SortLayerIndex()
-	TableSort:SortByString(self.objects.layerIndex)
-end 
 
+-- draw all objects in order
 function DrawList:Draw()
 
-	local layerIndex = TableSort:UniqueVars(self.objects.layerIndex)
-	TableSort:SortByString(layerIndex)
+	-- draw all objects in all layers
+	for i=1, #self.objects.layerIndex do
 
-	for i=1, #layerIndex do
-		
 		repeat
 
 			-- is this layer/depth active?
-			if(self.layers[self.layers.index[layerIndex[i]]].active == false) then
-
+			if(self.layers[self.layers.index[self.objects.layerIndex[i]]].active == false) then
 				break
 			end
 
+			local layerIndex = self.objects.layerIndex[i]
+
+			-- first
+			-- draw this object below all others
+			if(self.objects[layerIndex].first) then
+				self.objects[layerIndex].first.o.Draw:Draw()
+				self.drawnThisFrame = self.drawnThisFrame + 1
+			end 		
+
 			-- draw each object in this layer
-			for j=1, #self.objects[layerIndex[i]] do
-				
-				-- currently just calls DrawCall directly
-				-- but should probly go thru Draw component
-				--self.objects[layerIndex[i]][j]:DrawCall() 
-				self.objects[layerIndex[i]][j].Draw:Draw()
-
-				
-
+			for j=1, #self.objects[self.objects.layerIndex[i]].draw do				
+				self.objects[self.objects.layerIndex[i]].draw[j].o.Draw:Draw()
+				self.drawnThisFrame = self.drawnThisFrame + 1
 			end 
+
+			-- last
+			-- draw this object on top of all others
+			if(self.objects[layerIndex].last) then
+				self.objects[layerIndex].last.o.Draw:Draw()
+				self.drawnThisFrame = self.drawnThisFrame + 1
+			end 
+
+
 
 		until true
 	end
@@ -157,16 +237,26 @@ function DrawList:PrintDebugText()
 		{text = "", obj = "DrawList" },
 		{text = "Draw"},
 		{text = "---------------------"},
-		{text = "Depth Index:"},
+		{text = "Layer Index:"},
 		{text = layerIndexString}
 	}
 end
+
+
+
 
 ObjectUpdater:AddStatic(DrawList)
 
 
 -- Notes
 -------------------- 
+-- NEEDED
+-- Layers as objects that have their own transform compoenent
+-- so that layers of objects can be moved, rotated, shader, etc independantly
+-- right now layers are temporary and thats cool
+-- but they could be so much more useful as objects
+-- maybe they should not be layers but one level higher?
+
 -- send objects and and layering value to draw them at during Update
 -- when Draw calls back, sort the order of draws
 -- then draw them all
@@ -231,8 +321,15 @@ ObjectUpdater:AddStatic(DrawList)
 -- DONE
 -- predefined layer values as names
 
--- NEEDED
+-- DONE 
+-- can call DrawList:SubmitFirst or SubmitLast
+-- or create a Draw comoponent with Draw.first or Draw.last set to true
+-- right now its passed thru Box to Draw on a New call, but needs to be modified to work differently for all objects
 -- a LAST slot to draw a selected object on top of all others in its layer
 -- also a FIRST for the opposite end, just cuz I might need it
 -- last is way more important and useful tho
 
+
+
+-- Old Code
+----------------

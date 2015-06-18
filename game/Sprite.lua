@@ -6,6 +6,7 @@ local SpriteSheet = require("SpriteSheet")
 local Color = require("Color")
 local Pos = require("Pos")
 local Size = require("Size")
+local Draw = require("Draw")
 
 local Sprite = {}
 
@@ -101,21 +102,19 @@ function Sprite:New(data)
 
 	o.Pos = Pos:New(data.pos or Pos.defaultPos)
 
+	o.Draw = Draw:New
+	{
+		parent = o,
+		depth = data.depth or "Objects"
+	}
+
 	--------------------
 	-- Functions
 	--------------------
 
 
 	function o:Update()
-		self:SubmitDraw()
-	end 
-
-	function o:SubmitDraw()
-		DrawList:Submit
-		{
-			o = self,
-			depth = 4
-		}
+		
 	end 
 
 

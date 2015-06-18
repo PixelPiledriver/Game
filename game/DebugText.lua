@@ -39,7 +39,6 @@ DebugText.messageType =
 	-- Managers
 	ObjectUpdater = false,
 	CollisionManager = false,
-
 	DrawList = true,
 
 	-- Statics
@@ -53,7 +52,7 @@ DebugText.messageType =
 	Link = false,
 
 	-- Objects
-	Box = false,
+	Box = true,
 	Camera = false,
 	Bullet = false,
 	Block = false,

@@ -8,26 +8,49 @@
 
 local Draw = {}
 
+Draw.name = "Draw"
+Draw.oType = "Static"
+Draw.dataType = "Graphics Constructor"
+
+
 
 function Draw:New(data)
 
 	local o = {}
 
+	o.name = data.name or "..."
+	o.oType = "Draw"
+	o.dataType = "Graphics"
+
 	o.parent = data.parent
 	o.drawCall = data.parent.DrawCall or data.drawFunc
 	o.useExternalDrawCall = data.useExternalDrawCall or false
 
+	-- other
+	o.first = data.first or false
+	o.last = data.last or false
+	o.inGroup = false
+	o.isGroup = false
+
 	local byName = data.byName or true
 
 	if(byName) then
-		o.depth = data.depth and DrawList:GetLayer(data.depth)
 		o.layer = data.layer and DrawList:GetLayer(data.layer)
+	
+		if(o.layer == nil) then
+			o.layer = 3
+		end 
+
 	else
-		o.depth = data.depth or 1
 		o.layer = data.layer or 1
 	end 
 
 	o.active = data.active or true
+
+	-- get depth function
+	-- defined per object
+	-- so that they can control their depth
+	o.depth = 0
 
 
 	---------------
@@ -38,12 +61,67 @@ function Draw:New(data)
 	-- but lets let ObjectUpdater take care of it for now
 	-- seems to work ok I guess :D
 	function o:Update()
-		DrawList:Submit
+
+		self:CalculateCurrentDepth()
+		self:SubmitToDrawList()
+
+	end 
+
+	function o:CalculateCurrentDepth()
+
+		local currentDepth = 0
+
+		if(self.parent.GetDepth) then
+			currentDepth = self.parent.GetDepth(self.parent)
+		end 
+
+		self.depth = currentDepth
+
+	end 
+
+	function o:SubmitToDrawList()
+
+		if(self.inGroup) then
+			return
+		end 
+
+		local drawData =
 		{
 			o = self.parent,
-			depth = self.depth,
-			layer = self.layer
+			layer = self.layer,
+			depth = self.depth
 		}
+
+		if(self.first) then
+			DrawList:SubmitFirst(drawData)
+		elseif(self.last) then
+			DrawList:SubmitLast(drawData)
+		else
+			DrawList:Submit(drawData)
+		end 
+
+	end
+
+	-- for use by other objects that take control of this component --> DrawGroup
+	-- this function is pointless but will leave for now
+	-- used to be used by draw group but is not needed
+	function o:SubmitToDrawListManual()
+
+		local drawData =
+		{
+			o = self.parent,
+			layer = self.layer,
+			depth = self.depth
+		}
+
+		if(self.first) then
+			DrawList:SubmitFirst(drawData)
+		elseif(self.last) then
+			DrawList:SubmitLast(drawData)
+		else
+			DrawList:Submit(drawData)
+		end 
+
 	end 
 
 	-- calls DrawCall function of the parent
@@ -79,10 +157,17 @@ function Draw:New(data)
 end
 
 
+----------------------
+-- Static 
+----------------------
 
-----------------------
--- Static Functions
-----------------------
+Draw.defaultDraw =
+{
+	parent = o,
+	layer = "Objects",
+	layer = "Objects",
+}
+
 
 
 -- calls love.graphics.draw()

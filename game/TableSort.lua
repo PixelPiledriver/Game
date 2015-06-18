@@ -44,6 +44,7 @@ function TableSort:SortByString(t)
 
 end 
 
+
 -- returns a table of only variables that have unique values
 function TableSort:UniqueVars(t)
 	

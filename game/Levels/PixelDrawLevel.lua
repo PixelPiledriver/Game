@@ -14,7 +14,7 @@ local Line = require("Line")
 local DrawTools = require("DrawTools")
 local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
-local pawnGraphics = require("AnimationTest") -- animation test with new spriteStuff
+--local pawnGraphics = require("AnimationTest") -- animation test with new spriteStuff
 local DrawToolsHUD = require("DrawToolsHUD")
 local Panel = require("Panel")
 local SimplePanel = require("SimplePanel")
@@ -23,6 +23,7 @@ local MapTable = require("MapTable")
 local Link = require("Link")
 local InputText = require("InputText")
 local ParticleSystem = require("ParticleSystem")
+local DrawGroup = require("DrawGroup")
 
 -- test shit code and stuff
 
@@ -32,14 +33,69 @@ local mouse = Mouse:New{name = "mouse"}
 
 local billy = Box:New
 {
-	x = 500,
+	x = 275,
 	y = 200,
-	width = 16,
-	height = 16,
+	width = 200,
+	height = 100,
 	color = Color:Get("black")
 }
 
+local billy2 = Box:New
+{
+	x = 300,
+	y = 225,
+	width = 200,
+	height = 100,
+	color = Color:Get("white")
+}
 
+local billy3 = Box:New
+{
+	x = 200,
+	y = 150,
+	width = 222,
+	height = 222,
+	color = Color:Get("red"),
+}
+
+local group = DrawGroup:New{billy2, billy3}
+
+local bob = Box:New
+{
+	width = 32,
+	height = 32,
+	color = Color:Get("orange")
+}
+
+local xLink = Link:New
+{
+	a = {
+				o = bob,
+				comp = "Pos",
+				var = "x",
+			},
+	b = {
+				o = mouse,
+				var = "x"
+			},
+
+	type = "value"
+}
+
+local yLink = Link:New
+{
+		a = {
+				o = bob,
+				comp = "Pos",
+				var = "y",
+			},
+	b = {
+				o = mouse,
+				var = "y"
+			},
+
+	type = "value"
+}
 
 
 --[[

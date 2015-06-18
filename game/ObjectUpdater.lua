@@ -23,6 +23,7 @@ ObjectUpdater.dataType = "Manager"
 ObjectUpdater.statics = {}
 ObjectUpdater.objects = {}
 ObjectUpdater.cameras = {}
+ObjectUpdater.postUpdateObjects = {} -- temporary
 
 -- flags
 ObjectUpdater.destroyObjects = false
@@ -264,9 +265,12 @@ function ObjectUpdater:Update()
 
 			if(self.objects[i].PrintDebugText) then
 					self.objects[i]:PrintDebugText()
-				
 			end 
 
+		end 
+
+		if(self.objects[i].PostUpdate) then
+			self:AddToPostUpdate(self.objects[i])
 		end 
 
 	end 
@@ -277,6 +281,33 @@ function ObjectUpdater:Update()
 	end
 
 end
+
+function ObjectUpdater:AddToPostUpdate(postObject)
+	self.postUpdateObjects[#self.postUpdateObjects + 1] = postObject
+end 
+
+function ObjectUpdater:ClearPostUpdate()
+	for i=1, #self.postUpdateObjects do
+		self.postUpdateObjects[i] = nil
+	end 
+
+	self.postUpdateObjects = nil
+	self.postUpdateObjects = {}
+end 
+
+function ObjectUpdater:PostUpdate()
+
+	for i=1, #self.postUpdateObjects do
+
+		if(self.postUpdateObjects[i].PostUpdate) then 
+			self.postUpdateObjects[i]:PostUpdate()
+		end 
+
+	end
+
+	self:ClearPostUpdate()
+
+end 
 
 function ObjectUpdater:RepeatedInput()
 
