@@ -4,7 +4,7 @@
 
 
 -- Create some basic objects
----------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 local line1 = Line:New
 {
@@ -56,8 +56,8 @@ local point2 = Point:New
 }
 
 
--- some draw shit
----------------------------------------
+-- Various graphics stuff
+----------------------------------------------------------------------------------------------------------------
 pix:Box
 {
 	x = 0,
@@ -133,10 +133,200 @@ pix:Pixel
 
 
 
+-- Palette
+----------------------------------------------------------------------------------------------------------------
+
+local pal = Palette:NewRandom{size = 4}
+
+
+
+
+
+
+-- App
+----------------------------------------------------------------------------------------------------------------
+-- App.lua
+-- do game application stuff
+-- control the window, blah blah blah
+
+local Input = require("Input")
+
+local App = {}
+
+---------------------------
+-- Vars
+------------------------
+-- object
+App.name = "App"
+App.oType = "Static"
+App.dataType = "Manager"
+
+----------------------
+-- Components
+----------------------
+App.Input = Input:New()
+
+
+---------------------
+-- Functions
+---------------------
+
+function App:QuitGameInput(key)
+	-- exit game
+	if(key == "escape") then
+		love.event.quit()
+	end 
+
+end 
+
+function App:Input(key)
+	self:QuitGameInput(key)
+end 
+
+
+ObjectUpdater:AddStatic(App)
+
+return App
+
+
+
+
+
+
+
+-- Camera
+-------------------------------------------------------------
+
+
+-- manually control the camera
+-- test stuff
+function Camera:RepeatedInput()
+
+	-- move
+	if(love.keyboard.isDown(self.keys.left)) then
+		self.pos.x = self.pos.x + self.moveSpeed
+	end 
+
+	if(love.keyboard.isDown(self.keys.right)) then
+		self.pos.x = self.pos.x - self.moveSpeed
+	end 
+
+	if(love.keyboard.isDown(self.keys.up)) then
+		self.pos.y = self.pos.y + self.moveSpeed
+	end 
+	
+	if(love.keyboard.isDown(self.keys.down)) then
+		self.pos.y = self.pos.y - self.moveSpeed
+	end 
+
+	-- zoom
+	if(love.keyboard.isDown(self.keys.zoomIn)) then
+		self.zoom.x = self.zoom.x + self.zoomSpeed
+		self.zoom.y = self.zoom.y + self.zoomSpeed
+	end 
+
+	if(love.keyboard.isDown(self.keys.zoomOut)) then
+		self.zoom.x = self.zoom.x - self.zoomSpeed
+		self.zoom.y = self.zoom.y - self.zoomSpeed
+	end 
+
+	-- rotate
+	if(love.keyboard.isDown(self.keys.rotLeft)) then
+		self.rot = self.rot + self.rotSpeed
+	end 
+
+	if(love.keyboard.isDown(self.keys.rotRight)) then
+		self.rot = self.rot - self.rotSpeed
+	end 
+
+	-- shake
+	if(love.keyboard.isDown(self.keys.shake1)) then
+		self:Shake{xMax = 10, yMax= 10}
+	end
+	-- node 
+
+end
+
+
+
+
+
+
+-- Collision Manager
+-------------------------------------------------------------------------
+--[==[
+			local obj = objList[a]
+
+			repeat
+
+				if(obj.collisionList == nil) then
+					break
+				end 
+
+				-- for each in collision list of a
+				for c=1, #obj.collisionList do
+				
+
+					for b=1, #objList[obj.collisionList[c]] do
+					
+						local B = objList[obj.collisionList[c]][b]
+						local A = obj
+
+						if(self:RectToRect(A, B)) then
+							A:CollisionWith{other = B}
+							B:CollisionWith{other = A}
+
+							printDebug{A.name .. " +collision+ " .. B.name, "Collision"}
+						end 
+
+					end
+
+				end
+
+			until true
+
+		end
+
+	end 
+	--]==]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -- Unsorted
-------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 -- checking pixels before and after they are drawn to	
 local pixel = {r,g,b,a}
@@ -147,13 +337,6 @@ print("Pixel[" .. pixel.r .. "," .. pixel.g .. "," .. pixel.b .. "," .. pixel.a 
 
 
 
--- palette
--------------------------------------------
-local pal = Palette:NewRandom{size = 4}
-
-
-
---[[
 local pal2 = Palette:New
 {
 	Pos = palPos,
@@ -174,8 +357,6 @@ pal2:Linear
 
 -- more pixel drawing stuff
 
-
-	--[[
 	for i = 1, 80, 2 do
 		pix:Cluster
 		{
@@ -192,9 +373,7 @@ pal2:Linear
 
 	pix:XSymmetry()
 	pix:YSymmetry()
---]]
 
---[[
 	pix:LerpStroke
 	{
 		a = {x=20,y=20},
@@ -204,9 +383,9 @@ pal2:Linear
 		xCurve = 0.5,
 		yCurve = -0.5
 	}
---]]
 
---[[
+
+
 	pix:DirectionalStroke
 	{
 		x = Value:Value(64),
@@ -220,20 +399,6 @@ pal2:Linear
 		brush = Value:Random{values = {PixelBrush.x1, PixelBrush.x2, PixelBrush.x4}},
 		fade = Value:Value(0.99)
 	}
-	--]]
-
-
-
-
--- dis iz the main file nigga!!
--- dont be fuckin round wit my mainz!!!!!
-
--- i fucked wit yo mainz - adam
--- (•_•)
--- ( •_•)>⌐■-■
--- (⌐■_■)
--- DEAL WITH IT
-
 
 
 

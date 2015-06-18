@@ -41,7 +41,7 @@ function Link:New(data)
 		if(self.linkType == "value") then
 
 			-- this is poorly written
-			-- re write this shit please :P
+			-- re write this stuff please :P
 			if(self.aComp and self.bComp == nil) then
 				self.a[self.aComp][self.aVar] = self.b[self.bVar]
 			elseif(self.aComp and self.bComp) then 
@@ -96,7 +96,7 @@ return Link
 -- add in ability to set an offset from the linked to variable
 
 
--- this shit works now
+-- this stuff works now
 -- use this to fix problems I was having with building panels and stuff
 
 -- b gets applied to a
@@ -109,7 +109,7 @@ return Link
 
 
 -- old structure
--- re writing all this shit :P
+-- re writing all this stuff :P
 --------------------------------------
 
 --[[

@@ -229,7 +229,7 @@ App.Input = Input:New
 			if(inputType == "press") then
 				print("press")
 				if(self.pressKeys[key]) then
-					print("press this shit")
+					print("press this stuff")
 					self.pressKeys[key].func()
 				end 
 
@@ -238,14 +238,14 @@ App.Input = Input:New
 			if(inputType == "release") then
 				
 				if(self.releaseKeys[key]) then
-					print("release this shit")
+					print("release this stuff")
 					self.releaseKeys[key].func()
 				end 
 			end
 
 			if(inputType == "hold") then
 				if(self.holdKeys[key]) then
-					print("hold this shit")
+					print("hold this stuff")
 					self.holdKeys[key].func()
 				end 
 			end 

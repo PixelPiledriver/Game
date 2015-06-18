@@ -37,7 +37,7 @@ PixelTexture.defaultPath = "graphics/"
 -- Static Functions
 -------------------------------
 
--- wtf is this shit?
+-- wtf is this stuff?
 -- doesnt seem like I need this?
 -- if anything this should be moved over to PixelTexture.lua
 -- and be made a static function
@@ -187,7 +187,7 @@ function PixelTexture:New(data)
 	--------------------------------------
 	function o:LoadFromSpriteSheet(data)
 
-		--> fix this shit its not working correctly :P
+		--> fix this stuff its not working correctly :P
 		--self.image = data.sprite.image:getDsata()
 		self.image = data.spriteSheet.imageData
 		
@@ -747,46 +747,6 @@ function PixelTexture:New(data)
 end 
 
 
------------------------
--- Test Shit
-----------------------
-
---[[
-local p = PixelTexture:New
-{
-	width = 32,
-	height = 32
-}
-
-
-p:SetPixel
-{
-	x = 8,
-	y = 8,
-	color = "random"
-}
-
-
-p:BoxPixels
-{
-	x = 8,
-	y = 8,
-	width = 8,
-	height = 8,
-	color = "random"
-}
-
-p:Encode
-{
-	filename = "image.png", 
-	type = "png"
-}
-
---]]
-
-
--- return static
-
 return PixelTexture
 
 
@@ -837,20 +797,50 @@ return PixelTexture
 
 -- mix colors on set pixel
 ---------------------------------------------
--- lower alpha overwrites pixels instead of blending with them, fix that shit
+-- lower alpha overwrites pixels instead of blending with them, fix that stuff
 
 
--- Pixel Robot
--------------------------------------
--- Random pixel generator
--- characters
--- Educational and useful
--- Composition theory
--- Creates a daily image that you get to rate and tweak
 
 
--- old code
-----------------------------------------------
+
+
+
+
+--------------------
+--[[ Test Code
+--------------------
+
+local p = PixelTexture:New
+{
+	width = 32,
+	height = 32
+}
+
+
+p:SetPixel
+{
+	x = 8,
+	y = 8,
+	color = "random"
+}
+
+
+p:BoxPixels
+{
+	x = 8,
+	y = 8,
+	width = 8,
+	height = 8,
+	color = "random"
+}
+
+p:Encode
+{
+	filename = "image.png", 
+	type = "png"
+}
+
+
 
 -- changed this to just use :refresh()
 -- at the moment doesnt seem to have any draw backs
@@ -864,3 +854,5 @@ return PixelTexture
 		--self.texture = love.graphics.newImage(self.image)
 		--self.texture:setFilter("nearest", "nearest")
 	--end 
+
+--]]

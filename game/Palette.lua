@@ -66,8 +66,8 @@ function Palette:New(data)
 	---------------------
 	-- stores the index of the given property
 	-- make a funciton that calculates just one or all of these
-	-- these should actually be fucking tables.............
-	-- and the just sort by them
+	-- these should actually be tables.....
+	-- and then just sort them by --> ? no idea comment wasnt finished
 	o.colorStatsCalculated = false
 	o.darkest = {}
 	o.lightest = {}

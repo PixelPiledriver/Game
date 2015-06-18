@@ -7,7 +7,7 @@
 -- DrawList sorts the group by .depth witin a .layer just like any other object
 -- But draws all of the objects within the group as if it were its own layer
 
--- Useful for windows and characters with parts and shit like that
+-- Useful for windows and characters with parts and stuff like that
 
 
 local DrawGroup = {}

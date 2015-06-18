@@ -1,5 +1,8 @@
--- Button
--- click on it and it does stuff
+-- Button.lua
+
+-- Purpose
+----------------------------
+-- Clickable object that can run a function or act as a toggle
 
 local Box = require("Box")
 local Collision = require("Collision")
@@ -12,15 +15,21 @@ local Size = require("Size")
 local MouseHover = require("MouseHover")
 local Draw = require("Draw")
 
+
+
 local Button = {}
 
--- Static Vars
------------------
-
+------------------
+-- Static Info
+------------------
 Button.name = "Button"
 Button.oType = "Static"
 Button.dataType = "Hud Constructor" 
 
+
+------------------
+-- Static Vars
+------------------
 Button.totalCreated = 0
 Button.defaultCreated = {Pos = {x = 16, y = 500}, Size = {width = 0, height = 0}}
 Button.lastCreated = Button.defaultCreated
@@ -57,15 +66,21 @@ end
 function Button:New(data)
 
 	local o = {}
-	----------------
-	-- Variables
-	----------------
 
-	-- info
+	------------------
+	-- Object Info
+	------------------
 	o.name = data.name or "..."
 	o.oType = "Button"
 	o.dataType = "HUD"
 
+	------------
+	-- Vars
+	------------
+
+	-- this should not be here
+	-- needs to be a feature of PrintDebugText
+	-- needs to create a sup components for objects just like everything else
 	o.printDebugTextActive = data.printDebugTextActive or false
 
 	-- pos
@@ -73,10 +88,11 @@ function Button:New(data)
 	--local x = 0
 	--local y = 0
 
-	-- need to fix this max columns bullshit
+	-- need to fix max columns
 	-- it doesnt work correctly at all
 	-- was just a quick fix
 	--[[
+
 	if(Button.totalCreated == Button.maxColumns) then
 		Button.lastCreated.Pos.x = Button.defaultCreated.Pos.x
 		Button.lastCreated.Pos.y = Button.defaultCreated.Pos.y + Button.lastCreated.height + Button.ySpace

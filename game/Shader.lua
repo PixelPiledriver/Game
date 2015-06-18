@@ -1,7 +1,7 @@
 -- Shader.lua
 
 -- no idea how to do shaders in love 2d
--- so lets figure this shit out
+-- so lets figure this stuff out
 
 -- play with canvases tomorrow too and get a basic full screen shader going
 -- then work on an canvas swapping pipeline

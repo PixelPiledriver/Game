@@ -1,5 +1,5 @@
 -- Particle
--- basic shit for explosions
+-- basic stuff for explosions
 -- KERPOW
 
 
@@ -678,7 +678,7 @@ return Particle
 
 
 
--- this whole list of shit might become void
+-- this whole list of stuff might become void
 -- if Value.lua works correctly
 -- all possible arguments
 -- for a new particle
@@ -707,7 +707,7 @@ local particle = Particle:New
 
 -- BUG
 -- apparently particles are broken
--- need to fix that shit
+-- need to fix that stuff
 -- wtf
 
 -- curved directions ----------------- done

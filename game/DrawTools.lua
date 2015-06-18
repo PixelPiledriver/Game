@@ -34,7 +34,7 @@ DrawTools.tools =
 }
 
 -- displays the current selected color
--- gonna ignore this shit for a min
+-- gonna ignore this stuff for a min
 DrawTools.selectedColorBox = Box:New
 {
 	x = 200,
@@ -244,7 +244,7 @@ return DrawTools
 
 
 -- * improved quite a bit from the super basic setup*
--- super basic shit right now
+-- super basic stuff right now
 -- not special or great at all
 -- but it works
--- organization is pretty shitty right now
+-- organization is pretty stuffty right now

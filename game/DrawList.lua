@@ -34,8 +34,6 @@ DrawList.layers =
 
 function DrawList:Update()
 	self:UpdateMode()
-	print(self.drawnThisFrame)
-	self.drawnThisFrame = 0
 end 
 
 -- update functions for different modes
@@ -237,9 +235,11 @@ function DrawList:PrintDebugText()
 		{text = "", obj = "DrawList" },
 		{text = "Draw"},
 		{text = "---------------------"},
-		{text = "Layer Index:"},
-		{text = layerIndexString}
+		{text = "Layer Index: " .. layerIndexString},
+		{text = "Drawn this Frame: " .. self.drawnThisFrame}
 	}
+
+	self.drawnThisFrame = 0
 end
 
 
@@ -294,7 +294,7 @@ ObjectUpdater:AddStatic(DrawList)
 
 -- WORKS - but is annoying to add a submit function to each object
 -- not that big of a deal I guess
--- might create a draw component to handle shit like that
+-- might create a draw component to handle stuff like that
 -- but most draw funcitions are fairly different
 -- so maybe I wont make a universal component for that
 

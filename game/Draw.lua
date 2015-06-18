@@ -207,5 +207,5 @@ return Draw
 -- gonna turn this into a proper draw component
 -- draw function is not defined as part of component
 -- pass the draw function of an object to this and it will run it for it
--- the reason we need this is to handle shit like DrawList:Submit and stuff
+-- the reason we need this is to handle stuff like DrawList:Submit and stuff
 -- so it doesnt need to be typed in all over the place

@@ -1,3 +1,7 @@
 -- RNG.lua
+
+-- Purpose
+----------------------------
 -- Random Number Generator
--- fucking RNG brooooooo
+
+

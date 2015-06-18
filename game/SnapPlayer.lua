@@ -238,7 +238,7 @@ function SnapPlayer:New(data)
 
 	function object:Draw()
 		-- what type of graphic does the object have
-		-- this is bullshit and needs to be re worked
+		-- this is bullstuff and needs to be re worked
 		if(self.frame) then
 			self.skin.idle:Draw(self)
 		elseif(self.animation) then

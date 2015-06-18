@@ -118,7 +118,7 @@ return Guns
 -- notes
 ----------------
 
--- oh shit bro :O
+-- oh stuff bro :O
 -- there is only one instance of each gun, both players cant shoot at the same time
 -- need to hand out copies to players
 

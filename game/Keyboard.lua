@@ -141,7 +141,7 @@ function Keyboard:AllKeysTest()
 end
 
 -- is a key pressed? --> only one input
--- this funciton is bullshit
+-- this funciton is bullstuff
 -- it doesnt work this way at all
 function Keyboard:KeyPress(k)
 	return love.keypressed(k)
@@ -245,7 +245,7 @@ local keys = Keyboard:Keys{"lshift", "t"}
 
 
 
--- old code shit
+-- old code stuff
 --[===[
 
 -- symbols

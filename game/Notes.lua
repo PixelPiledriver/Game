@@ -1,7 +1,7 @@
 -- Notes.lua
 
--- track shit that needs to be coded in the future
--- gonna put new shit at the top and push old shit down
+-- track stuff that needs to be coded in the future
+-- gonna put new stuff at the top and push old stuff down
 
 
 
@@ -68,7 +68,13 @@
 
 
 
-
+-- Pixel Robot
+-------------------------------------
+-- Random pixel generator
+-- characters
+-- Educational and useful
+-- Composition theory
+-- Creates a daily image that you get to rate and tweak
 
 
 

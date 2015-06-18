@@ -107,10 +107,8 @@ function Camera:New()
 	end 
 
 
-	
-
 	-- manually control the camera
-	-- test bullshit
+	-- test stuff
 	function o:RepeatedInput()
 		-- move
 		if(love.keyboard.isDown(self.keys.left)) then
@@ -256,7 +254,6 @@ function Camera:New()
 
 	-- i dont think this actually does anything
 	-- or has been tested yet
-	-- fuck off :P
 	function o:SetMoveNode(data)
 		local node = {}
 		node.x = data.x or self.pos.x
@@ -463,7 +460,6 @@ end
 
 -- i dont think this actually does anything
 -- or has been tested yet
--- fuck off :P
 function Camera:SetMoveNode(data)
 	local node = {}
 	node.x = data.x or self.pos.x
@@ -497,70 +493,18 @@ function Camera:PrintDebugText()
 end 
 
 
+-- is this commented out for a reason?
+-- need to look into it
 --ObjectUpdater:AddStatic(Camera)
 
 return Camera
 
+
+
+
+
 -- Notes
 --------------
 -- Camera only operates as a static currently
--- the New function is fucked and is not even used
+-- the New function is broken and is not even used
 -- everything in thats static in this object needs to be moved over to New
-
-
-
--- Old Code
--------------------------------------
---[[
-
--- manually control the camera
--- test bullshit
-function Camera:RepeatedInput()
-
-	-- move
-	if(love.keyboard.isDown(self.keys.left)) then
-		self.pos.x = self.pos.x + self.moveSpeed
-	end 
-
-	if(love.keyboard.isDown(self.keys.right)) then
-		self.pos.x = self.pos.x - self.moveSpeed
-	end 
-
-	if(love.keyboard.isDown(self.keys.up)) then
-		self.pos.y = self.pos.y + self.moveSpeed
-	end 
-	
-	if(love.keyboard.isDown(self.keys.down)) then
-		self.pos.y = self.pos.y - self.moveSpeed
-	end 
-
-	-- zoom
-	if(love.keyboard.isDown(self.keys.zoomIn)) then
-		self.zoom.x = self.zoom.x + self.zoomSpeed
-		self.zoom.y = self.zoom.y + self.zoomSpeed
-	end 
-
-	if(love.keyboard.isDown(self.keys.zoomOut)) then
-		self.zoom.x = self.zoom.x - self.zoomSpeed
-		self.zoom.y = self.zoom.y - self.zoomSpeed
-	end 
-
-	-- rotate
-	if(love.keyboard.isDown(self.keys.rotLeft)) then
-		self.rot = self.rot + self.rotSpeed
-	end 
-
-	if(love.keyboard.isDown(self.keys.rotRight)) then
-		self.rot = self.rot - self.rotSpeed
-	end 
-
-	-- shake
-	if(love.keyboard.isDown(self.keys.shake1)) then
-		self:Shake{xMax = 10, yMax= 10}
-	end
-	-- node 
-
-
-end
-
---]]

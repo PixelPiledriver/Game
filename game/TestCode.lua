@@ -1,10 +1,28 @@
--- TestShit.lua
+-- TestCode.lua
+
+
+-- Purpose
+----------------------------
 -- scratch file for testing simple code stuff
 -- is only run once upon require
--- this is not meant to be a complex place for testing objects
--- just for raw lua code dealing with tables and shit
 
---[[
+-- this is not meant to be a complex place for testing objects
+-- just for small bits of code dealing with tables or math and stuff like that
+
+
+
+
+
+-- Notes
+---------------------------------------
+-- This file is rarely used but let's keep it around for a bit
+-- if it conitinues to be that we it can be depricated
+
+
+--------------------
+--[[ Test Code
+--------------------
+
 local thing = {}
 thing.a = 10
 thing.name = "thing"
@@ -58,7 +76,5 @@ contain:PrintSelf()
 thing:PrintSelf()
 thing["Add"](thing)
 thing["PrintSelf"](thing)
---]]
-
 
 --]]

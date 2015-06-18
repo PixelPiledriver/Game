@@ -1,5 +1,5 @@
 -- shoots out particles
--- omg son that shit is crazy
+-- omg son that stuff is crazy
 
 local Particle = require("Particle")
 local Color = require("Color")
@@ -240,5 +240,5 @@ return ParticleSystem
 
 -- BUG
 -- apparently particles are broken
--- need to fix that shit
+-- need to fix that stuff
 -- wtf

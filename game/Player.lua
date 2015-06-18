@@ -255,7 +255,7 @@ function Player:New(data)
 	function o:DrawCall()
 
 		-- what type of graphic does the o have
-		-- this is bullshit and needs to be re worked
+		-- this is bullstuff and needs to be re worked
 		if(self.frame) then
 			self.skin.idle:Draw(self)
 		elseif(self.animation) then
@@ -523,7 +523,7 @@ return Player
 
 -- Notes
 --------------
--- pull out all the controller bullshit and move to its own component
+-- pull out all the controller bullstuff and move to its own component
 
 
 

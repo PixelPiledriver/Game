@@ -1,5 +1,5 @@
 -- Mouse.lua
--- stuff about the mouse and shit
+-- stuff about the mouse and stuff
 
 
 

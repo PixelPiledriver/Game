@@ -1,4 +1,5 @@
 -- Health.lua
+
 -- health component for objects that need to take damage
 
 
@@ -52,7 +53,7 @@ function Health:New(data)
 	end 
 
 	function o:Death()
-		printDebug{"fucking dead!", "Health"}
+		printDebug{"Dead!", "Health"}
 	end 
 
 	function o:GetHealth()

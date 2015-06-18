@@ -1,17 +1,20 @@
 -- Life.lua
--- basic component for destroying os when they get too old
--- this is for simple os like lines, boxes, etc
+
+
+-- Purpose
+----------------------------
+-- basic component for destroying objects when they get too old
+-- this is for simple objects like lines, boxes, etc
 -- this is not a health component for players/enemies
--- do not confuse it for that --> BITCH! >:D
-
-
 
 
 local Life = {}
 
------------------
--- Static Vars
------------------
+
+
+------------------
+-- Static Info
+------------------
 
 Life.name = "Life"
 Life.oType = "Static"
@@ -23,16 +26,17 @@ function Life:New(data)
 
 	local o = {}
 
-	---------------------
-	-- Create
-	---------------------
-
-	-- object
+	------------------
+	-- Object Info
+	------------------
 	o.name = data.name or "..."
 	o.oType = "Life"
 	o.dataType = "Component"
 
-	-- vars
+	
+	----------------
+	-- Vars
+	----------------
 	o.life = data.life or 100
 	o.maxLife = data.maxLife or o.life
 	o.drain = data.drain or nil
@@ -44,6 +48,11 @@ function Life:New(data)
 	end 
 
 	o.parent = data.parent or nil
+
+
+	------------------
+	-- Functions
+	------------------
 
 	function o:Update()
 		self:Drain()
@@ -104,3 +113,9 @@ ObjectUpdater:AddStatic(Life)
 
 return Life
 
+
+
+
+-- Notes
+---------------------------------------
+-- I think only particles use this component right now

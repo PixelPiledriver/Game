@@ -4,10 +4,9 @@
 
 local Controller = {}
 
-----------------
--- Static Vars
-----------------
-
+------------------
+-- Static Info
+------------------
 Controller.name = "Controller"
 Controller.oType = "Static"
 Controller.dataType = "Input Constructor & Manager"
@@ -357,19 +356,12 @@ function Controller:Update()
 		controllers[i]:ClearButtonsPressed()
 	end 
 
-
-
 end 
 
 
--- Vibration
--------------------------
--- Doesnt work :(s
--- hopefully will work in next update of SDL
--- which is what Love2D is built with
-
--- setup
+-- Run Setup at start
 Controller:Setup()
+
 
 ObjectUpdater:AddStatic(Controller)
 
@@ -377,34 +369,48 @@ return Controller
 
 
 
-
-
 -- Notes
 ---------------------------------------
---[[
--- count the number of connected controllers
-print(love.joystick.getJoystickCount())
+-- Not sure if this component  still works
+-- needs to be checked at some point
+
+-- Controller Vibration doesn't work :(
+-- Hopefully will work in next update of SDL
+-- Which is what Love2D is built on
+
+-- TODO
+-- need to be able to connect new controllers at run time
+-- currently all controllers must be connected at start up
 
 
--- print out the names of connected controllers
-local controllers = love.joystick.getJoysticks()
-
-for i=1, #controllers do
-	print(controllers[i]:getName())
-end 
+--------------------
+--[[ Test Code
+--------------------
 
 
--- get a single controller and
--- see if we can fuck with it
-local player1 = controllers[1]
-print(player1:getName())
-print(player1:getButtonCount())
+	-- count the number of connected controllers
+	print(love.joystick.getJoystickCount())
+
+
+	-- print out the names of connected controllers
+	local controllers = love.joystick.getJoysticks()
+
+	for i=1, #controllers do
+		print(controllers[i]:getName())
+	end 
+
+
+	-- get a single controller and
+	-- see if we can play with it
+	local player1 = controllers[1]
+	print(player1:getName())
+	print(player1:getButtonCount())
+
+
+
+
+	--Controller:SticksTest(controllers[i])
+	--Controller:ButtonTest(controllers[i])
+	--Controller:TriggerTest(controllers[i])
+
 --]]
-
-
-
-
--- Tests
-		--Controller:SticksTest(controllers[i])
-		--Controller:ButtonTest(controllers[i])
-		--Controller:TriggerTest(controllers[i])

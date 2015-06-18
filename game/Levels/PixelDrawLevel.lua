@@ -25,7 +25,7 @@ local InputText = require("InputText")
 local ParticleSystem = require("ParticleSystem")
 local DrawGroup = require("DrawGroup")
 
--- test shit code and stuff
+-- test stuff code and stuff
 
 
 
@@ -389,7 +389,7 @@ return PixelDrawLevel
 
 
 
--- old test shit
+-- old test stuff
 --[[
 
 

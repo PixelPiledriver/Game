@@ -1,5 +1,8 @@
--- Window
--- tracks shit about the window and stuff
+-- Window.lua
+
+-- Purpose
+----------------------------
+-- Handles the window the game is diplayed within
 
 ----------------
 -- Requires
@@ -7,19 +10,24 @@
 local Random = require("Random")
 
 
+
 local Window = {}
 
+
+------------------
+-- Static Info
+------------------
 Window.name = "..."
 Window.oType = "Window"
 Window.dataType = "App Static"
 
 
+
 ----------------
 -- Title
 ----------------
-
 -- fun additional text to add to the window title
--- a random one is chose
+-- a random title is chosen each time you run the game
 Window.titleFlavor = 
 {
 	"[*___*]",
@@ -35,6 +43,8 @@ Window.titleFlavor =
 	"pow pow pachow",
 	"oh yes",
 	"shabba",
+	"yep",
+	"do a barrel roll!",
 }
 
 Window.title = "PixelRobot: " .. Random:ChooseRandomlyFrom(Window.titleFlavor)

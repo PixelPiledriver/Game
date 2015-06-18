@@ -7,6 +7,25 @@
 -- printDebug.["Name"]
 
 
+-- creates a new type of object to be enabled for PrintDebug
+local PrintDebugType = {}
+
+-- create a new object type
+
+function PrintDebugType:New(name)
+
+	--.active = true
+	--.priority1 = true
+	--.priority2 = true
+	--.priority3 = true
+
+	-- add to printList
+
+end 
+
+
+
+-- name of this needs to be change to printList
 local printDebugSettings = {}
 
 -- switches
@@ -18,6 +37,7 @@ printDebugSettings["Collision"] = false
 printDebugSettings["Collision2"] = false
 printDebugSettings["Collision3"] = false
 printDebugSettings["CollisionList"] = false
+printDebugSettings["CollisionManager"] = false
 printDebugSettings["Build"] = false
 printDebugSettings["Controller"] = false
 printDebugSettings["MapTable"] = false
@@ -58,7 +78,13 @@ end
 
 
 
--- notes
--------------------
+-- Notes
+------------------------------------
+
 -- should probly add global switches for love.graphic.print as well
 -- will do that later
+
+
+-- To Do
+-----------------------------------
+-- priority levels for a call to this so one object can turn on/off groups of messages

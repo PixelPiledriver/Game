@@ -317,7 +317,7 @@ ObjectUpdater:AddStatic(DebugText)
 -- DONE! --> put a better way to control it tho :|
 	-- need to be able to scroll thru each line of text of a single printed object
 	-- add an alternate way to control it
-	-- eventually add debug hud for this shit like some buttons and a panel :P
+	-- eventually add debug hud for this stuff like some buttons and a panel :P
 
 -- NEED
 	-- add in feature to print children or parents :P

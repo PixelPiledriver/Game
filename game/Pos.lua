@@ -185,7 +185,7 @@ return Pos
 
 -- TO DO
 -- move functions
--- pretty basic shit
+-- pretty basic stuff
 
 -- DONE --> as the Link type of object
 -- need to be able to link a Pos compoenent to another Pos component

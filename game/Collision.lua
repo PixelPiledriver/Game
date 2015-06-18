@@ -1,33 +1,41 @@
--- Collision
--- does stuff and checks if shit is hitting shit
+-- Collision.lua
 
 
+-- Purpose
+----------------------------
+-- Collision compoenent for individual objects
+-- handles all data needed to pass to CollisionManager
+
+
+------------------
+-- Requires
+------------------
 local CollisionManager = require("CollisionManager")
 local Color = require("Color")
 local Pos = require("Pos")
 local Draw = require("Draw")
-
--- new need to implement
 local Size = require("Size")
+
+
 
 local Collision = {}
 
------------------
--- Static Vars
------------------
 
+-----------------
+-- Static info
+-----------------
 Collision.name = "Collision"
 Collision.oType = "Static"
 Collision.dataType = "Object Constructor"
 
+
 function Collision:New(data)
 
-	-----------------
-	-- Create
-	-----------------
 	local o = {}
 
-	-- object
+	-----------------
+	-- Object info
+	-----------------
 	o.name = data.name or "..."
 	o.oType = "Collision"
 	o.dataType = "Object"

@@ -137,26 +137,22 @@ return Value
 
 
 
-
-
-
 -- Notes
 -------------------------------------
--- WTF is this file for?
--- pass a table into a function
--- it will append functions to the table that
+-- What does this file do?
+-- Pass a table into a function
+
+-- It will append functions to the table that
 -- allow the user to generically get a value from it
 -- these act as mini objects to get data from
--- is nice cuz if they have a range they can continue to spit out
+
+-- It's nice cuz if they have a range they can continue to spit out
 -- random numbers
 
 -- every value type needs a get function
 
--- make sense?
--- no?
--- well fuck off then!!!
-
-
+-- To Do
+-------------------------------------------
 -- need to write a get function that covers whether or not the value is a table or just a normal value
 -- something like:
 -- Value:Get(var) --> return (var and (#var > 0) and var:get) or (var and var) or nill

@@ -1,24 +1,25 @@
 -- Sprites.lua
+
+
+-- Purpose
+----------------------------
 -- load sprites here
--- just messy shit for now
--- no biggie
--- need to clean this garbage up at some point
+
 
 local Animation = require("Animation")
 
 local Sprites = {}
-Sprites.data = {}
-
-
 
 -----------------------------
--- Variables
+-- Vars
 -----------------------------
+
 -- stops all sprites from drawing
-Sprites.drawNone = false
+-- I don't this works with the new Draw process --> FIX
+Sprites.drawNone = false 
 
 ---------------------------------------------
---New shit
+--New Code -- needs to be refactored
 ---------------------------------------------
 
 -- make a single frame
@@ -120,6 +121,7 @@ end
 
 
 -- sprite sheet load
+
 -- sheet
 Sprites.sheet = {}
 Sprites.sheet.object = love.graphics.newImage("graphics/dude.png")
@@ -225,14 +227,6 @@ Sprites.block.blue = MakeFrame
 
 
 
-
-
-
-
-
-
-
-
 return Sprites
 
 
@@ -241,11 +235,15 @@ return Sprites
 
 --Notes
 -------------------------------
---[[
--- need to integrate the shit I made in Corona into this
+
+-- need to integrate the stuff I made in Corona into this
+-- need to clean this file up at some point
 
 
 
+--------------------
+--[[ Test Code
+--------------------
 
 -- Animation example
 Sprites.pawn.animation1 = Animation:New
@@ -270,17 +268,6 @@ Sprites.pawn.animation1 = Animation:New
 	delays = {10, 10, 10, 10},
 	speed = 1,
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 --]]

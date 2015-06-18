@@ -1,5 +1,5 @@
 -- Graphics.lua
--- sets up window and other graphics shit
+-- sets up window and other graphics stuff
 -- this is just a temp file until 
 -- I break the features down into other components
 

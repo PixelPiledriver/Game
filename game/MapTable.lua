@@ -1,15 +1,34 @@
 -- MapTable.lua
--- 2 dimensional table to add and get things from
--- fuckin dope as shiiiiiiiit!!!!
 
+-- 2 dimensional table to add and get things from
+--------------------------------------------------------------------------------
 
 
 local MapTable = {}
+
+------------------
+-- Static Info
+------------------
+MapTable.name = "MapTable"
+MapTable.oType = "Static"
+MapTable.dataType = "Data Storage Constructor"
 
 
 function MapTable:New(data)
 	
 	local o = {}
+
+	------------------
+	-- Object Info
+	------------------
+	o.name = "..."
+	o.oType = "MapTable"
+	o.dataType = "Data Storage"
+
+
+	------------
+	-- Vars
+	------------
 
 	o.width = data.width or 1
 	o.height = data.height or 1
@@ -29,7 +48,6 @@ function MapTable:New(data)
 			end 
 		end 
 				
-		--print(self.map[1][1])
 	end 
 
 	o:BlankMap()
@@ -190,7 +208,7 @@ return MapTable
 
 
 
-
+-- 
 --[[
 		for i=1, #self.map do
 			local mapAsString = ""

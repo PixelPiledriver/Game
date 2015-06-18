@@ -15,15 +15,15 @@ function TextWriteLevel:Load()
 	--local file = love.filesystem.newFile("monkey.txt")
 	--file:open("w")
 
-	--local f = love.filesystem.write("dildo.txt", "this is a file mother fucker 12345")
+	--local f = love.filesystem.write("dildo.txt", "this is a file bro 12345")
 
 	local t = Textfile:New
 	{
 		filename = "PoopStuff.txt",
-		text = "first line bitch"
+		text = "first line dawg"
 	}
 
-	t:AddLine("2nd line motherfucker")
+	t:AddLine("2nd line yo")
 
 	t:Save()
 

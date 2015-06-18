@@ -1,6 +1,8 @@
--- Game
--- shit about the game
+-- Game.lua
 
+-- Purpose
+----------------------------
+-- Manages higher concepts of the game
 
 local Game = {}
 
@@ -14,7 +16,7 @@ Game.oType = "Static"
 Game.dataType = "Manager"
 
 
--- CollisionLists.lua kinda replaces this shit
+-- CollisionLists.lua kinda replaces this stuff
 -- hrmmmmmmmm :L --> Depricate???
 Game.playersInPlay = {"redRobot", "blueRobot"}
 
@@ -36,3 +38,10 @@ end
 ObjectUpdater:AddStatic(Game)
 
 return Game
+
+
+
+
+-- Notes
+---------------------------------------
+-- This file is very incomplete and needs to be refactored

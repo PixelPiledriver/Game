@@ -1,4 +1,4 @@
--- Requires --> load and run shit in other files
+-- Requires --> load and run stuff in other files
 
 --Utility requires
 require("ObjectUpdater")
@@ -32,10 +32,8 @@ local Draw = require("Draw")
 local DrawTools = require("DrawTools")
 local Panel = require("Panel")
 
-
-
 -- other require stuff
-require("TestShit")
+require("TestCode")
 
 
 -- List of Levels

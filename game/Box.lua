@@ -1,6 +1,14 @@
 -- Box.lua
--- box/cube/square graphic o
+ 
+-- Purpose
+----------------------------
+-- Square 2D graphics object
 
+
+
+------------------
+-- Requires
+------------------
 local SinCounter = require("SinCounter")
 local Color = require("Color")
 local Life = require("Life")
@@ -12,8 +20,9 @@ local Draw = require("Draw")
 
 local Box = {}
 
+
 -------------------
--- Static Vars
+-- Static Info
 -------------------
 
 Box.name = "Box"
@@ -24,15 +33,19 @@ Box.dataType = "Graphics Constructor"
 -- create instance
 function Box:New(data)
 
-	----------
-	-- Create
-	----------
 	local o = {}
 
-	-- other
+	------------------
+	-- Object Info
+	------------------
 	o.name = data.name or "..."
 	o.oType = "Box"
 	o.dataType = "Graphics"
+
+
+	----------------
+	-- Vars
+	----------------
 
 	-- position
 	o.Pos = Pos:New
@@ -125,8 +138,9 @@ function Box:New(data)
 	}
 
 
-	-- remove this shit as a component
+	
 	-- controls
+	-- convert all of this stuff into a component
 	o.keys =
 	{
 		left = data.keys and data.keys.left or "a",
@@ -156,9 +170,9 @@ function Box:New(data)
 	o.Draw = Draw:New(data.Draw or defaultDraw)
 	
 
-	-------------
+	------------------
 	-- Functions
-	-------------
+	------------------
 
 	function o:Update()
 		self:Spin() 
@@ -212,7 +226,7 @@ function Box:New(data)
 
 	end 
 
-
+	-- needs to be converted to a component
 	function o:Move()
 
 		if(self.move == false) then
@@ -272,7 +286,6 @@ function Box:New(data)
 
 		--self.xScale = self.xScaleStatic * self.xFlip:Get()
 		
-
 		if(self.xFlip) then
 			self.xScale = self.xFlip:Get()
 		end
@@ -323,6 +336,7 @@ function Box:New(data)
 
 	
 	function o:Destroy()
+
 		if(self.xFlip) then
 			ObjectUpdater:Destroy(self.xFlip)
 		end 
@@ -332,17 +346,6 @@ function Box:New(data)
 		end 
 
 	end 
-
-	--[[
-	o.Input = Input:New
-	{
-		{"a", "press", 
-		func = function()
-			o.Pos:Move{x = 10}
-		end 
-		}
-	}
-	--]]
 
 
 
@@ -355,3 +358,34 @@ end
 ObjectUpdater:AddStatic(Box)
 
 return Box
+
+
+
+
+
+
+-- Notes
+---------------------------------------
+
+
+
+
+
+
+--------------------
+--[[ Test Code
+--------------------
+
+	o.Input = Input:New
+	{
+		{"a", "press", 
+		func = function()
+			o.Pos:Move{x = 10}
+		end 
+		}
+	}
+
+
+
+
+--]]

@@ -32,7 +32,7 @@ CollisionManager.destroyObjects = false
 function CollisionManager:PointToPoint(a, b)
 
 	if(a.Pos.x == b.Pos.x and a.Pos.y == b.Pos.y) then
-		printDebug{"Point to Point: collision", "Collision"}
+		printDebug{"Point to Point: collision", "CollisionManager"}
 		return true
 	end 
 
@@ -120,13 +120,13 @@ function CollisionManager:RectToRect(a, b)
 
 		-- bottom right overlap
 		if(rect2.min.y <= rect1.max.y and rect2.min.y >= rect1.min.y) then
-			printDebug{"Rect to Rect: collision", "Collision"}
+			printDebug{"Rect to Rect: collision", "CollisionManager"}
 			return true
 		end 
 
 		-- top right overlap
 		if(rect2.max.y >= rect1.min.y and rect2.max.y <= rect1.max.y) then
-			printDebug{"Rect to Rect: collision", "Collision"}
+			printDebug{"Rect to Rect: collision", "CollisionManager"}
 			return true
 		end
 
@@ -215,10 +215,10 @@ function CollisionManager:ClearDestroyedObjects()
 		for j=1, #temp do
 
 			if(temp[j].destroy == nil or temp[j].destroy == false) then
-				printDebug("Add", "Collision")
+				printDebug("Add", "CollisionManager")
 				self:Add(temp[j])
 			else
-				printDebug("remove", "Collision")
+				printDebug("remove", "CollisionManager")
 				temp[j] = nil
 			end 
 
@@ -291,7 +291,7 @@ function CollisionManager:CheckForCollisions()
 								A:CollisionWith{other = B}
 								B:CollisionWith{other = A}
 
-								--printDebug{A.name .. " +collision+ " .. B.name, "Collision"}
+								printDebug{A.name .. " +collision+ " .. B.name, "CollisionManager"}
 							end 
 
 						end 
@@ -307,49 +307,17 @@ function CollisionManager:CheckForCollisions()
 		end 
 
 	end 
---[==[
-			local obj = objList[a]
-
-			repeat
-
-				if(obj.collisionList == nil) then
-					break
-				end 
-
-				-- for each in collision list of a
-				for c=1, #obj.collisionList do
-				
-
-					for b=1, #objList[obj.collisionList[c]] do
-					
-						local B = objList[obj.collisionList[c]][b]
-						local A = obj
-
-						if(self:RectToRect(A, B)) then
-							A:CollisionWith{other = B}
-							B:CollisionWith{other = A}
-
-							printDebug{A.name .. " +collision+ " .. B.name, "Collision"}
-						end 
-
-					end
-
-				end
-
-			until true
-
-		end
-
-	end 
-	--]==]
 
 end 
 
 
+-- needs to be a feature of PrintDebugText
 CollisionManager.printDebugTextActive = false
 
 
--- :P
+-- function is bugged right now
+-- needs to be fixed
+-- i think this is an old style of coding the debug text ->FIX
 function CollisionManager:PrintDebugText()
 	
 	if(self.printDebugTextActive == false) then
@@ -382,11 +350,19 @@ end
 
 
 
--- leave out for now
--- cannot put a manager in a manager or some shit
 --ObjectUpdater:AddStatic(CollisionManager)
 
 
-
-
 return CollisionManager
+
+
+
+-- Notes
+---------------------------------------
+-- Collision Manager is not meant to be submitted to ObjectUpdater
+-- leave it out for now
+-- will refactor how that works later
+
+
+
+
