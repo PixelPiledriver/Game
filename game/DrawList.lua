@@ -1,8 +1,12 @@
 -- DrawList.lua
 
+-- Purpose
+----------------------------
 -- manages draw order of objects submitted to it
 
+-------------------------------------------------------------------------
 
+-- global
 DrawList = {}
 
 DrawList.mode = {}
@@ -103,10 +107,8 @@ end
 -- after the Update call, all objects have submitted here to be drawn
 -- now its time to sort them and stuff
 function DrawList:PostUpdate()
-
 	self:CompressAndSortLayerList()
 	self:Sort()
-
 end 
 
 -- removes duplicate indexs of layers in use
@@ -171,7 +173,6 @@ function DrawList:Clear()
 	self.objects.layerIndex = nil
 	self.objects.layerIndex = {}
 end
-
 
 -- draw all objects in order
 function DrawList:Draw()
@@ -250,6 +251,9 @@ ObjectUpdater:AddStatic(DrawList)
 
 -- Notes
 -------------------- 
+-- needs to be part of a higherarchy called DrawManager or something
+-- so that other stuff can factor in like Cameras and Shaders and stuff!
+
 -- NEEDED
 -- Layers as objects that have their own transform compoenent
 -- so that layers of objects can be moved, rotated, shader, etc independantly

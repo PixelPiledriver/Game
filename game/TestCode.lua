@@ -1,13 +1,23 @@
 -- TestCode.lua
 
-
 -- Purpose
 ----------------------------
 -- scratch file for testing simple code stuff
 -- is only run once upon require
 
--- this is not meant to be a complex place for testing objects
+-- this is not meant to be a complex place for testing objects or building components
 -- just for small bits of code dealing with tables or math and stuff like that
+
+
+
+
+
+
+
+
+
+
+
 
 
 

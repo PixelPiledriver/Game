@@ -1,25 +1,35 @@
 -- DebugText.lua
 -----------------------------------------------
+
+-- Purpose
+----------------------------
 -- draw text info to screen
 -- add --> funciton o:PrintDebugText()
 -- to your object type to print to this
--- DebugText is a Global --> use anywhere
 
--- need to make a console too
 
+------------------
+-- Requires
+------------------
 local Color = require("Color")
 local Input = require("Input")
 
+-----------------------------------------------------------------------------
+
+-- global
 DebugText = {}
 
 ----------------------
--- Create
+-- Static Info
 ----------------------
-
--- object
 DebugText.name = "DebugText"
 DebugText.oType = "Static"
 DebugText.dataType = "Manager"
+
+
+----------------------
+-- Static Vars
+----------------------
 
 -- On or Off
 DebugText.active = true
@@ -327,6 +337,8 @@ ObjectUpdater:AddStatic(DebugText)
 
 	-- Input wont work here because texts need to be gathered first....
 	-- hrmmm weid... not sure what to do about that at this point :(
+
+-- need to make a console too
 
 
 

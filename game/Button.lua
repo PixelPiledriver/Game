@@ -1,9 +1,13 @@
 -- Button.lua
+-->CLEAN
 
 -- Purpose
 ----------------------------
 -- Clickable object that can run a function or act as a toggle
 
+------------------
+-- Requires
+------------------
 local Box = require("Box")
 local Collision = require("Collision")
 local Color = require("Color")
@@ -16,6 +20,8 @@ local MouseHover = require("MouseHover")
 local Draw = require("Draw")
 
 
+
+---------------------------------------------------------------------------
 
 local Button = {}
 
@@ -481,10 +487,10 @@ end
 
 
 
--------------------------------------
--- Useful Buttons
--------------------------------------
--- premade buttons go here that can be deployed into any scene
+-----------------------------
+-- Button Library
+-----------------------------
+-- useful buttons go here that can be deployed into any scene
 -- pass these as a table --> Button.New(Button.buttonName)
 
 
@@ -639,9 +645,6 @@ Button.debugTextOnOff =
 	end 
 }
 
----------------------
--- Static Functions
----------------------
 function Button:PrintDebugText()	
 	DebugText:TextTable
 	{
@@ -655,9 +658,6 @@ end
 ObjectUpdater:AddStatic(Button)
 
 
------------------------------
--- Button Library
------------------------------
 
 
 

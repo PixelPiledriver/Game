@@ -1,31 +1,42 @@
 -- App.lua
--- do game application stuff
--- control the window, blah blah blah
 
+
+-- Purpose
+----------------------------
+-- Handles game application tasks
+
+------------------
+-- Requires
+------------------
 local Input = require("Input")
+
+
+---------------------------------------------------------------------------
 
 local App = {}
 
----------------------------
--- Vars
-------------------------
--- object
+
+------------------
+-- Static Info
+------------------
 App.name = "App"
 App.oType = "Static"
 App.dataType = "Manager"
 
----------------------
--- Functions
----------------------
+-----------------------
+-- Static Functions
+-----------------------
 
+-- close the program
 function App:QuitGameInput()
 		love.event.quit()
 end 
 
-
 ----------------------
 -- Input
 ----------------------
+
+-- Exit the game with ESC
 App.Input = Input:New
 {
 	keys = 
@@ -35,8 +46,6 @@ App.Input = Input:New
 }
 
 
-
-
 ObjectUpdater:AddStatic(App)
 
 return App
@@ -44,8 +53,6 @@ return App
 
 
 -- Notes
----------------------------------------
--- gonna test the new input component on this
--- Cool, the new input system works
-
-
+---------------------------------------------------------------------------
+-- very light file at the moment
+-- that's fine, it can be made more robust in the future

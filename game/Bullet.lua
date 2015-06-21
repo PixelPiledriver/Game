@@ -1,12 +1,23 @@
+-- Bullet.lua
+-->OLD
+
+-- Purpose
+----------------------------
 -- simple bullet
 
 
+------------------
+-- Requires
+------------------
 local Collision = require("Collision")
+
+
+---------------------------------------------------------------------------
 
 local Bullet = {}
 
 ----------------
--- Static Vars
+-- Static Info
 ----------------
 Bullet.name = "Bullet"
 Bullet.oType = "Static"
@@ -20,12 +31,18 @@ function Bullet:New(data)
 
 	local object = {}
 
-	-- object
-	object.name = data.name or "???"
+	------------------
+	-- Object Info
+	------------------
+	object.name = data.name or "..."
 	object.oType = "Bullet"
 	object.dataType = "GameObject"
 
-	-- vars
+	
+	----------------
+	-- Vars
+	----------------
+
 	if(data.bulletType) then
 		
 		object.frame = data.frame
@@ -65,7 +82,7 @@ function Bullet:New(data)
 
 
 
-	--------------
+	---------------
 	-- Collision
 	---------------
 
@@ -109,16 +126,8 @@ function Bullet:New(data)
 
 	end 
 
+	-->???
 	function object:OutOfBounds()
-		-- off screen
-
-		-- right
-		--if(self.x > )
-		-- bottom
-		-- left
-		-- top
-		
-
 	end 
 
 	function object:Update()
@@ -132,10 +141,9 @@ function Bullet:New(data)
 	end 
 
 
-	-- add new object to updater
+	
 	ObjectUpdater:Add{object}
 
-	-- done
 	return object
 
 end 
@@ -143,3 +151,9 @@ end
 ObjectUpdater:AddStatic(Bullet)
 
 return Bullet
+
+
+
+-- Notes
+---------------------------------------
+-- old game code that needs to be looked over

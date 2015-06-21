@@ -1,23 +1,34 @@
 -- ObjectUpdater.lua
+-->CLEAN
+
+-- Purpose
+----------------------------
 -- holds all objects in a table and updates them
 -- objects, statics, special types
+
 
 --------------
 -- Requires
 --------------
 local CollisionManager = require("CollisionManager")
 
+------------------------------------------------------------------------------
 
+-- global
 ObjectUpdater = {}
 
----------------
--- Create
----------------
+-----------------
+-- Static Info
+-----------------
 
--- object
 ObjectUpdater.name = "ObjectUpdater"
 ObjectUpdater.otype = "Static"
 ObjectUpdater.dataType = "Manager"
+
+
+-----------------
+-- Static Vars
+-----------------
 
 -- tables
 ObjectUpdater.statics = {}
@@ -33,17 +44,19 @@ ObjectUpdater.printAllObjectsInDebugText = false
 ObjectUpdater.printAllStaticsInDebugText = true
 ObjectUpdater.printTotalObjectTypes = false
 
--------------
---Functions
--------------
+----------------------
+-- Static Functions
+----------------------
 
+-- add a new static to the static list
 function ObjectUpdater:AddStatic(staticObject)
 	self.statics[#self.statics + 1] = staticObject
 
 end 
 
--- add a new object to the list
--- {a,b,c,...} --> table of objects
+-- add a new object to the object list
+-- use table even if theres only 1 object
+-- data = {objectA, objectB, objectC, ...}
 function ObjectUpdater:Add(objects)
 
 	for i=1, #objects do
@@ -54,8 +67,7 @@ end
 
 
 
--- destroy a single object
--- also adds collision of object to destroy list if it has one
+-- flag an object to be destroyed on the next ClearDestroyedObjects call
 function ObjectUpdater:Destroy(obj)
 	
 	if(obj.Destroy) then
@@ -65,6 +77,8 @@ function ObjectUpdater:Destroy(obj)
 	obj.destroy = true
 	self.destroyObjects = true
 
+	-- flag the collision of this object
+	-- this needs to be done for other components as well -->FIX
 	if(obj.collision) then
 		obj.collision.destroy = true
 		CollisionManager.destroyObjects = true
@@ -309,6 +323,7 @@ function ObjectUpdater:PostUpdate()
 
 end 
 
+-- is this function even needed anymore?
 function ObjectUpdater:RepeatedInput()
 
 	-- cameras
@@ -352,19 +367,30 @@ function ObjectUpdater:RepeatedInput()
 
 end 
 
+-- this is all good and fine
+-- but after the update loop objects with input components should be added
+-- to an input list, and then only those objects are part of this input update
+-- much like draw list -->FIX
 function ObjectUpdater:InputUpdate(key, inputType)
 
-	-- statics
+	for i=1, #self.cameras do
+
+		if(self.cameras[i].Input) then
+			self.cameras[i].Input:InputUpdate(key, inputType)
+		end 
+
+	end 
+
+	-- Statics
 	for i=1 , #self.statics do
 
-		-- update
 		if(self.statics[i].Input) then
 			self.statics[i].Input:InputUpdate(key, inputType)
 		end
 
 	end
 
-	-- objects
+	-- Objects
 	for i=1, #self.objects do
 
 		if(self.objects[i].Input) then

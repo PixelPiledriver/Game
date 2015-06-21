@@ -1,10 +1,12 @@
 -- Bool.lua
 
--- Global 
+
+-- Purpose
+----------------------------
 -- functions for bools
--- does cool stuff that I dont feel like programming over and over --> :D
 
 
+---------------------------------------------------------------------------
 
 Bool = {}
 
@@ -15,6 +17,7 @@ Bool = {}
 
 -- converts a bool into a string
 -- main use is for printing bools to screen
+-- b = bool
 function Bool:ToString(b)
 
 	if(b) then
@@ -27,6 +30,7 @@ end
 
 -- toggle given bool based on current state
 -- assign the return value of give bool to bool --> weird I know but thats how it works :P
+-- b = bool
 function Bool:Toggle(b)
 	if(b) then
 		return false
@@ -37,3 +41,6 @@ function Bool:Toggle(b)
 end 
 
 
+-- Notes
+---------------------------------------
+-- Global

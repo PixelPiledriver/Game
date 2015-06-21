@@ -1,12 +1,32 @@
 -- AnimationTest.lua
 
+
+-- Purpose
+----------------------------
+-- file for building test animations
+
+
+------------------
+-- Requires
+------------------
 local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
 local Animation = require("Animation")
 
 
+---------------------------------------------------------------------------
+
+
+
+---------------
+-- Test Code
+---------------
+
+-- Pawn character
+
 local pawnGraphics = {}
 
+-- create SpriteSheet
 pawnGraphics.pawnSheet = SpriteSheet:New
 {
 	image = "pawnSheet.png",
@@ -14,9 +34,8 @@ pawnGraphics.pawnSheet = SpriteSheet:New
 	spriteHeight = 64
 }
 
-
+-- create Sprites --> from SpriteSheet
 pawnGraphics.sprites = {}
-
 
 pawnGraphics.sprites.idle = Sprite:New
 {
@@ -24,7 +43,6 @@ pawnGraphics.sprites.idle = Sprite:New
 	xIndex = 1,
 	yIndex = 1
 }
-
 
 pawnGraphics.sprites.walk = Sprite:New
 {
@@ -40,6 +58,8 @@ pawnGraphics.sprites.attack = Sprite:New
 	yIndex = 2,
 }
 
+
+-- create Animations --> from Sprites
 pawnGraphics.animations = {}
 
 pawnGraphics.animations.walk = Animation:New
@@ -64,6 +84,8 @@ pawnGraphics.animations.walk = Animation:New
 	}
 }
 
+
+-- place animated sprite in world
 pawnGraphics.animations.walk.Pos.x = 100
 pawnGraphics.animations.walk.Pos.y = 150
 
@@ -73,3 +95,10 @@ return pawnGraphics
 
 
 
+-- Notes
+---------------------------------------------------------------------------
+-- this file just builds an animated character sprite from test graphics
+-- the animation is forced into the game world, along with all the sprites -->REFACTOR
+-- Animation and Sprite need to be fixed so that they don't do that
+-- this shouldn't happen and should be in reserve for later use, uncreated
+-- but this is just a test file, will be removed from the project at some point

@@ -1,5 +1,11 @@
 -- OldCode.lua
+
+
+-- Purpose
+----------------------------
 -- place to drop off commented out code that might be useful at a later time
+-- WARNING: eventually all of this code will be deleted
+-- so be careful what you put in this file
 
 
 
@@ -320,6 +326,22 @@ ObjectUpdater:Draw()
 
 
 
+
+-- Animation
+--------------------------------------------------------------------------------------------------
+-- original draw call before Draw component was implemented
+function o:Draw(oData)
+
+	if(self.colors) then
+		love.graphics.setColor(self.colors[self.currentFrame])
+	else
+		love.graphics.setColor({255,255,255,255})
+	end 
+
+	love.graphics.draw(self.sheet, self.frames[self.currentFrame].frame, oData.x, oData.y, oData.angle, oData.xScale, oData.yScale)
+
+	self:UpdateFrameTime()	
+end 
 
 
 

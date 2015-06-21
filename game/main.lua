@@ -7,10 +7,11 @@
 -- contains all Callbacks for looping
 
 ----------------------
--- Utilities
+-- Utilities and Globals
 ----------------------
 require("ObjectUpdater")
 require("DrawList")
+require("DrawManager")
 require("DebugText")
 require("DeltaTime")
 require("Keyboard")
@@ -131,21 +132,15 @@ local PixelDrawLevel = require("levels/PixelDrawLevel")
 	---------------
 
 	function love.draw()
-		DrawList:Draw()
-		DebugText:Draw()
-
-		-- this needs to be made into a static object
-		-- doesnt make sense to have it on it's own here anymore ->MOVE
-		FrameCounter:Draw()
-	end 
-
+		DrawManager:Draw()
+		DrawManager:PostDraw()
+	end
 
 
 
 
 -- Notes
 ---------------------------------------
--- probly need a PostDraw as well -->NEED
 
 
 

@@ -15,7 +15,7 @@ local Sprites = {}
 -----------------------------
 
 -- stops all sprites from drawing
--- I don't this works with the new Draw process --> FIX
+-- I don't this works with the new Draw process -->FIX
 Sprites.drawNone = false 
 
 ---------------------------------------------

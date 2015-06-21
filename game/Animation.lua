@@ -1,51 +1,73 @@
 -- Animaiton.lua
+-->OLD
+-->REVISE
+
+
+-- Purpose
+----------------------------
 -- makes animations from sprite frames
--- should handle itself for drawing
 
 
+------------------
+-- Requires
+------------------
 local Color = require("Color")
 local Pos = require("Pos")
 local Draw = require("Draw")
 
+---------------------------------------------------------------------------
 
 local Animation = {}
 
------------------
--- Static Vars
------------------
 
--- obj
+-----------------
+-- Static Info
+-----------------
 Animation.name = "Animation"
 Animation.oType = "Static"
 Animation.dataType = "Data Constructor"
 
 
+---------------------
+-- Static Functions
+---------------------
 
+
+-- Create an animation
+-- data = 
+-- {
+-- 	 frames = { index table of frames to display},
+--	 delays = { index table of numbers to control speed per frame},
+--	 colors = { index table of colors per frame for shading},
+--	 *loopMax = number of times you want the animation to play, 0 = infinite
+-- }
 function Animation:New(data)
-	
-	
-	-- bug checking stuff --> should really add this stuff to more files :P
-	-- but should organize it in some way
-	-----------
-	-- Fails
-	-----------
+
+	----------------
+	-- Fail Cases
+	----------------
+
 	-- number of delays does not match number of frames
 	if(#data.frames ~= #data.delays) then
+		printDebug{"Animation:New FAILED!", "animation"}
 		printDebug{"Delays and Frames count not the same!", "animation"}
 		return 
 	end
 
-	--------------
-	-- Create
-	--------------
+
 	local o = {}
 
-	-- object
+	-----------------
+	-- Object Info
+	-----------------
 	o.name = data.name or "..."
 	o.oType = "Animation"
 	o.dataType = "Graphics"
 
-	-- color per frame
+
+	----------------
+	-- Vars
+	----------------	
 	o.colors = data.colors or "poop"
 
 	o.spriteSheet = data.spriteSheet or nil
@@ -62,6 +84,7 @@ function Animation:New(data)
 
 	o.active = true
 
+
 	---------------
 	-- Components
 	---------------
@@ -73,16 +96,16 @@ function Animation:New(data)
 		layer = "Objects"
 	}
 
-	-------------
-	-- Functions
-	-------------
 
+	--------------
+	-- Functions
+	--------------
 	function o:Update()
 		self:UpdateFrameTime()
 	end 
 
-	-- update the frame based on the animation speed and frame delay
-	function o:UpdateFrameTime()
+	-- handle animation speed and frame delay
+	function o:FrameTimeUpdate()
 
 		-- animation should be playing?
 		if(self.active == false) then
@@ -122,6 +145,7 @@ function Animation:New(data)
 	end 
 
  
+ 	-- render object to screen
 	function o:DrawCall()
 
 		-- color
@@ -154,20 +178,6 @@ function Animation:New(data)
 
 	end 
 
---[[
-	function o:Draw(oData)
-
-		if(self.colors) then
-			love.graphics.setColor(self.colors[self.currentFrame])
-		else
-			love.graphics.setColor({255,255,255,255})
-		end 
-
-		love.graphics.draw(self.sheet, self.frames[self.currentFrame].frame, oData.x, oData.y, oData.angle, oData.xScale, oData.yScale)
-
-		self:UpdateFrameTime()	
-	end 
---]]
 
 	ObjectUpdater:Add{o}
 	return o
@@ -181,4 +191,6 @@ return Animation
 
 
 
-	
+-- Notes
+---------------------------------------
+-- old code but still works

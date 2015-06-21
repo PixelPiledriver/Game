@@ -1,10 +1,11 @@
 -- Box.lua
+-->CLEAN
+-->REFACTOR
+
  
 -- Purpose
 ----------------------------
 -- Square 2D graphics object
-
-
 
 ------------------
 -- Requires
@@ -18,6 +19,9 @@ local Pos = require("Pos")
 local Input = require("Input")
 local Draw = require("Draw")
 
+
+---------------------------------------------------------------------------
+
 local Box = {}
 
 
@@ -30,7 +34,10 @@ Box.oType = "Static"
 Box.dataType = "Graphics Constructor"
 
 
--- create instance
+-- create Box -->REFACTOR
+-- data = 
+--{x, y, width, height, color, fill, draw, angle, pivot, 
+-- spin, xScale, yScale xScaleSpeed, yScaleSpeed, parent, useParentPos, etc....}
 function Box:New(data)
 
 	local o = {}
@@ -41,7 +48,6 @@ function Box:New(data)
 	o.name = data.name or "..."
 	o.oType = "Box"
 	o.dataType = "Graphics"
-
 
 	----------------
 	-- Vars
@@ -138,9 +144,9 @@ function Box:New(data)
 	}
 
 
-	
 	-- controls
 	-- convert all of this stuff into a component
+	-->MOVE
 	o.keys =
 	{
 		left = data.keys and data.keys.left or "a",
@@ -153,7 +159,7 @@ function Box:New(data)
 
 	o.Input = Input:New{}
 
-	-- new draw component -> seems to work fine
+	-- new draw component
 	function o:GetDepth()
 		return self.Pos.y
 	end 
@@ -180,7 +186,7 @@ function Box:New(data)
 		self:Flip()
 	end 
 
-
+	-- render to screen
 	function o:DrawCall()
 
 		if(self.draw == false) then
@@ -226,7 +232,7 @@ function Box:New(data)
 
 	end 
 
-	-- needs to be converted to a component
+	-->MOVE
 	function o:Move()
 
 		if(self.move == false) then
@@ -249,12 +255,11 @@ function Box:New(data)
 			self.Pos.y = self.Pos.y + self.speed
 		end
 
-		
-
 	end
 
 
 	-- spin controls
+	-->MOVE
 	function o:Rotate()
 
 		if(love.keyboard.isDown(self.keys.rotLeft)) then
@@ -269,12 +274,9 @@ function Box:New(data)
 
 	-- only used for down
 	function o:RepeatedInput()
-
 		self:Rotate()
 		self:Move()
-
 	end 
-
 
 	-- rotation velocity
 	function o:Spin()
@@ -293,23 +295,10 @@ function Box:New(data)
 		if(self.yFlip) then
 			self.yScale = self.yFlip:Get()
 		end
-		--print(self.xScale)
-
-
-		--[[
-		self.xScale = Math:Lerp
-		{
-			a = -self.xScaleStatic,
-			b = self.xScaleStatic,
-			t = self.xFlip:Get()
-		}
-
-		print(self.xScale)
-		--]]
-
-		--self.yScale = self.yFlip:Get()
+	
 	end
 
+	-->???
 	function o:Scale()
 		self.xScale = self.xScale + (self.xScaleSpeed * 0.01)
 		self.yScale = self.yScale + (self.yScaleSpeed * 0.01)
@@ -317,6 +306,7 @@ function Box:New(data)
 		self.yScaleStatic = self.yScale
 	end 
 
+	-- info
 	function o:PrintDebugText()
 
 		local life = self.Life and self.Life.life or 0
@@ -334,7 +324,7 @@ function Box:New(data)
 
 	end 
 
-	
+	-- remove this box
 	function o:Destroy()
 
 		if(self.xFlip) then
@@ -355,6 +345,8 @@ function Box:New(data)
 
 end 
 
+
+
 ObjectUpdater:AddStatic(Box)
 
 return Box
@@ -366,7 +358,13 @@ return Box
 
 -- Notes
 ---------------------------------------
+-- this file contains a lot of features that need to be broken down into
+-- independant components
+-- such as the transform code, only this object has that
+-->REFACTOR
 
+-- Box:New needs to be cleaned up a lot
+-- for the same reasons stated above
 
 
 
@@ -385,6 +383,20 @@ return Box
 		}
 	}
 
+
+
+	--[[
+
+	self.xScale = Math:Lerp
+	{
+		a = -self.xScaleStatic,
+		b = self.xScaleStatic,
+		t = self.xFlip:Get()
+	}
+
+	self.yScale = self.yFlip:Get()
+
+	--]]
 
 
 
