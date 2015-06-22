@@ -33,6 +33,9 @@ Static.dataType = "Input Constructor & Manager" -- the function of this static
 -- Static Vars
 ----------------
 
+---------------------
+-- Static Functions
+---------------------
 
 ----------------
 -- Fail Cases
@@ -51,11 +54,6 @@ o.dataType = "Graphics" -- the function of this object
 ----------------
 -- Vars
 ----------------
-
----------------------
--- Static Functions
----------------------
-
 
 ------------------
 -- Functions

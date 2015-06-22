@@ -1,5 +1,7 @@
 -- Collision.lua
-
+-->CLEAN
+-->REVISE
+-->COMMENT
 
 -- Purpose
 ----------------------------
@@ -16,7 +18,7 @@ local Pos = require("Pos")
 local Draw = require("Draw")
 local Size = require("Size")
 
-
+--------------------------------------------------------------------------
 
 local Collision = {}
 
@@ -28,6 +30,10 @@ Collision.name = "Collision"
 Collision.oType = "Static"
 Collision.dataType = "Object Constructor"
 
+
+---------------------
+-- Static Functions
+---------------------
 
 function Collision:New(data)
 
@@ -261,6 +267,13 @@ return Collision
 
 
 
+
+--------------------
+--[==[ Test Code
+--------------------
+
+
+
 -- what does this do?
 -- doesnt seem like its needed anymore
 --[[
@@ -317,3 +330,5 @@ function o:FollowParent()
 
 end 
 --]]
+
+--]==]

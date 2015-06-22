@@ -40,6 +40,7 @@ local Window = require("Window")
 local Graphics = require("Graphics")
 local Shader = require("Shader")
 local Draw = require("Draw")
+local Canvas = require("Canvas")
 local DrawTools = require("DrawTools")
 local Panel = require("Panel")
 

@@ -1,14 +1,19 @@
+--  CollisionManager.lua
+-->CLEAN
+-->REVISE
+-->COMMENT
+
+-- Purpose
+----------------------------
 -- checks all the collision objects for collisions
 
--- Requires
------------------
-
+---------------------------------------------------------------------
 
 local CollisionManager = {}
 
 
 ----------------------
--- Variables
+-- Static Vars
 ----------------------
 
 -- object
@@ -136,9 +141,9 @@ function CollisionManager:RectToRect(a, b)
 
 end 
 
----------------
--- Functions
----------------
+----------------------
+-- STatic Functions
+----------------------
 
 -- add a new object name to ordered table of names --> straight array
 function CollisionManager:AddName(name)
@@ -311,7 +316,7 @@ function CollisionManager:CheckForCollisions()
 end 
 
 
--- needs to be a feature of PrintDebugText
+-- needs to be a feature of PrintDebugText -->FIX
 CollisionManager.printDebugTextActive = false
 
 
@@ -361,7 +366,7 @@ return CollisionManager
 ---------------------------------------
 -- Collision Manager is not meant to be submitted to ObjectUpdater
 -- leave it out for now
--- will refactor how that works later
+-- will refactor how that works later -->FIX
 
 
 

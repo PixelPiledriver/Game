@@ -1,12 +1,19 @@
--- use to get colors by name
--- and other stuff
+-- Color.lua
+
+
+-- Purpose
+----------------------------
+-- colors by name and other color operations
 
 local Random = require("Random")
+
+
+--------------------------------------------------------------------------
 
 local Color = {}
 
 ----------------------
--- Static Vars
+-- Static Info
 ----------------------
 
 Color.name = "Color"
@@ -1357,6 +1364,10 @@ Color.group.fire2 =
 }
 
 
+---------------------
+-- Static Functions
+---------------------
+
 -- return copy of given named color
 function Color:Get(name)
 
@@ -1379,9 +1390,6 @@ end
 --create a new color object
 function Color:New(data)
 
-	-----------------
-	-- Create
-	-----------------
 	local o = {}
 
 
@@ -1396,6 +1404,10 @@ function Color:New(data)
 	o.b = data.b or 256
 	o.a = data.a or 256
 
+
+	------------------
+	-- Functions
+	------------------
 
 	function o:PrintSelf()
 		print( ((self.name .. ": ") or "Color: ") .. "[" .. self.r .. ", " .. self.g .. ", " .. self.b .. ", " .. self.a .. "]")
@@ -1414,7 +1426,7 @@ end
 
 
 -----------------------------
--- Static Functions
+-- More Static Functions
 -- many of these need to be converted to object functions
 -----------------------------
 
@@ -1563,6 +1575,7 @@ function Color:Clamp(data)
 
 end 
 
+-- Linear Interpolation from color A to color B
 --{a, b, t}
 function Color:Lerp(data)
 
@@ -1585,17 +1598,26 @@ function Color:Lerp(data)
 end 
 
 
-
--- add static to table of other statics
 ObjectUpdater:AddStatic(Color)
 
 
 
--- Test
-------------------
+return Color
+
+
+
+-- Notes
+-----------------------------------------------------------------------
+-- this file could be improved in functionality and eas of use 
+-- but its fine for now
+
+
+--------------------
+--[[ Test Code
+--------------------
+
 -- local red = Color:Get("red")
 -- red:PrintSelf()
 
+--]]
 
--- done
-return Color

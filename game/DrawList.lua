@@ -26,7 +26,7 @@ DrawList.layers =
 	Backdrop = {value = 2, active = false},
 	Objects = {value = 3, active = true},
 	Collision = {value = 4, active = false},
-	Hud = {value = 5, active = false},
+	Hud = {value = 5, active = true},
 	DebugText = {value = 6, active = false},
 
 	index = 
