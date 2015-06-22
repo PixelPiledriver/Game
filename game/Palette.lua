@@ -199,7 +199,7 @@ function Palette:New(data)
 		-- convert all colors to luminance values in table
 		local lums = {}
 		for i=1, #self.colors do
-			lums[#lums + 1] = Color:Luminance(self.colors[i])
+			lums[#lums + 1] = Color:GetLuminance(self.colors[i])
 		end 
 
 		-- find the lightest of all colors

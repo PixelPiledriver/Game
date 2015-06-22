@@ -354,11 +354,208 @@ end
 
 
 
+-- Link
+------------------------------------------------------------------------------
+
+-- old structure
+-- re writing all this stuff :P
+--------------------------------------
+
+
+
+-- Link.lua
+
+-- object that links two objects values together
+
+
+
+
+local Link = {}
+
+
+function Link:New(data) 
+
+	local o = {}
+
+	-- objects
+	o.a = data.a
+	o.b = data.b
+
+
+	-- component
+	o.aComp = data.
+
+	-- variable 
+	o.aVar = data.aVar
+	o.bVar = data.bVar
+
+	o.linkType = data.linkType
+
+	function o:Update()
+
+		-- this does nothing because the value is passed as a value
+		if(self.linkType == "value") then
+			self.a[self.av] = self.b[self.bv]
+		end 
+
+		if(self.linkType == "func") then
+			self.a[self.av] = self.b[self.bv](self.b)
+		end 
+
+	end 
+
+
+	function o:PrintDebugText()
+		--print(self.a)
+		DebugText:TextTable
+		{
+			{text = "", obj = "Link"},
+			{text = "Link"},
+			{text = "-------------------------"},
+			--{text = "A:" .. self.a},
+			--{text = "B:" .. self.b},
+		}
+	end 
+
+
+
+	ObjectUpdater:Add{o}
+
+	return o
+
+end
+
+
+
+ObjectUpdater:AddStatic(Link)
+
+return Link
+
+
+-- notes
+-------------------------------------
+-- b gets applied to a
+-- a should always be a 
+
+-- try passing objects and then what you want from them seperatelys
 
 
 
 
 
+-- DebugText
+----------------------------------------------------------------------
+
+function DebugText:ScrollMessagesControl()
+
+	-- scroll object message index
+	if(Mouse.wheelUp) then
+		self.messageIndex = self.messageIndex - 1
+	end 
+
+	if(Mouse.wheelDown) then
+		self.messageIndex = self.messageIndex + 1
+	end
+
+	-- set index within bounds of given min and max
+	self.messageIndex = Math:Bind
+											{
+												value = self.messageIndex,
+												min = 1,
+												max = #self.texts
+											}
+
+  -- scroll each line of the first object message
+  if(Keyboard:Key("2")) then
+  	self.lineIndex = self.lineIndex + 1
+  end 
+
+  if(Keyboard:Key("1")) then
+  	self.lineIndex = self.lineIndex - 1
+  end
+
+  if(#self.texts > 0) then
+	  self.lineIndex = Math:Bind
+	  								 {
+	  								   value = self.lineIndex,
+	  								   min = 1,
+	  								   max = #self.texts[self.messageIndex]
+	  								 }
+	end 
+
+end 
+
+
+--DebugText
+------------------------------------------------------------------
+
+-- generic object print
+-- this function isnt really needed anymore
+-- DEPRICATED 11-17-2014!!
+function DebugText:PrintObject(data)
+	self:Text("")
+	self:Text("Name: " .. data.name)
+	self:Text("X: " .. data.x)
+	self:Text("Y: " .. data.y)
+end
+
+
+-- DragWithMouse
+---------------------------------------------------------------------------
+	-- right click to drag a button
+	function o:ClickToMove()
+
+		if(self.hover == true and Button.buttonBeingDragged == false) then
+			if(love.mouse.isDown("r")) then
+				self.move = true
+				Button.buttonBeingDragged = true
+			end 
+		end 
+
+		if(self.move == true) then
+			self.move = true
+			self.lastX = love.mouse.getX() - self.Pos.x
+			self.lastY = love.mouse.getY() - self.Pos.y
+		end 
+
+
+		-- drop
+		if(self.move == true and love.mouse.isDown("r") == false) then
+			self.move = false
+			Button.buttonBeingDragged = false
+		end 
+
+	end 
+
+
+
+-- Mouse Drag Example
+------------------------------------------------------------------------
+
+	-- right click to drag a button
+	function o:ClickToMove()
+
+		if(self.hover == true and Button.buttonBeingDragged == false) then
+			if(love.mouse.isDown("r")) then
+				self.move = true
+				Button.buttonBeingDragged = true
+			end 
+		end 
+
+		if(self.move == true) then
+			self.move = true
+			self.lastX = love.mouse.getX() - self.Pos.x
+			self.lastY = love.mouse.getY() - self.Pos.y
+		end 
+
+
+		-- drop
+		if(self.move == true and love.mouse.isDown("r") == false) then
+			self.move = false
+			Button.buttonBeingDragged = false
+		end 
+
+	end 
 
 
 

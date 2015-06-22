@@ -1,6 +1,16 @@
--- manages using controllers
+-- Controller.lua
+-->OLD
+-->REVISE
+-->REFACTOR
 
 
+-- Purpose
+------------------------------------------------
+-- manages controller/gamepad use and input
+
+
+
+-----------------------------------------------------------------------
 
 local Controller = {}
 
@@ -12,6 +22,10 @@ Controller.oType = "Static"
 Controller.dataType = "Input Constructor & Manager"
 
 
+----------------
+-- Static Vars
+----------------
+
 -- get all available controllers
 -- needs to be cleaned up and added to Controller static table
 local getControllers = love.joystick.getJoysticks()
@@ -20,7 +34,9 @@ local controllers = {}
 -------------
 -- Buttons
 -------------
+
 -- table of button values
+-- for xbox 360 controller
 local buttons = 
 {
 	-- pad
@@ -360,6 +376,8 @@ end
 
 
 -- Run Setup at start
+-- this needs to be called during runtime as well 
+-- when a controller is plugged in -->FIX
 Controller:Setup()
 
 

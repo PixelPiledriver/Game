@@ -1,5 +1,7 @@
 -- DebugText.lua
------------------------------------------------
+-->CLEAN
+-->REFACTOR
+
 
 -- Purpose
 ----------------------------
@@ -40,10 +42,11 @@ DebugText.texts = {}
 ----------------------
 -- Print Type Flags
 ----------------------
+
 -- flip these on and off 
 -- to run o:PrintDebugText() for named object type
 -- changed 'type' to 'messageType'
--------------------------------------------------------
+
 DebugText.messageType = 
 {
 	-- Managers
@@ -109,7 +112,6 @@ DebugText.messageType =
 
 
 
-
 -- Draw Position
 DebugText.xStart = 8
 DebugText.yStart = 64
@@ -127,12 +129,11 @@ DebugText.lineIndex = 1
 ----------------
 
 function DebugText:Update()
-	-- nuthin to do here for now I guess :P
-	-- but would now update as a static
-
+	
 end 
 
-
+-- debug text info can be scrolled thru
+-- using the mouse and keyboard
 function DebugText:ScrollMessagesControl()
 
 	-- scroll object message index
@@ -199,7 +200,7 @@ end
 -- add a new text to be drawn
 -- this is the shorthand format --> much faster to type
 -- data is converted into a table slot to be used by DebugText
--- { type = className, text = {string, color}
+-- { type = className, text = {string, color}, objectType}
 function DebugText:TextTableSimple(data)
 
 	local textType = data.type or "Generic"
@@ -221,7 +222,7 @@ end
 
 
 -- optional text altering
--- {text, x, y, rot, xScale, yScale, 
+-- data = {text, x, y, rot, xScale, yScale, 
 --	xOffset, yOffset, xShear, yShear}
 function LovePrint(data)
 	local text = data.text or "NoText"
@@ -236,17 +237,6 @@ function LovePrint(data)
 	local yShear = data.yShear or 0
 	love.graphics.print(text, x, y, rot, xScale, yScale, xOffset, yOffset, xShear, yShear)
 end 
-
--- generic object print
--- this function isnt really needed anymore
--- DEPRICATED 11-17-2014!!
-function DebugText:PrintObject(data)
-	self:Text("")
-	self:Text("Name: " .. data.name)
-	self:Text("X: " .. data.x)
-	self:Text("Y: " .. data.y)
-end
-
 
 
 -- draw all texts
@@ -340,49 +330,9 @@ ObjectUpdater:AddStatic(DebugText)
 
 -- need to make a console too
 
+-- need to convert the setup to be objects that submit themselves
+-- using a debug text component
+-- also need to simplify passing data to be printed
+-->REFACTOR
 
 
--- Old Code
-----------------------------
---[[
-
-function DebugText:ScrollMessagesControl()
-
-	-- scroll object message index
-	if(Mouse.wheelUp) then
-		self.messageIndex = self.messageIndex - 1
-	end 
-
-	if(Mouse.wheelDown) then
-		self.messageIndex = self.messageIndex + 1
-	end
-
-	-- set index within bounds of given min and max
-	self.messageIndex = Math:Bind
-											{
-												value = self.messageIndex,
-												min = 1,
-												max = #self.texts
-											}
-
-  -- scroll each line of the first object message
-  if(Keyboard:Key("2")) then
-  	self.lineIndex = self.lineIndex + 1
-  end 
-
-  if(Keyboard:Key("1")) then
-  	self.lineIndex = self.lineIndex - 1
-  end
-
-  if(#self.texts > 0) then
-	  self.lineIndex = Math:Bind
-	  								 {
-	  								   value = self.lineIndex,
-	  								   min = 1,
-	  								   max = #self.texts[self.messageIndex]
-	  								 }
-	end 
-
-end 
-
---]]

@@ -5,6 +5,12 @@
 ----------------------------
 -- colors by name and other color operations
 
+
+
+------------------
+-- Requires
+------------------
+
 local Random = require("Random")
 
 
@@ -1409,11 +1415,12 @@ function Color:New(data)
 	-- Functions
 	------------------
 
+	-- print info to console
 	function o:PrintSelf()
 		print( ((self.name .. ": ") or "Color: ") .. "[" .. self.r .. ", " .. self.g .. ", " .. self.b .. ", " .. self.a .. "]")
 	end
 
-	-- get brightness value of color
+	-- get brightness value
 	function o:Luminance()
 		return (self.r + self.g + self.b) / 3
 	end
@@ -1431,6 +1438,7 @@ end
 -----------------------------
 
 -- return color as table for love.graphics.setColor(color)
+-- data = {r, g, b, a}
 function Color:AsTable(data)
 
 	local copy =
@@ -1445,14 +1453,12 @@ function Color:AsTable(data)
 	
 end
 
-
-
--- return the brightness of the color
-function Color:Luminance(c)
+-- return the brightness of given color
+function Color:GetLuminance(c)
 	return (c.r + c.g + c.b) / 3
 end
 
--- return invert color of given color
+-- return inverse color of given color
 function Color:GetInverted(c)
 	
 	local newColor = Color:New
@@ -1486,7 +1492,7 @@ function Color:Equal(a,b)
 end 
 
 -- add two colors together
--- {a, b}
+-- data = {a, b}
 function Color:Add(data)
 	local newColor = {}
 
@@ -1514,7 +1520,7 @@ function Color:Add(data)
 end 
 
 -- subtracct color b from color a
--- {a, b, loop}
+-- data {a, b, loop}
 function Color:Sub(data)
 	local newColor = {}
 
@@ -1543,7 +1549,8 @@ function Color:Sub(data)
 end 
 
 
---{color, min, max}
+-- restrict all components of a color
+-- data = {color, min, max}
 function Color:Clamp(data)
 
 	-- min 	
@@ -1575,8 +1582,8 @@ function Color:Clamp(data)
 
 end 
 
--- Linear Interpolation from color A to color B
---{a, b, t}
+-- Linear Interpolation from color A to color B at T
+-- data = {a, b, t, *alpha} 
 function Color:Lerp(data)
 
 	local newColor = Color:New
@@ -1607,8 +1614,8 @@ return Color
 
 
 -- Notes
------------------------------------------------------------------------
--- this file could be improved in functionality and eas of use 
+---------------------------------------------------------------------------
+-- this file could be improved in functionality and ease of use 
 -- but its fine for now
 
 

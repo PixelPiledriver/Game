@@ -1,9 +1,14 @@
 -- Link.lua
+-->CLEAN
 
+-- Purpose
+----------------------------
 -- object that links two objects values together
+-- like a constraint
 
 
 
+-----------------------------------------------------------------
 
 local Link = {}
 
@@ -88,7 +93,7 @@ return Link
 -- notes
 -------------------------------------
 
--- Links should be updated after all objects
+-- Links should be updated after all objects -->FIX
 -- they need to be in their own list in Object Updater
 -- this means that Object Updater needs a way of sorting objects by update priority
 
@@ -108,101 +113,3 @@ return Link
 
 
 
--- old structure
--- re writing all this stuff :P
---------------------------------------
-
---[[
-
--- Link.lua
-
--- object that links two objects values together
-
-
-
-
-local Link = {}
-
-
-function Link:New(data) 
-
-	local o = {}
-
-	-- objects
-	o.a = data.a
-	o.b = data.b
-
-
-	-- component
-	o.aComp = data.
-
-	-- variable 
-	o.aVar = data.aVar
-	o.bVar = data.bVar
-
-	o.linkType = data.linkType
-
-	function o:Update()
-
-		-- this does nothing because the value is passed as a value
-		if(self.linkType == "value") then
-			self.a[self.av] = self.b[self.bv]
-		end 
-
-		if(self.linkType == "func") then
-			self.a[self.av] = self.b[self.bv](self.b)
-		end 
-
-	end 
-
-
-	function o:PrintDebugText()
-		--print(self.a)
-		DebugText:TextTable
-		{
-			{text = "", obj = "Link"},
-			{text = "Link"},
-			{text = "-------------------------"},
-			--{text = "A:" .. self.a},
-			--{text = "B:" .. self.b},
-		}
-	end 
-
-
-
-	ObjectUpdater:Add{o}
-
-	return o
-
-end
-
-
-
-ObjectUpdater:AddStatic(Link)
-
-return Link
-
-
--- notes
--------------------------------------
--- b gets applied to a
--- a should always be a 
-
--- try passing objects and then what you want from them seperatelys
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---]]

@@ -1,18 +1,46 @@
 -- DragWithMouse.lua
--- Component
--- makes object drag and droppable
+-->DEPRICATED 6-22-2015
 
+-- Purpose
+----------------------------
+-- Component
+-- handles drag and drop with mouse interaction for parent
+
+
+
+------------------------------------------------------------------------
 
 local DragWithMouse = {}
 
+
+------------------
+-- Static Info
+------------------
+
 DragWithMouse.name = "DragWithMouse"
 DragWithMouse.oType = "Static"
-DragWithMouse.dataType = "Object Constructor"
+DragWithMouse.dataType = "Component Constructor"
+
+
+----------------------
+-- Static Functions
+----------------------
+
 
 function DragWithMouse:New(data)
 
 	local o = {}
 
+	------------------
+	-- Object Info
+	------------------
+	o.name = "..."
+	o.oType = "DragWithMouse"
+	o.dataType = "Input Component"
+
+	----------------
+	-- Vars
+	----------------
 	o.parent = data.parent
 	o.drag = false
 	o.mouseButton = data.mouseButton or "r"
@@ -21,6 +49,7 @@ function DragWithMouse:New(data)
 	-- Functions
 	-----------------------
 
+	-- activate or deactivate the drag state
 	function o:Drag()
 		
 		if(self.parent == nil) then
@@ -55,31 +84,8 @@ return DragWithMouse
 
 
 -- Notes
------------------------------
---[[
-	-- right click to drag a button
-	function o:ClickToMove()
-
-		if(self.hover == true and Button.buttonBeingDragged == false) then
-			if(love.mouse.isDown("r")) then
-				self.move = true
-				Button.buttonBeingDragged = true
-			end 
-		end 
-
-		if(self.move == true) then
-			self.move = true
-			self.lastX = love.mouse.getX() - self.Pos.x
-			self.lastY = love.mouse.getY() - self.Pos.y
-		end 
-
-
-		-- drop
-		if(self.move == true and love.mouse.isDown("r") == false) then
-			self.move = false
-			Button.buttonBeingDragged = false
-		end 
-
-	end 
-
-	--]]
+-------------------------------------
+-- this file is not actually working
+-- there isnt any code that makes it do its purpose
+-->DEPRICATED 6-22-2015
+-- MouseDrag.lua is a working version of the same functionality

@@ -1,18 +1,29 @@
 -- TableSort.lua
--- I want to be able to sort a table by any of its variables
--- so here we go
---- yep just need to write a compare function
--- woot
 
 
--- BUT
--- it would be cool to be able to pass in a name and sort a table
--- by inner table names
+-- Purpose
+----------------------------
+-- Functions for sorting tables
 
+
+----------------------------------------------------------------------------
+
+-- global
 TableSort = {}
 
+------------------
+-- Static Info
+------------------
+TableSort.name = "TableSort"
+TableSort.oType = "Static"
+TableSort.dataType = "Utility"
 
--- {t, var}
+---------------------
+-- Static Functions
+---------------------
+
+-- sort a table of objects by a variable name they all have in common
+-- data = {t, var}
 function TableSort:SortByVar(data)
 
 	local function tempCompare(a,b)
@@ -23,6 +34,8 @@ function TableSort:SortByVar(data)
 
 end
 
+-- sorts the given table using afunction name they all have in common
+-- data = {t, func}
 function TableSort:SortByFunc(data)
 
 	local function tempCompare(a,b)
@@ -33,7 +46,11 @@ function TableSort:SortByFunc(data)
 
 end
 
---{index table of strings}
+-- sorts a table of strings
+-- honestly this is a pointlessly named function
+-- it should just be sort a table of values
+-- and should work for any hard values, not just strings -->CHANGE
+-- {index table of strings}
 function TableSort:SortByString(t)
 
 	local function tempCompare(a,b)
@@ -45,7 +62,8 @@ function TableSort:SortByString(t)
 end 
 
 
--- returns a table of only variables that have unique values
+-- returns a new indexed table that consists only of the unique values
+-- contained in the given index table
 function TableSort:UniqueVars(t)
 	
 	local tempTable = {}
@@ -69,6 +87,22 @@ function TableSort:UniqueVars(t)
 	return tempTable
 
 end
+
+
+
+
+-- Notes
+-----------------------------------------------------------------
+-- I want to be able to sort a table by any of its variables
+-- so here we go
+--- yep just need to write a compare function
+-- woot
+
+
+-- BUT
+-- it would be cool to be able to pass in a name and sort a table
+-- by inner table names
+
 
 
 -- Test Sort by Function

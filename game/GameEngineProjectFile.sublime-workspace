@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Draw",
+				"DrawManager"
+			],
+			[
 				"drawn",
 				"drawnThisFrame"
 			],
@@ -34,10 +38,6 @@
 			[
 				"use",
 				"useExternalDrawCall"
-			],
-			[
-				"Draw",
-				"DrawList"
 			],
 			[
 				"Dra",
@@ -520,58 +520,10 @@
 	"buffers":
 	[
 		{
-			"file": "Bullet.lua",
-			"settings":
-			{
-				"buffer_size": 2700,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "BulletTypes.lua",
-			"settings":
-			{
-				"buffer_size": 1302,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Animation.lua",
-			"settings":
-			{
-				"buffer_size": 3499,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "BlockMap.lua",
-			"settings":
-			{
-				"buffer_size": 1360,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Block.lua",
-			"settings":
-			{
-				"buffer_size": 3435,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Camera.lua",
-			"settings":
-			{
-				"buffer_size": 9963,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "Code Tags and Tools.lua",
 			"settings":
 			{
-				"buffer_size": 1259,
+				"buffer_size": 1257,
 				"line_ending": "Windows"
 			}
 		}
@@ -616,18 +568,36 @@
 	},
 	"file_history":
 	[
-		"/D/GitRepos/Game/game/Bullet.lua",
+		"/D/GitRepos/Game/game/Controller.lua",
+		"/D/GitRepos/Game/game/Console.lua",
+		"/D/GitRepos/Game/game/TableSort.lua",
+		"/D/GitRepos/Game/game/Palette.lua",
+		"/D/GitRepos/Game/game/ComponentManager.lua",
+		"/D/GitRepos/Game/game/Color.lua",
+		"/D/GitRepos/Game/game/main.lua",
+		"/D/GitRepos/Game/game/Canvas.lua",
 		"/D/GitRepos/Game/game/Box.lua",
+		"/D/GitRepos/Game/game/DrawList.lua",
+		"/D/GitRepos/Game/game/DrawManager.lua",
+		"/D/GitRepos/Game/game/Bool.lua",
+		"/D/GitRepos/Game/game/BlockMap.lua",
+		"/D/GitRepos/Game/game/Camera.lua",
+		"/D/GitRepos/Game/game/Link.lua",
+		"/D/GitRepos/Game/game/OldCode.lua",
+		"/D/GitRepos/Game/game/Fade.lua",
+		"/D/GitRepos/Game/game/Particle.lua",
+		"/D/GitRepos/Game/game/Collision.lua",
+		"/D/GitRepos/Game/game/CollisionLists.lua",
+		"/D/GitRepos/Game/game/CollisionManager.lua",
+		"/D/GitRepos/Game/game/DebugText.lua",
+		"/D/GitRepos/Game/game/ObjectUpdater.lua",
+		"/D/GitRepos/Game/game/Bullet.lua",
+		"/D/GitRepos/Game/game/BulletTypes.lua",
+		"/D/GitRepos/Game/game/Animation.lua",
 		"/D/GitRepos/Game/game/Block.lua",
 		"/D/GitRepos/Game/game/Button.lua",
 		"/D/GitRepos/Game/game/AnimationTest.lua",
 		"/D/GitRepos/Game/game/App.lua",
-		"/D/GitRepos/Game/game/BulletTypes.lua",
-		"/D/GitRepos/Game/game/Bool.lua",
-		"/D/GitRepos/Game/game/BlockMap.lua",
-		"/D/GitRepos/Game/game/Animation.lua",
-		"/D/GitRepos/Game/game/main.lua",
-		"/D/GitRepos/Game/game/OldCode.lua",
 		"/D/GitRepos/Game/game/Sprites.lua",
 		"/D/GitRepos/Game/game/Graphics.lua",
 		"/D/GitRepos/Game/game/TestCode.lua",
@@ -637,10 +607,8 @@
 		"/D/GitRepos/Game/game/Player.lua",
 		"/D/GitRepos/Game/game/PixelTexture.lua",
 		"/D/GitRepos/Game/game/ParticleSystem.lua",
-		"/D/GitRepos/Game/game/Particle.lua",
 		"/D/GitRepos/Game/game/Notes.lua",
 		"/D/GitRepos/Game/game/Mouse.lua",
-		"/D/GitRepos/Game/game/Link.lua",
 		"/D/GitRepos/Game/game/Levels/PixelDrawLevel.lua",
 		"/D/GitRepos/Game/game/Levels/AudioTestLevel.lua",
 		"/D/GitRepos/Game/game/Keyboard.lua",
@@ -649,39 +617,29 @@
 		"/D/GitRepos/Game/game/GameEngineProjectFile.sublime-workspace",
 		"/D/GitRepos/Game/game/Game.lua",
 		"/D/GitRepos/Game/game/DrawTools.lua",
-		"/D/GitRepos/Game/game/DrawList.lua",
 		"/D/GitRepos/Game/game/DrawGroup.lua",
 		"/D/GitRepos/Game/game/Draw.lua",
 		"/D/GitRepos/Game/game/Pos.lua",
-		"/D/GitRepos/Game/game/DebugText.lua",
 		"/D/GitRepos/Game/game/Life.lua",
-		"/D/GitRepos/Game/game/Collision.lua",
 		"/D/GitRepos/Game/game/PrintDebug.lua",
-		"/D/GitRepos/Game/game/CollisionManager.lua",
-		"/D/GitRepos/Game/game/Camera.lua",
 		"/D/GitRepos/Game/game/GameEngineProjectFile.sublime-project",
 		"/D/GitRepos/Game/game/Window.lua",
 		"/D/GitRepos/Game/game/Code Tags and Tools.lua",
 		"/D/GitRepos/Game/game/Group.lua",
 		"/D/GitRepos/Game/game/MapTable.lua",
-		"/D/GitRepos/Game/game/Controller.lua",
 		"/D/GitRepos/Game/game/RNG.lua",
-		"/D/GitRepos/Game/game/Palette.lua",
 		"/D/GitRepos/Game/game/Health.lua",
 		"/D/GitRepos/Game/game/Textfile.lua",
 		"/D/GitRepos/Game/game/Value.lua",
 		"/D/GitRepos/Game/game/Sprite.lua",
 		"/D/GitRepos/Game/game/Panel.lua",
 		"/D/GitRepos/Game/game/InputList.lua",
-		"/D/GitRepos/Game/game/TableSort.lua",
-		"/D/GitRepos/Game/game/ObjectUpdater.lua",
 		"/D/GitRepos/Game/game/ObjectCreator.lua",
 		"/D/GitRepos/Game/design/Command Gameplay/CommandGame_1.txt",
 		"/D/GitRepos/Game/backup/DrawList_1.lua",
 		"/D/GitRepos/Game/backup/DrawList_1",
 		"/D/GitRepos/Game/game/Levels/BoxLevel.lua",
 		"/D/GitRepos/Game/game/Levels/DecrodedLerpLevel.lua",
-		"/D/GitRepos/Game/game/Color.lua",
 		"/D/GitRepos/Game/game/Levels/TestLevel.lua",
 		"/D/GitRepos/Game/game/LevelManager.lua",
 		"/D/GitRepos/Game/game/SimplePanel.lua",
@@ -700,17 +658,12 @@
 		"/D/GitRepos/Game/game/InputText.lua",
 		"/D/GitRepos/Game/game/FrameCounter.lua",
 		"/D/GitRepos/Game/game/FailNew.lua",
-		"/D/GitRepos/Game/game/Fade.lua",
 		"/D/GitRepos/Game/game/DrawToolsHUD.lua",
 		"/D/GitRepos/Game/game/DragWithMouse.lua",
 		"/D/GitRepos/Game/game/DeltaTime.lua",
 		"/D/GitRepos/Game/game/DataPass.lua",
-		"/D/GitRepos/Game/game/Console.lua",
 		"/D/GitRepos/Game/game/Components.lua",
-		"/D/GitRepos/Game/game/ComponentManager.lua",
 		"/D/GitRepos/Game/game/ColorPicker.lua",
-		"/D/GitRepos/Game/game/CollisionLists.lua",
-		"/D/GitRepos/Game/game/Canvas.lua",
 		"/D/GitRepos/Game/game/WindowMessages.lua",
 		"/D/GitRepos/Game/game/Timer.lua",
 		"/D/GitRepos/Game/game/Text.lua",
@@ -742,8 +695,7 @@
 		"/G/pixel piledriver/Pixelation/Messages/Fighting Game Guy_2.txt",
 		"/G/pixel piledriver/Pixelation/Messages/Fighting Game Guy_1.txt",
 		"/G/pixel piledriver/Jobs/money wise.txt",
-		"/D/GitRepos/Game/game/Button",
-		"/D/GitRepos/Game/design/Build and Blast.txt"
+		"/D/GitRepos/Game/game/Button"
 	],
 	"find":
 	{
@@ -751,7 +703,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 105.0,
 		"where_history":
 		[
 			"D:\\GitRepos\\Game\\game",
@@ -763,6 +715,22 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"Luminance",
+			"GetLuminance",
+			"Color:Luminance",
+			"DataPass",
+			"AfterDraw",
+			"{\n",
+			"Input",
+			"Camera:New",
+			"yes",
+			"Repeated",
+			"RepeatedInput",
+			"	\n",
+			"Camera",
+			"camera",
+			"Camera",
+			"Camer",
 			"\"???\"",
 			"print",
 			"shit",
@@ -874,23 +842,7 @@
 			".loops",
 			"Clear()",
 			"()\n",
-			"Submit",
-			"		\n",
-			"print",
-			"self.objects.index",
-			"local ObjectUpdater",
-			"local ObjectUpdater =",
-			"shit",
-			"DebugText:PrintDebugText()",
-			":PrintDebugText()",
-			"ScrollMessagesControl",
-			"print",
-			"back",
-			"break",
-			"continue",
-			"self.rot",
-			"Input",
-			".keys"
+			"Submit"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1026,232 +978,8 @@
 	"groups":
 	[
 		{
-			"selected": 5,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "Bullet.lua",
-					"settings":
-					{
-						"buffer_size": 2700,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								601,
-								601
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "BulletTypes.lua",
-					"settings":
-					{
-						"buffer_size": 1302,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								25,
-								25
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "Animation.lua",
-					"settings":
-					{
-						"buffer_size": 3499,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3499,
-								3499
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 3036.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "BlockMap.lua",
-					"settings":
-					{
-						"buffer_size": 1360,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								23,
-								23
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1197.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "Block.lua",
-					"settings":
-					{
-						"buffer_size": 3435,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3420,
-								3420
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2593.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "Camera.lua",
-					"settings":
-					{
-						"buffer_size": 9963,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								244,
-								244
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		},
 		{
@@ -1259,19 +987,19 @@
 			"sheets":
 			[
 				{
-					"buffer": 6,
+					"buffer": 0,
 					"file": "Code Tags and Tools.lua",
 					"settings":
 					{
-						"buffer_size": 1259,
+						"buffer_size": 1257,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								190,
-								240
+								149,
+								189
 							]
 						],
 						"settings":
