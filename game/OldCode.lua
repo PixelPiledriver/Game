@@ -164,7 +164,7 @@ local App = {}
 ------------------------
 -- object
 App.name = "App"
-App.oType = "Static"
+App.objectType = "Static"
 App.dataType = "Manager"
 
 ----------------------

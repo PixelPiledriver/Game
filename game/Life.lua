@@ -17,7 +17,7 @@ local Life = {}
 ------------------
 
 Life.name = "Life"
-Life.oType = "Static"
+Life.objectType = "Static"
 Life.dataType = "Component Construtor"
 
 
@@ -30,7 +30,7 @@ function Life:New(data)
 	-- Object Info
 	------------------
 	o.name = data.name or "..."
-	o.oType = "Life"
+	o.objectType = "Life"
 	o.dataType = "Component"
 
 	

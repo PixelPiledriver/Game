@@ -64,6 +64,10 @@ CollisionLists.blueRobot =
 
 }
 
+---------------
+-- Static End
+---------------
+
 return CollisionLists
 
 

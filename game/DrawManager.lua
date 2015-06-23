@@ -1,6 +1,5 @@
 -- DrawManager.lua
 
-
 -- Purpose
 ----------------------------
 -- handles drawing operations for the entire game
@@ -23,7 +22,7 @@ DrawManager = {}
 -- Static Info
 ------------------
 DrawManager.name = "DrawManager"
-DrawManager.oType = "Static"
+DrawManager.objectType = "Static"
 DrawManager.dataType = "Manager" -- the function of this static
 
 
@@ -52,6 +51,12 @@ end
 function DrawManager:PostDraw()
 	Camera:PostDraw()
 end
+
+
+
+---------------
+-- Static End
+---------------
 
 
 -- Notes

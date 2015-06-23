@@ -148,7 +148,7 @@ function ObjectUpdater:PrintDebugText()
 
 		for i=1, #self.objects do
 
-			local objectType = self.objects[i].oType or "unknown"
+			local objectType = self.objects[i].objectType or "unknown"
 			
 			if(objectTypesTemp[objectType] == nil) then
 				objectTypesTemp[objectType] =
@@ -200,7 +200,7 @@ function ObjectUpdater:PrintDebugText()
 
 		for i=1, #self.statics do
 			local sName = self.statics[i].name or "..."
-			local sOType = self.statics[i].oType or "___"
+			local sOType = self.statics[i].objectType or "___"
 			local sDataType = self.statics[i].dataType or "***" 
 
 			staticNames[#staticNames+1] = {}
@@ -220,12 +220,12 @@ function ObjectUpdater:PrintDebugText()
 		for i=1, #self.objects do
 
 			local oName = self.objects[i].name or "..."
-			local oType = self.objects[i].oType or "___"
+			local objectType = self.objects[i].objectType or "___"
 			local oDataType = self.objects[i].dataType or "***"
 
 
 			objectNames[#objectNames + 1] = {}
-			objectNames[#objectNames].text = oName .. "| " .. oType .. " | " .. oDataType
+			objectNames[#objectNames].text = oName .. "| " .. objectType .. " | " .. oDataType
 			
 		end 
 
@@ -408,6 +408,17 @@ end
 
 --	Notes
 ----------------------
+-- destroy needs to check objects for components and run destroy on them properly
+
+-- operations on lists of objects needs to be generic
+-- so that if a new list of objects is added ObjectUpdater can
+-- perform all tasks on it just like any other list
+-- such as updating and clearing dead objects
+-- this comes up because I need to add a postObjects list
+-- but would need to add exact duplcates of existing functions
+-- that call on the new lists -->REDUNDANT
+
+
 -- Global
 -- changed ObjectUpdater to a global
 -- since so many files use it

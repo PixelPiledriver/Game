@@ -6,12 +6,18 @@
 -- functions for bools
 -- makes them easier to work with
 
-
 ---------------------------------------------------------------------------
 
 -- global
 Bool = {}
 
+------------------
+-- Static Info
+------------------
+
+Bool.name = "Bool"
+Bool.objectType = "Static"
+Bool.dataType = "Utility"
 
 ---------------------------
 -- Static Functions
@@ -41,6 +47,14 @@ function Bool:Toggle(b)
 	end 
 
 end 
+
+
+---------------
+-- Static End
+---------------
+
+
+
 
 
 -- Notes

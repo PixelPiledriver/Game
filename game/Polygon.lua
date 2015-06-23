@@ -16,7 +16,7 @@ function Polygon:New(data)
 	local object = {}
 
 	object.name = "..."
-	object.oType = "Polygon"
+	object.objectType = "Polygon"
 	object.dataType = "Graphics Object"
 
 

@@ -18,7 +18,7 @@ local Window = {}
 -- Static Info
 ------------------
 Window.name = "..."
-Window.oType = "Window"
+Window.objectType = "Window"
 Window.dataType = "App Static"
 
 

@@ -48,7 +48,7 @@ function Palette:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.oType = "Palette"
+	o.objectType = "Palette"
 	o.dataType = "Graphics"
 
 	-- vars

@@ -9,6 +9,17 @@
 -- global
 DrawList = {}
 
+------------------
+-- Static Info
+------------------
+DrawList.name = "Controller"
+DrawList.objectType = "Static"
+DrawList.dataType = "Input Constructor & Manager"
+
+----------------
+-- Static Vars
+----------------
+
 DrawList.mode = {}
 DrawList.mode.options = {"Static", "Submit", "Sort"}
 DrawList.mode.selected = "Submit"
@@ -18,7 +29,6 @@ DrawList.objects.layerIndex = {}
 DrawList.objects.lastLayerIndex = nil
 
 DrawList.drawnThisFrame = 0
-
 
 DrawList.layers = 
 {
@@ -35,6 +45,10 @@ DrawList.layers =
 	}
 }
 
+
+---------------------
+-- Static Functions
+---------------------
 
 function DrawList:Update()
 	self:UpdateMode()
@@ -77,6 +91,7 @@ function DrawList:CreateLayer(layer)
 end 
 
 -- add an object to be drawn at given layer
+-- data = Draw component
 function DrawList:Submit(data)
 
 	-- make layer if it doesn't exist
@@ -93,12 +108,14 @@ end
 
 -- sets the given object to draw first
 -- need to add a feature that lets you bump the first object with a new one
+-- data = Draw component
 function DrawList:SubmitFirst(data)
 	self:CreateLayer(data.layer)
 	self.objects[data.layer].first = data
 end 
  
 -- sets the given object to draw last
+-- data = Draw component
 function DrawList:SubmitLast(data)
 	self:CreateLayer(data.layer)
 	self.objects[data.layer].last = data
@@ -209,14 +226,13 @@ function DrawList:Draw()
 				self.drawnThisFrame = self.drawnThisFrame + 1
 			end 
 
-
-
 		until true
 	end
 
 end 
 
 
+-- info
 function DrawList:PrintDebugText()
 
 	local layerIndexString = ""
@@ -228,8 +244,6 @@ function DrawList:PrintDebugText()
 			layerIndexString = layerIndexString .. ", " .. self.objects.lastLayerIndex[i]
 		end 
 	end
-
-
 
 	DebugText:TextTable
 	{
@@ -244,9 +258,15 @@ function DrawList:PrintDebugText()
 end
 
 
-
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(DrawList)
+
+
+
+
 
 
 -- Notes

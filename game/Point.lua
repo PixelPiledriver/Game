@@ -23,7 +23,7 @@ function Point:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.oType = "Point"
+	o.objectType = "Point"
 	o.dataType = "Graphics"
 
 	-- vars
@@ -76,7 +76,7 @@ function Point:New(data)
 		{
 			{text = "", obj = "Point" },
 			{text = "Name: " .. self.name},
-			{text = "Type: " .. self.oType},
+			{text = "Type: " .. self.objectType},
 			{text = "Pos: {" .. self.Pos.x .. ", " .. self.Pos.y .. "}"},
 		}
 

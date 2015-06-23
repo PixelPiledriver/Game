@@ -20,7 +20,7 @@ local App = {}
 -- Static Info
 ------------------
 App.name = "App"
-App.oType = "Static"
+App.objectType = "Static"
 App.dataType = "Manager"
 
 -----------------------
@@ -36,7 +36,6 @@ end
 -- Input
 ----------------------
 
--- Exit the game with ESC
 App.Input = Input:New
 {
 	keys = 
@@ -45,6 +44,11 @@ App.Input = Input:New
 	}
 }
 
+
+
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(App)
 

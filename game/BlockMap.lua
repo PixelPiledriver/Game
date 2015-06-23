@@ -15,7 +15,7 @@ local BlockMap = {}
 -- Static Info
 ------------------
 BlockMap.name = "BlockMap"
-BlockMap.oType = "Static"
+BlockMap.objectType = "Static"
 BlockMap.dataType = "Map"
 
 
@@ -66,6 +66,10 @@ function BlockMap:SpaceEmpty(data)
 
 end 
 
+
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(BlockMap)
 

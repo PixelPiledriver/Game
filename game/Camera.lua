@@ -23,7 +23,7 @@ local Camera = {}
 -- Static Info
 ------------------
 Camera.name = "Camera"
-Camera.oType = "Static"
+Camera.objectType = "Static"
 Camera.dataType = "View Constructor"
 
 
@@ -281,6 +281,12 @@ function Camera:PrintDebugText()
 	}
 end 
 
+
+
+---------------
+-- Static End
+---------------
+
 -- this is commented out for now because Camera is the only camera
 -- acts as a static
 -- but is updated like an object
@@ -309,9 +315,9 @@ return Camera
 
 
 
---------------------
---[===[ Original File
---------------------
+------------------------------------------------------------------
+--[===[ Original File -- get Camera stable then delete all this
+------------------------------------------------------------------
 
 -- Camera.lua
 -->REFACTOR
@@ -338,7 +344,7 @@ local Camera = {}
 -- Static Info
 ------------------
 Camera.name = "Camera"
-Camera.oType = "Static"
+Camera.objectType = "Static"
 Camera.dataType = "View Constructor"
 
 
@@ -393,7 +399,7 @@ function Camera:New()
 	-- Object Info
 	------------------
 	o.name = "cam"
-	o.oType = "Camera Static"
+	o.objectType = "Camera Static"
 	o.dataType = "Static"
 
 	----------------

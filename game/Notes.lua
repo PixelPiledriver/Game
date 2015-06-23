@@ -1,7 +1,30 @@
 -- Notes.lua
 
+
+
 -- track stuff that needs to be coded in the future
 -- gonna put new stuff at the top and push old stuff down
+
+
+-- Test Automation
+---------------------------------------
+-- need to write a test component to interact with current object types
+-- use input and check for correct output
+-- test files are submitted to the TestAutomation component
+-- these tests need to each be run and print out pass of fail results
+
+-- simple example 
+	-- create 100 of each type of object
+	-- delete all 
+	-- # of objects in updater should be 0
+	-- return pass or fail
+
+-- then keep adding more tests and periodically run them all
+
+
+
+
+
 
 
 

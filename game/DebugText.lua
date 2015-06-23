@@ -25,7 +25,7 @@ DebugText = {}
 -- Static Info
 ----------------------
 DebugText.name = "DebugText"
-DebugText.oType = "Static"
+DebugText.objectType = "Static"
 DebugText.dataType = "Manager"
 
 
@@ -304,6 +304,11 @@ function DebugText:ClearTexts()
 	end 
 
 end 
+
+
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(DebugText)
 

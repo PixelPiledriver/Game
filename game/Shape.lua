@@ -20,7 +20,7 @@ function Shape:New(data)
 	local o = {}
 
 	o.name = data.name or "..."
-	o.oType = "Shape"
+	o.objectType = "Shape"
 	o.dataType = "Graphics Object"
 
 	o.x = data.x or 0

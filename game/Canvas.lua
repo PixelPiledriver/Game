@@ -13,7 +13,7 @@ local Canvas = {}
 -- Static Info
 ------------------
 Canvas.name = "Canvas"
-Canvas.oType = "Static"
+Canvas.objectType = "Static"
 Canvas.dataType = "Graphics Constructor"
 
 
@@ -43,19 +43,28 @@ function Canvas:New(data)
 	-------------------
 	-- object
 	o.name = "..."
-	o.oType = "Canvas"
+	o.objectType = "Canvas"
 	o.dataType = "Graphics"
 
 	-- done
+
+
+
+	----------
+	-- End
+	----------
 
 	ObjectUpdater:Add{o}
 
 	return o
 end 
 
+
+---------------
+-- Static End
+---------------
+
 ObjectUpdater:AddStatic(Canvas)
-
-
 
 return Canvas
 

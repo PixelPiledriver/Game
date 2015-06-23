@@ -15,7 +15,7 @@ TableSort = {}
 -- Static Info
 ------------------
 TableSort.name = "TableSort"
-TableSort.oType = "Static"
+TableSort.objectType = "Static"
 TableSort.dataType = "Utility"
 
 ---------------------

@@ -23,7 +23,7 @@ local Color = {}
 ----------------------
 
 Color.name = "Color"
-Color.oType = "Static"
+Color.objectType = "Static"
 Color.dataType = "Graphics Constructor"
 
 ----------------------
@@ -1401,7 +1401,7 @@ function Color:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.oType = "Color"
+	o.objectType = "Color"
 	o.dataType = "Graphics"
 
 
@@ -1425,6 +1425,10 @@ function Color:New(data)
 		return (self.r + self.g + self.b) / 3
 	end
 
+
+	----------
+	-- End
+	----------
 	-- probly need to add to ObjectUpdater
 
 	return o
@@ -1605,9 +1609,12 @@ function Color:Lerp(data)
 end 
 
 
+
+---------------
+-- Static End
+---------------
+
 ObjectUpdater:AddStatic(Color)
-
-
 
 return Color
 

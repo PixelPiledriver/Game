@@ -36,7 +36,7 @@ function Player:New(data)
 	local o = {}
 
 	o.name = data.name or "..."
-	o.oType = "Player"
+	o.objectType = "Player"
 	o.datatype = "Game Object"
 
 	o.sprite = data.sprite or nil

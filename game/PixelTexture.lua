@@ -24,7 +24,7 @@ local PixelTexture = {}
 ----------------
 
 PixelTexture.name = "PixelTexture"
-PixelTexture.oType  = "Static"
+PixelTexture.objectType  = "Static"
 PixelTexture.dataType = "Graphics Construtor"
 
 PixelTexture.mask = nil
@@ -87,7 +87,7 @@ function PixelTexture:New(data)
 	local o = {}
 
 	o.name = data.name or "..."
-	o.oType = "PixelTexture"
+	o.objectType = "PixelTexture"
 	o.datatype = "Graphics Object"
 
 	
@@ -141,7 +141,7 @@ function PixelTexture:New(data)
 
 
 		love.graphics.setColor(Color:AsTable(Color:Get("white")))
-		Draw:Draw
+		Draw:LoveDraw
 		{
 			object = self.texture,
 			x = self.Pos.x,

@@ -1,20 +1,62 @@
 -- Gun Types
+-->OLD
+
+-- Purpose
+---------------------------------------------------
 -- players can carry guns and shoot stuff
 -- Guns have stats and properties --> ammo from BulletTypes etc
+
+------------------
+-- Requires
+------------------
 
 local BulletTypes = require("BulletTypes")
 local Bullet = require("Bullet")
 
 
+-----------------------------------------------------------------------------------
 
 local Guns = {}
+
+------------------
+-- Static Info
+------------------
+
+Guns.name = "Guns"
+Guns.objectType = "Static"
+Guns.dataType = "Object Data"
+
+-----------------
+-- Static Vars
+-----------------
+Guns.stats =
+{
+	"name",
+	"bullet",
+	"rateOfFire",
+	"maxRateOfFire",
+	"clip",
+	"reloadTime",
+	"Shoot"
+}
+
+
 
 function Guns:New(data)
 
 	local o = {}
 
+	-----------------
+	-- Object Info
+	-----------------
+
 	o.name = data.name or "???"
-	o.oType = "gun"
+	o.objectType = "Gun"
+	o.dataType = "Player Item"
+
+	-----------
+	-- Vars
+	-----------
 
 	o.bullet = data.bullet or BulletTypes.laser
 	o.maxRateOfFire = data.rateOfFire or 10
@@ -26,6 +68,11 @@ function Guns:New(data)
 	o.parent =  nil 															-- owner of the gun
 	o.triggerDown = false
 	o.triggerMashing = false
+
+
+	----------------
+	-- Functions
+	----------------
 
 	function o:Shoot(p)
 
@@ -56,6 +103,10 @@ function Guns:New(data)
 
 end 
 
+----------------------
+-- Static Functions
+----------------------
+
 function Guns:Get(gunName)
 	local copy = {}
 
@@ -67,16 +118,11 @@ function Guns:Get(gunName)
 	return copy
 end 
 
-Guns.stats =
-{
-	"name",
-	"bullet",
-	"rateOfFire",
-	"maxRateOfFire",
-	"clip",
-	"reloadTime",
-	"Shoot"
-}
+
+
+----------
+-- Guns
+----------
 
 Guns.laserRifle = Guns:New
 {
@@ -108,7 +154,9 @@ Guns.missleLauncher = Guns:New
 	ammo = 20
 }
 
-
+----------------
+-- Static End
+----------------
 
 return Guns
 
@@ -117,9 +165,8 @@ return Guns
 
 -- notes
 ----------------
+-- old code
 
--- oh stuff bro :O
+-- is this fixed? -->FIX
 -- there is only one instance of each gun, both players cant shoot at the same time
 -- need to hand out copies to players
-
--- 

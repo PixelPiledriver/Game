@@ -14,7 +14,7 @@ function SinCounter:New(data)
 	local object = {}
 
 	object.name = "..."
-	object.oType = "SinCounter"
+	object.objectType = "SinCounter"
 	object.dataType = "Math Object"
 
 

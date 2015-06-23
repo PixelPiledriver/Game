@@ -471,6 +471,10 @@ function Button:New(data)
 	end 
 
 
+	----------
+	-- End
+	----------
+
 	-- add object to list
 	ObjectUpdater:Add{o}
 	Button.totalCreated = Button.totalCreated + 1
@@ -655,11 +659,13 @@ function Button:PrintDebugText()
 	}
 end 
 
+
+---------------
+-- Static End
+---------------
+
+
 ObjectUpdater:AddStatic(Button)
-
-
-
-
 
 return Button
 

@@ -24,7 +24,7 @@ local Animation = {}
 -- Static Info
 -----------------
 Animation.name = "Animation"
-Animation.oType = "Static"
+Animation.objectType = "Static"
 Animation.dataType = "Data Constructor"
 
 
@@ -61,7 +61,7 @@ function Animation:New(data)
 	-- Object Info
 	-----------------
 	o.name = data.name or "..."
-	o.oType = "Animation"
+	o.objectType = "Animation"
 	o.dataType = "Graphics"
 
 
@@ -179,11 +179,19 @@ function Animation:New(data)
 	end 
 
 
+	----------
+	-- End
+	----------
+
 	ObjectUpdater:Add{o}
 	return o
 
 end 
 
+
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(Animation)
 

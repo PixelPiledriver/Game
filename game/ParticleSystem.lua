@@ -15,7 +15,7 @@ function ParticleSystem:New(data)
 
 
 	object.name = data.name or "???"
-	object.oType = "ParticleSystem"
+	object.objectType = "ParticleSystem"
 	object.dataType = "Game Object"
 
 	object.x = data.x or 200

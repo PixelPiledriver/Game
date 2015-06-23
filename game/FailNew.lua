@@ -1,9 +1,13 @@
 -- FailNew.lua
+-->REFACTOR
 
+-- Purpose
+----------------------------
 -- call inside of Type:New to check for
 -- data members that are required
 
 
+-------------------------------------------------------------------------
 
 -- stops an object from being created
 -- if the given members are not present
@@ -21,4 +25,22 @@ function FailNew(data)
 
 	return false
 
-end 
+end
+
+----------
+-- End
+----------
+
+
+-- Notes
+---------------------------------------
+-- this file only contains a single function
+-- needs to be converted into a component that can be used for testing objects
+
+-- not sure what to do with it at the moment
+
+
+
+
+
+

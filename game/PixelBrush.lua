@@ -14,7 +14,7 @@ function PixelBrush:New(data)
 	local object = {}
 
 	object.name = "..."
-	object.oType = "Brush"
+	object.objectType = "Brush"
 	object.dataType = "Graphics Object"
 
 	object.width = data.width

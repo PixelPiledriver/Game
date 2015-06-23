@@ -95,6 +95,11 @@ BulletTypes.mine =
 }
 
 
+
+---------------
+-- Static End
+---------------
+
 return BulletTypes
 
 

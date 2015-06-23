@@ -9,7 +9,7 @@ local Size = {}
 -- Static Vars
 ----------------
 Size.name = "Size"
-Size.oType = "Static"
+Size.objectType = "Static"
 Size.dataType = "Component Constructor"
 
 
@@ -23,7 +23,7 @@ function Size:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.oType = "Size"
+	o.objectType = "Size"
 	o.dataType = "Component"
 
 	-- vars

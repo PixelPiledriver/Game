@@ -1,33 +1,47 @@
 -- Fade.lua
+
+
+-- Purpose
+----------------------------
 -- component
 -- use to fade out basic os and control their alpha
 -- might merge this with a SuperColor class in the future
 
 
+-----------------------------------------------------------------------------
+
 local Fade = {}
 
 -----------------
--- Static Vars
+-- Static Info
 -----------------
 
 Fade.name = "Fade"
-Fade.oType = "Static"
+Fade.objectType = "Static"
 Fade.dataType = "Component Constructor"
+
+----------------
+-- Static Vars
+----------------
 
 Fade.activeDefault = false
 
 
+---------------------
+-- Static Functions
+---------------------
+
+-- data = {fade, speed, parent, fadeWithLife, active}
 function Fade:New(data)
 
 	local o = {}
 
-	----------------
-	-- Create 
-	----------------
+	------------------
+	-- Object Info 
+	------------------
 
-	-- o
 	o.name = data.name or "..."
-	o.oType = "Fade"
+	o.objectType = "Fade"
 	o.dataType = "Component"
 
 	-- vars
@@ -105,10 +119,19 @@ function Fade:New(data)
 	end 
 
 
+	----------
+	-- End
+	----------
+
 	ObjectUpdater:Add{o}
 
 	return o
 end
+
+
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(Fade)
 

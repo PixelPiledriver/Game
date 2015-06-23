@@ -1,28 +1,31 @@
 -- Health.lua
+-->OLD
 
+-- Purpose
+-----------------------------------------
 -- health component for objects that need to take damage
 
-
+----------------------------------------------------------------------------------
 
 local Health = {}
 
 ------------------
--- Static Vars
+-- Static Info
 ------------------
 
 Health.name = "Health"
-Health.oType = "Static"
+Health.objectType = "Static"
 Health.dataType = "Component Constructor"
 
 function Health:New(data)
 
-	-------------
-	-- Create
-	--------------
 	local o = {}
 
+	------------------
+	-- Object Info
+	------------------
 	o.name = data.name or "???"
-	o.oType = "Health"
+	o.objectType = "Health"
 	o.dataType = "Component"
 
 	o.max = data.max or 100
@@ -60,13 +63,18 @@ function Health:New(data)
 		return self.hp
 	end 
 
+	----------
+	-- End 
+	----------
+	
 	return o
 
 end 
 
 
-
-
+----------------
+-- Static End
+----------------
 
 ObjectUpdater:AddStatic(Health)
 

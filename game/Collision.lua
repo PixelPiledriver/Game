@@ -27,7 +27,7 @@ local Collision = {}
 -- Static info
 -----------------
 Collision.name = "Collision"
-Collision.oType = "Static"
+Collision.objectType = "Static"
 Collision.dataType = "Object Constructor"
 
 
@@ -43,7 +43,7 @@ function Collision:New(data)
 	-- Object info
 	-----------------
 	o.name = data.name or "..."
-	o.oType = "Collision"
+	o.objectType = "Collision"
 	o.dataType = "Object"
 
 
@@ -237,17 +237,23 @@ function Collision:New(data)
 
 	end 
 
+
+	----------
+	-- End
+	----------
+
 	CollisionManager:Add(o)
 	ObjectUpdater:Add{o}
 
 	return o
 
-
 end
 
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(Collision)
-
 
 return Collision
 

@@ -37,27 +37,41 @@ Static.dataType = "Input Constructor & Manager" -- the function of this static
 -- Static Functions
 ---------------------
 
-----------------
--- Fail Cases
-----------------
+
+
+	----------------
+	-- Fail Cases
+	----------------
+
+	------------------
+	-- Object Info
+	------------------
+	-- vv example info vv
+	o.name = "..." -- nameless unless given
+	o.oType = "Box" -- name of objects type -> same as Static.name that created this object
+	o.dataType = "Graphics" -- the function of this object
+
+	----------------
+	-- Vars
+	----------------
+
+	------------------
+	-- Functions
+	------------------
+
+	-------------------
+	-- On Require
+	-------------------
 
 
 
-------------------
--- Object Info
-------------------
--- vv example info vv
-o.name = "..." -- nameless unless given
-o.oType = "Box" -- name of objects type -> same as Static.name that created this object
-o.dataType = "Graphics" -- the function of this object
+	----------
+	-- End
+	----------
 
-----------------
--- Vars
-----------------
-
-------------------
--- Functions
-------------------
+---------------
+-- Static End
+---------------
 
 
 

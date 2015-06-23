@@ -14,7 +14,7 @@ local Scale = {}
 --------------------
 
 Scale.name = "Scale"
-Scale.oType = "Static"
+Scale.objectType = "Static"
 Scale.dataType = "Component Constructor"
 
 Scale.defaultScale =
@@ -35,7 +35,7 @@ function Scale:New(data)
 	local o = {}
 
 	o.name = data.name or "..."
-	o.oType = "Scale"
+	o.objectType = "Scale"
 	o.dataType =  "Graphics Component"
 
 	o.parent = data.parent or nil

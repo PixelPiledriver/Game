@@ -17,7 +17,7 @@ local Panel = {}
 -- Static Vars
 -----------------
 Panel.name = "Panel"
-Panel.oType = "Static"
+Panel.objectType = "Static"
 Panel.dataType = "HUD Constructor"
 
 Panel.defaultPanelColor = Color:New
@@ -47,7 +47,7 @@ function Panel:New(data)
 	local o = {}
 
 	o.name = data.name or "..."
-	o.oType = "Panel"
+	o.objectType = "Panel"
 	o.dataType = "HUD Object"
 
 

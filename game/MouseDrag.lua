@@ -12,7 +12,7 @@ local MouseDrag = {}
 -----------------
 
 MouseDrag.name = "MouseDrag"
-MouseDrag.oType = "Static"
+MouseDrag.objectType = "Static"
 MouseDrag.dataType = "Object Constructor"
 
 MouseDrag.draggingObjects = 0

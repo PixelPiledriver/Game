@@ -18,7 +18,7 @@ local Controller = {}
 -- Static Info
 ------------------
 Controller.name = "Controller"
-Controller.oType = "Static"
+Controller.objectType = "Static"
 Controller.dataType = "Input Constructor & Manager"
 
 

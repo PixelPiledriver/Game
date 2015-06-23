@@ -24,7 +24,7 @@ local Block = {}
 -- Static Info
 ---------------------
 Block.name = "Block"
-Block.oType = "Static"
+Block.objectType = "Static"
 Block.DataType = "GameObject Constructor"
 
 
@@ -42,7 +42,7 @@ function Block:New(data)
 	-- Object Info
 	------------------
 	object.name = data.name or "..."
-	object.oType = "Block"
+	object.objectType = "Block"
 	object.dataType = "GameObject"
 
 	----------------
@@ -143,6 +143,11 @@ function Block:New(data)
 	end 
 
 
+	----------
+	-- End
+	----------
+
+
 	ObjectUpdater:Add{object}
 
 	return object
@@ -150,6 +155,9 @@ function Block:New(data)
 end 
 
 
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(Block)
 

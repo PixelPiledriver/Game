@@ -14,7 +14,7 @@ local Line = {}
 -- Static Vars
 -----------------
 Line.name = "Line"
-Line.oType = "Static"
+Line.objectType = "Static"
 Line.dataType = "Graphics Constructor"
 
 -- {a = {x,y}, b = {x,y}, width, color}
@@ -28,7 +28,7 @@ function Line:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.oType = "Line"
+	o.objectType = "Line"
 	o.dataType = "Graphics"
 
 

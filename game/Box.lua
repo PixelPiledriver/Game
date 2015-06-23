@@ -30,7 +30,7 @@ local Box = {}
 -------------------
 
 Box.name = "Box"
-Box.oType = "Static"
+Box.objectType = "Static"
 Box.dataType = "Graphics Constructor"
 
 
@@ -46,7 +46,7 @@ function Box:New(data)
 	-- Object Info
 	------------------
 	o.name = data.name or "..."
-	o.oType = "Box"
+	o.objectType = "Box"
 	o.dataType = "Graphics"
 
 	----------------
@@ -338,6 +338,9 @@ function Box:New(data)
 	end 
 
 
+	----------
+	-- End
+	----------
 
 	ObjectUpdater:Add{o}
 
@@ -345,7 +348,9 @@ function Box:New(data)
 
 end 
 
-
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(Box)
 

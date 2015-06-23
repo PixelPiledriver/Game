@@ -13,7 +13,7 @@
 local Link = {}
 
 Link.name = "Link"
-Link.oType = "Static"
+Link.objectType = "Static"
 Link.dataType = "Data Constructor"
 
 
@@ -22,7 +22,7 @@ function Link:New(data)
 	local o = {}
 
 	o.name = data.name or "..."
-	o.oType = "Link"
+	o.objectType = "Link"
 	o.dataType = "Data"
 
 	-- objects

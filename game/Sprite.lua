@@ -8,11 +8,21 @@ local Pos = require("Pos")
 local Size = require("Size")
 local Draw = require("Draw")
 
+-------------------------------------------------------------------------------
+
 local Sprite = {}
 
+------------------
+-- Static Info
+------------------
 Sprite.name = "Sprite"
-Sprite.oType = "Static"
+Sprite.objectType = "Static"
 Sprite.dataType = "Graphics Constructor"
+
+
+----------------
+-- Static Vars
+----------------
 
 -- default values
 -- this makes it easier to load lots of sprites from the same sheet
@@ -29,6 +39,10 @@ Sprite.useSpriteSheetSpriteSize = true
 Sprite.drawNone = false
 
 
+---------------------
+-- Static Functions
+---------------------
+
 -- {spriteSheet, x, y, width, height}
 function Sprite:New(data)
 
@@ -38,15 +52,14 @@ function Sprite:New(data)
 		members = {}
 	}
 
-	----------------
-	-- Create
-	----------------
-
 	local o = {}
 
-	-- other
+	------------------
+	-- Object Info
+	------------------
+
 	o.name = data.name or "..."
-	o.oType = "Sprite"
+	o.objectType = "Sprite"
 	o.dataType = "Graphics"
 
 	-- vars
@@ -112,9 +125,8 @@ function Sprite:New(data)
 	-- Functions
 	--------------------
 
+	function o:Update()		
 
-	function o:Update()
-		
 	end 
 
 
@@ -160,9 +172,18 @@ function Sprite:New(data)
 
 	ObjectUpdater:Add{o}
 
+	----------
+	-- End
+	----------
+
 	return o
 
 end 
+
+
+----------------
+-- Static End
+----------------
 
 ObjectUpdater:AddStatic(Sprite)
 

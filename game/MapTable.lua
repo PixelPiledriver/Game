@@ -10,7 +10,7 @@ local MapTable = {}
 -- Static Info
 ------------------
 MapTable.name = "MapTable"
-MapTable.oType = "Static"
+MapTable.objectType = "Static"
 MapTable.dataType = "Data Storage Constructor"
 
 
@@ -22,7 +22,7 @@ function MapTable:New(data)
 	-- Object Info
 	------------------
 	o.name = "..."
-	o.oType = "MapTable"
+	o.objectType = "MapTable"
 	o.dataType = "Data Storage"
 
 

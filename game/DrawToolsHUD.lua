@@ -1,20 +1,24 @@
 -- DrawToolsHUD.lua
 
+-- Purpose
+----------------------------
 -- sprites and buttons for DrawTools
 -- require this file in the scene you are using
--- and it will create all of the buttons and stuff :D
+-- and it will create the assets, buttons and stuff :D
 
-
+------------------
+-- Requires
+------------------
 local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
 local Button = require("Button")
 local DrawTools = require("DrawTools")
 
-
+-----------------------------------------------------------------------------------
 
 local DrawToolsHUD = {}
--- DrawTools hud stuff
--- need to move to a new file soon
+
+
 DrawToolsHUD.iconSheet = SpriteSheet:New
 {
 	image = "EditorIcons.png",
@@ -132,4 +136,14 @@ DrawToolsHUD.selectButton = Button:New
 }
 
 
+---------------
+-- Static End
+---------------
+
 return DrawToolsHUD
+
+
+
+-- Notes
+---------------------------------------
+-- this 

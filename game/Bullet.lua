@@ -20,7 +20,7 @@ local Bullet = {}
 -- Static Info
 ----------------
 Bullet.name = "Bullet"
-Bullet.oType = "Static"
+Bullet.objectType = "Static"
 Bullet.dataType = "GameObject Constructor"
 
 function Bullet:New(data)
@@ -35,7 +35,7 @@ function Bullet:New(data)
 	-- Object Info
 	------------------
 	object.name = data.name or "..."
-	object.oType = "Bullet"
+	object.objectType = "Bullet"
 	object.dataType = "GameObject"
 
 	
@@ -141,12 +141,20 @@ function Bullet:New(data)
 	end 
 
 
+	----------
+	-- End
+	----------
 	
 	ObjectUpdater:Add{object}
 
 	return object
 
 end 
+
+
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(Bullet)
 

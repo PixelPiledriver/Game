@@ -11,7 +11,7 @@ local Pos =  {}
 -- Static Vars
 -----------------
 Pos.name = "Pos"
-Pos.oType = "Static"
+Pos.objectType = "Static"
 Pos.dataType = "Component Constructor"
 
 Pos.defaultPos = 
@@ -44,7 +44,7 @@ function Pos:New(data)
 
 	-- object
 	o.name = data.name or "..."
-	o.oType = "Pos"
+	o.objectType = "Pos"
 	o.dataType = "Component"
 
 	o.parent = data.parent

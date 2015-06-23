@@ -1,26 +1,62 @@
 -- Draw.lua
 
--- Draw component
--- handles small draw things
--- but uses the Draw function you give it
+
+-- Purpose
+----------------------------
+-- Component
+-- handles rendering its parent object
 
 
+
+-------------------------------------------------------------------
 
 local Draw = {}
 
+
+------------------
+-- Static Info
+------------------
 Draw.name = "Draw"
-Draw.oType = "Static"
+Draw.objectType = "Static"
 Draw.dataType = "Graphics Constructor"
 
 
+----------------------
+-- Static Vars
+----------------------
 
+Draw.defaultDraw =
+{
+	parent = o,
+	layer = "Objects",
+	layer = "Objects",
+}
+
+
+
+---------------------
+-- Static Functions
+---------------------
+
+-- creat component
+-- data = {parent, layer, *drawFunc, *first, *last}
 function Draw:New(data)
 
 	local o = {}
 
+
+	------------------
+	-- Object Info
+	------------------
+
 	o.name = data.name or "..."
-	o.oType = "Draw"
+	o.objectType = "Draw"
 	o.dataType = "Graphics"
+
+
+	----------------
+	-- Vars
+	----------------
 
 	o.parent = data.parent
 	o.drawCall = data.parent.DrawCall or data.drawFunc
@@ -57,16 +93,15 @@ function Draw:New(data)
 	-- Functions
 	---------------
 
-	-- might need to do this manually
-	-- but lets let ObjectUpdater take care of it for now
-	-- seems to work ok I guess :D
+	
+	-- currently ObjectUpdater takes care of this like any other object
+	-- but actually this needs to update after all other objects
 	function o:Update()
-
 		self:CalculateCurrentDepth()
 		self:SubmitToDrawList()
-
 	end 
 
+	-- get depth from parent
 	function o:CalculateCurrentDepth()
 
 		local currentDepth = 0
@@ -79,6 +114,7 @@ function Draw:New(data)
 
 	end 
 
+	-- send draw data to be drawn
 	function o:SubmitToDrawList()
 
 		if(self.inGroup) then
@@ -105,6 +141,7 @@ function Draw:New(data)
 	-- for use by other objects that take control of this component --> DrawGroup
 	-- this function is pointless but will leave for now
 	-- used to be used by draw group but is not needed
+	-->DEPRICATED 6-22-2015
 	function o:SubmitToDrawListManual()
 
 		local drawData =
@@ -150,6 +187,11 @@ function Draw:New(data)
 	end 
 
 
+
+	----------
+	-- End
+	----------
+
 	ObjectUpdater:Add{o}
 
 	return o
@@ -157,24 +199,14 @@ function Draw:New(data)
 end
 
 
-----------------------
--- Static 
-----------------------
-
-Draw.defaultDraw =
-{
-	parent = o,
-	layer = "Objects",
-	layer = "Objects",
-}
-
-
-
+-- love.graphics.draw() wrapper
 -- calls love.graphics.draw()
 -- with a table --> use any order or optional
 -- {drawable, x, y, r, sx, sy, ox, oy, kx, ky} -- love names
 -- {object, x, y, rot, xScale, yScale, xOffset, yOffset, xShear, yShear} -- actual names
-function Draw:Draw(data)
+-- this might not be the best place for this anymore 
+-->MOVE
+function Draw:LoveDraw(data)
 
 	-- defaults
 	--> add a "missing texture/graphics" image to project
@@ -193,6 +225,11 @@ function Draw:Draw(data)
 end
 
 
+
+---------------
+-- Static End
+---------------
+
 ObjectUpdater:AddStatic(Draw)
 
 return Draw
@@ -202,6 +239,9 @@ return Draw
 
 -- Notes
 -----------------
+-- Draw does not have a defined DrawCall
+-- uses the DrawCall function you give it
+-- so that it may be customised for each type of object
 
 -- DONE
 -- gonna turn this into a proper draw component

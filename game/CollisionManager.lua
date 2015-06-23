@@ -18,7 +18,7 @@ local CollisionManager = {}
 
 -- object
 CollisionManager.name = "CollisionManager"
-CollisionManager.oType = "Static"
+CollisionManager.objectType = "Static"
 CollisionManager.dataType = "Manager"
 
 -- lists
@@ -353,10 +353,11 @@ function CollisionManager:Update()
 end 
 
 
-
+---------------
+-- Static End
+---------------
 
 --ObjectUpdater:AddStatic(CollisionManager)
-
 
 return CollisionManager
 

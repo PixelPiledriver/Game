@@ -1,15 +1,21 @@
 -- DrawTools.lua
+
+-- Purpose
+----------------------------
 -- draw stuff on pixel textures
 
-
+------------------
+-- Requires
+------------------
 local Color = require("Color")
 local Box = require("Box")
 
+---------------------------------------------------------------------------
 
 local DrawTools = {}
 
 DrawTools.name = "DrawTools"
-DrawTools.oType  = "Static"
+DrawTools.objectType  = "Static"
 DrawTools.dataType = "Graphics Tools"
 
 DrawTools.monkey = false
@@ -45,9 +51,8 @@ DrawTools.selectedColorBox = Box:New
 }
 
 
-
 ---------------------------
--- Functions
+-- Static Functions
 ---------------------------
 
 -- change a tool from in-active to active and back again
@@ -148,6 +153,7 @@ function DrawTools:Zoom()
 
 end 
 
+-- set the color to be used with tools
 function DrawTools:SetSelectedColor(color)
 	self.selectedColor = color
 	self.selectedColorBox.color = color
@@ -172,6 +178,7 @@ function DrawTools:ColorDrop()
 
 end 
 
+-- info
 function DrawTools:PrintDebugText()	
 	DebugText:TextTable
 	{
@@ -187,15 +194,19 @@ function DrawTools:PrintDebugText()
 end 
 
 
+---------------
+-- Static End
+---------------
+
 ObjectUpdater:AddStatic(DrawTools)
-
-
 
 return DrawTools
 
 
 -- notes
 -------------------------------------------------
+
+-- 1st and 2nd selected color -->ADD
 
 -- Basic Tools
 --------------------

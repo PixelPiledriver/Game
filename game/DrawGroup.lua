@@ -1,5 +1,9 @@
 -- DrawGroup.lua
 
+
+
+-- Purpose
+----------------------------
 -- Add objects to a DrawGroup that all need to be drawn together in the same layer
 
 -- When an object is part of a DrawGroup it's Draw component does not submit itself to DrawList
@@ -10,8 +14,21 @@
 -- Useful for windows and characters with parts and stuff like that
 
 
+-----------------------------------------------------------------------------
 local DrawGroup = {}
 
+
+------------------
+-- Static Info
+------------------
+DrawGroup.name = "DrawGroup "
+DrawGroup.objectType = "Static"
+DrawGroup.dataType = "Graphics Object Constructor"
+
+
+---------------------
+-- Static Functions
+---------------------
 
 -- indexed table
 -- {o1, o2, ...}
@@ -19,8 +36,25 @@ function DrawGroup:New(data)
 
 	local o = {}
 
+	------------------
+	-- Object Info
+	------------------
+	o.name = "..."
+	o.objectType = "Box"
+	o.dataType = "Graphics"
+
+
+	----------------
+	-- Vars
+	----------------
 	o.drawables = {}
 	o.isGroup = true -- flag to DrawList that this is a group of objects to be drawn not just a single draw
+
+
+
+	------------------
+	-- Functions
+	------------------
 
 	-- add object on top of group
 	-- {o, layer}
@@ -55,6 +89,9 @@ function DrawGroup:New(data)
 		
 	end 
 
+	-------------------
+	-- On Require
+	-------------------
 
 	-- Add objects passed into New this group
 	if(#data > 0) then
@@ -64,12 +101,22 @@ function DrawGroup:New(data)
 	end 
 
 
+
+	----------
+	-- End
+	----------
+
+
 	ObjectUpdater:Add{o}
 
 	return o
 
 end 
 
+
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(DrawGroup)
 
