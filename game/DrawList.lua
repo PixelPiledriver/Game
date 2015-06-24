@@ -34,7 +34,7 @@ DrawList.layers =
 {
 	Skybox = {value = 1, active = false},
 	Backdrop = {value = 2, active = false},
-	Objects = {value = 3, active = true},
+	Objects = {value = 3, active = false},
 	Collision = {value = 4, active = false},
 	Hud = {value = 5, active = true},
 	DebugText = {value = 6, active = false},

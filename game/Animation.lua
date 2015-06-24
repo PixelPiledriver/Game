@@ -101,7 +101,7 @@ function Animation:New(data)
 	-- Functions
 	--------------
 	function o:Update()
-		self:UpdateFrameTime()
+		self:FrameTimeUpdate()
 	end 
 
 	-- handle animation speed and frame delay

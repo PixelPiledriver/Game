@@ -6,7 +6,7 @@
 -- Purpose
 ----------------------------
 -- draw text info to screen
--- add --> funciton o:PrintDebugText()
+-- add --> function o:PrintDebugText()
 -- to your object type to print to this
 
 
@@ -52,25 +52,26 @@ DebugText.messageType =
 	-- Managers
 	ObjectUpdater = false,
 	CollisionManager = false,
-	DrawList = true,
+	DrawList = false,
 
 	-- Statics
 	ButtonStatic = false,
 	ShaderStatic = false,
 	MouseStatic = false,
 	InputTextStatic = false,
+	Info = true,
 
 	-- Data types
 	MapTable = false,
 	Link = false,
 
 	-- Objects
-	Box = true,
+	Box = false,
 	Camera = false,
 	Bullet = false,
 	Block = false,
 	Controller = false,
-	Window = true,
+	Window = false,
 	Map = false,
 	ParticleSystem = false,
 	Particle = false,
@@ -78,7 +79,7 @@ DebugText.messageType =
 	SnapPlayer = false,
 	
 	-- Text
-	InputText = true,
+	InputText = false,
 
 	-- Input
 	Mouse = false,

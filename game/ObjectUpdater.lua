@@ -22,7 +22,7 @@ ObjectUpdater = {}
 -----------------
 
 ObjectUpdater.name = "ObjectUpdater"
-ObjectUpdater.otype = "Static"
+ObjectUpdater.objectType = "Static"
 ObjectUpdater.dataType = "Manager"
 
 
@@ -35,14 +35,19 @@ ObjectUpdater.statics = {}
 ObjectUpdater.objects = {}
 ObjectUpdater.cameras = {}
 ObjectUpdater.postUpdateObjects = {} -- temporary
+ObjectUpdater.dataTypes = {}
+
+ObjectUpdater.componentTypes = {}
+ObjectUpdater.componentTypes.index = {}
 
 -- flags
 ObjectUpdater.destroyObjects = false
 
 -- debug text options
 ObjectUpdater.printAllObjectsInDebugText = false
-ObjectUpdater.printAllStaticsInDebugText = true
+ObjectUpdater.printAllStaticsInDebugText = false
 ObjectUpdater.printTotalObjectTypes = false
+ObjectUpdater.printComponents = true
 
 ----------------------
 -- Static Functions
@@ -61,8 +66,19 @@ function ObjectUpdater:Add(objects)
 
 	for i=1, #objects do
 		self.objects[#self.objects+1] = objects[i]
+
+		if(objects[i].dataType == "Component") then
+			self:AddComponentType(objects[i])
+		end
 	end 
 
+end 
+
+function ObjectUpdater:AddComponentType(object)
+	if(self.componentTypes[object.objectType] == nil) then
+		self.componentTypes[object.objectType] = true
+		self.componentTypes.index[#self.componentTypes.index + 1] = object.objectType
+	end 
 end 
 
 
@@ -102,10 +118,21 @@ function ObjectUpdater:ClearDestroyedObjects()
 		if(temp[i].destroy == nil or temp[i].destroy == false) then
 			self:Add{temp[i]}
 		else
+			
 			if(temp[i].collision) then
-		
 				CollisionManager:Destroy(temp[i].collision)
 			end 
+
+			-- need to clear all components -->FIX
+			-- this code didnt work
+			-- figure out why
+			
+			if(temp[i].Draw) then
+				temp[i].Draw = nil
+			end 
+
+
+
 		end 
 
 
@@ -231,6 +258,23 @@ function ObjectUpdater:PrintDebugText()
 
 		DebugText:TextTable(objectNames)
 			
+	end 
+
+	-- print 
+	if(ObjectUpdater.printComponents) then 
+		local componentNames = {}
+		componentNames[1] = {text = "Component Types", obj = "ObjectUpdater"}
+		componentNames[2] = {text = "-----------------"}
+		
+		for i=1, #self.componentTypes.index do
+
+			componentNames[#componentNames + 1] = {}
+			componentNames[#componentNames].text =  self.componentTypes.index[i]
+
+		end 
+
+		DebugText:TextTable(componentNames)
+
 	end 
 
 

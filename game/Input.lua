@@ -1,34 +1,57 @@
 -- Input.lua
 
+-- Purpose
+---------------------------------------------
 -- input component for objects
--- add keys to this component and then it will check for them
--- can add a key to press or release input type list
--- press, release, placeholder
+-- add keys and functions to be run when they are pressed
 
+
+
+----------------------------------------------------------------------------
 
 local Input = {}
 
+-----------------
+-- Static Info
+-----------------
+Input.name = "Input"
+Input.objectType = "Static"
+Input.dataType = "Input Component Constructor"
+
+
+----------------------
+-- Static Functions
+----------------------
 
 	function Input:New(data)
 
 		local o = {}
 
+		-----------------
+		-- Object Info
+		-----------------
+		o.name = "..."
+		o.objectType = "Input"
+		o.dataType = "Component"
+
+		----------
+		-- Vars
+		----------
 
 		-- lists of keys
 		o.pressKeys = {index = {}}
 		o.releaseKeys = {index = {}}
 		o.holdKeys = {index = {}}
 
-
-
 		-- other
 		o.parent = data.parent or nil
 		o.active = data.active or true
+		o.count = 0
 
 
+		---------------
 		-- Functions
-		------------------------
-
+		---------------
 
 		-- short hand, add multiple keys
 		-- have new call this if data.keys is passed in
@@ -74,7 +97,7 @@ local Input = {}
 
 		end
 
-		o.count = 0
+		
 
 		-- passed in from ObjectUpdater -> parent -> this object on input callbacks
 		-- this is used for press and release only
@@ -158,16 +181,26 @@ local Input = {}
 
 		end 
 
-
-		-- add useable keys
+		-------------
+		-- On New
+		-------------
 		if(data and data.keys) then
 			o:AddKeys(data.keys)
 		end 
+
+		----------
+		-- End
+		----------
 
 		return o
 
 	end 
 
+	-----------------
+	-- Static End
+	-----------------
+
+ObjectUpdater:AddStatic(Input)
 
 return Input
 
@@ -175,12 +208,8 @@ return Input
 
 -- Notes
 --------------------
-
 -- should this component handle mouse and controller input as well?
--- probly not? right?
--- they should each have their own compoenent?
--- I guess? Not sure :|
--- will think about it.... bleh
+-- for now it only handles keyboard input
 
 
 -- Creating an Input Component
@@ -217,66 +246,3 @@ App.Input = Input:New
 -- the comps parent will pass in the data for updating
 
 -- has to be added to the end of an objects file
-
-
-
-
-
--- Old Code
------------------------------------------
-			--[[
-			-- run thru all keys
-			if(inputType == "press") then
-				print("press")
-				if(self.pressKeys[key]) then
-					print("press this stuff")
-					self.pressKeys[key].func()
-				end 
-
-			end
-
-			if(inputType == "release") then
-				
-				if(self.releaseKeys[key]) then
-					print("release this stuff")
-					self.releaseKeys[key].func()
-				end 
-			end
-
-			if(inputType == "hold") then
-				if(self.holdKeys[key]) then
-					print("hold this stuff")
-					self.holdKeys[key].func()
-				end 
-			end 
-
-			--]]
-
-			--[[
-			if(data.type == "press") then
-				self.pressKeys[data.key] =
-				{
-					key = data.key,
-					func = data.func,
-					state = false
-				}
-
-			elseif(data.type == "release") then
-				self.releaseKeys[data.key] =
-				{
-					key = data.key,
-					func = data.func,
-					state = false
-				}
-
-			elseif(data.type == "hold") then
-				self.holdKeys[data.key] =
-				{
-					key = data.key,
-					func = data.func,
-					state = false
-				}
-
-			end 
-
-			--]]

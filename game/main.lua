@@ -10,6 +10,7 @@
 -- Utilities and Globals
 ----------------------
 require("ObjectUpdater")
+require("Info")
 require("DrawList")
 require("DrawManager")
 require("DebugText")
@@ -22,6 +23,7 @@ require("Random")
 require("FailNew")
 require("Bool")
 require("Mouse")
+require("Game")
 
 ---------------------------------
 -- Create Important Data Types 

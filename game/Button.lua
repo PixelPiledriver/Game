@@ -29,7 +29,7 @@ local Button = {}
 -- Static Info
 ------------------
 Button.name = "Button"
-Button.oType = "Static"
+Button.objectType = "Static"
 Button.dataType = "Hud Constructor" 
 
 
@@ -77,7 +77,7 @@ function Button:New(data)
 	-- Object Info
 	------------------
 	o.name = data.name or "..."
-	o.oType = "Button"
+	o.objectType = "Button"
 	o.dataType = "HUD"
 
 	------------

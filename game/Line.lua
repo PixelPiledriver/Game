@@ -6,6 +6,7 @@
 local Color = require("Color")
 local Life = require("Life")
 local Fade = require("Fade")
+local Draw = require("Draw")
 
 
 local Line = {}
@@ -67,6 +68,17 @@ function Line:New(data)
 		}
 	end 
 
+	local defaultDraw =
+	{
+		parent = o,
+		layer = "Objects",
+		GetDepth = o.GetDepth,
+		first = data.first or false,
+		last = data.last or false,
+	}
+
+	o.Draw = Draw:New(defaultDraw)
+
 	o.components = {"Life", "Fade"}
 
 	-----------------
@@ -93,7 +105,9 @@ function Line:New(data)
 			{text = "Name: " .. self.name},
 			{text = "A: {" .. self.a.x .. "," .. self.a.y .. "}"},
 			{text = "B: {" .. self.b.x .. "," .. self.b.y .. "}"},
-			{text = "LifeCompValue: " .. life}
+			{text = "LifeCompValue: " .. life},
+			{text = "Alpha: " .. self.color.a},
+			{text = "Fade: " .. self.Fade.fade}
 		}
 
 	end 

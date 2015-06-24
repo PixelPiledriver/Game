@@ -14,10 +14,12 @@ local Game = {}
 -------------------
 -- Static Info
 -------------------
-
-Game.name = "Game"
-Game.objectType = "Static"
-Game.dataType = "Manager"
+Game.Info = Info:New
+{
+	name = "Game",
+	objectType = "Static",
+	dataType = "Manager"
+}
 
 
 -------------------
@@ -53,3 +55,4 @@ return Game
 -- Notes
 ---------------------------------------
 -- This file is very incomplete and needs to be refactored
+-- may have very little to do with the new game engine

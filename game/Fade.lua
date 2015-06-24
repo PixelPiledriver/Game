@@ -24,7 +24,7 @@ Fade.dataType = "Component Constructor"
 -- Static Vars
 ----------------
 
-Fade.activeDefault = false
+Fade.activeDefault = true
 
 
 ---------------------
@@ -78,6 +78,7 @@ function Fade:New(data)
 	end
 
 	function o:Fade()
+
 
 		if(self.active == false) then
 			return

@@ -51,7 +51,7 @@ function Draw:New(data)
 
 	o.name = data.name or "..."
 	o.objectType = "Draw"
-	o.dataType = "Graphics"
+	o.dataType = "Component"
 
 
 	----------------

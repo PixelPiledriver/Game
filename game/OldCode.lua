@@ -558,6 +558,64 @@ end
 	end 
 
 
+-- Input
+-------------------------------------------------------------------------------
+
+			-- run thru all keys
+			if(inputType == "press") then
+				print("press")
+				if(self.pressKeys[key]) then
+					print("press this stuff")
+					self.pressKeys[key].func()
+				end 
+
+			end
+
+			if(inputType == "release") then
+				
+				if(self.releaseKeys[key]) then
+					print("release this stuff")
+					self.releaseKeys[key].func()
+				end 
+			end
+
+			if(inputType == "hold") then
+				if(self.holdKeys[key]) then
+					print("hold this stuff")
+					self.holdKeys[key].func()
+				end 
+			end 
+
+
+
+
+			if(data.type == "press") then
+				self.pressKeys[data.key] =
+				{
+					key = data.key,
+					func = data.func,
+					state = false
+				}
+
+			elseif(data.type == "release") then
+				self.releaseKeys[data.key] =
+				{
+					key = data.key,
+					func = data.func,
+					state = false
+				}
+
+			elseif(data.type == "hold") then
+				self.holdKeys[data.key] =
+				{
+					key = data.key,
+					func = data.func,
+					state = false
+				}
+
+			end 
+
+
 
 
 
