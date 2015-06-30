@@ -1,4 +1,5 @@
 -- Canvas.lua
+-->EMPTY
 
 -- Purpose
 ----------------------------
@@ -12,10 +13,12 @@ local Canvas = {}
 ------------------
 -- Static Info
 ------------------
-Canvas.name = "Canvas"
-Canvas.objectType = "Static"
-Canvas.dataType = "Graphics Constructor"
-
+Canvas.Info = Info:New
+{
+	name = "Canvas",
+	dataType = "Graphics",
+	structureType = "Static"	
+}
 
 ----------------
 -- Static Vars
@@ -42,9 +45,13 @@ function Canvas:New(data)
 	-- Create
 	-------------------
 	-- object
-	o.name = "..."
-	o.objectType = "Canvas"
-	o.dataType = "Graphics"
+	o.Info = Info:New
+	{
+		name = "...",
+		objectType = "Canvas",
+		dataType = "Graphics",
+		structureType = "Object"
+	}
 
 	-- done
 

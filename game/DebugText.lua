@@ -24,10 +24,12 @@ DebugText = {}
 ----------------------
 -- Static Info
 ----------------------
-DebugText.name = "DebugText"
-DebugText.objectType = "Static"
-DebugText.dataType = "Manager"
-
+DebugText.Info = Info:New
+{
+	objectType = "DebugText",
+	dataType = "Debug",
+	structureType = "Manager"
+}
 
 ----------------------
 -- Static Vars

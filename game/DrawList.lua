@@ -12,9 +12,12 @@ DrawList = {}
 ------------------
 -- Static Info
 ------------------
-DrawList.name = "Controller"
-DrawList.objectType = "Static"
-DrawList.dataType = "Input Constructor & Manager"
+DrawList = Info:New
+{
+	name = "Controller",
+	objectType = "Static",
+	dataType = "Input Constructor & Manager"
+}
 
 ----------------
 -- Static Vars

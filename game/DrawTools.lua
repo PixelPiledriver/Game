@@ -14,9 +14,12 @@ local Box = require("Box")
 
 local DrawTools = {}
 
-DrawTools.name = "DrawTools"
-DrawTools.objectType  = "Static"
-DrawTools.dataType = "Graphics Tools"
+DrawTools.Info = Info:New
+{
+	name = "DrawTools",
+	objectType  = "Static",
+	dataType = "Graphics Tools"
+}
 
 DrawTools.monkey = false
 

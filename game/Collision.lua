@@ -12,7 +12,6 @@
 ------------------
 -- Requires
 ------------------
-local CollisionManager = require("CollisionManager")
 local Color = require("Color")
 local Pos = require("Pos")
 local Draw = require("Draw")
@@ -26,9 +25,12 @@ local Collision = {}
 -----------------
 -- Static info
 -----------------
-Collision.name = "Collision"
-Collision.objectType = "Static"
-Collision.dataType = "Object Constructor"
+Collision.Info = Info:New
+{
+	objectType = "Collision",
+	dataType = "Interaction",
+	structureType = "Static"
+}
 
 
 ---------------------
@@ -42,9 +44,13 @@ function Collision:New(data)
 	-----------------
 	-- Object info
 	-----------------
-	o.name = data.name or "..."
-	o.objectType = "Collision"
-	o.dataType = "Object"
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Collision",
+		dataType = "Interaction",
+		structureType = "Component"
+	}
 
 
 	---------------

@@ -23,9 +23,12 @@ local Animation = {}
 -----------------
 -- Static Info
 -----------------
-Animation.name = "Animation"
-Animation.objectType = "Static"
-Animation.dataType = "Data Constructor"
+Animation.Info = Info:New
+{
+	objectType = "Animation",
+	dataType = "Graphics",
+	structureType = "Static",
+}
 
 
 ---------------------
@@ -60,9 +63,13 @@ function Animation:New(data)
 	-----------------
 	-- Object Info
 	-----------------
-	o.name = data.name or "..."
-	o.objectType = "Animation"
-	o.dataType = "Graphics"
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Animation",
+		dataType = "Graphics",
+		structureType = "Object"
+	}
 
 
 	----------------

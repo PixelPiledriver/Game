@@ -9,7 +9,6 @@
 -- manages controller/gamepad use and input
 
 
-
 -----------------------------------------------------------------------
 
 local Controller = {}
@@ -17,10 +16,12 @@ local Controller = {}
 ------------------
 -- Static Info
 ------------------
-Controller.name = "Controller"
-Controller.objectType = "Static"
-Controller.dataType = "Input Constructor & Manager"
-
+Controller.Info = Info:New
+{
+	objectType = "Controller",
+	dataType = "Input",
+	structureType = "Manager"
+}
 
 ----------------
 -- Static Vars

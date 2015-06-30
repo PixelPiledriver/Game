@@ -4,6 +4,62 @@
 		"selected_items":
 		[
 			[
+				"require",
+				"require()	package"
+			],
+			[
+				"object",
+				"objectType"
+			],
+			[
+				"dataTyp",
+				"dataTypes"
+			],
+			[
+				"data",
+				"dataTypes"
+			],
+			[
+				"o",
+				"other"
+			],
+			[
+				"componn",
+				"componentNames"
+			],
+			[
+				"com",
+				"componentTypes"
+			],
+			[
+				"compon",
+				"componentNames"
+			],
+			[
+				"Debug",
+				"DebugText:TextTable"
+			],
+			[
+				"component",
+				"componentNames"
+			],
+			[
+				"compo",
+				"componentNames"
+			],
+			[
+				"print",
+				"printComponents"
+			],
+			[
+				"objec",
+				"objectType"
+			],
+			[
+				"dat",
+				"dataType"
+			],
+			[
 				"Draw",
 				"DrawManager"
 			],
@@ -324,14 +380,6 @@
 				"totalObjectPadWidth"
 			],
 			[
-				"object",
-				"objectToPanelPad"
-			],
-			[
-				"objec",
-				"objectToObjectPad"
-			],
-			[
 				"windo",
 				"windowBorderSpace"
 			],
@@ -366,10 +414,6 @@
 			[
 				"sel",
 				"selectedTool"
-			],
-			[
-				"print",
-				"printDebugTextActive"
 			],
 			[
 				"toggle",
@@ -470,60 +514,24 @@
 			[
 				"Obec",
 				"ObjectUpdater"
-			],
-			[
-				"ObjectU",
-				"ObjectUpdater.name"
-			],
-			[
-				"Obj",
-				"ObjectUpdater"
-			],
-			[
-				"love.file",
-				"love.filesystem.read"
-			],
-			[
-				"Text",
-				"Textfile:New"
-			],
-			[
-				"requ",
-				"require()	package"
-			],
-			[
-				"self.last",
-				"self.lastTime"
-			],
-			[
-				"rotVel",
-				"rotVelocityScale"
-			],
-			[
-				"Pixe",
-				"PixelBrush.x2"
-			],
-			[
-				"PixelBrush",
-				"PixelBrush.x1"
-			],
-			[
-				"XS",
-				"XScroll"
-			],
-			[
-				"object.Line",
-				"object.LineValues"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "Line.lua",
+			"file": "Controller.lua",
 			"settings":
 			{
-				"buffer_size": 2345,
+				"buffer_size": 9576,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/GitRepos/Ideas-and-Writing/Words and stuff_31.txt",
+			"settings":
+			{
+				"buffer_size": 82104,
 				"line_ending": "Windows"
 			}
 		},
@@ -531,31 +539,23 @@
 			"file": "DebugText.lua",
 			"settings":
 			{
-				"buffer_size": 6724,
+				"buffer_size": 6754,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "ObjectUpdater.lua",
+			"file": "DeltaTime.lua",
 			"settings":
 			{
-				"buffer_size": 9701,
+				"buffer_size": 307,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "Fade.lua",
+			"file": "Color.lua",
 			"settings":
 			{
-				"buffer_size": 2204,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Mouse.lua",
-			"settings":
-			{
-				"buffer_size": 5887,
+				"buffer_size": 18904,
 				"line_ending": "Windows"
 			}
 		}
@@ -600,31 +600,46 @@
 	},
 	"file_history":
 	[
-		"/D/GitRepos/Game/game/Code Tags and Tools.lua",
+		"/D/GitRepos/Game/game/Color.lua",
 		"/D/GitRepos/Game/game/Button.lua",
-		"/D/GitRepos/Game/game/Health.lua",
-		"/D/GitRepos/Game/game/Guns.lua",
-		"/D/GitRepos/Game/game/FrameCounter.lua",
-		"/D/GitRepos/Game/game/Fade.lua",
+		"/D/GitRepos/Game/game/BulletTypes.lua",
+		"/D/GitRepos/Game/game/Bool.lua",
+		"/D/GitRepos/Game/game/Box.lua",
+		"/D/GitRepos/Game/game/Bullet.lua",
+		"/D/GitRepos/Game/game/Canvas.lua",
+		"/D/GitRepos/Game/game/CollisionManager.lua",
+		"/D/GitRepos/Game/game/CollisionLists.lua",
+		"/D/GitRepos/Game/game/MouseDrag.lua",
+		"/D/GitRepos/Game/game/Collision.lua",
+		"/D/GitRepos/Game/game/Camera.lua",
+		"/D/GitRepos/Game/game/App.lua",
+		"/D/GitRepos/Game/game/BlockMap.lua",
+		"/D/GitRepos/Game/game/Info.lua",
+		"/D/GitRepos/Game/game/Code Tags and Tools.lua",
+		"/D/GitRepos/Game/game/Animation.lua",
+		"/D/GitRepos/Game/game/Block.lua",
 		"/D/GitRepos/Game/game/DrawTools.lua",
 		"/D/GitRepos/Game/game/DrawManager.lua",
 		"/D/GitRepos/Game/game/DrawList.lua",
 		"/D/GitRepos/Game/game/DrawGroup.lua",
 		"/D/GitRepos/Game/game/Draw.lua",
+		"/D/GitRepos/Game/game/main.lua",
+		"/D/GitRepos/Game/game/ObjectUpdater.lua",
 		"/D/GitRepos/Game/game/DebugText.lua",
+		"/D/GitRepos/Game/game/Game.lua",
+		"/D/Backup/Files/DebugText_1.lua",
+		"/D/GitRepos/Game/game/Line.lua",
+		"/D/GitRepos/Game/game/InputList.lua",
+		"/D/GitRepos/Game/game/OldCode.lua",
+		"/D/GitRepos/Game/game/Input.lua",
+		"/D/GitRepos/Game/game/Fade.lua",
+		"/D/GitRepos/Game/game/Pos.lua",
+		"/D/GitRepos/Game/game/Levels/PixelDrawLevel.lua",
+		"/D/GitRepos/Game/game/Mouse.lua",
+		"/D/GitRepos/Game/game/Health.lua",
+		"/D/GitRepos/Game/game/Guns.lua",
+		"/D/GitRepos/Game/game/FrameCounter.lua",
 		"/D/GitRepos/Game/game/Controller.lua",
-		"/D/GitRepos/Game/game/Color.lua",
-		"/D/GitRepos/Game/game/CollisionManager.lua",
-		"/D/GitRepos/Game/game/Collision.lua",
-		"/D/GitRepos/Game/game/Canvas.lua",
-		"/D/GitRepos/Game/game/Camera.lua",
-		"/D/GitRepos/Game/game/Bullet.lua",
-		"/D/GitRepos/Game/game/Box.lua",
-		"/D/GitRepos/Game/game/Bool.lua",
-		"/D/GitRepos/Game/game/BlockMap.lua",
-		"/D/GitRepos/Game/game/Block.lua",
-		"/D/GitRepos/Game/game/App.lua",
-		"/D/GitRepos/Game/game/Animation.lua",
 		"/D/GitRepos/Game/game/Window.lua",
 		"/D/GitRepos/Game/game/TableSort.lua",
 		"/D/GitRepos/Game/game/Sprite.lua",
@@ -633,7 +648,6 @@
 		"/D/GitRepos/Game/game/SimplePanel.lua",
 		"/D/GitRepos/Game/game/Shape.lua",
 		"/D/GitRepos/Game/game/Scale.lua",
-		"/D/GitRepos/Game/game/Pos.lua",
 		"/D/GitRepos/Game/game/Polygon.lua",
 		"/D/GitRepos/Game/game/Point.lua",
 		"/D/GitRepos/Game/game/Player.lua",
@@ -643,38 +657,27 @@
 		"/D/GitRepos/Game/game/Particle.lua",
 		"/D/GitRepos/Game/game/Panel.lua",
 		"/D/GitRepos/Game/game/Palette.lua",
-		"/D/GitRepos/Game/game/OldCode.lua",
-		"/D/GitRepos/Game/game/ObjectUpdater.lua",
-		"/D/GitRepos/Game/game/MouseDrag.lua",
-		"/D/GitRepos/Game/game/Mouse.lua",
 		"/D/GitRepos/Game/game/MapTable.lua",
 		"/D/GitRepos/Game/game/Map.lua",
 		"/D/GitRepos/Game/game/Link.lua",
-		"/D/GitRepos/Game/game/Line.lua",
 		"/D/GitRepos/Game/game/Life.lua",
 		"/D/GitRepos/Game/game/FailNew.lua",
 		"/D/GitRepos/Game/game/Graphics.lua",
-		"/D/GitRepos/Game/game/Game.lua",
 		"/D/GitRepos/Game/game/DrawToolsHUD.lua",
 		"/D/GitRepos/Game/game/Sprites.lua",
 		"/D/GitRepos/Game/game/Notes.lua",
 		"/D/GitRepos/Game/game/ColorPicker.lua",
-		"/D/GitRepos/Game/game/CollisionLists.lua",
-		"/D/GitRepos/Game/game/BulletTypes.lua",
 		"/D/GitRepos/Game/game/DeltaTime.lua",
 		"/D/GitRepos/Game/game/DragWithMouse.lua",
 		"/D/GitRepos/Game/game/Console.lua",
 		"/D/GitRepos/Game/game/ComponentManager.lua",
-		"/D/GitRepos/Game/game/main.lua",
 		"/D/GitRepos/Game/game/AnimationTest.lua",
 		"/D/GitRepos/Game/game/TestCode.lua",
 		"/D/GitRepos/Game/game/Levels/TextWriteLevel.lua",
 		"/D/GitRepos/Game/game/SnapPlayer.lua",
 		"/D/GitRepos/Game/game/Shader.lua",
-		"/D/GitRepos/Game/game/Levels/PixelDrawLevel.lua",
 		"/D/GitRepos/Game/game/Levels/AudioTestLevel.lua",
 		"/D/GitRepos/Game/game/Keyboard.lua",
-		"/D/GitRepos/Game/game/Input.lua",
 		"/D/GitRepos/Game/game/GameEngineProjectFile.sublime-workspace",
 		"/D/GitRepos/Game/game/PrintDebug.lua",
 		"/D/GitRepos/Game/game/GameEngineProjectFile.sublime-project",
@@ -682,7 +685,6 @@
 		"/D/GitRepos/Game/game/RNG.lua",
 		"/D/GitRepos/Game/game/Textfile.lua",
 		"/D/GitRepos/Game/game/Value.lua",
-		"/D/GitRepos/Game/game/InputList.lua",
 		"/D/GitRepos/Game/game/ObjectCreator.lua",
 		"/D/GitRepos/Game/design/Command Gameplay/CommandGame_1.txt",
 		"/D/GitRepos/Game/backup/DrawList_1.lua",
@@ -725,9 +727,7 @@
 		"/G/pixel piledriver/Jobs/Cool Fighting Game/Fighting Game Notes.txt",
 		"/G/pixel piledriver/Jobs/Aeon Sands/Special effects list.txt",
 		"/G/pixel piledriver/Pixelation/Messages/Fighting Game Guy_2.txt",
-		"/G/pixel piledriver/Pixelation/Messages/Fighting Game Guy_1.txt",
-		"/G/pixel piledriver/Jobs/money wise.txt",
-		"/D/GitRepos/Game/game/Button"
+		"/G/pixel piledriver/Pixelation/Messages/Fighting Game Guy_1.txt"
 	],
 	"find":
 	{
@@ -747,6 +747,20 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"Or not",
+			"MoveObjecTo",
+			"object.name",
+			"object.",
+			"object",
+			"local CollisionManager",
+			"Print",
+			"Object Component",
+			"dataTypes",
+			"componentTypes",
+			"otype",
+			".oType",
+			".count",
+			"o.count",
 			"active",
 			"defaultDraw",
 			"Draw",
@@ -860,21 +874,7 @@
 			"Draw",
 			"local Mouse = require(\"Mouse\")",
 			"alphaStart",
-			"CreateParticleFromTable",
-			"Draw:New",
-			".layer",
-			"CreateDepth",
-			"DepthIndex",
-			"depthIndex",
-			"Draw",
-			"AsTable",
-			"colors",
-			"Color:Get(\"red\")",
-			"Color:GetColor(\"red\")",
-			"red",
-			"o.color",
-			"pawnGraphics",
-			"Animation"
+			"CreateParticleFromTable"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -882,6 +882,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"object.Info.name",
+			"o.",
+			"o",
 			"objectType",
 			"stuff",
 			"Draw",
@@ -1011,23 +1014,23 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Line.lua",
+					"file": "Controller.lua",
 					"settings":
 					{
-						"buffer_size": 2345,
+						"buffer_size": 9576,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2065,
-								2065
+								381,
+								381
 							]
 						],
 						"settings":
@@ -1047,63 +1050,53 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1069.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "DebugText.lua",
+					"file": "/D/GitRepos/Ideas-and-Writing/Words and stuff_31.txt",
 					"settings":
 					{
-						"buffer_size": 6724,
+						"buffer_size": 82104,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								924,
-								924
+								81999,
+								81999
 							]
 						],
 						"settings":
 						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 977.0,
+						"translation.y": 69381.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "ObjectUpdater.lua",
+					"file": "DebugText.lua",
 					"settings":
 					{
-						"buffer_size": 9701,
+						"buffer_size": 6754,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2311,
-								2311
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1123,25 +1116,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1923.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "Fade.lua",
+					"file": "DeltaTime.lua",
 					"settings":
 					{
-						"buffer_size": 2204,
+						"buffer_size": 307,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								489,
-								489
+								307,
+								307
 							]
 						],
 						"settings":
@@ -1157,29 +1150,28 @@
 									"selector": "source.lua.corona"
 								}
 							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 330.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "Mouse.lua",
+					"file": "Color.lua",
 					"settings":
 					{
-						"buffer_size": 5887,
+						"buffer_size": 18904,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3811,
-								3811
+								440,
+								440
 							]
 						],
 						"settings":
@@ -1199,7 +1191,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4783.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1240,7 +1232,7 @@
 		"cols":
 		[
 			0.0,
-			0.72091503268,
+			0.761689047884,
 			1.0
 		],
 		"rows":

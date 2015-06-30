@@ -21,9 +21,12 @@ DrawManager = {}
 ------------------
 -- Static Info
 ------------------
-DrawManager.name = "DrawManager"
-DrawManager.objectType = "Static"
-DrawManager.dataType = "Manager" -- the function of this static
+DrawManager = Info:New
+{
+	name = "DrawManager",
+	objectType = "Static",
+	dataType = "Manager"
+}
 
 
 ---------------------

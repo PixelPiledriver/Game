@@ -14,10 +14,12 @@ Bool = {}
 ------------------
 -- Static Info
 ------------------
-
-Bool.name = "Bool"
-Bool.objectType = "Static"
-Bool.dataType = "Utility"
+Bool.Info = Info:New
+{
+	objectType = "Bool",
+	dataType = "Data",
+	structureType = "Utility"
+}
 
 ---------------------------
 -- Static Functions

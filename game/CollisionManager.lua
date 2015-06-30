@@ -9,17 +9,18 @@
 
 ---------------------------------------------------------------------
 
-local CollisionManager = {}
+CollisionManager = {}
 
 
 ----------------------
 -- Static Vars
 ----------------------
-
--- object
-CollisionManager.name = "CollisionManager"
-CollisionManager.objectType = "Static"
-CollisionManager.dataType = "Manager"
+CollisionManager.Info = Info:New
+{
+	name = "CollisionManager",
+	objectType = "Static",
+	dataType = "Manager"
+}
 
 -- lists
 CollisionManager.objects = {}
@@ -168,13 +169,13 @@ function CollisionManager:Add(object)
 
 	-- sort objects by name
 	-- first object of this type? create table for them
-	if(self.objects[object.name] == nil) then
-		self.objects[object.name] = {}
-		self:AddName(object.name)
+	if(self.objects[object.Info.name] == nil) then
+		self.objects[object.Info.name] = {}
+		self:AddName(object.Info.name)
 	end 
 
 	-- add object to table by name
-	self.objects[object.name][#self.objects[object.name] + 1] = object
+	self.objects[object.Info.name][#self.objects[object.Info.name] + 1] = object
 
 end
 
@@ -296,7 +297,7 @@ function CollisionManager:CheckForCollisions()
 								A:CollisionWith{other = B}
 								B:CollisionWith{other = A}
 
-								printDebug{A.name .. " +collision+ " .. B.name, "CollisionManager"}
+								printDebug{A.Info.name .. " +collision+ " .. B.Info.name, "CollisionManager"}
 							end 
 
 						end 
@@ -359,7 +360,6 @@ end
 
 --ObjectUpdater:AddStatic(CollisionManager)
 
-return CollisionManager
 
 
 

@@ -21,9 +21,12 @@ local DrawGroup = {}
 ------------------
 -- Static Info
 ------------------
-DrawGroup.name = "DrawGroup "
-DrawGroup.objectType = "Static"
-DrawGroup.dataType = "Graphics Object Constructor"
+DrawGroup.Info = Info:New
+{
+	name = "DrawGroup ",
+	objectType = "Static",
+	dataType = "Graphics Object Constructor"
+}
 
 
 ---------------------

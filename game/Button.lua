@@ -28,10 +28,13 @@ local Button = {}
 ------------------
 -- Static Info
 ------------------
-Button.name = "Button"
-Button.objectType = "Static"
-Button.dataType = "Hud Constructor" 
-
+Button.Info = Info:New
+{
+	name = "Button",
+	objectType = "Static",
+	dataType = "H",
+	structureType = "Static"
+}
 
 ------------------
 -- Static Vars
@@ -76,9 +79,13 @@ function Button:New(data)
 	------------------
 	-- Object Info
 	------------------
-	o.name = data.name or "..."
-	o.objectType = "Button"
-	o.dataType = "HUD"
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Button",
+		dataType = "HUD",
+		structureType = "Object"
+	}
 
 	------------
 	-- Vars
@@ -459,7 +466,7 @@ function Button:New(data)
 			{text = "", obj = "Button"},
 			{text = "Button"},
 			{text = "-----------"},
-			{text = "Name: " .. self.name},
+			{text = "Name: " .. self.Info.name},
 			{text = "Width: " .. self.Size.width},
 			{text = "Height: " .. self.Size.height},
 			{text = "Function: " .. self.text},

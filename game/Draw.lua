@@ -16,9 +16,12 @@ local Draw = {}
 ------------------
 -- Static Info
 ------------------
-Draw.name = "Draw"
-Draw.objectType = "Static"
-Draw.dataType = "Graphics Constructor"
+Draw.Info = Info:New
+{
+	name = "Draw",
+	objectType = "Static",
+	dataType = "Graphics Constructor"
+}
 
 
 ----------------------

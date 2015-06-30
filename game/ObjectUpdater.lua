@@ -7,11 +7,6 @@
 -- objects, statics, special types
 
 
---------------
--- Requires
---------------
-local CollisionManager = require("CollisionManager")
-
 ------------------------------------------------------------------------------
 
 -- global
@@ -20,10 +15,12 @@ ObjectUpdater = {}
 -----------------
 -- Static Info
 -----------------
-
-ObjectUpdater.name = "ObjectUpdater"
-ObjectUpdater.objectType = "Static"
-ObjectUpdater.dataType = "Manager"
+ObjectUpdater.Info =
+{
+	name = "ObjectUpdater",
+	objectType = "Static",
+	dataType = "Manager"
+}
 
 
 -----------------

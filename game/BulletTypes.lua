@@ -19,6 +19,12 @@ local Sprites = require("Sprites")
 
 local BulletTypes = {}
 
+BulletTypes = Info:New
+{
+	objectType = "BulletTypes",
+	dataType = "Game"
+	structureType = "List"
+}
 
 
 BulletTypes.laser = 

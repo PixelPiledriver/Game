@@ -19,9 +19,12 @@ local App = {}
 ------------------
 -- Static Info
 ------------------
-App.name = "App"
-App.objectType = "Static"
-App.dataType = "Manager"
+App.Info = Info:New
+{
+	objectType = "App",
+	dataType = "Game",
+	structureType = "Static"
+}
 
 -----------------------
 -- Static Functions

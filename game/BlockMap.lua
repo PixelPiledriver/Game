@@ -14,9 +14,12 @@ local BlockMap = {}
 ------------------
 -- Static Info
 ------------------
-BlockMap.name = "BlockMap"
-BlockMap.objectType = "Static"
-BlockMap.dataType = "Map"
+BlockMap = Info:New
+{
+	objectType = "BlockMap"
+	dataType = "Game",
+	structureType = "Map"
+}
 
 
 ----------------

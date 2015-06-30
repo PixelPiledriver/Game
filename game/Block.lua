@@ -22,10 +22,13 @@ local Block = {}
 
 ---------------------
 -- Static Info
----------------------
-Block.name = "Block"
-Block.objectType = "Static"
-Block.DataType = "GameObject Constructor"
+---------------------s
+Block.Info = Info:New
+{
+	objectType = "Block",
+	DataType = "Game",
+	structureType = "Static"
+}
 
 
 ---------------------
@@ -41,40 +44,44 @@ function Block:New(data)
 	------------------
 	-- Object Info
 	------------------
-	object.name = data.name or "..."
-	object.objectType = "Block"
-	object.dataType = "GameObject"
+	o.Info = Info:New
+	{
+		name = data.name or "..."
+		objectType = "Block"
+		dataType = "Game"
+		structureType = "Object"
+	}
 
 	----------------
 	-- Vars
 	----------------
-	object.x = data.x
-	object.y = data.y
-	object.xIndex = data.xIndex
-	object.yIndex = data.yIndex
+	o.x = data.x
+	o.y = data.y
+	o.xIndex = data.xIndex
+	o.yIndex = data.yIndex
 
-	printDebug{"New block xIndex:" .. object.xIndex, "Build"}
-	printDebug{"New block yIndex:" .. object.yIndex, "Build"}
+	printDebug{"New block xIndex:" .. o.xIndex, "Build"}
+	printDebug{"New block yIndex:" .. o.yIndex, "Build"}
 	
-	object.frame = data.frame
-	object.color = {255,255,255,255}
+	o.frame = data.frame
+	o.color = {255,255,255,255}
 
-	object.buildTime = data.buildTime or 100
-	object.completion = 0
-	object.collisionList = data.collisionList or nil
+	o.buildTime = data.buildTime or 100
+	o.completion = 0
+	o.collisionList = data.collisionList or nil
 	
-	object.health = Health:New{}
+	o.health = Health:New{}
 
 	---------------
 	-- Collision
 	---------------
-	object.collision = Collision:New
+	o.collision = Collision:New
 	{
 		name = data.builder.playerColor .. "Block",
 		parent = object,
-		width = object.frame.width,
-		height = object.frame.height,
-		collisionList = object.collisionList or nil
+		width = o.frame.width,
+		height = o.frame.height,
+		collisionList = o.collisionList or nil
 	}
 
 	---------------

@@ -9,8 +9,10 @@
 ----------------------
 -- Utilities and Globals
 ----------------------
+
 require("ObjectUpdater")
 require("Info")
+require("CollisionManager")
 require("DrawList")
 require("DrawManager")
 require("DebugText")
@@ -34,7 +36,6 @@ local Camera = require("Camera")
 local Controller = require("Controller")
 local Color = require("Color")
 local Collision = require("Collision")
-local CollisionManager = require("CollisionManager")
 local CollisionLists = require("CollisionLists")
 local FrameCounter = require("FrameCounter")
 local Sound = require("Sound")

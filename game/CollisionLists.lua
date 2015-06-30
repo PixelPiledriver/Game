@@ -11,12 +11,16 @@
 
 local CollisionLists = {}
 
-
+CollisionLists.Info = Info:New
+{	
+	objectType = "CollisionLists",
+	dataType = "List",
+	structureType = "Static"
+}
 
 ----------------
 -- Static Vars
 ----------------
-
 CollisionLists.redRobot =
 {
 	robot =

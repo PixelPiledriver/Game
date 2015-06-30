@@ -22,9 +22,12 @@ local Camera = {}
 ------------------
 -- Static Info
 ------------------
-Camera.name = "Camera"
-Camera.objectType = "Static"
-Camera.dataType = "View Constructor"
+Camera.Info = Info:New
+{
+	objectType = "Camera",
+	dataType = "Graphics",
+	structureType = "Static"
+}
 
 
 ------------------

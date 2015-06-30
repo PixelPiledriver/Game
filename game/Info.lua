@@ -16,6 +16,7 @@ Info = {}
 ------------
 -- Vars
 ------------
+Info.AllInfos = {}
 Info.objectTypes = {}
 Info.objectTypes.index = {}
 
@@ -34,10 +35,22 @@ function Info:New(data)
 	-- Vars
 	--------------
 
-	o.name = data.name
-	o.objectType = data.objectType
-	o.dataType = data.dataType
-	o.structureType = data.structureType
+	-- name of object 
+	-- personal string to call an individual object by
+	-- most objects will not have a name
+	-- for statics this is the same as their objectType
+	o.name = data.name or "..."
+
+	-- the name of the static that created this object or the static itself
+	o.objectType = data.objectType or "___"
+
+	-- the kind of stuff this object provides, Graphics, Collision, Constructor, Game, etc
+	o.dataType = data.dataType or "???"
+
+	-- the build of the object, Static, Object or Table
+	o.structureType = data.structureType or "***"
+
+	self:AddInfo(data)
 
 	self:AddDataType(data)
 
@@ -47,6 +60,11 @@ function Info:New(data)
 	----------
 	return o
 
+end 
+
+-- data = data from New
+function Info:AddInfo(data)
+	self.AllInfos[#self.AllInfos + 1] = data
 end 
 
 -- data = data from New
@@ -64,8 +82,11 @@ end
 function Info:PrintDebugText()
 
 	local text = {}
-	text[1] = {text = "Info:", obj = "Info"}
+	text[1] = {text = "Info.lua", obj = "Info"}
+	text[2] = {text = "------------"}
 
+	text[3] = {text = "DataTypes"}
+	text[4] = {text = "======="}
 	for i=1, #self.dataTypes.index do
 		text[#text + 1] = {text = self.dataTypes.index[i]}
 	end 
@@ -91,6 +112,7 @@ Info.Info = Info:New
 -----------------
 
 ObjectUpdater:AddStatic(Info)
+
 
 
 

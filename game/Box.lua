@@ -28,10 +28,12 @@ local Box = {}
 -------------------
 -- Static Info
 -------------------
-
-Box.name = "Box"
-Box.objectType = "Static"
-Box.dataType = "Graphics Constructor"
+Box.Info = Info:New
+{
+	objectType = "Box",
+	dataType = "Graphics",
+	structureType = "Static"
+}
 
 
 -- create Box -->REFACTOR
@@ -45,9 +47,13 @@ function Box:New(data)
 	------------------
 	-- Object Info
 	------------------
-	o.name = data.name or "..."
-	o.objectType = "Box"
-	o.dataType = "Graphics"
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Box",
+		dataType = "Graphics",
+		structureType = "Object"
+	}
 
 	----------------
 	-- Vars

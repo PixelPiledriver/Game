@@ -36,7 +36,7 @@ function MouseDrag:New(data)
 	-- Functions
 	-----------------------
 
-	function o:MoveObjecToMouse()
+	function o:MoveObjectToMouse()
 		if(self.drag == false) then
 			return 
 		end 
@@ -79,7 +79,7 @@ function MouseDrag:New(data)
 
 	function o:Update()
 		self:Drag()
-		self:MoveObjecToMouse()
+		self:MoveObjectToMouse()
 	end 
 
 	ObjectUpdater:Add{o}

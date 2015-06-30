@@ -21,10 +21,12 @@ local Color = {}
 ----------------------
 -- Static Info
 ----------------------
-
-Color.name = "Color"
-Color.objectType = "Static"
-Color.dataType = "Graphics Constructor"
+Color.Info = Info:New
+{
+	objectType = "Color",
+	dataType = "Graphics",
+	structureType = "Static"
+}
 
 ----------------------
 -- Colors
