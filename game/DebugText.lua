@@ -20,7 +20,8 @@ DebugText.type =
 	ObjectUpdater = false,
 	CollisionManager = false,
 	Map = false,
-	ParticleSystem = true,
+	ParticleSystem = false,
+	Particle = false,
 	Camera = true,
 		
 	Generic = true,
