@@ -528,14 +528,6 @@
 			}
 		},
 		{
-			"file": "/D/GitRepos/Ideas-and-Writing/Words and stuff_31.txt",
-			"settings":
-			{
-				"buffer_size": 82104,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "DebugText.lua",
 			"settings":
 			{
@@ -600,6 +592,7 @@
 	},
 	"file_history":
 	[
+		"/D/GitRepos/Ideas-and-Writing/Words and stuff_31.txt",
 		"/D/GitRepos/Game/game/Color.lua",
 		"/D/GitRepos/Game/game/Button.lua",
 		"/D/GitRepos/Game/game/BulletTypes.lua",
@@ -718,7 +711,6 @@
 		"/D/GitRepos/Game/game/PixelGenerators.lua",
 		"/D/GitRepos/Game/game/box",
 		"/D/GitRepos/Game/game/Levels/Box2.lua",
-		"/D/GitRepos/Ideas-and-Writing/Words and stuff_31.txt",
 		"/D/GitRepos/Ideas-and-Writing/SparkleDawg_ep1_2.txt",
 		"/D/Love test code/hello world/main.lua",
 		"/D/Love test code/Coroutines/main.lua",
@@ -1014,7 +1006,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -1029,8 +1021,8 @@
 						"selection":
 						[
 							[
-								381,
-								381
+								821,
+								821
 							]
 						],
 						"settings":
@@ -1050,41 +1042,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 396.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/D/GitRepos/Ideas-and-Writing/Words and stuff_31.txt",
-					"settings":
-					{
-						"buffer_size": 82104,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								81999,
-								81999
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 69381.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "DebugText.lua",
 					"settings":
 					{
@@ -1122,7 +1086,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "DeltaTime.lua",
 					"settings":
 					{
@@ -1159,7 +1123,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "Color.lua",
 					"settings":
 					{
