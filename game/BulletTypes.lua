@@ -1,10 +1,30 @@
--- Bullet types
--- different kinds of bullets with stats and stuff
+-- BulletTypes.lua
+-->OLD
 
 
+-- Purpose
+----------------------------
+-- different kinds of bullets that player can fire
+-- each bullet has its own stats and vars
+
+
+------------------
+-- Requires
+------------------
 local Sprites = require("Sprites")
 
+
+
+---------------------------------------------------------------------------
+
 local BulletTypes = {}
+
+BulletTypes = Info:New
+{
+	objectType = "BulletTypes",
+	dataType = "Game"
+	structureType = "List"
+}
 
 
 BulletTypes.laser = 
@@ -82,7 +102,14 @@ BulletTypes.mine =
 
 
 
-
-
+---------------
+-- Static End
+---------------
 
 return BulletTypes
+
+
+-- Notes
+---------------------------------------
+-- this file is just tables of data waiting to be sent to Bullet.lua
+-- might still be useful

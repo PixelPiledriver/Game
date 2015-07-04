@@ -1,31 +1,80 @@
 -- Gun Types
+-->OLD
+
+-- Purpose
+---------------------------------------------------
 -- players can carry guns and shoot stuff
 -- Guns have stats and properties --> ammo from BulletTypes etc
+
+------------------
+-- Requires
+------------------
 
 local BulletTypes = require("BulletTypes")
 local Bullet = require("Bullet")
 
 
+-----------------------------------------------------------------------------------
 
 local Guns = {}
 
+------------------
+-- Static Info
+------------------
+
+Guns.name = "Guns"
+Guns.objectType = "Static"
+Guns.dataType = "Object Data"
+
+-----------------
+-- Static Vars
+-----------------
+Guns.stats =
+{
+	"name",
+	"bullet",
+	"rateOfFire",
+	"maxRateOfFire",
+	"clip",
+	"reloadTime",
+	"Shoot"
+}
+
+
+
 function Guns:New(data)
 
-	local object = {}
+	local o = {}
 
-	object.name = data.name or "Gun"
-	object.bullet = data.bullet or BulletTypes.laser
-	object.maxRateOfFire = data.rateOfFire or 10
-	object.rateOfFire = 0
-	object.clip = data.clip or 10
-	object.reloadTime = data.reloadTime or 100				-- time it takes to load new ammo clip, need to add reload types
-	object.shotsFired = data.shotsFired or 1 					-- for shotguns, etc
+	-----------------
+	-- Object Info
+	-----------------
 
-	object.parent =  nil 															-- owner of the gun
-	object.triggerDown = false
-	object.triggerMashing = false
+	o.name = data.name or "???"
+	o.objectType = "Gun"
+	o.dataType = "Player Item"
 
-	function object:Shoot(p)
+	-----------
+	-- Vars
+	-----------
+
+	o.bullet = data.bullet or BulletTypes.laser
+	o.maxRateOfFire = data.rateOfFire or 10
+	o.rateOfFire = 0
+	o.clip = data.clip or 10
+	o.reloadTime = data.reloadTime or 100				-- time it takes to load new ammo clip, need to add reload types
+	o.shotsFired = data.shotsFired or 1 					-- for shotguns, etc
+
+	o.parent =  nil 															-- owner of the gun
+	o.triggerDown = false
+	o.triggerMashing = false
+
+
+	----------------
+	-- Functions
+	----------------
+
+	function o:Shoot(p)
 
 
 		self.rateOfFire = self.rateOfFire + 1
@@ -50,9 +99,13 @@ function Guns:New(data)
 
 	end 
 
-	return object
+	return o
 
 end 
+
+----------------------
+-- Static Functions
+----------------------
 
 function Guns:Get(gunName)
 	local copy = {}
@@ -65,16 +118,11 @@ function Guns:Get(gunName)
 	return copy
 end 
 
-Guns.stats =
-{
-	"name",
-	"bullet",
-	"rateOfFire",
-	"maxRateOfFire",
-	"clip",
-	"reloadTime",
-	"Shoot"
-}
+
+
+----------
+-- Guns
+----------
 
 Guns.laserRifle = Guns:New
 {
@@ -106,7 +154,9 @@ Guns.missleLauncher = Guns:New
 	ammo = 20
 }
 
-
+----------------
+-- Static End
+----------------
 
 return Guns
 
@@ -115,9 +165,8 @@ return Guns
 
 -- notes
 ----------------
+-- old code
 
--- oh shit bro :O
+-- is this fixed? -->FIX
 -- there is only one instance of each gun, both players cant shoot at the same time
 -- need to hand out copies to players
-
--- 

@@ -1,14 +1,32 @@
--- Game
--- shit about the game
+-- Game.lua
+-->OLD
 
+-- Purpose
+----------------------------
+-- Manages higher concepts of the game
+
+
+-------------------------------------------------------------------------------
 
 local Game = {}
 
 
+-------------------
+-- Static Info
+-------------------
+Game.Info = Info:New
+{
+	name = "Game",
+	objectType = "Static",
+	dataType = "Manager"
+}
 
--- CollisionLists.lua kinda replaces this shit
+
+-------------------
+-- Static Vars
+-------------------
+
 Game.playersInPlay = {"redRobot", "blueRobot"}
-
 
 
 function Game:GetAllOtherPlayers(playerName)
@@ -23,4 +41,18 @@ function Game:GetAllOtherPlayers(playerName)
 	return temp
 end 
 
+
+---------------
+-- Static End
+---------------
+
+ObjectUpdater:AddStatic(Game)
+
 return Game
+
+
+
+-- Notes
+---------------------------------------
+-- This file is very incomplete and needs to be refactored
+-- may have very little to do with the new game engine

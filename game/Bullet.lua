@@ -1,71 +1,103 @@
+-- Bullet.lua
+-->OLD
+
+-- Purpose
+----------------------------
 -- simple bullet
 
 
-local ObjectUpdater = require("ObjectUpdater")
+------------------
+-- Requires
+------------------
 local Collision = require("Collision")
+
+
+---------------------------------------------------------------------------
 
 local Bullet = {}
 
-
--- create
+----------------
+-- Static Info
+----------------
+Bullet.Info = Info:New
+{
+	objectType = "Bullet",
+	dataType = "Game",
+	structureType = "Static"
+}
 
 function Bullet:New(data)
 
+	---------------------
+	-- Create
+	---------------------
+
 	local object = {}
 
-	--------------
-	-- Variables
-	--------------
+	------------------
+	-- Object Info
+	------------------
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Bullet",
+		dataType = "Game",
+		StructureType = "Object"
+	}
+
+	
+	----------------
+	-- Vars
+	----------------
+
 	if(data.bulletType) then
 		
-		object.frame = data.frame
-		object.bulletType = data.bulletType
+		o.frame = data.frame
+		o.bulletType = data.bulletType
 
 		-- pos
-		object.x = data.shooter.x + data.shooter.xShootPos
-		object.y = data.shooter.y + data.shooter.yShootPos
+		o.x = data.shooter.x + data.shooter.xShootPos
+		o.y = data.shooter.y + data.shooter.yShootPos
 
 		-- direction
-		object.xSpeed = data.direction.x or 0
-		object.ySpeed = data.direction.y or 0
+		o.xSpeed = data.direction.x or 0
+		o.ySpeed = data.direction.y or 0
 
 		-- bullet stats
-		object.speed = object.bulletType.speed
-		object.damage = object.bulletType.damage
-		object.lifespan = object.bulletType.lifespan
+		o.speed = o.bulletType.speed
+		o.damage = o.bulletType.damage
+		o.lifespan = o.bulletType.lifespan
 
 	else
 
 		-- sprite
-		object.frame = data.frame or nil
+		o.frame = data.frame or nil
 		
 		-- pos
-		object.x = data.shooter.x + data.shooter.xShootPos
-		object.y = data.shooter.y + data.shooter.yShootPos
+		o.x = data.shooter.x + data.shooter.xShootPos
+		o.y = data.shooter.y + data.shooter.yShootPos
 
 		-- direction
-		object.xSpeed = data.xSpeed or 0
-		object.ySpeed = data.ySpeed or 0
+		o.xSpeed = data.xSpeed or 0
+		o.ySpeed = data.ySpeed or 0
 
 		-- bullet stats
-		object.speed = data.speed or 10
-		object.damage = data.damage or 1
-		object.lifespan = data.lifespan or -1
+		o.speed = data.speed or 10
+		o.damage = data.damage or 1
+		o.lifespan = data.lifespan or -1
 	end
 
-	object.type = "bullet"
 
-
-	--------------
+	---------------
 	-- Collision
 	---------------
 
-	object.collision = Collision:New
+	o.collision = Collision:New
 	{
 		name = data.shooter.playerColor .. "Bullet",
 		parent = object,
-		width = object.frame.width,
-		height = object.frame.height,
+		width = o.frame.width,
+		height = o.frame.height,
 		collisionList = data.collisionList or nil,
 		oneCollision = true,
 		visible = false
@@ -100,16 +132,8 @@ function Bullet:New(data)
 
 	end 
 
+	-->???
 	function object:OutOfBounds()
-		-- off screen
-
-		-- right
-		--if(self.x > )
-		-- bottom
-		-- left
-		-- top
-		
-
 	end 
 
 	function object:Update()
@@ -123,24 +147,27 @@ function Bullet:New(data)
 	end 
 
 
-	-- add new object to updater
+	----------
+	-- End
+	----------
+	
 	ObjectUpdater:Add{object}
 
-	-- done
 	return object
 
 end 
 
 
+---------------
+-- Static End
+---------------
 
-
-
-
-
-
-
-
-
-
+ObjectUpdater:AddStatic(Bullet)
 
 return Bullet
+
+
+
+-- Notes
+---------------------------------------
+-- old game code that needs to be looked over

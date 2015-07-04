@@ -1,0 +1,26 @@
+Build and Blast
+-----------------------
+
+Ideas
+------------------
+
+
+Growing game board
+	Tiles for each side -
+	Match starts small
+	Board expands from the middle
+
+Discovery game board
+	- terrain is randomized and hidden
+	-	players scan, download and reveal new terrain to the game board
+	- A single block can open up many other tiles at once when it is completed
+		- a small room
+		- a long hallyway
+	- most blocks are random, but some contain hidden pickups or structures!
+
+	Pickup Types
+	----------------
+	- special ammo
+	- bombs
+
+

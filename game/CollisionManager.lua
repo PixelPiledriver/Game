@@ -1,60 +1,76 @@
+--  CollisionManager.lua
+-->CLEAN
+-->REVISE
+-->COMMENT
+
+-- Purpose
+----------------------------
 -- checks all the collision objects for collisions
 
-local CollisionManager = {}
+---------------------------------------------------------------------
+
+CollisionManager = {}
 
 
+----------------------
+-- Static Vars
+----------------------
+CollisionManager.Info = Info:New
+{
+	name = "CollisionManager",
+	objectType = "Static",
+	dataType = "Manager"
+}
 
+-- lists
 CollisionManager.objects = {}
 CollisionManager.names = {}
 CollisionManager.destroyList = {}
 
-
-
-----------------------
--- Variables
-----------------------
-
+-- flags
 CollisionManager.destroyObjects = false
-
 
 -------------------------
 -- Collision Functions
 -------------------------
 
+-- {a = {x,y}, b = {x,y}}
 function CollisionManager:PointToPoint(a, b)
 
-	if(a.x == b.x and a.y == b.y) then
-		printDebug{"Point to Point: collision", "Collision"}
+	if(a.Pos.x == b.Pos.x and a.Pos.y == b.Pos.y) then
+		printDebug{"Point to Point: collision", "CollisionManager"}
 		return true
 	end 
 
 	return false
 end
 
+-- {point = {x,y}, rect = {x,y,width,height} }
 function CollisionManager:PointToRect(point, rect)
-	if(point.x > rect.x and point.x < rect.x + rect.width and point.y > rect.y ) then
+	if(point.Pos.x > rect.Pos.x and point.Pos.x < rect.Pos.x + rect.width and point.Pos.y > rect.Pos.y ) then
 		return true
 	end
 
 	return false
 end 
 
+-- {a = {x,y,width,height}, b = {}}
 function CollisionManager:RectToRect(a, b)
 	local rect1, rect2
 
-	if(a.x < b.x) then
+	if(a.Pos.x < b.Pos.x) then
 		rect1 = 
 		{
 			min = 
 			{	
-				x = a.x,
-				y = a.y
+				x = a.Pos.x,
+				y = a.Pos.y
 			},
 
 			max = 
 			{
-				x = a.x + a.width,
-				y = a.y + a.height
+				x = a.Pos.x + a.Size.width,
+				y = a.Pos.y + a.Size.height
 			}
 		}
 
@@ -62,14 +78,14 @@ function CollisionManager:RectToRect(a, b)
 		{
 			min = 
 			{	
-				x = b.x,
-				y = b.y
+				x = b.Pos.x,
+				y = b.Pos.y
 			},
 
 			max = 
 			{
-				x = b.x + b.width,
-				y = b.y + b.height
+				x = b.Pos.x + b.Size.width,
+				y = b.Pos.y + b.Size.height
 			}
 		}
 
@@ -78,14 +94,14 @@ function CollisionManager:RectToRect(a, b)
 		{
 			min = 
 			{	
-				x = b.x,
-				y = b.y
+				x = b.Pos.x,
+				y = b.Pos.y
 			},
 
 			max = 
 			{
-				x = b.x + b.width,
-				y = b.y + b.height
+				x = b.Pos.x + b.Size.width,
+				y = b.Pos.y + b.Size.height
 			}
 		}
 
@@ -93,14 +109,14 @@ function CollisionManager:RectToRect(a, b)
 		{
 			min = 
 			{	
-				x = a.x,
-				y = a.y
+				x = a.Pos.x,
+				y = a.Pos.y
 			},
 
 			max = 
 			{
-				x = a.x + a.width,
-				y = a.y + a.height
+				x = a.Pos.x + a.Size.width,
+				y = a.Pos.y + a.Size.height
 			}
 		}
 	end 
@@ -110,13 +126,13 @@ function CollisionManager:RectToRect(a, b)
 
 		-- bottom right overlap
 		if(rect2.min.y <= rect1.max.y and rect2.min.y >= rect1.min.y) then
-			printDebug{"Rect to Rect: collision", "Collision"}
+			printDebug{"Rect to Rect: collision", "CollisionManager"}
 			return true
 		end 
 
 		-- top right overlap
 		if(rect2.max.y >= rect1.min.y and rect2.max.y <= rect1.max.y) then
-			printDebug{"Rect to Rect: collision", "Collision"}
+			printDebug{"Rect to Rect: collision", "CollisionManager"}
 			return true
 		end
 
@@ -126,10 +142,9 @@ function CollisionManager:RectToRect(a, b)
 
 end 
 
-
----------------
--- Functions
----------------
+----------------------
+-- STatic Functions
+----------------------
 
 -- add a new object name to ordered table of names --> straight array
 function CollisionManager:AddName(name)
@@ -154,13 +169,13 @@ function CollisionManager:Add(object)
 
 	-- sort objects by name
 	-- first object of this type? create table for them
-	if(self.objects[object.name] == nil) then
-		self.objects[object.name] = {}
-		self:AddName(object.name)
+	if(self.objects[object.Info.name] == nil) then
+		self.objects[object.Info.name] = {}
+		self:AddName(object.Info.name)
 	end 
 
 	-- add object to table by name
-	self.objects[object.name][#self.objects[object.name] + 1] = object
+	self.objects[object.Info.name][#self.objects[object.Info.name] + 1] = object
 
 end
 
@@ -182,12 +197,17 @@ function CollisionManager:Destroy(obj)
 
 end 
 
+-- does what is says
+--> this should be ported to work with DebugText
 function CollisionManager:PrintDestroyList()
 	for i=1, #self.destroyList do
 		print(self.destroyList[i])
 	end 
 end
 
+-- removes all destroyed objects
+-- from the lists
+-- this does not include Statics --> are not destroyed --> for now
 function CollisionManager:ClearDestroyedObjects()
 
 	--self:PrintDestroyList()
@@ -201,10 +221,10 @@ function CollisionManager:ClearDestroyedObjects()
 		for j=1, #temp do
 
 			if(temp[j].destroy == nil or temp[j].destroy == false) then
-				printDebug("Add", "Collision")
+				printDebug("Add", "CollisionManager")
 				self:Add(temp[j])
 			else
-				printDebug("remove", "Collision")
+				printDebug("remove", "CollisionManager")
 				temp[j] = nil
 			end 
 
@@ -277,7 +297,7 @@ function CollisionManager:CheckForCollisions()
 								A:CollisionWith{other = B}
 								B:CollisionWith{other = A}
 
-								--printDebug{A.name .. " +collision+ " .. B.name, "Collision"}
+								printDebug{A.Info.name .. " +collision+ " .. B.Info.name, "CollisionManager"}
 							end 
 
 						end 
@@ -293,48 +313,17 @@ function CollisionManager:CheckForCollisions()
 		end 
 
 	end 
---[==[
-			local obj = objList[a]
-
-			repeat
-
-				if(obj.collisionList == nil) then
-					break
-				end 
-
-				-- for each in collision list of a
-				for c=1, #obj.collisionList do
-				
-
-					for b=1, #objList[obj.collisionList[c]] do
-					
-						local B = objList[obj.collisionList[c]][b]
-						local A = obj
-
-						if(self:RectToRect(A, B)) then
-							A:CollisionWith{other = B}
-							B:CollisionWith{other = A}
-
-							printDebug{A.name .. " +collision+ " .. B.name, "Collision"}
-						end 
-
-					end
-
-				end
-
-			until true
-
-		end
-
-	end 
-	--]==]
 
 end 
 
 
+-- needs to be a feature of PrintDebugText -->FIX
 CollisionManager.printDebugTextActive = false
 
--- prints data to screen
+
+-- function is bugged right now
+-- needs to be fixed
+-- i think this is an old style of coding the debug text ->FIX
 function CollisionManager:PrintDebugText()
 	
 	if(self.printDebugTextActive == false) then
@@ -358,21 +347,28 @@ function CollisionManager:PrintDebugText()
 
 end 
 
--- do stuff
+
 function CollisionManager:Update()
 	self:CheckForCollisions()
 	self:PrintDebugText()
 end 
 
 
+---------------
+-- Static End
+---------------
+
+--ObjectUpdater:AddStatic(CollisionManager)
 
 
 
 
+-- Notes
+---------------------------------------
+-- Collision Manager is not meant to be submitted to ObjectUpdater
+-- leave it out for now
+-- will refactor how that works later -->FIX
 
 
 
 
-
-
-return CollisionManager

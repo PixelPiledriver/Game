@@ -1,7 +1,28 @@
+-- FrameCounter.lua
+
+-- Purpose
+----------------------------
 -- calculates and displays FPS
+-- should pipe this thru Debug Text
+-- but meh, will move it later
+-- :P
+
+------------------------------------------------------------------
 
 local FrameCounter = {}
 
+
+------------------
+-- Static Info
+------------------
+FrameCounter.name = "Controller"
+FrameCounter.objectType = "Static"
+FrameCounter.dataType = "Input Constructor & Manager"
+
+
+----------------
+-- Static Vars
+----------------
 
 -- switches
 FrameCounter.active = true
@@ -11,21 +32,22 @@ FrameCounter.printLoveFPS = true
 -- variables
 FrameCounter.x = 10
 FrameCounter.y = 10
-FrameCounter.color = {0, 255, 0, 255}
-
+FrameCounter.color = {0, 0, 0, 255}
 
 local time = 0
 local frameCount = 0
 local fps = 0
 local updateRate = 4
 
+---------------------
+-- Static Functions
+---------------------
 
 function FrameCounter:Update(dt)
 
 	if(self.active == false) then
 		return
 	end
-
 
 	frameCount = frameCount + 1
 	time = time + dt
@@ -58,5 +80,9 @@ function FrameCounter:Draw()
 
 end 
 
+
+---------------
+-- Static End
+---------------
 
 return FrameCounter

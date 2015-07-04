@@ -1,19 +1,25 @@
+-- Sprites.lua
+
+
+-- Purpose
+----------------------------
 -- load sprites here
--- just messy shit for now
--- no biggie
+
 
 local Animation = require("Animation")
 
 local Sprites = {}
-Sprites.data = {}
 
+-----------------------------
+-- Vars
+-----------------------------
 
-------------------
--- Functions
-------------------
+-- stops all sprites from drawing
+-- I don't this works with the new Draw process -->FIX
+Sprites.drawNone = false 
 
 ---------------------------------------------
---New shit
+--New Code -- needs to be refactored
 ---------------------------------------------
 
 -- make a single frame
@@ -37,15 +43,18 @@ local function MakeFrame(data)
 	f.frame = love.graphics.newQuad(f.x, f.y, f.width, f.height, f.imageWidth, f.imageHeight)
 
 	-------------
-	-- Function
+	-- Functions
 	-------------
 
 	function f:Draw(objectData)
 
-		if(self.draw == false) then
+		if(Sprites.drawNone) then
 			return
 		end 
 
+		if(self.draw == false) then
+			return
+		end 
 
 		if(objectData.color) then
 			love.graphics.setColor(objectData.color)
@@ -112,6 +121,7 @@ end
 
 
 -- sprite sheet load
+
 -- sheet
 Sprites.sheet = {}
 Sprites.sheet.object = love.graphics.newImage("graphics/dude.png")
@@ -217,14 +227,6 @@ Sprites.block.blue = MakeFrame
 
 
 
-
-
-
-
-
-
-
-
 return Sprites
 
 
@@ -233,11 +235,15 @@ return Sprites
 
 --Notes
 -------------------------------
---[[
--- need to integrate the shit I made in Corona into this
+
+-- need to integrate the stuff I made in Corona into this
+-- need to clean this file up at some point
 
 
 
+--------------------
+--[[ Test Code
+--------------------
 
 -- Animation example
 Sprites.pawn.animation1 = Animation:New
@@ -262,17 +268,6 @@ Sprites.pawn.animation1 = Animation:New
 	delays = {10, 10, 10, 10},
 	speed = 1,
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 --]]

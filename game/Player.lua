@@ -1,7 +1,6 @@
--- basic object with sprite, input, etc
+-- Player.lua
+-- basic o with sprite, input, etc
 
-
-local ObjectUpdater = require("ObjectUpdater")
 local Animation = require("Animation")
 local Controller = require("Controller")
 local Bullet = require("Bullet")
@@ -17,6 +16,11 @@ local BlockMap = require("BlockMap")
 local Health = require("Health")
 local Guns = require("Guns")
 local Map = require("Map")
+local SnapGrid = require("SnapGrid")
+local Timer = require("Timer")
+
+
+
 
 -- use to create more instances
 local Player = {}
@@ -29,65 +33,69 @@ function Player:New(data)
 	----------
 	-- Create
 	----------
-	local object = {}
+	local o = {}
 
-	object.sprite = data.sprite or nil
+	o.name = data.name or "..."
+	o.objectType = "Player"
+	o.datatype = "Game Object"
 
-	object.x = data.x or 100
-	object.y = data.y or 100
-	object.z = 0
+	o.sprite = data.sprite or nil
+
+	o.x = data.x or 100
+	o.y = data.y or 100
+	o.z = 0
 	
-	object.gravity = 1
+	o.gravity = 1
 
-	object.yJump = 0
-	object.jumpNow = false
+	o.yJump = 0
+	o.jumpNow = false
 
+	o.GridMovementTimer = Timer:New()
 
+	o.width = data.width or 32
+	o.height = data.height or 32
+	o.color = data.color or {255,255,255,255}
+	o.playerColor = data.playerColor or "red"
 
+	o.speed = data.speed or 2
+	o.walkSpeed = data.walkSpeed or 2
+	o.dodgeSpeed = data.dodgeSpeed or 6
 
+	o.direction = "none"
+	o.xDirection = 1
+	o.yDirection = 0
 
-	object.width = data.width or 32
-	object.height = data.height or 32
-	object.color = data.color or {255,255,255,255}
-	object.playerColor = data.playerColor or "red"
+	o.frame = data.frame or nil
+	o.animation = data.animation or nil
 
-	object.speed = data.speed or 2
-	object.walkSpeed = data.walkSpeed or 2
-	object.dodgeSpeed = data.dodgeSpeed or 6
+	o.angle = data.angle or 0
+	o.xScale = data.xScale or 1
+	o.yScale = data.yScale or 1
+	o.xShootPos = data.xShootPos or 25
+	o.yShootPos = data.yShootPos or 0
+	o.shootDirection = data.shootDirection or 1
 
-	object.direction = "none"
-	object.xDirection = 1
-	object.yDirection = 0
-
-	object.frame = data.frame or nil
-	object.animation = data.animation or nil
-
-	object.angle = data.angle or 0
-	object.xScale = data.xScale or 1
-	object.yScale = data.yScale or 1
-	object.xShootPos = data.xShootPos or 25
-	object.yShootPos = data.yShootPos or 0
-	object.shootDirection = data.shootDirection or 1
-
-	object.xStick = 0
-	object.yStick = 0
+	o.xStick = 0
+	o.yStick = 0
 	
-	object.name = data.name
-	object.collisionList = CollisionLists[object.name]
+	o.name = data.name or "???"
+	o.type = "player"
 
-	object.skin = data.skin
-	object.type = "player"
 
-	object.health =  Health:New{}
+	o.collisionList = CollisionLists[o.name]
 
-	object.mapX = 0
-	object.mapY = 0
+	o.skin = data.skin
+	
+	o.health =  Health:New{}
+
+	o.mapX = 0
+	o.mapY = 0
 
 	-- weapon
-	object.gun = Guns:Get("laserRifle")
+	o.gun = Guns:Get("laserRifle")
 
 	-- controls
-	object.keys =
+	o.keys =
 	{
 		left = data.keys and data.keys.left or "a",
 		right = data.keys and data.keys.right or "d",
@@ -100,24 +108,24 @@ function Player:New(data)
 
 
 	-- controller setup
-	object.useController = false
+	o.useController = false
 	if(Controller:Count() > 0) then
-		object.controller = Controller:GetUnclaimedController()
+		o.controller = Controller:GetUnclaimedController()
 
 		-- claimed a controller?
-		if(object.controller) then 
-			object.useController = true
+		if(o.controller) then 
+			o.useController = true
 		end 
 
 	end
 
 	-- shadow
 	local shadowHeight = 6
-	local shadowWidth = object.width - 12
-	object.shadow = Box:New
+	local shadowWidth = o.width - 12
+	o.shadow = Box:New
 	{
-		x = object.x + 6,
-		y = object.y + object.height - shadowHeight,
+		x = o.x + 6,
+		y = o.y + o.height - shadowHeight,
 	 	width = shadowWidth,
 	 	height = shadowHeight,
 		color = {0,0,0,100},
@@ -130,20 +138,20 @@ function Player:New(data)
 	-- Collision
 	---------------
 	
-	object.collision = Collision:New
+	o.collision = Collision:New
 	{
 		width = 32,
 		height = 32,
 		shape = "rect",
-		color = Color:Get(object.playerColor),
-		name = object.name,
-		parent = object,
-		collisionList = object.collisionList.robot,
+		color = Color:Get(o.playerColor),
+		name = o.name,
+		parent = o,
+		collisionList = o.collisionList.robot,
 		visible = false
 	}
 
 
-	function object:OnCollision(data)
+	function o:OnCollision(data)
 		
 		-- Bullet
 		if(data.other.parent.type == "bullet") then
@@ -158,11 +166,11 @@ function Player:New(data)
 	-- Functions
 	-------------
 
-	function object:ColorFlash()
+	function o:ColorFlash()
 		self.color = Color:Get("red")
 	end 
 
-	function object:ColorUpdate()
+	function o:ColorUpdate()
 
 		--self.color = {255,255,255}
 		local colorSpeed = 20
@@ -180,7 +188,7 @@ function Player:New(data)
 
 	end 
 
-	function object:PrintDebugText()
+	function o:PrintDebugText()
 		
 		DebugText:TextTable
 		{
@@ -189,28 +197,30 @@ function Player:New(data)
 			{text = "X: " .. self.x},
 			{text = "Y: " .. self.y},
 			{text = "Z: " .. self.z},
-			{text = "HP:" ..self.health.hp},
+			{text = "HP:" .. self.health.hp},
 			{text = "Gun: " .. self.gun.name},
 			{text = "Direction: " .. self.direction},
 			{text = "Map { " .. self.mapX .. ", " .. self.mapY .. "}"},
 		}
 	end 
 
-	function object:DoMapStuff()
+	function o:DoMapStuff()
 
 		self.mapX = (( (self.x) - (self.x % Map.tileWidth)) / Map.tileWidth) + 1
 		self.mapY = (( (self.y + self.height) - (self.y % Map.tileHeight)) / Map.tileHeight) + 1
 	
+	--[[
 		local tile = Map:ObjectInTile(self)
+
 		
 		if(tile) then 
 			self.z = -tile.z
 		end 
-		
+	--]]
 
 	end 
 
-	function object:JumpUpdate()
+	function o:JumpUpdate()
 
 		if(self.jumpNow == false) then
 			return
@@ -229,23 +239,23 @@ function Player:New(data)
 		
 	end 
 
-	function object:Shadow()
+	function o:Shadow()
 		self.shadow.x = self.x + 6
 		self.shadow.y = self.y + self.height - self.shadow.height
 		self.shadow.z = self.z
 	end 
 
-	function object:Update()
+	function o:Update()
 		self:DoMapStuff()
 		self:JumpUpdate()
 		self:Shadow()
 		self:ColorUpdate()
 	end 
 
-	function object:Draw()
+	function o:DrawCall()
 
-		-- what type of graphic does the object have
-		-- this is bullshit and needs to be re worked
+		-- what type of graphic does the o have
+		-- this is bullstuff and needs to be re worked
 		if(self.frame) then
 			self.skin.idle:Draw(self)
 		elseif(self.animation) then
@@ -261,25 +271,27 @@ function Player:New(data)
 	-- Actions
 	---------------
 
-	-- movement
-	function object:MoveLeft()
+	-- simple movement
+	function o:MoveLeft()
 		self.x = self.x - self.speed
 	end 
 
-	function object:MoveRight()
+	function o:MoveRight()
 		self.x = self.x + self.speed
 	end 
 
-	function object:MoveUp()
+	function o:MoveUp()
 		self.y = self.y - self.speed
 	end 
 
-	function object:MoveDown()
+	function o:MoveDown()
 		self.y = self.y + self.speed
 	end 
 
+
+
 	-- jump
-	function object:Jump(j)
+	function o:Jump(j)
 		if(self.z == 0) then
 			self.yJump = 10
 		end 
@@ -288,9 +300,9 @@ function Player:New(data)
 	-- used for 4 directional movement
 	-- put in options for movement types
 	-- need to get hud buttons for changing options at runtime
-	function object:SetDirection(dir)
+	function o:SetDirection(dir)
 
-		object.direction = dir
+		o.direction = dir
 
 		if(dir == "left") then
 			self.xDirection = -1
@@ -314,14 +326,14 @@ function Player:New(data)
 
 	end 
 
-	function object:Shoot()
+	function o:Shoot()
 
 		self.gun:Shoot(self)
 	
 	end 
 
 	-- build blocks
-	function object:Build()
+	function o:Build()
 
 		local x = self.x - (self.x % 32)
 		local y = self.y - (self.y % 32)
@@ -357,14 +369,22 @@ function Player:New(data)
 	---------------
 
 	-- only used for press and release
-	function object:Input(key)
+	function o:InputUpdate(key, inputype)
 
 		if(key == "d") then 
-			--self:MoveRight()
+			self:MoveRight()
 		end
 
 		if(key == "a") then
-			--self:MoveLeft()
+			self:MoveLeft()
+		end 
+
+		if(key == "w") then 
+			self:MoveUp()
+		end
+
+		if(key == "s") then
+			self:MoveDown()
 		end 
 
 		if(key == self.keys.jump) then
@@ -378,10 +398,10 @@ function Player:New(data)
 	-- need to reorganize :P
 	-- only used for isDown=pressed 
 	-- not for button down or up
-	function object:RepeatedInput()
-
+	function o:RepeatedInput()
 		-- simple controls
 		if(love.keyboard.isDown(self.keys.left)) then
+			love.timer.getTime();
 			self:MoveLeft()
 			self:SetDirection("left")
 		end 
@@ -417,7 +437,7 @@ function Player:New(data)
 
 
 	-- xbox controller input
-	object.controls = 
+	o.controls = 
 	{
 		gamepad =
 		{
@@ -433,7 +453,7 @@ function Player:New(data)
 		}
 	}
 
-	function object:ControllerInput()
+	function o:ControllerInput()
 
 		if(self.useController == false) then
 			return
@@ -489,11 +509,11 @@ function Player:New(data)
 
 	end
 
-	-- add new object to updater
-	ObjectUpdater:Add{object}
+	-- add new o to updater
+	ObjectUpdater:Add{o}
 
-	-- done creating player object
-	return object
+	-- done creating player o
+	return o
 
 end 
 
@@ -501,7 +521,9 @@ end
 -- done with static
 return Player
 
-
+-- Notes
+--------------
+-- pull out all the controller bullstuff and move to its own component
 
 
 

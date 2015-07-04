@@ -1,28 +1,42 @@
 -- Health.lua
+-->OLD
+
+-- Purpose
+-----------------------------------------
 -- health component for objects that need to take damage
 
-
+----------------------------------------------------------------------------------
 
 local Health = {}
 
+------------------
+-- Static Info
+------------------
 
+Health.name = "Health"
+Health.objectType = "Static"
+Health.dataType = "Component Constructor"
 
 function Health:New(data)
 
-	-------------
-	-- Create
-	--------------
-	local object = {}
+	local o = {}
 
-	object.max = data.max or 100
-	object.min = data.min or 0
-	object.start = data.start or 100
-	object.hp = 100
+	------------------
+	-- Object Info
+	------------------
+	o.name = data.name or "???"
+	o.objectType = "Health"
+	o.dataType = "Component"
+
+	o.max = data.max or 100
+	o.min = data.min or 0
+	o.start = data.start or 100
+	o.hp = 100
 
 	---------------
 	-- Functions
 	---------------
-	function object:Damage(attack)
+	function o:Damage(attack)
 		self.hp = self.hp - attack.damage
 		self:UpdateCheck()
 
@@ -30,7 +44,7 @@ function Health:New(data)
 
 	end
 
-	function object:UpdateCheck()
+	function o:UpdateCheck()
 		if(self.hp < self.min) then 
 			self.hp = self.min
 		end
@@ -41,22 +55,27 @@ function Health:New(data)
 
 	end 
 
-	function object:Death()
-		printDebug{"fucking dead!", "Health"}
+	function o:Death()
+		printDebug{"Dead!", "Health"}
 	end 
 
-	function object:GetHealth()
+	function o:GetHealth()
 		return self.hp
 	end 
 
-	return object
+	----------
+	-- End 
+	----------
+	
+	return o
 
 end 
 
 
+----------------
+-- Static End
+----------------
 
-
-
-
+ObjectUpdater:AddStatic(Health)
 
 return Health

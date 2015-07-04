@@ -1,66 +1,107 @@
--- Blocks that the player builds
+-- Block.lua 
+-->OLD 
 
 
 
-local ObjectUpdater = require("ObjectUpdater")
+-- Purpose
+--------------------------------------------------
+-- blocks that players can build 
+
+------------------
+-- Requires
+------------------
 local Collision = require("Collision")
 local BlockMap = require("BlockMap")
 local Camera = require("Camera")
 local Health = require("Health")
 
+
+---------------------------------------------------------------------------
+
 local Block = {}
 
+---------------------
+-- Static Info
+---------------------s
+Block.Info = Info:New
+{
+	objectType = "Block",
+	DataType = "Game",
+	structureType = "Static"
+}
 
--------------
--- Create
--------------
+
+---------------------
+-- Static Functions
+---------------------
+
+-- create a Block
+-- data = {x, y, frame, buildtime, collisionList, builder}
 function Block:New(data)
 
 	local object = {}
 
-	object.x = data.x
-	object.y = data.y
-	object.xIndex = data.xIndex
-	object.yIndex = data.yIndex
-	printDebug{"New block xIndex:" .. object.xIndex, "Build"}
-	printDebug{"New block yIndex:" .. object.yIndex, "Build"}
-	object.frame = data.frame
-	object.color = {255,255,255,255}
+	------------------
+	-- Object Info
+	------------------
+	o.Info = Info:New
+	{
+		name = data.name or "..."
+		objectType = "Block"
+		dataType = "Game"
+		structureType = "Object"
+	}
 
-	object.buildTime = data.buildTime or 100
-	object.completion = 0
-	object.collisionList = data.collisionList or nil
-	object.type = "block"
+	----------------
+	-- Vars
+	----------------
+	o.x = data.x
+	o.y = data.y
+	o.xIndex = data.xIndex
+	o.yIndex = data.yIndex
 
-	object.health = Health:New{}
+	printDebug{"New block xIndex:" .. o.xIndex, "Build"}
+	printDebug{"New block yIndex:" .. o.yIndex, "Build"}
+	
+	o.frame = data.frame
+	o.color = {255,255,255,255}
+
+	o.buildTime = data.buildTime or 100
+	o.completion = 0
+	o.collisionList = data.collisionList or nil
+	
+	o.health = Health:New{}
 
 	---------------
 	-- Collision
 	---------------
-
-	object.collision = Collision:New
+	o.collision = Collision:New
 	{
 		name = data.builder.playerColor .. "Block",
 		parent = object,
-		width = object.frame.width,
-		height = object.frame.height,
-		collisionList = object.collisionList or nil
+		width = o.frame.width,
+		height = o.frame.height,
+		collisionList = o.collisionList or nil
 	}
 
 	---------------
 	-- Functions
 	---------------
 
+	-- render this block to screen --> needs to be updated to DRAW -->OLD -->FIX
 	function object:Draw()
 		self.frame:Draw(self)
 	end 
 
+	-->???
 	function object:Build()
 		if(self.completion < self.buildTime) then
 			self.completion = self.completion + 1
 		end 
 	end
 
+	-- deal damage to this block
+	-- data = sent from self:OnCollision()
 	function object:Damage(data)
 		self.health = self.health - data.other.parent.damage
 
@@ -70,6 +111,8 @@ function Block:New(data)
 
 	end 
 
+	-- something is touching this block
+	-- data = sent from CollisionManager
 	function object:OnCollision(data)
 		
 		-- is object of bullet type?
@@ -79,21 +122,23 @@ function Block:New(data)
 
 	end 
 
-
+	-- destroy this block
 	function object:Destroy()
 		BlockMap:Remove{x = self.xIndex, y = self.yIndex}
 		Camera:AddShake{x = 5, y= 5}
 	end 
 
+	-->???
 	function object:CheckStatus()
-		
 	end
+
 
 	function object:Update()
 		self:CheckStatus()
 	end 
 
 
+	-- info about this block
 	function object:PrintDebugText()
 		DebugText:TextTable
 		{
@@ -105,6 +150,11 @@ function Block:New(data)
 	end 
 
 
+	----------
+	-- End
+	----------
+
+
 	ObjectUpdater:Add{object}
 
 	return object
@@ -112,10 +162,11 @@ function Block:New(data)
 end 
 
 
+---------------
+-- Static End
+---------------
 
-
-
-
+ObjectUpdater:AddStatic(Block)
 
 return Block
 
@@ -123,15 +174,19 @@ return Block
 
 
 
--------------
 -- Notes
--------------
+---------------------------------------
 -- player can enter blocks of their color
 -- move between blocks by pressing a direction and A
 -- jumps to next block like startroptics
 -- press towards an exit and press A to leave a block
 -- press towards and ext and press X to shoot out
 -- blocks can be destroyed by other players
+
+-- this is very old, game specific code
+-- needs to be looked at see if any of it is still useful
+-- it may not be
+
 
 
 

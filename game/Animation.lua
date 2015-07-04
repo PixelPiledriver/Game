@@ -1,47 +1,118 @@
+-- Animaiton.lua
+-->OLD
+-->REVISE
+
+
+-- Purpose
+----------------------------
 -- makes animations from sprite frames
--- should handle itself for drawing
+
+
+------------------
+-- Requires
+------------------
+local Color = require("Color")
+local Pos = require("Pos")
+local Draw = require("Draw")
+
+---------------------------------------------------------------------------
 
 local Animation = {}
 
 
+-----------------
+-- Static Info
+-----------------
+Animation.Info = Info:New
+{
+	objectType = "Animation",
+	dataType = "Graphics",
+	structureType = "Static",
+}
+
+
+---------------------
+-- Static Functions
+---------------------
+
+
+-- Create an animation
+-- data = 
+-- {
+-- 	 frames = { index table of frames to display},
+--	 delays = { index table of numbers to control speed per frame},
+--	 colors = { index table of colors per frame for shading},
+--	 *loopMax = number of times you want the animation to play, 0 = infinite
+-- }
 function Animation:New(data)
 
-	-----------
-	-- Fails
-	-----------
+	----------------
+	-- Fail Cases
+	----------------
+
 	-- number of delays does not match number of frames
 	if(#data.frames ~= #data.delays) then
+		printDebug{"Animation:New FAILED!", "animation"}
 		printDebug{"Delays and Frames count not the same!", "animation"}
 		return 
 	end
 
-	----------
-	-- Create
-	----------
-	local object = {}
 
-	object.name = data.name or nil
-	object.colors = data.colors or nil
+	local o = {}
 
-	object.sheet = data.sheet or nil
-	object.frames = data.frames or nil -- table of frames
-	object.currentFrame = 1
+	-----------------
+	-- Object Info
+	-----------------
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Animation",
+		dataType = "Graphics",
+		structureType = "Object"
+	}
+
+
+	----------------
+	-- Vars
+	----------------	
+	o.colors = data.colors or "poop"
+
+	o.spriteSheet = data.spriteSheet or nil
+	o.frames = data.frames or nil -- table of frames
+	o.currentFrame = 1
 	
-	object.speedTime = 1
-	object.speed = data.speed
-	object.delayTime = 1
-	object.delays = data.delays
+	o.speedTime = 1
+	o.speed = data.speed or 1
+	o.delayTime = 1
+	o.delays = data.delays
 
-	object.loopMax = data.loopMax or 0
-	object.loopCount = 0
+	o.loopMax = data.loopMax or 0
+	o.loopCount = 0
 
-	object.active = true
+	o.active = true
 
-	-------------
+
+	---------------
+	-- Components
+	---------------
+	o.Pos = Pos:New(data.pos or Pos.defaultPos)
+
+	o.Draw = Draw:New
+	{
+		parent = o,
+		layer = "Objects"
+	}
+
+
+	--------------
 	-- Functions
-	-------------
-	-- update the frame based on the animation speed and frame delay
-	function object:UpdateFrameTime()
+	--------------
+	function o:Update()
+		self:FrameTimeUpdate()
+	end 
+
+	-- handle animation speed and frame delay
+	function o:FrameTimeUpdate()
 
 		-- animation should be playing?
 		if(self.active == false) then
@@ -80,30 +151,61 @@ function Animation:New(data)
 
 	end 
 
-	function object:Draw(objectData)
+ 
+ 	-- render object to screen
+	function o:DrawCall()
 
-		if(self.colors) then
-			love.graphics.setColor(self.colors[self.currentFrame])
+		-- color
+		love.graphics.setColor(Color:AsTable(Color:Get(self.colors[self.currentFrame])))
+
+		-- transform
+		-- needs to be changed to processed by component
+		local x = 0
+		local y = 0
+		local angle = 0
+		local xScale = 3
+		local yScale = 3
+
+		if(self.parent) then
+
+			if(self.parent.Pos) then
+				x = self.parent.Pos.x + self.Pos.x
+				y = self.parent.Pos.y + self.Pos.y
+			else
+				x = self.Pos.x
+				y = self.Pos.y
+			end 
+
 		else
-			love.graphics.setColor({255,255,255,255})
+			x = self.Pos.x
+			y = self.Pos.y
 		end 
 
-		love.graphics.draw(self.sheet, self.frames[self.currentFrame].frame, objectData.x, objectData.y, objectData.angle, objectData.xScale, objectData.yScale)
+		love.graphics.draw(self.spriteSheet.image, self.frames[self.currentFrame].sprite, x, y, angle, xScale, yScale)
 
-		self:UpdateFrameTime()	
 	end 
 
 
-	return object
+	----------
+	-- End
+	----------
+
+	ObjectUpdater:Add{o}
+	return o
 
 end 
 
 
+---------------
+-- Static End
+---------------
 
-
+ObjectUpdater:AddStatic(Animation)
 
 return Animation
 
 
 
-	
+-- Notes
+---------------------------------------
+-- old code but still works

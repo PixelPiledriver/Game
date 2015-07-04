@@ -1,0 +1,95 @@
+
+Tile VS shooter
+
+2 small tile areas
+
+
+X - Fire basic weapons
+A - Hack Tile
+Y - Command Mode
+B - Cancel 
+
+Command expendable Units - Cubits/weapons and Machines
+Grid locked to usable units.
+Pad - move cursor between selectable units
+A - Select Unit
+
+Give Command
+Most Units only do one thing
+
+Attack Units
+------------------
+When selected an attack cursor and range are shown on the other players side 
+- in your color
+Pad - move the attack cursor 
+A - Basic Attack
+X - Advanced Attack
+Y - Tactical Attack
+B - Cancel Attack
+
+Basic Attack
+---------------
+The Unit attacks the given destination.
+
+Advanced Attack
+-----------------
+Some Attack Units have more than one type of Attack or another Ability.
+
+Tactical Attack
+-----------------
+Uses the Basic attack of the Unit but in a different way.
+Tatical Attacks help the player create combos and mixups, typically by delaying the attack of the unit.
+Example:
+Rocket Unit
+	Basic - fires a single rocket that flys up and arcs down onto the enemy field.
+	Tactical - Waits 3 seconds. then ... Basic Attack
+This allows the player to delay several units while making other commands or attack directly so that combinations of attacks can be delivered simultaneously
+
+Be careful using Tactical Attacks!
+Units can be destroyed while they are in the Delay state by the opposing player.
+
+Unit Types
+-----------------
+	Single Use
+	-------------
+		Most units are used up after a single attack.
+		After attacking they may self destruct or run away.
+
+
+		
+
+
+	Multi Use
+	-------------
+		Some units have multiple uses.
+		After their uses are depleted they may self destruct or run away.
+
+	Permanants
+	-------------
+		A rare few units do not go away with use.
+		They can however be destroyed by the opposing player.
+
+
+
+Other Units
+----------------
+Units do not always attack
+Dismantiller - littl edood that 
+
+
+Random Ideas
+------------------
+
+
+Attack
+------
+Rocket - rocket silo
+3 shot - cubit with small pistol
+10 shot - 10 bullet turret
+Buck shot - shotgun box
+
+Laser Log - shoots wide rolling damage. player must jump or move
+
+
+Command Cubits
+Cubits can do things

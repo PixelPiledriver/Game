@@ -1,0 +1,1244 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"require",
+				"require()	package"
+			],
+			[
+				"object",
+				"objectType"
+			],
+			[
+				"dataTyp",
+				"dataTypes"
+			],
+			[
+				"data",
+				"dataTypes"
+			],
+			[
+				"o",
+				"other"
+			],
+			[
+				"componn",
+				"componentNames"
+			],
+			[
+				"com",
+				"componentTypes"
+			],
+			[
+				"compon",
+				"componentNames"
+			],
+			[
+				"Debug",
+				"DebugText:TextTable"
+			],
+			[
+				"component",
+				"componentNames"
+			],
+			[
+				"compo",
+				"componentNames"
+			],
+			[
+				"print",
+				"printComponents"
+			],
+			[
+				"objec",
+				"objectType"
+			],
+			[
+				"dat",
+				"dataType"
+			],
+			[
+				"Draw",
+				"DrawManager"
+			],
+			[
+				"drawn",
+				"drawnThisFrame"
+			],
+			[
+				"Post",
+				"PostUpdate"
+			],
+			[
+				"post",
+				"postUpdateObjects"
+			],
+			[
+				"in",
+				"inGroup"
+			],
+			[
+				"Comp",
+				"CompressAndSortLayerList"
+			],
+			[
+				"layer",
+				"layerIndex"
+			],
+			[
+				"defaul",
+				"defaultDraw"
+			],
+			[
+				"use",
+				"useExternalDrawCall"
+			],
+			[
+				"Dra",
+				"DrawList"
+			],
+			[
+				"depthIn",
+				"depthIndex"
+			],
+			[
+				"depth",
+				"depthIndex"
+			],
+			[
+				"depthInx",
+				"depthIndexString"
+			],
+			[
+				"dept",
+				"depthIndex"
+			],
+			[
+				"Scrolldow",
+				"ScrollDownSubMessages"
+			],
+			[
+				"Sub",
+				"ScrollUpSubMessages"
+			],
+			[
+				"Add",
+				"AddToText"
+			],
+			[
+				"keys",
+				"keysToAdd"
+			],
+			[
+				"key",
+				"keysToAdd"
+			],
+			[
+				"Shake",
+				"ShakeSoft"
+			],
+			[
+				"Rot",
+				"RotLeft"
+			],
+			[
+				"Zoom",
+				"ZoomIn"
+			],
+			[
+				"hold",
+				"holdKeys"
+			],
+			[
+				"input",
+				"inputType"
+			],
+			[
+				"press",
+				"pressKeys"
+			],
+			[
+				"Object",
+				"ObjectUpdater"
+			],
+			[
+				"Objec",
+				"ObjectUpdater"
+			],
+			[
+				"Get",
+				"GetX"
+			],
+			[
+				"Coru",
+				"Corutines"
+			],
+			[
+				"all",
+				"allKeysPressed"
+			],
+			[
+				"any",
+				"anyKey"
+			],
+			[
+				"line",
+				"lineIndex"
+			],
+			[
+				"lin",
+				"lineIndex"
+			],
+			[
+				"message",
+				"messageIndex"
+			],
+			[
+				"mess",
+				"messageIndex"
+			],
+			[
+				"wheel",
+				"wheelDown"
+			],
+			[
+				"lastwheel",
+				"lastWheelDown"
+			],
+			[
+				"last",
+				"lastWheelUp"
+			],
+			[
+				"lastwhee",
+				"lastWheelDown"
+			],
+			[
+				"wheeldo",
+				"wheelDownSkip"
+			],
+			[
+				"whe",
+				"wheelUpSkip"
+			],
+			[
+				"lastWh",
+				"lastWheelUpCheck"
+			],
+			[
+				"w",
+				"wheelUp"
+			],
+			[
+				"wh",
+				"wheelDown"
+			],
+			[
+				"click",
+				"clickButton"
+			],
+			[
+				"dr",
+				"draggingObjects"
+			],
+			[
+				"Key",
+				"Keyboard"
+			],
+			[
+				"Ke",
+				"Keyboard"
+			],
+			[
+				"grid",
+				"gridPad"
+			],
+			[
+				"hei",
+				"height"
+			],
+			[
+				"widt",
+				"width"
+			],
+			[
+				"colli",
+				"collision"
+			],
+			[
+				"top",
+				"topFrame"
+			],
+			[
+				"objectto",
+				"objectToPanelPad"
+			],
+			[
+				"width",
+				"widthOffset"
+			],
+			[
+				"heig",
+				"heightOffset"
+			],
+			[
+				"link",
+				"linkWidth"
+			],
+			[
+				"gri",
+				"gridScale"
+			],
+			[
+				"printD",
+				"printDebugTextActive"
+			],
+			[
+				"MapTa",
+				"MapTable:New"
+			],
+			[
+				"grow",
+				"growMap"
+			],
+			[
+				"gro",
+				"growMap"
+			],
+			[
+				"mapt",
+				"maptable"
+			],
+			[
+				"map",
+				"mapAsString"
+			],
+			[
+				"panel",
+				"panelType"
+			],
+			[
+				"follow",
+				"followParent"
+			],
+			[
+				"mouse",
+				"mouseButton"
+			],
+			[
+				"foll",
+				"followPos"
+			],
+			[
+				"hover",
+				"hoverType"
+			],
+			[
+				"collision",
+				"collisionList"
+			],
+			[
+				"collsion",
+				"collisionList"
+			],
+			[
+				"off",
+				"offsetFromMouseY"
+			],
+			[
+				"offset",
+				"offsetFromMouseX"
+			],
+			[
+				"colors",
+				"colorsList"
+			],
+			[
+				"Toggle",
+				"ToggleDraw"
+			],
+			[
+				"draw",
+				"drawText"
+			],
+			[
+				"topF",
+				"topFrame"
+			],
+			[
+				"def",
+				"defaultTopFrame"
+			],
+			[
+				"df",
+				"defaultFrameColor"
+			],
+			[
+				"totalObje",
+				"totalObjectPadWidth"
+			],
+			[
+				"windo",
+				"windowBorderSpace"
+			],
+			[
+				"pawn",
+				"pawnSheet"
+			],
+			[
+				"spr",
+				"sprites"
+			],
+			[
+				"default",
+				"defaultPath"
+			],
+			[
+				"selec",
+				"selectedPixelTexture"
+			],
+			[
+				"sele",
+				"selectedPixelTexture"
+			],
+			[
+				"defau",
+				"defaultCreated"
+			],
+			[
+				"active",
+				"activeTools"
+			],
+			[
+				"sel",
+				"selectedTool"
+			],
+			[
+				"toggle",
+				"toggleState"
+			],
+			[
+				"sprite",
+				"spriteSheet"
+			],
+			[
+				"Sprite",
+				"SpriteSheet:New"
+			],
+			[
+				"x",
+				"lastX"
+			],
+			[
+				"max",
+				"maxColumns"
+			],
+			[
+				"self.sele",
+				"self.selectedPixelTexture"
+			],
+			[
+				"self.sle",
+				"self.selectedColor"
+			],
+			[
+				"act",
+				"activeDefault"
+			],
+			[
+				"b.func",
+				"b.funcObjectIndex"
+			],
+			[
+				"b.fun",
+				"b.funcObjectIndex"
+			],
+			[
+				"Pixel",
+				"PixelGenFunctions"
+			],
+			[
+				"objectType",
+				"objectTypesTemp"
+			],
+			[
+				"total",
+				"totalsTextTable"
+			],
+			[
+				"objectT",
+				"objectTypesTemp"
+			],
+			[
+				"SortB",
+				"SortByFunc"
+			],
+			[
+				"Table",
+				"TableSort:Sort"
+			],
+			[
+				"pal",
+				"pal2"
+			],
+			[
+				"re",
+				"require()	package"
+			],
+			[
+				"rqu",
+				"require()	package"
+			],
+			[
+				"Ob",
+				"ObjectUpdater"
+			],
+			[
+				"requi",
+				"require()	package"
+			],
+			[
+				"Oj",
+				"ObjectUpdater"
+			],
+			[
+				"OBjec",
+				"ObjectUpdater"
+			],
+			[
+				"Debu",
+				"DebugText"
+			],
+			[
+				"Obec",
+				"ObjectUpdater"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Controller.lua",
+			"settings":
+			{
+				"buffer_size": 9576,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "DebugText.lua",
+			"settings":
+			{
+				"buffer_size": 6754,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "DeltaTime.lua",
+			"settings":
+			{
+				"buffer_size": 307,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Color.lua",
+			"settings":
+			{
+				"buffer_size": 18904,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/User/LOVE.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"",
+				"Build: Build"
+			],
+			[
+				"vmen",
+				"View: Toggle Menu"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Packa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/GitRepos/Ideas-and-Writing/Words and stuff_31.txt",
+		"/D/GitRepos/Game/game/Color.lua",
+		"/D/GitRepos/Game/game/Button.lua",
+		"/D/GitRepos/Game/game/BulletTypes.lua",
+		"/D/GitRepos/Game/game/Bool.lua",
+		"/D/GitRepos/Game/game/Box.lua",
+		"/D/GitRepos/Game/game/Bullet.lua",
+		"/D/GitRepos/Game/game/Canvas.lua",
+		"/D/GitRepos/Game/game/CollisionManager.lua",
+		"/D/GitRepos/Game/game/CollisionLists.lua",
+		"/D/GitRepos/Game/game/MouseDrag.lua",
+		"/D/GitRepos/Game/game/Collision.lua",
+		"/D/GitRepos/Game/game/Camera.lua",
+		"/D/GitRepos/Game/game/App.lua",
+		"/D/GitRepos/Game/game/BlockMap.lua",
+		"/D/GitRepos/Game/game/Info.lua",
+		"/D/GitRepos/Game/game/Code Tags and Tools.lua",
+		"/D/GitRepos/Game/game/Animation.lua",
+		"/D/GitRepos/Game/game/Block.lua",
+		"/D/GitRepos/Game/game/DrawTools.lua",
+		"/D/GitRepos/Game/game/DrawManager.lua",
+		"/D/GitRepos/Game/game/DrawList.lua",
+		"/D/GitRepos/Game/game/DrawGroup.lua",
+		"/D/GitRepos/Game/game/Draw.lua",
+		"/D/GitRepos/Game/game/main.lua",
+		"/D/GitRepos/Game/game/ObjectUpdater.lua",
+		"/D/GitRepos/Game/game/DebugText.lua",
+		"/D/GitRepos/Game/game/Game.lua",
+		"/D/Backup/Files/DebugText_1.lua",
+		"/D/GitRepos/Game/game/Line.lua",
+		"/D/GitRepos/Game/game/InputList.lua",
+		"/D/GitRepos/Game/game/OldCode.lua",
+		"/D/GitRepos/Game/game/Input.lua",
+		"/D/GitRepos/Game/game/Fade.lua",
+		"/D/GitRepos/Game/game/Pos.lua",
+		"/D/GitRepos/Game/game/Levels/PixelDrawLevel.lua",
+		"/D/GitRepos/Game/game/Mouse.lua",
+		"/D/GitRepos/Game/game/Health.lua",
+		"/D/GitRepos/Game/game/Guns.lua",
+		"/D/GitRepos/Game/game/FrameCounter.lua",
+		"/D/GitRepos/Game/game/Controller.lua",
+		"/D/GitRepos/Game/game/Window.lua",
+		"/D/GitRepos/Game/game/TableSort.lua",
+		"/D/GitRepos/Game/game/Sprite.lua",
+		"/D/GitRepos/Game/game/Size.lua",
+		"/D/GitRepos/Game/game/SinCounter.lua",
+		"/D/GitRepos/Game/game/SimplePanel.lua",
+		"/D/GitRepos/Game/game/Shape.lua",
+		"/D/GitRepos/Game/game/Scale.lua",
+		"/D/GitRepos/Game/game/Polygon.lua",
+		"/D/GitRepos/Game/game/Point.lua",
+		"/D/GitRepos/Game/game/Player.lua",
+		"/D/GitRepos/Game/game/PixelTexture.lua",
+		"/D/GitRepos/Game/game/PixelBrush.lua",
+		"/D/GitRepos/Game/game/ParticleSystem.lua",
+		"/D/GitRepos/Game/game/Particle.lua",
+		"/D/GitRepos/Game/game/Panel.lua",
+		"/D/GitRepos/Game/game/Palette.lua",
+		"/D/GitRepos/Game/game/MapTable.lua",
+		"/D/GitRepos/Game/game/Map.lua",
+		"/D/GitRepos/Game/game/Link.lua",
+		"/D/GitRepos/Game/game/Life.lua",
+		"/D/GitRepos/Game/game/FailNew.lua",
+		"/D/GitRepos/Game/game/Graphics.lua",
+		"/D/GitRepos/Game/game/DrawToolsHUD.lua",
+		"/D/GitRepos/Game/game/Sprites.lua",
+		"/D/GitRepos/Game/game/Notes.lua",
+		"/D/GitRepos/Game/game/ColorPicker.lua",
+		"/D/GitRepos/Game/game/DeltaTime.lua",
+		"/D/GitRepos/Game/game/DragWithMouse.lua",
+		"/D/GitRepos/Game/game/Console.lua",
+		"/D/GitRepos/Game/game/ComponentManager.lua",
+		"/D/GitRepos/Game/game/AnimationTest.lua",
+		"/D/GitRepos/Game/game/TestCode.lua",
+		"/D/GitRepos/Game/game/Levels/TextWriteLevel.lua",
+		"/D/GitRepos/Game/game/SnapPlayer.lua",
+		"/D/GitRepos/Game/game/Shader.lua",
+		"/D/GitRepos/Game/game/Levels/AudioTestLevel.lua",
+		"/D/GitRepos/Game/game/Keyboard.lua",
+		"/D/GitRepos/Game/game/GameEngineProjectFile.sublime-workspace",
+		"/D/GitRepos/Game/game/PrintDebug.lua",
+		"/D/GitRepos/Game/game/GameEngineProjectFile.sublime-project",
+		"/D/GitRepos/Game/game/Group.lua",
+		"/D/GitRepos/Game/game/RNG.lua",
+		"/D/GitRepos/Game/game/Textfile.lua",
+		"/D/GitRepos/Game/game/Value.lua",
+		"/D/GitRepos/Game/game/ObjectCreator.lua",
+		"/D/GitRepos/Game/design/Command Gameplay/CommandGame_1.txt",
+		"/D/GitRepos/Game/backup/DrawList_1.lua",
+		"/D/GitRepos/Game/backup/DrawList_1",
+		"/D/GitRepos/Game/game/Levels/BoxLevel.lua",
+		"/D/GitRepos/Game/game/Levels/DecrodedLerpLevel.lua",
+		"/D/GitRepos/Game/game/Levels/TestLevel.lua",
+		"/D/GitRepos/Game/game/LevelManager.lua",
+		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/User/LOVE.sublime-build",
+		"/D/Sublime Projects/gameEngineProject.sublime-project",
+		"/D/GitRepos/Game/game/Levels/SnapGridTestLevel.lua",
+		"/D/GitRepos/Game/game/Levels/LerpLevel.lua",
+		"/D/GitRepos/Game/game/Levels/BoxTestLevel.lua",
+		"/D/GitRepos/Game/game/MouseHover.lua",
+		"/D/GitRepos/Game/game/Math.lua",
+		"/D/GitRepos/Game/game/Key.lua",
+		"/D/GitRepos/Game/game/InputText.lua",
+		"/D/GitRepos/Game/game/DataPass.lua",
+		"/D/GitRepos/Game/game/Components.lua",
+		"/D/GitRepos/Game/game/WindowMessages.lua",
+		"/D/GitRepos/Game/game/Timer.lua",
+		"/D/GitRepos/Game/game/Text.lua",
+		"/D/GitRepos/Game/game/TestShit.lua",
+		"/D/GitRepos/Game/game/TestLevel.lua",
+		"/D/GitRepos/Game/game/SpriteSheet.lua",
+		"/D/GitRepos/Game/game/Sound.lua",
+		"/D/GitRepos/Game/game/SnapGrid.lua",
+		"/D/GitRepos/Game/game/Random.lua",
+		"/D/GitRepos/Game/game/PlayerSkins.lua",
+		"/D/GitRepos/Game/game/PixelGenFunctions.lua",
+		"/D/GitRepos/Game/game/PixelGenerators.lua",
+		"/D/GitRepos/Game/game/box",
+		"/D/GitRepos/Game/game/Levels/Box2.lua",
+		"/D/GitRepos/Ideas-and-Writing/SparkleDawg_ep1_2.txt",
+		"/D/Love test code/hello world/main.lua",
+		"/D/Love test code/Coroutines/main.lua",
+		"/G/pixel piledriver/Resume/My Life and Carrer in a list.txt",
+		"/G/pixel piledriver/Jobs/Pixelation Portfolio Page_2.txt",
+		"/G/pixel piledriver/Jobs/Cool Fighting Game/Fighting Game Notes.txt",
+		"/G/pixel piledriver/Jobs/Aeon Sands/Special effects list.txt",
+		"/G/pixel piledriver/Pixelation/Messages/Fighting Game Guy_2.txt",
+		"/G/pixel piledriver/Pixelation/Messages/Fighting Game Guy_1.txt"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"D:\\GitRepos\\Game\\game",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"Or not",
+			"MoveObjecTo",
+			"object.name",
+			"object.",
+			"object",
+			"local CollisionManager",
+			"Print",
+			"Object Component",
+			"dataTypes",
+			"componentTypes",
+			"otype",
+			".oType",
+			".count",
+			"o.count",
+			"active",
+			"defaultDraw",
+			"Draw",
+			"Guns.stats",
+			"oType",
+			"Static",
+			"FailNew",
+			"data.",
+			"2nd",
+			"second",
+			"Static",
+			"DrawList",
+			"Static",
+			"Bool",
+			"Static",
+			"Draw",
+			"DrawGroup",
+			"Draw:Draw",
+			"Draw.defaultDraw",
+			"MouseDrag",
+			"Drag",
+			"DragWithMouse",
+			"Luminance",
+			"GetLuminance",
+			"Color:Luminance",
+			"DataPass",
+			"AfterDraw",
+			"{\n",
+			"Input",
+			"Camera:New",
+			"yes",
+			"Repeated",
+			"RepeatedInput",
+			"	\n",
+			"Camera",
+			"camera",
+			"Camera",
+			"Camer",
+			"\"???\"",
+			"print",
+			"shit",
+			"--> FIX",
+			"-->FIX",
+			"-->REFACTOR",
+			"-->FIX",
+			"-->",
+			"print(",
+			"Graphics:",
+			"ObjectUpdater",
+			"nigga",
+			"Nigga",
+			"nigga",
+			"NIGGA",
+			"fuck",
+			"Fuck",
+			"FUCK",
+			"shit",
+			"Ass",
+			" ass ",
+			" ass",
+			"ass",
+			"SHIIIIIT",
+			"SHIT",
+			"CUNT",
+			"BITCH",
+			"Bitch",
+			"bitch",
+			"cunt",
+			"shit",
+			"Sprites.data",
+			"shit",
+			"\"Collision\"",
+			"Collision",
+			"shit",
+			"Size",
+			"shit",
+			"Camera",
+			"shit",
+			"Shit",
+			"shit",
+			"Shit",
+			"shit",
+			"fuck",
+			"fucj",
+			"print",
+			"print(",
+			"print",
+			"Test Code",
+			"finished",
+			"fuck",
+			"--",
+			"fuck",
+			"nigga",
+			"ClearPostUpdate",
+			"print(\"group\")",
+			"Box",
+			"submit",
+			"\"submit\"",
+			"submit\"",
+			"submit",
+			"mouse",
+			"Mouse",
+			"depth",
+			"Draw",
+			"depth = \"",
+			"depth = \"Hud\"",
+			"depth = \"Objects\"",
+			"Draw",
+			"depth =",
+			"Draw:New",
+			"Draw",
+			"local Mouse = require(\"Mouse\")",
+			"alphaStart",
+			"CreateParticleFromTable"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"object.Info.name",
+			"o.",
+			"o",
+			"objectType",
+			"stuff",
+			"Draw",
+			"layer = \"Hud\"",
+			"layer = \"Objects\"",
+			"LayerIndex",
+			"layerIndex",
+			"self.objects.depthIndex",
+			"Keyboard.allKeys",
+			"the guy",
+			"The guy",
+			".Size.height",
+			".Size.width",
+			"LinkPosTo",
+			"MouseDrag",
+			"MouseHover",
+			"followPos",
+			"Damage",
+			".Pos.y",
+			".Pos.x",
+			"self.Pos.y",
+			"self.Pos.x",
+			"o.Size.height",
+			"o.Size.width",
+			"Panel.objectToPanelPad",
+			"self.Pos.x,",
+			"self.Pos.x ",
+			"self.Pos.y ",
+			"self.Pos.x",
+			"self.Size.height",
+			"self.Size.width",
+			"RefreshTexture",
+			"DrawToolsHUD.",
+			"DrawToolsHUD.iconSheet",
+			"DrawToolsHUD.",
+			".tools",
+			"self.Pos.y",
+			"self.Pos.x",
+			"o",
+			"monkey",
+			"o",
+			"otype",
+			"Pos",
+			"o",
+			"o:",
+			"o.",
+			"o",
+			"rot",
+			"Polygon",
+			"self.colors",
+			"= 1",
+			"rotDirection.angle",
+			"{",
+			", 255}",
+			"type",
+			"t.data",
+			"t.",
+			"dir",
+			"Get",
+			"data.color",
+			"data.max",
+			"data.min",
+			"spin",
+			"z",
+			"Map.tileHei",
+			"Map.tileHeight",
+			"Map.tileWidth",
+			"ButtonDown",
+			"self:NewButtonTable()",
+			"buttons",
+			"lifespan",
+			"self",
+			"and",
+			"controller.controller:getAxis",
+			"controller.rightStick",
+			"controller.leftStick",
+			"controller",
+			"rightStick",
+			"brickSpriteData",
+			"names",
+			"Sprites",
+			"]:",
+			"self.objects",
+			"speedTime",
+			"finalizePath",
+			"findPath",
+			"playerPath",
+			"path",
+			"pathClosedList",
+			"patClosedList",
+			"pathClosedMap",
+			"pathOpenList",
+			"pathOpenMap",
+			"pathFirstRun",
+			"pathComplete",
+			"",
+			"object",
+			"addSubButtonStyle",
+			"AddSubButtonStyle",
+			"composer",
+			"object.",
+			"markTotal",
+			"self",
+			"Player",
+			"self.speed",
+			"indexes",
+			"node",
+			"Node",
+			"currentCharacter",
+			"GameFlow",
+			"self",
+			"debugDrawPathObjects",
+			"CdebugDrawPathObjects",
+			"CAM.gameCam",
+			"CAM.",
+			"T",
+			"tilemap",
+			"currentLayer",
+			"self"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Controller.lua",
+					"settings":
+					{
+						"buffer_size": 9576,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								821,
+								821
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 396.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "DebugText.lua",
+					"settings":
+					{
+						"buffer_size": 6754,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "DeltaTime.lua",
+					"settings":
+					{
+						"buffer_size": 307,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								307,
+								307
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Color.lua",
+					"settings":
+					{
+						"buffer_size": 18904,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								440,
+								440
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 36.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.761689047884,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 164.0
+	},
+	"replace":
+	{
+		"height": 74.0
+	},
+	"save_all_on_build": false,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/D/CoronaTestCode/Display Stuff 1/main.lua"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 233.0,
+	"status_bar_visible": false
+}

@@ -24,7 +24,7 @@ function Math:UnitVector(vector)
 end 
 
 
-function Math:VectorFromAngle(angle)
+function Math:AngleToVector(angle)
 
 
 	local sin = math.sin(math.rad(angle))
@@ -42,6 +42,17 @@ function Math:VectorFromAngle(angle)
 
 end 
 
+function Math:VectorToAngle(vector)
+
+	local v = {}
+	v.x = 1
+	v.y = 0
+
+	local angle = math.atan2(vector.y,vector.x) - math.atan2(v.y,v.x)
+
+	return angle
+
+end 
 
 
 -- linear interpolation
@@ -50,14 +61,36 @@ function Math:Lerp(data)
 	return data.a + ((data.b - data.a) * data.t)
 end 
 
+-- {a, b, t}
 function Math:InverseLerp(data)
 	return  data.t/(data.a + (data.b-data.a))
 end
 
+--{a={x,y}, b={x,y}}
+function Math:TestEqualityPoints(data)
+
+	if(data.a.x == data.b.x and data.a.y == data.b.y) then
+		return true
+	end 
+
+	return false
+
+end 
 
 
+-- compares a value to a range and keeps it within
+-- {value, min, max}
+function Math:Bind(data)
+	if(data.value < data.min) then
+		return data.min
+	elseif(data.value > data.max) then
+		return data.max
+	else
+		return data.value
+	end 
 
 
+end 
 
 
 

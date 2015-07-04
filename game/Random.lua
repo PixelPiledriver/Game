@@ -28,6 +28,12 @@ end
 ------------
 love.math.setRandomSeed(os.time())
 
+-- random seed must be instated by use of love.math.random
+-- which is really weird but thats just the way it is
+Random:ChooseRandomlyFrom{1,2,3}
+
+
+
 
 
 
