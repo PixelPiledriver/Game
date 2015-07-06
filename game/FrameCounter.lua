@@ -15,10 +15,12 @@ local FrameCounter = {}
 ------------------
 -- Static Info
 ------------------
-FrameCounter.name = "Controller"
-FrameCounter.objectType = "Static"
-FrameCounter.dataType = "Input Constructor & Manager"
-
+FrameCounter.Info = Info:New
+{
+	name = "Controller",
+	objectType = "Static",
+	dataType = "Input Constructor & Manager"
+}
 
 ----------------
 -- Static Vars

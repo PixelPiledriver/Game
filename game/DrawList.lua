@@ -14,9 +14,9 @@ DrawList = {}
 ------------------
 DrawList = Info:New
 {
-	name = "Controller",
-	objectType = "Static",
-	dataType = "Input Constructor & Manager"
+	objectType = "Controller",
+	dataType = "Static",
+	structureType = "Input Constructor & Manager"
 }
 
 ----------------

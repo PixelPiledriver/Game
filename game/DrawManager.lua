@@ -23,9 +23,9 @@ DrawManager = {}
 ------------------
 DrawManager = Info:New
 {
-	name = "DrawManager",
-	objectType = "Static",
-	dataType = "Manager"
+	objectType = "DrawManager",
+	dataType = "Static",
+	structureType = "Manager"
 }
 
 

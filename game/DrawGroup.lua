@@ -23,9 +23,9 @@ local DrawGroup = {}
 ------------------
 DrawGroup.Info = Info:New
 {
-	name = "DrawGroup",
-	objectType = "Static",
-	dataType = "Graphics Object Constructor"
+	objectType = "DrawGroup",
+	dataType = "Static",
+	structureType = "Graphics Object Constructor"
 }
 
 
@@ -42,10 +42,13 @@ function DrawGroup:New(data)
 	------------------
 	-- Object Info
 	------------------
-	o.name = "..."
-	o.objectType = "Box"
-	o.dataType = "Graphics"
-
+	o.Info = Info:New
+	{
+		name = "...",
+		objectType = "DrawGroup",
+		dataType = "Graphics",
+		structureType = "Component"
+	}
 
 	----------------
 	-- Vars

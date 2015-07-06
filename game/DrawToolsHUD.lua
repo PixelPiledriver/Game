@@ -19,6 +19,13 @@ local DrawTools = require("DrawTools")
 local DrawToolsHUD = {}
 
 
+DrawToolsHUD.Info = Info:New
+{
+	objectType = "DrawToolsHUD",
+	dataType = "Tools",
+	structureType = "Manager"
+}
+
 DrawToolsHUD.iconSheet = SpriteSheet:New
 {
 	image = "EditorIcons.png",
