@@ -23,7 +23,7 @@ local DrawGroup = {}
 ------------------
 DrawGroup.Info = Info:New
 {
-	name = "DrawGroup ",
+	name = "DrawGroup",
 	objectType = "Static",
 	dataType = "Graphics Object Constructor"
 }

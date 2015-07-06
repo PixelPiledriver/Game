@@ -520,34 +520,34 @@
 	"buffers":
 	[
 		{
-			"file": "Controller.lua",
+			"file": "DrawGroup.lua",
 			"settings":
 			{
-				"buffer_size": 9576,
+				"buffer_size": 2967,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "DebugText.lua",
+			"file": "Draw.lua",
 			"settings":
 			{
-				"buffer_size": 6754,
+				"buffer_size": 4665,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "DeltaTime.lua",
+			"file": "DrawList.lua",
 			"settings":
 			{
-				"buffer_size": 307,
+				"buffer_size": 9265,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "Color.lua",
+			"file": "/G/pixel piledriver/Cartoon/Father Son/Father and Son_ Script.txt",
 			"settings":
 			{
-				"buffer_size": 18904,
+				"buffer_size": 1393,
 				"line_ending": "Windows"
 			}
 		}
@@ -592,8 +592,15 @@
 	},
 	"file_history":
 	[
-		"/D/GitRepos/Ideas-and-Writing/Words and stuff_31.txt",
 		"/D/GitRepos/Game/game/Color.lua",
+		"/D/GitRepos/Game/game/DeltaTime.lua",
+		"/D/GitRepos/Game/game/DrawList.lua",
+		"/D/GitRepos/Game/game/DebugText.lua",
+		"/D/GitRepos/Game/game/Controller.lua",
+		"/G/pixel piledriver/Cartoon/Resolutions.txt",
+		"/G/pixel piledriver/Cartoon/Father Son/Father and Son_ Script.txt",
+		"/G/pixel piledriver/Cartoon/ideas/Extra Ideas_1.txt",
+		"/D/GitRepos/Ideas-and-Writing/Words and stuff_31.txt",
 		"/D/GitRepos/Game/game/Button.lua",
 		"/D/GitRepos/Game/game/BulletTypes.lua",
 		"/D/GitRepos/Game/game/Bool.lua",
@@ -613,12 +620,10 @@
 		"/D/GitRepos/Game/game/Block.lua",
 		"/D/GitRepos/Game/game/DrawTools.lua",
 		"/D/GitRepos/Game/game/DrawManager.lua",
-		"/D/GitRepos/Game/game/DrawList.lua",
 		"/D/GitRepos/Game/game/DrawGroup.lua",
 		"/D/GitRepos/Game/game/Draw.lua",
 		"/D/GitRepos/Game/game/main.lua",
 		"/D/GitRepos/Game/game/ObjectUpdater.lua",
-		"/D/GitRepos/Game/game/DebugText.lua",
 		"/D/GitRepos/Game/game/Game.lua",
 		"/D/Backup/Files/DebugText_1.lua",
 		"/D/GitRepos/Game/game/Line.lua",
@@ -632,7 +637,6 @@
 		"/D/GitRepos/Game/game/Health.lua",
 		"/D/GitRepos/Game/game/Guns.lua",
 		"/D/GitRepos/Game/game/FrameCounter.lua",
-		"/D/GitRepos/Game/game/Controller.lua",
 		"/D/GitRepos/Game/game/Window.lua",
 		"/D/GitRepos/Game/game/TableSort.lua",
 		"/D/GitRepos/Game/game/Sprite.lua",
@@ -660,7 +664,6 @@
 		"/D/GitRepos/Game/game/Sprites.lua",
 		"/D/GitRepos/Game/game/Notes.lua",
 		"/D/GitRepos/Game/game/ColorPicker.lua",
-		"/D/GitRepos/Game/game/DeltaTime.lua",
 		"/D/GitRepos/Game/game/DragWithMouse.lua",
 		"/D/GitRepos/Game/game/Console.lua",
 		"/D/GitRepos/Game/game/ComponentManager.lua",
@@ -716,10 +719,7 @@
 		"/D/Love test code/Coroutines/main.lua",
 		"/G/pixel piledriver/Resume/My Life and Carrer in a list.txt",
 		"/G/pixel piledriver/Jobs/Pixelation Portfolio Page_2.txt",
-		"/G/pixel piledriver/Jobs/Cool Fighting Game/Fighting Game Notes.txt",
-		"/G/pixel piledriver/Jobs/Aeon Sands/Special effects list.txt",
-		"/G/pixel piledriver/Pixelation/Messages/Fighting Game Guy_2.txt",
-		"/G/pixel piledriver/Pixelation/Messages/Fighting Game Guy_1.txt"
+		"/G/pixel piledriver/Jobs/Cool Fighting Game/Fighting Game Notes.txt"
 	],
 	"find":
 	{
@@ -739,6 +739,8 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"from",
+			"women",
 			"Or not",
 			"MoveObjecTo",
 			"object.name",
@@ -864,9 +866,7 @@
 			"depth =",
 			"Draw:New",
 			"Draw",
-			"local Mouse = require(\"Mouse\")",
-			"alphaStart",
-			"CreateParticleFromTable"
+			"local Mouse = require(\"Mouse\")"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1006,99 +1006,23 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Controller.lua",
+					"file": "DrawGroup.lua",
 					"settings":
 					{
-						"buffer_size": 9576,
+						"buffer_size": 2967,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								821,
-								821
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 396.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "DebugText.lua",
-					"settings":
-					{
-						"buffer_size": 6754,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "DeltaTime.lua",
-					"settings":
-					{
-						"buffer_size": 307,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								307,
-								307
+								697,
+								697
 							]
 						],
 						"settings":
@@ -1117,25 +1041,25 @@
 							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 132.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "Color.lua",
+					"buffer": 1,
+					"file": "Draw.lua",
 					"settings":
 					{
-						"buffer_size": 18904,
+						"buffer_size": 4665,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								440,
-								440
+								823,
+								823
 							]
 						],
 						"settings":
@@ -1151,11 +1075,73 @@
 									"selector": "source.lua.corona"
 								}
 							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 792.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "DrawList.lua",
+					"settings":
+					{
+						"buffer_size": 9265,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								791,
+								791
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 396.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/G/pixel piledriver/Cartoon/Father Son/Father and Son_ Script.txt",
+					"settings":
+					{
+						"buffer_size": 1393,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								388,
+								388
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 396.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1196,7 +1182,7 @@
 		"cols":
 		[
 			0.0,
-			0.761689047884,
+			0.891613028534,
 			1.0
 		],
 		"rows":

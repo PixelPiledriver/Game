@@ -18,9 +18,9 @@ local Draw = {}
 ------------------
 Draw.Info = Info:New
 {
-	name = "Draw",
-	objectType = "Static",
-	dataType = "Graphics Constructor"
+	objectType = "Draw",
+	dataType = "Graphics",
+	StructureTyp = "Static"
 }
 
 
@@ -52,9 +52,13 @@ function Draw:New(data)
 	-- Object Info
 	------------------
 
-	o.name = data.name or "..."
-	o.objectType = "Draw"
-	o.dataType = "Component"
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Draw",
+		dataType = "Graphics",
+		structureType = "Component"
+	}
 
 
 	----------------
