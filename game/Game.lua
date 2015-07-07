@@ -16,11 +16,10 @@ local Game = {}
 -------------------
 Game.Info = Info:New
 {
-	name = "Game",
-	objectType = "Static",
-	dataType = "Manager"
+	objecType = "Game",
+	dataType = "Manager",
+	structureType = "Static"
 }
-
 
 -------------------
 -- Static Vars

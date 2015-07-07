@@ -12,10 +12,12 @@ local Health = {}
 ------------------
 -- Static Info
 ------------------
-
-Health.name = "Health"
-Health.objectType = "Static"
-Health.dataType = "Component Constructor"
+Health.Info = Info:New
+{
+	objectType = "Health",
+	dataType = "Game",
+	structureType = "Static"
+}
 
 function Health:New(data)
 
@@ -24,9 +26,13 @@ function Health:New(data)
 	------------------
 	-- Object Info
 	------------------
-	o.name = data.name or "???"
-	o.objectType = "Health"
-	o.dataType = "Component"
+	o.Info = Info:New
+	{ 
+		name = data.name or "???",
+		objectType = "Health",
+		dataType = "Game",
+		structureType = "Component"
+	}
 
 	o.max = data.max or 100
 	o.min = data.min or 0

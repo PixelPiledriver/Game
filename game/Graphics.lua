@@ -14,6 +14,16 @@ local Color = require("Color")
 
 local Graphics = {}
 
+-------------------
+-- Static Info
+-------------------
+Graphics.Info = Info:New
+{
+  objectType = "Graphics",
+  dataType = "Graphics",
+  structureType = "Manager"
+}
+
 
 ----------------------
 -- Static Functions

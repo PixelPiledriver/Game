@@ -17,9 +17,9 @@ local FrameCounter = {}
 ------------------
 FrameCounter.Info = Info:New
 {
-	name = "Controller",
-	objectType = "Static",
-	dataType = "Input Constructor & Manager"
+	objectType = "FrameCounter",
+	dataType = "Debug",
+	structureType = "Static"
 }
 
 ----------------

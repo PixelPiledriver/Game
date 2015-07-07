@@ -21,10 +21,12 @@ local Guns = {}
 ------------------
 -- Static Info
 ------------------
-
-Guns.name = "Guns"
-Guns.objectType = "Static"
-Guns.dataType = "Object Data"
+Guns.Info = Info:New
+{
+	objectType = "Guns",
+	dataType = "Game",
+	structureType = "Static"
+}
 
 -----------------
 -- Static Vars
