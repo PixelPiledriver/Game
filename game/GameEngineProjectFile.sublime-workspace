@@ -523,7 +523,7 @@
 			"file": "DrawGroup.lua",
 			"settings":
 			{
-				"buffer_size": 2967,
+				"buffer_size": 3036,
 				"line_ending": "Windows"
 			}
 		},
@@ -539,15 +539,57 @@
 			"file": "DrawList.lua",
 			"settings":
 			{
-				"buffer_size": 9265,
+				"buffer_size": 9274,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/G/pixel piledriver/Cartoon/Father Son/Father and Son_ Script.txt",
+			"file": "Levels/StudyLevel.lua",
 			"settings":
 			{
-				"buffer_size": 1393,
+				"buffer_size": 593,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 116 files for \"repeat\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Button.lua:\n   48  Button.maxColumns = 7\n   49  \n   50: Button.repeatFunction = 1\n   51  \n   52  Button.buttonBeingDragged = false\n   ..\n   72  \n   73  \n   74: -- {x, y, width, height, useBox = bool, repeatable = bool, actionObjects = table}\n   75  function Button:New(data)\n   76  \n   ..\n  146  	o.useBox = data.useBox or false\n  147  \n  148: 	-- repeat\n  149: 	o.repeatable = data.repeatable or false\n  150  \n  151  	-- function\n  ...\n  343  					if(self.func) then\n  344  \n  345: 						-- button type = function repeats more than once\n  346: 						if(self.repeatable) then\n  347  \n  348: 							for i=1, Button.repeatFunction do\n  349  								if(self.funcObjectIndex == nil) then \n  350  									self.func()\n  ...\n  509  Button.createPoint = \n  510  {\n  511: 	repeatable = true,\n  512  	text = \"Create Point\",\n  513  	func = function()\n  ...\n  539  -- the next button press will be executed\n  540  -- if the button has Repeat enabled\n  541: Button.repeatFunctionUp = \n  542  {\n  543  	text = \"Repeat Func Up\",\n  544  	func = function()\n  545: 		Button.repeatFunction = Button.repeatFunction + 1\n  546  	end\n  547  }\n  ...\n  550  -- the next button press will be executed\n  551  -- if the button has Repeat enabled\n  552: Button.repeatFunctionDown = \n  553  {\n  554  	text = \"Repeat Func Down\",\n  555  	func = function()\n  556: 		Button.repeatFunction = Button.repeatFunction - 1\n  557  	end\n  558  }\n  ...\n  663  		{text = \"Button Static\"},\n  664  		{text = \"-------------------------\"},\n  665: 		{text = \"RepeatFunction: \" .. Button.repeatFunction},\n  666  	}\n  667  end \n\nD:\\GitRepos\\Game\\game\\CollisionManager.lua:\n  281  				if(self.objects[collisionObjectName]) then\n  282  \n  283: 					repeat\n  284  \n  285  						for b=1, #self.objects[collisionObjectName] do\n\nD:\\GitRepos\\Game\\game\\DrawList.lua:\n  201  	for i=1, #self.objects.layerIndex do\n  202  \n  203: 		repeat\n  204  \n  205  			-- is this layer/depth active?\n\nD:\\GitRepos\\Game\\game\\Input.lua:\n  114  			if(self[inputType][key]) then\n  115  \n  116: 				repeat\n  117  \n  118  					-- key is active? --> can be used?\n  ...\n  153  				local keyIndex = self.holdKeys.index[i]\n  154  \n  155: 				repeat\n  156  \n  157  					if(self.holdKeys[keyIndex].active == false) then\n\nD:\\GitRepos\\Game\\game\\Keyboard.lua:\n  148  end\n  149  \n  150: -- is a key down? --> held down repeats input\n  151  function Keyboard:Key(k)\n  152  	return love.keyboard.isDown(k)\n\nD:\\GitRepos\\Game\\game\\OldCode.lua:\n  264  local obj = objList[a]\n  265  \n  266: repeat\n  267  \n  268  	if(obj.collisionList == nil) then\n\nD:\\GitRepos\\Game\\game\\Palette.lua:\n  444  \n  445  -- o:Interpolated is not quite right\n  446: -- when using odd total spaces between colors, some colors are repeated\n\nD:\\GitRepos\\Game\\game\\PixelTexture.lua:\n  254  			for y=1, data.height do\n  255  \n  256: 				repeat\n  257  \n  258  					if(data.x + x > self.width or data.x + x < 1) then \n  ...\n  291  				for y = 0, self.height-1 do\n  292  \n  293: 					repeat\n  294  \n  295  						if(y < data.yBorder or y > self.height - data.yBorder) then\n  ...\n  319  				for x = 0, self.width-1 do\n  320  \n  321: 					repeat\n  322  \n  323  						if(x < data.xBorder or x > self.width - data.xBorder) then\n  ...\n  350  				if(data.brush.pixels[y][x] == 1) then\n  351  				\n  352: 					repeat\n  353  \n  354  						if(data.x >= self.width or data.x + x > self.width or data.x + x < 0) then \n  ...\n  420  		local lerp = 0\n  421  		\n  422: 		repeat\n  423  \n  424  			local c = nil\n\n28 matches across 8 files\n",
+			"settings":
+			{
+				"buffer_size": 3567,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "Collision.lua",
+			"settings":
+			{
+				"buffer_size": 5875,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "main.lua",
+			"settings":
+			{
+				"buffer_size": 2986,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Levels/PixelDrawLevel.lua",
+			"settings":
+			{
+				"buffer_size": 6659,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Levels/TestLevel.lua",
+			"settings":
+			{
+				"buffer_size": 2664,
 				"line_ending": "Windows"
 			}
 		}
@@ -592,13 +634,14 @@
 	},
 	"file_history":
 	[
+		"/G/pixel piledriver/Cartoon/Father Son/Father and Son_ Script.txt",
+		"/D/GitRepos/Game/game/CollisionManager.lua",
 		"/D/GitRepos/Game/game/Color.lua",
 		"/D/GitRepos/Game/game/DeltaTime.lua",
 		"/D/GitRepos/Game/game/DrawList.lua",
 		"/D/GitRepos/Game/game/DebugText.lua",
 		"/D/GitRepos/Game/game/Controller.lua",
 		"/G/pixel piledriver/Cartoon/Resolutions.txt",
-		"/G/pixel piledriver/Cartoon/Father Son/Father and Son_ Script.txt",
 		"/G/pixel piledriver/Cartoon/ideas/Extra Ideas_1.txt",
 		"/D/GitRepos/Ideas-and-Writing/Words and stuff_31.txt",
 		"/D/GitRepos/Game/game/Button.lua",
@@ -607,7 +650,6 @@
 		"/D/GitRepos/Game/game/Box.lua",
 		"/D/GitRepos/Game/game/Bullet.lua",
 		"/D/GitRepos/Game/game/Canvas.lua",
-		"/D/GitRepos/Game/game/CollisionManager.lua",
 		"/D/GitRepos/Game/game/CollisionLists.lua",
 		"/D/GitRepos/Game/game/MouseDrag.lua",
 		"/D/GitRepos/Game/game/Collision.lua",
@@ -727,7 +769,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 102.0,
 		"where_history":
 		[
 			"D:\\GitRepos\\Game\\game",
@@ -739,6 +781,9 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"repeat",
+			"PixelDraw",
+			"TestLevel",
 			"from",
 			"women",
 			"Or not",
@@ -863,10 +908,7 @@
 			"depth = \"Hud\"",
 			"depth = \"Objects\"",
 			"Draw",
-			"depth =",
-			"Draw:New",
-			"Draw",
-			"local Mouse = require(\"Mouse\")"
+			"depth ="
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -874,6 +916,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"StudyLevel",
 			"object.Info.name",
 			"o.",
 			"o",
@@ -1014,15 +1057,15 @@
 					"file": "DrawGroup.lua",
 					"settings":
 					{
-						"buffer_size": 2967,
+						"buffer_size": 3036,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								697,
-								697
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1090,15 +1133,15 @@
 					"file": "DrawList.lua",
 					"settings":
 					{
-						"buffer_size": 9265,
+						"buffer_size": 9274,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								791,
-								791
+								632,
+								660
 							]
 						],
 						"settings":
@@ -1118,33 +1161,337 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 396.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "/G/pixel piledriver/Cartoon/Father Son/Father and Son_ Script.txt",
+					"file": "Levels/StudyLevel.lua",
 					"settings":
 					{
-						"buffer_size": 1393,
+						"buffer_size": 593,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								388,
-								388
+								490,
+								490
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 396.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"settings":
+					{
+						"buffer_size": 3567,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										136,
+										142
+									],
+									[
+										273,
+										279
+									],
+									[
+										421,
+										427
+									],
+									[
+										438,
+										444
+									],
+									[
+										456,
+										462
+									],
+									[
+										588,
+										594
+									],
+									[
+										632,
+										638
+									],
+									[
+										687,
+										693
+									],
+									[
+										838,
+										844
+									],
+									[
+										1026,
+										1032
+									],
+									[
+										1130,
+										1136
+									],
+									[
+										1154,
+										1160
+									],
+									[
+										1306,
+										1312
+									],
+									[
+										1414,
+										1420
+									],
+									[
+										1438,
+										1444
+									],
+									[
+										1612,
+										1618
+									],
+									[
+										1770,
+										1776
+									],
+									[
+										1944,
+										1950
+									],
+									[
+										2093,
+										2099
+									],
+									[
+										2231,
+										2237
+									],
+									[
+										2402,
+										2408
+									],
+									[
+										2568,
+										2574
+									],
+									[
+										2783,
+										2789
+									],
+									[
+										2886,
+										2892
+									],
+									[
+										3030,
+										3036
+									],
+									[
+										3182,
+										3188
+									],
+									[
+										3348,
+										3354
+									],
+									[
+										3501,
+										3507
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1122.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Collision.lua",
+					"settings":
+					{
+						"buffer_size": 5875,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "main.lua",
+					"settings":
+					{
+						"buffer_size": 2986,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2029,
+								2029
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1038.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "Levels/PixelDrawLevel.lua",
+					"settings":
+					{
+						"buffer_size": 6659,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								367,
+								367
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "Levels/TestLevel.lua",
+					"settings":
+					{
+						"buffer_size": 2664,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								406,
+								406
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

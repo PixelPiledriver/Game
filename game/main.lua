@@ -58,6 +58,7 @@ require("TestCode")
 ----------------------------
 -- Level -- change how this works-->REFACTOR
 local PixelDrawLevel = require("levels/PixelDrawLevel")
+local StudyLevel = require("levels/StudyLevel")
 
 
 ----------------
@@ -79,7 +80,8 @@ local PixelDrawLevel = require("levels/PixelDrawLevel")
 		ObjectUpdater:AddCamera(Camera)
 
 		-- Load your level here
-		PixelDrawLevel:Load()
+		--PixelDrawLevel:Load()
+		StudyLevel:Load()
 
 	end 
 
@@ -95,7 +97,9 @@ local PixelDrawLevel = require("levels/PixelDrawLevel")
 		Controller.Update()
 		CollisionManager:Update()
 
-		PixelDrawLevel:Update()
+		--PixelDrawLevel:Update()
+		
+
 
 		-- Post Update
 		PostUpdate(dt)
