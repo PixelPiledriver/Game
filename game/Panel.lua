@@ -14,11 +14,19 @@ local Draw = require("Draw")
 
 local Panel = {}
 
--- Static Vars
 -----------------
-Panel.name = "Panel"
-Panel.objectType = "Static"
-Panel.dataType = "HUD Constructor"
+-- Static Info
+-----------------
+Panel.Info = Info:New
+{
+	objectType = "Panel",
+	dataType = "User Interface",
+	structureType = "Static"
+}
+
+----------------
+-- Static Vars
+----------------
 
 Panel.defaultPanelColor = Color:New
 { r = 0, g = 0, b = 0, a = 128}
@@ -45,10 +53,12 @@ Panel.objectDirections = {"left, right, up, down"}
 function Panel:New(data)
 
 	local o = {}
-
-	o.name = data.name or "..."
-	o.objectType = "Panel"
-	o.dataType = "HUD Object"
+	o.Info = Info:New
+	{
+		objectType = "Panel",
+		dataType = "User Interface",
+		structureType = "Object"
+	}
 
 
 	---------------------

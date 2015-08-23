@@ -1,12 +1,29 @@
 -- PixelGenFunctions.lua
--- different funcitons that Ive used in the past to generate pixels
--- really just a place to store old code
 
+-- Purpose
+--------------------
+-- different funcitons that Ive used in the past to generate pixels
+-- a place to store old interesting code 
+
+
+--------------------------------------------------------------
 
 local PixelGenFunctions = {}
 
+----------------
+-- Static Info
+----------------
 
--- Static Function
+PixelGenFunctions.Info = Info:New
+{
+	objectType = "PixelGenFunctions",
+	dataType = "Create",
+	structureType = "Static"
+}
+
+----------------------
+-- Static Functions
+----------------------
 
 -- (PixelTexture)
 -- should probly pass in the brush for this too

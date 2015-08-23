@@ -4,7 +4,7 @@
 ----------------------------
 -- sprites and buttons for DrawTools
 -- require this file in the scene you are using
--- and it will create the assets, buttons and stuff :D
+-- and it will create the assets, buttons and stuff and put them on screen
 
 ------------------
 -- Requires
@@ -23,7 +23,7 @@ DrawToolsHUD.Info = Info:New
 {
 	objectType = "DrawToolsHUD",
 	dataType = "Tools",
-	structureType = "Manager"
+	structureType = "Manager" -- not sure this is the appropriate stuctureType name
 }
 
 DrawToolsHUD.iconSheet = SpriteSheet:New
@@ -153,4 +153,5 @@ return DrawToolsHUD
 
 -- Notes
 ---------------------------------------
--- this 
+-- this file is like a collecetion of objects
+-- that get created when required -> require("DrawToolsHUD")

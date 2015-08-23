@@ -1,27 +1,43 @@
 -- Shape
--- o with multiple boxes inside of it
+-- Group of other objects with multiple boxes inside of it
 
 
+-- Rruqi
 local Box = require("Box")
 local Color = require("Color")
 
-
-
+--------------------------------------------
 local Shape = {}
 
+----------------
+-- Static Info
+----------------
+
+Shape.Info = Info:New
+{
+	objectType = "Shape",
+	dataType = "Group",
+	structureType = "Static"
+}
 
 ---------------
--- Create
+-- Object
 ---------------
-
 
 function Shape:New(data)
 
 	local o = {}
 
-	o.name = data.name or "..."
-	o.objectType = "Shape"
-	o.dataType = "Graphics Object"
+	------------
+	-- Info
+	------------
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Shape",
+		dataType = "Group",
+		structureType = "Object"
+	}
 
 	o.x = data.x or 0
 	o.y = data.y or 0
@@ -129,10 +145,11 @@ Shape.cross =
 
 
 
-
-
-
-
-
-
 return Shape 
+
+-- Notes
+-----------
+-- This object is badly named, limited, and not so great
+-- most likely dont need this
+-- and will repurpose the name
+-->DEPRICATE

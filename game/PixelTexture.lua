@@ -16,16 +16,23 @@ local Value = require("Value")
 local Random = require("Random")
 local Draw = require("Draw")
 
+---------------------------------------------------
 
 local PixelTexture = {}
 
 ----------------
+-- Static Info
+----------------
+PixelTexture.Info = Info:New
+{
+	objectType = "PixelTexture",
+	dataType = "Graphics",
+	structureType = "Static"
+}
+
+----------------
 -- Static Vars
 ----------------
-
-PixelTexture.name = "PixelTexture"
-PixelTexture.objectType  = "Static"
-PixelTexture.dataType = "Graphics Construtor"
 
 PixelTexture.mask = nil
 PixelTexture.defaultPath = "graphics/"
@@ -37,12 +44,14 @@ PixelTexture.defaultPath = "graphics/"
 -- Static Functions
 -------------------------------
 
--- wtf is this stuff?
+-- wtf is this function?
 -- doesnt seem like I need this?
 -- if anything this should be moved over to PixelTexture.lua
 -- and be made a static function
 -- untested, not sure if this actually works --> :P
+
 function ConvertPixelTextureToPoints(pix)
+
 	local xSpace = 7
 	local ySpace = 7
 	
@@ -77,19 +86,30 @@ function ConvertPixelTextureToPoints(pix)
 
 end 
 
+
+-------------
+-- Object
+-------------
+
 -- {name, width, height}
 function PixelTexture:New(data)
 
-	-------------------
-	-- Create
-	-------------------
-
 	local o = {}
 
-	o.name = data.name or "..."
-	o.objectType = "PixelTexture"
-	o.datatype = "Graphics Object"
-
+	-----------
+	-- Info
+	-----------
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "PixelTexture",
+		dataType = "Graphics",
+		structureType = "Object"
+	}
+	
+	---------
+	-- Vars
+	---------
 	
 	o.filename = data.filename or "image"
 
@@ -110,9 +130,7 @@ function PixelTexture:New(data)
 	-- palette to use
 	o.palette = nil
 
-
 	o.draw = data.draw or false
-
 
 	------------------------
 	-- Components

@@ -1,12 +1,12 @@
 -- Shader.lua
 
+-- Purpose
+---------------------
 -- no idea how to do shaders in love 2d
 -- so lets figure this stuff out
 
 -- play with canvases tomorrow too and get a basic full screen shader going
 -- then work on an canvas swapping pipeline
-
-
 
 -- stop shaders from working on machines that cant use them
 local deactivateShaders = false
@@ -15,7 +15,19 @@ if(deactivateShaders) then
 	return
 end 
 
+---------------------------------------------------------------------
+
 local Shader = {}
+
+----------------
+-- Static Info
+----------------
+Shader.Info = Info:New
+{
+	objectType = "Shader",
+	dataType = "Graphics",
+	structureType = "Static"
+}
 
 
 
@@ -129,3 +141,6 @@ return Shader
 -- varying vec4 vpos;
 -- just set the var you created in the function
 -- no need to pass it inside a vertex struct like HLSL
+
+-- this file is only an example and not organized well at all
+-- need to create a static for shader creation and managing

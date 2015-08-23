@@ -24,8 +24,8 @@ local DrawGroup = {}
 DrawGroup.Info = Info:New
 {
 	objectType = "DrawGroup",
-	dataType = "Static",
-	structureType = "Graphics Object Constructor"
+	dataType = "Graphics",
+	structureType = "Static"
 }
 
 

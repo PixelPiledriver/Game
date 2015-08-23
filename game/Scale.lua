@@ -1,42 +1,51 @@
 -- Scale.lua
+
+-- Purpose
+----------------i  
 -- Component
 -- control size of stuff
 
----------------
--- Requires
----------------
-
+-------------------------------------------------------
 
 local Scale = {}
 
 --------------------
--- Static Vars
+-- Static Info
 --------------------
+Scale.Info = Info:New
+{
+	objectType = "Scale",
+	dataType = "Transform",
+	structureType = "Static"
+}
 
-Scale.name = "Scale"
-Scale.objectType = "Static"
-Scale.dataType = "Component Constructor"
-
+----------------
+-- Static Vars
+----------------
 Scale.defaultScale =
 {
 	x = 1,
 	y = 1
 }
 
+-----------
+-- Object
+-----------
 
 function Scale:New(data)
 
-
-
-
-	----------------
-	-- Create
-	----------------
 	local o = {}
 
-	o.name = data.name or "..."
-	o.objectType = "Scale"
-	o.dataType =  "Graphics Component"
+	------------
+	-- Info
+	------------
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Scale",
+		dataType =  "Transform",
+		structureType = "Component"
+	}
 
 	o.parent = data.parent or nil
 

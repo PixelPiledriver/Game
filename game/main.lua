@@ -6,10 +6,10 @@
 -- every thing starts here
 -- contains all Callbacks for looping
 
-----------------------
+---------------------------
 -- Utilities and Globals
-----------------------
-
+---------------------------
+require("MemoryManager")
 require("ObjectUpdater")
 require("Info")
 require("CollisionManager")
@@ -46,6 +46,7 @@ local Draw = require("Draw")
 local Canvas = require("Canvas")
 local DrawTools = require("DrawTools")
 local Panel = require("Panel")
+local Polygon = require("Polygon")
 
 ----------------------
 -- Run Test Code
@@ -58,7 +59,6 @@ require("TestCode")
 ----------------------------
 -- Level -- change how this works-->REFACTOR
 local PixelDrawLevel = require("levels/PixelDrawLevel")
-local StudyLevel = require("levels/StudyLevel")
 
 
 ----------------
@@ -81,7 +81,7 @@ local StudyLevel = require("levels/StudyLevel")
 
 		-- Load your level here
 		--PixelDrawLevel:Load()
-		StudyLevel:Load()
+		PixelDrawLevel:Load()
 
 	end 
 
@@ -97,7 +97,7 @@ local StudyLevel = require("levels/StudyLevel")
 		Controller.Update()
 		CollisionManager:Update()
 
-		--PixelDrawLevel:Update()
+		PixelDrawLevel:Update()
 		
 
 

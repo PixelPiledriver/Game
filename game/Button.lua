@@ -30,9 +30,8 @@ local Button = {}
 ------------------
 Button.Info = Info:New
 {
-	name = "Button",
-	objectType = "Static",
-	dataType = "H",
+	objectType = "Button",
+	dataType = "User Interface",
 	structureType = "Static"
 }
 
@@ -44,7 +43,6 @@ Button.defaultCreated = {Pos = {x = 16, y = 500}, Size = {width = 0, height = 0}
 Button.lastCreated = Button.defaultCreated
 Button.xSpace = 8
 Button.ySpace = 8
-
 Button.maxColumns = 7
 
 Button.repeatFunction = 1
@@ -83,7 +81,7 @@ function Button:New(data)
 	{
 		name = data.name or "...",
 		objectType = "Button",
-		dataType = "HUD",
+		dataType = "User Interface",
 		structureType = "Object"
 	}
 

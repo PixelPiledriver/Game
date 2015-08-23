@@ -1,10 +1,29 @@
+-- PlayerSkins.lua
+
+-- Purpose
+--------------------
 -- Skins for players
 -- tables of all related art assets
 
+-------------
+-- Requires
+-------------
 local Sprites = require("Sprites")
 
+----------------------------------------------------------
 
 local PlayerSkins = {}
+
+----------------
+-- Static Info
+----------------
+PlayerSkins.Info = Info:New
+{
+	objectType = "PlayerSkins",
+	dataType = "Data",
+	structureType = "Static"
+}
+
 
 -- red
 PlayerSkins.red = 

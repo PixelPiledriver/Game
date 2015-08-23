@@ -47,7 +47,10 @@ function Fade:New(data)
 		structureType = "Component"
 	}
 
-	-- vars
+	-----------
+	-- Vars
+	-----------
+
 	o.fade = data.fade or 255
 	o.speed = data.speed or 1
 

@@ -14,9 +14,12 @@ local Input = {}
 -----------------
 -- Static Info
 -----------------
-Input.name = "Input"
-Input.objectType = "Static"
-Input.dataType = "Input Component Constructor"
+Input.Info = Info:New
+{
+	objectType = "Input",
+	dataType = "Input",
+	structureType = "Static"
+}
 
 
 ----------------------
@@ -30,9 +33,13 @@ Input.dataType = "Input Component Constructor"
 		-----------------
 		-- Object Info
 		-----------------
-		o.name = "..."
-		o.objectType = "Input"
-		o.dataType = "Component"
+		o.Info = Info:New
+		{
+			name = "..." or data.name,
+			objectType = "Input",
+			dataType = "Input",
+			structureType = "Component"
+		}
 
 		----------
 		-- Vars

@@ -15,8 +15,8 @@ DrawList = {}
 DrawList = Info:New
 {
 	objectType = "Controller",
-	dataType = "Static",
-	structureType = "Input Constructor & Manager"
+	dataType = "Graphics",
+	structureType = "Manager"
 }
 
 ----------------
@@ -37,8 +37,8 @@ DrawList.layers =
 {
 	Skybox = {value = 1, active = false},
 	Backdrop = {value = 2, active = false},
-	Objects = {value = 3, active = false},
-	Collision = {value = 4, active = false},
+	Objects = {value = 3, active = true},
+	Collision = {value = 4, active = true},
 	Hud = {value = 5, active = true},
 	DebugText = {value = 6, active = false},
 
@@ -217,9 +217,13 @@ function DrawList:Draw()
 			end 		
 
 			-- draw each object in this layer
-			for j=1, #self.objects[self.objects.layerIndex[i]].draw do				
-				self.objects[self.objects.layerIndex[i]].draw[j].o.Draw:Draw()
-				self.drawnThisFrame = self.drawnThisFrame + 1
+			for j=1, #self.objects[self.objects.layerIndex[i]].draw do
+				-- only draw if Draw exists
+				if(self.objects[self.objects.layerIndex[i]].draw[j].o.Draw) then	
+					self.objects[self.objects.layerIndex[i]].draw[j].o.Draw:Draw()
+					self.drawnThisFrame = self.drawnThisFrame + 1
+				end
+
 			end 
 
 			-- last

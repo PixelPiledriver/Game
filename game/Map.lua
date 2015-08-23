@@ -1,11 +1,32 @@
 -- Map.lua
+
+-- Purpose
+-----------------
 -- base test map with tiles that show terrain and respond to player movement
 
-
+--------------
+-- Requires
+---------------
 local Box = require("Box")
-
 local Color = require("Color")
+
+------------------------------------------------------------
+
 local Map = {}
+
+-----------------
+-- Static Info
+-----------------
+Map.Info = Info:New
+{
+	objectType = "Map",
+	dataType = "Level",
+	structureType = "Static"
+}
+
+-----------------
+-- Static Vars
+-----------------
 
 Map.tileWidth = 64
 Map.tileHeight = 32
@@ -29,17 +50,25 @@ Map.tiles =
 }
 
 
+--------------------------
+-- Static Functions
+--------------------------
 
 -- create a single tile
+-- this should be its own type -->FIX
 function Map:MakeTile(data)
 
-	local object = {}
+	local o = {}
 
-	object.name = data.name or "???"
-	object.objectType = "tile"
-	object.dataType = "Game Object"
+	o.Info = Info:New
+	{
+		name = data.name or "???",
+		objectType = "Tile",
+		dataType = "Level",
+		stuctureType = "Object"
+	}
 
-	object.box = Box:New
+	o.box = Box:New
 	{
 		x = data.x,
 		y = data.y,
@@ -49,21 +78,21 @@ function Map:MakeTile(data)
 		fill = false
 	}
 
-	object.box.color[4] = self.opacity
+	o.box.color[4] = self.opacity
 
 
 	--------------
 	-- Variables
 	--------------
 
-	object.x = data.x
-	object.y = data.y
-	object.z = data.z
-	object.startZ = data.z
+	o.x = data.x
+	o.y = data.y
+	o.z = data.z
+	o.startZ = data.z
 	
-	object.objectOnTop = false
-	object.cushion = 4
-	object.cushionSpeed = 0.2
+	o.objectOnTop = false
+	o.cushion = 4
+	o.cushionSpeed = 0.2
 
 
 	--------------
@@ -71,7 +100,7 @@ function Map:MakeTile(data)
 	--------------
 
 	function object:VerticalCushion()
-		if(object.objectOnTop) then
+		if(o.objectOnTop) then
 			self.z = self.z + self.cushionSpeed
 
 			if(self.z > self.startZ + self.cushion) then
@@ -225,3 +254,8 @@ end
 
 return Map
 
+
+-- Notes
+------------------------------
+-- Tile type is part of this file and not broken off into its own thing
+-- that needs to be fixed

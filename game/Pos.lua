@@ -1,18 +1,27 @@
 -- Pos.lua
---------------------------------------
+
+-- Purpose
+--------------
 -- component
 -- control position of object
 
-
+---------------------------------------------------
 
 local Pos =  {}
 
 -----------------
+-- Static Info
+-----------------
+Pos.Info = Info:New
+{
+	objectType = "Pos",
+	dataType = "Transform",
+	structureType = "Static"
+}
+
+-----------------
 -- Static Vars
 -----------------
-Pos.name = "Pos"
-Pos.objectType = "Static"
-Pos.dataType = "Component Constructor"
 
 Pos.defaultPos = 
 {
@@ -33,19 +42,22 @@ function Pos:AddComponent(parent, posTable)
 	parent.Pos = o
 end 
 
+------------
+-- Object
+------------
+
 --{x,y,z}
 function Pos:New(data)
 
 	local o = {}
 
-	---------------
-	-- Create
-	---------------
-
-	-- object
-	o.name = data.name or "..."
-	o.objectType = "Pos"
-	o.dataType = "Component"
+	Info:ObjectOf
+	{
+		static = self,
+		o = o,
+		data = data,
+		structureType = "Component"
+	}
 
 	o.parent = data.parent
 

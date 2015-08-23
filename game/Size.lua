@@ -1,32 +1,46 @@
 -- Size.lua
+
+-- Purpose
+--------------------
 -- changes the size of an object over time
 -- ONLY FOR POINTS
 
-
+-----------------------------------------------------------------
 local Size = {}
 
 ----------------
--- Static Vars
+-- Static Info
 ----------------
-Size.name = "Size"
-Size.objectType = "Static"
-Size.dataType = "Component Constructor"
+Size.Info = Info:New
+{
+	objectType = "Size",
+	dataType = "Transform",
+	structureType = "Static"
+}
 
+-------------
+-- Object
+-------------
 
 function Size:New(data)
 
 	local o = {}
 
-	----------------
-	-- Create
-	----------------
+	-----------
+	-- Info
+	-----------
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Size",
+		dataType = "Component",
+		structureType = "Object"
+	}
 
-	-- object
-	o.name = data.name or "..."
-	o.objectType = "Size"
-	o.dataType = "Component"
 
-	-- vars
+	----------
+	-- Vars
+	----------
 
 	o.width = data.width or 0
 	o.height = data.height or 0

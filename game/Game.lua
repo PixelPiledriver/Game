@@ -16,7 +16,7 @@ local Game = {}
 -------------------
 Game.Info = Info:New
 {
-	objecType = "Game",
+	objectType = "Game",
 	dataType = "Manager",
 	structureType = "Static"
 }

@@ -1627,6 +1627,10 @@ return Color
 -- this file could be improved in functionality and ease of use 
 -- but its fine for now
 
+-- need to add support for .pal files
+-- they are extremely readable and easy to load
+-- some decent .pal editing funcitons would be nice
+-- might what to do in a seperate file
 
 --------------------
 --[[ Test Code

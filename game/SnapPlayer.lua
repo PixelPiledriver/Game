@@ -1,4 +1,11 @@
+-- SnapPlayer.lua
+
+-- 
 -- basic object with sprite, input, etc
+
+---------------
+-- Requires
+---------------
 
 local Animation = require("Animation")
 local Controller = require("Controller")
@@ -18,18 +25,34 @@ local Map = require("Map")
 local SnapGrid = require("SnapGrid")
 local Timer = require("Timer")
 
--- use to create more instances
+-------------------------------------------------------------
 local SnapPlayer = {}
 
+SnapPlayer.Info = Info:New
+{
+	objectType = "SnapPlayer",
+	dataType = "Game Object",
+	structureType = "Static"
+}
 
+------------
+-- Object
+------------
 
--- create instance
 function SnapPlayer:New(data)
 
-	---------- 
-	-- Create
-	----------
 	local object = {}
+
+	------------
+	-- Info
+	------------
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "SnapPlayer",
+		dataType = "Game Object",
+		structureType = "Object"
+	}
 
 	object.sprite = data.sprite or nil
 
@@ -510,3 +533,8 @@ end
 -- done with static
 return SnapPlayer
 
+
+-- Notes
+-------------------------------------
+-- this is a copy of Player.lua
+-- to be used with Adam's SnapGrid

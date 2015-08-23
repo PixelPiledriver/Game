@@ -1,18 +1,47 @@
 -- TextfileWriter.lua
+
+-- Purpose
+---------------------
 -- can read and write text file with simple function calls
 -- use for modifying large chunks of similar code and other things etc
 
+-----------------------------------------------------------
 
 local Textfile = {}
 
+-----------------
+-- Static Info
+-----------------
+Textfile.Info = Info:New
+{
+	objectType = "Textfile",
+	dataType = "File IO",
+	structureTe = "Static"
+}
 
+
+------------
+-- Object
+------------
 function Textfile:New(data)
 
 	local object = {}
 
-	-------------------------------
-	-- Create
-	-------------------------------
+	------------
+	-- Info
+	------------
+
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Textfile",
+		dataType = "File IO",
+		structureType = "Object"
+	}
+
+	------------
+	-- Vars
+	------------
 
 	object.textTable = {}
 	object.text = data.text or ""

@@ -1,30 +1,62 @@
 -- SpriteSheet.lua
 
+-- Purpose
+--------------------------------------
 -- load a single image
 -- frames can be displayed from it
 -- or the entire image
 -- might need to change the name
 
 
-
+--------------------------------------------------
 local SpriteSheet = {}
 
+-------------------
+-- Static Info
+-------------------
+
+SpriteSheet.Info = Info:New
+{
+	objectType = "SpriteSheet",
+	dataType = "Graphics",
+	structureType = "Static"
+}
+
+-----------
+-- Vars
+-----------
 SpriteSheet.loadPath = "graphics/"
+
+-------------
+-- Object
+-------------
 
 --{image, width, height, spriteWidth, spriteHeight}
 function SpriteSheet:New(data)
-
-	local o = {}
-
-	-------------------
-	-- Create
-	-------------------
 
 	FailNew
 	{
 		table = data,
 		members = {"image"}
 	}
+
+	local o = {}
+
+	--------------
+	-- Info
+	--------------
+
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "SpriteSheet",
+		dataType = "Graphics",
+		structureType = "Object"
+	}
+
+	-----------
+	-- Vars
+	-----------
 
 	-- image
 	o.image = love.graphics.newImage(SpriteSheet.loadPath .. data.image)
@@ -54,22 +86,30 @@ function SpriteSheet:New(data)
 		self.image:refresh()
 	end 
 
-
+	----------
+	-- End
+	----------
 	return o
 
 end 
 
 
-
+-- default if none if provided
 SpriteSheet.noImage = SpriteSheet:New
 {
-	image = "NoImage.png"	
+	image = "NoImage.png"
 }
 
+
+---------------
+-- Static End
+---------------
 
 ObjectUpdater:AddStatic(SpriteSheet)
 
 return SpriteSheet
+
+
 
 
 -- Notes

@@ -14,9 +14,12 @@ TableSort = {}
 ------------------
 -- Static Info
 ------------------
-TableSort.name = "TableSort"
-TableSort.objectType = "Static"
-TableSort.dataType = "Utility"
+TableSort.Info = Info:New
+{
+	objectType = "TableSort",
+	dataType = "Utility",
+	structureType = "Static"
+}
 
 ---------------------
 -- Static Functions
@@ -88,6 +91,14 @@ function TableSort:UniqueVars(t)
 
 end
 
+function TableSort:AddIndexIfUnique(data)
+
+	if(data.t[data.add] == nil) then
+		data.t[data.add] = true
+		data.t.index[#data.t.index + 1] = data.add
+	end 
+
+end 
 
 
 

@@ -1,24 +1,49 @@
 -- Polygon.lua
+
+-- Purpose
+---------------
 -- oooooooooooooooooo
 -- triiiiiiiiiiiiiiiiiiiiiiiangles
 -- we need triiiiiiiiiiiiiiiiiiiiiiiangles
 
+---------------
+-- Requires
+---------------
+
 local Color = require("Color")
 
-
+-----------------------------------------------------------------
 
 local Polygon = {}
 
+-----------------
+-- Static Info
+-----------------
+Polygon.Info = Info:New
+{
+	objectType = "Polygon",
+	dataType = "Graphics",
+	structureType = "Static"
+}
+
+-----------
+-- Object
+-----------
 
 --{x, y, verts{ {}, {}, {} } }
 function Polygon:New(data)
 
 	local object = {}
 
-	object.name = "..."
-	object.objectType = "Polygon"
-	object.dataType = "Graphics Object"
-
+	-----------
+	-- Info
+	-----------
+	Info:ObjectOf
+	{
+		static = self,
+		o = o,
+		data = data
+	}
 
 	object.verts = data.verts or 0
 

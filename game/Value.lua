@@ -1,9 +1,25 @@
 -- Value.lua
+
+-- Purpose
+----------------
+-- used for creating random values in various ways
 -- create values using useful functions pre wrapped by name
 
+---------------
+-- Requires
+---------------
 local Random = require("Random")
 
+----------------------------------------------------------------
+
 local Value = {}
+
+Value.Info = Info:New
+{
+	objectType = "Value",
+	dataType = "Generation",
+	structureType = "Static"
+}
 
 -- pass in a table that uses Value objects
 -- in a function call will return the 
@@ -134,9 +150,6 @@ return Value
 
 
 
-
-
-
 -- Notes
 -------------------------------------
 -- What does this file do?
@@ -157,3 +170,6 @@ return Value
 -- something like:
 -- Value:Get(var) --> return (var and (#var > 0) and var:get) or (var and var) or nill
 -- that seems about right, just need to test it
+
+-- this is a very useful file
+-- work on making it even better

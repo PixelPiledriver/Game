@@ -4,11 +4,41 @@
 -- writen by Adam Balk, August 2014
 --*******************************************************************--
 
+------------------------------------------------------
+
 local Timer = {}
+
+----------------
+-- Static Info
+----------------
+
+#.Info = Info:New
+{
+	objectType = "Timer",
+	dataType = "Time",
+	structureTe = "Static"
+}
+
+
+-------------
+-- Object
+-------------
 
 function Timer:New(data)
 	
 	local object = {}	
+
+	-------------
+	-- Info
+	-------------
+
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "",
+		dataType = "",
+		structureType = "Object"
+	}
 
 	function object:GetDeltaTimeSec()
 		return love.timer.getTime() - self.StartTime

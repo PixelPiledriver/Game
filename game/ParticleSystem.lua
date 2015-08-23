@@ -1,38 +1,62 @@
+-- ParticleSystem.lua
+
+-- Purpose
+-----------------------------------------------
 -- shoots out particles
 -- omg son that stuff is crazy
 
+---------------
+-- Requires
+---------------
 local Particle = require("Particle")
 local Color = require("Color")
 
+--------------------------------------------------------------------------------------
 
 local ParticleSystem = {}
 
+---------------
+-- Static Info
+---------------
 
+ParticleSystem.Info = Info:New
+{
+	objectType = "ParticleSystem",
+	dataType = "Effects",
+	structureType = "Static"
+}
+
+---------------------
+-- Static Functions
+---------------------
 
 function ParticleSystem:New(data)
 
-	local object = {}
+	local o = {}
+
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "ParticleSystem",
+		dataType = "Effects",
+		structureType = "Object"
+	}
+
+	o.x = data.x or 200
+	o.y = data.y or 200
 
 
-	object.name = data.name or "???"
-	object.objectType = "ParticleSystem"
-	object.dataType = "Game Object"
-
-	object.x = data.x or 200
-	object.y = data.y or 200
-
-
-	object.followMouse = data.followMouse or false
+	o.followMouse = data.followMouse or false
 	
-	object.particleTable = data.particleTable or nil
-	for i=1, #object.particleTable do 
-		object.particleTable[i].count = 0
+	o.particleTable = data.particleTable or nil
+	for i=1, #o.particleTable do 
+		o.particleTable[i].count = 0
 	end 
 
 
-	object.index = 1
+	o.index = 1
 
-	object.count = 0
+	o.count = 0
 
 
 

@@ -12,14 +12,7 @@ local StudyLevel = {}
 -- On Level Start
 function StudyLevel:Load()
 
-stuff = [[
-whats up
-with the
-monkey on
-your shoulder
-]]
 
-print(stuff)
 	
 end
 

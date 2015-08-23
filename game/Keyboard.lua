@@ -3,11 +3,22 @@
 
 -- lets make this global just for fun
 
-
+--------------
+-- Requires
+--------------
 local Key = require("Key")
 
 Keyboard = {}
 
+----------------
+-- Static Info
+----------------
+Keyboard.Info = Info:New
+{
+	objectType = "Keyboard",
+	dataType = "Input",
+	structureType = "Static"
+}
 
 
 ----------------
@@ -68,6 +79,7 @@ local alternateKeys =
 	["\\"] = "|",
 }
 
+-- string list of keys
 Keyboard.allKeys =
 {
 	-- buttons

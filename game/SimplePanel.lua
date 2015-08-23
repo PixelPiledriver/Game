@@ -1,8 +1,11 @@
 -- SimplePanel.lua
 
--- Panel.lua
+-- an alternate version of Panel.lua
 
--- requires
+-------------
+-- Requires
+-------------
+
 local Color = require("Color")
 local Box = require("Box")
 local Pos = require("Pos")
@@ -13,19 +16,29 @@ local MouseDrag = require("MouseDrag")
 local MapTable = require("MapTable")
 local Button = require("Button")
 
+---------------------------------------------------------------
 
 local Panel = {}
 
+----------------
+-- Static Info
+----------------
+
+Panel.Info = Info:New
+{
+	objectType = "SimplePanel",
+	dataType = "User Interface",
+	structureType = "Static"
+}
+
+-----------------
 -- Static Vars
 -----------------
-Panel.name = "Panel"
-Panel.objectType = "Static"
-Panel.dataType = "HUD Constructor"
 
 Panel.defaultPanelColor = Color:New
 { r = 0, g = 0, b = 0, a = 128}
 
-Panel.defaultTopFrame = 
+Panel.defaultTopFrame =
 {
 	height = 16,
 	color = Color:New
@@ -39,29 +52,35 @@ Panel.objectToPanelPad = 8
 Panel.objectToObjectPad = 16
 Panel.objectDirections = {"left, right, up, down"}
 
-------------------------
--- Static Functions
-------------------------
+-----------
+-- Object
+-----------
 
 function Panel:New(data)
 
 	local o = {}
 
-	o.name = data.name or "..."
-	o.objectType = "Panel"
-	o.dataType = "HUD Object"
+	----------
+	-- Info
+	----------
 
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "SimplePanel",
+		dataType = "User Interface",
+		structureType = "Object"
+	}
 
-	---------------------
+	-----------
 	-- Vars
-	---------------------
+	-----------
 	o.active = true
 	o.draw = true
 
-
-	-------------------------------------
+	-------------------------
 	-- Objects in Panel
-	-------------------------------------
+	-------------------------
 	o.objects = {}
 	o.objectDirection = data.objectDirection or "right"
 
@@ -73,10 +92,9 @@ function Panel:New(data)
 
 	----------------------
 	-- Panel Type
-	--[[
-		ObjectBased - adding objects to the panel expands the panel
-		MapBased
-	--]]								
+		-- ObjectBased - adding objects to the panel expands the panel
+		-- MapBased
+	
 	----------------------
 	o.panelType = data.panelType or "ObjectBased"
 	o.map = MapTable:New
@@ -212,9 +230,9 @@ function Panel:New(data)
 		y = 0
 	}
 	--]]
-	-------------------------
-	-- Object Functions
-	-------------------------
+	----------------
+	-- Functions
+	----------------
 
 	function o:Update()
 	end 
@@ -241,7 +259,6 @@ function Panel:New(data)
 
 		end 		
 	end 
-
 
 
 	-----------------------
@@ -273,9 +290,6 @@ function Panel:New(data)
 
 
 		
-
-
-
 	function o:PrintDebugText()	
 
 		DebugText:TextTable
@@ -288,7 +302,9 @@ function Panel:New(data)
 
 	end 
 
-
+--------
+-- End
+--------
 
 	ObjectUpdater:Add{o}
 
@@ -297,22 +313,24 @@ function Panel:New(data)
 end 
 
 
-
+----------------
+-- Static End
+----------------
 
 ObjectUpdater:AddStatic(Panel)
-
 
 return Panel
 
 
---[[ Notes
+-- Notes
+---------------
 
-- objects can be drag and dropped
-	move out of panel
-	move into panel
-	change position in panel
+-- objects can be drag and dropped
+--	move out of panel
+--	move into panel
+--	change position in panel
 
-- a open and close button in the top right of the panel
+-- a open and close button in the top right of the panel
 
 
 --]]

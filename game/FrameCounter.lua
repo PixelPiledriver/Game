@@ -3,9 +3,6 @@
 -- Purpose
 ----------------------------
 -- calculates and displays FPS
--- should pipe this thru Debug Text
--- but meh, will move it later
--- :P
 
 ------------------------------------------------------------------
 
@@ -88,3 +85,11 @@ end
 ---------------
 
 return FrameCounter
+
+
+
+-- Notes
+-------------
+-- should pipe this thru Debug Text
+-- but meh, will move it later
+-- :P

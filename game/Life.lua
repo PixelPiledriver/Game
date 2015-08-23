@@ -1,6 +1,5 @@
 -- Life.lua
 
-
 -- Purpose
 ----------------------------
 -- basic component for destroying objects when they get too old
@@ -10,16 +9,20 @@
 
 local Life = {}
 
-
-
 ------------------
 -- Static Info
 ------------------
 
-Life.name = "Life"
-Life.objectType = "Static"
-Life.dataType = "Component Construtor"
+Life.Info = Info:New
+{
+	objectType = "Life",
+	dataType = "Gameplay",
+	structureType = "Static"
+}
 
+---------------------
+-- Static Functions
+---------------------
 
 --{life, maxLife, drain, parent}
 function Life:New(data)

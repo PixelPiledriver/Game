@@ -15,7 +15,7 @@ local Canvas = {}
 ------------------
 Canvas.Info = Info:New
 {
-	name = "Canvas",
+	objectType = "Canvas",
 	dataType = "Graphics",
 	structureType = "Static"	
 }

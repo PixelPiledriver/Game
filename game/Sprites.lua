@@ -10,6 +10,13 @@ local Animation = require("Animation")
 
 local Sprites = {}
 
+Sprites.Info = Info:New
+{
+	objectType = "Sprites",
+	dataType = "Content",
+	structureTe = "Static"
+}
+
 -----------------------------
 -- Vars
 -----------------------------
@@ -22,12 +29,17 @@ Sprites.drawNone = false
 --New Code -- needs to be refactored
 ---------------------------------------------
 
+-----------------------
+-- Static Functions
+-----------------------
+
 -- make a single frame
 local function MakeFrame(data)
+
 	local f = {}
 
 	------------
-	-- Create
+	-- Vars
 	------------
 
 	f.x = data.x or 0

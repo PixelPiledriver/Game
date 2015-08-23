@@ -17,9 +17,9 @@ ObjectUpdater = {}
 -----------------
 ObjectUpdater.Info =
 {
-	name = "ObjectUpdater",
-	objectType = "Static",
-	dataType = "Manager"
+	objectType = "ObjectUpdater",
+	dataType = "Manager",
+	structureType = "Static"
 }
 
 

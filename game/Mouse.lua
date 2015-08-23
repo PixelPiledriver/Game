@@ -1,13 +1,28 @@
 -- Mouse.lua
--- stuff about the mouse and stuff
 
+-- Purpose
+------------------------------
+-- Handles mouse input and features
 
-
+-------------
+-- Requires
+-------------
 local Line = require("Line")
 local Collision = require("Collision")
 
+----------------------------------------------------------
+
 Mouse = {}
 
+-----------------
+-- Static Info
+-----------------
+Mouse.Info = Info:New
+{
+	objectType = "Mouse",
+	dataType = "Input",
+	structureType = "Static"	
+}
 
 ---------------------
 -- Static Vars
@@ -155,16 +170,22 @@ function Mouse:New(data)
 	
 	local o =  {}
 
-	----------------------------------
-	-- Create
-	----------------------------------
-
+	----------------
+	-- Object Info
+	----------------
+	
 	-- object
+	Mouse.Info = Info:New
+	{
+		objectType = "Mouse",
+		dataType = "Input",
+		structureType = "Object"
+	}
+
 	o.name = data.name or "..."
 	o.objectType = "Mouse"
 	o.dataType = "Control Object"
 
-	-- 
 	o.totalDistanceTraveled = 0
 	o.speed = {}
 	o.speed.x = 0

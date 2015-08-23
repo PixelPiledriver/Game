@@ -16,9 +16,9 @@ local DrawTools = {}
 
 DrawTools.Info = Info:New
 {
-	name = "DrawTools",
-	objectType  = "Static",
-	dataType = "Graphics Tools"
+	objectType = "DrawTools",
+	dataType = "Tools",
+	structureType  = "Static"
 }
 
 DrawTools.monkey = false

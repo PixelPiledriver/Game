@@ -1,32 +1,61 @@
 -- Point.lua
+
+-- Purpose
+------------------
 -- basic point graphic object
 
+--------------
+-- Requires
+--------------
 local Color = require("Color")
-
--- components
 local Fade = require("Fade")
 local Life = require("Life")
 local Size = require("Size")
 local Pos = require("Pos")
 
+-----------
+-- Setup
+-----------
+-- not sure if this should happen here
+-- but whatever for now
 love.graphics.setPointStyle("rough")
 
+-----------------------------------------------------------
+
 local Point = {}
+
+------------------
+-- Static Info
+------------------
+Point.Info = Info:New
+{
+	objectType = "Point",
+	dataType = "Graphics",
+	structureType = "Static"	
+}
+
+------------
+-- Object
+------------
 
 function Point:New(data)
 
 	local o = {}
 
 	---------------	
-	-- Create
+	-- Info
 	---------------
+	Info:ObjectOf
+	{
+		static = self,
+		o = o,
+		data = data
+	}
 
-	-- object
-	o.name = data.name or "..."
-	o.objectType = "Point"
-	o.dataType = "Graphics"
 
-	-- vars
+	---------
+	-- Vars
+	---------
 	o.size = data. size or 10
 
 
@@ -38,9 +67,9 @@ function Point:New(data)
 		o.color = data.color
 	end 
 
-	------------------------
+	-----------------
 	-- Components
-	------------------------
+	-----------------
 	o.Pos = Pos:New(data.pos or Pos.defaultPos)
 
 	if(data.fade) then	
@@ -115,3 +144,8 @@ end
 
 
 return Point
+
+
+
+-- Notes
+---------------

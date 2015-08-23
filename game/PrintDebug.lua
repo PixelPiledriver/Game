@@ -1,3 +1,8 @@
+-- PrintDebug.lua
+
+-- Purpose
+----------------------------
+
 -- settings for console output
 -- this will include debug print
 
@@ -6,11 +11,25 @@
 -- add a new switch by adding a string index
 -- printDebug.["Name"]
 
-
 -- creates a new type of object to be enabled for PrintDebug
+
+
+-------------------------------------------------------------
 local PrintDebugType = {}
 
--- create a new object type
+----------------
+-- Static Info
+----------------
+PrintDebugType.Info = Info:New
+{
+	objectType = "PrintDebugType",
+	dataType = "Debug",
+	structureType = "Static"
+}
+
+-----------
+-- Object
+-----------
 
 function PrintDebugType:New(name)
 
@@ -83,6 +102,9 @@ end
 
 -- should probly add global switches for love.graphic.print as well
 -- will do that later
+
+-- prints to console
+-- thats what sets this apart from DebugText -> which prints to screen
 
 
 -- To Do

@@ -17,9 +17,9 @@ CollisionManager = {}
 ----------------------
 CollisionManager.Info = Info:New
 {
-	name = "CollisionManager",
-	objectType = "Static",
-	dataType = "Manager"
+	objectType = "CollisionManager",
+	dataType = "Collision",
+	structureType = "Manager"
 }
 
 -- lists

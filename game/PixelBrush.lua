@@ -1,26 +1,54 @@
--- PixelBrush
+-- PixelBrush.lua
+
+-- Purpose
+--------------
 -- an arrangement of pixels to be used on a PixelTexture object as a stamp
 
-
+-------------
+-- Requires
+-------------
 local Color = require("Color")
 
+------------------------------------------------------------------------------
 
 local PixelBrush = {}
 
+----------------
+-- Static Info
+----------------
+PixelBrush.Info = Info:New
+{
+	objectType = "PixelBrush",
+	dataType = "Graphics",
+	structureType = "Static"
+}
 
+-------------
+-- Object
+-------------
 -- {width, height, pixels, color}
 function PixelBrush:New(data)
 
-	local object = {}
+	local o = {}
 
-	object.name = "..."
-	object.objectType = "Brush"
-	object.dataType = "Graphics Object"
+	---------
+	-- Info
+	---------
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "PixelBrush",
+		dataType = "Graphics",
+		structureType = "Object"
+	}
 
-	object.width = data.width
-	object.height = data.height
-	object.pixels = data.pixels
-	object.color = data.color
+	-----------
+	-- Vars
+	-----------
+	o.width = data.width
+	o.height = data.height
+	o.pixels = data.pixels
+	o.color = data.color
 
 	return object
 
@@ -28,6 +56,9 @@ end
 
 
 
+-----------------------
+-- Static Functions
+-----------------------
 
 function PixelBrush:SetColor(colorName)
 	self.color = Color:Get(colorName)

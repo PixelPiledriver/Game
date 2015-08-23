@@ -98,13 +98,14 @@ local yLink = Link:New
 }
 
 
---[[
+
 -- Grid Based panel object placement and size
 local gridPanel = SimplePanel:New
 {
 	name = "grid panel",
 	posType = "bottom",	
 }
+
 
 local gbox1 = Box:New
 {
@@ -127,7 +128,7 @@ local gbox3 = Box:New
 	color = Color:Get("white")
 }
 
----[[
+
 gridPanel:Add
 {
 	object = gbox1,
@@ -149,7 +150,6 @@ gridPanel:Add
 	y = 5
 }
 
---]]
 
 
 

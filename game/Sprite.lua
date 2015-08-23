@@ -1,7 +1,13 @@
 -- Sprite.lua
+
+-- Purpose
+----------------------
 -- redo of sprite loading code
 -- want to try and rewrite it cuz the old stuff is a little weird
 
+-------------
+-- Requires
+-------------
 local SpriteSheet = require("SpriteSheet")
 local Color = require("Color")
 local Pos = require("Pos")
@@ -15,9 +21,12 @@ local Sprite = {}
 ------------------
 -- Static Info
 ------------------
-Sprite.name = "Sprite"
-Sprite.objectType = "Static"
-Sprite.dataType = "Graphics Constructor"
+Sprite.Info = Info:New
+{
+	objectType = "Sprite",
+	dataType = "Graphics",
+	structureType = "Static"
+}
 
 
 ----------------
@@ -39,9 +48,9 @@ Sprite.useSpriteSheetSpriteSize = true
 Sprite.drawNone = false
 
 
----------------------
--- Static Functions
----------------------
+------------
+-- Object
+------------
 
 -- {spriteSheet, x, y, width, height}
 function Sprite:New(data)
@@ -54,15 +63,22 @@ function Sprite:New(data)
 
 	local o = {}
 
-	------------------
-	-- Object Info
-	------------------
+	------------
+	-- Info
+	------------
 
-	o.name = data.name or "..."
-	o.objectType = "Sprite"
-	o.dataType = "Graphics"
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Sprite",
+		dataType = "Graphics",
+		structureType = "Object"
+	}
+	
+	------------
+	-- Vars
+	------------
 
-	-- vars
 	o.spriteSheet = data.spriteSheet or Sprite.defaultSpriteSheet
 
 	-- Size

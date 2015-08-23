@@ -4,10 +4,29 @@
 -- writen by Adam Balk, August 2014
 --******************************************************************--
 
+-------------
+-- Requires
+-------------
 local Box = require("Box")
 local Color = require("Color")
 
+------------------------------------------------
 local SnapGrid = {}
+
+-----------------
+-- Static Info
+-----------------
+
+SnapGrid.Info = Info:New
+{
+	objectType = "SnapGrid",
+	dataType = "Level",
+	structureType = "Static"
+}
+
+-------------------
+-- Static Vars
+-------------------
 
 SnapGrid.board = {}
 SnapGrid.cellWidth = 37
@@ -18,6 +37,10 @@ SnapGrid.boardHeight = 20
 
 SnapGrid.x = 0
 SnapGrid.y = 0
+
+-------------------------
+-- Static Functions
+-------------------------
 
 function SnapGrid:CreateCell(data)
 --[[
@@ -33,7 +56,9 @@ function SnapGrid:CreateCell(data)
 --]]
 	gridCell.gridPosX = 0
 	gridCell.gridPosY = 0
+
 	return gridCell
+
 end
 
 function SnapGrid:SetPosition(x, y)
@@ -63,3 +88,6 @@ end
 --SnapGrid:CreateBoard()
 
 return SnapGrid
+
+-- Notes
+--------------------

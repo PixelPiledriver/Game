@@ -1,14 +1,36 @@
+-- MouseHover.lua
 
+-- Purpose
+--------------
+-- component that handles mouse interaction for objects
 
-
-
+-----------------------------------------------------------------------
 
 local MouseHover = {}
+
+-------------------
+-- Static Info
+-------------------
+MouseHover.Info = Info:New
+{
+	objectType = "MouseHover",
+	dataType = "Input",
+	structureType = "Static"
+}
 
 function MouseHover:New(data)
 
 	local o = {}
 
+	----------------
+	-- Object Info
+	----------------
+	o.Info = Info:New
+	{
+		objectType = "MouseHover",
+		dataType = "Input",
+		structureType = "Component"
+	}
 
 	o.hoverType = data.hoverType or "parentCollision"
 	o.parent = data.parent or nil

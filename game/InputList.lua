@@ -16,3 +16,4 @@
 -- Notes
 -----------------------------------------------------------
 -- not built yet
+-- this will be a good optimization so definitely do it

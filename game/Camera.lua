@@ -305,6 +305,9 @@ return Camera
 
 -- Notes
 --------------
+-- scrolling up down left right is messed up while rotated
+-- need to fix this
+
 -- Camera only operates as a static currently
 -- the New function is broken and is not even used
 -- everything in thats static in this object needs to be moved over to New

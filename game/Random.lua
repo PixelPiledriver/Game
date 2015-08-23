@@ -1,9 +1,19 @@
--- Random
+-- Random.lua
+
+-- Purpose
+------------
 -- get common random numbers
 
-
+-----------------------------------------
 
 local Random = {}
+
+Random.Info = Info:New
+{
+	objectType = "Random",
+	dataType = "Generation",
+	structureType = "Static"
+}
 
 
 -----------------------

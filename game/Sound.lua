@@ -4,7 +4,23 @@
 -- writen by Adam Balk, June 2014
 --******************************************************************--
 
+---------------------------------------
 local Sound = {}
+
+-----------------
+-- Static Info
+-----------------
+
+Sound.Info = Info:New
+{
+	objectType = "Sound",
+	dataType = "Audio",
+	structureType = "Static"
+}
+
+-----------------------
+-- Static Functions
+-----------------------
 
 ----------------------------------------------------------------------
 -- Basic Methods for Playing Audio (probably main thing you'll use) --

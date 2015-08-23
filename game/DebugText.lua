@@ -214,12 +214,35 @@ function DebugText:TextTableSimple(data)
 
 	local convertedTable = {{text = "", data.objectType}}
 
-	for i=i, #data.text do
+	for i=1, #data.text do
 		convertedTable[#convertedTable+1] = {text = data.text[i][1], color = data.text[i][2] or nil }
 	end
 
 	self.texts[#self.texts + 1] = convertedTable
 
+end
+
+-- {t, objectType}
+function DebugText:PrintStringTable(data)
+	local textTable = 
+	{
+		{text = "", data.objectType}
+	}
+
+	for i=1, #data.t do
+		textTable[#textTable + 1] = {text = data.t[i], color = nil}
+	end 
+
+	self.texts[#self.texts + 1] = textTable
+
+end
+
+-- put table of elments 
+-- {t, text}
+function DebugText:AppendTableToText(data)
+	for i=1, #data.t do
+		data.text[#data.text + 1] = {text = data.t[i]}
+	end 
 end
 
 

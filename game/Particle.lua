@@ -1,32 +1,51 @@
--- Particle
+-- Particle.lua
+
+-- Purpose
+-------------------
 -- basic stuff for explosions
 -- KERPOW
 
-
+-------------
+-- Requires
+-------------
 local Box = require("Box")
 local Color = require("Color")
 local Random = require("Random")
 local Value = require("Value")
 local Shape = require("Shape")
 
-
-
+------------------------------------------
 
 local Particle = {}
 
+----------------
+-- Static Info
+----------------
+Particle.Info = Info:New
+{
+	objectType = "Particle",
+	dataType = "Effects",
+	structureType = "Static"
+}
 
+---------------------
+-- Static Functions
+---------------------
 
 function Particle:New(data)
 
 	local object = {}
 
-	-----------------------------
-	-- Other
-	-----------------------------
-	object.name = data.name or "???"
-	object.objectType = "Particle"
-	object.dataType = "Game Object"
-
+	------------------
+	-- Object Info
+	------------------
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Particle",
+		dataType = "Effects",
+		structureType = "Object"
+	}
 
 	-----------------------------
 	-- Pos

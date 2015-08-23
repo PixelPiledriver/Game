@@ -8,15 +8,23 @@ local Life = require("Life")
 local Fade = require("Fade")
 local Draw = require("Draw")
 
+-------------------------------------------------------------------
 
 local Line = {}
 
 -----------------
--- Static Vars
+-- Static Info
 -----------------
-Line.name = "Line"
-Line.objectType = "Static"
-Line.dataType = "Graphics Constructor"
+Line.Info = Info:New
+{
+	objectType = "Line",
+	dataType = "Graphics",
+	structureType = "Static"
+}
+
+---------------------
+-- Static Functions
+---------------------
 
 -- {a = {x,y}, b = {x,y}, width, color}
 function Line:New(data)
@@ -24,16 +32,21 @@ function Line:New(data)
 	local o = {}
 
 	--------------------------
-	-- Create
+	-- Object Info
 	--------------------------
 
-	-- object
-	o.name = data.name or "..."
-	o.objectType = "Line"
-	o.dataType = "Graphics"
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Line",
+		dataType = "Graphics",
+		structureType = "Object"
+	}
 
 
-	-- start
+	------------
+	-- Vars
+	------------
 	o.a = {}
 	o.a.x = data.a and data.a.x or 0
 	o.a.y = data.a and data.a.y or 0
@@ -84,7 +97,6 @@ function Line:New(data)
 	-----------------
 	-- Functions
 	-----------------
-
 	function o:Update()
 	end 
 
@@ -102,7 +114,7 @@ function Line:New(data)
 		DebugText:TextTable
 		{
 			{text = "", obj = "Line" },
-			{text = "Name: " .. self.name},
+			{text = "Name: " .. self.Info.name},
 			{text = "A: {" .. self.a.x .. "," .. self.a.y .. "}"},
 			{text = "B: {" .. self.b.x .. "," .. self.b.y .. "}"},
 			{text = "LifeCompValue: " .. life},

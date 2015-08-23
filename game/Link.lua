@@ -12,18 +12,39 @@
 
 local Link = {}
 
-Link.name = "Link"
-Link.objectType = "Static"
-Link.dataType = "Data Constructor"
+-----------------
+-- Static Info
+-----------------
 
+Link.Info = Info:New
+{
+	objectType = "Link",
+	dataType = "Data",
+	structureType = "Static"
+}
+
+---------------------
+-- Static Functions
+---------------------
 
 function Link:New(data) 
 
 	local o = {}
 
-	o.name = data.name or "..."
-	o.objectType = "Link"
-	o.dataType = "Data"
+	----------------
+	-- Object Info
+	----------------
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Link",
+		dataType = "Data",
+		structureType = "Component"
+	}
+
+	----------
+	-- Vars
+	----------
 
 	-- objects
 	o.a = data.a.o

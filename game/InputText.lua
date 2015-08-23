@@ -1,17 +1,45 @@
 --InputText.lua
 
+-- Purpose
+-----------------------------------
+-- object that holds a string that records keyboard input
 
-
+--------------
+-- Requires
+--------------
 local Keyboard = require("Keyboard")
 local Input = require("Input")
 
 
+----------------------------------------------------------
 local InputText = {}
+
+
+-----------------
+-- Static Info
+-----------------
+InputText.Info = Info:New
+{
+	objectType = "InputText",
+	dataType = "Input",
+	structureType = "Static"
+}
 
 
 function InputText:New(data)
 
 	local o = {}
+
+	----------------
+	-- Object Info
+	----------------
+	o.Info = Info:New
+	{
+		objectType = "InputText",
+		dataType = "Input",
+		structureType = "Object"		
+	}
+
 
 	--------------
 	-- Create

@@ -10,10 +10,14 @@ local MouseDrag = {}
 -----------------
 -- Static Info
 -----------------
+MouseDrag.Info = Info:New
+{
+	objectType = "MouseDrag",
+	dataType = "Input",
+	structureType = "Static"
+}
 
-MouseDrag.name = "MouseDrag"
-MouseDrag.objectType = "Static"
-MouseDrag.dataType = "Object Constructor"
+
 
 MouseDrag.draggingObjects = 0
 MouseDrag.maxDraggables = 1
@@ -24,6 +28,16 @@ MouseDrag.maxDraggables = 1
 function MouseDrag:New(data)
 
 	local o = {}
+
+	----------------
+	-- Object Info
+	----------------
+	o.Info = Info:New
+	{
+		objectType = "MouseDrag",
+		dataType = "Input",
+		structureType = "Component"
+	}
 
 	o.parent = data.parent or nil
 	o.drag = false

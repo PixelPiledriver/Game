@@ -1,5 +1,12 @@
 -- Player.lua
+
+-- Purpose
+-----------------------------------------
 -- basic o with sprite, input, etc
+
+-------------
+-- Requires
+-------------
 
 local Animation = require("Animation")
 local Controller = require("Controller")
@@ -19,26 +26,42 @@ local Map = require("Map")
 local SnapGrid = require("SnapGrid")
 local Timer = require("Timer")
 
-
-
+----------------------------------------------------
 
 -- use to create more instances
 local Player = {}
 
+---------------
+-- Static Info
+---------------
+Player.Info = Info:New
+{
+	objectType = "Player"
+	dataType = "Game"
+	structureType = "Static"
+}
 
+-------------
+-- Object
+-------------
 
 -- create instance
 function Player:New(data)
 
-	----------
-	-- Create
-	----------
 	local o = {}
 
-	o.name = data.name or "..."
-	o.objectType = "Player"
-	o.datatype = "Game Object"
-
+	----------
+	-- Info
+	----------
+	Info:ObjectOf
+	{
+		static = Player,
+		o = o,
+		data = data
+	}
+	----------
+	-- Vars
+	----------
 	o.sprite = data.sprite or nil
 
 	o.x = data.x or 100

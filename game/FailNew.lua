@@ -3,9 +3,7 @@
 
 -- Purpose
 ----------------------------
--- call inside of Type:New to check for
--- data members that are required
-
+-- call inside of Static:New to check for data members that ABSOLUTELY are required
 
 -------------------------------------------------------------------------
 
@@ -36,8 +34,8 @@ end
 ---------------------------------------
 -- this file only contains a single function
 -- needs to be converted into a component that can be used for testing objects
-
 -- not sure what to do with it at the moment
+-- so I'll just leave it alone for now
 
 
 

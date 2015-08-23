@@ -20,7 +20,7 @@ Draw.Info = Info:New
 {
 	objectType = "Draw",
 	dataType = "Graphics",
-	StructureTyp = "Static"
+	structureType = "Static"
 }
 
 

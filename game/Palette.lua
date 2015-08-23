@@ -1,10 +1,11 @@
 -- Palette.lua
+
+-- Purpose
+----------------------
 -- color palette
 -- store and do cool stuff with colors
-
 -- I think all of these will be converted colors.... no names...
 -- that probly makes the most sense I guess
-
 
 ------------------
 -- Requires
@@ -18,9 +19,19 @@ local MouseHover = require("MouseHover")
 local MouseDrag = require("MouseDrag")
 local Draw = require("Draw")
 
+----------------------------------------------------------------
 
 local Palette = {}
 
+----------------
+-- Static Info
+----------------
+Palette.Info = Info:New
+{
+	objectType = "Palette",
+	dataType = "Graphics",
+	structureType = "Static"
+}
 
 ---------------------------
 -- Static Functions
@@ -41,6 +52,16 @@ end
 function Palette:New(data)
 
 	local o = {}
+
+	----------------
+	-- Object Info
+	----------------
+	o.Info = Info:New
+	{
+		objectType = "Palette",
+		dataType = "Graphics",
+		structureType = "Object"
+	}
 
 	---------------
 	-- Create
