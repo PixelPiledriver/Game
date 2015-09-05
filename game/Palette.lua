@@ -18,6 +18,7 @@ local Collision = require("Collision")
 local MouseHover = require("MouseHover")
 local MouseDrag = require("MouseDrag")
 local Draw = require("Draw")
+local Link = require("Link")
 
 ----------------------------------------------------------------
 
@@ -119,7 +120,40 @@ function Palette:New(data)
 		name = o.name,
 		collisionList = {"Mouse"},
 	}
-	o.collision.Pos:LinkPosTo{link = o.Pos}
+
+
+	Link:New
+	{
+		a =
+		{
+			o = o.collision,
+			comp = "Pos",
+			var = "x"
+		},
+		
+		b =
+		{
+			o = o,
+			comp = "Pos",
+			var = "x"
+		}
+	}
+
+	Link:New
+	{
+		a =
+		{
+			o = o.collision,
+			comp = "Pos",
+			var = "y"
+		},
+		b =
+		{
+			o = o,
+			comp = "Pos",
+			var = "y"
+		}
+	}
 
 	o.Draw = Draw:New
 	{
@@ -375,8 +409,7 @@ function Palette:New(data)
 	function o:DrawCall()
 		
 		if(self.draw == false) then
-		
-			return 
+			return
 		end 
 
 		for i=1, #self.colors do

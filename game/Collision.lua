@@ -89,7 +89,7 @@ function Collision:New(data)
 
 	-- color
 	o.color = data.color or Color:AsTable(Color:Get("white"))
-	o.collisionColor = data.collisionColor or Color:AsTable(Color:Get("green"))
+	o.collisionColor = data.collisionColor or Color:AsTable(Color:Get("orange"))
 
 	-- stuff
 	o.visible = data.visible

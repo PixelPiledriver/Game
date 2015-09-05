@@ -47,6 +47,7 @@ local Canvas = require("Canvas")
 local DrawTools = require("DrawTools")
 local Panel = require("Panel")
 local Polygon = require("Polygon")
+local Text = require("Text")
 
 ----------------------
 -- Run Test Code

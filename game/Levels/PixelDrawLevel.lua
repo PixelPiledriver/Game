@@ -24,12 +24,19 @@ local Link = require("Link")
 local InputText = require("InputText")
 local ParticleSystem = require("ParticleSystem")
 local DrawGroup = require("DrawGroup")
+local Text = require("Text")
 
 -- test stuff code and stuff
 
-
-
 local mouse = Mouse:New{name = "mouse"}
+
+local textTest = Text:New
+{
+	text = "Shit Buddies",
+	size = 32,
+	x = 100,
+	y = 100
+}
 
 local billy = Box:New
 {
@@ -49,6 +56,7 @@ local billy2 = Box:New
 	color = Color:Get("white")
 }
 
+
 local billy3 = Box:New
 {
 	x = 200,
@@ -58,7 +66,10 @@ local billy3 = Box:New
 	color = Color:Get("red"),
 }
 
+
+
 local group = DrawGroup:New{billy2, billy3}
+
 
 local bob = Box:New
 {
@@ -66,6 +77,7 @@ local bob = Box:New
 	height = 32,
 	color = Color:Get("orange")
 }
+
 
 local xLink = Link:New
 {
@@ -102,8 +114,9 @@ local yLink = Link:New
 -- Grid Based panel object placement and size
 local gridPanel = SimplePanel:New
 {
-	name = "grid panel",
-	posType = "bottom",	
+	name = "Panel: the dopeness",
+	posType = "bottom",
+	gridScale = 16
 }
 
 
@@ -146,11 +159,11 @@ gridPanel:Add
 gridPanel:Add
 {
 	object = gbox3,
-	x = 10,
+	x = 5,
 	y = 5
 }
 
-
+--]]
 
 
 -- other stuff

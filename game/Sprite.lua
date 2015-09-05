@@ -121,10 +121,6 @@ function Sprite:New(data)
 
 	o.draw = data.draw or true
 
-
-	o.parent = data.parent or nil
-
-
 	--------------------
 	-- Components
 	--------------------
@@ -167,22 +163,7 @@ function Sprite:New(data)
 		local xScale = 1
 		local yScale = 1
 
-		if(self.parent) then
-
-			if(self.parent.Pos) then
-				x = self.parent.Pos.x + self.Pos.x
-				y = self.parent.Pos.y + self.Pos.y
-			else
-				x = self.Pos.x
-				y = self.Pos.y
-			end 
-
-		else
-			x = self.Pos.x
-			y = self.Pos.y
-		end 
-
-		love.graphics.draw(self.spriteSheet.image, self.sprite, x, y, angle, xScale, yScale)
+		love.graphics.draw(self.spriteSheet.image, self.sprite, self.Pos.x, self.Pos.y, angle, xScale, yScale)
 
 	end 
 
@@ -205,3 +186,25 @@ ObjectUpdater:AddStatic(Sprite)
 
 return Sprite
 
+
+
+-- Junk
+---------------------------------------------------------------
+		-- old style link
+		-- this code is trash
+		--[[
+		if(self.parent) then
+
+			if(self.parent.Pos) then
+				x = self.parent.Pos.x + self.Pos.x
+				y = self.parent.Pos.y + self.Pos.y
+			else
+				x = self.Pos.x
+				y = self.Pos.y
+			end 
+
+		else
+			x = self.Pos.x
+			y = self.Pos.y
+		end
+		--]]

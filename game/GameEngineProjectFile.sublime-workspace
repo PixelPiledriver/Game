@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"Button",
+				"selectButton"
+			],
+			[
+				"Zoom",
+				"zoomButton"
+			],
+			[
+				"zoom",
+				"zoomButton"
+			],
+			[
+				"DrawT",
+				"DrawToolsHUD"
+			],
+			[
+				"grid",
+				"gridScale"
+			],
+			[
+				"offst",
+				"offsets"
+			],
+			[
 				"stru",
 				"structureTypes"
 			],
@@ -200,10 +224,6 @@
 				"RotLeft"
 			],
 			[
-				"Zoom",
-				"ZoomIn"
-			],
-			[
 				"hold",
 				"holdKeys"
 			],
@@ -306,10 +326,6 @@
 			[
 				"Ke",
 				"Keyboard"
-			],
-			[
-				"grid",
-				"gridPad"
 			],
 			[
 				"hei",
@@ -498,104 +514,32 @@
 			[
 				"act",
 				"activeDefault"
-			],
-			[
-				"b.func",
-				"b.funcObjectIndex"
-			],
-			[
-				"b.fun",
-				"b.funcObjectIndex"
-			],
-			[
-				"Pixel",
-				"PixelGenFunctions"
-			],
-			[
-				"objectType",
-				"objectTypesTemp"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "Info.lua",
+			"file": "Levels/PixelDrawLevel.lua",
 			"settings":
 			{
-				"buffer_size": 4277,
+				"buffer_size": 6791,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "CollisionManager.lua",
+			"file": "SimplePanel.lua",
 			"settings":
 			{
-				"buffer_size": 6925,
+				"buffer_size": 7217,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "DrawList.lua",
+			"file": "DrawToolsHUD.lua",
 			"settings":
 			{
-				"buffer_size": 9363,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Line.lua",
-			"settings":
-			{
-				"buffer_size": 2567,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "DrawManager.lua",
-			"settings":
-			{
-				"buffer_size": 1267,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "TableSort.lua",
-			"settings":
-			{
-				"buffer_size": 3279,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Draw.lua",
-			"settings":
-			{
-				"buffer_size": 4666,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Window.lua",
-			"settings":
-			{
-				"buffer_size": 1432,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "DrawTools.lua",
-			"settings":
-			{
-				"buffer_size": 5854,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Value.lua",
-			"settings":
-			{
-				"buffer_size": 2980,
+				"buffer_size": 3482,
 				"line_ending": "Windows"
 			}
 		},
@@ -608,34 +552,124 @@
 			}
 		},
 		{
-			"file": "DrawGroup.lua",
+			"file": "DrawTools.lua",
 			"settings":
 			{
-				"buffer_size": 3017,
+				"buffer_size": 5854,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Link.lua",
+			"settings":
+			{
+				"buffer_size": 4813,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Button.lua",
+			"settings":
+			{
+				"buffer_size": 16359,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Text.lua",
+			"settings":
+			{
+				"buffer_size": 2683,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Palette.lua",
+			"settings":
+			{
+				"buffer_size": 9258,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Sprite.lua",
+			"settings":
+			{
+				"buffer_size": 3660,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ObjectUpdater.lua",
+			"settings":
+			{
+				"buffer_size": 10824,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Collision.lua",
+			"settings":
+			{
+				"buffer_size": 5876,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Pos.lua",
+			"settings":
+			{
+				"buffer_size": 3821,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Box.lua",
+			"settings":
+			{
+				"buffer_size": 7246,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Color.lua",
+			"settings":
+			{
+				"buffer_size": 19081,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Draw.lua",
+			"settings":
+			{
+				"buffer_size": 4713,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "main.lua",
+			"settings":
+			{
+				"buffer_size": 3038,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 117 files for \"LovePrint\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\DebugText.lua:\n  251  -- data = {text, x, y, rot, xScale, yScale, \n  252  --	xOffset, yOffset, xShear, yShear}\n  253: function LovePrint(data)\n  254  	local text = data.text or \"NoText\"\n  255  	local x = data.x or 0\n  ...\n  305  		for t = lineIndex, #self.texts[i] do\n  306  			love.graphics.setColor(self.texts[i][t].color or Color:AsTable(Color.white))\n  307: 			LovePrint\n  308  			{\n  309  				text = self.texts[i][t].text,\n\nD:\\GitRepos\\Game\\game\\Panel.lua:\n  230  	function o:DrawCall()\n  231  		love.graphics.setColor(Color:AsTable(Panel.defaultPanelColor))\n  232: 		LovePrint\n  233  		{\n  234  			text = self.name,\n\nD:\\GitRepos\\Game\\game\\SimplePanel.lua:\n  379  	function o:DrawCall()\n  380  		love.graphics.setColor(Color:AsTable(Panel.defaultPanelColor))\n  381: 		LovePrint\n  382  		{\n  383  			text = self.Info.name,\n\n4 matches across 3 files\n\n\nSearching 117 files for \".textColor\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Button.lua:\n  178  	-- text\n  179  	o.text = data.text or \"Button\"\n  180: 	o.textColor = data.textColor and Color:Get(\"data.textColor\") or Color:Get(\"black\")\n  181  	o.drawText = true\n  182  \n  ...\n  310  		-- need to convert to Text\n  311  		if(self.drawText) then\n  312: 			love.graphics.setColor(Color:AsTable(self.textColor))\n  313  			--love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2 - self.Size.height/6, self.Size.width, \"center\")\n  314  			love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2, self.Size.width, \"center\")\n\n4 matches in 1 file\n\n\nSearching 117 files for \"o.followPos\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Pos.lua:\n   85  \n   86  	-- link this pos component to another pos component\n   87: 	o.followPos = data.followPos or nil\n   88  	o.followOffsetX = 0\n   89  	o.followOffsetY = 0\n   ..\n  103  \n  104  	function o:LinkPosTo(data)\n  105: 		o.followPos = data.link or nil\n  106  		o.followOffsetX = data.x or 0\n  107  		o.followOffsetY = data.y or 0\n\n2 matches in 1 file\n\n\nSearching 117 files for \"self.followPos\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Pos.lua:\n  145  \n  146  	function o:FollowPosUpdate()\n  147: 		if(self.followPos == nil) then\n  148  			return\n  149  		end \n  ...\n  151  		self:SetPos\n  152  		{\n  153: 			x = self.followPos.x + self.followOffsetX,\n  154: 			y = self.followPos.y + self.followOffsetY,\n  155: 			z = self.followPos.z + self.followOffsetZ,\n  156  		}\n  157  	end\n\n4 matches in 1 file\n",
+			"settings":
+			{
+				"buffer_size": 2504,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
 			}
 		},
 		{
 			"file": "DebugText.lua",
 			"settings":
 			{
-				"buffer_size": 7172,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "BlockMap.lua",
-			"settings":
-			{
-				"buffer_size": 1413,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Levels/PixelDrawLevel.lua",
-			"settings":
-			{
-				"buffer_size": 6646,
+				"buffer_size": 6844,
 				"line_ending": "Windows"
 			}
 		}
@@ -680,16 +714,37 @@
 	},
 	"file_history":
 	[
-		"/D/GitRepos/Game/game/PrintDebug.lua",
+		"/D/GitRepos/Game/game/DrawToolsHUD.lua",
+		"/D/GitRepos/Game/game/Levels/PixelDrawLevel.lua",
+		"/D/GitRepos/Game/game/o.pos",
 		"/D/GitRepos/Game/game/Pos.lua",
-		"/D/GitRepos/Game/game/WindowMessage.lua",
-		"/D/GitRepos/Game/game/Window.lua",
+		"/D/GitRepos/Game/game/BlockMap.lua",
+		"/D/GitRepos/Game/game/DebugText.lua",
+		"/D/GitRepos/Game/game/DrawGroup.lua",
+		"/D/GitRepos/Game/game/SpriteSheet.lua",
+		"/D/GitRepos/Game/game/box",
+		"/D/GitRepos/Game/game/Box.lua",
 		"/D/GitRepos/Game/game/Value.lua",
+		"/D/GitRepos/Game/game/DrawTools.lua",
+		"/D/GitRepos/Game/game/ObjectUpdater.lua",
+		"/D/GitRepos/Game/game/Window.lua",
+		"/D/GitRepos/Game/game/TableSort.lua",
+		"/D/GitRepos/Game/game/Link.lua",
+		"/D/GitRepos/Game/game/DrawManager.lua",
+		"/D/GitRepos/Game/game/main.lua",
+		"/D/GitRepos/Game/game/Line.lua",
+		"/D/GitRepos/Game/game/Panel.lua",
+		"/D/GitRepos/Game/game/DrawList.lua",
+		"/D/GitRepos/Game/game/Info.lua",
+		"/D/GitRepos/Game/game/CollisionManager.lua",
+		"/D/GitRepos/Game/game/Collision.lua",
+		"/D/GitRepos/Game/game/Levels/collision",
+		"/D/GitRepos/Game/game/Draw.lua",
+		"/D/GitRepos/Game/game/PrintDebug.lua",
+		"/D/GitRepos/Game/game/WindowMessage.lua",
 		"/D/GitRepos/Game/game/Timer.lua",
 		"/D/GitRepos/Game/game/Textfile.lua",
-		"/D/GitRepos/Game/game/TableSort.lua",
 		"/D/GitRepos/Game/game/StaticObjectInfo.lua",
-		"/D/GitRepos/Game/game/SpriteSheet.lua",
 		"/D/GitRepos/Game/game/Sprites.lua",
 		"/D/GitRepos/Game/game/Sprite.lua",
 		"/D/GitRepos/Game/game/Sound.lua",
@@ -702,8 +757,6 @@
 		"/D/GitRepos/Game/game/Shader.lua",
 		"/D/GitRepos/Game/game/Scale.lua",
 		"/D/GitRepos/Game/game/Random.lua",
-		"/D/GitRepos/Game/game/Info.lua",
-		"/D/GitRepos/Game/game/main.lua",
 		"/D/GitRepos/Game/game/Polygon.lua",
 		"/D/GitRepos/Game/game/Point.lua",
 		"/D/GitRepos/Game/game/PlayerSkins.lua",
@@ -715,19 +768,14 @@
 		"/D/GitRepos/Game/game/PixelBrush.lua",
 		"/D/GitRepos/Game/game/ParticleSystem.lua",
 		"/D/GitRepos/Game/game/Particle.lua",
-		"/D/GitRepos/Game/game/Panel.lua",
 		"/D/GitRepos/Game/game/Palette.lua",
-		"/D/GitRepos/Game/game/ObjectUpdater.lua",
 		"/D/GitRepos/Game/game/MouseHover.lua",
-		"/D/GitRepos/Game/game/CollisionManager.lua",
 		"/D/GitRepos/Game/game/Camera.lua",
 		"/D/GitRepos/Game/game/MouseDrag.lua",
 		"/D/GitRepos/Game/game/Canvas.lua",
 		"/D/GitRepos/Game/game/Game.lua",
 		"/D/GitRepos/Game/game/Mouse.lua",
-		"/D/GitRepos/Game/game/Link.lua",
 		"/D/GitRepos/Game/game/Key.lua",
-		"/D/GitRepos/Game/game/Line.lua",
 		"/D/GitRepos/Game/game/Map.lua",
 		"/D/GitRepos/Game/game/Player.lua",
 		"/D/GitRepos/Game/game/Fade.lua",
@@ -735,7 +783,6 @@
 		"/D/GitRepos/Game/game/Keyboard.lua",
 		"/D/GitRepos/Game/game/InputText.lua",
 		"/D/GitRepos/Game/game/InputList.lua",
-		"/D/GitRepos/Game/game/DrawToolsHUD.lua",
 		"/D/GitRepos/Game/game/FailNew.lua",
 		"/D/GitRepos/Game/game/Bullet.lua",
 		"/D/GitRepos/Game/game/FrameCounter.lua",
@@ -754,29 +801,19 @@
 		"/D/GitRepos/Game/game/Input.lua",
 		"/D/GitRepos/Game/game/MemoryManager.lua",
 		"/G/pixel piledriver/Cartoon/Father Son/Father and Son_ Script.txt",
-		"/D/GitRepos/Game/game/DrawList.lua",
-		"/D/GitRepos/Game/game/Draw.lua",
-		"/D/GitRepos/Game/game/DrawGroup.lua",
 		"/D/GitRepos/Game/game/Code Tags and Tools.lua",
 		"/D/GitRepos/Game/game/Levels/StudyLevel.lua",
-		"/D/GitRepos/Game/game/Levels/PixelDrawLevel.lua",
-		"/D/GitRepos/Game/game/Collision.lua",
 		"/D/GitRepos/Game/game/Levels/TestLevel.lua",
 		"/D/GitRepos/Game/game/DeltaTime.lua",
-		"/D/GitRepos/Game/game/DebugText.lua",
 		"/D/GitRepos/Game/game/Controller.lua",
 		"/G/pixel piledriver/Cartoon/Resolutions.txt",
 		"/G/pixel piledriver/Cartoon/ideas/Extra Ideas_1.txt",
 		"/D/GitRepos/Game/game/Button.lua",
 		"/D/GitRepos/Game/game/BulletTypes.lua",
 		"/D/GitRepos/Game/game/Bool.lua",
-		"/D/GitRepos/Game/game/Box.lua",
 		"/D/GitRepos/Game/game/CollisionLists.lua",
 		"/D/GitRepos/Game/game/App.lua",
-		"/D/GitRepos/Game/game/BlockMap.lua",
 		"/D/GitRepos/Game/game/Animation.lua",
-		"/D/GitRepos/Game/game/DrawTools.lua",
-		"/D/GitRepos/Game/game/DrawManager.lua",
 		"/D/Backup/Files/DebugText_1.lua",
 		"/D/GitRepos/Game/game/OldCode.lua",
 		"/D/GitRepos/Game/game/Health.lua",
@@ -804,10 +841,7 @@
 		"/D/GitRepos/Game/game/Levels/DecrodedLerpLevel.lua",
 		"/D/GitRepos/Game/game/LevelManager.lua",
 		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/User/LOVE.sublime-build",
-		"/D/Sublime Projects/gameEngineProject.sublime-project",
-		"/D/GitRepos/Game/game/Levels/SnapGridTestLevel.lua",
-		"/D/GitRepos/Game/game/Levels/LerpLevel.lua",
-		"/D/GitRepos/Game/game/Levels/BoxTestLevel.lua"
+		"/D/Sublime Projects/gameEngineProject.sublime-project"
 	],
 	"find":
 	{
@@ -815,7 +849,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 123.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"D:\\GitRepos\\Game\\game",
@@ -827,6 +861,96 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"itemPad",
+			"itemPade",
+			"width",
+			"size",
+			"itemSize",
+			"itemSoze",
+			"text",
+			"Shit",
+			"text",
+			"dopeness",
+			"offsets",
+			"Print",
+			"print",
+			"Text",
+			"textOnSpriteDefault",
+			"parent",
+			"active",
+			"width",
+			"Text",
+			"Box",
+			"Collision",
+			"parent",
+			"--",
+			"p",
+			"--",
+			"sprite",
+			"links",
+			"self.followPos",
+			"self.x",
+			"self.Pos",
+			"o.followPos",
+			"Collision",
+			"Open",
+			"o.color",
+			"Text:",
+			"text",
+			".textColor",
+			"default",
+			"		\n",
+			"LovePrint",
+			"Draw:New",
+			"Yellow",
+			"Color",
+			"Yellow",
+			"Green",
+			"Freen",
+			"green",
+			"Color",
+			"Pos:New",
+			"last",
+			"--",
+			"Draw",
+			".Draw",
+			"Draw",
+			"LovePrint",
+			"name",
+			"close",
+			"LinkPosTo",
+			"LinkTo",
+			"ObjectUpdater:PostUpdate",
+			"Link:New",
+			"link\n",
+			"link",
+			"links",
+			"offsets",
+			"print",
+			"link",
+			"Info",
+			"--",
+			"type",
+			".active",
+			"Toggle",
+			"self.draw",
+			"self",
+			".Draw",
+			":Draw",
+			".active",
+			".topCollision",
+			".topFrame",
+			".box",
+			".objects",
+			"Panel:",
+			"Simple",
+			"SimplePanel",
+			"New",
+			"SimplePanel",
+			"SimplePanel:New",
+			"SimplePanle:New",
+			"self.objects",
+			"o.objects",
 			"\"Input Constructor",
 			"\"Input",
 			"structureType",
@@ -864,97 +988,7 @@
 			".oType",
 			".count",
 			"o.count",
-			"active",
-			"defaultDraw",
-			"Draw",
-			"Guns.stats",
-			"oType",
-			"Static",
-			"FailNew",
-			"data.",
-			"2nd",
-			"second",
-			"Static",
-			"DrawList",
-			"Static",
-			"Bool",
-			"Static",
-			"Draw",
-			"DrawGroup",
-			"Draw:Draw",
-			"Draw.defaultDraw",
-			"MouseDrag",
-			"Drag",
-			"DragWithMouse",
-			"Luminance",
-			"GetLuminance",
-			"Color:Luminance",
-			"DataPass",
-			"AfterDraw",
-			"{\n",
-			"Input",
-			"Camera:New",
-			"yes",
-			"Repeated",
-			"RepeatedInput",
-			"	\n",
-			"Camera",
-			"camera",
-			"Camera",
-			"Camer",
-			"\"???\"",
-			"print",
-			"shit",
-			"--> FIX",
-			"-->FIX",
-			"-->REFACTOR",
-			"-->FIX",
-			"-->",
-			"print(",
-			"Graphics:",
-			"ObjectUpdater",
-			"nigga",
-			"Nigga",
-			"nigga",
-			"NIGGA",
-			"fuck",
-			"Fuck",
-			"FUCK",
-			"shit",
-			"Ass",
-			" ass ",
-			" ass",
-			"ass",
-			"SHIIIIIT",
-			"SHIT",
-			"CUNT",
-			"BITCH",
-			"Bitch",
-			"bitch",
-			"cunt",
-			"shit",
-			"Sprites.data",
-			"shit",
-			"\"Collision\"",
-			"Collision",
-			"shit",
-			"Size",
-			"shit",
-			"Camera",
-			"shit",
-			"Shit",
-			"shit",
-			"Shit",
-			"shit",
-			"fuck",
-			"fucj",
-			"print",
-			"print(",
-			"print",
-			"Test Code",
-			"finished",
-			"fuck",
-			"--"
+			"active"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -962,6 +996,12 @@
 		"regex": false,
 		"replace_history":
 		[
+			".barCollision",
+			".bar",
+			".frame",
+			".items",
+			"self.items",
+			"o.items",
 			"o:",
 			"o.",
 			"StudyLevel",
@@ -1083,10 +1123,7 @@
 			"CdebugDrawPathObjects",
 			"CAM.gameCam",
 			"CAM.",
-			"T",
-			"tilemap",
-			"currentLayer",
-			"self"
+			"T"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1097,23 +1134,23 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Info.lua",
+					"file": "Levels/PixelDrawLevel.lua",
 					"settings":
 					{
-						"buffer_size": 4277,
+						"buffer_size": 6791,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3174,
-								3174
+								1982,
+								1982
 							]
 						],
 						"settings":
@@ -1133,25 +1170,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3976.0,
+						"translation.y": 3465.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "CollisionManager.lua",
+					"file": "SimplePanel.lua",
 					"settings":
 					{
-						"buffer_size": 6925,
+						"buffer_size": 7217,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								427,
-								427
+								6867,
+								6867
 							]
 						],
 						"settings":
@@ -1171,25 +1208,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 261.0,
+						"translation.y": 13418.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "DrawList.lua",
+					"file": "DrawToolsHUD.lua",
 					"settings":
 					{
-						"buffer_size": 9363,
+						"buffer_size": 3482,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4881,
-								4881
+								2829,
+								2829
 							]
 						],
 						"settings":
@@ -1209,278 +1246,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5894.0,
+						"translation.y": 6642.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "Line.lua",
-					"settings":
-					{
-						"buffer_size": 2567,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2001.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "DrawManager.lua",
-					"settings":
-					{
-						"buffer_size": 1267,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 783.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "TableSort.lua",
-					"settings":
-					{
-						"buffer_size": 3279,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								342,
-								342
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 87.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "Draw.lua",
-					"settings":
-					{
-						"buffer_size": 4666,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								332,
-								332
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 174.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "Window.lua",
-					"settings":
-					{
-						"buffer_size": 1432,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								399,
-								399
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 174.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "DrawTools.lua",
-					"settings":
-					{
-						"buffer_size": 5854,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								372,
-								372
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 87.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "Value.lua",
-					"settings":
-					{
-						"buffer_size": 2980,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								403,
-								403
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 87.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
 					"file": "SpriteSheet.lua",
 					"settings":
 					{
@@ -1491,8 +1263,8 @@
 						"selection":
 						[
 							[
-								414,
-								414
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1512,93 +1284,17 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 174.0,
+						"translation.y": 1980.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 11,
-					"file": "DrawGroup.lua",
+					"buffer": 4,
+					"file": "DrawTools.lua",
 					"settings":
 					{
-						"buffer_size": 3017,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								768,
-								768
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 261.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "DebugText.lua",
-					"settings":
-					{
-						"buffer_size": 7172,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4329,
-								4329
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 6525.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "BlockMap.lua",
-					"settings":
-					{
-						"buffer_size": 1413,
+						"buffer_size": 5854,
 						"regions":
 						{
 						},
@@ -1626,25 +1322,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 743.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 14,
-					"file": "Levels/PixelDrawLevel.lua",
+					"buffer": 5,
+					"file": "Link.lua",
 					"settings":
 					{
-						"buffer_size": 6646,
+						"buffer_size": 4813,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2246,
-								2246
+								4116,
+								4116
 							]
 						],
 						"settings":
@@ -1664,16 +1360,573 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3915.0,
+						"translation.y": 7085.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Button.lua",
+					"settings":
+					{
+						"buffer_size": 16359,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3541,
+								3541
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6645.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "Text.lua",
+					"settings":
+					{
+						"buffer_size": 2683,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								761,
+								761
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1725.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "Palette.lua",
+					"settings":
+					{
+						"buffer_size": 9258,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7438,
+								7438
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 12921.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "Sprite.lua",
+					"settings":
+					{
+						"buffer_size": 3660,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2550,
+								2556
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3193.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "ObjectUpdater.lua",
+					"settings":
+					{
+						"buffer_size": 10824,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6301,
+								6301
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 8131.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "Collision.lua",
+					"settings":
+					{
+						"buffer_size": 5876,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2523.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "Pos.lua",
+					"settings":
+					{
+						"buffer_size": 3821,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2641,
+								2658
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3844.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "Box.lua",
+					"settings":
+					{
+						"buffer_size": 7246,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3584,
+								3584
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5405.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "Color.lua",
+					"settings":
+					{
+						"buffer_size": 19081,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13401,
+								13421
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 90.0,
+						"translation.y": 37131.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "Draw.lua",
+					"settings":
+					{
+						"buffer_size": 4713,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3052,
+								3058
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5305.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "main.lua",
+					"settings":
+					{
+						"buffer_size": 3038,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1242,
+								1242
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 870.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"settings":
+					{
+						"buffer_size": 2504,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										203,
+										212
+									],
+									[
+										441,
+										450
+									],
+									[
+										649,
+										658
+									],
+									[
+										849,
+										858
+									],
+									[
+										1084,
+										1094
+									],
+									[
+										1101,
+										1111
+									],
+									[
+										1131,
+										1141
+									],
+									[
+										1325,
+										1335
+									],
+									[
+										1775,
+										1786
+									],
+									[
+										1925,
+										1936
+									],
+									[
+										2204,
+										2218
+									],
+									[
+										2315,
+										2329
+									],
+									[
+										2368,
+										2382
+									],
+									[
+										2421,
+										2435
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								2057,
+								2057
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"detect_indentation": false,
+							"output_tag": 4,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2001.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "DebugText.lua",
+					"settings":
+					{
+						"buffer_size": 6844,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4761,
+								4761
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 7134.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				}
-			]
-		},
-		{
-			"sheets":
-			[
 			]
 		}
 	],
@@ -1694,18 +1947,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.891613028534,
 			1.0
 		],
 		"rows":
@@ -1717,7 +1963,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 164.0
+		"height": 165.0
 	},
 	"replace":
 	{

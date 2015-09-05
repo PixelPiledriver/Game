@@ -18,6 +18,8 @@ local Pos = require("Pos")
 local Size = require("Size")
 local MouseHover = require("MouseHover")
 local Draw = require("Draw")
+local Text = require("Text")
+local Link = require("Link")
 
 
 
@@ -48,6 +50,10 @@ Button.maxColumns = 7
 Button.repeatFunction = 1
 
 Button.buttonBeingDragged = false
+
+-- if a sprite is defined text will not draw
+-- not sure which is better so this default can be changed
+Button.textOnSpriteDefault = false
 
 
 ---------------------------
@@ -94,21 +100,6 @@ function Button:New(data)
 	-- needs to create a sup components for objects just like everything else
 	o.printDebugTextActive = data.printDebugTextActive or false
 
-	-- pos
-
-	--local x = 0
-	--local y = 0
-
-	-- need to fix max columns
-	-- it doesnt work correctly at all
-	-- was just a quick fix
-	--[[
-
-	if(Button.totalCreated == Button.maxColumns) then
-		Button.lastCreated.Pos.x = Button.defaultCreated.Pos.x
-		Button.lastCreated.Pos.y = Button.defaultCreated.Pos.y + Button.lastCreated.height + Button.ySpace
-	end 
-	--]]
 
 	---------------
 	-- Components
@@ -176,26 +167,52 @@ function Button:New(data)
 	o.toggleOffFunc = data.toggleOffFunc or nil
 
 	-- text
-	o.text = data.text or "Button"
-	o.textColor = data.textColor and Color:Get("data.textColor") or Color:Get("black")
-	o.drawText = true
+	o.Text = Text:New
+	{
+		text = data.text or "Button",
+		color = data.textColor and Color:Get("data.textColor") or Color:Get("black"),
+		alignment = "center",
+		displayWidth = o.Size.width
+	}
 
+	Link:New
+	{
+		a =
+		{
+			o = o.Text,
+			comp = "Pos",
+			var = "x"
+		},
+		b =
+		{
+			o = o,
+			comp = "Pos",
+			var = "x"
+		}
+	}
+
+	Link:New
+	{
+		a =
+		{
+			o = o.Text,
+			comp = "Pos",
+			var = "y"
+		},
+		b =
+		{
+			o = o,
+			comp = "Pos",
+			var = "y"
+		}
+	}
+
+	o.Text.Draw.active = data.drawText or true
 
 	--------------
 	-- Graphics
 	--------------
-
-	-- color
-	o.color = Color:Get("white")
-	o.colors = 
-	{
-		idle = Color:Get("white"),
-		hover = Color:Get("blue"),
-		click = Color:Get("green"),
-		toggleFalse = Color:Get("white"),
-		toggleTrue = Color:Get("red")
-	}
-
+	
 	-- sprite
 	o.sprite = data.sprite or nil
 
@@ -206,19 +223,73 @@ function Button:New(data)
 		o.sizeToSprite = true
 	else
 		o.sizeToSprite = false
-	end 
+	end
 
+	-- change vars in interest of using sprite
 	if(o.sizeToSprite) then
-		o.drawText = false --> this should probly be put somewhere else :P
 		o.Size.width = o.sprite.Size.width
 		o.Size.height = o.sprite.Size.height
+		o.Text.displayWidth = o.Size.width
 	end 
 
+	-- link sprite to button
 	if(o.sprite) then
-		o.sprite.parent = o
+
+		Link:New
+		{
+			a =
+			{
+				o = o.sprite,
+				comp = "Pos",
+				var = "x"
+			},
+			
+			b =
+			{
+				o = o,
+				comp = "Pos",
+				var = "x"
+			}
+		}
+
+		Link:New
+		{
+			a =
+			{
+				o = o.sprite,
+				comp = "Pos",
+				var = "y"
+			},
+			b =
+			{
+				o = o,
+				comp = "Pos",
+				var = "y"
+			}
+		}
+
+	end
+
+	-- hide text if sprite is used --> not always wanted so use default for now
+	if(o.sprite) then
+		o.Text.Draw.active = Button.textOnSpriteDefault
 	end 
 
-	-- collision
+	-- color --> colorizes the sprite of button in differnt states
+	o.color = Color:Get("white")
+	o.colors = 
+	{
+		idle = Color:Get("white"),
+		hover = Color:Get("blue"),
+		click = Color:Get("green"),
+		toggleFalse = Color:Get("white"),
+		toggleTrue = Color:Get("red")
+	}
+
+
+	---------------
+	-- Collision
+	---------------
 	-- this uses collision obejcts
 	-- a mouse based version with no collision might be good at some point :O
 	o.collision = Collision:New
@@ -233,10 +304,44 @@ function Button:New(data)
 		parent = o
 	}
 
+	Link:New
+	{
+		a =
+		{
+			o = o.collision,
+			comp = "Pos",
+			var = "x"
+		},
+		b =
+		{
+			o = o,
+			comp = "Pos",
+			var = "x"
+		}
+	}
+
+	Link:New
+	{
+		a =
+		{
+			o = o.collision,
+			comp = "Pos",
+			var = "y"
+		},
+		b =
+		{
+			o = o,
+			comp = "Pos",
+			var = "y"
+		}
+	}
+	
+	
 	o.collision.Pos:LinkPosTo
 	{
 		link = o.Pos
 	}
+	
 
 	-- button
 	o.hover = false
@@ -302,13 +407,19 @@ function Button:New(data)
 	end 
 
 	function o:DrawCall()
+
 		-- draw text for button? --> if button has a sprite, defaults to not draw
 		-- this should not always be the case, if button has a backdrop and text goes on top
 		-- will need to fix this issue at a later time :P
+
+		-- need to convert to Text
+		--[[
 		if(self.drawText) then
-			love.graphics.setColor(Color:AsTable(self.textColor))
-			love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2 - self.Size.height/6, self.Size.width, "center")
+			love.graphics.setColor(Color:AsTable(Color:Get(self.Text.color)))
+			--love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2 - self.Size.height/6, self.Size.width, "center")
+			love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2, self.Size.width, "center")
 		end
+		--]]
 
 	end
 
@@ -467,7 +578,7 @@ function Button:New(data)
 			{text = "Name: " .. self.Info.name},
 			{text = "Width: " .. self.Size.width},
 			{text = "Height: " .. self.Size.height},
-			{text = "Function: " .. self.text},
+			{text = "Function: " .. self.Text.text},
 			{text = "Pos: {" .. self.Pos.x .. ", " .. self.Pos.y .. "}"},
 			{text = "Toggle: " .. toggleInfo},
 			{text = "State: " ..self.state}
@@ -712,3 +823,25 @@ return Button
 	-- buttons need and extra variable that lets you pass in an object for them to work on
 	-- assuming they need one
 	-- objects needed for buttons to works will be genericized into a table maybe?
+
+
+
+
+-- Junk
+-----------------------
+
+	-- pos
+
+	--local x = 0
+	--local y = 0
+
+	-- need to fix max columns
+	-- it doesnt work correctly at all
+	-- was just a quick fix
+	--[[
+
+	if(Button.totalCreated == Button.maxColumns) then
+		Button.lastCreated.Pos.x = Button.defaultCreated.Pos.x
+		Button.lastCreated.Pos.y = Button.defaultCreated.Pos.y + Button.lastCreated.height + Button.ySpace
+	end 
+	--]]

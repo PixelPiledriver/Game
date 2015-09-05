@@ -13,6 +13,7 @@ local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
 local Button = require("Button")
 local DrawTools = require("DrawTools")
+local Panel = require("SimplePanel")
 
 -----------------------------------------------------------------------------------
 
@@ -142,7 +143,56 @@ DrawToolsHUD.selectButton = Button:New
 	printDebugTextActive = true,
 }
 
+-------------
+-- Panel
+-------------
 
+-- create
+DrawToolsHUD.panel = Panel:New
+{
+	name = "DrawTools",
+	posType = "bottom",
+	gridSize = 32	
+}
+
+-- add objects
+DrawToolsHUD.panel:Add
+{
+	object = DrawToolsHUD.drawButton,
+	x = 1,
+	y = 1
+}
+
+--[[
+DrawToolsHUD.panel:Add
+{
+	object = DrawToolsHUD.moveButton,
+	x = 2,
+	y = 1
+}
+
+
+DrawToolsHUD.panel:Add
+{
+	object = DrawToolsHUD.zoomButton,
+	x = 3,
+	y = 1
+}
+
+DrawToolsHUD.panel:Add
+{
+	object = DrawToolsHUD.colorDropButton,
+	x = 4,
+	y = 1
+}
+
+DrawToolsHUD.panel:Add
+{
+	object = DrawToolsHUD.selectButton,
+	x = 5,
+	y = 1
+}
+--]]
 ---------------
 -- Static End
 ---------------

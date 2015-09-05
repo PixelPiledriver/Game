@@ -41,6 +41,8 @@ DebugText.active = true
 -- all text messages that need to be drawn on the next frame
 DebugText.texts = {}
 
+DebugText.font = love.graphics.newFont(12)
+
 ----------------------
 -- Print Type Flags
 ----------------------
@@ -245,26 +247,6 @@ function DebugText:AppendTableToText(data)
 	end 
 end
 
-
-
--- optional text altering
--- data = {text, x, y, rot, xScale, yScale, 
---	xOffset, yOffset, xShear, yShear}
-function LovePrint(data)
-	local text = data.text or "NoText"
-	local x = data.x or 0
-	local y = data.y or 0
-	local rot = data.rot or 0
-	local xScale = data.xScale or 1
-	local yScale = data.yScale or 1
-	local xOffset = data.xOffset or 0
-	local yOffset = data.yOffset or 0
-	local xShear = data.xShear or 0
-	local yShear = data.yShear or 0
-	love.graphics.print(text, x, y, rot, xScale, yScale, xOffset, yOffset, xShear, yShear)
-end 
-
-
 -- draw all texts
 function DebugText:Draw()
 
@@ -275,6 +257,11 @@ function DebugText:Draw()
 	if(#self.texts < 1) then
 		return
 	end 
+
+	-- set font for all messages
+	-- each message could have its own font
+	-- but I dont think it matters right now
+	love.graphics.setFont(self.font)
 
 	-- use index for sub items in text tables
 	local index = 1
@@ -303,6 +290,8 @@ function DebugText:Draw()
 
 		-- for each text message in item
 		for t = lineIndex, #self.texts[i] do
+
+			-- draw the text
 			love.graphics.setColor(self.texts[i][t].color or Color:AsTable(Color.white))
 			LovePrint
 			{

@@ -1,6 +1,11 @@
 -- Panel.lua
 
--- requires
+-- in game window that holds buttons and stuff
+
+-------------
+-- Requires
+-------------
+
 local Color = require("Color")
 local Box = require("Box")
 local Pos = require("Pos")
@@ -11,6 +16,7 @@ local MouseDrag = require("MouseDrag")
 local MapTable = require("MapTable")
 local Draw = require("Draw")
 
+---------------------------------------------------------------
 
 local Panel = {}
 
@@ -71,7 +77,7 @@ function Panel:New(data)
 	-------------------------------------
 	-- Objects in Panel
 	-------------------------------------
-	o.objects = {}
+	o.items = {}
 	o.objectDirection = data.objectDirection or "right"
 
 	-------------------
@@ -245,11 +251,11 @@ function Panel:New(data)
 	function o:ToggleDraw()
 		self.draw = Bool:Toggle(self.draw)
 
-		for i=1, #self.objects do
-			if(self.objects[i].ToggleDraw) then
-				self.objects[i]:ToggleDraw()
+		for i=1, #self.items do
+			if(self.items[i].ToggleDraw) then
+				self.items[i]:ToggleDraw()
 			else
-				self.objects[i].draw = self.draw
+				self.items[i].draw = self.draw
 			end 
 
 		end 		
@@ -262,9 +268,9 @@ function Panel:New(data)
 	function o:GetMaxObjectHeight()
 		local max = 0
 
-			for i=1, #self.objects do
-				if(self.objects[i].Size.height > max) then
-					max = self.objects[i].Size.height
+			for i=1, #self.items do
+				if(self.items[i].Size.height > max) then
+					max = self.items[i].Size.height
 				end 
 			end 
 
@@ -274,9 +280,9 @@ function Panel:New(data)
 	function o:GetMaxObjectWidth()
 		local max = 0
 
-			for i=1, #self.objects do
-				if(self.objects[i].Size.width > max) then
-					max = self.objects[i].Size.width
+			for i=1, #self.items do
+				if(self.items[i].Size.width > max) then
+					max = self.items[i].Size.width
 				end 
 			end 
 
@@ -285,22 +291,22 @@ function Panel:New(data)
 
 	function o:GetObjectsHeight()
 		local height = 0
-			for i=1, #self.objects do
-				height = height + self.objects[i].Size.height
+			for i=1, #self.items do
+				height = height + self.items[i].Size.height
 			end
 		return height
 	end 
 
 	function o:GetPadHeight()
-		return (#self.objects * Panel.objectToObjectPad) + (Panel.objectToPanelPad * 2)
+		return (#self.items * Panel.objectToObjectPad) + (Panel.objectToPanelPad * 2)
 	end 
 
 	-- get the total width of all objects in the panel
 	function o:GetObjectsWidth()
 		local width = 0
 
-		for i=1, #self.objects do
-			width = width + self.objects[i].Size.width
+		for i=1, #self.items do
+			width = width + self.items[i].Size.width
 		end 
 
 		return width
@@ -308,11 +314,11 @@ function Panel:New(data)
 	
 	-- get the total width of all padding in the panel
 	function o:GetPadWidth()	
-		return (#self.objects * Panel.objectToObjectPad) + (Panel.objectToPanelPad * 2)
+		return (#self.items * Panel.objectToObjectPad) + (Panel.objectToPanelPad * 2)
 	end
 
 	function o:GetObjectPadWidth()
-		return (Panel.objectToObjectPad * (#self.objects - 1))
+		return (Panel.objectToObjectPad * (#self.items - 1))
 	end 
 
 
@@ -366,7 +372,7 @@ function Panel:New(data)
 		local totalPadWidth = self:GetPadWidth()
 
 		-- add object to table of objects
-		self.objects[#self.objects + 1] = object
+		self.items[#self.items + 1] = object
 
 		-- resize panel to accomodate new object
 
@@ -384,7 +390,7 @@ function Panel:New(data)
 
 		local objectToObjectPad = 0
 
-		if(#self.objects > 1) then
+		if(#self.items > 1) then
 			objectToObjectPad = self:GetObjectPadWidth()
 		end
 
@@ -439,9 +445,9 @@ function Panel:New(data)
 	end 
 
 	function o:ApplyObjectPosition()
-		for i=1, #self.objects do
-			self.objects[i].Pos.x = self.Pos.x + self.objects[i].panelPos.x
-			self.objects[i].Pos.y = self.Pos.y + self.objects[i].panelPos.y
+		for i=1, #self.items do
+			self.items[i].Pos.x = self.Pos.x + self.items[i].panelPos.x
+			self.items[i].Pos.y = self.Pos.y + self.items[i].panelPos.y
 		end 
 	end
 
@@ -460,7 +466,7 @@ function Panel:New(data)
 			{text = "", obj = "DrawTools"},
 			{text = "Panel"},
 			{text = "-------------------------"},
-			{text = #self.objects}
+			{text = #self.items}
 		}
 	end 
 

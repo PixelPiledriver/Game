@@ -126,6 +126,10 @@ function Draw:New(data)
 
 		if(self.inGroup) then
 			return
+		end
+
+		if(self.active == false)then
+			return
 		end 
 
 		local drawData =
@@ -183,7 +187,6 @@ function Draw:New(data)
 
 	-- turn on/off drawing for this object
 	function o:ToggleDraw()
-
 
 		if(self.active) then
 			self.active = false

@@ -15,6 +15,9 @@ local MouseHover = require("MouseHover")
 local MouseDrag = require("MouseDrag")
 local MapTable = require("MapTable")
 local Button = require("Button")
+local Link = require("Link")
+local Draw = require("Draw")
+local Text = require("Text")
 
 ---------------------------------------------------------------
 
@@ -81,20 +84,21 @@ function Panel:New(data)
 	-------------------------
 	-- Objects in Panel
 	-------------------------
-	o.objects = {}
+	o.items = {}
 	o.objectDirection = data.objectDirection or "right"
 
 	-------------------
 	-- Object Map
 	-------------------
-	o.gridScale = data.gridScale or 32
-	o.gridPad = data.gridPad or 8
+	o.gridScale = data.gridScale or 32 --> size of items
+	o.gridPad = data.gridPad or 0
+
+	o.itemPad = data.itemPad or 8 --> space between items
 
 	----------------------
 	-- Panel Type
 		-- ObjectBased - adding objects to the panel expands the panel
 		-- MapBased
-	
 	----------------------
 	o.panelType = data.panelType or "ObjectBased"
 	o.map = MapTable:New
@@ -124,31 +128,42 @@ function Panel:New(data)
 		}
 	end
 
+	o.Draw = Draw:New
+	{
+		parent = o,
+		layer = "Hud"
+	}
+
 	-------------------------------
 	-- Graphics
 	-------------------------------
 	-- main panel area
-	o.box = Box:New
+	o.frame = Box:New
 	{
 		color = Panel.defaultPanelColor,
 		parent = o,
 	}
 
-	o.box.Pos:LinkPosTo
+	Link:Simple
 	{
-		link = o.Pos
+		a = {o.frame, "Pos", "x"},
+		b = {o, "Pos", "x"},
 	}
 
-	o.box.Size:LinkSizeTo
+	Link:Simple
+	{
+		a = {o.frame, "Pos", "y"},
+		b = {o, "Pos", "y"},
+	}
+
+	-->REPLACE with Link:Simple
+	o.frame.Size:LinkSizeTo
 	{
 		link = o.Size
 	}
 
-	--o.box.Pos = o.Pos
-	--o.box.Size = o.Size
-
 	-- above panel
-	o.topFrame = Box:New
+	o.bar = Box:New
 	{
 		x = o.Pos.x,
 		y = o.Pos.y - Panel.defaultTopFrame.height,
@@ -158,37 +173,110 @@ function Panel:New(data)
 		parent = o,
 	}
 
-	o.topFrame.Size:LinkWidthTo{link = o.Size}
+	-->REPLACE with Link:Simple
+	o.bar.Size:LinkWidthTo{link = o.Size}
 
-	o.topFrame.Pos:LinkPosTo
+	Link:Simple
 	{
-		link = o.Pos,
-		x = o.topFrame.Pos.x - o.Pos.x,
-		y = o.topFrame.Pos.y - o.Pos.y
+		a = {o.bar, "Pos", "x"},
+		b = {o, "Pos", "x"}
 	}
 
-	--------------------
+	Link:Simple
+	{
+		a = {o.bar, "Pos", "y"},
+		b = {o, "Pos", "y"},
+		offsets =
+		{
+			{object = {o.bar.Size, "height", "Sub"}}
+		}
+	}
+
+	-- add Text here to diplay name of panel
+	-- old way was DrawCall LovePrint
+	o.barTitle = Text:New
+	{
+		text = o.Info.name,
+		color = Color:Get("black")
+	}
+
+	Link:Simple
+	{
+		a = {o.barTitle, "Pos", "x"},
+		b = {o.bar, "Pos", "x"}
+	}
+
+	Link:Simple
+	{
+		a = {o.barTitle, "Pos", "y"},
+		b = {o.bar, "Pos", "y"}
+	}
+
+
+	-----------------
 	-- Collision
-	--------------------
-	o.topCollision = Collision:New
+	-----------------
+
+	o.barCollision = Collision:New
 	{
 		x = o.Pos.x,
-		y = o.Pos.y - o.topFrame.Size.height,
-		width = o.topFrame.Size.width,
-		height = o.topFrame.Size.height,
+		y = o.Pos.y - o.bar.Size.height,
+		width = o.bar.Size.width,
+		height = o.bar.Size.height,
 		name = o.name,
 		shape = "rect",
 		collisionList = {"Mouse"},
 	}
 
-	o.topCollision.Pos:LinkPosTo
+	Link:Simple
 	{
-		link = o.topFrame.Pos,
+		a = {o.barCollision, "Pos", "x"},
+		b = {o.bar, "Pos", "x"},
 	}
 
-	o.topCollision.Size:LinkWidthTo
+	Link:Simple
 	{
-		link = o.topFrame.Size
+		a = {o.barCollision, "Pos", "y"},
+		b = {o.bar, "Pos", "y"},
+	}
+
+	o.barCollision.Size:LinkWidthTo
+	{
+		link = o.bar.Size
+	}
+
+	--------------
+	-- Buttons
+	--------------
+
+	o.openCloseButton = Button:New
+	{
+		name = "panel close",
+		text = "x",
+		width = 16,
+		height = 16,
+		func = function()
+			o:ToggleDraw()
+		end,
+
+		printDebugTextActive = true
+		
+	}
+
+	Link:Simple
+	{
+		a = {o.openCloseButton, "Pos", "x"},
+		b = {o.bar, "Pos", "x"},
+		offsets =
+		{
+			{object = {o.frame.Size, "width"}}
+		}
+	}
+
+	yLink = Link:Simple
+	{
+		a = {o.openCloseButton, "Pos", "y"},
+		b = {o.bar, "Pos", "y"}
 	}
 
 	------------------------
@@ -197,7 +285,7 @@ function Panel:New(data)
 	o.hover = MouseHover:New
 	{
 		parent = o,
-		collision = o.topCollision
+		collision = o.barCollision
 	}
 
 	o.drag = MouseDrag:New
@@ -205,31 +293,7 @@ function Panel:New(data)
 		parent = o
 	}
 
-	-- Open/Close Button
-	---------------------------
 
-	o.openCloseButton = Button:New
-	{
-		name = "panel close",
-		text = "x",
-		x = 100,
-		y = 100,
-		func = function()
-			Bool:Toggle(o.active)
-		end,
-
-		printDebugTextActive = true
-		
-	}
-
-	---[[
-	o.openCloseButton.Pos:LinkPosTo
-	{
-		link = o.Pos,
-		x = o.topFrame.Size.width,
-		y = 0
-	}
-	--]]
 	----------------
 	-- Functions
 	----------------
@@ -238,26 +302,27 @@ function Panel:New(data)
 	end 
 
 	function o:DrawCall()
-		love.graphics.setColor(Color:AsTable(Panel.defaultPanelColor))
+
+		--[[
+		love.graphics.setColor(Color:AsTable(Color:Get("black")))
 		LovePrint
 		{
-			text = self.name,
-			x = self.Pos.x + 6,
-			y = self.Pos.y - 14
+			text = self.Info.name,
+			x = self.bar.Pos.x,
+			y = self.bar.Pos.y,
 		}
+		--]]
 	end
 
 	function o:ToggleDraw()
-		self.draw = Bool:Toggle(self.draw)
 
-		for i=1, #self.objects do
-			if(self.objects[i].ToggleDraw) then
-				self.objects[i]:ToggleDraw()
-			else
-				self.objects[i].draw = self.draw
-			end 
+		for i=1, #self.items do
+			self.items[i].Draw:ToggleDraw()
+		end
 
-		end 		
+		self.frame.Draw:ToggleDraw()
+		--self.bar.Draw:ToggleDraw()
+
 	end 
 
 
@@ -267,7 +332,9 @@ function Panel:New(data)
 
 	-- add an object to this panel
 	-- {object, x, y}
-	function o:Add(data)	
+	function o:Add(data)
+
+		self.items[#self.items + 1] = data.object
 
 		self.map:Add
 		{
@@ -276,16 +343,37 @@ function Panel:New(data)
 			y = data.y,
 		}
 	
+		-- not sure why the shit on the right is commented out
 		local w = (self.gridScale * self.map.width)	--+ ((self.map.width-2) * self.gridPad)
 		local h = (self.gridScale * self.map.height) --+ ((self.map.height-2) * self.gridPad)
 		self.Size:Set(w,h)
 
-		self.map.map[data.x][data.y].Pos:LinkPosTo
+		-- objects added to the panel
+		-- follow the panel based on their map position
+		local xLink = Link:Simple
 		{
-			link = self.Pos,
-			x = (data.x - 1) * self.gridScale + self.gridPad,
-			y = (data.y - 1) * self.gridScale + self.gridPad
+			a = {data.object, "Pos", "x"},
+			b = {o, "Pos", "x"},
+			offsets = 
+			{
+				{value = {data.x - 1}}, --> needs to update if map position changes
+				{object = {self,"gridScale", "Mul"}},
+				{object = {self, "gridPad"}}
+			}
 		}
+
+		local yLink = Link:Simple
+		{
+			a = {data.object, "Pos", "y"},
+			b = {o, "Pos", "y"},
+			offsets = 
+			{
+				{value = {data.y - 1}}, --> needs to update if map position changes
+				{object = {self, "gridScale", "Mul"}},
+				{object = {self, "gridPad"}}
+			}
+		}
+
 	end 
 
 
@@ -297,7 +385,7 @@ function Panel:New(data)
 			{text = "", obj = "DrawTools"},
 			{text = "Panel"},
 			{text = "-------------------------"},
-			{text = #self.objects}
+			{text = #self.items}
 		}
 
 	end 
@@ -325,12 +413,32 @@ return Panel
 -- Notes
 ---------------
 
--- objects can be drag and dropped
+-- DrawGroup needs to be figured out
+-- so panels can draw behind their items
+
+-- TO DO --> much later
+-- drag and drop objects
 --	move out of panel
 --	move into panel
 --	change position in panel
 
+-- DONE
 -- a open and close button in the top right of the panel
 
 
---]]
+
+
+
+
+
+
+-- Junk
+-------------------------------------
+	--[[
+	o.bar.Pos:LinkPosTo
+	{
+		link = o.Pos,
+		x = o.bar.Pos.x - o.Pos.x,
+		y = o.bar.Pos.y - o.Pos.y
+	}
+	--]]

@@ -30,6 +30,7 @@ ObjectUpdater.Info =
 -- tables
 ObjectUpdater.statics = {}
 ObjectUpdater.objects = {}
+ObjectUpdater.links = {}
 ObjectUpdater.cameras = {}
 ObjectUpdater.postUpdateObjects = {} -- temporary
 ObjectUpdater.dataTypes = {}
@@ -53,7 +54,10 @@ ObjectUpdater.printComponents = true
 -- add a new static to the static list
 function ObjectUpdater:AddStatic(staticObject)
 	self.statics[#self.statics + 1] = staticObject
+end 
 
+function ObjectUpdater:AddLink(linkObject)
+	self.links[#self.links + 1] = linkObject
 end 
 
 -- add a new object to the object list
@@ -283,6 +287,21 @@ function ObjectUpdater:Update()
 	-- destroy
 	self:ClearDestroyedObjects()
 
+	-- links
+	-- run twice to make sure links to links 
+	-- are completely up to date
+	-- works!
+	for i=1, 2 do 	
+
+		for i=1, #self.links do
+			if(self.links[i].Update) then
+				self.links[i]:Update()
+			end 
+		end 
+
+	end
+
+
 	-- cameras
 	for i=1, #self.cameras do
 		self.cameras[i]:Update()
@@ -298,7 +317,7 @@ function ObjectUpdater:Update()
 		-- update
 		if(self.statics[i].Update) then
 			self.statics[i]:Update()
-		end 
+		end
 
 		-- debug text
 		if(self.statics[i].PrintDebugText) then

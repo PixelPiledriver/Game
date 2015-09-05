@@ -1,13 +1,12 @@
 -- DrawGroup.lua
 
-
-
 -- Purpose
 ----------------------------
--- Add objects to a DrawGroup that all need to be drawn together in the same layer
+-- Add objects to a DrawGroup that all need to be drawn together 
+-- in the same layer, sequentially
 
--- When an object is part of a DrawGroup it's Draw component does not submit itself to DrawList
--- A DrawGroup submits itself to DrawList
+-- When an object is part of a DrawGroup it's Draw component does not submit to DrawList
+-- Instead the DrawGroup submits itself to DrawList
 -- DrawList sorts the group by .depth witin a .layer just like any other object
 -- But draws all of the objects within the group as if it were its own layer
 
@@ -83,7 +82,7 @@ function DrawGroup:New(data)
 		--  this is wrongly implemented
 		-- maybe I can pass the depth of the group to the object
 		-- but no actually I NEED to pass the group to grouplist
-		-- so it can carrt the list of objects
+		-- so it can carry the list of objects
 
 		--[[
 		for i=1, #self.drawables do
@@ -131,6 +130,9 @@ return DrawGroup
 
 -- Notes
 ------------
+-- seems to be broken :|
+-->BROKEN
+
 -- holds refs to objects
 -- set their stacking order
 -- submit to Drawlist and it handles giving it its own spot in a unique depth
