@@ -14,7 +14,7 @@ local Line = require("Line")
 local DrawTools = require("DrawTools")
 local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
-local DrawToolsHUD = require("DrawToolsHUD")
+local DrawToolsUI = require("DrawToolsUI")
 local Panel = require("Panel")
 local Box = require("Box")
 

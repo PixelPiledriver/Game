@@ -103,8 +103,8 @@ function Panel:New(data)
 	o.panelType = data.panelType or "ObjectBased"
 	o.map = MapTable:New
 	{
-		width = 2,
-		height = 2,
+		width = 1,
+		height = 1,
 	}
 
 	---------------
@@ -137,7 +137,9 @@ function Panel:New(data)
 	-------------------------------
 	-- Graphics
 	-------------------------------
-	-- main panel area
+
+	-- main panel area - holds panel items
+	---------------------------------------------------
 	o.frame = Box:New
 	{
 		color = Panel.defaultPanelColor,
@@ -157,12 +159,20 @@ function Panel:New(data)
 	}
 
 	-->REPLACE with Link:Simple
-	o.frame.Size:LinkSizeTo
+	Link:Simple
 	{
-		link = o.Size
+		a = {o.frame, "Size", "width"},
+		b = {o, "Size", "width"}
 	}
 
-	-- above panel
+	Link:Simple
+	{
+		a = {o.frame, "Size", "height"},
+		b = {o, "Size", "height"}
+	}
+
+	-- above panel bar - move panel and holds title
+	------------------------------------------------
 	o.bar = Box:New
 	{
 		x = o.Pos.x,
@@ -173,8 +183,11 @@ function Panel:New(data)
 		parent = o,
 	}
 
-	-->REPLACE with Link:Simple
-	o.bar.Size:LinkWidthTo{link = o.Size}
+	Link:Simple
+	{
+		a = {o.bar, "Size", "width"},
+		b = {o, "Size", "width"}
+	}
 
 	Link:Simple
 	{
@@ -192,8 +205,8 @@ function Panel:New(data)
 		}
 	}
 
-	-- add Text here to diplay name of panel
-	-- old way was DrawCall LovePrint
+	-- title of panel displayed in bar
+	-------------------------------------
 	o.barTitle = Text:New
 	{
 		text = o.Info.name,
@@ -257,10 +270,7 @@ function Panel:New(data)
 		height = 16,
 		func = function()
 			o:ToggleDraw()
-		end,
-
-		printDebugTextActive = true
-		
+		end
 	}
 
 	Link:Simple
@@ -273,7 +283,7 @@ function Panel:New(data)
 		}
 	}
 
-	yLink = Link:Simple
+	Link:Simple
 	{
 		a = {o.openCloseButton, "Pos", "y"},
 		b = {o.bar, "Pos", "y"}
@@ -298,20 +308,13 @@ function Panel:New(data)
 	-- Functions
 	----------------
 
+	-- empty for now
 	function o:Update()
 	end 
 
+	-- empty for now
 	function o:DrawCall()
 
-		--[[
-		love.graphics.setColor(Color:AsTable(Color:Get("black")))
-		LovePrint
-		{
-			text = self.Info.name,
-			x = self.bar.Pos.x,
-			y = self.bar.Pos.y,
-		}
-		--]]
 	end
 
 	function o:ToggleDraw()
@@ -326,11 +329,11 @@ function Panel:New(data)
 	end 
 
 
-	-----------------------
-	-- Add Functions
-	-----------------------
+	--------------------------------------------
+	-- Add Functions - put objects in panel
+	--------------------------------------------
 
-	-- add an object to this panel
+	-- add an object to this panel at a specific position
 	-- {object, x, y}
 	function o:Add(data)
 
@@ -343,14 +346,15 @@ function Panel:New(data)
 			y = data.y,
 		}
 	
-		-- not sure why the shit on the right is commented out
+		-- increase size of panel to make room for new object
+		-- not sure why the shit on the right is commented out --> move to junk soon :P
 		local w = (self.gridScale * self.map.width)	--+ ((self.map.width-2) * self.gridPad)
 		local h = (self.gridScale * self.map.height) --+ ((self.map.height-2) * self.gridPad)
 		self.Size:Set(w,h)
 
-		-- objects added to the panel
+		-- link object added
 		-- follow the panel based on their map position
-		local xLink = Link:Simple
+		Link:Simple
 		{
 			a = {data.object, "Pos", "x"},
 			b = {o, "Pos", "x"},
@@ -362,7 +366,7 @@ function Panel:New(data)
 			}
 		}
 
-		local yLink = Link:Simple
+		Link:Simple
 		{
 			a = {data.object, "Pos", "y"},
 			b = {o, "Pos", "y"},
@@ -373,6 +377,40 @@ function Panel:New(data)
 				{object = {self, "gridPad"}}
 			}
 		}
+
+	end 
+
+	-- add multiple objects to panel from left to right
+	-- {a, b, c, ...}
+	function o:AddHorizontal(data)
+
+		for i=1, #data do
+			local table = 
+			{
+				object = data[i],
+				x = i,
+				y = data.yStart or 1 -- there is no way to input yStart since data is indexed
+			}
+
+			o:Add(table)
+		end
+
+	end 
+
+	-- add multiple objects to panel from top to bottom
+	-- {a, b, c, ...}
+	function o:AddVertical(data)
+
+		for i=1, #data do
+			local table = 
+			{
+				object = data[i],
+				x = data.xStart or 1, -- there is no way to input xStart since data is indexed
+				y = i
+			}
+
+			o:Add(table)
+		end
 
 	end 
 
@@ -416,11 +454,16 @@ return Panel
 -- DrawGroup needs to be figured out
 -- so panels can draw behind their items
 
+--> TO DO
+-- fit width to panel name
+-- or have title overhang the panel
+
+
 -- TO DO --> much later
 -- drag and drop objects
---	move out of panel
---	move into panel
---	change position in panel
+-- move out of panel
+-- move into panel
+-- change position in panel
 
 -- DONE
 -- a open and close button in the top right of the panel
@@ -435,10 +478,32 @@ return Panel
 -- Junk
 -------------------------------------
 	--[[
+
+	-- old links
 	o.bar.Pos:LinkPosTo
 	{
 		link = o.Pos,
 		x = o.bar.Pos.x - o.Pos.x,
 		y = o.bar.Pos.y - o.Pos.y
 	}
+
+	o.bar.Size:LinkWidthTo{link = o.Size}
+
+	o.frame.Size:LinkSizeTo
+	{
+		link = o.Size
+	}
+
+
+
+	-- old title text
+	love.graphics.setColor(Color:AsTable(Color:Get("black")))
+	LovePrint
+	{
+		text = self.Info.name,
+		x = self.bar.Pos.x,
+		y = self.bar.Pos.y,
+	}
 	--]]
+
+

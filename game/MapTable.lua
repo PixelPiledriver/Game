@@ -55,6 +55,7 @@ function MapTable:New(data)
 
 	-- runs thru the table and fills any empty slots with "_nil"
 	function o:FillEmptySlots()
+
 		printDebug{"width: " .. self.width, "MapTable"}
 		printDebug{"height: " .. self.height, "MapTable"}
 
@@ -69,9 +70,8 @@ function MapTable:New(data)
 
 					-- full slot, do nothing
 					if(self.map[x][y]) then
-						printDebug{"slot taken by:", "MapTable"}
-						--printDebug{"x:" .. x ..  ", y:" .. y .. " = " .. self.map[x][y], "MapTable"}
-
+						printDebug{"slot taken by: unknown", "MapTable"}
+						
 					-- empty slot, fill with nil keyword
 					else
 						printDebug{"empty slot:", "MapTable"}

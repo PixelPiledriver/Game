@@ -156,44 +156,15 @@ DrawToolsUI.panel = Panel:New
 }
 
 -- add objects
-DrawToolsUI.panel:AddHorizontal
+DrawToolsUI.panel:AddVertical
 {
 	DrawToolsUI.drawButton, 
 	DrawToolsUI.moveButton,
 	DrawToolsUI.zoomButton,
-	DrawToolsUI.
+	DrawToolsUI.colorDropButton,
+	DrawToolsUI.selectButton
 }
 
---[[
-DrawToolsUI.panel:Add
-{
-	object = DrawToolsUI.moveButton,
-	x = 2,
-	y = 1
-}
-
-
-DrawToolsUI.panel:Add
-{
-	object = DrawToolsUI.zoomButton,
-	x = 3,
-	y = 1
-}
-
-DrawToolsUI.panel:Add
-{
-	object = DrawToolsUI.colorDropButton,
-	x = 4,
-	y = 1
-}
-
-DrawToolsUI.panel:Add
-{
-	object = DrawToolsUI.selectButton,
-	x = 5,
-	y = 1
-}
---]]
 ---------------
 -- Static End
 ---------------

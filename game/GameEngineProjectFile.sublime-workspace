@@ -5,7 +5,15 @@
 		[
 			[
 				"Button",
-				"selectButton"
+				"colorDropButton"
+			],
+			[
+				"DrawTools",
+				"DrawToolsHUD"
+			],
+			[
+				"ValueSto",
+				"ValueStorage"
 			],
 			[
 				"Zoom",
@@ -506,24 +514,16 @@
 			[
 				"self.sele",
 				"self.selectedPixelTexture"
-			],
-			[
-				"self.sle",
-				"self.selectedColor"
-			],
-			[
-				"act",
-				"activeDefault"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "Levels/PixelDrawLevel.lua",
+			"file": "DrawToolsUI.lua",
 			"settings":
 			{
-				"buffer_size": 6791,
+				"buffer_size": 3214,
 				"line_ending": "Windows"
 			}
 		},
@@ -531,15 +531,40 @@
 			"file": "SimplePanel.lua",
 			"settings":
 			{
-				"buffer_size": 7217,
+				"buffer_size": 7733,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "DrawToolsHUD.lua",
+			"file": "MapTable.lua",
 			"settings":
 			{
-				"buffer_size": 3482,
+				"buffer_size": 4352,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ValueStorage.lua",
+			"settings":
+			{
+				"buffer_size": 920,
+				"line_ending": "Windows",
+				"name": "-- ValueStore.lua"
+			}
+		},
+		{
+			"file": "Levels/PixelDrawLevel.lua",
+			"settings":
+			{
+				"buffer_size": 6789,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "TargetShot.lua",
+			"settings":
+			{
+				"buffer_size": 351,
 				"line_ending": "Windows"
 			}
 		},
@@ -556,6 +581,14 @@
 			"settings":
 			{
 				"buffer_size": 5854,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Levels/DecrodedLerpLevel.lua",
+			"settings":
+			{
+				"buffer_size": 4447,
 				"line_ending": "Windows"
 			}
 		},
@@ -656,10 +689,10 @@
 			}
 		},
 		{
-			"contents": "Searching 117 files for \"LovePrint\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\DebugText.lua:\n  251  -- data = {text, x, y, rot, xScale, yScale, \n  252  --	xOffset, yOffset, xShear, yShear}\n  253: function LovePrint(data)\n  254  	local text = data.text or \"NoText\"\n  255  	local x = data.x or 0\n  ...\n  305  		for t = lineIndex, #self.texts[i] do\n  306  			love.graphics.setColor(self.texts[i][t].color or Color:AsTable(Color.white))\n  307: 			LovePrint\n  308  			{\n  309  				text = self.texts[i][t].text,\n\nD:\\GitRepos\\Game\\game\\Panel.lua:\n  230  	function o:DrawCall()\n  231  		love.graphics.setColor(Color:AsTable(Panel.defaultPanelColor))\n  232: 		LovePrint\n  233  		{\n  234  			text = self.name,\n\nD:\\GitRepos\\Game\\game\\SimplePanel.lua:\n  379  	function o:DrawCall()\n  380  		love.graphics.setColor(Color:AsTable(Panel.defaultPanelColor))\n  381: 		LovePrint\n  382  		{\n  383  			text = self.Info.name,\n\n4 matches across 3 files\n\n\nSearching 117 files for \".textColor\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Button.lua:\n  178  	-- text\n  179  	o.text = data.text or \"Button\"\n  180: 	o.textColor = data.textColor and Color:Get(\"data.textColor\") or Color:Get(\"black\")\n  181  	o.drawText = true\n  182  \n  ...\n  310  		-- need to convert to Text\n  311  		if(self.drawText) then\n  312: 			love.graphics.setColor(Color:AsTable(self.textColor))\n  313  			--love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2 - self.Size.height/6, self.Size.width, \"center\")\n  314  			love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2, self.Size.width, \"center\")\n\n4 matches in 1 file\n\n\nSearching 117 files for \"o.followPos\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Pos.lua:\n   85  \n   86  	-- link this pos component to another pos component\n   87: 	o.followPos = data.followPos or nil\n   88  	o.followOffsetX = 0\n   89  	o.followOffsetY = 0\n   ..\n  103  \n  104  	function o:LinkPosTo(data)\n  105: 		o.followPos = data.link or nil\n  106  		o.followOffsetX = data.x or 0\n  107  		o.followOffsetY = data.y or 0\n\n2 matches in 1 file\n\n\nSearching 117 files for \"self.followPos\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Pos.lua:\n  145  \n  146  	function o:FollowPosUpdate()\n  147: 		if(self.followPos == nil) then\n  148  			return\n  149  		end \n  ...\n  151  		self:SetPos\n  152  		{\n  153: 			x = self.followPos.x + self.followOffsetX,\n  154: 			y = self.followPos.y + self.followOffsetY,\n  155: 			z = self.followPos.z + self.followOffsetZ,\n  156  		}\n  157  	end\n\n4 matches in 1 file\n",
+			"contents": "Searching 117 files for \"LovePrint\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\DebugText.lua:\n  251  -- data = {text, x, y, rot, xScale, yScale, \n  252  --	xOffset, yOffset, xShear, yShear}\n  253: function LovePrint(data)\n  254  	local text = data.text or \"NoText\"\n  255  	local x = data.x or 0\n  ...\n  305  		for t = lineIndex, #self.texts[i] do\n  306  			love.graphics.setColor(self.texts[i][t].color or Color:AsTable(Color.white))\n  307: 			LovePrint\n  308  			{\n  309  				text = self.texts[i][t].text,\n\nD:\\GitRepos\\Game\\game\\Panel.lua:\n  230  	function o:DrawCall()\n  231  		love.graphics.setColor(Color:AsTable(Panel.defaultPanelColor))\n  232: 		LovePrint\n  233  		{\n  234  			text = self.name,\n\nD:\\GitRepos\\Game\\game\\SimplePanel.lua:\n  379  	function o:DrawCall()\n  380  		love.graphics.setColor(Color:AsTable(Panel.defaultPanelColor))\n  381: 		LovePrint\n  382  		{\n  383  			text = self.Info.name,\n\n4 matches across 3 files\n\n\nSearching 117 files for \".textColor\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Button.lua:\n  178  	-- text\n  179  	o.text = data.text or \"Button\"\n  180: 	o.textColor = data.textColor and Color:Get(\"data.textColor\") or Color:Get(\"black\")\n  181  	o.drawText = true\n  182  \n  ...\n  310  		-- need to convert to Text\n  311  		if(self.drawText) then\n  312: 			love.graphics.setColor(Color:AsTable(self.textColor))\n  313  			--love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2 - self.Size.height/6, self.Size.width, \"center\")\n  314  			love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2, self.Size.width, \"center\")\n\n4 matches in 1 file\n\n\nSearching 117 files for \"o.followPos\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Pos.lua:\n   85  \n   86  	-- link this pos component to another pos component\n   87: 	o.followPos = data.followPos or nil\n   88  	o.followOffsetX = 0\n   89  	o.followOffsetY = 0\n   ..\n  103  \n  104  	function o:LinkPosTo(data)\n  105: 		o.followPos = data.link or nil\n  106  		o.followOffsetX = data.x or 0\n  107  		o.followOffsetY = data.y or 0\n\n2 matches in 1 file\n\n\nSearching 117 files for \"self.followPos\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Pos.lua:\n  145  \n  146  	function o:FollowPosUpdate()\n  147: 		if(self.followPos == nil) then\n  148  			return\n  149  		end \n  ...\n  151  		self:SetPos\n  152  		{\n  153: 			x = self.followPos.x + self.followOffsetX,\n  154: 			y = self.followPos.y + self.followOffsetY,\n  155: 			z = self.followPos.z + self.followOffsetZ,\n  156  		}\n  157  	end\n\n4 matches in 1 file\n\n\nSearching 121 files for \"DrawToolsHUD\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\DrawToolsHUD.lua:\n    1: -- DrawToolsHUD.lua\n    2  \n    3  -- Purpose\n    .\n   18  -----------------------------------------------------------------------------------\n   19  \n   20: local DrawToolsHUD = {}\n   21  \n   22  \n   23: DrawToolsHUD.Info = Info:New\n   24  {\n   25: 	objectType = \"DrawToolsHUD\",\n   26  	dataType = \"Tools\",\n   27  	structureType = \"Manager\" -- not sure this is the appropriate stuctureType name\n   28  }\n   29  \n   30: DrawToolsHUD.iconSheet = SpriteSheet:New\n   31  {\n   32  	image = \"EditorIcons.png\",\n   33  }\n   34  \n   35: DrawToolsHUD.drawIcon = Sprite:New\n   36  {\n   37: 	spriteSheet = DrawToolsHUD.iconSheet,\n   38  	xIndex = 1,\n   39  	yIndex = 1\n   40  }\n   41  \n   42: DrawToolsHUD.moveIcon = Sprite:New\n   43  {\n   44: 	spriteSheet = DrawToolsHUD.iconSheet,\n   45  	xIndex = 2,\n   46  	yIndex = 1\n   47  }\n   48  \n   49: DrawToolsHUD.zoomIcon = Sprite:New\n   50  {\n   51: 	spriteSheet = DrawToolsHUD.iconSheet,\n   52  	xIndex = 3,\n   53  	yIndex = 1\n   54  }\n   55  \n   56: DrawToolsHUD.colorDropIcon = Sprite:New\n   57  {\n   58: 	spriteSheet = DrawToolsHUD.iconSheet,\n   59  	xIndex = 4,\n   60  	yIndex = 1\n   61  }\n   62  \n   63: DrawToolsHUD.selectIcon = Sprite:New\n   64  {\n   65: 	spriteSheet = DrawToolsHUD.iconSheet,\n   66  	xIndex = 6,\n   67  	yIndex = 1\n   ..\n   69  \n   70  \n   71: DrawToolsHUD.drawButton = Button:New\n   72  {\n   73  	x = 400,\n   ..\n   75  	text = \"toggle!\",\n   76  	toggle = true,\n   77: 	sprite = DrawToolsHUD.drawIcon,\n   78  	printDebugTextActive = true,\n   79  	toggleOnFunc = function() \n   ..\n   85  }\n   86  \n   87: DrawToolsHUD.moveButton = Button:New\n   88  {\n   89  	x = 432,\n   ..\n   92  	buttonName = \"Move\",\n   93  	toggle = true,\n   94: 	sprite = DrawToolsHUD.moveIcon,\n   95  	--printDebugTextActive = true\n   96  	toggleOnFunc = function()\n   ..\n  102  }\n  103  \n  104: DrawToolsHUD.zoomButton = Button:New\n  105  {\n  106  	x = 464,\n  ...\n  108  	text = \"toggle!\",\n  109  	toggle = true,\n  110: 	sprite = DrawToolsHUD.zoomIcon,\n  111  	toggleOnFunc = function()\n  112  		DrawTools:ToggleTool(\"Zoom\")\n  ...\n  117  }\n  118  \n  119: DrawToolsHUD.colorDropButton = Button:New\n  120  {\n  121  	x = 496,\n  ...\n  123  	text = \"toggle!\",\n  124  	toggle = true,\n  125: 	sprite = DrawToolsHUD.colorDropIcon,\n  126  	--printDebugTextActive = true\n  127  	toggleOnFunc = function()\n  ...\n  133  }\n  134  \n  135: DrawToolsHUD.selectButton = Button:New\n  136  {\n  137  	x = 528,\n  ...\n  140  	toggle = true,\n  141  	saveAsLast = false,\n  142: 	sprite = DrawToolsHUD.selectIcon,\n  143  	printDebugTextActive = true,\n  144  }\n  ...\n  149  \n  150  -- create\n  151: DrawToolsHUD.panel = Panel:New\n  152  {\n  153  	name = \"DrawTools\",\n  ...\n  157  \n  158  -- add objects\n  159: DrawToolsHUD.panel:AddHorizontal\n  160  {\n  161: 	DrawToolsHUD.drawButton, \n  162: 	DrawToolsHUD.moveButton,\n  163: 	DrawToolsHUD.zoomButton,\n  164: 	DrawToolsHUD.\n  165  }\n  166  \n  167  --[[\n  168: DrawToolsHUD.panel:Add\n  169  {\n  170: 	object = DrawToolsHUD.moveButton,\n  171  	x = 2,\n  172  	y = 1\n  ...\n  174  \n  175  \n  176: DrawToolsHUD.panel:Add\n  177  {\n  178: 	object = DrawToolsHUD.zoomButton,\n  179  	x = 3,\n  180  	y = 1\n  181  }\n  182  \n  183: DrawToolsHUD.panel:Add\n  184  {\n  185: 	object = DrawToolsHUD.colorDropButton,\n  186  	x = 4,\n  187  	y = 1\n  188  }\n  189  \n  190: DrawToolsHUD.panel:Add\n  191  {\n  192: 	object = DrawToolsHUD.selectButton,\n  193  	x = 5,\n  194  	y = 1\n  ...\n  199  ---------------\n  200  \n  201: return DrawToolsHUD\n  202  \n  203  \n  ...\n  206  ---------------------------------------\n  207  -- this file is like a collecetion of objects\n  208: -- that get created when required -> require(\"DrawToolsHUD\")\n  209  \n\nD:\\GitRepos\\Game\\game\\GameEngineProjectFile.sublime-workspace:\n   18  			[\n   19  				\"DrawT\",\n   20: 				\"DrawToolsHUD\"\n   21  			],\n   22  			[\n   ..\n  537  		},\n  538  		{\n  539: 			\"file\": \"DrawToolsHUD.lua\",\n  540  			\"settings\":\n  541  			{\n  ...\n  716  	[\n  717  		\"/G/PixelPiledriver/Game Design/In the name of.txt\",\n  718: 		\"/D/GitRepos/Game/game/DrawToolsHUD.lua\",\n  719  		\"/D/GitRepos/Game/game/Levels/PixelDrawLevel.lua\",\n  720  		\"/D/GitRepos/Game/game/o.pos\",\n  ...\n 1041  			\"self.Size.width\",\n 1042  			\"RefreshTexture\",\n 1043: 			\"DrawToolsHUD.\",\n 1044: 			\"DrawToolsHUD.iconSheet\",\n 1045: 			\"DrawToolsHUD.\",\n 1046  			\".tools\",\n 1047  			\"self.Pos.y\",\n ....\n 1216  				{\n 1217  					\"buffer\": 2,\n 1218: 					\"file\": \"DrawToolsHUD.lua\",\n 1219  					\"settings\":\n 1220  					{\n\nD:\\GitRepos\\Game\\game\\Levels\\DecrodedLerpLevel.lua:\n   15  local SpriteSheet = require(\"SpriteSheet\")\n   16  local Sprite = require(\"Sprite\")\n   17: local DrawToolsHUD = require(\"DrawToolsHUD\")\n   18  local Panel = require(\"Panel\")\n   19  local Box = require(\"Box\")\n\nD:\\GitRepos\\Game\\game\\Levels\\PixelDrawLevel.lua:\n   16  local Sprite = require(\"Sprite\")\n   17  local pawnGraphics = require(\"AnimationTest\") -- animation test with new spriteStuff\n   18: local DrawToolsHUD = require(\"DrawToolsHUD\")\n   19  local Panel = require(\"Panel\")\n   20  local SimplePanel = require(\"SimplePanel\")\n\n52 matches across 4 files\n",
 			"settings":
 			{
-				"buffer_size": 2504,
+				"buffer_size": 7698,
 				"line_ending": "Windows",
 				"name": "Find Results",
 				"scratch": true
@@ -714,7 +747,9 @@
 	},
 	"file_history":
 	[
+		"/D/GitRepos/Game/game/GameEngineProjectFile.sublime-workspace",
 		"/D/GitRepos/Game/game/DrawToolsHUD.lua",
+		"/G/PixelPiledriver/Game Design/In the name of.txt",
 		"/D/GitRepos/Game/game/Levels/PixelDrawLevel.lua",
 		"/D/GitRepos/Game/game/o.pos",
 		"/D/GitRepos/Game/game/Pos.lua",
@@ -829,7 +864,6 @@
 		"/D/GitRepos/Game/game/TestCode.lua",
 		"/D/GitRepos/Game/game/Levels/TextWriteLevel.lua",
 		"/D/GitRepos/Game/game/Levels/AudioTestLevel.lua",
-		"/D/GitRepos/Game/game/GameEngineProjectFile.sublime-workspace",
 		"/D/GitRepos/Game/game/GameEngineProjectFile.sublime-project",
 		"/D/GitRepos/Game/game/Group.lua",
 		"/D/GitRepos/Game/game/RNG.lua",
@@ -840,8 +874,7 @@
 		"/D/GitRepos/Game/game/Levels/BoxLevel.lua",
 		"/D/GitRepos/Game/game/Levels/DecrodedLerpLevel.lua",
 		"/D/GitRepos/Game/game/LevelManager.lua",
-		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/User/LOVE.sublime-build",
-		"/D/Sublime Projects/gameEngineProject.sublime-project"
+		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/User/LOVE.sublime-build"
 	],
 	"find":
 	{
@@ -849,7 +882,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 147.0,
 		"where_history":
 		[
 			"D:\\GitRepos\\Game\\game",
@@ -861,6 +894,10 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"self.width",
+			"DrawToolsHUD",
+			"ValueStore",
+			"xLink",
 			"itemPad",
 			"itemPade",
 			"width",
@@ -984,11 +1021,7 @@
 			"Object Component",
 			"dataTypes",
 			"componentTypes",
-			"otype",
-			".oType",
-			".count",
-			"o.count",
-			"active"
+			"otype"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -996,6 +1029,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"DrawToolsUI",
 			".barCollision",
 			".bar",
 			".frame",
@@ -1122,8 +1156,7 @@
 			"debugDrawPathObjects",
 			"CdebugDrawPathObjects",
 			"CAM.gameCam",
-			"CAM.",
-			"T"
+			"CAM."
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1139,18 +1172,18 @@
 			[
 				{
 					"buffer": 0,
-					"file": "Levels/PixelDrawLevel.lua",
+					"file": "DrawToolsUI.lua",
 					"settings":
 					{
-						"buffer_size": 6791,
+						"buffer_size": 3214,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1982,
-								1982
+								2852,
+								2852
 							]
 						],
 						"settings":
@@ -1170,7 +1203,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3465.0,
+						"translation.y": 3884.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1180,15 +1213,15 @@
 					"file": "SimplePanel.lua",
 					"settings":
 					{
-						"buffer_size": 7217,
+						"buffer_size": 7733,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6867,
-								6867
+								6089,
+								6089
 							]
 						],
 						"settings":
@@ -1208,25 +1241,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 13418.0,
+						"translation.y": 10299.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "DrawToolsHUD.lua",
+					"file": "MapTable.lua",
 					"settings":
 					{
-						"buffer_size": 3482,
+						"buffer_size": 4352,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2829,
-								2829
+								1889,
+								1889
 							]
 						],
 						"settings":
@@ -1246,13 +1279,105 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6642.0,
+						"translation.y": 2505.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
+					"file": "ValueStorage.lua",
+					"settings":
+					{
+						"buffer_size": 920,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								813,
+								813
+							]
+						],
+						"settings":
+						{
+							"auto_name": "-- ValueStore.lua",
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Levels/PixelDrawLevel.lua",
+					"settings":
+					{
+						"buffer_size": 6789,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2067,
+								2067
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4329.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "TargetShot.lua",
+					"settings":
+					{
+						"buffer_size": 351,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								199,
+								199
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 191.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
 					"file": "SpriteSheet.lua",
 					"settings":
 					{
@@ -1290,7 +1415,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 7,
 					"file": "DrawTools.lua",
 					"settings":
 					{
@@ -1322,13 +1447,51 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 743.0,
+						"translation.y": 1497.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 8,
+					"file": "Levels/DecrodedLerpLevel.lua",
+					"settings":
+					{
+						"buffer_size": 4447,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
 					"file": "Link.lua",
 					"settings":
 					{
@@ -1366,7 +1529,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 10,
 					"file": "Button.lua",
 					"settings":
 					{
@@ -1404,7 +1567,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 11,
 					"file": "Text.lua",
 					"settings":
 					{
@@ -1442,7 +1605,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 12,
 					"file": "Palette.lua",
 					"settings":
 					{
@@ -1480,7 +1643,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 13,
 					"file": "Sprite.lua",
 					"settings":
 					{
@@ -1518,7 +1681,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 14,
 					"file": "ObjectUpdater.lua",
 					"settings":
 					{
@@ -1556,7 +1719,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 15,
 					"file": "Collision.lua",
 					"settings":
 					{
@@ -1594,7 +1757,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 16,
 					"file": "Pos.lua",
 					"settings":
 					{
@@ -1632,7 +1795,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 17,
 					"file": "Box.lua",
 					"settings":
 					{
@@ -1670,7 +1833,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 18,
 					"file": "Color.lua",
 					"settings":
 					{
@@ -1708,7 +1871,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 19,
 					"file": "Draw.lua",
 					"settings":
 					{
@@ -1746,7 +1909,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 20,
 					"file": "main.lua",
 					"settings":
 					{
@@ -1784,10 +1947,10 @@
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 21,
 					"settings":
 					{
-						"buffer_size": 2504,
+						"buffer_size": 7698,
 						"regions":
 						{
 							"match":
@@ -1850,6 +2013,214 @@
 									[
 										2421,
 										2435
+									],
+									[
+										2613,
+										2625
+									],
+									[
+										2774,
+										2786
+									],
+									[
+										2815,
+										2827
+									],
+									[
+										2875,
+										2887
+									],
+									[
+										3030,
+										3042
+									],
+									[
+										3139,
+										3151
+									],
+									[
+										3205,
+										3217
+									],
+									[
+										3292,
+										3304
+									],
+									[
+										3358,
+										3370
+									],
+									[
+										3445,
+										3457
+									],
+									[
+										3511,
+										3523
+									],
+									[
+										3598,
+										3610
+									],
+									[
+										3669,
+										3681
+									],
+									[
+										3756,
+										3768
+									],
+									[
+										3824,
+										3836
+									],
+									[
+										3916,
+										3928
+									],
+									[
+										4051,
+										4063
+									],
+									[
+										4176,
+										4188
+									],
+									[
+										4314,
+										4326
+									],
+									[
+										4439,
+										4451
+									],
+									[
+										4574,
+										4586
+									],
+									[
+										4699,
+										4711
+									],
+									[
+										4839,
+										4851
+									],
+									[
+										4969,
+										4981
+									],
+									[
+										5108,
+										5120
+									],
+									[
+										5217,
+										5229
+									],
+									[
+										5328,
+										5340
+									],
+									[
+										5378,
+										5390
+									],
+									[
+										5412,
+										5424
+									],
+									[
+										5445,
+										5457
+									],
+									[
+										5478,
+										5490
+									],
+									[
+										5528,
+										5540
+									],
+									[
+										5577,
+										5589
+									],
+									[
+										5660,
+										5672
+									],
+									[
+										5709,
+										5721
+									],
+									[
+										5787,
+										5799
+									],
+									[
+										5836,
+										5848
+									],
+									[
+										5919,
+										5931
+									],
+									[
+										5968,
+										5980
+									],
+									[
+										6075,
+										6087
+									],
+									[
+										6263,
+										6275
+									],
+									[
+										6394,
+										6406
+									],
+									[
+										6481,
+										6493
+									],
+									[
+										6644,
+										6656
+									],
+									[
+										6837,
+										6849
+									],
+									[
+										6864,
+										6876
+									],
+									[
+										6900,
+										6912
+									],
+									[
+										7025,
+										7037
+									],
+									[
+										7238,
+										7250
+									],
+									[
+										7262,
+										7274
+									],
+									[
+										7544,
+										7556
+									],
+									[
+										7568,
+										7580
 									]
 								],
 								"scope": ""
@@ -1858,8 +2229,8 @@
 						"selection":
 						[
 							[
-								2057,
-								2057
+								5491,
+								5491
 							]
 						],
 						"settings":
@@ -1876,7 +2247,7 @@
 								}
 							],
 							"detect_indentation": false,
-							"output_tag": 4,
+							"output_tag": 5,
 							"result_base_dir": "",
 							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
 							"result_line_regex": "^ +([0-9]+):",
@@ -1884,13 +2255,13 @@
 							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2001.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 22,
 					"file": "DebugText.lua",
 					"settings":
 					{
