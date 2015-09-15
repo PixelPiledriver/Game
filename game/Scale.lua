@@ -68,6 +68,7 @@ function Scale:New(data)
 		self:Speed()
 	end 
 
+	-- apply speed to current scale
 	function o:Speed()
 		self.x = self.x + self.speed.x
 		self.y = self.y + self.speed.y

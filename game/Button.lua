@@ -17,6 +17,7 @@ local Shader = require("Shader")
 local Pos = require("Pos")
 local Size = require("Size")
 local MouseHover = require("MouseHover")
+local MouseDrag = require("MouseDrag")
 local Draw = require("Draw")
 local Text = require("Text")
 local Link = require("Link")
@@ -41,11 +42,12 @@ Button.Info = Info:New
 -- Static Vars
 ------------------
 Button.totalCreated = 0
+
 Button.defaultCreated = {Pos = {x = 16, y = 500}, Size = {width = 0, height = 0}}
 Button.lastCreated = Button.defaultCreated
+Button.saveAsLast = true
 Button.xSpace = 8
 Button.ySpace = 8
-Button.maxColumns = 7
 
 Button.repeatFunction = 1
 
@@ -91,16 +93,6 @@ function Button:New(data)
 		structureType = "Object"
 	}
 
-	------------
-	-- Vars
-	------------
-
-	-- this should not be here
-	-- needs to be a feature of PrintDebugText
-	-- needs to create a sup components for objects just like everything else
-	o.printDebugTextActive = data.printDebugTextActive or false
-
-
 	---------------
 	-- Components
 	---------------
@@ -128,8 +120,14 @@ function Button:New(data)
 		layer = "Hud"
 	}
 
+	-------------
+	-- Vars
+	-------------
 
-	-- other options and stuff
+	-- this should not be here
+	-- needs to be a feature of PrintDebugText
+	-- needs to create a sup components for objects just like everything else
+	o.printDebugTextActive = data.printDebugTextActive or false
 
 	-- rect
 	o.useBox = data.useBox or false
@@ -140,9 +138,9 @@ function Button:New(data)
 	-- function
 	o.func = data.func or nil
 
-	-- function objects
-	-- objects to use in the function run when button is pressed
+	-- function objects --> objects to use in data.func
 	if(data.funcObjects) then
+
 		o.funcObjectIndex = data.funcObjects or nil
 		o.funcObjects = {}
 
@@ -166,48 +164,32 @@ function Button:New(data)
 	o.toggleOnFunc = data.toggleOnFunc or nil
 	o.toggleOffFunc = data.toggleOffFunc or nil
 
-	-- text
-	o.Text = Text:New
+	-----------
+	-- Text
+	-----------
+
+	o.text = Text:New
 	{
 		text = data.text or "Button",
 		color = data.textColor and Color:Get("data.textColor") or Color:Get("black"),
 		alignment = "center",
-		displayWidth = o.Size.width
+		displayWidth = o.Size.width,
+		displayHeight = o.Size.height
 	}
 
-	Link:New
+	Link:Simple
 	{
-		a =
-		{
-			o = o.Text,
-			comp = "Pos",
-			var = "x"
-		},
-		b =
-		{
-			o = o,
-			comp = "Pos",
-			var = "x"
-		}
+		a = {o.text, "Pos", "x"},
+		b = {o, "Pos", "x"},
 	}
 
-	Link:New
+	Link:Simple
 	{
-		a =
-		{
-			o = o.Text,
-			comp = "Pos",
-			var = "y"
-		},
-		b =
-		{
-			o = o,
-			comp = "Pos",
-			var = "y"
-		}
+		a = {o.text, "Pos", "y"},
+		b = {o, "Pos", "y"},
 	}
 
-	o.Text.Draw.active = data.drawText or true
+	o.text.active = data.drawText or true
 
 	--------------
 	-- Graphics
@@ -218,61 +200,39 @@ function Button:New(data)
 
 	-- size to sprite
 	-- fit button to the sprite size
-	-- also stops text from drawing
 	if(o.sprite) then
-		o.sizeToSprite = true
+		o.sizeToSprite = data.sizeToSprite or true
 	else
 		o.sizeToSprite = false
 	end
 
-	-- change vars in interest of using sprite
+	-- change vars to fit sprite
 	if(o.sizeToSprite) then
 		o.Size.width = o.sprite.Size.width
 		o.Size.height = o.sprite.Size.height
-		o.Text.displayWidth = o.Size.width
+		o.text.displayWidth = o.Size.width
 	end 
 
 	-- link sprite to button
 	if(o.sprite) then
 
-		Link:New
+		Link:Simple
 		{
-			a =
-			{
-				o = o.sprite,
-				comp = "Pos",
-				var = "x"
-			},
-			
-			b =
-			{
-				o = o,
-				comp = "Pos",
-				var = "x"
-			}
+			a = {o.sprite, "Pos", "x"},
+			b = {o, "Pos", "x"}
 		}
 
-		Link:New
+		Link:Simple
 		{
-			a =
-			{
-				o = o.sprite,
-				comp = "Pos",
-				var = "y"
-			},
-			b =
-			{
-				o = o,
-				comp = "Pos",
-				var = "y"
-			}
+			a = {o.sprite, "Pos", "y"},
+			b = {o, "Pos", "y"}
 		}
 
 	end
 
 	-- hide text if sprite is used --> not always wanted so use default for now
 	if(o.sprite) then
-		o.Text.Draw.active = Button.textOnSpriteDefault
+		o.text.Draw.active = Button.textOnSpriteDefault
 	end 
 
 	-- color --> colorizes the sprite of button in differnt states
@@ -280,7 +240,7 @@ function Button:New(data)
 	o.colors = 
 	{
 		idle = Color:Get("white"),
-		hover = Color:Get("blue"),
+		hover = Color:Get("orange"),
 		click = Color:Get("green"),
 		toggleFalse = Color:Get("white"),
 		toggleTrue = Color:Get("red")
@@ -304,47 +264,22 @@ function Button:New(data)
 		parent = o
 	}
 
-	Link:New
+	Link:Simple
 	{
-		a =
-		{
-			o = o.collision,
-			comp = "Pos",
-			var = "x"
-		},
-		b =
-		{
-			o = o,
-			comp = "Pos",
-			var = "x"
-		}
+		a = {o.collision, "Pos", "x"},
+		b = {o, "Pos", "x"}
 	}
 
-	Link:New
+	Link:Simple
 	{
-		a =
-		{
-			o = o.collision,
-			comp = "Pos",
-			var = "y"
-		},
-		b =
-		{
-			o = o,
-			comp = "Pos",
-			var = "y"
-		}
+		a = {o.collision, "Pos", "y"},
+		b = {o, "Pos", "y"}
 	}
-	
-	
-	o.collision.Pos:LinkPosTo
-	{
-		link = o.Pos
-	}
-	
 
-	-- button
-	o.hover = false
+
+	-----------------------------
+	-- Mouse Interaction
+	-----------------------------
 
 	-- idle, hover, click
 	o.state = "idle"
@@ -357,74 +292,48 @@ function Button:New(data)
 	o.offsetFromMouseX = 0
 	o.offsetFromMouseY = 0
 
-	-- hover
+
+	-- mouse over button
 	o.hover = MouseHover:New
 	{
-		parent = o
+		parent = o,
 	}
 
+	-- right click to move buttons
+	o.drag = MouseDrag:New
+	{
+		parent = o,
+		mouseButton = "r"
+	}
 
 	----------------------
 	-- Object Functions
 	----------------------
 	function o:Update()
 
-		-- move --> right click lets you move buttons
-		-- intended to make testing easier
-		self:ClickToDrag()
-		self:UpdateMoveToMouse()
 		self:OnNoCollision()
-
-
-		-- color
-		self.color = self.colors[self.state]
-		if(self.sprite) then
-			self.sprite.color = self.color
-			if(self.toggleState) then
-				self.sprite.color = self.colors["toggleTrue"]
-			end
-		end 
-
-		-- click --> do button funcition
+		self:ColorUpdate()
 		self:ClickButton()
 
 		-- clear vars from last frame
-		self.hover = false
+		self.hover.isHovering = false
 		--self.state = "idle"
 		self.lastClicked = self.clicked
 		self.clicked = false
 
 	end
 
-	function o:SubmitDraw()
-
-	end 
-
 	function o:ToggleDraw()
-		self.draw = Bool:Toggle(self.draw)
-		self.collision.draw = self.draw
-		self.drawText = self.draw
+		self.collision.Draw:ToggleDraw()
+		self.text:ToggleActive()
+		self.sprite.Draw:ToggleDraw()
 	end 
 
 	function o:DrawCall()
-
-		-- draw text for button? --> if button has a sprite, defaults to not draw
-		-- this should not always be the case, if button has a backdrop and text goes on top
-		-- will need to fix this issue at a later time :P
-
-		-- need to convert to Text
-		--[[
-		if(self.drawText) then
-			love.graphics.setColor(Color:AsTable(Color:Get(self.Text.color)))
-			--love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2 - self.Size.height/6, self.Size.width, "center")
-			love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2, self.Size.width, "center")
-		end
-		--]]
-
 	end
 
 	function o:OnCollision(data)
-		self.hover = true
+		self.hover.isHovering = true
 		self.state = "hover"
 	end 
 
@@ -436,12 +345,25 @@ function Button:New(data)
 		self.state = "idle"
 	end 
 
+	function o:ColorUpdate()
+
+		self.color = self.colors[self.state]
+
+		if(self.sprite) then
+			self.sprite.color = self.color
+			if(self.toggleState) then
+				self.sprite.color = self.colors["toggleTrue"]
+			end
+		end 
+
+	end 
+
 	-- runs the functions for the button -----> b.func()
 	function o:ClickButton()
 
 		local wasClicked = false
 
-		if(self.hover == true)then
+		if(self.hover.isHovering == true)then
 			if(Mouse:SingleClick("l")) then --> single click fixed
 			--if(love.mouse.isDown("l")) then
 
@@ -518,42 +440,7 @@ function Button:New(data)
 
 	end 
 
-	function o:UpdateMoveToMouse()
-		if(self.move == false) then
-			return 
-		end 
 
-		self.Pos.x = love.mouse.getX() - self.offsetFromMouseX
-		self.Pos.y = love.mouse.getY() - self.offsetFromMouseY
-	end 
-
-	-- right click to drag a button
-	function o:ClickToDrag()
-
-		-- right click on button? set button to move
-		if(self.hover == true and Button.buttonBeingDragged == false) then
-			if(love.mouse.isDown("r")) then
-				self.move = true
-				Button.buttonBeingDragged = true
-
-				-- set offset
-				self.offsetFromMouseX = love.mouse.getX() - self.Pos.x
-				self.offsetFromMouseY = love.mouse.getY() - self.Pos.y
-			end 
-		end 
-
-		-- let go of button? drop
-		if(self.move == true and love.mouse.isDown("r") == false) then
-			self.move = false
-			Button.buttonBeingDragged = false
-
-			-- reset offset
-			self.offsetFromMouseX = 0
-			self.offsetFromMouseY = 0
-
-		end 
-
-	end 
 
 	function o:PrintDebugText()
 
@@ -578,7 +465,7 @@ function Button:New(data)
 			{text = "Name: " .. self.Info.name},
 			{text = "Width: " .. self.Size.width},
 			{text = "Height: " .. self.Size.height},
-			{text = "Function: " .. self.Text.text},
+			{text = "Function: " .. self.text.text},
 			{text = "Pos: {" .. self.Pos.x .. ", " .. self.Pos.y .. "}"},
 			{text = "Toggle: " .. toggleInfo},
 			{text = "State: " ..self.state}
@@ -596,7 +483,7 @@ function Button:New(data)
 	Button.totalCreated = Button.totalCreated + 1
 
 	-- store as most recent button created
-	if(data.saveAsLast == nil) then
+	if(Button.saveAsLast == true) then
 		Button.lastCreated = o
 	end 
 
@@ -610,10 +497,10 @@ end
 -----------------------------
 -- Button Library
 -----------------------------
+
 -- useful buttons go here that can be deployed into any scene
--- pass these as a table --> Button.New(Button.buttonName)
-
-
+-- pass these as a table to Button:New 
+--> Button:New(Button.buttonName)
 
 Button.createPoint = 
 {
@@ -824,7 +711,10 @@ return Button
 	-- assuming they need one
 	-- objects needed for buttons to works will be genericized into a table maybe?
 
-
+	-->FIXED?
+	-- draw text for button? --> if button has a sprite, defaults to not draw
+	-- this should not always be the case, if button has a backdrop and text goes on top
+	-- will need to fix this issue at a later time :P
 
 
 -- Junk
@@ -845,3 +735,68 @@ return Button
 		Button.lastCreated.Pos.y = Button.defaultCreated.Pos.y + Button.lastCreated.height + Button.ySpace
 	end 
 	--]]
+
+	-- old text
+
+	-- need to convert to Text
+	--[[
+	if(self.drawText) then
+		love.graphics.setColor(Color:AsTable(Color:Get(self.text.color)))
+		--love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2 - self.Size.height/6, self.Size.width, "center")
+		love.graphics.printf(self.text, self.Pos.x, self.Pos.y + self.Size.height/2, self.Size.width, "center")
+	end
+	--]]
+
+	----------------------------------------
+	-- old mouse drag
+	-------------------------------------
+
+--[[
+
+	-- called in update
+	self:UpdateMoveToMouse()
+	self:ClickToDrag()
+
+	function o:UpdateMoveToMouse()
+		if(self.move == false) then
+			return 
+		end 
+
+		self.Pos.x = love.mouse.getX() - self.offsetFromMouseX
+		self.Pos.y = love.mouse.getY() - self.offsetFromMouseY
+	end 
+
+	-- right click to drag a button
+	function o:ClickToDrag()
+
+		-- right click on button? set button to move
+		if(self.hover.isHovering == true and Button.buttonBeingDragged == false) then
+			if(love.mouse.isDown("r")) then
+				self.move = true
+				Button.buttonBeingDragged = true
+
+				-- set offset
+				self.offsetFromMouseX = love.mouse.getX() - self.Pos.x
+				self.offsetFromMouseY = love.mouse.getY() - self.Pos.y
+			end 
+		end 
+
+		-- let go of button? drop
+		if(self.move == true and love.mouse.isDown("r") == false) then
+			self.move = false
+			Button.buttonBeingDragged = false
+
+			-- reset offset
+			self.offsetFromMouseX = 0
+			self.offsetFromMouseY = 0
+
+		end 
+
+	end 
+
+
+
+	
+
+
+]]

@@ -324,11 +324,13 @@ function Mouse:New(data)
 
 
 	----------
-	-- Done!
+	-- End
 	----------
+
 	ObjectUpdater:Add{o}
 
 	return o
+
 end
 
 
@@ -348,6 +350,9 @@ function Mouse:PrintDebugText()
 
 end 
 
+-----------------
+-- Static End
+-----------------
 
 ObjectUpdater:AddStatic(Mouse)
 

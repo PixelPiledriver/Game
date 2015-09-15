@@ -78,6 +78,9 @@ function Palette:New(data)
 	o.size = data.size or 0 -- size = max, not just length of color table
 	o.draw = data.draw or false -- show the palette on screen or not
 
+	-- might not need this
+	o.showWhenEmpty = data.showWhenEmpty or false -- show the palette if it has no colors?
+
 	--if(data.asObject) then
 
 	o.width = 32
@@ -109,51 +112,35 @@ function Palette:New(data)
 		Pos:AddComponent(o, defaultPos)
 	end
 
-	---[[
-	o.collision = Collision:New
-	{
-		x = o.Pos.x,
-		y = o.Pos.y,
-		width = o.width,
-		height = o.height,
-		shape = "rect",
-		name = o.name,
-		collisionList = {"Mouse"},
-	}
-
-
-	Link:New
-	{
-		a =
+	-- this is the source of the extra collision object
+	-- fix this shit tomorrow
+	-- need a better solution than this, in fact this doesnt work
+	-->FIX
+	if(o.draw) then
+		o.collision = Collision:New
 		{
-			o = o.collision,
-			comp = "Pos",
-			var = "x"
-		},
-		
-		b =
-		{
-			o = o,
-			comp = "Pos",
-			var = "x"
+			x = o.Pos.x,
+			y = o.Pos.y,
+			width = o.width,
+			height = o.height,
+			shape = "rect",
+			name = o.name,
+			collisionList = {"Mouse"},
 		}
-	}
 
-	Link:New
-	{
-		a =
+
+		Link:Simple
 		{
-			o = o.collision,
-			comp = "Pos",
-			var = "y"
-		},
-		b =
-		{
-			o = o,
-			comp = "Pos",
-			var = "y"
+			a = {o.collision, "Pos", "x"},
+			b = {o, "Pos", "x"}
 		}
-	}
+
+		Link:Simple
+		{
+			a = {o.collision, "Pos", "y"},
+			b = {o, "Pos", "y"}
+		}
+	end
 
 	o.Draw = Draw:New
 	{
@@ -410,11 +397,26 @@ function Palette:New(data)
 		
 		if(self.draw == false) then
 			return
-		end 
+		end
 
-		for i=1, #self.colors do
-			love.graphics.setColor(Color:AsTable(self.colors[i]))
-			love.graphics.rectangle("fill", self.Pos.x, self.Pos.y + ( (i-1) * self.height), self.width, self.height)
+
+		if(#self.colors > 0) then
+			
+			for i=1, #self.colors do
+				love.graphics.setColor(Color:AsTable(self.colors[i]))
+				love.graphics.rectangle("fill", self.Pos.x, self.Pos.y + ( (i-1) * self.height), self.width, self.height)
+			end 
+
+		else
+
+			LovePrint
+			{
+				text = "Empty Palette",
+				x = self.Pos.x,
+				y = self.Pos.y,
+				color = Color:AsTable(Color:Get("black"))
+			}
+
 		end 
 
 	end 

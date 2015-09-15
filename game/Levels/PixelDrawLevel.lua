@@ -32,10 +32,12 @@ local mouse = Mouse:New{name = "mouse"}
 
 local textTest = Text:New
 {
-	text = "Shit Buddies",
+	text = "poop",
 	size = 32,
-	x = 100,
-	y = 100
+	x = 200,
+	y = 100,
+	timer = 100,
+	box = {color = Color:Get("green")}
 }
 
 local billy = Box:New
@@ -67,7 +69,8 @@ local billy3 = Box:New
 }
 
 
-
+-- DrawGroup is broken right now
+-->FIX
 local group = DrawGroup:New{billy2, billy3}
 
 
@@ -78,38 +81,18 @@ local bob = Box:New
 	color = Color:Get("orange")
 }
 
-
-local xLink = Link:New
+---[[
+Link:Simple
 {
-	a = {
-				o = bob,
-				comp = "Pos",
-				var = "x",
-			},
-	b = {
-				o = mouse,
-				var = "x"
-			},
-
-	type = "value"
+	a = {bob, "Pos", "x"},
+	b = {mouse, "x"}
 }
 
-local yLink = Link:New
+Link:Simple 
 {
-		a = {
-				o = bob,
-				comp = "Pos",
-				var = "y",
-			},
-	b = {
-				o = mouse,
-				var = "y"
-			},
-
-	type = "value"
+	a = {bob, "Pos", "y"},
+	b = {mouse, "y"}
 }
-
-
 
 -- Grid Based panel object placement and size
 local gridPanel = SimplePanel:New
@@ -118,7 +101,6 @@ local gridPanel = SimplePanel:New
 	posType = "bottom",
 	gridScale = 16
 }
-
 
 local gbox1 = Box:New
 {
@@ -171,6 +153,12 @@ local palPos =
 {
 	x = 500,
 	y = 200 
+}
+
+local palPos2 =
+{
+	x = 700,
+	y = 200	
 }
 
 
@@ -259,11 +247,11 @@ function PixelDrawLevel:Load()
 	-- pixel generation stuff
 	-------------------------------------------
 
----------------------
--- Buttons
----------------------
+	---------------------
+	-- Buttons
+	---------------------
 
--- moving all buttons now that they have been made generic
+	-- moving all buttons now that they have been made generic
 
 	local monkeyFace = 100
 
@@ -285,8 +273,7 @@ function PixelDrawLevel:Load()
 			{
 				spriteSheet = pawnGraphics.pawnSheet
 			}
-		end 
-
+		end
 	}
 
 	local actionTest = Button:ActionButton(Button.actionTest, {a = monkeyFace})
@@ -301,7 +288,7 @@ function PixelDrawLevel:Load()
 			pal = nil
 			pal = Palette:New
 			{
-					Pos = palPos,
+					Pos = palPos2,
 					draw = true
 			}
 
@@ -399,10 +386,9 @@ return PixelDrawLevel
 ------------------------------------------------------
 
 
-
-
-
--- old test stuff
+-------------------------
+-- Test Code
+-------------------------
 --[[
 
 
@@ -460,15 +446,8 @@ local xLink = Link:New
 }
 
 
-
-
-
---]]
-
---]]
-
 -- 1st Test panel
---[[
+--------------------------------
 local panel = Panel:New
 {
 	posType = "bottom",
@@ -519,5 +498,11 @@ panel:Add(pawnGraphics.sprites.idle)
 panel:Add(pawnGraphics.sprites.attack)
 panel:Add(pawnGraphics.sprites.walk)
 panel:Add(button1)
+
+
+
+
+
+
 
 --]]

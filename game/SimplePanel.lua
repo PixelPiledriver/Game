@@ -120,6 +120,8 @@ function Panel:New(data)
 
 	o.posType = data.posType or "none"
 
+	-- this is super weird and I don't think matters at all?
+	-- need a better solution/feature than this
 	if(o.posType == "bottom") then
 		o.Pos:SetPos
 		{
@@ -158,7 +160,6 @@ function Panel:New(data)
 		b = {o, "Pos", "y"},
 	}
 
-	-->REPLACE with Link:Simple
 	Link:Simple
 	{
 		a = {o.frame, "Size", "width"},
@@ -205,27 +206,6 @@ function Panel:New(data)
 		}
 	}
 
-	-- title of panel displayed in bar
-	-------------------------------------
-	o.barTitle = Text:New
-	{
-		text = o.Info.name,
-		color = Color:Get("black")
-	}
-
-	Link:Simple
-	{
-		a = {o.barTitle, "Pos", "x"},
-		b = {o.bar, "Pos", "x"}
-	}
-
-	Link:Simple
-	{
-		a = {o.barTitle, "Pos", "y"},
-		b = {o.bar, "Pos", "y"}
-	}
-
-
 	-----------------
 	-- Collision
 	-----------------
@@ -253,10 +233,55 @@ function Panel:New(data)
 		b = {o.bar, "Pos", "y"},
 	}
 
-	o.barCollision.Size:LinkWidthTo
+	Link:Simple
 	{
-		link = o.bar.Size
+		a = {o.barCollision, "Size", "width"},
+		b = {o.bar, "Size", "width"}
 	}
+
+
+	---------------
+	-- Title
+	---------------
+
+	o.title = Text:New
+	{
+		text = o.Info.name,
+		color = Color:Get("black"),
+	}
+
+	Link:Simple
+	{
+		a = {o.title, "Pos", "x"},
+		b = {o.bar, "Pos", "x"}
+	}
+
+	Link:Simple
+	{
+		a = {o.title, "Pos", "y"},
+		b = {o.bar, "Pos", "y"},
+		offsets =
+		{
+			{value = {o.bar.Size.height, "Sub"}}
+		}
+	}
+
+	-- hide title if too long to fit in window bar
+	if(o.title:GetWidth() > o.bar.Size.width) then
+		o.title:SetActive(false)
+		o.title.useTimer = true
+		o.title.timerMax = 30
+		o.title.timerTrigger = {o.barCollision, "collidedLastFrame"}
+	end
+
+	-- add this feature in a min
+	if(data.toolTipTitle) then
+
+	end 
+
+	--o.showTitle = data.showTitle or true
+	--o.title.active = o.showTitle
+
 
 	--------------
 	-- Buttons
@@ -320,7 +345,15 @@ function Panel:New(data)
 	function o:ToggleDraw()
 
 		for i=1, #self.items do
-			self.items[i].Draw:ToggleDraw()
+
+			if(self.items[i].Draw) then
+				self.items[i].Draw:ToggleDraw()
+			end 
+
+			if(self.items[i].ToggleDraw) then
+				self.items[i]:ToggleDraw()
+			end 
+
 		end
 
 		self.frame.Draw:ToggleDraw()

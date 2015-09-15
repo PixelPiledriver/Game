@@ -35,7 +35,7 @@ function MouseHover:New(data)
 	o.hoverType = data.hoverType or "parentCollision"
 	o.parent = data.parent or nil
 	o.collision = data.collision or data.parent.collision or nil
-	o.hover = false
+	o.isHovering = false
 
 	o.PrintDebugTextActive = true
 
@@ -54,9 +54,9 @@ function MouseHover:New(data)
 			-- this component has a parent and collides with mouse?
 			if(self.parent and o.collision and o.collision:DoesCollideWith("Mouse")) then
 				if(o.collision.collidedLastFrame) then
-					self.hover = true
+					self.isHovering= true
 				else
-					self.hover = false
+					self.isHovering= false
 				end 
 
 			end 
@@ -78,7 +78,7 @@ function MouseHover:New(data)
 		DebugText:TextTable
 		{
 			{text = "", obj = "MouseHover"},
-			{text = "Hover:" .. Bool:ToString(self.hover)}
+			{text = "Hover:" .. Bool:ToString(self.isHovering)}
 		}
 
 		--[[
@@ -89,7 +89,7 @@ function MouseHover:New(data)
 			{
 				{"Hover"},
 				{"+-----------+"},
-				{Bool:ToString(self.hover)}
+				{Bool:ToString(self.isHovering)}
 			}
 		}
 		--]]

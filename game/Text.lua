@@ -10,6 +10,8 @@
 local Color = require("Color")
 local Pos = require("Pos")
 local Draw = require("Draw")
+local Box = require("Box")
+local Link = require("Link")
 
 ---------------------------------------------------
 
@@ -46,28 +48,77 @@ function Text:New(data)
 		structureType = "Object"
 	}
 
-	----------
+	--------------------
 	-- Vars
-	----------
+	--------------------
+
 	o.text = data.text or ""
 	o.color = data.color or Color:Get("white")
 	o.font = love.graphics.newFont(data.size)
 
+	-- size of area that text is within -> ex: button size
 	o.displayWidth = data.displayWidth or o.font:getWidth(o.text)
+	o.displayHeight = data.displayHeight or o.font:getHeight()
 
-	-- oophorizontal only
-	-- need to add vertical
 	o.alignment = data.alignment or "left" 
+	o.verticalAlignment = data.verticalAlignment or "center"
+
+	o.active = data.active or true
+
+	-- timer
+	o.useTimer = false
+
+	if(data.timer) then
+		o.useTimer = true
+	end
+
+	o.timer = data.timer or 0
+	o.timerMax = data.timer or 100
+
+	-- pass a bool here that text object can check
+	--{object, var}
+	o.timerTrigger = data.timerTrigger or nil
+
+	
+
+	---------------
+	-- Graphics
+	---------------
+
+	o.boxPad = data.boxPad or 0
+
+	-- optional simple box backdrop for text
+	if(data.box) then
+		o.box = Box:New
+		{
+			width = o.font:getWidth(o.text) + o.boxPad,
+			height = o.font:getHeight() + o.boxPad,
+			color = data.box.color
+		}
+
+		Link:Simple
+		{
+			a = {o.box, "Pos", "x"},
+			b = {o, "Pos", "x"}
+		}
+
+		Link:Simple
+		{
+			a = {o.box, "Pos", "y"},
+			b = {o, "Pos", "y"}
+		}
+
+	end
 
 	---------------
 	-- Components
 	---------------
+
 	o.Pos = Pos:New
 	{
 		x = data.x or Pos.defaultPos.x,
 		y = data.y or Pos.defaultPos.y
 	}
-
 
 	local defaultDraw =
 	{
@@ -84,39 +135,120 @@ function Text:New(data)
 	-- Functions
 	---------------
 
+	function o:Update()
+		self:UpdateTimer()
+	end 
+
+
+	function o:UpdateTimer()
+		if(self.useTimer == false) then
+			return
+		end
+
+		if(self.timerTrigger) then
+			--print(self.timerTrigger[1][self.timerTrigger[2]])
+			if(self.timerTrigger[1][self.timerTrigger[2]]) then
+				self.timer = self.timerMax
+				self:SetActive(true)
+			end
+		end 
+
+		if(self.timer > 0) then
+			self.timer = self.timer - 1
+		end 
+
+		if(self.timer == 0 and self.active) then
+			self:SetActive(false)
+		end 
+	end 
+
+
+	function o:ToggleActive()
+
+		if(self.active) then
+			self:SetActive(false)
+		else 
+			self:SetActive(true)
+		end 
+
+	end 
+
+	function o:SetActive(state)
+		if(state == false) then 
+			
+			self.active = false
+
+			if(self.box) then
+				self.box.Draw.active = false
+			end
+
+		else
+
+			self.active = true
+
+			if(self.box) then
+				self.box.Draw.active = true
+			end			
+
+		end 
+
+	end 
+
 	function o:DrawCall()
+
+		if(self.active == false) then
+			return
+		end 
+
 		love.graphics.setColor(Color:AsTable(self.color))
 		love.graphics.setFont(self.font)
 
 		local x = 0
 		local y = 0
 
-		-- alignment --> move this to a function?
+		-- horizontal alignment
 		if(self.alignment == "left") then
 			x = self.Pos.x
-			y = self.Pos.y
 		elseif(self.alignment == "right") then
 			x = self.Pos.x + self.displayWidth - self.font:getWidth(self.text)
-			y = self.Pos.y
 		elseif(self.alignment == "center") then
 			x = self.Pos.x + (self.displayWidth/2) -((self.font:getWidth(self.text))/2)
-			y = self.Pos.y
 		end 
 
+		-- vertical alignment
+		if(self.verticalAlignment == "left") then
+			y = self.Pos.y
+		elseif(self.verticalAlignment == "right") then
+			y = self.Pos.y
+		elseif(self.verticalAlignment == "center") then
+			y = self.Pos.y + (self.displayHeight/2) - (self.font:getHeight()/2)
+		elseif(self.verticalAlignment == "none") then
+			y = self.Pos.y
+		end 
 
 		LovePrint
 		{
 			text = self.text,
 			x = x,
-			y = y
+			y = y,
+			color = Color:AsTable(self.color)
 		}
+	end 
+
+
+	function o:GetWidth()
+		return self.font:getWidth(o.text)
+	end 
+
+	function o:GetHeight()
+		return self.font:getHeight()
 	end 
 
 
 	--------
 	-- End
 	--------
-
+	ObjectUpdater:Add{o}
 
 	return o
 
@@ -129,9 +261,9 @@ end
 ObjectUpdater:AddStatic(Text)
 
 
-----------
--- Global
-----------
+-------------
+-- Global -- this needs to be moved to somewhere else
+-------------
 -- optional text altering
 -- data = {text, x, y, rot, xScale, yScale, 
 --	xOffset, yOffset, xShear, yShear}
@@ -146,7 +278,11 @@ function LovePrint(data)
 	local yOffset = data.yOffset or 0
 	local xShear = data.xShear or 0
 	local yShear = data.yShear or 0
+
+	love.graphics.setColor(data.color or Color:AsTable(Color:Get("white")))
+
 	love.graphics.print(text, x, y, rot, xScale, yScale, xOffset, yOffset, xShear, yShear)
+
 end 
 
 return Text

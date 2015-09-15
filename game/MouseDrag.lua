@@ -65,7 +65,7 @@ function MouseDrag:New(data)
 			return
 		end 
 
-		if(self.parent.hover.hover == true and self.drag == false and MouseDrag.draggingObjects == 0) then
+		if(self.parent.hover.isHovering == true and self.drag == false and MouseDrag.draggingObjects == 0) then
 			if(love.mouse.isDown(self.mouseButton)) then
 				self.drag = true
 				self.offsetFromMouseX = love.mouse.getX() - self.parent.Pos.x

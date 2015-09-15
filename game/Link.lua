@@ -140,7 +140,8 @@ function Link:New(data)
 
 		-- no implementation for this type yet
 		-->FIX
-		if(self.linkType == "func") then			
+		if(self.linkType == "func") then
+			-->EMPTY
 		end 
 
 	end 
@@ -186,23 +187,35 @@ end
 
 function Link:Simple(data)
 
-	-- creat the link
+	-- create A
+	local a = {}
+	
+	a.o = data.a[1]
+
+	if(data.a[3] == nil) then
+		a.var = data.a[2]
+	else 
+		a.comp = data.a[2]
+		a.var = data.a[3]
+	end
+
+	-- create B
+	local b = {}
+	
+	b.o = data.b[1]
+
+	if(data.b[3] == nil) then
+		b.var = data.b[2]
+	else 
+		b.comp = data.b[2]
+		b.var = data.b[3]
+	end
+
+	-- create the link
 	local linkTable =
 	{
-		a = 
-		{
-			o = data.a[1],
-			comp = data.a[2],
-			var =  data.a[3]
-		},
-
-		b = 
-		{
-			o = data.b[1],
-			comp = data.b[2],
-			var = data.b[3] 
-		},
-
+		a = a,
+		b = b,  
 		offsets = {}
 	}
 
@@ -222,7 +235,7 @@ function Link:Simple(data)
 				linkTable.offsets[#linkTable.offsets + 1] =
 				{
 					value = data.offsets[i].value[1],
-					math = data.offsets[i].value[3] or nil
+					math = data.offsets[i].value[2] or nil
 				}
 			end 
 
@@ -247,6 +260,10 @@ return Link
 
 -- notes
 -------------------------------------
+
+-- NEED
+-- way to create multiple var links from a single call to Link:Simple
+
 -->TODO
 -- need offset value from link
 -- only works for number values
@@ -259,6 +276,11 @@ return Link
 -- TO DO
 -- add in ability to set an offset from the linked to variable
 
+-- TO DO
+-- implement "function" link type
+-- right now only vars are supported
+-- not sure exactly what a function link would be used for
+-- but could perhpas be useful
 
 -- this stuff works now
 -- use this to fix problems I was having with building panels and stuff
@@ -267,8 +289,6 @@ return Link
 -- a should always be a 
 
 -- try passing objects and then what you want from them seperately
-
-
 
 
 
