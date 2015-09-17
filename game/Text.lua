@@ -98,14 +98,8 @@ function Text:New(data)
 
 		Link:Simple
 		{
-			a = {o.box, "Pos", "x"},
-			b = {o, "Pos", "x"}
-		}
-
-		Link:Simple
-		{
-			a = {o.box, "Pos", "y"},
-			b = {o, "Pos", "y"}
+			a = {o.box, "Pos", {"x", "y"}},
+			b = {o, "Pos", {"x", "y"}}
 		}
 
 	end

@@ -101,7 +101,7 @@ function DrawList:Submit(data)
 	self:CreateLayer(data.layer)
 
 	-- stack object on top
-	-- there is no sorting yet :|
+	-- there is no sorting yet :| --> there is now
 	self.objects[data.layer].sort[#self.objects[data.layer].sort + 1] = data
 
 	-- store layers in use
@@ -111,14 +111,14 @@ end
 
 -- sets the given object to draw first
 -- need to add a feature that lets you bump the first object with a new one
--- data = Draw component
+-- data = Draw component --> not true its a local table
 function DrawList:SubmitFirst(data)
 	self:CreateLayer(data.layer)
 	self.objects[data.layer].first = data
 end 
  
 -- sets the given object to draw last
--- data = Draw component
+-- data = Draw component --> not true its a local table
 function DrawList:SubmitLast(data)
 	self:CreateLayer(data.layer)
 	self.objects[data.layer].last = data
@@ -127,8 +127,14 @@ end
 -- after the Update call, all objects have submitted here to be drawn
 -- now its time to sort them and stuff
 function DrawList:PostUpdate()
+
+	-- create list of used layers
 	self:CompressAndSortLayerList()
+
+	-- sort draw order of all objects submitted
+	-- o.sort is just a pile of unsorted objects
 	self:Sort()
+
 end 
 
 -- removes duplicate indexs of layers in use
@@ -218,11 +224,22 @@ function DrawList:Draw()
 
 			-- draw each object in this layer
 			for j=1, #self.objects[self.objects.layerIndex[i]].draw do
-				-- only draw if Draw exists
-				if(self.objects[self.objects.layerIndex[i]].draw[j].o.Draw) then	
-					self.objects[self.objects.layerIndex[i]].draw[j].o.Draw:Draw()
-					self.drawnThisFrame = self.drawnThisFrame + 1
-				end
+
+
+				if(self.objects[self.objects.layerIndex[i]].draw[j].isGroup) then
+					
+					for k=1, #self.objects[self.objects.layerIndex[i]].draw[j].drawables do
+						self.objects[self.objects.layerIndex[i]].draw[j].drawables[k]:Draw()
+						self.drawnThisFrame = self.drawnThisFrame + 1
+					end 
+
+				else
+					if(self.objects[self.objects.layerIndex[i]].draw[j].o.Draw) then	
+
+						self.objects[self.objects.layerIndex[i]].draw[j].o.Draw:Draw()
+						self.drawnThisFrame = self.drawnThisFrame + 1
+					end
+				end 
 
 			end 
 

@@ -128,18 +128,12 @@ function Palette:New(data)
 			collisionList = {"Mouse"},
 		}
 
-
 		Link:Simple
 		{
-			a = {o.collision, "Pos", "x"},
-			b = {o, "Pos", "x"}
+			a = {o.collision, "Pos", {"x", "y"}},
+			b = {o, "Pos", {"x", "y"}}
 		}
 
-		Link:Simple
-		{
-			a = {o.collision, "Pos", "y"},
-			b = {o, "Pos", "y"}
-		}
 	end
 
 	o.Draw = Draw:New

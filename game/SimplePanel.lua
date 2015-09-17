@@ -18,6 +18,7 @@ local Button = require("Button")
 local Link = require("Link")
 local Draw = require("Draw")
 local Text = require("Text")
+local DrawGroup = require("DrawGroup")
 
 ---------------------------------------------------------------
 
@@ -50,7 +51,9 @@ Panel.defaultTopFrame =
 
 Panel.defaultNameColor = Color:Get("black")
 
-Panel.windowBorderSpace = 16
+-- safe space buffer 
+Panel.windowBorderSpace = 32
+
 Panel.objectToPanelPad = 8
 Panel.objectToObjectPad = 16
 Panel.objectDirections = {"left, right, up, down"}
@@ -125,8 +128,8 @@ function Panel:New(data)
 	if(o.posType == "bottom") then
 		o.Pos:SetPos
 		{
-			x = Panel.windowBorderSpace,
-			y = love.window.getHeight() - o.Size.height - Panel.windowBorderSpace
+			x = love.window.getWidth() - 100,
+			y = Panel.windowBorderSpace
 		}
 	end
 
@@ -150,26 +153,14 @@ function Panel:New(data)
 
 	Link:Simple
 	{
-		a = {o.frame, "Pos", "x"},
-		b = {o, "Pos", "x"},
+		a = {o.frame, "Pos", {"x", "y"}},
+		b = {o, "Pos", {"x", "y"}},
 	}
 
 	Link:Simple
 	{
-		a = {o.frame, "Pos", "y"},
-		b = {o, "Pos", "y"},
-	}
-
-	Link:Simple
-	{
-		a = {o.frame, "Size", "width"},
-		b = {o, "Size", "width"}
-	}
-
-	Link:Simple
-	{
-		a = {o.frame, "Size", "height"},
-		b = {o, "Size", "height"}
+		a = {o.frame, "Size", {"width", "height"}},
+		b = {o, "Size", {"width", "height"}}
 	}
 
 	-- above panel bar - move panel and holds title
@@ -223,14 +214,8 @@ function Panel:New(data)
 
 	Link:Simple
 	{
-		a = {o.barCollision, "Pos", "x"},
-		b = {o.bar, "Pos", "x"},
-	}
-
-	Link:Simple
-	{
-		a = {o.barCollision, "Pos", "y"},
-		b = {o.bar, "Pos", "y"},
+		a = {o.barCollision, "Pos", {"x", "y"}},
+		b = {o.bar, "Pos", {"x", "y"}},
 	}
 
 	Link:Simple

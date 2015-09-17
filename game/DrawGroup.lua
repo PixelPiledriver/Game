@@ -8,9 +8,10 @@
 -- When an object is part of a DrawGroup it's Draw component does not submit to DrawList
 -- Instead the DrawGroup submits itself to DrawList
 -- DrawList sorts the group by .depth witin a .layer just like any other object
--- But draws all of the objects within the group as if it were its own layer
+-- But draws all of the objects within the group in order 
+-- effectively, as if the group were its own layer
 
--- Useful for windows and characters with parts and stuff like that
+-- Useful for panels and characters with parts that need to be in a specific order
 
 
 -----------------------------------------------------------------------------
@@ -53,13 +54,26 @@ function DrawGroup:New(data)
 	-- Vars
 	----------------
 	o.drawables = {}
-	o.isGroup = true -- flag to DrawList that this is a group of objects to be drawn not just a single draw
 
+	o.layer = data.layer or 3
+	o.depth = 0
+
+	-- flag for DrawList to recongnize that this is a DrawGroup 
+	-- not just a single Draw object
+	o.isGroup = true
 
 
 	------------------
 	-- Functions
 	------------------
+
+	function o:Update()
+		o:SubmitToDrawList()
+	end 
+
+	function o:SubmitToDrawList()
+		DrawList:Submit(self)
+	end 
 
 	-- add object on top of group
 	-- {o, layer}
@@ -79,7 +93,7 @@ function DrawGroup:New(data)
 	-- before its depth can be calculated for the current frame
 	function o:PostUpdate()
 
-		--  this is wrongly implemented
+		-- this is wrongly implemented
 		-- maybe I can pass the depth of the group to the object
 		-- but no actually I NEED to pass the group to grouplist
 		-- so it can carry the list of objects
@@ -90,13 +104,8 @@ function DrawGroup:New(data)
 		end 
 		--]]
 
-		
-		
 	end 
 
-	-------------------
-	-- On Require
-	-------------------
 
 	-- Add objects passed into New this group
 	if(#data > 0) then

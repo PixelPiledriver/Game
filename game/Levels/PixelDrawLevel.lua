@@ -40,38 +40,42 @@ local textTest = Text:New
 	box = {color = Color:Get("green")}
 }
 
-local billy = Box:New
+
+
+-- fixing DrawGroup
+
+local greenBox = Box:New
 {
 	x = 275,
 	y = 200,
-	width = 200,
+	width = 100,
 	height = 100,
-	color = Color:Get("black")
+	color = Color:Get("green")
 }
 
-local billy2 = Box:New
+local orangeBox = Box:New
 {
 	x = 300,
 	y = 225,
-	width = 200,
+	width = 100,
 	height = 100,
-	color = Color:Get("white")
+	color = Color:Get("orange")
 }
 
 
-local billy3 = Box:New
+local blueBox = Box:New
 {
-	x = 200,
+	x = 250,
 	y = 150,
-	width = 222,
-	height = 222,
-	color = Color:Get("red"),
+	width = 100,
+	height = 100,
+	color = Color:Get("blue"),
 }
 
 
 -- DrawGroup is broken right now
 -->FIX
-local group = DrawGroup:New{billy2, billy3}
+local group = DrawGroup:New{orangeBox, greenBox, blueBox}
 
 
 local bob = Box:New
@@ -81,18 +85,13 @@ local bob = Box:New
 	color = Color:Get("orange")
 }
 
----[[
+
 Link:Simple
 {
-	a = {bob, "Pos", "x"},
-	b = {mouse, "x"}
+	a = {bob, "Pos", {"x", "y"}},
+	b = {mouse, {"x", "y"}}
 }
 
-Link:Simple 
-{
-	a = {bob, "Pos", "y"},
-	b = {mouse, "y"}
-}
 
 -- Grid Based panel object placement and size
 local gridPanel = SimplePanel:New
@@ -145,7 +144,6 @@ gridPanel:Add
 	y = 5
 }
 
---]]
 
 
 -- other stuff

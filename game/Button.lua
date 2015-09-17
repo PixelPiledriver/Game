@@ -179,15 +179,10 @@ function Button:New(data)
 
 	Link:Simple
 	{
-		a = {o.text, "Pos", "x"},
-		b = {o, "Pos", "x"},
+		a = {o.text, "Pos", {"x", "y"}},
+		b = {o, "Pos", {"x", "y"}},
 	}
 
-	Link:Simple
-	{
-		a = {o.text, "Pos", "y"},
-		b = {o, "Pos", "y"},
-	}
 
 	o.text.active = data.drawText or true
 
@@ -218,14 +213,8 @@ function Button:New(data)
 
 		Link:Simple
 		{
-			a = {o.sprite, "Pos", "x"},
-			b = {o, "Pos", "x"}
-		}
-
-		Link:Simple
-		{
-			a = {o.sprite, "Pos", "y"},
-			b = {o, "Pos", "y"}
+			a = {o.sprite, "Pos", {"x", "y"}},
+			b = {o, "Pos", {"x", "y"}}
 		}
 
 	end
@@ -266,16 +255,9 @@ function Button:New(data)
 
 	Link:Simple
 	{
-		a = {o.collision, "Pos", "x"},
-		b = {o, "Pos", "x"}
+		a = {o.collision, "Pos", {"x", "y"}},
+		b = {o, "Pos", {"x", "y"}}
 	}
-
-	Link:Simple
-	{
-		a = {o.collision, "Pos", "y"},
-		b = {o, "Pos", "y"}
-	}
-
 
 	-----------------------------
 	-- Mouse Interaction

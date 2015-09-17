@@ -149,6 +149,19 @@ function Draw:New(data)
 
 	end
 
+	function o:GetDrawData()
+
+		local drawData =
+		{
+			o = self.parent,
+			layer = self.layer,
+			depth = self.depth
+		}
+
+		return
+		
+	end 
+
 	-- for use by other objects that take control of this component --> DrawGroup
 	-- this function is pointless but will leave for now
 	-- used to be used by draw group but is not needed
