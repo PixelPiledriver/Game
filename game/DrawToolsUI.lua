@@ -92,7 +92,6 @@ DrawToolsUI.moveButton = Button:New
 	buttonName = "Move",
 	toggle = true,
 	sprite = DrawToolsUI.moveIcon,
-	--printDebugTextActive = true
 	toggleOnFunc = function()
 		DrawTools:ToggleTool("Move")
 	end,
@@ -123,7 +122,6 @@ DrawToolsUI.colorDropButton = Button:New
 	text = "toggle!",
 	toggle = true,
 	sprite = DrawToolsUI.colorDropIcon,
-	--printDebugTextActive = true
 	toggleOnFunc = function()
 		DrawTools:ToggleTool("ColorDrop")
 	end,
@@ -140,7 +138,6 @@ DrawToolsUI.selectButton = Button:New
 	toggle = true,
 	saveAsLast = false,
 	sprite = DrawToolsUI.selectIcon,
-	printDebugTextActive = true,
 }
 
 -------------
@@ -152,7 +149,8 @@ DrawToolsUI.panel = Panel:New
 {
 	name = "DrawTools",
 	posType = "bottom",
-	gridSize = 32	
+	gridSize = 32,
+	colorSkin = "gray"
 }
 
 -- add objects

@@ -177,7 +177,7 @@ function Text:New(data)
 			end
 
 		else
-
+			
 			self.active = true
 
 			if(self.box) then

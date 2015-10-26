@@ -50,6 +50,18 @@ function Bool:Toggle(b)
 
 end 
 
+-- use to set vars of objects to false by New data
+function Bool:DataOrDefault(b, default)
+
+	if(b == nil) then
+		return default
+	elseif(b == false) then
+		return false
+	elseif(b == true) then
+		return true
+	end 
+
+end 
 
 ---------------
 -- Static End

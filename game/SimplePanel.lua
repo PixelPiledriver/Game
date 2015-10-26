@@ -39,8 +39,33 @@ Panel.Info = Info:New
 -- Static Vars
 -----------------
 
+Panel.objectsMade = {}
+
+Panel.colorSkins =
+{
+	blue = 
+	{
+		frame = Color:Get("darkGray"),
+		bar = Color:Get("lightBlue")
+	},
+
+	green = 
+	{
+		frame = Color:Get("lightGreen"),
+		bar = Color:Get("green")
+	},
+
+	gray =
+	{
+		frame = Color:Get("lightGray"),
+		bar = Color:Get("darkGray")
+	}
+}
+
+Panel.defaulColorSkin = "gray"
+
 Panel.defaultPanelColor = Color:New
-{ r = 0, g = 0, b = 0, a = 128}
+{ r = 0, g = 0, b = 0, a = 255}
 
 Panel.defaultTopFrame =
 {
@@ -54,7 +79,7 @@ Panel.defaultNameColor = Color:Get("black")
 -- safe space buffer 
 Panel.windowBorderSpace = 32
 
-Panel.objectToPanelPad = 8
+Panel.objectToPanelPad = 32
 Panel.objectToObjectPad = 16
 Panel.objectDirections = {"left, right, up, down"}
 
@@ -65,6 +90,8 @@ Panel.objectDirections = {"left, right, up, down"}
 function Panel:New(data)
 
 	local o = {}
+
+	self.objectsMade[#self.objectsMade + 1] = o
 
 	----------
 	-- Info
@@ -90,11 +117,15 @@ function Panel:New(data)
 	o.items = {}
 	o.objectDirection = data.objectDirection or "right"
 
+	o.itemOffset = {x = 0, y = 0}
+
 	-------------------
 	-- Object Map
 	-------------------
 	o.gridScale = data.gridScale or 32 --> size of items
-	o.gridPad = data.gridPad or 0
+	o.gridWidth = data.gridWidth or o.gridScale
+	o.gridHeight = data.gridHeight or o.gridScale
+	o.gridPad = data.gridPad or 8
 
 	o.itemPad = data.itemPad or 8 --> space between items
 
@@ -104,6 +135,8 @@ function Panel:New(data)
 		-- MapBased
 	----------------------
 	o.panelType = data.panelType or "ObjectBased"
+
+	-- 2D array of item locations
 	o.map = MapTable:New
 	{
 		width = 1,
@@ -117,6 +150,19 @@ function Panel:New(data)
 	{
 		width = data.width or 32,
 		height = data.height or 32
+	}
+
+	o.heightMax = data.heightMax or 300
+
+	-- this is not in use yet
+	-- because making it work will be awkward
+	-- .Size needs to be a pointer and other Size components need to hold
+	-- the size data and .Size should switch between them
+	-- fix later
+	o.SizeMinimized = Size:New
+	{
+		width = 16,
+		height = 8
 	}
 
 	o.Pos = Pos:New(Pos.defaultPos)
@@ -143,11 +189,14 @@ function Panel:New(data)
 	-- Graphics
 	-------------------------------
 
+	-- color skin
+	o.colorSkin = Panel.colorSkins[Panel.defaulColorSkin] or Panel.colorSkins[data.colorSkin]
+
 	-- main panel area - holds panel items
 	---------------------------------------------------
 	o.frame = Box:New
 	{
-		color = Panel.defaultPanelColor,
+		color = o.colorSkin and o.colorSkin.frame or Panel.defaultPanelColor,
 		parent = o,
 	}
 
@@ -171,9 +220,11 @@ function Panel:New(data)
 		y = o.Pos.y - Panel.defaultTopFrame.height,
 		height = Panel.defaultTopFrame.height,
 		width = o.Size.width,
-		color = Panel.defaultTopFrame.color,
+		color = o.colorSkin and o.colorSkin.bar or Panel.defaultTopFrame.color,
 		parent = o,
 	}
+
+	o.bar.noScissor = true
 
 	Link:Simple
 	{
@@ -224,7 +275,6 @@ function Panel:New(data)
 		b = {o.bar, "Size", "width"}
 	}
 
-
 	---------------
 	-- Title
 	---------------
@@ -268,6 +318,7 @@ function Panel:New(data)
 	--o.title.active = o.showTitle
 
 
+
 	--------------
 	-- Buttons
 	--------------
@@ -276,9 +327,16 @@ function Panel:New(data)
 	{
 		name = "panel close",
 		text = "x",
+		toggleText = "o",
 		width = 16,
 		height = 16,
-		func = function()
+		toggle = true,
+
+		toggleOnFunc = function() 
+			o:ToggleDraw()
+		end,
+
+		toggleOffFunc = function()
 			o:ToggleDraw()
 		end
 	}
@@ -300,6 +358,133 @@ function Panel:New(data)
 	}
 
 	------------------------
+	-- Scroll Buttons
+	------------------------
+	
+	-- add scroll bars later
+
+	-- sets scroll back to zero
+	o.scrollResetButton = Button:New
+	{
+		name = "scroll reset",
+		text = "o",
+		width = 16,
+		height = 16,
+		func = function() 
+			o.itemOffset.y = 0
+		end,
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollResetButton, "Pos", "x"},
+		b = {o.bar, "Pos", "x"},
+		offsets =
+		{
+			{object = {o.frame.Size, "width"}},
+		}
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollResetButton, "Pos", "y"},
+		b = {o.bar, "Pos", "y"},
+		offsets =
+		{
+			{value = {48}}
+		}	
+	}
+
+
+	-- up
+	o.scrollUpButton = Button:New
+	{
+		name = "scroll up",
+		text = "^",
+		width = 16,
+		height = 16,
+		holdable = true,
+		func = function() 
+			o:ScrollY(1)
+		end,
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollUpButton, "Pos", "x"},
+		b = {o.bar, "Pos", "x"},
+		offsets =
+		{
+			{object = {o.frame.Size, "width"}},
+		}
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollUpButton, "Pos", "y"},
+		b = {o.bar, "Pos", "y"},
+		offsets =
+		{
+			{value = {16}}
+		}	
+	}
+
+
+
+	-- down
+	o.scrollDownButton = Button:New
+	{
+		name = "scroll down",
+		text = "v",
+		width = 16,
+		height = 16,
+		holdable = true,
+		func = function() 
+			o:ScrollY(-1)
+		end,
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollDownButton, "Pos", "x"},
+		b = {o.bar, "Pos", "x"},
+		offsets =
+		{
+			{object = {o.frame.Size, "width"}},
+		}
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollDownButton, "Pos", "y"},
+		b = {o.bar, "Pos", "y"},
+		offsets =
+		{
+			{value = {32}}
+		}	
+	}
+
+	--------------
+	-- DrawGroup
+	--------------
+	-- set draw order of objects
+	-- will need to be changed as new items are added to panel
+	-- but no worries, just do items last
+	o.DrawGroup = DrawGroup:New
+	{
+		objects = {o.frame, o.bar},
+		scissor = 
+		{
+			x = {o.frame, "Pos", "x"},
+			y = {o.frame, "Pos", "y"},
+			width = {o.frame, "Size", "width"},
+			height = {o.frame, "Size", "height"},
+		}
+	}
+
+	--o.DrawGroup:SetDepthObject(o.bar)
+
+	------------------------
 	-- Mouse Interaction
 	------------------------
 	o.hover = MouseHover:New
@@ -318,8 +503,18 @@ function Panel:New(data)
 	-- Functions
 	----------------
 
-	-- empty for now
+	function o:ScrollY(value)
+		o.itemOffset.y = o.itemOffset.y + value
+	end 
+
+	function o:ScrollX(value)
+		o.itemOffset.x = o.itemOffset.x + value
+	end 
+
+
 	function o:Update()
+
+		--self.itemOffset.y = self.itemOffset.y - 0.5
 	end 
 
 	-- empty for now
@@ -366,8 +561,16 @@ function Panel:New(data)
 	
 		-- increase size of panel to make room for new object
 		-- not sure why the shit on the right is commented out --> move to junk soon :P
-		local w = (self.gridScale * self.map.width)	--+ ((self.map.width-2) * self.gridPad)
-		local h = (self.gridScale * self.map.height) --+ ((self.map.height-2) * self.gridPad)
+		--local w = (self.gridScale * self.map.width) + self.gridPad	--+ ((self.map.width-2) * self.gridPad)
+		--local h = (self.gridScale * self.map.height) + self.gridPad --+ ((self.map.height-2) * self.gridPad)
+		local w = (self.gridWidth * self.map.width) + self.gridPad * 2
+		local h = (self.gridHeight * self.map.height) + self.gridPad * 2
+		
+		-- height max constraint
+		if(h > self.heightMax) then
+			h = self.heightMax
+		end 
+
 		self.Size:Set(w,h)
 
 		-- link object added
@@ -379,8 +582,9 @@ function Panel:New(data)
 			offsets = 
 			{
 				{value = {data.x - 1}}, --> needs to update if map position changes
-				{object = {self,"gridScale", "Mul"}},
-				{object = {self, "gridPad"}}
+				{object = {self,"gridWidth", "Mul"}},
+				{object = {self, "gridPad"}},
+				{object = {self.itemOffset, "x"}}
 			}
 		}
 
@@ -391,10 +595,65 @@ function Panel:New(data)
 			offsets = 
 			{
 				{value = {data.y - 1}}, --> needs to update if map position changes
-				{object = {self, "gridScale", "Mul"}},
-				{object = {self, "gridPad"}}
+				{object = {self, "gridHeight", "Mul"}},
+				{object = {self, "gridPad"}},
+				{object = {self.itemOffset, "y"}}
 			}
 		}
+
+		-- add graphics objects of added object
+		if(data.object.drawables) then
+			self.DrawGroup:AddDrawablesOf(data.object)
+		else 
+			self.DrawGroup:Add(data.object.Draw)
+		end 
+
+		-- buttons
+		if(data.object.Info.objectType == "Button") then
+
+			-- this doesnt work
+			-- needs to use a Link
+			--[[
+			data.object.activeRange = 
+			{
+				use = true,
+				a = {x = self.Pos.x, y = self.Pos.y},
+				b = {x = self.Pos.x + self.Size.width, y = self.Pos.y + self.Size.height}
+			}
+			--]]
+
+			-- a of rect
+			Link:Simple
+			{
+				a = {data.object.activeRange, "a", {"x", "y"}},
+				b = {self, "Pos", {"x", "y"}},			
+			}
+
+			-- b of rect
+			Link:Simple
+			{
+				a = {data.object.activeRange, "b", "x"},
+				b = {self, "Pos", "x"},
+				offsets =
+	  		{
+	  			{object = {self.Size, "width"}}
+	  		}
+	  	}
+
+			Link:Simple
+			{
+				a = {data.object.activeRange, "b", "y"},
+				b = {self, "Pos", "y"},
+				offsets =
+	  		{
+	  			{object = {self.Size, "height"}}
+	  		}
+	  	}
+
+	  	data.object.activeRange.use =  true
+
+
+		end 
 
 	end 
 
@@ -432,8 +691,6 @@ function Panel:New(data)
 
 	end 
 
-
-		
 	function o:PrintDebugText()	
 
 		DebugText:TextTable
@@ -456,6 +713,37 @@ function Panel:New(data)
 
 end 
 
+---------------------
+-- Static Functions
+---------------------
+
+function Panel:Update()
+
+	self:SamePosGuard()
+
+end 
+
+function Panel:SamePosGuard()
+
+	if(#self.objectsMade < 2) then
+		return
+	end
+
+	local a = self.objectsMade[1]
+
+		-- y position of all panels
+	for i=2, #self.objectsMade do
+
+		local b = self.objectsMade[i]
+
+		if(a.Pos.y == b.Pos.y) then
+			a.Pos.y = a.Pos.y + 0.1
+		end 
+
+	end 
+
+end 
+
 
 ----------------
 -- Static End
@@ -468,6 +756,12 @@ return Panel
 
 -- Notes
 ---------------
+-- need 
+-- Minimized size - bar has a small size
+-- then restores to open size when restored
+
+-- max panel size should probly be to the screen height or slightly less?
+-- def need to put in something to make that more restricted and useful 
 
 -- DrawGroup needs to be figured out
 -- so panels can draw behind their items
@@ -523,5 +817,6 @@ return Panel
 		y = self.bar.Pos.y,
 	}
 	--]]
+
 
 

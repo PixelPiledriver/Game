@@ -264,6 +264,13 @@ function Link:Simple(data)
 						value = data.offsets[i].value[1],
 						math = data.offsets[i].value[2] or nil
 					}
+				elseif(data.offsets[i].varOf) then
+					linkTable.offsets[#linkTable.offsets + 1] =
+					{
+						o = data.offsets[i].varOf[1],
+						var = data.offsets[i].varOf[2][data.offsets[i].varOf[3]],
+						math = data.offsets[i].varOf[4] or nil 
+					}
 				end 
 
 			end 

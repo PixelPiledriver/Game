@@ -2,7 +2,8 @@
 
 -- Purpose
 -----------------
--- base test map with tiles that show terrain and respond to player movement
+-- base test map with tiles that show terrain 
+-- and respond to player movement
 
 --------------
 -- Requires
@@ -259,3 +260,7 @@ return Map
 ------------------------------
 -- Tile type is part of this file and not broken off into its own thing
 -- that needs to be fixed
+
+-- this file is OLD
+-- and needs to be broken down and repurposed
+-- Depricate soon

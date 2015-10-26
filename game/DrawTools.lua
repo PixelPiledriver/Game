@@ -26,7 +26,7 @@ DrawTools.monkey = false
 
 DrawTools.selectedPixelTexture = nil
 
-DrawTools.selectedColor = Color:Get("red")
+DrawTools.selectedColor = Color:Get("green")
 
 -- current tool to run
 -- this is a function pointer and calls whatever it is set to
@@ -44,6 +44,7 @@ DrawTools.tools =
 
 -- displays the current selected color
 -- gonna ignore this stuff for a min
+--[[
 DrawTools.selectedColorBox = Box:New
 {
 	x = 200,
@@ -52,6 +53,7 @@ DrawTools.selectedColorBox = Box:New
 	height = 50,
 	color = DrawTools.selectedColor,
 }
+--]]
 
 
 ---------------------------
@@ -99,6 +101,7 @@ function DrawTools:UpdateTools()
 
 end 
 
+-- get the position of the mouse relative to this texture
 function DrawTools:MousePos()
 	local x = (love.mouse.getX() - self.selectedPixelTexture.Pos.x) /	self.selectedPixelTexture.Scale.x
 	local y = (love.mouse.getY() - self.selectedPixelTexture.Pos.y) / self.selectedPixelTexture.Scale.y

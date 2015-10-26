@@ -37,8 +37,12 @@ function MapTable:New(data)
 
 	o.growMap = data.growMap or true
 
+	o.emptySlotDefault = data.emptySlotDefault or nil
+	print(o.emptySlotDefault)
 
-	-- puts the _nil keyword into 
+
+	-- puts the _nil keyword into slots of the map
+	-- does not clean up objects, may need that in the future
 	function o:BlankMap()
 
 		for i=1, self.width do
@@ -70,13 +74,14 @@ function MapTable:New(data)
 
 					-- full slot, do nothing
 					if(self.map[x][y]) then
-						printDebug{"slot taken by: unknown", "MapTable"}
+						-- cant get name for some reason
+						printDebug{"slot taken by " .. "Unknown" , "MapTable"} 
 						
 					-- empty slot, fill with nil keyword
 					else
 						printDebug{"empty slot:", "MapTable"}
 						printDebug{"x:" .. x ..  ", y:" .. y .. " = " .. "NIL", "MapTable"}
-						self.map[x][y] = "_nil"
+						self.map[x][y] = self.emptySlotDefault or "_nil"
 					end 
 
 				end
@@ -89,11 +94,22 @@ function MapTable:New(data)
 	end 
 
 
+	-- set the size of the map
+	-- only works with a blank map for now
+	-- need to add better support for already built maps later
+	function o:SetSize(data)
+		self:Add
+		{
+			object = "_nil",
+			x = data.width,
+			y = data.height
+		}
+	end 
 
 	-- place object into slot in map
 	function o:Add(data)
 
-		--print("add to map")
+		printDebug{"Added " .. (data.object.name or "NoName") .. " to map", "MapTable"}
 
 		-- grow X?
 		if(data.x > self.width) then
@@ -101,7 +117,7 @@ function MapTable:New(data)
 			local oldWidth = self.width
 			self.width = self.width + (data.x - self.width)
 		
-			for i=oldWidth+1, data.x do
+			for i=oldWidth + 1, data.x do
 				self.map[i] = {}
 			end 
 
@@ -145,6 +161,50 @@ function MapTable:New(data)
 		end 
 
 		return nil
+	end 
+
+	-- swap the map position of a and b
+	function o:Swap(data)
+
+		-- not sure if this actually works
+		-- probly doesn't
+
+		if(self:IsPosInBounds{x = data.b.x, y = data.b.x} == false) then
+			print("out of bounds")
+			return
+		end 
+
+		local a = self.map[data.a.x][data.a.y]
+		local b = self.map[data.b.x][data.b.y]
+
+		self.map[data.a.x][data.a.y] = b
+		self.map[data.b.x][data.b.y] = a
+
+	end
+
+
+	-- test an x,y pos to see if it is inside
+	-- the width and height of the map
+	function o:IsPosInBounds(data)
+
+		if(data.x > self.width) then
+			return false
+		end
+
+		if(data.x < 1) then
+			return false
+		end 
+
+		if(data.y > self.height) then
+			return false
+		end
+
+		if(data.y < 1) then
+			return false
+		end 
+
+		return true
+
 	end 
 
 	o.printDebugTextActive = true

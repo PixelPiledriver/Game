@@ -63,7 +63,7 @@ DebugText.messageType =
 	ShaderStatic = false,
 	MouseStatic = false,
 	InputTextStatic = false,
-	Info = true,
+	Info = false,
 
 	-- Data types
 	MapTable = false,

@@ -14,6 +14,7 @@
 local Color = require("Color")
 local Pos = require("Pos")
 local Draw = require("Draw")
+local Scale = require("Scale")
 
 ---------------------------------------------------------------------------
 
@@ -103,6 +104,11 @@ function Animation:New(data)
 		layer = "Objects"
 	}
 
+	o.Scale = Scale:New
+	{
+		x = data.Scale and data.Scale.x or 1,
+		y = data.Scale and data.Scale.y or 1
+	}
 
 	--------------
 	-- Functions
@@ -163,8 +169,6 @@ function Animation:New(data)
 		local x = 0
 		local y = 0
 		local angle = 0
-		local xScale = 3
-		local yScale = 3
 
 		if(self.parent) then
 
@@ -181,7 +185,7 @@ function Animation:New(data)
 			y = self.Pos.y
 		end 
 
-		love.graphics.draw(self.spriteSheet.image, self.frames[self.currentFrame].sprite, x, y, angle, xScale, yScale)
+		love.graphics.draw(self.spriteSheet.image, self.frames[self.currentFrame].sprite, x, y, angle, self.Scale.x, self.Scale.y)
 
 	end 
 

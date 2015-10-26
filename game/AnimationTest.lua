@@ -41,7 +41,8 @@ pawnGraphics.sprites.idle = Sprite:New
 {
 	spriteSheet = pawnGraphics.pawnSheet,
 	xIndex = 1,
-	yIndex = 1
+	yIndex = 1,
+	draw = false
 }
 
 pawnGraphics.sprites.walk = Sprite:New
@@ -49,6 +50,7 @@ pawnGraphics.sprites.walk = Sprite:New
 	spriteSheet = pawnGraphics.pawnSheet,
 	xIndex = 2,
 	yIndex = 1,
+	draw = false
 }
 
 pawnGraphics.sprites.attack = Sprite:New
@@ -56,6 +58,7 @@ pawnGraphics.sprites.attack = Sprite:New
 	spriteSheet = pawnGraphics.pawnSheet,
 	xIndex = 1,
 	yIndex = 2,
+	draw = false
 }
 
 
@@ -75,12 +78,14 @@ pawnGraphics.animations.walk = Animation:New
 	
 	delays =
 	{
-		10, 10, 10, 10,
+		--10, 10, 10, 10,
+		20, 20, 20, 20,
 	},
 
 	colors =
 	{
-		"mistyRose", "olive", "thistle", "plum"
+		--"mistyRose", "olive", "thistle", "plum"
+		"blue", "red", "green", "yellow"
 	}
 }
 

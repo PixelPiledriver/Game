@@ -32,6 +32,7 @@ FrameCounter.printLoveFPS = true
 FrameCounter.x = 10
 FrameCounter.y = 10
 FrameCounter.color = {0, 0, 0, 255}
+FrameCounter.font = love.graphics.newFont(10)
 
 local time = 0
 local frameCount = 0
@@ -66,6 +67,7 @@ function FrameCounter:Draw()
 		return
 	end 
 
+	love.graphics.setFont(self.font)
 	love.graphics.setColor(self.color)
 	love.graphics.print("FPS:" .. math.floor(fps), self.x, self.y)
 

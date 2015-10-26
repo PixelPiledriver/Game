@@ -59,8 +59,9 @@ printDebugSettings["CollisionList"] = false
 printDebugSettings["CollisionManager"] = false
 printDebugSettings["Build"] = false
 printDebugSettings["Controller"] = false
-printDebugSettings["MapTable"] = false
+printDebugSettings["MapTable"] = true
 printDebugSettings["Mouse"] = false
+printDebugSettings["MapObject"] = true
 
 
 

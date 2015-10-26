@@ -34,7 +34,7 @@ Collision.Info = Info:New
 
 
 ---------------------
--- Static Functions
+-- Object
 ---------------------
 
 function Collision:New(data)
@@ -254,6 +254,20 @@ function Collision:New(data)
 	return o
 
 end
+
+
+-----------------------
+-- Static Functions
+-----------------------
+function Collision:PointInRect(data)
+
+	if(data.point.x >= data.rect.a.x and data.point.x <= data.rect.b.x and data.point.y >= data.rect.a.y and data.point.y <= data.rect.b.y) then
+		return true
+	end 
+
+	return false
+
+end 
 
 ---------------
 -- Static End

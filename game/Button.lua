@@ -74,6 +74,8 @@ function Button:ActionButton(data, funcObjects)
 		b.funcObjects[b.funcObjectIndex[i]] = funcObjects[b.funcObjectIndex[i]]
 	end
 
+	return b
+
 end 
 
 
@@ -123,6 +125,7 @@ function Button:New(data)
 	-------------
 	-- Vars
 	-------------
+	o.active = data.active or true
 
 	-- this should not be here
 	-- needs to be a feature of PrintDebugText
@@ -134,6 +137,9 @@ function Button:New(data)
 
 	-- repeat
 	o.repeatable = data.repeatable or false
+
+	-- can be held down
+	o.holdable = data.holdable or false
 
 	-- function
 	o.func = data.func or nil
@@ -174,12 +180,29 @@ function Button:New(data)
 		color = data.textColor and Color:Get("data.textColor") or Color:Get("black"),
 		alignment = "center",
 		displayWidth = o.Size.width,
-		displayHeight = o.Size.height
+		displayHeight = o.Size.height,
+		size = 11
 	}
 
 	Link:Simple
 	{
 		a = {o.text, "Pos", {"x", "y"}},
+		b = {o, "Pos", {"x", "y"}},
+	}
+
+	o.toggleText = Text:New
+	{
+		text = data.toggleText or "#empty",
+		color = data.textColor and Color:Get("data.textColor") or Color:Get("black"),
+		alignment = "center",
+		displayWidth = o.Size.width,
+		displayHeight = o.Size.height
+	}
+	o.toggleText:SetActive(false)
+
+	Link:Simple
+	{
+		a = {o.toggleText, "Pos", {"x", "y"}},
 		b = {o, "Pos", {"x", "y"}},
 	}
 
@@ -223,6 +246,18 @@ function Button:New(data)
 	if(o.sprite) then
 		o.text.Draw.active = Button.textOnSpriteDefault
 	end 
+
+	o.drawables = {}
+
+	if(o.sprite) then
+		o.drawables[#o.drawables + 1] = o.sprite
+	end 
+
+	if(o.text) then
+		o.drawables[#o.drawables + 1] = o.text
+	end 
+
+
 
 	-- color --> colorizes the sprite of button in differnt states
 	o.color = Color:Get("white")
@@ -288,13 +323,27 @@ function Button:New(data)
 		mouseButton = "r"
 	}
 
+	-- active range
+	-- if button is not inside of this rect
+	-- it will not work when clicked
+	-- this feature is used for scrolling panels
+	-- so buttons out of view cant be clicked
+	o.activeRange = 
+	{
+		use = data.activeRange and true or false,
+		a = {x = data.activeRange and data.activeRange.a.x or nil, y = data.activeRange and data.activeRange.a.y or nil},
+		b = {x = data.activeRange and data.activeRange.b.x or nil, y = data.activeRange and data.activeRange.b.y or nil}
+	}
+
+
 	----------------------
-	-- Object Functions
+	-- Functions
 	----------------------
 	function o:Update()
 
 		self:OnNoCollision()
 		self:ColorUpdate()
+		--self:TextUpdate()
 		self:ClickButton()
 
 		-- clear vars from last frame
@@ -306,10 +355,27 @@ function Button:New(data)
 	end
 
 	function o:ToggleDraw()
+
 		self.collision.Draw:ToggleDraw()
 		self.text:ToggleActive()
-		self.sprite.Draw:ToggleDraw()
+
+		if(self.sprite) then
+			self.sprite.Draw:ToggleDraw()
+		end 
+
+		self:ToggleActive()
+
 	end 
+
+	function o:ToggleActive()
+		if(self.active) then
+			self.active = false
+		else
+			self.active = true
+		end 
+	end 
+
+
 
 	function o:DrawCall()
 	end
@@ -336,16 +402,63 @@ function Button:New(data)
 			if(self.toggleState) then
 				self.sprite.color = self.colors["toggleTrue"]
 			end
+		end
+
+		if(self.text) then
+			self.text.color = self.color
+
+			if(self.state == "idle") then
+				self.text.color = Color:Get("black")
+			end 
 		end 
+
+	end
+
+	function o:TextUpdate()
+
+		-- toggle text show/hide
+		-- this shit is kinda fucked and is causing 
+		-- text of buttons to be unhideable
+		-->FIX
+		-- this code is supposed to show the another text when toggle buttons are true
+		-- but its done in a very stupid way
+		if(self.toggleState == true) then
+			self.text:SetActive(false)
+			self.toggleText:SetActive(true)
+		elseif(self.toggleState == false) then
+			self.text:SetActive(true)
+			self.toggleText:SetActive(false)
+		end
 
 	end 
 
 	-- runs the functions for the button -----> b.func()
 	function o:ClickButton()
 
+		if(self.active == false) then
+			return
+		end 
+
+		if(self.activeRange.use == true) then
+
+			local inRange = Collision:PointInRect
+			{
+				point = self.Pos,
+				rect = self.activeRange
+			}
+
+			--print(inRange)
+			
+			if(inRange == false) then
+				return
+			end 
+
+		end 
+
 		local wasClicked = false
 
 		if(self.hover.isHovering == true)then
+			
 			if(Mouse:SingleClick("l")) then --> single click fixed
 			--if(love.mouse.isDown("l")) then
 
@@ -407,13 +520,27 @@ function Button:New(data)
 					-- no fucntion or toggle defined --> this button is useless --> but can change in appearance
 					else
 						print("this button has no function")
-
 						wasClicked = true
 					end 
 
 				end
 
+			elseif(love.mouse.isDown("l")) then
+
+				if(self.holdable) then
+
+					if(self.funcObjectIndex == nil) then 
+						self.func()
+					else
+						self.func(self.funcObjects) -- arguments go here
+					end
+
+					wasClicked = true
+
+				end 
+
 			end 
+
 		end 
 
 		if(wasClicked) then
@@ -439,7 +566,7 @@ function Button:New(data)
 			toggleInfo = "none"
 		end 
 
-		DebugText:TextTable
+		local text = 
 		{
 			{text = "", obj = "Button"},
 			{text = "Button"},
@@ -452,6 +579,16 @@ function Button:New(data)
 			{text = "Toggle: " .. toggleInfo},
 			{text = "State: " ..self.state}
 		}
+
+		if(self.activeRange.use) then
+			text[#text + 1] = {text = "Range"}
+			text[#text + 1] = {text = "-----------"}
+			text[#text + 1] = {text = "A: " .. self.activeRange.a.x .. ", " .. self.activeRange.a.y}
+			text[#text + 1] = {text = "B: " .. self.activeRange.b.x .. ", " .. self.activeRange.b.y}
+		end
+
+
+		DebugText:TextTable(text)
 
 	end 
 
@@ -599,7 +736,7 @@ Button.savePixels =
 -- {a}
 Button.actionTest =
 {
-	text = "ActionObject",
+	text = "Action Test",
 	funcObjects = {"a"},
 	func = function(data)
 		data.a = data.a + 5
@@ -634,14 +771,17 @@ Button.debugTextOnOff =
 	end 
 }
 
-function Button:PrintDebugText()	
-	DebugText:TextTable
-	{
-		{text = "", obj = "ButtonStatic"},
-		{text = "Button Static"},
-		{text = "-------------------------"},
-		{text = "RepeatFunction: " .. Button.repeatFunction},
-	}
+function Button:PrintDebugText()
+
+	local text = {}
+
+	text[1] = {text = "", obj = "ButtonStatic"}
+	text[2] = {text = "Button Static"}
+	text[3] = {text = "-------------------------"}
+	text[4] = {text = "RepeatFunction: " .. Button.repeatFunction}
+
+	DebugText:TextTable(text)
+
 end 
 
 

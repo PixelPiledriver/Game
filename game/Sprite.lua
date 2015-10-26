@@ -119,7 +119,11 @@ function Sprite:New(data)
 	-- create sprite from sheet
 	o.sprite = love.graphics.newQuad(o.x, o.y, o.Size.width, o.Size.height, o.spriteSheet.width, o.spriteSheet.height)
 
-	o.draw = data.draw or true
+	
+
+
+	-- display sprite
+	o.draw = Bool:DataOrDefault(data.draw,true)
 
 	--------------------
 	-- Components
@@ -185,6 +189,17 @@ end
 ObjectUpdater:AddStatic(Sprite)
 
 return Sprite
+
+
+
+-- Notes
+-------------------
+-- LOD - zoom level sprites
+-- sprite has a table of other sprites to use in its place
+-- depending on camera zoom, and or scale, based on options selected
+
+
+
 
 
 

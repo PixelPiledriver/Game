@@ -38,7 +38,7 @@ DrawList.layers =
 	Skybox = {value = 1, active = false},
 	Backdrop = {value = 2, active = false},
 	Objects = {value = 3, active = true},
-	Collision = {value = 4, active = true},
+	Collision = {value = 4, active = false},
 	Hud = {value = 5, active = true},
 	DebugText = {value = 6, active = false},
 
@@ -227,10 +227,53 @@ function DrawList:Draw()
 
 
 				if(self.objects[self.objects.layerIndex[i]].draw[j].isGroup) then
+
+					-- flag for after drawing		
+					local resetScissor = false
+					local x = nil
+					local y = nil
+					local width = nil
+					local height = nil
+				
+					-- set space to draw within --> good for panels
+					if(self.objects[self.objects.layerIndex[i]].draw[j].scissorActive) then
+
+						-- get scissor vars
+						x = self.objects[self.objects.layerIndex[i]].draw[j].scissor.x
+						y = self.objects[self.objects.layerIndex[i]].draw[j].scissor.y
+						width = self.objects[self.objects.layerIndex[i]].draw[j].scissor.width
+						height = self.objects[self.objects.layerIndex[i]].draw[j].scissor.height
+
+						-- set draw rect
+						love.graphics.setScissor(x, y, width, height)
+
+						-- set flag
+						resetScissor = true
+
+					end 
 					
+					-- draw all objects in group
 					for k=1, #self.objects[self.objects.layerIndex[i]].draw[j].drawables do
+
+						-- is object excluded from this groups scissor?
+						-- then disable scissor
+						if(self.objects[self.objects.layerIndex[i]].draw[j].drawables[k].parent.noScissor) then
+							love.graphics.setScissor()
+						end 
+
 						self.objects[self.objects.layerIndex[i]].draw[j].drawables[k]:Draw()
 						self.drawnThisFrame = self.drawnThisFrame + 1
+
+						-- re enable scissor if object was excluded
+						if(resetScissor) then
+							love.graphics.setScissor(x, y, width, height)
+						end 
+
+					end 
+
+					-- diable scissor because group is done drawing
+					if(resetScissor) then
+						love.graphics.setScissor()
 					end 
 
 				else

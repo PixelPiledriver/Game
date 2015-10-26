@@ -16,8 +16,7 @@ local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
 local pawnGraphics = require("AnimationTest") -- animation test with new spriteStuff
 local DrawToolsUI = require("DrawToolsUI")
-local Panel = require("Panel")
-local SimplePanel = require("SimplePanel")
+local Panel = require("SimplePanel")
 local Box = require("Box")
 local MapTable = require("MapTable")
 local Link = require("Link")
@@ -75,14 +74,14 @@ local blueBox = Box:New
 
 -- DrawGroup is broken right now
 -->FIX
-local group = DrawGroup:New{orangeBox, greenBox, blueBox}
+local group = DrawGroup:New{objects = {orangeBox, greenBox, blueBox}}
 
 
 local bob = Box:New
 {
 	width = 32,
 	height = 32,
-	color = Color:Get("orange")
+	color = Color:Get("black")
 }
 
 
@@ -94,11 +93,12 @@ Link:Simple
 
 
 -- Grid Based panel object placement and size
-local gridPanel = SimplePanel:New
+local gridPanel = Panel:New
 {
 	name = "Panel: the dopeness",
 	posType = "bottom",
-	gridScale = 16
+	gridScale = 16,
+	colorSkin = "blue"
 }
 
 local gbox1 = Box:New
@@ -175,8 +175,8 @@ local pix = PixelTexture:New
 
 	scale =
 	{
-		x = 8,
-		y = 8
+		x = 1,
+		y = 1
 	}
 }
 
@@ -240,10 +240,6 @@ local PixelDrawLevel = {}
 
 
 function PixelDrawLevel:Load()
-
-
-	-- pixel generation stuff
-	-------------------------------------------
 
 	---------------------
 	-- Buttons
@@ -345,19 +341,33 @@ function PixelDrawLevel:Load()
 		end 
 	}
 	
-	local hidePanel = Button:New
+
+
+
+	-- create
+	local buttonsPanel = Panel:New
 	{
-		text = "Hide Panel",
-		toggle = true,
-		toggleOnFunc = function()
-			panel:ToggleDraw()
-		end,
-		toggleOffFunc = function()
-			panel:ToggleDraw()
-		end 
+		name = "Buttons",
+		posType = "bottom",
+		gridWidth = 100,
+		gridHeight = 64,
+		colorSkin = "gray"
 	}
 
-
+	-- add objects
+	buttonsPanel:AddVertical
+	{
+		loadSpriteToPixTex,
+		actionTest,
+		randomPixels,
+		randPal,
+		testTexture,
+		savePixels,
+		refreshSprite,
+		createPix,
+		wash,
+		convertPixels,
+	}
 
 
 end 
@@ -368,7 +378,19 @@ end
 
 function PixelDrawLevel:Update()
 
+--[[
+	local pointTest = Collision:PointInRect
+	{
+		point = {x = 100, y = 100},
+		rect = 
+		{
+			a = {x = 0, y = 0},
+			b = {x = 100, y = 100}
+		}
+	}
 
+	print(pointTest)
+	--]]
 
 end
 
@@ -382,6 +404,9 @@ return PixelDrawLevel
 
 -- Notes
 ------------------------------------------------------
+-- use love.graphics.setScissor and self.itemOffset to create a scrolling panel
+-- items outside the draw area should be deativated
+
 
 
 -------------------------
@@ -499,7 +524,17 @@ panel:Add(button1)
 
 
 
-
+	local hidePanel = Button:New
+	{
+		text = "Hide Panel",
+		toggle = true,
+		toggleOnFunc = function()
+			panel:ToggleDraw()
+		end,
+		toggleOffFunc = function()
+			panel:ToggleDraw()
+		end 
+	}
 
 
 

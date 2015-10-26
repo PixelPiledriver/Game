@@ -1391,8 +1391,13 @@ function Color:Get(name)
 		a = Color[name].a,
 		name = name,
 	}
-	
 	return copy
+end
+
+function Color:AlphaOf(name, alpha)
+	local color = self:Get(name)
+	color.a = alpha
+	return color
 end
 
 --create a new color object

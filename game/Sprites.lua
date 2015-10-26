@@ -5,11 +5,18 @@
 ----------------------------
 -- load sprites here
 
-
+--------------
+-- Requires
+--------------
 local Animation = require("Animation")
+
+--------------------------------------------------------------------
 
 local Sprites = {}
 
+------------------
+-- Static Info
+------------------
 Sprites.Info = Info:New
 {
 	objectType = "Sprites",
@@ -250,6 +257,8 @@ return Sprites
 
 -- need to integrate the stuff I made in Corona into this
 -- need to clean this file up at some point
+-- this is an old way of loading sprites
+-- use Sprite.lua instead
 
 
 

@@ -59,7 +59,8 @@ require("TestCode")
 -- Vars
 ----------------------------
 -- Level -- change how this works-->REFACTOR
-local PixelDrawLevel = require("levels/PixelDrawLevel")
+--local PixelDrawLevel = require("levels/PixelDrawLevel")
+local MapWorldLevel = require("levels/MapWorldLevel")
 
 
 ----------------
@@ -82,7 +83,7 @@ local PixelDrawLevel = require("levels/PixelDrawLevel")
 
 		-- Load your level here
 		--PixelDrawLevel:Load()
-		PixelDrawLevel:Load()
+		MapWorldLevel:Load()
 
 	end 
 
@@ -98,7 +99,8 @@ local PixelDrawLevel = require("levels/PixelDrawLevel")
 		Controller.Update()
 		CollisionManager:Update()
 
-		PixelDrawLevel:Update()
+		--PixelDrawLevel:Update()
+		MapWorldLevel:Update()
 		
 
 
@@ -150,7 +152,6 @@ local PixelDrawLevel = require("levels/PixelDrawLevel")
 
 -- Notes
 ---------------------------------------
-
-
+-->FIX fps counter
 
 
