@@ -41,7 +41,7 @@ local orc = MapObject:New
 	reactions = 
 	{
 		walk = {able = true, message = " walks past Worf."},
-		chat = "Fuck off, I'm busy..."
+		chat = {able = true, chat = "Fuck off, I'm busy..."}
 	},
 	x = 5,
 	y = 5
@@ -64,7 +64,7 @@ local tree = MapObject:New
 	reactions = 
 	{
 		walk = {able = false, message = " bumps into the tree."},
-		chat = "Hello, I am a tree",
+		chat = {able = true, chat = "Hello, I am a tree"},
 	},
 	x = 6,
 	y = 2

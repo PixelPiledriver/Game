@@ -38,7 +38,7 @@ function MapTable:New(data)
 	o.growMap = data.growMap or true
 
 	o.emptySlotDefault = data.emptySlotDefault or nil
-	print(o.emptySlotDefault)
+	printDebug{o.emptySlotDefault, "MapTable"}
 
 
 	-- puts the _nil keyword into slots of the map
@@ -146,7 +146,6 @@ function MapTable:New(data)
 
 		-- slot is empty so put object inside?
 		--if(self.map[data.x][data.y] == "_nil") then 
-			--print("yes")
 			self.map[data.x][data.y] = data.object
 			--print(self.map[data.x][data.y])
 		--end
@@ -170,7 +169,7 @@ function MapTable:New(data)
 		-- probly doesn't
 
 		if(self:IsPosInBounds{x = data.b.x, y = data.b.x} == false) then
-			print("out of bounds")
+			printDebug{"out of bounds", "MapTable"}
 			return
 		end 
 

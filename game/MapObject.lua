@@ -117,6 +117,12 @@ function MapObject:New(data)
 		end 
 	end 
 
+	o.actions.direction =
+	{
+		x = 1,
+	  y = 0
+	}
+
 	---------------
 	-- Funcitons
 	---------------
@@ -124,8 +130,9 @@ function MapObject:New(data)
 	-- use an action that this object poses
 	function o:UseAction(actionName)
 
-		self.actionTarget = self.map:Get(self.x + self.actions[actionName].x, self.y + self.actions[actionName].y)
-
+		--self.actionTarget = self.map:Get(self.x + self.actions[actionName].x, self.y + self.actions[actionName].y)
+		self.actionTarget = self.map:Get(self.x + self.actions.direction.x, self.y + self.actions.direction.y)
+		
 		if(self.actionTarget == nil) then
 			printDebug{"No target", "MapObject"}
 			return false
@@ -140,7 +147,7 @@ function MapObject:New(data)
 			printDebug{actionName .. " failed", "MapObject"}
 		end 
 
-		-- target has reaction?
+		-- target has reaction message?
 		if(self.actionTarget and self.actionTarget.reactions) then
 			if(self.actionTarget.reactions[actionName].message) then
 				printDebug{self.name .. self.actionTarget.reactions[actionName].message, "MapObject"}
@@ -151,10 +158,38 @@ function MapObject:New(data)
 
 	end 
 
+	-- check if target has reaction
+	function o:TargetHasReaction(reactionName)
+		if(self.actionTarget and self.actionTarget.reactions and self.actionTarget.reactions[reactionName]) then
+			return true
+		end
+
+		return false
+	end
+
+	-- get the bool value of reaction
+	-- looks for reactionName.able --> might change this later
+	function o:TargetReactionState(reactionName)
+		if(self.actionTarget and self.actionTarget.reactions and self.actionTarget.reactions[reactionName]) then
+			return self.actionTarget.reactions[reactionName].able
+		end 
+	end
+
 	function o:chat()
 
+		-- cannot chat with target
+		if(self:TargetHasReaction("chat") == false) then
+			printDebug{"Cannot chat with target", "MapObject"}
+			return false
+		end 
 
-		return true 
+		if(self:TargetReactionState("chat")) then
+			print(self.actionTarget.reactions.chat.chat)
+			return true
+		end
+
+		return false 
+
 	end 
 
 	-- walk action
@@ -177,8 +212,8 @@ function MapObject:New(data)
 			-- this needs to be moved somewhere
 			-- actions need to be a bit more complicated it seems
 			-- and have changes that can be made upon failure
-			self.actions.walk.x = 0
-			self.actions.walk.y = 1
+			self.actions.direction.x = 0
+			self.actions.direction.y = 1
 
 			return false
 		end 		
@@ -192,21 +227,27 @@ function MapObject:New(data)
 		self.map.map:Swap
 		{
 			a = {x = self.x, y = self.y},
-			b = {x = self.x + self.actions.walk.x, y = self.y + self.actions.walk.y}
+			b = {x = self.x + self.actions.direction.x, y = self.y + self.actions.direction.y}
+			--b = {x = self.x + self.actions.walk.x, y = self.y + self.actions.walk.y}
 		}
 	
 		-- update pos values of self
-		self.x = self.x + self.actions.walk.x
-		self.y = self.y + self.actions.walk.y
+		--self.x = self.x + self.actions.walk.x
+		--self.y = self.y + self.actions.walk.y
+		self.x = self.x + self.actions.direction.x
+		self.y = self.y + self.actions.direction.y
+
 
 		-- upate pos values of target
 		-- to compensate for the swap
 		if(self.actionTarget.x) then
-			self.actionTarget.x = self.actionTarget.x - self.actions.walk.x
+			--self.actionTarget.x = self.actionTarget.x - self.actions.walk.x
+			self.actionTarget.x = self.actionTarget.x - self.actions.direction.x
 		end 
 
 		if(self.actionTarget.y) then
-			self.actionTarget.y = self.actionTarget.y - self.actions.walk.y
+			--self.actionTarget.y = self.actionTarget.y - self.actions.walk.y
+			self.actionTarget.y = self.actionTarget.y - self.actions.direction.y
 		end 
 
 		
