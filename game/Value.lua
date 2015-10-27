@@ -2,13 +2,16 @@
 
 -- Purpose
 ----------------
+-- value wrapped in a table
 -- used for creating random values in various ways
 -- create values using useful functions pre wrapped by name
+
+-- this file could stand to have some refactoring
+-- as it stands its still very useful stuff
 
 ---------------
 -- Requires
 ---------------
-local Random = require("Random")
 
 ----------------------------------------------------------------
 

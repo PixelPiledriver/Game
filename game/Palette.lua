@@ -12,7 +12,6 @@
 ------------------
 local Pos = require("Pos")
 local Color = require("Color")
-local Random = require("Random")
 local Value = require("Value")
 local Collision = require("Collision")
 local MouseHover = require("MouseHover")

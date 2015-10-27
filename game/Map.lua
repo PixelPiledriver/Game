@@ -263,4 +263,5 @@ return Map
 
 -- this file is OLD
 -- and needs to be broken down and repurposed
+-- no longer has relevance to the game engine at large
 -- Depricate soon

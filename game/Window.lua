@@ -4,10 +4,6 @@
 ----------------------------
 -- Handles the window the game is diplayed within
 
-----------------
--- Requires
-----------------
-local Random = require("Random")
 
 ---------------------------------------------------------
 local Window = {}

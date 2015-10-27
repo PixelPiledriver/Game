@@ -255,16 +255,24 @@ return MapTable
 
 
 -- Notes
---]]---------------------------
-	
+---------------------------
+
+-- need to add optional layers
+-- so that slot of map can hold more than one object
+-- it might be smarter, and less work, to just use more than one map
+-- instead of layers
+
+
+-- DONE
 -- need to add functionality for growing the map
 -- if objects are placed outside of its current size
 
 
 
 
---]]----------------------------
 
+-- junk
+-------------------------------
 
 
 -- 

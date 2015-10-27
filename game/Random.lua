@@ -2,11 +2,15 @@
 
 -- Purpose
 ------------
--- get common random numbers
+-- get random numbers
+-- for single uses
+
+-- if you need to keep getting random values over and over
+-- use Value.lua instead --> needs to be refactored
 
 -----------------------------------------
-
-local Random = {}
+-- Global
+Random = {}
 
 Random.Info = Info:New
 {
@@ -23,6 +27,17 @@ Random.Info = Info:New
 -- get a multiple of a number
 function Random:MultipleOf(number, scale)
 	return number + love.math.random(scale) * number
+end
+
+-- get random number from 0 to given number
+-- this is the most simple random function
+function Random:Number(number)
+	return love.math.random(number)
+end 
+
+-- get a random number within the range given
+function Random:Range(min, max)
+	return love.math.random(min, max)
 end 
 
 -- get a single random value 
@@ -43,8 +58,3 @@ love.math.setRandomSeed(os.time())
 Random:ChooseRandomlyFrom{1,2,3}
 
 
-
-
-
-
-return Random

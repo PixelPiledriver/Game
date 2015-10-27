@@ -37,11 +37,24 @@ local orc = MapObject:New
 {
 	type = "orc",
 	name = "Worf",
-	actions = {"fart", "bite"},
+	actions = {"walk", "fart", "bite"},
 	reactions = 
 	{
 		walk = {able = true, message = " walks past Worf."},
 		chat = {able = true, chat = "Fuck off, I'm busy..."}
+	},
+	active = false,
+	direction = 
+	{
+		pattern = 
+		{
+			index = 1,
+			steps = 
+			{
+				{x = 1, y = 0 },
+				{x = -1, y = 0 },
+			}
+		},
 	},
 	x = 5,
 	y = 5
@@ -51,23 +64,48 @@ local human = MapObject:New
 {
 	type = "human",
 	name = "Steve",
-	actions = {"walk", "chat"},
+	actions = {"walk", "chat", "push"},
+	reactions =
+	{
+		chat = {able = true, chat = "Yo, I'm Steve"}
+	},
 	x = 2,
 	y = 2,
-	move = true
+	active = true
 }
 
-local tree = MapObject:New
+MapObject:Create
 {
-	type = "plant",
+	name = "rock",
+	x = 3,
+	y = 2	
+}
+
+MapObject:Create
+{
+	name = "rock",
+	x = 4,
+	y = 4	
+}
+
+MapObject:Create
+{
 	name = "tree",
-	reactions = 
-	{
-		walk = {able = false, message = " bumps into the tree."},
-		chat = {able = true, chat = "Hello, I am a tree"},
-	},
 	x = 6,
 	y = 2
+}
+
+
+MapObject:CreateRandom
+{
+	name = "tree",
+	count = 0
+}
+
+MapObject:CreateRandom
+{
+	name = "pond",
+	count = 0
 }
 
 

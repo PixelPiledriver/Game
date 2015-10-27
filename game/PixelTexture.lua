@@ -13,7 +13,6 @@ local Pos = require("Pos")
 local Scale = require("Scale")
 local Color = require("Color")
 local Value = require("Value")
-local Random = require("Random")
 local Draw = require("Draw")
 
 ---------------------------------------------------

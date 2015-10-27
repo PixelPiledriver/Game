@@ -10,7 +10,6 @@
 -------------
 local Box = require("Box")
 local Color = require("Color")
-local Random = require("Random")
 local Value = require("Value")
 local Shape = require("Shape")
 
