@@ -88,7 +88,7 @@ function MapObject:New(data)
 	o.active =
 	{
 		use = data.active,
-		wait = 30,
+		wait = 40,
 		waitCount = 0
 	}
 
@@ -186,17 +186,135 @@ function MapObject:New(data)
 		end 
 	end
 
+
+	-- remove target from the map
+	-- for now, fill space with default empty
+	function o:kill()
+		if(self:TargetReactionAble("kill") == false) then
+			printDebug{"Cannot kill " .. (self.actionTarget.name or "nothing"), "MapObject"}
+		end 		
+
+		self.mapWorld.map:Remove{x = self.actionTarget.x, y = self.actionTarget.y}
+
+		return true
+
+	end 
+
+	-- kills target and moves to the space it occupied
+	function o:replace()
+
+		if(self:TargetReactionAble("replace") == false) then
+			printDebug{"Cannot replace " .. (self.actionTarget.name or "nothing"), "MapObject"}
+		end 
+
+
+	end 
+
+	-- move this object from its relative pos in the map to another pos
+	function o:jumpFromHereTo()
+
+		-- dont think this is needed
+		-- jumping doesnt use an action target
+		--[[
+		if(self:TargetReactionAble("jumpTo") == false) then
+			printDebug{"Cannot jump to " .. (self.actionTarget.name or "nothing"), "MapObject"}
+			return false
+		end
+		--]]
+
+		local x = self.x + self.direction.x
+		local y = self.y + self.direction.y
+
+		-- already in same pos?
+		if(self.x == x and self.y == y) then
+			printDebug{"JumpFromHereTo pos is same as pos", "MapObject"}
+			return false
+		end 
+
+		-- is pos to jump to inside map?
+		if(self.mapWorld.map:IsPosInBounds{x = x, y = y} == false) then
+			printDebug{"Jump to positon is out of bounds", "MapObject"}
+			return false	
+		end 
+
+		local landTarget = self.mapWorld:Get(x, y)
+		
+		if(landTarget.ReactionAble and landTarget:ReactionAble("walk") == false) then
+			printDebug{"Cannot land on top of " .. (landTarget.name or "nothing"), "MapObject"}
+			return false
+		end 
+
+		self.mapWorld.map:MoveTo
+		{
+			a = {x = self.x, y = self.y},
+			b = {x = x, y = y}
+		}
+
+		return true
+
+	end 
+
+	-- move this object to a specific pos in the map
+	function o:jumpTo()
+
+		-- dont think this is needed
+		-- jumping doesnt use an action target
+		--[[
+		if(self:TargetReactionAble("jumpTo") == false) then
+			printDebug{"Cannot jump to " .. (self.actionTarget.name or "nothing"), "MapObject"}
+			return false
+		end
+		--]]
+
+		if(self.direction.x == self.x and self.direction.y == self.y) then
+			printDebug{"Object in same position as jump to position", "MapObject"}
+			return false			
+		end
+
+		-- is pos to jump to inside map?
+		if(self.mapWorld.map:IsPosInBounds{x = self.direction.x, y = self.direction.y} == false) then
+			printDebug{"Jump to positon is out of bounds", "MapObject"}
+			return false	
+		end 
+
+		local landTarget = self.mapWorld:Get(self.direction.x, self.direction.y)
+
+		if(landTarget.ReactionAble and landTarget:ReactionAble("walk") == false) then
+			printDebug{"Cannot land on top of " .. (landTarget.name or "nothing"), "MapObject"}
+			return false
+		end 
+
+		local success = self.mapWorld.map:MoveTo
+		{
+			a = {x = self.x, y = self.y},
+			b = {x = self.direction.x, y = self.direction.y}
+		}
+
+		if(success == false) then
+			return false
+		end
+
+		return true
+	end 
+
 	function o:jumpOver()
 
-		if(self:TargetReactionAble("jumpOver") == false)then
+		if(self:TargetReactionAble("jumpOver") == false) then
 			printDebug{"Cannot jump over " .. (self.actionTarget.name or "nothing"), "MapObject"}
 			return false
 		end
 
 		local landTarget = self.mapWorld:Get(self.actionTarget.x + self.direction.x, self.actionTarget.y + self.direction.y)
 
+		-- does landTarget exist? if not its probly outside the map
+		if(landTarget == nil) then
+			printDebug{"No landTarget for jump over", "MapObject"}
+			print(self.actionTarget.x)
+			return false
+		end 
+
 		if(landTarget.ReactionAble and landTarget:ReactionAble("walk") == false) then
-			printDebug{"Cannot jump over " .. (landTarget.name or "nothing"), "MapObject"}
+			printDebug{"Cannot land on top of " .. (landTarget.name or "nothing"), "MapObject"}
 			return false
 		end 
 
@@ -225,7 +343,9 @@ function MapObject:New(data)
 		return true
 	end 
 
-	-- chat action
+	-- talk to target
+	-- this is very basic at the moment
+	-- in the future it will active a seperate Chat component
 	function o:chat()
 
 		-- cannot chat with target
@@ -303,16 +423,23 @@ function MapObject:New(data)
 			if(self.active.waitCount > self.active.wait) then
 				self.active.waitCount = 0
 				
-				-- all actions test
-				-- this needs to be change tho
-				self:UseAction("chat")
-				self:UseAction("jumpOver")
+				-- Actions Test
+				-------------------
+				-- needs to be moved eventually
+				--self:UseAction("chat")
 				--self:UseAction("push")
-				self:UseAction("walk")
-				
+				--self:UseAction("jumpOver")
+				--self:UseAction("walk")
+				--self:UseAction("kill")
+				self.direction.x = 0
+				self.direction.y = 0
+				self:UseAction("jumpFromHereTo")
 
-				-- this shouldnt be here
-				-- move to somewhere else
+
+				self.active.use = false
+				
+				-- direaction pattern test
+				-- needs to be moved eventually
 				if(self.direction.pattern) then
 					self.direction.pattern.index = self.direction.pattern.index + 1
 
@@ -423,6 +550,14 @@ return MapObject
 
 -- Notes
 ----------------------------
+-- need to have a function that can create a shared space
+-- by creating a link or table in the slot
+-- that references the the objects in the space
+-- but only creates such a table when necessary
+-- otherwise all slots in the map must be dealt with as on table deep
+-- and I dont think I really want to do that
+
+
 -- Walk function is an example of how this should work
 -- actions and accepts
 -- objects have actions the use on other objects

@@ -56,7 +56,7 @@ local orc = MapObject:New
 			}
 		},
 	},
-	x = 5,
+	x = 4,
 	y = 5
 }
 

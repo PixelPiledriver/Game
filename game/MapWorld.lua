@@ -43,11 +43,15 @@ function MapWorld:New(data)
 
 	o.map = MapTable:New
 	{
-		emptySlotDefault = MapObject:New
+		emptySlotDefault =
 		{
-			type = "plant",
-			name = "grass"
-		}
+			type = "empty",
+			name = "empty",
+			x = 0,
+			y = 0
+		},
+
+		defaultIndex = {"name", "x", "y"}
 	}
 
 	if(data.size) then
@@ -114,7 +118,7 @@ function MapWorld:New(data)
 				if(self.map.map[x][y].Info) then
 					char = self.map.map[x][y].name
 				else
-					char = "x" --self.map.map[x][y] -- "o"
+					char = "x" -- self.map.map[x][y].x .. "," .. self.map.map[x][y].y --"x" --self.map.map[x][y] -- "o"
 				end 
 
 				LovePrint
@@ -144,3 +148,11 @@ end
 ObjectUpdater:AddStatic(MapWorld)
 
 return MapWorld
+
+
+-- Notes
+--------------------------
+-- needs to have at least 2 maps
+-- one for objects - top layer
+-- and one for terrain - bottom layer
+-- other map layers may be needed

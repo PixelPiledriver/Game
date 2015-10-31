@@ -63,14 +63,6 @@ function Palette:New(data)
 		structureType = "Object"
 	}
 
-	---------------
-	-- Create
-	---------------
-
-	-- object
-	o.name = data.name or "..."
-	o.objectType = "Palette"
-	o.dataType = "Graphics"
 
 	-- vars
 	o.colors = data.colors or {}
