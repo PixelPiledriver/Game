@@ -342,7 +342,7 @@ ObjectUpdater:AddStatic(DrawList)
 -- so that other stuff can factor in like Cameras and Shaders and stuff!
 
 -- NEEDED
--- Layers as objects that have their own transform compoenent
+-- Layers as objects that have their own transform component
 -- so that layers of objects can be moved, rotated, shader, etc independantly
 -- right now layers are temporary and thats cool
 -- but they could be so much more useful as objects

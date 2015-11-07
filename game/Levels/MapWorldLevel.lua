@@ -26,8 +26,8 @@ local Earth = MapWorld:New
 {
 	size =
 	{
-		width = 10,
-		height = 10
+		width = 12,
+		height = 12
 	}	
 }
 
@@ -41,7 +41,8 @@ local orc = MapObject:New
 	reactions = 
 	{
 		walk = {able = true, message = " walks past Worf."},
-		chat = {able = true, chat = "Fuck off, I'm busy..."}
+		chat = {able = true, chat = "Fuck off, I'm busy..."},
+		push = {able = true}
 	},
 	active = false,
 	direction = 
@@ -71,7 +72,8 @@ local human = MapObject:New
 	},
 	x = 2,
 	y = 2,
-	active = true
+	active = false,
+	playerControlled = true
 }
 
 MapObject:Create

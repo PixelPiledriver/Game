@@ -62,6 +62,7 @@ Input.Info = Info:New
 
 		-- short hand, add multiple keys
 		-- have new call this if data.keys is passed in
+		-- {key, inputType, function, parent, description, active}
 		function o:AddKeys(data)
 		-- add keys to input as its created in a shortcut format
 			if(data and #data > 0) then

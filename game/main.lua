@@ -88,21 +88,19 @@ local MapWorldLevel = require("levels/MapWorldLevel")
 	end 
 
 
-	-- frame step
+	-- for each frame step
 	function love.update(dt)
 		deltaTime = dt
 		FrameCounter:Update(dt)
 
 		ObjectUpdater:Update()
 		ObjectUpdater:RepeatedInput()
-
 		Controller.Update()
 		CollisionManager:Update()
 
 		--PixelDrawLevel:Update()
 		MapWorldLevel:Update()
 		
-
 
 		-- Post Update
 		PostUpdate(dt)
@@ -142,6 +140,7 @@ local MapWorldLevel = require("levels/MapWorldLevel")
 	-- Graphics
 	---------------
 
+	-- render graphics
 	function love.draw()
 		DrawManager:Draw()
 		DrawManager:PostDraw()

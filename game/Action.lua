@@ -1,6 +1,6 @@
 -- Action.lua
 
--- an Action is an effec that one object tries to apply to another
+-- an Action is an effect that one object tries to apply to another
 -- that object can revceive or ignore the action
 -- and then use its own action in response --> a reaction
 
@@ -41,10 +41,24 @@ function o:New(data)
 	-- Vars
 	-----------
 	o.name = data.name or "unNamed"
+	o.func = data.func or nil
+	o.arguments = data.argument or nil
+	o.argumentIndex = data.argumentIndex or nil --> might not need this
 
 	----------------
 	-- Functions
 	----------------
+
+	function o:Use()
+		o.func(o.arguments)
+	end
+
+	function o:Destroy()
+		o.name = nil
+		o.func = nil
+		o.arguments = nil
+		o.argumentIndex = nil
+	end 
 
 	return o
 end 
@@ -55,6 +69,8 @@ return Action
 
 -- Notes
 ---------------------------
+-- very primitive at the moment
+
 -- there should be an ActionManager component to go with this
 -- this should be just an action object
 -- Action manager should handle 

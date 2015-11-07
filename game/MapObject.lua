@@ -5,6 +5,13 @@
 -- object that can be placed into MapWorld
 
 
+--------------
+-- Requires
+--------------
+local Input = require("Input")
+
+-------------------------------------------
+
 local MapObject = {}
 
 ------------------
@@ -30,17 +37,6 @@ MapObject.currentMapWorld = nil
 
 MapObject.actions = {}
 
-MapObject.actions.walk =
-{
-	x = 1,
-	y = 0
-}
-
-MapObject.actions.chat = 
-{
-	x = 1,
-	y = 0	
-}
 
 
 
@@ -109,13 +105,7 @@ function MapObject:New(data)
 	o.actionTarget = nil
 
 	-- create action tables for this object
-	o.actions = {}
-
-	if(data.actions) then
-		for i=1, #data.actions do	
-			o.actions[data.actions[i]] = self.actions[data.actions[i]] or {}
-		end 
-	end 
+	o.actions = data.actions or {}
 
 	-- all actions use this to determine
 	-- the location of their target
@@ -125,6 +115,89 @@ function MapObject:New(data)
 	  y = 0,
 	  pattern = data.direction and data.direction.pattern or nil
 	}
+
+	o.selectedAction = o.actions[1]
+
+	-------------
+	-- Control
+	-------------
+	o.playerControlled = data.playerControlled or false
+
+	-- is this object manually controlled by the player?
+	if(o.playerControlled) then
+		o.Input = Input:New{}
+
+		-- direct and use selected action
+		local actionLeft =
+		{"left", "press", 
+			function() 
+				o.direction.x = -1
+				o.direction.y = 0
+				o:UseAction(o.selectedAction) 
+			end
+		}
+
+		local actionRight =
+		{"right", "press", 
+			function() 
+				o.direction.x = 1
+				o.direction.y = 0
+				o:UseAction(o.selectedAction) 
+			end
+		}
+
+		local actionDown =
+		{"down", "press", 
+			function() 
+				o.direction.x = 0
+				o.direction.y = 1
+				o:UseAction(o.selectedAction) 
+			end
+		}
+
+		local actionUp =
+		{"up", "press", 
+			function() 
+				o.direction.x = 0
+				o.direction.y = -1
+				o:UseAction(o.selectedAction) 
+			end
+		}
+
+		-- select an action
+		local selectAction1 =
+		{
+			"z", "press",
+			function()
+				o.selectedAction = o.actions[1]
+				printDebug{"action select: " .. o.selectedAction, "MapObject"}
+			end 
+		}
+
+		local selectAction2 =
+		{
+			"x", "press",
+			function()
+				o.selectedAction = o.actions[2]
+				printDebug{"action select: " .. o.selectedAction, "MapObject"}
+			end 
+		}
+
+		local selectAction3 =
+		{
+			"c", "press",
+			function()
+				o.selectedAction = o.actions[3]
+				printDebug{"action select: " .. o.selectedAction, "MapObject"}
+			end 
+		}
+
+		o.Input:AddKeys
+		{
+			actionLeft, actionRight, actionDown, actionUp,
+			selectAction1, selectAction2, selectAction3
+		}
+	end 
 
 	---------------
 	-- Funcitons
@@ -147,23 +220,24 @@ function MapObject:New(data)
 
 		-- was action successful?
 		if(success) then
-			printDebug{actionName .. " successful", "MapObject"}
+			printDebug{actionName .. " successful", "MapObject", 2}
 		else
-			printDebug{actionName .. " failed", "MapObject"}
+			printDebug{actionName .. " failed", "MapObject", 2}
 		end 
 
 		-- target has reaction message?
 		if(self:TargetHasReaction(actionName)) then
 			if(self.actionTarget.reactions[actionName].message) then
-				printDebug{self.name .. self.actionTarget.reactions[actionName].message, "MapObject"}
+				printDebug{self.name .. self.actionTarget.reactions[actionName].message, "MapObject", 2}
 			end 
 		end
 
+		-- remove target after action is done
 		self.actionTarget = nil
 
 	end 
 
-	-- check if target has reaction
+	-- does target have reaction of given action?
 	function o:TargetHasReaction(reactionName)
 		if(self.actionTarget and self.actionTarget.reactions and self.actionTarget.reactions[reactionName]) then
 			return true
@@ -172,6 +246,7 @@ function MapObject:New(data)
 		return false
 	end
 
+	-- does target react to given action?
 	function o:ReactionAble(reactionName)
 		if(self.reactions and self.reactions[reactionName]) then
 			return self.reactions[reactionName].able
@@ -207,6 +282,8 @@ function MapObject:New(data)
 			printDebug{"Cannot replace " .. (self.actionTarget.name or "nothing"), "MapObject"}
 		end 
 
+		-- this funcition is unfinished
+		-->FIX
 
 	end 
 
@@ -416,6 +493,11 @@ function MapObject:New(data)
 
 
 	function o:Update()
+
+		-- this is one massive test area
+		-- makes it so objects use actions on their own
+		-- a full featured AI component will need
+		-- to be developed at some point
 		if(self.active.use) then
 
 			self.active.waitCount = self.active.waitCount + 1
@@ -510,8 +592,9 @@ MapObject.objects.tree =
 	name = "tree",
 	reactions = 
 	{
-		walk = {able = false, message = " bumps into the tree."},
+		walk = {able = false, message = " bumps into the tree"},
 		chat = {able = true, chat = "The tree says nothing... but creaks in response"},
+		chop = {able = true, chat = "The mighty cannot handle the chopping action"}
 	},
 	x = 0,
 	y = 0
@@ -547,6 +630,28 @@ MapObject.objects.rock =
 
 return MapObject
 
+-- test area
+--[[
+
+local Actions = {}
+Actions.chat = 
+{
+-- has reaction
+if(self:TargetHasReaction("chat") == false) then
+	printDebug{"Cannot chat with " .. (self.actionTarget.name or "nothing"), "MapObject"}
+	return false
+end 
+
+		if(self:TargetReactionAble("chat")) then
+			print(self.actionTarget.reactions.chat.chat)
+			return true
+		end
+
+		return false 
+
+	end 
+
+--]]
 
 -- Notes
 ----------------------------
@@ -576,7 +681,7 @@ return MapObject
 
 -- Junk
 --------------------------------
---[[
+--[==[
 self.map.map:Swap
 {
 	a = {x = self.x, y = self.y},
@@ -619,4 +724,13 @@ self.x = self.x + 1
 
 --b = {x = self.x + self.actions.walk.x, y = self.y + self.actions.walk.y}
 
---]]
+
+
+
+	if(data.actions) then
+		for i=1, #data.actions do	
+			o.actions[data.actions[i]] = self.actions[data.actions[i]] or {}
+		end 
+	end 
+
+--]==]

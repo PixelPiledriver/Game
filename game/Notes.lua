@@ -6,6 +6,18 @@
 -- gonna put new stuff at the top and push old stuff down
 
 
+
+-- Event Log
+---------------------
+-- Global component that records things that happen
+-- works like a console in other games
+-- log can be saved to a file
+-- not all objects need to be supported, but it would be useful
+-- for many different situations
+
+
+
+
 -- Test Automation
 ---------------------------------------
 -- need to write a test component to interact with current object types
@@ -21,7 +33,7 @@
 
 -- then keep adding more tests and periodically run them all
 
-
+-- this can go on the back burner for now
 
 
 

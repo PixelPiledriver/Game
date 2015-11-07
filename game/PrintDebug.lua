@@ -45,23 +45,23 @@ end
 
 
 -- name of this needs to be change to printList
-local printDebugSettings = {}
+local printList = {}
 
 -- switches
-printDebugSettings["stuff"] = false
-printDebugSettings["mathTest"] = false
-printDebugSettings["animation"] = false
-printDebugSettings["Health"] = false
-printDebugSettings["Collision"] = false
-printDebugSettings["Collision2"] = false
-printDebugSettings["Collision3"] = false
-printDebugSettings["CollisionList"] = false
-printDebugSettings["CollisionManager"] = false
-printDebugSettings["Build"] = false
-printDebugSettings["Controller"] = false
-printDebugSettings["MapTable"] = false
-printDebugSettings["Mouse"] = false
-printDebugSettings["MapObject"] = true
+printList.stuff = {false, false}
+printList.mathTest = {false, false}
+printList.animation = {false, false}
+printList.Health = {false, false}
+printList.Collision = {false, false}
+printList.Collision2 = {false, false}
+printList.Collision3 = {false, false}
+printList.CollisionList = {false, false}
+printList.CollisionManager = {false, false}
+printList.Build = {false, false}
+printList.Controller = {false, false}
+printList.MapTable = {false, false}
+printList.Mouse = {false, false}
+printList.MapObject = {true, false}
 
 
 
@@ -73,7 +73,9 @@ printDebugSettings["MapObject"] = true
 -- {"message", "typeName"}
 function printDebug(data)
 	
-	if(printDebugSettings[data[2]]) then
+	local priority = data[3] or 1
+
+	if(printList[data[2]][priority]) then
 		print(data[1])
 	end 
 
@@ -88,10 +90,10 @@ end
 -- Run on Require
 -------------------
 
--- switch to print to console
+-- print to consoel?
 local printAtRuntime = true
 
--- allows printing?
+-- allows printing to console
 if(printAtRuntime) then
 	io.stdout:setvbuf("no")
 end 
@@ -111,3 +113,35 @@ end
 -- To Do
 -----------------------------------
 -- priority levels for a call to this so one object can turn on/off groups of messages
+
+
+-- junk
+---------------------------
+--[[
+
+-- switches
+printList["stuff"] = false
+printList["mathTest"] = false
+printList["animation"] = false
+printList["Health"] = false
+printList["Collision"] = false
+printList["Collision2"] = false
+printList["Collision3"] = false
+printList["CollisionList"] = false
+printList["CollisionManager"] = false
+printList["Build"] = false
+printList["Controller"] = false
+printList["MapTable"] = false
+printList["Mouse"] = false
+printList["MapObject"] = true
+
+
+
+
+
+
+
+
+
+
+--]]

@@ -11,6 +11,8 @@
 ActionManager = {}
 
 
+ActionManager.actionSubmissions = {}
+
 
 
 
