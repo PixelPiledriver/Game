@@ -266,7 +266,7 @@ function Text:New(data)
 		return self.font:getHeight()
 	end 
 
-
+	-- split string into several lines of passed in length
 	function o:BreakIntoLines(maxLength)
 
 		self.tempText = ""
@@ -340,3 +340,11 @@ function LovePrint(data)
 end 
 
 return Text
+
+
+
+-- Notes
+------------------------
+-- need to not break works apart in BreakIntoLines
+-- right now it disregards them
+-->FIX

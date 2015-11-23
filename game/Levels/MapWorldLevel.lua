@@ -138,6 +138,7 @@ ChatBox:New
 	x = 100,
 	y = 100,
 	text = "Hello! Whats the fucking deal man? Why are you so cool!?!??"
+	--text = "bing bang biggity boo what the fuck is the deal with you you got a big hat and a nice pair of pants but that fancy dress aint gonna help you dance yah herd word"
 }
 
 

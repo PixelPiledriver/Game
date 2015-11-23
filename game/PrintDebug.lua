@@ -62,6 +62,7 @@ printList.Controller = {false, false}
 printList.MapTable = {false, false}
 printList.Mouse = {false, false}
 printList.MapObject = {true, false}
+printList.ChatBox = {true, false}
 
 
 

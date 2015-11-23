@@ -21,7 +21,10 @@ ChatBox.Info = Info:New
 ----------------
 -- Static Vars
 ----------------
-ChatBox.defaultSlideSpeed = 1.2
+ChatBox.default = {}
+ChatBox.default.slideSpeed = 2.5
+ChatBox.default.width = 128
+ChatBox.default.height = 64
 
 -----------------
 -- Object
@@ -68,7 +71,16 @@ function ChatBox:New(data)
 	--------------------------
 
 	o.widthPad = data.widthPad or 16 --> not used yet -->FIX 
-	o.maxWidth = data.maxWidth or 128	
+	o.maxWidth = data.maxWidth or ChatBox.default.width	
+
+	-- if text height of text is bigger than data.height
+	-- increase height
+	-->FIX
+	local heightAdjust = nil
+	if(o.text.font:getHeight(o.text.text) > (data.height or ChatBox.default.height)) then
+		heightAdjust = o.text.font:getHeight(o.text.text)
+		printDebug{"Height adjusted to fit font", "ChatBox"}
+	end 
 
 
 	-------------------
@@ -77,7 +89,8 @@ function ChatBox:New(data)
 	-- simple box for now
 	o.box = Box:New
 	{
-		width = math.min(o.text:GetWidth(), o.maxWidth) + o.widthPad
+		width = math.min(o.text:GetWidth(), o.maxWidth) + o.widthPad or ChatBox.default.width,
+		height = heightAdjust or data.height or ChatBox.default.height
 	}
 
 	o.boxAlign = data.boxAlign or "left"
@@ -107,7 +120,6 @@ function ChatBox:New(data)
 	if(o.text:GetWidth() > o.maxWidth) then
 		o.text:BreakIntoLines(o.maxWidth)
 		o.box.Size.height = o.text.font:getHeight(o.text.text) * #o.text.multiLineText
-		--print(o.text.font:getHeight )
 	end 
 
 
@@ -120,35 +132,61 @@ function ChatBox:New(data)
 	function o:SlidingBoxSetup()
 		-- will need to make one for each line
 		-->FIX
+		o.slideBox = {}
+		
+		for i=1, #self.text.multiLineText do
 
-		-- create overly 
-		o.slideBox = Box:New
-		{
-			layer = "Overlap",
-			color = Color:GetCopy(o.box.color),
-			width = self.box.Size.width,
-			height = self.box.Size.height
-		}
+			-- create overly 
+			o.slideBox[#o.slideBox+1] = Box:New
+			{
+				layer = "Overlap",
+				color = Color:GetCopy(o.box.color),
+				width = self.box.Size.width,
+				height = self.box.Size.height / # self.text.multiLineText
+			}
 
-		o.slideBox.slideSpeed = ChatBox.defaultSlideSpeed
-		o.slideBox.slideTotal = 0
+			o.slideBox[#o.slideBox].slideSpeed = ChatBox.default.slideSpeed
+			o.slideBox[#o.slideBox].slideTotal = 0
 
-		Link:Simple
-		{
-			a = {o.slideBox, "Pos", {"x","y"}},
-			b = {o, "Pos", {"x","y"}},
-		}
+			Link:Simple
+			{
+				a = {o.slideBox[#o.slideBox], "Pos", "x"},
+				b = {o, "Pos", "x"},
+			}
 
+			Link:Simple
+			{
+				a = {o.slideBox[#o.slideBox], "Pos", "y"},
+				b = {o, "Pos", "y"},
+				offsets =
+				{
+					{value = {self.text.multiLineYSpace * (i-1)}}
+				}
+			}
+
+
+
+		end 
+
+			o.slideBoxIndex = 1
 	end 
 
-	function o:SlidingBoxUpdate()
-		-- slide
-		o.slideBox.slideTotal = o.slideBox.slideTotal + o.slideBox.slideSpeed
-		o.slideBox.Size.width = o.slideBox.Size.width - o.slideBox.slideSpeed
-		o.slideBox.Pos.x = o.slideBox.Pos.x + o.slideBox.slideTotal
+	
 
-		if(o.slideBox.Size.width <= 0) then
-			ObjectUpdater:Destroy(o.slideBox)
+	function o:SlidingBoxUpdate()
+
+		-- done with all slide boxes?
+		if(self.slideBoxIndex > #self.text.multiLineText) then
+			return
+		end 
+		
+		self.slideBox[self.slideBoxIndex].slideTotal = self.slideBox[self.slideBoxIndex].slideTotal + self.slideBox[self.slideBoxIndex].slideSpeed
+		self.slideBox[self.slideBoxIndex].Size.width = self.slideBox[self.slideBoxIndex].Size.width - self.slideBox[self.slideBoxIndex].slideSpeed
+		self.slideBox[self.slideBoxIndex].Pos.x = self.slideBox[self.slideBoxIndex].Pos.x + self.slideBox[self.slideBoxIndex].slideTotal
+
+		if(self.slideBox[self.slideBoxIndex].Size.width <= 0) then
+			ObjectUpdater:Destroy(self.slideBox[self.slideBoxIndex])
+			self.slideBoxIndex = self.slideBoxIndex +  1
 		end
 	end 
 
