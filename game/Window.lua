@@ -35,8 +35,10 @@ Window.titleFlavor =
 	":)",
 	":O",
 	":|",
+	">:E",
 	"D:",
 	"XD",
+	">:A",
 	"YEAW",
 	"WAT",
 	"WUT",
@@ -45,10 +47,17 @@ Window.titleFlavor =
 	"oh yes",
 	"shabba",
 	"yep",
-	"do a barrel roll!",
+	"Do a barrel roll!",
 	"NEVER GONNA GIVE IT UP!!!",
 	"2DEEP4U",
-	"just DO IT"
+	"just... DO IT!",
+	"Don't even trip dawg...",
+	"The path of life is not always short and sweet",
+	"loves you...",
+	"has vivid dreams of you...",
+	"Hello World",
+	"You can do this!",
+	"you just gotta BELIEVE",
 }
 
 Window.title = "PixelRobot: " .. Random:ChooseRandomlyFrom(Window.titleFlavor)

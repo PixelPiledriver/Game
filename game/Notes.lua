@@ -1,6 +1,8 @@
 -- Notes.lua
 
-
+-- Camera
+--------------------
+-- need to work on moving camera code soon
 
 -- track stuff that needs to be coded in the future
 -- gonna put new stuff at the top and push old stuff down

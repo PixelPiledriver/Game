@@ -34,10 +34,17 @@ function Health:New(data)
 		structureType = "Component"
 	}
 
+	-----------------
+	-- Vars
+	-----------------
+	o.hp = 100
 	o.max = data.max or 100
 	o.min = data.min or 0
 	o.start = data.start or 100
-	o.hp = 100
+	o.death = 0
+	o.dead = false
+
+	
 
 	---------------
 	-- Functions
@@ -51,6 +58,8 @@ function Health:New(data)
 	end
 
 	function o:UpdateCheck()
+
+		-- bind health to min and max
 		if(self.hp < self.min) then 
 			self.hp = self.min
 		end
@@ -59,13 +68,18 @@ function Health:New(data)
 			self.hp = self.max
 		end 
 
+		-- is object dead?
+		if(self.hp < self.dead) then
+			self:Dead()
+		end 
+
 	end 
 
 	function o:Death()
 		printDebug{"Dead!", "Health"}
 	end 
 
-	function o:GetHealth()
+	function o:Get()
 		return self.hp
 	end 
 

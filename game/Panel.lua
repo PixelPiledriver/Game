@@ -61,6 +61,7 @@ function Panel:New(data)
 	local o = {}
 	o.Info = Info:New
 	{
+		name = "...",
 		objectType = "Panel",
 		dataType = "User Interface",
 		structureType = "Object"

@@ -114,6 +114,8 @@ function Sprite:New(data)
 	end 
 	
 
+	-- make this a var for new as well
+	-->FIX
 	o.color = Color:Get("white")
 
 	-- create sprite from sheet
@@ -145,7 +147,6 @@ function Sprite:New(data)
 
 	end 
 
-
 	-- draw sprite
 	function o:DrawCall()
 
@@ -161,14 +162,51 @@ function Sprite:New(data)
 
 		love.graphics.setColor(Color:AsTable(self.color))
 
-		local x = 0
-		local y = 0
+		local x = self.Pos.x
+		local y = self.Pos.y
+
+		if(self.parent) then
+			x = self.parent.Pos and self.parent.Pos.x or self.parent.xAbs or self.parent.x
+			y = self.parent.Pos and self.parent.Pos.y or self.parent.yAbs or self.parent.y
+		end 
+
 		local angle = 0
 		local xScale = 1
 		local yScale = 1
 
-		love.graphics.draw(self.spriteSheet.image, self.sprite, self.Pos.x, self.Pos.y, angle, xScale, yScale)
+		love.graphics.draw(self.spriteSheet.image, self.sprite, x, y, angle, xScale, yScale)
 
+	end 
+
+	function o:Copy()
+		local copy = Sprite:New
+		{
+			spriteSheet = self.spriteSheet,
+			width = self.width,
+			height = self.height,
+			xIndex = self.xIndex,
+			yIndex = self.yIndex,
+			draw = true
+		}
+
+		return copy
+	end 
+
+	function o:CopyFor(object)
+		local copy = Sprite:New
+		{
+			spriteSheet = self.spriteSheet,
+			width = self.width,
+			height = self.height,
+			xIndex = self.xIndex,
+			yIndex = self.yIndex,
+			draw = true,
+			parent = object,
+			
+		}		
+
+		return copy
+		
 	end 
 
 	ObjectUpdater:Add{o}
@@ -181,6 +219,21 @@ function Sprite:New(data)
 
 end 
 
+
+----------------------
+-- Static Functions
+----------------------
+-- this is pointless
+function Sprite:Set(object, sprite)
+	object.sprite = sprite:Copy()
+	object.sprite.parent = object
+end 
+
+function Sprite:GetFor(object, sprite)
+	local spriteCopy = sprite:Copy()
+	spriteCopy.parent = object
+	return spriteCopy
+end 
 
 ----------------
 -- Static End

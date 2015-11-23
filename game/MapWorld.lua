@@ -30,8 +30,6 @@ MapWorld.Info = Info:New
 -- Static Vars
 -----------------
 
- 
-
 
 ------------
 -- Object
@@ -46,12 +44,16 @@ function MapWorld:New(data)
 		emptySlotDefault =
 		{
 			type = "empty",
-			name = "empty",
+			name = "balls",
 			x = 0,
-			y = 0
+			y = 0,
+			reactions = 
+			{
+				walk = {able = true}
+			}
 		},
 
-		defaultIndex = {"name", "x", "y"}
+		defaultIndex = {"type", "name", "x", "y", "reactions"}
 	}
 
 	if(data.size) then
@@ -80,6 +82,10 @@ function MapWorld:New(data)
 	o.x = 100
 	o.y = 100
 
+	o.tileWidth = 32
+	o.tileHeight = 32
+
+
 	----------------
 	-- Components
 	----------------
@@ -98,6 +104,7 @@ function MapWorld:New(data)
 	--------------
 	-- Functions
 	--------------
+
 	function o:Add(data)
 		o.map:Add(data)
 	end
@@ -106,34 +113,55 @@ function MapWorld:New(data)
 		return self.map:Get{x = x, y = y}
 	end 
 
-	function o:DrawCall()
+	function o:IsPosEmpty(x, y)
+		return self.map:IsPosEmpty(x,y)
 
-		local space = 32
+	end 
+
+	function o:Update()
+
+	
+	end 
+
+
+	function o:DrawCall()
 
 		for x=1, self.map.width do
 			for y=1, self.map.height do
 
-				local char = nil
+				repeat
+					if(self.map.map[x][y].sprite) then
+						break
+					end 
 
-				if(self.map.map[x][y].Info) then
-					char = self.map.map[x][y].name
-				else
-					char = "x" -- self.map.map[x][y].x .. "," .. self.map.map[x][y].y --"x" --self.map.map[x][y] -- "o"
-				end 
+					local char = nil
 
-				LovePrint
-				{
-					text = char,
-					x = self.x + (x * space),
-					y = self.y + (y * space),
-					color = Color:AsTable(Color:Get("black"))
-				}
+					if(self.map.map[x][y].Info) then
+						char = self.map.map[x][y].name
+					else
+						char = "x" -- self.map.map[x][y].x .. "," .. self.map.map[x][y].y --"x" --self.map.map[x][y] -- "o"
+					end 
+
+					LovePrint
+					{
+						text = char,
+						x = self.x + (x * self.tileWidth),
+						y = self.y + (y * self.tileHeight),
+						color = Color:AsTable(Color:Get("black"))
+					}
+				until true
 
 			end 
 		end 
 
 	end 
 
+
+	---------------
+	-- End
+	---------------
+
+	ObjectUpdater:Add{o}
 
 	return o
 
@@ -152,6 +180,8 @@ return MapWorld
 
 -- Notes
 --------------------------
+-- camera could be tied to mapWorld
+
 -- needs to have at least 2 maps
 -- one for objects - top layer
 -- and one for terrain - bottom layer

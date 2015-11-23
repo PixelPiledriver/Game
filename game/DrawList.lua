@@ -271,7 +271,7 @@ function DrawList:Draw()
 
 					end 
 
-					-- diable scissor because group is done drawing
+					-- disable scissor because group is done drawing
 					if(resetScissor) then
 						love.graphics.setScissor()
 					end 

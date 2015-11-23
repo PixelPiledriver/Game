@@ -46,27 +46,36 @@ function MapTable:New(data)
 	-- default value or object to fill empty slots with
 	-- lets you customize the usage of the map
 	o.emptySlotDefault = data.emptySlotDefault or nil
+
+
 	o.defaultIndex = data.defaultIndex or nil
-	printDebug{o.emptySlotDefault, "MapTable"}
+	printDebug{o.emptySlotDefault, "MapTable"} 
 
 	---------------
 	-- Functions
 	---------------
 
 	function o:GetEmptySlotDefault(x, y)
+		
+		-- this will be a copy of the default
 		local temp = {}
 
+		-- copy all vars over
 		for i=1, #self.defaultIndex do
 			temp[self.defaultIndex[i]] = self.emptySlotDefault[self.defaultIndex[i]]
 		end 
 
+		-- if default uses has pos data then set it
 		if(temp.x) then
 			temp.x = x
 		end 
 
 		if(temp.y) then
 			temp.y = y
-		end 
+		end
+
+		-- set indicator flag that marks this object as an empty default
+		temp.emptySlotObject = true
 
 		return temp
 	end 
@@ -206,8 +215,10 @@ function MapTable:New(data)
 			return false
 		end 
 
-		self.map[data.b.x][data.b.y] = self.map[data.a.x][data.a.x]
+		-- move object to new location, clear old location
+		self.map[data.b.x][data.b.y] = self.map[data.a.x][data.a.y]
 		self:Remove{x = data.a.x, y = data.a.y}
+
 	end 
 
 	-- swap the map position of a and b
@@ -261,6 +272,14 @@ function MapTable:New(data)
 
 		return true
 
+	end 
+
+	function o:IsPosEmpty(x,y)
+		if(self.map[x][y].emptySlotObject) then
+			return true
+		end 
+
+		return false
 	end 
 
 
