@@ -137,7 +137,7 @@ ChatBox:New
 {
 	x = 100,
 	y = 100,
-	text = "Hello!"
+	text = "Hello! Whats the fucking deal man? Why are you so cool!?!??"
 }
 
 

@@ -40,11 +40,12 @@ DrawList.layers =
 	Objects = {value = 3, active = true},
 	Collision = {value = 4, active = false},
 	Hud = {value = 5, active = true},
-	DebugText = {value = 6, active = false},
+	Overlap = {value = 6, active = true},
+	DebugText = {value = 7, active = false},
 
 	index = 
 	{
-		"Skybox", "Backdrop", "Objects", "Collision", "Hud", "DebugText"
+		"Skybox", "Backdrop", "Objects", "Collision", "Hud", "Overlap", "DebugText"
 	}
 }
 

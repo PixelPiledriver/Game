@@ -173,7 +173,7 @@ function Box:New(data)
 	local defaultDraw =
 	{
 		parent = o,
-		layer = "Objects",
+		layer = data.layer or "Objects",
 		GetDepth = o.GetDepth,
 		first = data.first or false,
 		last = data.last or false,

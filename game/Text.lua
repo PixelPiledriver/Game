@@ -53,12 +53,18 @@ function Text:New(data)
 	--------------------
 
 	o.text = data.text or ""
+	o.tempText = nil
+	
 	o.color = data.color or Color:Get("white")
 	o.font = love.graphics.newFont(data.size)
 
 	-- size of area that text is within -> ex: button size
 	o.displayWidth = data.displayWidth or o.font:getWidth(o.text)
 	o.displayHeight = data.displayHeight or o.font:getHeight()
+
+	o.multiLine = false
+	o.multiLineText = {}
+	o.multiLineYSpace = data.multiLineYSpace or o.displayHeight
 
 	o.alignment = data.alignment or "left" 
 	o.verticalAlignment = data.verticalAlignment or "center"
@@ -220,13 +226,31 @@ function Text:New(data)
 			y = self.Pos.y
 		end 
 
-		LovePrint
-		{
-			text = self.text,
-			x = x,
-			y = y,
-			color = Color:AsTable(self.color)
-		}
+		-- single line text
+		if(self.multiLine == false) then
+			LovePrint
+			{
+				text = self.text,
+				x = x,
+				y = y,
+				color = Color:AsTable(self.color)
+			}
+
+		-- multi line text
+		else
+
+			for i=1, #self.multiLineText do
+				LovePrint
+				{
+					text = self.multiLineText[i],
+					x = x,
+					y = y + (self.multiLineYSpace * (i - 1)),
+					color = Color:AsTable(self.color)
+				}
+			end 
+
+		end 
+
 	end 
 
 
@@ -234,10 +258,46 @@ function Text:New(data)
 		return self.font:getWidth(o.text)
 	end 
 
+	function o:GetWidthTempText()
+		return self.font:getWidth(o.tempText)
+	end 
+
 	function o:GetHeight()
 		return self.font:getHeight()
 	end 
 
+
+	function o:BreakIntoLines(maxLength)
+
+		self.tempText = ""
+
+		local readIndex = 1
+
+		print(string.len(self.text))
+		for i=1, string.len(self.text) do
+			
+			self.tempText = self.tempText .. string.sub(self.text,i,i)
+
+			if(self:GetWidthTempText() > maxLength) then
+				self.multiLineText[#self.multiLineText+1] = string.sub(self.text, readIndex, i)
+				readIndex = (i+1)
+				self.tempText = nil
+				self.tempText = ""
+				print("yes")
+				print(i)
+			end
+
+		end
+
+
+		self.multiLineText[#self.multiLineText+1] = string.sub(self.text, readIndex, string.len(self.text))
+
+
+
+		--string.sub(text.text,)
+
+		self.multiLine = true
+	end 
 
 	--------
 	-- End

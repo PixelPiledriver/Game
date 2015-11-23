@@ -1613,6 +1613,10 @@ function Color:Lerp(data)
 
 	return newColor
 
+end
+
+function Color:GetCopy(colorObject)
+	return Color:Get(colorObject.name)
 end 
 
 
