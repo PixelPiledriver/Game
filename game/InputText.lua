@@ -115,6 +115,14 @@ function InputText:New(data)
 	}
 
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.Input)
+	end 
+
+	------------
+	-- End
+	------------
 
 	ObjectUpdater:Add{o}
 

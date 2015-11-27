@@ -27,21 +27,6 @@ PrintDebugType.Info = Info:New
 	structureType = "Static"
 }
 
------------
--- Object
------------
-
-function PrintDebugType:New(name)
-
-	--.active = true
-	--.priority1 = true
-	--.priority2 = true
-	--.priority3 = true
-
-	-- add to printList
-
-end 
-
 
 
 -- name of this needs to be change to printList
@@ -63,6 +48,9 @@ printList.MapTable = {false, false}
 printList.Mouse = {false, false}
 printList.MapObject = {true, false}
 printList.ChatBox = {true, false}
+printList.Links = {true, false}
+printList.ObjectUpdater = {false, false}
+printList.Fail = {true, false}
 
 
 
@@ -140,8 +128,24 @@ printList["MapObject"] = true
 
 
 
+-- object style
+-- decided to not use this
+-- might change my mind in the future :P
 
+-----------
+-- Object
+-----------
 
+function PrintDebugType:New(name)
+
+	--.active = true
+	--.priority1 = true
+	--.priority2 = true
+	--.priority3 = true
+
+	-- add to printList
+
+end 
 
 
 

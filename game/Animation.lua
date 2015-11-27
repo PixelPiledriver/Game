@@ -189,6 +189,13 @@ function Animation:New(data)
 
 	end 
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.Pos)
+		ObjectUpdater:Destroy(self.Draw)
+		ObjectUpdater:Destroy(self.Scale)
+
+	end 
 
 	----------
 	-- End

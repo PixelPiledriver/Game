@@ -19,3 +19,8 @@ MapObject.Item = {}
 function MapObject:New()
 	
 end 
+
+-- Notes
+--------------------
+-- this file does nothing right now
+-->FIX

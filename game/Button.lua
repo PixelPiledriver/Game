@@ -549,6 +549,17 @@ function Button:New(data)
 
 	end 
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.Pos)
+		ObjectUpdater:Destroy(self.Size)
+		ObjectUpdater:Destroy(self.Draw)
+		ObjectUpdater:Destroy(self.text)
+		ObjectUpdater:Destroy(self.toggleText)
+		ObjectUpdater:Destroy(self.collision)
+		ObjectUpdater:Destroy(self.hover)
+		ObjectUpdater:Destroy(self.drag)
+	end 
 
 
 	function o:PrintDebugText()

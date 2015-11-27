@@ -103,7 +103,6 @@ end
 -- add a new member to the end of an indexed table if it exists
 -- [table, object, member] -- shorthand form, no names
 function TableSort:AddIfNotNil(data)
-	print(data)
 	if(data[2].data[3]) then
 		data[1][#data[1] + 1] = data[2].data[3]
 	end 

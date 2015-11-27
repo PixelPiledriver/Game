@@ -32,7 +32,7 @@ function Bullet:New(data)
 	-- Create
 	---------------------
 
-	local object = {}
+	local o = {}
 
 	------------------
 	-- Object Info
@@ -95,7 +95,7 @@ function Bullet:New(data)
 	o.collision = Collision:New
 	{
 		name = data.shooter.playerColor .. "Bullet",
-		parent = object,
+		parent = o,
 		width = o.frame.width,
 		height = o.frame.height,
 		collisionList = data.collisionList or nil,
@@ -104,7 +104,7 @@ function Bullet:New(data)
 	}
 
 
-	function object:OnCollision(data)
+	function o:OnCollision(data)
 		self.lifespan = 0
 	end 
 
@@ -112,12 +112,12 @@ function Bullet:New(data)
 	-- Functions
 	--------------
 
-	function object:Move()
+	function o:Move()
 		self.x = self.x + (self.xSpeed * self.speed)
 		self.y = self.y + (self.ySpeed * self.speed)
 	end 
 
-	function object:Life()
+	function o:Life()
 		if(self.lifespan == -1) then
 			return
 		end 
@@ -133,17 +133,22 @@ function Bullet:New(data)
 	end 
 
 	-->???
-	function object:OutOfBounds()
+	function o:OutOfBounds()
 	end 
 
-	function object:Update()
+	function o:Update()
 		self:Move()
 		self:Life()
 		self:OutOfBounds()
 	end
 
-	function object:Draw()
+	function o:Draw()
 		self.frame:Draw(self)
+	end
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.collision)
 	end 
 
 
@@ -151,9 +156,9 @@ function Bullet:New(data)
 	-- End
 	----------
 	
-	ObjectUpdater:Add{object}
+	ObjectUpdater:Add{o}
 
-	return object
+	return o
 
 end 
 

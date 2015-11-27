@@ -6,8 +6,10 @@ String = {}
 
 
 
+ObjectUpdater:AddStatic(String)
 
 
-
-
-ObjectUpdater:AddStatic()
+-- Notes
+---------------------------
+-- completely empty
+-->:P

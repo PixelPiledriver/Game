@@ -9,6 +9,7 @@
 -- Requires
 -------------------
 local MapObject = require("MapObject")
+local ChatBox = require("ChatBox")
 
 -------------------------------------------------------
 -- Sub Component
@@ -42,9 +43,10 @@ function MapObject.Action:New(data)
 	function o:Use(object)
 
 		-- how to get target?
+
 		-- relative position?
 		if(self.targetPos) then
-			print("targetPos: " .. self.targetPos.x .. ", " .. self.targetPos.y)
+			--print("targetPos: " .. self.targetPos.x .. ", " .. self.targetPos.y)
 			object.actionTarget = object.mapWorld:Get(object.x + self.targetPos.x, object.y + self.targetPos.y)
 			
 		-- absolute position?
@@ -65,6 +67,7 @@ function MapObject.Action:New(data)
 
 		-- state action used
 		printDebug{"used action: " .. o.name, "MapObject", 2}
+		EventLog:Add{"used action: " .. o.name, "MapObject", 2}
 		
 		-- does target reaction to this action? does this action require it?
 		if(self.requireReaction and object:TargetHasReaction(self.name) == false) then
@@ -120,6 +123,8 @@ function MapObject.Action:New(data)
 			
 			return false
 		end
+
+		EventLog:Add{object.name .. ": " .. o.name .. ": " .. object.actionTarget.name, "MapObject"}
 
 		self.func(object)
 
@@ -185,6 +190,12 @@ MapObject.Action.chat =
 	-- dialog
 	func = function(object)
 		print(object.actionTarget.reactions.chat.chat)
+		ChatBox:New
+		{
+			x = object.actionTarget.xAbs,
+			y = object.actionTarget.yAbs,
+			text = object.actionTarget.reactions.chat.chat
+		}
 	end,
 
 	noReactionFunc = function(object)

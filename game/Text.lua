@@ -12,6 +12,8 @@ local Pos = require("Pos")
 local Draw = require("Draw")
 local Box = require("Box")
 local Link = require("Link")
+local Fade = require("Fade")
+local Life = require("Life")
 
 ---------------------------------------------------
 
@@ -26,6 +28,15 @@ Text.Info = Info:New
 	objectType = "Text",
 	dataType = "User Interface",
 	structureType = "Static"
+}
+
+-----------------
+-- Static Vars
+-----------------
+Text.default =
+{
+	fade = false,
+	life = false,	
 }
 
 ------------
@@ -63,7 +74,7 @@ function Text:New(data)
 	o.displayHeight = data.displayHeight or o.font:getHeight()
 
 	o.multiLine = false
-	o.multiLineText = {}
+	o.multiLineText = nil
 	o.multiLineYSpace = data.multiLineYSpace or o.displayHeight
 
 	o.alignment = data.alignment or "left" 
@@ -102,6 +113,7 @@ function Text:New(data)
 			color = data.box.color
 		}
 
+		Link.newParent = o
 		Link:Simple
 		{
 			a = {o.box, "Pos", {"x", "y"}},
@@ -109,6 +121,23 @@ function Text:New(data)
 		}
 
 	end
+
+	if(data.life or Text.default.life) then 
+		o.Life = Life:New
+		{
+			life = 100,
+			drain = true,
+			parent = o
+		}
+	end 
+
+	if(data.fade or Text.default.fade) then
+		o.Fade = Fade:New
+		{
+			parent = o,
+			fadeWithLife = true
+		}
+	end 
 
 	---------------
 	-- Components
@@ -269,27 +298,44 @@ function Text:New(data)
 	-- split string into several lines of passed in length
 	function o:BreakIntoLines(maxLength)
 
-		self.tempText = ""
+		-- create table for lines of text
+		self.multiLineText = {}
 
+		-- used to collect lines of text
+		local tempText = ""
+
+		-- indicated where to read from
 		local readIndex = 1
 
-		print(string.len(self.text))
 		for i=1, string.len(self.text) do
 			
-			self.tempText = self.tempText .. string.sub(self.text,i,i)
+			tempText = tempText .. string.sub(self.text,i,i)
 
-			if(self:GetWidthTempText() > maxLength) then
+			if(self.font:getWidth(tempText) > maxLength) then
+
+				-- move back to a space character
+				repeat
+					i = i - 1
+				until	 string.sub(self.text, i, i) == " "
+
+
+				-- break off and add the line of text
 				self.multiLineText[#self.multiLineText+1] = string.sub(self.text, readIndex, i)
+
+				-- start reading from the next character
 				readIndex = (i+1)
-				self.tempText = nil
-				self.tempText = ""
-				print("yes")
-				print(i)
+
+				-- clear temp text for the next loop
+				tempText = nil
+				tempText = ""
+
 			end
 
 		end
 
 
+		-- add the last line,
+		-- this happens after the loop, since it won't reach the max
 		self.multiLineText[#self.multiLineText+1] = string.sub(self.text, readIndex, string.len(self.text))
 
 
@@ -298,6 +344,24 @@ function Text:New(data)
 
 		self.multiLine = true
 	end 
+
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.box)
+		ObjectUpdater:Destroy(self.Pos)
+		ObjectUpdater:Destroy(self.Draw)
+
+		if(self.Links) then
+			self.Links:DestroyAll()
+			ObjectUpdater:Destroy(self.Links)
+		end 
+
+		ObjectUpdater:Destroy(self.Life)
+		ObjectUpdater:Destroy(self.Fade)
+		
+	end 
+
 
 	--------
 	-- End
@@ -345,6 +409,60 @@ return Text
 
 -- Notes
 ------------------------
+-->FIX
+-- BreakIntoLines fails on long overstretched words
+-- like BOOOOOOOOOOOOOOOOOO!!!!!
+-- this could be solved with scissor, but other solution?
+
+-->FIX
+-- BreakIntoLines can sometimes fail on letters with wide width?
+
+-->DONE
 -- need to not break works apart in BreakIntoLines
 -- right now it disregards them
--->FIX
+
+
+
+
+-- Junk
+-----------------------------------------------
+--[[
+-- changing BreakIntoLines a bit
+-- here is the old version
+
+	-- split string into several lines of passed in length
+	function o:BreakIntoLines(maxLength)
+
+		self.tempText = ""
+
+		local readIndex = 1
+
+		print(string.len(self.text))
+		for i=1, string.len(self.text) do
+			
+			self.tempText = self.tempText .. string.sub(self.text,i,i)
+
+			if(self:GetWidthTempText() > maxLength) then
+
+				if(self.multiL)
+
+				self.multiLineText[#self.multiLineText+1] = string.sub(self.text, readIndex, i)
+				readIndex = (i+1)
+				self.tempText = nil
+				self.tempText = ""
+			end
+
+		end
+
+
+		self.multiLineText[#self.multiLineText+1] = string.sub(self.text, readIndex, string.len(self.text))
+
+
+
+		--string.sub(text.text,)
+
+		self.multiLine = true
+	end 
+
+
+--]]

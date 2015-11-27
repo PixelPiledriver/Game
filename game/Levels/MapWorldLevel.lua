@@ -15,6 +15,7 @@ require("MapObject_Sprites")
 require("MapObject_Action")
 require("MapObject_Objects")
 local ChatBox = require("ChatBox")
+local Polygon = require("Polygon")
 
 
 local Name = require("Name")
@@ -135,11 +136,17 @@ MapObject:CreateRandom
 
 ChatBox:New
 {
-	x = 100,
-	y = 100,
+	x = 150,
+	y = 80,
 	text = "Hello! Whats the fucking deal man? Why are you so cool!?!??"
 	--text = "bing bang biggity boo what the fuck is the deal with you you got a big hat and a nice pair of pants but that fancy dress aint gonna help you dance yah herd word"
+	--text = "this is a shit Stoooooooooorm"
+	--text = "yo dood! :D"
 }
+
+
+
+
 
 
 function MapWorldLevel:Load()
@@ -223,7 +230,15 @@ local orc = MapObject:New
 
 
 
-
+local polygon = Polygon:New
+{
+	verts = 
+	{
+		{x = 0, y = 0},
+		{x = 100, y = 0},
+		{x = 200, y = 100},
+	}		
+}
 
 
 --]]

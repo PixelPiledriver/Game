@@ -320,6 +320,14 @@ function MapTable:New(data)
 
 	end 
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end
+
+	------------
+	-- End
+	------------
+
 	ObjectUpdater:Add{o}
 
 	return o

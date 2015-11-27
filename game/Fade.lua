@@ -36,6 +36,20 @@ function Fade:New(data)
 
 	local o = {}
 
+	-----------
+	-- Fails
+	-----------
+	if(data.parent == nil) then
+		printDebug{"Fail: Fade requires data.parent", "Fail"}
+		return
+	end 
+
+	if(data.parent.color == nil) then
+		printDebug{"Fail: Fade requires parent to have .color", "Fail"}
+		return
+	end 
+
+
 	------------------
 	-- Object Info 
 	------------------
@@ -50,12 +64,11 @@ function Fade:New(data)
 	-----------
 	-- Vars
 	-----------
+	o.parent = data.parent or nil
 
 	o.fade = data.fade or 255
 	o.speed = data.speed or 1
-
-	-- other
-	o.parent = data.parent or nil
+	
 	o.doneFading = false
 	o.fadeWithLife = data.fadeWithLife or false
 
@@ -63,10 +76,10 @@ function Fade:New(data)
 	-- if parent does not contain a color, this component serves no purpose
 	local activeOnCreation = nil
 
-	if(data.active == nil) then
-		activeOnCreation = Fade.activeDefault
-	else
-		activeOnCreation = data.active
+		if(data.active == nil) then
+			activeOnCreation = Fade.activeDefault
+		else
+			activeOnCreation = data.active
 	end
 
 
@@ -84,7 +97,6 @@ function Fade:New(data)
 	end
 
 	function o:Fade()
-
 
 		if(self.active == false) then
 			return
@@ -125,7 +137,10 @@ function Fade:New(data)
 
 	end 
 
-
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end 
+	
 	----------
 	-- End
 	----------

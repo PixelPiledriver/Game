@@ -126,6 +126,10 @@ function Block:New(data)
 	function object:Destroy()
 		BlockMap:Remove{x = self.xIndex, y = self.yIndex}
 		Camera:AddShake{x = 5, y= 5}
+
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.health)
+		ObjectUpdater:Destroy(self.collision)
 	end 
 
 	-->???

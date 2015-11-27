@@ -1,6 +1,7 @@
 -- SnapPlayer.lua
 
--- 
+-- Purpose
+-------------------------------------------
 -- basic object with sprite, input, etc
 
 ---------------
@@ -538,3 +539,6 @@ return SnapPlayer
 -------------------------------------
 -- this is a copy of Player.lua
 -- to be used with Adam's SnapGrid
+
+-- old garbage
+-- throw out soon

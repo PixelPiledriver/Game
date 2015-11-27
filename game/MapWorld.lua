@@ -157,6 +157,13 @@ function MapWorld:New(data)
 	end 
 
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.map)
+		ObjectUpdater:Destroy(self.Draw)
+	end 
+
+
 	---------------
 	-- End
 	---------------

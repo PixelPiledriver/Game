@@ -54,7 +54,7 @@ function Palette:New(data)
 	local o = {}
 
 	----------------
-	-- Object Info
+	-- Info
 	----------------
 	o.Info = Info:New
 	{
@@ -453,6 +453,17 @@ function Palette:New(data)
 	end 
 
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.collision)
+		ObjectUpdater:Destroy(self.hover)
+		ObjectUpdater:Destroy(self.drag)
+		ObjectUpdater:Destroy(self.Draw)
+	end 
+
+	------------
+	-- End
+	------------
 
 	ObjectUpdater:Add{o}
 

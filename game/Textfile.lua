@@ -16,7 +16,7 @@ Textfile.Info = Info:New
 {
 	objectType = "Textfile",
 	dataType = "File IO",
-	structureTe = "Static"
+	structureType = "Static"
 }
 
 
@@ -25,7 +25,7 @@ Textfile.Info = Info:New
 ------------
 function Textfile:New(data)
 
-	local object = {}
+	local o = {}
 
 	------------
 	-- Info
@@ -43,46 +43,54 @@ function Textfile:New(data)
 	-- Vars
 	------------
 
-	object.textTable = {}
-	object.text = data.text or ""
-	object.filename = data.filename or "textFile"
+	o.textTable = {}
+	o.text = data.text or ""
+	o.filename = data.filename or "textFile"
 
 	-------------------------------
 	-- Functions
 	-------------------------------
 
-	function object:AddLine(txt)
-		object.text = object.text .. "\r\n" .. txt 
+	function o:AddLine(txt)
+		o.text = o.text .. "\r\n" .. txt 
 	end 
 
 	--{text = {...}, spaceBetweenEach = bool}
-	function object:AddLineFromTable(data)
+	function o:AddLineFromTable(data)
 
-		object.text = object.text .. "\r\n"
+		o.text = o.text .. "\r\n"
 
 		for i=1, #data.text do
-			object.text = object.text .. data.text[i] .. " "
+			o.text = o.text .. data.text[i] .. " "
 		end 
 
 	end 
 
-	function object:Save()
-		love.filesystem.write(object.filename, object.text)
+	function o:Save()
+		love.filesystem.write(o.filename, o.text)
 	end
 
 	-- reads the whole file into a single string
-	function object:Read()
+	function o:Read()
 		self.text = love.filesystem.read(self.filename)
 	end 
 	
 	-- reads each line into a seperate index of a table
-	function object:ReadLines()
+	function o:ReadLines()
 		for line in love.filesystem.lines(self.filename) do
 			self.textTable[#self.textTable + 1] = line
 		end 
 	end 
 
-	return object
+	function o:Destroy()
+		ObjectUpdater:Destroy()
+	end 
+
+	-----------
+	-- End
+	-----------
+
+	return o
 
 end 
 

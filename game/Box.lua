@@ -45,7 +45,7 @@ function Box:New(data)
 	local o = {}
 
 	------------------
-	-- Object Info
+	-- Info
 	------------------
 	o.Info = Info:New
 	{
@@ -340,6 +340,15 @@ function Box:New(data)
 		if(self.yFlip) then
 			ObjectUpdater:Destroy(self.yFlip)
 		end 
+
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.Pos)
+		ObjectUpdater:Destroy(self.Size)
+		ObjectUpdater:Destroy(self.Life)
+		ObjectUpdater:Destroy(self.Fade)
+		ObjectUpdater:Destroy(self.Input)
+		ObjectUpdater:Destroy(self.Draw)
+		ObjectUpdater:Destroy(self.color)
 
 	end 
 

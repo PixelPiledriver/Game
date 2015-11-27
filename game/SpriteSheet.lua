@@ -86,9 +86,14 @@ function SpriteSheet:New(data)
 		self.image:refresh()
 	end 
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(o.Info)
+	end 
+
 	----------
 	-- End
 	----------
+
 	return o
 
 end 

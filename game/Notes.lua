@@ -1,5 +1,16 @@
 -- Notes.lua
 
+
+
+-- Load Level/Game
+----------------------
+-- Level loading is really old code and janky
+-- needs to be updated very soon
+
+-- Destroy Statics
+---------------
+-- need to be able to add and remove statics
+
 -- Camera
 --------------------
 -- need to work on moving camera code soon

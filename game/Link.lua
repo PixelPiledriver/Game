@@ -6,7 +6,10 @@
 -- object that links two objects values together
 -- like a constraint
 
-
+---------------
+-- Requires 
+---------------
+local Links = require("Links")
 
 -----------------------------------------------------------------
 
@@ -22,6 +25,11 @@ Link.Info = Info:New
 	dataType = "Data",
 	structureType = "Static"
 }
+
+
+-- Vars
+------------
+Link.newParent = nil
 
 --------------
 -- Object
@@ -175,6 +183,25 @@ function Link:New(data)
 
 	end 
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end 
+
+	------------
+	-- End
+	------------
+
+	if(Link.newParent) then
+
+		if(Link.newParent.Links == nil) then
+			Link.newParent.Links = Links:New{}
+		end 
+	
+		Link.newParent.Links:Add(o)
+	end 
+
+
+
 	ObjectUpdater:AddLink(o)
 
 	return o
@@ -277,13 +304,16 @@ function Link:Simple(data)
 		end
 
 		-- call new
+		--[[
 		if(data.a.links == nil) then
 			data.a.links = {}
 		end 
+		--]]
 
 		-- create link and have object A keep track of it
 		-- so it can be changed or deleted later
-		data.a.links[#data.a.links + 1] = Link:New(linkTable)
+		--data.a.links[#data.a.links + 1] = Link:New(linkTable)
+		Link:New(linkTable)
 
 	end 
 

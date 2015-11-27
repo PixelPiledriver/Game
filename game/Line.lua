@@ -92,7 +92,7 @@ function Line:New(data)
 
 	o.Draw = Draw:New(defaultDraw)
 
-	o.components = {"Life", "Fade"}
+	--o.components = {"Life", "Fade", "Draw"}
 
 	-----------------
 	-- Functions
@@ -126,12 +126,20 @@ function Line:New(data)
 
 
 	function o:Destroy()
+		
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.Life)
+		ObjectUpdater:Destroy(self.Fade)
+		ObjectUpdater:Destroy(self.Draw)
 
+
+		--[=[
 		for i=1, #self.components do
 			if(self[self.components[i]]) then
 				ObjectUpdater:Destroy(self[self.components[i]])
 			end 
 		end 
+		--]=]
 
 	end 
 

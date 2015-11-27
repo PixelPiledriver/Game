@@ -53,12 +53,14 @@ function Player:New(data)
 	----------
 	-- Info
 	----------
-	Info:ObjectOf
+	o.Info = Info:New
 	{
-		static = Player,
-		o = o,
-		data = data
+		name = "...",
+		objectType = "Player",
+		dataType = "Game",
+		structureType = "Object"
 	}
+
 	----------
 	-- Vars
 	----------
@@ -531,6 +533,18 @@ function Player:New(data)
 		end 
 
 	end
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.GridMovementTimer)
+		ObjectUpdater:Destroy(self.health)
+		ObjectUpdater:Destroy(self.shadow)
+		ObjectUpdater:Destroy(self.collision)
+	end 
+
+	------------
+	-- End
+	------------
 
 	-- add new o to updater
 	ObjectUpdater:Add{o}

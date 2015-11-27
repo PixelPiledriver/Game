@@ -196,6 +196,11 @@ Input.Info = Info:New
 			o:AddKeys(data.keys)
 		end 
 
+
+		function o:Destroy()
+			ObjectUpdater:Destroy(self.Info)
+		end 
+
 		----------
 		-- End
 		----------

@@ -144,3 +144,6 @@ return Shader
 
 -- this file is only an example and not organized well at all
 -- need to create a static for shader creation and managing
+
+
+-- use [[ ]] to make a string across multiple lines

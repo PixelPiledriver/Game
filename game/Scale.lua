@@ -82,7 +82,16 @@ function Scale:New(data)
 		self.speed.x = data.xSpeed or self.speed.x
 		self.speed.y = data.ySpeed or self.speed.y
 	end 
-	-- add to runtime
+
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end
+
+	-----------
+	-- End 
+	-----------
+
 	ObjectUpdater:Add{o}
 
 	return o

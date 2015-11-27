@@ -209,11 +209,18 @@ function Sprite:New(data)
 		
 	end 
 
-	ObjectUpdater:Add{o}
+	function o:Destroy()
+		ObjectUpdater:Destroy(o.Info)
+		ObjectUpdater:Destroy(o.Size)
+		ObjectUpdater:Destroy(o.Pos)
+		ObjectUpdater:Destroy(o.Draw)
+	end 
 
 	----------
 	-- End
 	----------
+
+	ObjectUpdater:Add{o}
 
 	return o
 

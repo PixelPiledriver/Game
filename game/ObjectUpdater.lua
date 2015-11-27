@@ -45,7 +45,7 @@ ObjectUpdater.destroyObjects = false
 ObjectUpdater.printAllObjectsInDebugText = false
 ObjectUpdater.printAllStaticsInDebugText = false
 ObjectUpdater.printTotalObjectTypes = false
-ObjectUpdater.printComponents = true
+ObjectUpdater.printComponents = false
 
 ----------------------
 -- Static Functions
@@ -87,6 +87,11 @@ end
 -- flag an object to be destroyed on the next ClearDestroyedObjects call
 function ObjectUpdater:Destroy(obj)
 	
+	if(obj == nil) then
+		printDebug{"Cannot destroy, object already nil", "ObjectUpdater"}
+		return
+	end 
+
 	if(obj.Destroy) then
 		obj:Destroy()
 	end 

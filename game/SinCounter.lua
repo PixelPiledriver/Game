@@ -9,7 +9,7 @@
 local SinCounter = {}
 
 -----------------
--- Static Info
+-- Static InfoObjectUpdater:Destroy(self.Info)
 -----------------
 
 SinCounter.Info = Info:New
@@ -80,6 +80,10 @@ function SinCounter:New(data)
 			{text = "Speed: " .. self.speed},
 			{text = "Sin: " .. self.sin},
 		}
+	end 
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
 	end 
 
 	----------

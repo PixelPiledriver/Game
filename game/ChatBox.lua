@@ -1,10 +1,13 @@
 -- ChatBox.lua
 
 local Box = require("Box")
+local Polygon = require("Polygon")
 local Text = require("Text")
 local Pos = require("Pos")
 local Color = require("Color")
 local Link = require("Link")
+local Links = require("Links")
+local Life = require("Life")
 
 local ChatBox = {}
 
@@ -63,7 +66,7 @@ function ChatBox:New(data)
 	o.text = Text:New
 	{
 		text = data.text or "...",
-		color = Color:Get("black")
+		color = Color:Get("black"),
 	}
 
 	--------------------------
@@ -73,10 +76,16 @@ function ChatBox:New(data)
 	o.widthPad = data.widthPad or 16 --> not used yet -->FIX 
 	o.maxWidth = data.maxWidth or ChatBox.default.width	
 
-	-- if text height of text is bigger than data.height
-	-- increase height
-	-->FIX
+	-- control height of box relative to font and text
+	o.fixedHeight = data.fixedHeight or false
 	local heightAdjust = nil
+
+	-- match text height?
+	if(o.fixedHeight == false) then
+		heightAdjust = o.text.font:getHeight(o.text.text)
+	end 
+
+	-- if font height is bigger than box height match height
 	if(o.text.font:getHeight(o.text.text) > (data.height or ChatBox.default.height)) then
 		heightAdjust = o.text.font:getHeight(o.text.text)
 		printDebug{"Height adjusted to fit font", "ChatBox"}
@@ -98,6 +107,7 @@ function ChatBox:New(data)
 		o.Pos.x = o.Pos.x - (o.box.Size.width * 0.5)
 	end 
 
+	Link.newParent = o
 	-- link box and text to ChatBox object
 	Link:Simple
 	{
@@ -114,6 +124,51 @@ function ChatBox:New(data)
 	}
 
 	---------------------
+	-- Pointer Graphics
+	---------------------
+	-- this creates a down facing centered pointer
+	-- need to make other optional styles
+
+	function o:CreateBoxPointer()
+		o.boxPointer = Polygon:New
+		{
+			x = o.Pos.x,
+			y = o.Pos.y,
+			verts =
+			{
+				{x = 0, y = 0},
+				{x = 5, y = 10},
+				{x = 10, y = 0}
+			},
+			color = Color:Get(o.box.color.name)
+		}
+
+		Link:Simple
+		{
+			a = {o.boxPointer, "Pos", "x"},
+			b = {o, "Pos", "x"},
+			offsets =
+			{
+				{value = {(o.box.Size.width/2) - 5}}
+			}
+		}
+
+		Link:Simple
+		{
+			a = {o.boxPointer, "Pos", "y"},
+			b = {o, "Pos", "y"},
+			offsets =
+			{
+				{object = {o.box.Size, "height"}}
+			}
+		}
+	end 
+
+	if(data.boxPointer) then
+		o:CreateBoxPointer()
+	end 
+
+	---------------------
 	-- Multiline text?
 	---------------------
 	-- if text doesnt fit box width, break it into multiple lines
@@ -123,52 +178,54 @@ function ChatBox:New(data)
 	end 
 
 
-
 	------------------------------
-	-- Tying Animtaion Functions 
+	-- Typing Animtaion Functions 
 	------------------------------
 
 	-- box overlap text and ruduces width to reveal text
 	function o:SlidingBoxSetup()
-		-- will need to make one for each line
-		-->FIX
-		o.slideBox = {}
-		
-		for i=1, #self.text.multiLineText do
 
-			-- create overly 
-			o.slideBox[#o.slideBox+1] = Box:New
+		-- all boxes are stored together
+		self.slideBox = {}
+
+		-- the number of boxes to create
+		self.slideBoxCount = self.text.multiLineText and #self.text.multiLineText or 1
+
+		--		
+		for i=1, self.slideBoxCount do
+
+			-- create overlay 
+			self.slideBox[#self.slideBox+1] = Box:New
 			{
 				layer = "Overlap",
-				color = Color:GetCopy(o.box.color),
+				color = Color:GetCopy(self.box.color),
 				width = self.box.Size.width,
-				height = self.box.Size.height / # self.text.multiLineText
+				height = self.box.Size.height / self.slideBoxCount
 			}
 
-			o.slideBox[#o.slideBox].slideSpeed = ChatBox.default.slideSpeed
-			o.slideBox[#o.slideBox].slideTotal = 0
+			self.slideBox[#self.slideBox].slideSpeed = ChatBox.default.slideSpeed
+			self.slideBox[#self.slideBox].slideTotal = 0
 
 			Link:Simple
 			{
-				a = {o.slideBox[#o.slideBox], "Pos", "x"},
-				b = {o, "Pos", "x"},
+				a = {self.slideBox[#o.slideBox], "Pos", "x"},
+				b = {self, "Pos", "x"},
 			}
 
 			Link:Simple
 			{
-				a = {o.slideBox[#o.slideBox], "Pos", "y"},
-				b = {o, "Pos", "y"},
+				a = {self.slideBox[#o.slideBox], "Pos", "y"},
+				b = {self, "Pos", "y"},
 				offsets =
 				{
 					{value = {self.text.multiLineYSpace * (i-1)}}
 				}
 			}
-
-
-
 		end 
 
-			o.slideBoxIndex = 1
+		-- create slide box vars
+		self.slideBoxIndex = 1
+		self.slideBoxTotal = #o.slideBox
 	end 
 
 	
@@ -176,7 +233,11 @@ function ChatBox:New(data)
 	function o:SlidingBoxUpdate()
 
 		-- done with all slide boxes?
-		if(self.slideBoxIndex > #self.text.multiLineText) then
+		if(self.slideBoxIndex > self.slideBoxCount) then
+			if(self.Life.drain == false) then
+				self.Life.drain = true
+			end 
+
 			return
 		end 
 		
@@ -184,7 +245,8 @@ function ChatBox:New(data)
 		self.slideBox[self.slideBoxIndex].Size.width = self.slideBox[self.slideBoxIndex].Size.width - self.slideBox[self.slideBoxIndex].slideSpeed
 		self.slideBox[self.slideBoxIndex].Pos.x = self.slideBox[self.slideBoxIndex].Pos.x + self.slideBox[self.slideBoxIndex].slideTotal
 
-		if(self.slideBox[self.slideBoxIndex].Size.width <= 0) then
+		if(self.slideBox[self.slideBoxIndex].Size.width <= 1) then
+			self.slideBox[self.slideBoxIndex].color.a = 0
 			ObjectUpdater:Destroy(self.slideBox[self.slideBoxIndex])
 			self.slideBoxIndex = self.slideBoxIndex +  1
 		end
@@ -201,31 +263,73 @@ function ChatBox:New(data)
 		o.typingAnimation.type = "slidingBox"
 	end 
 	
-
-
 	-- type = {SetupFunction, UpdateFunction}
 	o.typingAnimation.slidingBox = {}
 	o.typingAnimation.slidingBox.SetupFunction = o.SlidingBoxSetup 
 	o.typingAnimation.slidingBox.UpdateFunction = o.SlidingBoxUpdate
 		
+	--------------------
+	-- Close ChatBox
+	--------------------
+	-- timer needs to start AFTER text is done typing
+	-->FIX
+	o.closeType = data.closeType or "timer"
+	if(o.closeType == "timer") then
+		o.Life = Life:New
+		{
+			life = 100,
+			drain = false,
+			parent = o
+		}
+	end 
+	
+
 
 	---------------
 	-- Functions
 	---------------
 
+	-- reveals the text, type writer style
 	function o:UpdateTypingAnimation()
-		-- does self have typing animation?
 		if(self.typingAnimation == nil) then
 			return
 		end 
 
 		self.typingAnimation[self.typingAnimation.type].UpdateFunction(o)
-
 	end 
 
 	function o:Update()
 		self:UpdateTypingAnimation()
+		--self.Pos.x = self.Pos.x + 1
+		--self.Pos.y = self.Pos.y + 1
 	end
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.Pos)
+		ObjectUpdater:Destroy(self.text)
+		ObjectUpdater:Destroy(self.box)
+		ObjectUpdater:Destroy(self.boxPointer)
+		ObjectUpdater:Destroy(self.text)
+		ObjectUpdater:Destroy(self.Life)
+		
+		self.Links:DestroyAll()
+		ObjectUpdater:Destroy(self.Links)
+		
+
+		-- this probly wont be needed
+		-- since destroy timer start after all
+		-- slide boxes have been destroyed
+		-- leave it in for now
+		if(self.slideBox) then
+			for i = self.slideBoxIndex, self.slideBoxTotal do
+				ObjectUpdater:Destroy(self.slideBox[i])
+			end 
+		end
+
+
+
+	end 
 
 	o.typingAnimation[o.typingAnimation.type].SetupFunction(o)
 

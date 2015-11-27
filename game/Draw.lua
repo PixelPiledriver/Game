@@ -209,6 +209,9 @@ function Draw:New(data)
 
 	end 
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end 
 
 
 	----------

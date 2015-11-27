@@ -1,4 +1,4 @@
---MapObject_Objects.lua
+-- MapObject_Objects.lua
 
 -- Purpose
 -------------------------------------

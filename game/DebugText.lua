@@ -54,7 +54,7 @@ DebugText.font = love.graphics.newFont(12)
 DebugText.messageType = 
 {
 	-- Managers
-	ObjectUpdater = false,
+	ObjectUpdater = true,
 	CollisionManager = false,
 	DrawList = false,
 

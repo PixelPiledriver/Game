@@ -19,6 +19,10 @@ function ValueStorage:New()
 		structureType = "Object"
 	}
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)		
+	end 
+
 	return o
 
 end 

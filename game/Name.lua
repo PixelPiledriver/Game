@@ -121,17 +121,17 @@ Name.human.family =
 
 Name.pet =
 {
-	"Bubbles","Bagel","Buddy", "Boots",
+	"Bubbles","Bagel","Buddy", "Boots", "Benny",
+	"Buddy", "Booby",
 	"Crooky", "Cleo",
 	"Egypt", 
 	"Furball","Fuzzy","Fug",
 	"Gatito Puente",
-	"Meat","Monkey","Maximillian",
-	"Smokey","Sylvia",
-	"Runner",
-	"Wiggles", "Weenie",
+	"Meat","Monkey","Max",
+	"Runner", "Rex",
+	"Wiggles", "Weenie", "Woof",
 	"Lady",
-	"Sooty", "Skippy"
+	"Smokey","Sylvia", "Sooty", "Skippy"
 
 }
 
@@ -150,6 +150,7 @@ Name.monster =
 	"Hauz",
 	"Isykklz",
 	"Radish",
+	"Razor",
 	"Skunk",
 	"Worf",
 	"Xiz",

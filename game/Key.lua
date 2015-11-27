@@ -34,7 +34,7 @@ function Key:NewT(data)
 	----------------
 	-- Object Info
 	----------------
-	o.info = Info:New
+	o.Info = Info:New
 	{
 		name = data.name or "...",
 		objectType = "Key",
@@ -45,6 +45,16 @@ function Key:NewT(data)
 	o.key = data.key or nil
 	o.pressed = false
 	o.active = true
+
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end 
+
+
+	-----------
+	-- End
+	-----------
 
 	return o
 

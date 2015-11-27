@@ -1,8 +1,13 @@
--- Shape
+-- Shape.lua
+
+-- Purpose
+-----------------------------------
 -- Group of other objects with multiple boxes inside of it
 
 
--- Rruqi
+---------------
+-- Requires
+---------------
 local Box = require("Box")
 local Color = require("Color")
 
@@ -81,11 +86,18 @@ function Shape:New(data)
 
 
 	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+
 		for i=1, #self.boxes do
 			ObjectUpdater:Destroy(self.boxes[i])
 		end 
 		
 	end 
+
+
+	-------------
+	-- End
+	-------------
 
 	ObjectUpdater:Add{o}
 

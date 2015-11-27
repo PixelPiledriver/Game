@@ -1,5 +1,14 @@
 -- TargetShot.lua
 
+-- Purpose
+----------------------------------
+-- I dont know........
+-- wtf is this?
+
+
+
+-----------------------------------------
+
 
 local TargetShot = {}
 
@@ -31,3 +40,9 @@ end
 
 
 return TargetShot
+
+
+-- Notes
+--------------------
+-- I have no idea what this is
+-->:P

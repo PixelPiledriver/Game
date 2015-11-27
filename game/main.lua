@@ -26,6 +26,7 @@ require("FailNew")
 require("Bool")
 require("Mouse")
 require("Game")
+require("EventLog")
 
 ---------------------------------
 -- Create Important Data Types 
@@ -60,7 +61,7 @@ require("TestCode")
 ----------------------------
 -- Level -- change how this works-->REFACTOR
 --local PixelDrawLevel = require("levels/PixelDrawLevel")
-local MapWorldLevel = require("levels/MapWorldLevel")
+local MapWorldLevel = require("levels.MapWorldLevel")
 
 
 ----------------

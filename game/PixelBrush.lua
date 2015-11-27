@@ -50,7 +50,16 @@ function PixelBrush:New(data)
 	o.pixels = data.pixels
 	o.color = data.color
 
-	return object
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end
+
+	------------
+	-- End
+	------------
+
+	return o
 
 end
 

@@ -10,7 +10,6 @@
 local Color = require("Color")
 local Fade = require("Fade")
 local Life = require("Life")
-local Size = require("Size")
 local Pos = require("Pos")
 
 -----------
@@ -42,14 +41,15 @@ function Point:New(data)
 
 	local o = {}
 
-	---------------	
+	------------------
 	-- Info
-	---------------
-	Info:ObjectOf
+	------------------
+	o.Info = Info:New
 	{
-		static = self,
-		o = o,
-		data = data
+		name = data.name or "...",
+		objectType = "Point",
+		dataType = "Graphics",
+		structureType = "Object"
 	}
 
 
@@ -91,7 +91,7 @@ function Point:New(data)
 	end 
 
 
-	o.components = {"Pos", "Fade", "Size", "Life"}
+	--o.components = {"Pos", "Fade", "Life"}
 
 	---------------
 	-- Functions
@@ -125,14 +125,25 @@ function Point:New(data)
 
 	function o:Destroy()
 
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.Pos)
+		ObjectUpdater:Destroy(self.Fade)
+		ObjectUpdater:Destroy(self.Life)
+
+		--[=[
 		for i=1, #self.components do
 			if(self[self.components[i]]) then
 				ObjectUpdater:Destroy(self[self.components[i]])
 			end 
 		end 
+		--]=]
 	
 	end 
 
+
+	-------------
+	-- End
+	-------------
 
 	ObjectUpdater:Add{o}
 

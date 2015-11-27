@@ -83,6 +83,11 @@ function Health:New(data)
 		return self.hp
 	end 
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end 
+
+
 	----------
 	-- End 
 	----------

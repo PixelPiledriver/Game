@@ -175,8 +175,9 @@ function Mouse:New(data)
 	----------------
 	
 	-- object
-	Mouse.Info = Info:New
+	o.Info = Info:New
 	{
+		name = data.name or "...",
 		objectType = "Mouse",
 		dataType = "Input",
 		structureType = "Object"
@@ -321,6 +322,11 @@ function Mouse:New(data)
 		}
 		
 	end
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.collision)
+	end 
 
 
 	----------

@@ -44,7 +44,7 @@ MapObject.actions = {}
 ----------------------
 -- for controlling any object
 -- not all objects can be controlled by the player
--- should maybe do this in another file
+-- needs to be put into its own file
 
 MapObject.selectedObjectForInput = nil
 MapObject.Input = Input:New{}
@@ -151,7 +151,7 @@ function MapObject:New(data)
 
 	o.selectedActionIndex = 1
 
-	o.selectedAction = "nil"--data.actions[o.selectedActionIndex]
+	o.selectedAction = "nil" --data.actions[o.selectedActionIndex]
 	if(o.actions and o.actions.index) then
 		o.selectedAction = "walk"
 	end 
@@ -172,7 +172,7 @@ function MapObject:New(data)
 			function() 
 				o.direction.x = -1
 				o.direction.y = 0
-				o:UseAction(o.selectedAction) 
+				o:UseAction(o.selectedAction)
 			end
 		}
 
@@ -220,6 +220,7 @@ function MapObject:New(data)
 				-- set action
 				o.selectedAction = o.actions.index[o.selectedActionIndex]
 			
+				EventLog:Add{"Next Action: " .. o.selectedAction, "MapObject"}
 				printDebug{"Next Action: " .. o.selectedAction, "MapObject"}
 		
 			end 
@@ -241,6 +242,7 @@ function MapObject:New(data)
 				-- set action
 				o.selectedAction = o.actions.index[o.selectedActionIndex]
 	
+				EventLog:Add{"Prev Action: " .. o.selectedAction, "MapObject"}
 				printDebug{"Prev Action: " .. o.selectedAction, "MapObject"}
 
 			end 		
@@ -332,6 +334,11 @@ function MapObject:New(data)
 	function o:Update()
 		self.xAbs = self.mapWorld.x + (self.mapWorld.tileWidth * self.x) 
 		self.yAbs = self.mapWorld.y + (self.mapWorld.tileHeight * self.y) 
+	end 
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.Input)
 	end 
 
 

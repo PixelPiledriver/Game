@@ -47,8 +47,7 @@ PixelTexture.defaultPath = "graphics/"
 -- doesnt seem like I need this?
 -- if anything this should be moved over to PixelTexture.lua
 -- and be made a static function
--- untested, not sure if this actually works --> :P
-
+-- untested, not sure if this actually works -->:P
 function ConvertPixelTextureToPoints(pix)
 
 	local xSpace = 7
@@ -756,6 +755,18 @@ function PixelTexture:New(data)
 		self.image:encode(PixelTexture.defaultPath .. self.filename .. self.saveIndex .. ".png", "png")
 		self.saveIndex = self.saveIndex + 1
 	end 
+
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.Scale)
+		ObjectUpdater:Destroy(self.Pos)
+		ObjectUpdater:Destroy(self.Draw)
+	end 
+
+	---------------
+	-- End 
+	---------------
 
 	ObjectUpdater:Add{o}
 

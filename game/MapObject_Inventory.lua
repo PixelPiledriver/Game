@@ -62,11 +62,10 @@ end
 
 
 
-
-
-
-
-
+-- Notes
+-----------------------------
+-- this file does nothing right now
+-->FIX
 
 -- need MapObjects_Item.lua
 

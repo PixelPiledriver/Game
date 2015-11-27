@@ -100,7 +100,7 @@ function Map:MakeTile(data)
 	-- Functions
 	--------------
 
-	function object:VerticalCushion()
+	function o:VerticalCushion()
 		if(o.objectOnTop) then
 			self.z = self.z + self.cushionSpeed
 
@@ -122,7 +122,7 @@ function Map:MakeTile(data)
 
 	end
 
-	function object:Offset()
+	function o:Offset()
 		self.box.y = self.y + self.z
 	end 
 
@@ -141,12 +141,22 @@ function Map:MakeTile(data)
 	end 
 
 	-- add to Map
-	self.tiles.x[data.xIndex].y[data.yIndex] = object
+	self.tiles.x[data.xIndex].y[data.yIndex] = o
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.box)
+	end
+
+
+	------------
+	-- End
+	------------
 
 	-- add to object manager
-	ObjectUpdater:Add{object}
+	ObjectUpdater:Add{o}
 
-	return object
+	return o
 end
 
 

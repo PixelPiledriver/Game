@@ -49,6 +49,11 @@ App.Input = Input:New
 
 
 
+function App:Destroy()
+	ObjectUpdater:Destroy(self.Info)
+	ObjectUpdater:Destroy(self.Input)
+
+end 
 ---------------
 -- Static End
 ---------------

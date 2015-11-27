@@ -29,12 +29,24 @@ function Life:New(data)
 
 	local o = {}
 
+	-----------
+	-- Fails
+	-----------
+	if(data.parent == nil) then
+		printDebug{"Fail: Life requires data.parent", "Fail"}
+		return
+	end 
+
 	------------------
-	-- Object Info
+	-- Info
 	------------------
-	o.name = data.name or "..."
-	o.objectType = "Life"
-	o.dataType = "Component"
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Life",
+		dataType = "Component",
+		structureType = "Object"
+	}
 
 	
 	----------------
@@ -77,7 +89,6 @@ function Life:New(data)
 	function o:CheckDead()
 		
 		if(self.life <= 0) then
-			--ObjectUpdater:Destroy(self)
 			ObjectUpdater:Destroy(self.parent)
 		end 
 
@@ -103,6 +114,10 @@ function Life:New(data)
 	function o:Reset()
 		self.life = self.maxLife
 	end
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end 
 
 
 	ObjectUpdater:Add{o}

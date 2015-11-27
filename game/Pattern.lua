@@ -4,7 +4,7 @@
 ----------------------------------------------
 -- table of values to step thru
 -- the values are applied to an object that the pattern object is a part of
--- or you can define what objec it should apply itself to
+-- or you can define what object it should apply itself to
 -- it does so by using an index of the variables it holds
 -- and applies each to the object.variable of the same name
 
@@ -57,7 +57,13 @@ function Pattern:New(data)
 	-- Functions
 	--------------
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end 
 
+	-------------
+	-- End
+	-------------
 	ObjectUpdater:Add{o}
 
 	return o

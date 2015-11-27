@@ -59,6 +59,10 @@ Panel.objectDirections = {"left, right, up, down"}
 function Panel:New(data)
 
 	local o = {}
+
+	----------
+	-- Info
+	----------
 	o.Info = Info:New
 	{
 		name = "...",
@@ -471,7 +475,22 @@ function Panel:New(data)
 		}
 	end 
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.map)
+		ObjectUpdater:Destroy(self.Size)
+		ObjectUpdater:Destroy(self.Pos)
+		ObjectUpdater:Destroy(self.Draw)
+		ObjectUpdater:Destroy(self.box)
+		ObjectUpdater:Destroy(self.topFrame)
+		ObjectUpdater:Destroy(self.topCollision)
+		ObjectUpdater:Destroy(self.hover)
+		ObjectUpdater:Destroy(self.drag)
+	end 
 
+	-------------
+	-- End
+	-------------
 
 	ObjectUpdater:Add{o}
 

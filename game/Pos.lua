@@ -34,6 +34,7 @@ Pos.defaultPos =
 
 -- is this even needed? :P
 -- adds component to given parent using given data
+-- this can be deleted I think
 --{parent, data}
 function Pos:AddComponent(parent, posTable)
 	parent.componentsIndex[#parent.componentsIndex+1] = "Pos"
@@ -51,13 +52,17 @@ function Pos:New(data)
 
 	local o = {}
 
-	Info:ObjectOf
+	----------------
+	-- Info
+	----------------
+	o.Info = Info:New
 	{
-		static = self,
-		o = o,
-		data = data,
-		structureType = "Component"
+		name = data.name or "...",
+		objectType = "Pos",
+		dataType = "Transform",
+		structureType = "Object"
 	}
+
 
 	o.parent = data.parent
 
@@ -156,6 +161,10 @@ function Pos:New(data)
 		}
 	end
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(o.Info)
+	end 
+
 	-------------
 	-- Debug
 	-------------
@@ -168,11 +177,14 @@ function Pos:New(data)
 	end 
 
 	
+
+	-------------
+	-- End 
+	-------------
+	
 	ObjectUpdater:Add{o}
 
-	-- done!	
 	return o
-
 
 end 
 

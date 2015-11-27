@@ -75,6 +75,10 @@ function Info:New(data)
 	self:AddObjectType(data)
 	self:AddStructureType(data)
 
+	function o:Destroy()
+		self.Info = nil
+	end 
+
 	----------
 	-- End
 	----------

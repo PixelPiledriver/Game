@@ -39,7 +39,7 @@ function Bool:ToString(b)
 end 
 
 -- toggle given bool based on current state
--- assign the return value of give bool to bool --> weird I know but thats how it works :P
+-- assign the return value of given bool to bool --> weird I know but thats how it works :P
 -- b = bool
 function Bool:Toggle(b)
 	if(b) then

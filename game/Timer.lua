@@ -12,7 +12,7 @@ local Timer = {}
 -- Static Info
 ----------------
 
-#.Info = Info:New
+Timer.Info = Info:New
 {
 	objectType = "Timer",
 	dataType = "Time",
@@ -26,7 +26,7 @@ local Timer = {}
 
 function Timer:New(data)
 	
-	local object = {}	
+	local o = {}	
 
 	-------------
 	-- Info
@@ -35,43 +35,60 @@ function Timer:New(data)
 	o.Info = Info:New
 	{
 		name = data.name or "...",
-		objectType = "",
-		dataType = "",
+		objectType = "Timer",
+		dataType = "Time",
 		structureType = "Object"
 	}
 
-	function object:GetDeltaTimeSec()
+	function o:GetDeltaTimeSec()
 		return love.timer.getTime() - self.StartTime
 	end
 
-	function object:GetDeltaTimeMs()
+	function o:GetDeltaTimeMs()
 		return love.timer.getTime() * 1000 - self.StartTime * 1000 
 	end
 
-	function object:StartTimer()
+	function o:StartTimer()
 		self.StartTime = love.timer.getTime()	
 	end
 
-	function object:ResetTimer()
+	function o:ResetTimer()
 		self.StartTime = love.timer.getTime()
 	end
 
 	-- return x amount of time has passed (in seconds)
-	function object:TimeElapsedSec(numofSeconds)
+	function o:TimeElapsedSec(numofSeconds)
 		if(GetDeltaTimeSec >= numofSeconds) then
 			return true
 		end
 	end
 
 	-- return x amount of time has passed (in milliseconds)
-	function object:TimeElapsedMs(numofMilliseconds)
-		if(object:GetDeltaTimeMs() >= numofMilliseconds) then
+	function o:TimeElapsedMs(numofMilliseconds)
+		if(o:GetDeltaTimeMs() >= numofMilliseconds) then
 			return true
 		end
 	end
 
-	object:StartTimer()
-	
-	return object
+	o:StartTimer()
+
+
+	function o:Destroy()
+		ObjectUpdater:Destroy(o.Info)
+	end 
+
+	-------------
+	-- End
+	-------------
+
+	return o
+
 end
+
+
 return Timer
+
+
+-- Notes
+--------------------
+-- old

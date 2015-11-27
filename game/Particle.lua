@@ -33,10 +33,10 @@ Particle.Info = Info:New
 
 function Particle:New(data)
 
-	local object = {}
+	local o = {}
 
 	------------------
-	-- Object Info
+	-- Info
 	------------------
 	o.Info = Info:New
 	{
@@ -49,48 +49,48 @@ function Particle:New(data)
 	-----------------------------
 	-- Pos
 	-----------------------------
-	object.xOffset = data.xOffset and data.xOffset.Get() or 0
-	object.x = data.x + object.xOffset
-	object.yOffset = data.yOffset and data.yOffset.Get() or 0
-	object.y = data.y + object.yOffset or 0
+	o.xOffset = data.xOffset and data.xOffset.Get() or 0
+	o.x = data.x + o.xOffset
+	o.yOffset = data.yOffset and data.yOffset.Get() or 0
+	o.y = data.y + o.yOffset or 0
 
 	if(data.verts) then
 		local vert = data.verts.Get()
-		object.x = data.x + vert[1] * data.vertSpace
-		object.y = data.y + vert[2] * data.vertSpace
+		o.x = data.x + vert[1] * data.vertSpace
+		o.y = data.y + vert[2] * data.vertSpace
 	end 
 
 	-----------------------------
 	-- Size
 	-----------------------------
-	object.width = data.width.Get()
-	object.height = data.height.Get()
+	o.width = data.width.Get()
+	o.height = data.height.Get()
 
 	----------------------------
 	-- Scale
 	----------------------------
-	object.scale = {}
-	object.scale.xSpeed = data.scale.xSpeed
-	object.scale.ySpeed = data.scale.ySpeed
-	object.scale.x = data.scale.x and data.scale.x.Get() or 1
-	object.scale.y = data.scale.y and data.scale.y.Get() or 1
-	object.scale.min = 0
-	object.scale.max = data.scale.max or 10
+	o.scale = {}
+	o.scale.xSpeed = data.scale.xSpeed
+	o.scale.ySpeed = data.scale.ySpeed
+	o.scale.x = data.scale.x and data.scale.x.Get() or 1
+	o.scale.y = data.scale.y and data.scale.y.Get() or 1
+	o.scale.min = 0
+	o.scale.max = data.scale.max or 10
 
 	----------------------------
 	-- Flip
 	----------------------------
-	object.xFlip = data.xFlip and data.xFlip:Get() or 0
-	object.yFlip = data.yFlip and data.yFlip:Get() or 0
-	object.xFlipDamp = data.xFlipDamp and data.xFlipDamp:Get() or 0
-	object.yFlipDamp = data.yFlipDamp and data.yFlipDamp:Get() or 0
+	o.xFlip = data.xFlip and data.xFlip:Get() or 0
+	o.yFlip = data.yFlip and data.yFlip:Get() or 0
+	o.xFlipDamp = data.xFlipDamp and data.xFlipDamp:Get() or 0
+	o.yFlipDamp = data.yFlipDamp and data.yFlipDamp:Get() or 0
 
 	----------------------------
 	-- Spin
 	----------------------------
-	object.spin = data.spin and data.spin.Get() or 0
-	object.angle = data.angle and data.angle.Get() or 0
-	object.spinDamp = data.spinDamp and data.spinDamp.Get() or 1
+	o.spin = data.spin and data.spin.Get() or 0
+	o.angle = data.angle and data.angle.Get() or 0
+	o.spinDamp = data.spinDamp and data.spinDamp.Get() or 1
 
 	-----------------
 	-- Color
@@ -98,13 +98,13 @@ function Particle:New(data)
 	local color = data.color and data.color.Get() or "white"
 
 	-- color interpolation
-	object.interpolateColor = data.interpolateColor or false
-	object.colorMod = data.colorMod or nil
+	o.interpolateColor = data.interpolateColor or false
+	o.colorMod = data.colorMod or nil
 
-	if(object.colorMod) then
-		object.colors = {}
-		object.colors = data.colors.Get()
-		color = object.colors[1]
+	if(o.colorMod) then
+		o.colors = {}
+		o.colors = data.colors.Get()
+		color = o.colors[1]
 	end 
 
 
@@ -114,32 +114,32 @@ function Particle:New(data)
 	local fill = data.fill and data.fill.Get()
 	
 	if(fill == nil) then
-		object.fill = true
+		o.fill = true
 	else 
-		object.fill = fill
+		o.fill = fill
 	end 
 	
 	-----------------------------
 	-- Box
 	-----------------------------
 
-	object.box = Box:New
+	o.box = Box:New
 	{
-		x = object.x,
-		y = object.y,
+		x = o.x,
+		y = o.y,
 		color = Color:Get(color),
-		width = object.width * object.scale.x,
-		height = object.height * object.scale.y,
-		fill = object.fill,
-		angle = object.angle,
+		width = o.width * o.scale.x,
+		height = o.height * o.scale.y,
+		fill = o.fill,
+		angle = o.angle,
 		rotatable = true,
-		spin = object.spin,
+		spin = o.spin,
 		draw = true,
-		xFlip = object.xFlip,
-		yFlip = object.yFlip,
+		xFlip = o.xFlip,
+		yFlip = o.yFlip,
 	}
 
-	--object.shape = Shape:Get("cross")
+	--o.shape = Shape:Get("cross")
 
 	
 
@@ -148,17 +148,17 @@ function Particle:New(data)
 	-- Fade
 	-----------------------------
 
-	object.fade = data.fade or 0
-	object.fadeWithLife = data.fadeWithLife or false
+	o.fade = data.fade or 0
+	o.fadeWithLife = data.fadeWithLife or false
 
 	-- inverse
-	object.inverseFade = data.inverseFade and data.inverseFade.Get() or false
-	if(object.inverseFade == true) then
-		object.box.color[4] = 0 
+	o.inverseFade = data.inverseFade and data.inverseFade.Get() or false
+	if(o.inverseFade == true) then
+		o.box.color[4] = 0 
 	end 
 
-	object.box.color[4] = data.alpha and data.alpha.Get() or object.box.color[4]
-	object.alphaStart = object.box.color[4]
+	o.box.color[4] = data.alpha and data.alpha.Get() or o.box.color[4]
+	o.alphaStart = o.box.color[4]
 
 	
 
@@ -174,39 +174,39 @@ function Particle:New(data)
 		dir.y = data.ySpeed or 0
 	end 
 
-	object.xSpeed = dir.x
-	object.ySpeed = dir.y
+	o.xSpeed = dir.x
+	o.ySpeed = dir.y
 
 	-----------------------------
 	-- Rotational Direction
 	-----------------------------
 	if(data.rotDirection) then
-		object.rotDirection = {}
-		object.rotDirection.angle = math.deg(Math:VectorToAngle(dir))
-		object.rotDirection.speed =  data.rotDirection.Get()
+		o.rotDirection = {}
+		o.rotDirection.angle = math.deg(Math:VectorToAngle(dir))
+		o.rotDirection.speed =  data.rotDirection.Get()
 	end
 
 	
 
 	if(data.rotDirectionLerp) then
-		object.rotDirectionLerp = {}
-		object.rotDirectionLerp.speed = data.rotDirectionLerp.speed.Get()
-		object.rotDirectionLerp.angle = data.rotDirectionLerp.angle.Get()
-		object.rotDirectionLerp.t = 0
+		o.rotDirectionLerp = {}
+		o.rotDirectionLerp.speed = data.rotDirectionLerp.speed.Get()
+		o.rotDirectionLerp.angle = data.rotDirectionLerp.angle.Get()
+		o.rotDirectionLerp.t = 0
 	end
 
 	------------------------
 	-- Speed
 	------------------------
-	object.speed = data.speed and data.speed.Get() or 1
-	object.speedDamp = data.speedDamp and data.speedDamp.Get() or 1
+	o.speed = data.speed and data.speed.Get() or 1
+	o.speedDamp = data.speedDamp and data.speedDamp.Get() or 1
 
 	-------------------------
 	-- Life
 	-------------------------
-	object.life = data.life.Get() or 100
-	object.lifeStart = object.life
-	object.lifeSpeed = data.lifeSpeed.Get() or 1
+	o.life = data.life.Get() or 100
+	o.lifeStart = o.life
+	o.lifeSpeed = data.lifeSpeed.Get() or 1
 	
 
 
@@ -215,10 +215,10 @@ function Particle:New(data)
 	----------------------------
 	-- DebugText Variables --> can disable these later
 	----------------------------
-	object.lerpValue = nil
-	object.colorIndex = nil
-	object.bIndex = nil
-	object.lifePercentage = nil
+	o.lerpValue = nil
+	o.colorIndex = nil
+	o.bIndex = nil
+	o.lifePercentage = nil
 
 
 
@@ -227,7 +227,7 @@ function Particle:New(data)
 	-------------------------------
 
 
-	function object:Move()
+	function o:Move()
 		self.x = self.x + (self.speed * self.xSpeed)
 		self.y = self.y + (self.speed * self.ySpeed)
 
@@ -247,7 +247,7 @@ function Particle:New(data)
 		self.speed = self.speed * self.speedDamp
 	end 
 
-	function object:RotDirection()
+	function o:RotDirection()
 		
 		if(self.rotDirection == nil) then
 			return
@@ -276,7 +276,7 @@ function Particle:New(data)
 	end 
 
 
-	function object:Life()
+	function o:Life()
 		self.life = self.life - self.lifeSpeed
 
 		if(self.life <= 0) then
@@ -295,7 +295,7 @@ function Particle:New(data)
 	end 
 
 
-	function object:Fade()
+	function o:Fade()
 
 		-- matches fade exactly with end of life
 		if(self.fadeWithLife) then
@@ -335,7 +335,7 @@ function Particle:New(data)
 	end 
 
 	-- modulate color over life
-	function object:ColorModulate()
+	function o:ColorModulate()
 		
 		if(self.colorMod == nil) then
 			return 
@@ -428,7 +428,7 @@ function Particle:New(data)
 
 	-- change size of particle over time
 	Particle.scaleSpeedReduce = 0.001
-	function object:Scale()
+	function o:Scale()
 
 		self.scale.x = self.scale.x + (self.scale.xSpeed * Particle.scaleSpeedReduce)
 		self.scale.y = self.scale.y + (self.scale.ySpeed * Particle.scaleSpeedReduce)
@@ -448,14 +448,14 @@ function Particle:New(data)
 
 	end 
 
-	function object:Spin()
+	function o:Spin()
 		self.box.spin = self.box.spin * self.spinDamp
 	end 
 
-	function object:Flip()
+	function o:Flip()
 	end
 
-	function object:Update()
+	function o:Update()
 		self:Move()
 		self:Life()
 		self:ColorModulate()
@@ -466,7 +466,7 @@ function Particle:New(data)
 		self:Flip()
 	end 
 
-	function object:PrintDebugText()
+	function o:PrintDebugText()
 
 		local colorIndex = self.colorIndex or "Not set"
 		local bIndex = self.bIndex or "Not set"
@@ -484,7 +484,7 @@ function Particle:New(data)
 
 	end
 
-	function object:Destroy()
+	function o:Destroy()
 
 		if(self.box) then
 			ObjectUpdater:Destroy(self.box)
@@ -496,10 +496,14 @@ function Particle:New(data)
 	end 
 
 
-	ObjectUpdater:Add{object}
 
+	---------------
+	-- End
+	---------------
 
-	return object
+	ObjectUpdater:Add{o}
+
+	return o
 
 end 
 

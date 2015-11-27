@@ -1405,18 +1405,26 @@ function Color:New(data)
 
 	local o = {}
 
+	------------------
+	-- Info
+	------------------
+	o.Info = Info:New
+	{
+		name = data.name or "...",
+		objectType = "Color",
+		dataType = "Graphics",
+		structureType = "Object"
+	}
 
-	-- object
+	--------------
+	-- Vars
+	--------------
 	o.name = data.name or "..."
-	o.objectType = "Color"
-	o.dataType = "Graphics"
-
 
 	o.r = data.r or 256
 	o.g = data.g or 256
 	o.b = data.b or 256
 	o.a = data.a or 256
-
 
 	------------------
 	-- Functions
@@ -1432,6 +1440,9 @@ function Color:New(data)
 		return (self.r + self.g + self.b) / 3
 	end
 
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end 
 
 	----------
 	-- End

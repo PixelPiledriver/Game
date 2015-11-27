@@ -53,9 +53,13 @@ function Canvas:New(data)
 		structureType = "Object"
 	}
 
-	-- done
 
-
+	---------------
+	-- Functions
+	---------------
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+	end 
 
 	----------
 	-- End

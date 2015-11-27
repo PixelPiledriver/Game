@@ -50,14 +50,16 @@ function o:New(data)
 	----------------
 
 	function o:Use()
-		o.func(o.arguments)
+		self.func(o.arguments)
 	end
 
 	function o:Destroy()
-		o.name = nil
-		o.func = nil
-		o.arguments = nil
-		o.argumentIndex = nil
+		self.name = nil
+		self.func = nil
+		self.arguments = nil
+		sefl.argumentIndex = nil
+
+		ObjectUpdater:Destroy(self.Info)
 	end 
 
 	return o

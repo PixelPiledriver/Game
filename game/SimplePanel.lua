@@ -703,9 +703,34 @@ function Panel:New(data)
 
 	end 
 
---------
--- End
---------
+	function o:Destroy()
+		ObjectUpdater:Destroy(self.Info)
+		ObjectUpdater:Destroy(self.map)
+		ObjectUpdater:Destroy(self.Size)
+		ObjectUpdater:Destroy(self.SizeMinimized)
+
+		ObjectUpdater:Destroy(self.Pos)
+		ObjectUpdater:Destroy(self.Draw)
+
+		ObjectUpdater:Destroy(self.frame)
+		ObjectUpdater:Destroy(self.bar)
+		ObjectUpdater:Destroy(self.barCollision)
+		ObjectUpdater:Destroy(self.title)
+
+		ObjectUpdater:Destroy(self.openCloseButton)
+		ObjectUpdater:Destroy(self.scrollResetButton)
+		ObjectUpdater:Destroy(self.scrollUpButton)
+		ObjectUpdater:Destroy(self.scrollDownButton)
+
+		ObjectUpdater:Destroy(self.DrawGroup)
+
+		ObjectUpdater:Destroy(self.hover)
+		ObjectUpdater:Destroy(self.drag)
+	end 
+
+	--------
+	-- End
+	--------
 
 	ObjectUpdater:Add{o}
 
