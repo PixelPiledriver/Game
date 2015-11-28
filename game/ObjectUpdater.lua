@@ -42,10 +42,13 @@ ObjectUpdater.componentTypes.index = {}
 ObjectUpdater.destroyObjects = false
 
 -- debug text options
-ObjectUpdater.printAllObjectsInDebugText = false
-ObjectUpdater.printAllStaticsInDebugText = false
+ObjectUpdater.printAllObjectsInDebugText = true
+ObjectUpdater.printAllStaticsInDebugText = true
 ObjectUpdater.printTotalObjectTypes = false
 ObjectUpdater.printComponents = false
+
+-- object tracking options
+ObjectUpdater.excludeNewFromLevel = false
 
 ----------------------
 -- Static Functions
@@ -72,6 +75,20 @@ function ObjectUpdater:Add(objects)
 			self:AddComponentType(objects[i])
 		end
 	end 
+
+	-- add to level object list, unless excluded
+	for i=1, #objects do
+		
+		if(self.excludeNewFromLevel == false) then
+			if(objects[i].Info.name == "fuckyou") then
+				--print(objects[i].Info.objectType .. ": what the fuck")
+			end 
+			LevelManager:ObjectCreatedByLevel(objects[i])
+		end 
+		if(i > 1) then
+			print("yes its higher than 1")
+		end 
+	end
 
 end 
 
@@ -232,12 +249,12 @@ function ObjectUpdater:PrintDebugText()
 		staticNames[3] = {text = "------------"}
 
 		for i=1, #self.statics do
-			local sName = self.statics[i].name or "..."
-			local sOType = self.statics[i].objectType or "___"
-			local sDataType = self.statics[i].dataType or "***" 
+			local sName = self.statics[i].Info.objectType or "..."
+			local sOType = self.statics[i].Info.dataType or "___"
+			local sDataType = self.statics[i].Info.structureType or "***" 
 
 			staticNames[#staticNames+1] = {}
-			staticNames[#staticNames].text = sName .. " | " .. sOType .. " | " .. sDataType
+			staticNames[#staticNames].text = sName .. " - " .. sOType .. " - " .. sDataType
 
 		end 
 
@@ -249,16 +266,19 @@ function ObjectUpdater:PrintDebugText()
 	if(ObjectUpdater.printAllObjectsInDebugText) then
 		local objectNames = {}
 		objectNames[1] = {text = "", obj = "ObjectUpdater"}
+		objectNames[2] = {text = "Objects"}
+		objectNames[3] = {text = "------------"}
 
 		for i=1, #self.objects do
 
-			local oName = self.objects[i].name or "..."
-			local objectType = self.objects[i].objectType or "___"
-			local oDataType = self.objects[i].dataType or "***"
+			local oName = self.objects[i].Info.name or "..."
+			local objectType = self.objects[i].Info.objectType or "___"
+			local oDataType = self.objects[i].Info.dataType or "***"
+			local oStructureType = self.objects[i].Info.structureType or "xxx"
 
 
 			objectNames[#objectNames + 1] = {}
-			objectNames[#objectNames].text = oName .. "| " .. objectType .. " | " .. oDataType
+			objectNames[#objectNames].text = oName .. " - " .. objectType .. " - " .. oDataType .. " - " .. oStructureType
 			
 		end 
 

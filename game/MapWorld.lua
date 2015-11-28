@@ -44,7 +44,7 @@ function MapWorld:New(data)
 		emptySlotDefault =
 		{
 			type = "empty",
-			name = "balls",
+			name = "empty Space",
 			x = 0,
 			y = 0,
 			reactions = 

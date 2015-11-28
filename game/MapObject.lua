@@ -220,7 +220,7 @@ function MapObject:New(data)
 				-- set action
 				o.selectedAction = o.actions.index[o.selectedActionIndex]
 			
-				EventLog:Add{"Next Action: " .. o.selectedAction, "MapObject"}
+				--EventLog:Add{"Next Action: " .. o.selectedAction, "MapObject"}
 				printDebug{"Next Action: " .. o.selectedAction, "MapObject"}
 		
 			end 
@@ -242,7 +242,7 @@ function MapObject:New(data)
 				-- set action
 				o.selectedAction = o.actions.index[o.selectedActionIndex]
 	
-				EventLog:Add{"Prev Action: " .. o.selectedAction, "MapObject"}
+				--EventLog:Add{"Prev Action: " .. o.selectedAction, "MapObject"}
 				printDebug{"Prev Action: " .. o.selectedAction, "MapObject"}
 
 			end 		

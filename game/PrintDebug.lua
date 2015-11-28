@@ -48,9 +48,10 @@ printList.MapTable = {false, false}
 printList.Mouse = {false, false}
 printList.MapObject = {true, false}
 printList.ChatBox = {true, false}
-printList.Links = {true, false}
+printList.Links = {false, false}
 printList.ObjectUpdater = {false, false}
 printList.Fail = {true, false}
+printList.LevelManager = {true, false}
 
 
 

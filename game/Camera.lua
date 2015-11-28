@@ -175,14 +175,14 @@ end
 
 
 function Camera:PostDraw()
-	---[[
+	
 	local o = 
 	{
 		x = love.graphics.getWidth() / 2,
 		y = love.graphics.getHeight() / 2
 	}
 	love.graphics.translate(o.x, o.y)
-	--]]
+	
 
 	love.graphics.pop()
 end 

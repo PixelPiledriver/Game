@@ -82,5 +82,9 @@ return Links
 
 -- Notes
 --------------------
+-- sort of a bullshit component
+-- but for now I'll allow it to exist
+-- down the road this may be phased out
+
 -- this object should be simplified into something that
 -- can clean up any object type

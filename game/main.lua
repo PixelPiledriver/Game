@@ -10,6 +10,7 @@
 -- Utilities and Globals
 ---------------------------
 require("MemoryManager")
+require("LevelManager")
 require("ObjectUpdater")
 require("Info")
 require("CollisionManager")
@@ -27,6 +28,12 @@ require("Bool")
 require("Mouse")
 require("Game")
 require("EventLog")
+require("Level")
+
+-- Post Utilities
+----------------------
+LevelManager:PostRequire()
+
 
 ---------------------------------
 -- Create Important Data Types 
@@ -53,15 +60,15 @@ local Text = require("Text")
 ----------------------
 -- Run Test Code
 ----------------------
-require("TestCode")
+-- this is pretty much useless now
+-->REMOVE
+require("TestCode") 
 
 
 ----------------------------
 -- Vars
 ----------------------------
--- Level -- change how this works-->REFACTOR
---local PixelDrawLevel = require("levels/PixelDrawLevel")
-local MapWorldLevel = require("levels.MapWorldLevel")
+
 
 
 ----------------
@@ -82,34 +89,35 @@ local MapWorldLevel = require("levels.MapWorldLevel")
 		-- manual camera object -->REFACTOR
 		ObjectUpdater:AddCamera(Camera)
 
-		-- Load your level here
-		--PixelDrawLevel:Load()
-		MapWorldLevel:Load()
+		LevelManager:Setup()
+
 
 	end 
 
 
 	-- for each frame step
 	function love.update(dt)
+
+		-- time and frame rate -->CHANGE
 		deltaTime = dt
 		FrameCounter:Update(dt)
 
+		-- objects
 		ObjectUpdater:Update()
+
+		-- Input
 		ObjectUpdater:RepeatedInput()
 		Controller.Update()
+
+		-- collision
 		CollisionManager:Update()
 
-		--PixelDrawLevel:Update()
-		MapWorldLevel:Update()
+		-- Level/Scene
+		LevelManager:UpdateLevel()
 		
-
-		-- Post Update
+		-- things to do after
 		PostUpdate(dt)
 		
-		-- this should happen somewhere else
-		-- Window.lua, Graphics.lua or something ->MOVE to Graphics.lua
-		love.graphics.clear()
-
 	end 
 
 	-- after all objects have updated
@@ -153,5 +161,34 @@ local MapWorldLevel = require("levels.MapWorldLevel")
 -- Notes
 ---------------------------------------
 -->FIX fps counter
+
+
+
+
+-- Junk
+-------------------------------------------------
+
+-- old level style stuff
+
+
+
+-- Level 
+-- change how this works
+-->REFACTOR
+--local PixelDrawLevel = require("levels/PixelDrawLevel")
+--local MapWorldLevel = require("levels/MapWorldLevel")
+
+
+		-- Load your level here
+		--PixelDrawLevel:Load()
+		--MapWorldLevel:Load()
+
+
+--PixelDrawLevel:Update()
+--MapWorldLevel:Update()
+
+
+
+
 
 

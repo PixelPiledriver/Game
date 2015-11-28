@@ -43,7 +43,9 @@ App.Input = Input:New
 {
 	keys = 
 	{ 
-		{ "escape", "press", App.QuitGameInput}
+		{ "escape", "press", App.QuitGameInput},
+		{ "z", "press", LevelManager.ExitLevel, LevelManager},
+		{ "x", "press", LevelManager.StartDefaultLevel, LevelManager}
 	}
 }
 

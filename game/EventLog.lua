@@ -38,9 +38,12 @@ EventLog.maxCount = 5
 EventLog.ySpace = 18
 EventLog.eventIndex = 1
 
+-- this is the rogue object at the start of main
+-- with no objects loaded
 EventLog.Pos = Pos:New
 {
-	x = love.window.getWidth() * 0.05, 
+	--x = love.window.getWidth() * 0.05, 
+	x = love.window.getWidth() * 0.4, 
 	y = love.window.getHeight() * 0.95
 }
 
@@ -54,6 +57,10 @@ EventLog.priority =
 
 function EventLog:Add(data)
 
+	ObjectUpdater.excludeNewFromLevel = true
+
+	--print(ObjectUpdater.excludeNewFromLevel)
+
 	local priority = data[3] or 1
 
 	if(self.priority[priority] == false) then
@@ -64,6 +71,7 @@ function EventLog:Add(data)
 		self.eventTexts[self.eventIndex] = Text:New
 		{
 			text = data[1],
+			name = "fuckyou"
 		}
 	else
 		-- remove old text
@@ -74,8 +82,12 @@ function EventLog:Add(data)
 		self.eventTexts[self.eventIndex] = Text:New
 		{
 			text = data[1],
+			name = "no"
 		}		
 	end 
+
+	-- set x
+	self.eventTexts[self.eventIndex].Pos.x = self.Pos.x
 
 	-- place new text at bottom of diplayed list
 	self.eventTexts[self.eventIndex].Pos.y = self.Pos.y - self.ySpace
@@ -100,28 +112,11 @@ function EventLog:Add(data)
 		self.eventIndex = 1
 	end 
 
-end 
-
-function EventLog:Add2(data)
-	self.allEvents[#self.allEvents+1] = data
-
-	self.eventTexts[#self.eventTexts+1] = Text:New
-	{
-		text = data[1],
-		objectType = data[2]
-	}
-
-	self.eventTexts[#self.eventTexts].Pos.x = self.Pos.x
-	self.eventTexts[#self.eventTexts].Pos.y = self.Pos.y + (#self.eventTexts * self.ySpace)
-	self.Pos.y = self.Pos.y - self.ySpace
-
-	-- push other messages up
-	-- this is only used for nonslide mode
-	for i=1, #self.eventTexts do
-		self.eventTexts[i].Pos.y = self.eventTexts[i].Pos.y - self.ySpace
-	end 
+	ObjectUpdater.excludeNewFromLevel = false
 
 end 
+
+
 
 function EventLog:Update()
 end 
@@ -148,3 +143,45 @@ end
 -- different types
 -- for now just going to do a stack of 5-10 events
 -- that it clears as it pushes them out
+
+
+
+
+-- Junk
+----------------------------------------------
+
+
+--[[
+
+
+function EventLog:Add2(data)
+	self.allEvents[#self.allEvents+1] = data
+
+	self.eventTexts[#self.eventTexts+1] = Text:New
+	{
+		text = data[1],
+		objectType = data[2]
+	}
+
+	self.eventTexts[#self.eventTexts].Pos.x = self.Pos.x
+	self.eventTexts[#self.eventTexts].Pos.y = self.Pos.y + (#self.eventTexts * self.ySpace)
+	self.Pos.y = self.Pos.y - self.ySpace
+
+	-- push other messages up
+	-- this is only used for nonslide mode
+	for i=1, #self.eventTexts do
+		self.eventTexts[i].Pos.y = self.eventTexts[i].Pos.y - self.ySpace
+	end 
+
+end 
+
+
+
+
+
+
+
+
+
+
+--]]

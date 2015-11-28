@@ -88,6 +88,6 @@ function Window:PrintDebugText()
 end
 
 
-ObjectUpdater:Add{Window}
+ObjectUpdater:AddStatic(Window)
 
 return Window
