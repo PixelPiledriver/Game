@@ -91,6 +91,8 @@ require("TestCode")
 
 		LevelManager:Setup()
 
+		ObjectUpdater:DestroyAllObjectsOwnedBy("shit")
+
 
 	end 
 

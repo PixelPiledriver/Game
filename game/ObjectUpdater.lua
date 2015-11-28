@@ -48,7 +48,12 @@ ObjectUpdater.printTotalObjectTypes = false
 ObjectUpdater.printComponents = false
 
 -- object tracking options
-ObjectUpdater.excludeNewFromLevel = false
+ObjectUpdater.newObjectsOwnedBy = nil
+ObjectUpdater.newObjectsOwnedBySave = nil
+
+-- flag for noting when Add actions should not occur
+-- because the objects are not new, but added after a destroy
+ObjectUpdater.rebuilding = false
 
 ----------------------
 -- Static Functions
@@ -71,27 +76,25 @@ function ObjectUpdater:Add(objects)
 	for i=1, #objects do
 		self.objects[#self.objects+1] = objects[i]
 
-		if(objects[i].dataType == "Component") then
-			self:AddComponentType(objects[i])
-		end
-	end 
+		-- new object or being added after a destroy clear?
+		if(self.rebuilding == false) then
 
-	-- add to level object list, unless excluded
-	for i=1, #objects do
-		
-		if(self.excludeNewFromLevel == false) then
-			if(objects[i].Info.name == "fuckyou") then
-				--print(objects[i].Info.objectType .. ": what the fuck")
-			end 
-			LevelManager:ObjectCreatedByLevel(objects[i])
+			-- new component type?
+			if(objects[i].dataType == "Component") then
+				self:AddComponentType(objects[i])
+			end
+
+			-- a level may be running, set it as the owner of this object
+			self.objects[#self.objects].ownedBy = self.newObjectsOwnedBy
 		end 
-		if(i > 1) then
-			print("yes its higher than 1")
-		end 
-	end
+
+	end 
 
 end 
 
+-- add to the list of component type names
+-- this serves no real purpose for now
+-- it is just some data to record
 function ObjectUpdater:AddComponentType(object)
 	if(self.componentTypes[object.objectType] == nil) then
 		self.componentTypes[object.objectType] = true
@@ -99,7 +102,28 @@ function ObjectUpdater:AddComponentType(object)
 	end 
 end 
 
+-- used on a level Exit
+-- any objects owned by the level are removed
+function ObjectUpdater:DestroyAllObjectsOwnedBy(ownerName)
+	
+	--print(ownerName)
+	--print(self.newObjectsOwnedBy)
 
+		print("All Owners")
+		print("------------------")
+
+	for i=1, #self.objects do
+		print(self.objects[i].ownedBy)
+
+		if(self.objects[i].ownedBy == ownerName) then
+			--print("yes")
+			self:Destroy(self.objects[i])
+
+		end 
+
+	end 
+
+end 
 
 -- flag an object to be destroyed on the next ClearDestroyedObjects call
 function ObjectUpdater:Destroy(obj)
@@ -139,7 +163,9 @@ function ObjectUpdater:ClearDestroyedObjects()
 	for i=1, #temp do
 
 		if(temp[i].destroy == nil or temp[i].destroy == false) then
+			self.rebuilding = true
 			self:Add{temp[i]}
+			self.rebuilding = false
 		else
 			
 			if(temp[i].collision) then
@@ -154,10 +180,7 @@ function ObjectUpdater:ClearDestroyedObjects()
 				temp[i].Draw = nil
 			end 
 
-
-
 		end 
-
 
 	end
 
@@ -172,8 +195,6 @@ end
 function ObjectUpdater:AddCamera(cam)
 	self.cameras[#self.cameras+1] = cam
 end 
-
-
 
 function ObjectUpdater:PrintDebugText()
 	if(DebugText.messageType["ObjectUpdater"] == false) then
@@ -240,7 +261,6 @@ function ObjectUpdater:PrintDebugText()
 	end 
 
 
-
 	-- print all Statics as list
 	if(ObjectUpdater.printAllStaticsInDebugText) then
 		local staticNames = {}
@@ -275,10 +295,11 @@ function ObjectUpdater:PrintDebugText()
 			local objectType = self.objects[i].Info.objectType or "___"
 			local oDataType = self.objects[i].Info.dataType or "***"
 			local oStructureType = self.objects[i].Info.structureType or "xxx"
+			local oOwner = self.objects[i].ownedBy or "no owner"
 
 
 			objectNames[#objectNames + 1] = {}
-			objectNames[#objectNames].text = oName .. " - " .. objectType .. " - " .. oDataType .. " - " .. oStructureType
+			objectNames[#objectNames].text = oName .. " - " .. objectType .. " - " .. oDataType .. " - " .. oStructureType .. " - " .. oOwner
 			
 		end 
 
@@ -561,11 +582,24 @@ end
 
 
 
+	-- add to level object list, unless excluded
+	for i=1, #objects do
+		
+		if(self.excludeNewFromLevel == false) then
+			if(objects[i].Info.name == "fuckyou") then
+				--print(objects[i].Info.objectType .. ": what the fuck")
+			end 
+			LevelManager:ObjectCreatedByLevel(objects[i])
+		end 
+		if(i > 1) then
+			print("yes its higher than 1")
+		end 
+	end
 
 
 
 
-
+ObjectUpdater.excludeNewFromLevel = false
 
 
 --]]

@@ -67,8 +67,6 @@ function Level:New(data)
 	o.objects = {}
 
 
-	
-
 	----------
 	-- End
 	----------

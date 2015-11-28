@@ -50,7 +50,8 @@ local level = Level:New
 	Start = Start,
 	Update = Update,
 	Exit = Exit,
-	Restart = Restart
+	Restart = Restart,
+	filename = "NewLevelTypeTest",
 }
 
 return level

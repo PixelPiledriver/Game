@@ -47,6 +47,8 @@ LevelManager.levels = {}
 
 -- set the given level and run it 
 function LevelManager:StartLevel(level)
+
+	-- fails 
 	if(level == nil) then
 		printDebug{"No level", "LevelManager"}
 		return
@@ -57,12 +59,21 @@ function LevelManager:StartLevel(level)
 		return		
 	end 
 
+	-- set object owner to this level
+	-- this marks objects created while this level is running
+	-- so that they can be destroyed later on exit
+	ObjectUpdater.newObjectsOwnedBy = level.filename
+
+	-- set level and load it
 	self.currentLevel = level
 	self.currentLevel:Start()
 
 	--EventLog:Add{"Start level", "LevelManager"}
+	printDebug{"Start level", "LevelManager"}
 
-	print(#self.currentLevel.objects)
+
+	
+
 end 
 
 function LevelManager:UpdateLevel()
@@ -79,6 +90,7 @@ function LevelManager:RestartLevel()
 	self:StartLevel()
 
 	--EventLog:Add{"Restart level", "LevelManager"}
+	printDebug{"Restart level", "LevelManager"}
 end 
 
 function LevelManager:ExitLevel()
@@ -88,63 +100,17 @@ function LevelManager:ExitLevel()
 		return
 	end 
 
+	ObjectUpdater:DestroyAllObjectsOwnedBy(self.currentLevel.filename)
+
 	self.currentLevel:Exit()
-
-	-- delete all objects made within this level
-	-- this is bugged somehow, but not sure what to make of it yet
-	-->FIX
-	if(self.destroyObjectsOnExit) then
-		print(#self.currentLevel.objects .. " objects BEFORE destroy list")
-		for i=1, #self.currentLevel.objects do
-			
-			-- need to figure out this bug
-			--print(self.currentLevel.objects[i].Info.objectType)
-			
-	 		ObjectUpdater:Destroy(self.currentLevel.objects[i])
-	 		
-
-	 	end 
-	 	print(#self.currentLevel.objects .. " objects AFTER destroy list")
-
-	 	for i=1, #self.currentLevel.objects do
-	 		print(i .. self.currentLevel.objects[i].Info.objectType)
-	 	end 
-	end
-
-	
-
-	self.currentLevel.objects = nil
-	self.currentLevel.objects = {}
-
-	print(#self.currentLevel.objects)
-
 	self.currentLevel = nil
 
 	--EventLog:Add{"Exit level", "LevelManager"}
+	printDebug{"Exit level", "LevelManager"}
 
 
 end 
 
--- objects created within a level are listed to that level
--- so they can be destroyed on Exit
--- BROKEN
--- this will be removed
-function LevelManager:ObjectCreatedByLevel(object)
-
-	if(self.currentLevel == nil) then
-		printDebug{"No current level", "LevelManager", 2}
-		return
-	end 
-
-	if(self.currentLevel.objects[1] == nil) then
-		--self.currentLevel.objects = nil
-		--self.currentLevel.objects = {}
-	end 
-
-	-- add object
-	self.currentLevel.objects[#self.currentLevel.objects+1] = object
-
-end 
 
 function LevelManager:Setup()
 
@@ -248,5 +214,62 @@ end
 	if(self.currentLevel.objects == nil) then
 		self.currentLevel.objects = {}
 	end 
+
+
+
+-- objects created within a level are listed to that level
+-- so they can be destroyed on Exit
+-- BROKEN
+-- this will be removed
+function LevelManager:ObjectCreatedByLevel(object)
+
+	if(self.currentLevel == nil) then
+		printDebug{"No current level", "LevelManager", 2}
+		return
+	end 
+
+	if(self.currentLevel.objects[1] == nil) then
+		--self.currentLevel.objects = nil
+		--self.currentLevel.objects = {}
+	end 
+
+	-- add object
+	self.currentLevel.objects[#self.currentLevel.objects+1] = object
+
+end 
+
+
+	-- delete all objects made within this level
+	-- this is bugged somehow, but not sure what to make of it yet
+	-->FIX
+	-- fix: gonna remove this and give objects a .ownedBy var
+	-- to track what should be destroyed on exit
+	if(self.destroyObjectsOnExit) then
+		print(#self.currentLevel.objects .. " objects BEFORE destroy list")
+		for i=1, #self.currentLevel.objects do
+			
+			-- need to figure out this bug
+			--print(self.currentLevel.objects[i].Info.objectType)
+			
+	 		ObjectUpdater:Destroy(self.currentLevel.objects[i])
+	 		
+
+	 	end 
+	 	print(#self.currentLevel.objects .. " objects AFTER destroy list")
+
+	 	for i=1, #self.currentLevel.objects do
+	 		print(i .. self.currentLevel.objects[i].Info.objectType)
+	 	end 
+	end
+
+	
+
+	self.currentLevel.objects = nil
+	self.currentLevel.objects = {}
+
+	print(#self.currentLevel.objects)
+
+
+
 
 --]]

@@ -39,7 +39,11 @@ EventLog.ySpace = 18
 EventLog.eventIndex = 1
 
 -- this is the rogue object at the start of main
--- with no objects loaded
+-- before any objects are loaded
+-- seems fine
+-- there will also be ui before load so no big deal
+-- problem is it keeps getting deleted on level Exit
+-- trying to figure out why
 EventLog.Pos = Pos:New
 {
 	--x = love.window.getWidth() * 0.05, 
