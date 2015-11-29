@@ -22,7 +22,7 @@ local BulletTypes = {}
 BulletTypes = Info:New
 {
 	objectType = "BulletTypes",
-	dataType = "Game"
+	dataType = "Game",
 	structureType = "List"
 }
 

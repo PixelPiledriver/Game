@@ -67,7 +67,7 @@ function MapObject.Action:New(data)
 
 		-- state action used
 		printDebug{"used action: " .. o.name, "MapObject", 2}
-		--EventLog:Add{"used action: " .. o.name, "MapObject", 2}
+		EventLog:Add{"used action: " .. o.name, "MapObject", 2}
 		
 		-- does target reaction to this action? does this action require it?
 		if(self.requireReaction and object:TargetHasReaction(self.name) == false) then
@@ -124,7 +124,7 @@ function MapObject.Action:New(data)
 			return false
 		end
 
-		--EventLog:Add{object.name .. ": " .. o.name .. ": " .. object.actionTarget.name, "MapObject"}
+		EventLog:Add{object.name .. ": " .. o.name .. ": " .. object.actionTarget.name, "MapObject"}
 
 		self.func(object)
 

@@ -47,7 +47,7 @@ EventLog.eventIndex = 1
 EventLog.Pos = Pos:New
 {
 	--x = love.window.getWidth() * 0.05, 
-	x = love.window.getWidth() * 0.4, 
+	x = love.window.getWidth() * 0.75, 
 	y = love.window.getHeight() * 0.95
 }
 
@@ -61,9 +61,9 @@ EventLog.priority =
 
 function EventLog:Add(data)
 
-	ObjectUpdater.excludeNewFromLevel = true
-
-	--print(ObjectUpdater.excludeNewFromLevel)
+	-- Event Log is not owned by level
+	ObjectUpdater.newObjectsOwnedBySave = ObjectUpdater.newObjectsOwnedBy
+	ObjectUpdater.newObjectsOwnedBy = nil
 
 	local priority = data[3] or 1
 
@@ -75,7 +75,6 @@ function EventLog:Add(data)
 		self.eventTexts[self.eventIndex] = Text:New
 		{
 			text = data[1],
-			name = "fuckyou"
 		}
 	else
 		-- remove old text
@@ -86,7 +85,6 @@ function EventLog:Add(data)
 		self.eventTexts[self.eventIndex] = Text:New
 		{
 			text = data[1],
-			name = "no"
 		}		
 	end 
 
@@ -116,7 +114,8 @@ function EventLog:Add(data)
 		self.eventIndex = 1
 	end 
 
-	ObjectUpdater.excludeNewFromLevel = false
+	-- reset level ownership
+	ObjectUpdater.newObjectsOwnedBy = ObjectUpdater.newObjectsOwnedBySave
 
 end 
 

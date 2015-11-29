@@ -26,7 +26,7 @@ local Block = {}
 Block.Info = Info:New
 {
 	objectType = "Block",
-	DataType = "Game",
+	dataType = "Game",
 	structureType = "Static"
 }
 
@@ -46,9 +46,9 @@ function Block:New(data)
 	------------------
 	o.Info = Info:New
 	{
-		name = data.name or "..."
-		objectType = "Block"
-		dataType = "Game"
+		name = data.name or "...",
+		objectType = "Block",
+		dataType = "Game",
 		structureType = "Object"
 	}
 

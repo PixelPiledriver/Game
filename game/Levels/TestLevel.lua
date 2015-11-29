@@ -4,8 +4,11 @@
 -- seperate from main)
 -- writen by Adam Balk, September 2014
 --******************************************************************--
+-- modified: for new level format
 
--- requirements for this level
+----------------
+-- Requires
+----------------
 local Box = require("Box")
 local Guns = require("Guns")
 local Map = require("Map")
@@ -19,13 +22,9 @@ local Polygon = require("Polygon")
 local Color = require("Color")
 local SinCounter = require("SinCounter")
 
--- Table to hold Level objects
-local TestLevel = {}
+-------------------------------------------------
 
--- On Level Start
-function TestLevel:Load()
-
-	
+local Start = function()
 
 	--------------
 	-- Objects
@@ -84,16 +83,40 @@ function TestLevel:Load()
 	
 end
 
--- On Level Update
-function TestLevel:Update()
-	--Map:Update()
+
+local Update = function()
 end
 
--- On Level End
-function TestLevel:Exit()
+local Exit = function()
 end
 
-return TestLevel
+local Reset = function()
+end 
+
+----------
+-- End
+----------
+
+local level = Level:New
+{
+	Start = Start,
+	Update = Update,
+	Exit = Exit,
+	Reset = Reset,
+
+	filename = "TestLevel"
+}
+
+return level
+
+
+
+
+
+
+
+
+
 
 
 

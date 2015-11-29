@@ -16,7 +16,7 @@ local BlockMap = {}
 ------------------
 BlockMap = Info:New
 {
-	objectType = "BlockMap"
+	objectType = "BlockMap",
 	dataType = "Game",
 	structureType = "Map"
 }

@@ -44,8 +44,6 @@ App.Input = Input:New
 	keys = 
 	{ 
 		{ "escape", "press", App.QuitGameInput},
-		{ "z", "press", LevelManager.ExitLevel, LevelManager},
-		{ "x", "press", LevelManager.StartDefaultLevel, LevelManager}
 	}
 }
 
@@ -70,3 +68,16 @@ return App
 ---------------------------------------------------------------------------
 -- very light file at the moment
 -- that's fine, it can be made more robust in the future
+
+
+
+-- Junk
+---------------------------
+--[=[
+
+		{ "z", "press", LevelManager.ExitLevel, LevelManager},
+		{ "x", "press", LevelManager.StartDefaultLevel, LevelManager}
+
+
+
+--]=]

@@ -8,8 +8,11 @@
 --------------
 -- Requires
 --------------
---local Text = require("Text")
+-- requires are filled in LevelManager.PostRequire()
 local Window = nil
+local Input = nil
+local Text = nil
+
 --------------------------------------
 
 -- global
@@ -33,13 +36,77 @@ LevelManager.levelNames =
 {
 	"MapWorldLevel",
 	"NewLevelTypeTest",
+	"TextWriteLevel",
+	"TestLevel"
 }
+
+LevelManager.levelSelectIndex = 1
 
 LevelManager.defaultLevel = LevelManager.levelNames[1]
 LevelManager.loadLevelAtStart = false
 
 -- level data table
 LevelManager.levels = {}
+
+----------------
+-- Input
+---------------
+-- after this works move to buttons
+function LevelManager:CreateInput()
+	self.Input = Input:New{}
+
+	-- create keys
+	local nextLevel =
+	{"6", "press", 
+		function() 
+			LevelManager.levelSelectIndex = LevelManager.levelSelectIndex + 1
+
+			-- index out of range?
+			if(LevelManager.levelSelectIndex > #LevelManager.levelNames) then
+				LevelManager.levelSelectIndex = #LevelManager.levelNames
+			end 
+
+			EventLog:Add{"Next Level: " .. LevelManager.levelNames[LevelManager.levelSelectIndex], LevelManager}
+		end
+	}
+
+	local prevLevel =
+	{"5", "press", 
+		function() 
+			LevelManager.levelSelectIndex = LevelManager.levelSelectIndex - 1
+
+			if(LevelManager.levelSelectIndex < 1) then
+				LevelManager.levelSelectIndex = 1
+			end 
+
+			EventLog:Add{"Prev Level: " .. LevelManager.levelNames[LevelManager.levelSelectIndex], LevelManager}
+		end
+	}
+
+	local startLevel = 
+	{
+		"x", "press",
+		function()
+			LevelManager:StartLevel(LevelManager.levels[LevelManager.levelNames[LevelManager.levelSelectIndex]])
+			EventLog:Add{"Start Level: " .. LevelManager.levelNames[LevelManager.levelSelectIndex], LevelManager}
+		end 
+	}
+
+	local exitLevel = 
+	{ 
+		"z", "press", 
+		function()
+			LevelManager:ExitLevel()
+		end 
+	}
+
+	self.Input:AddKeys
+	{
+		nextLevel, prevLevel, 
+		startLevel, exitLevel
+	}
+
+end 
 
 ---------------
 -- Functions
@@ -68,11 +135,8 @@ function LevelManager:StartLevel(level)
 	self.currentLevel = level
 	self.currentLevel:Start()
 
-	--EventLog:Add{"Start level", "LevelManager"}
-	printDebug{"Start level", "LevelManager"}
-
-
-	
+	EventLog:Add{"Start level: " .. level.filename, "LevelManager"}
+	--printDebug{"Start level", "LevelManager"}
 
 end 
 
@@ -89,8 +153,8 @@ function LevelManager:RestartLevel()
 	self:ExitLevel()
 	self:StartLevel()
 
-	--EventLog:Add{"Restart level", "LevelManager"}
-	printDebug{"Restart level", "LevelManager"}
+	EventLog:Add{"Restart level", "LevelManager"}
+	--printDebug{"Restart level", "LevelManager"}
 end 
 
 function LevelManager:ExitLevel()
@@ -105,8 +169,8 @@ function LevelManager:ExitLevel()
 	self.currentLevel:Exit()
 	self.currentLevel = nil
 
-	--EventLog:Add{"Exit level", "LevelManager"}
-	printDebug{"Exit level", "LevelManager"}
+	EventLog:Add{"Exit level", "LevelManager"}
+	--printDebug{"Exit level", "LevelManager"}
 
 
 end 
@@ -132,7 +196,7 @@ function LevelManager:PostRequire()
 	-- Levels
 	----------------
 
-	-- get all levels
+	-- get all levels data
 	for i=1, #LevelManager.levelNames do
 		LevelManager.levels[LevelManager.levelNames[i]] = require("levels/" .. LevelManager.levelNames[i])
 	end 
@@ -147,11 +211,15 @@ function LevelManager:PostRequire()
 		structureType = "Manager"
 	}
 
-
 	ObjectUpdater:AddStatic(LevelManager)
 
-	-- other
+	-- get requires
 	Window = require("Window")
+	Text = require("Text")
+	Input = require("Input")
+
+	-- Input
+	self:CreateInput()
 
 end 
 
@@ -161,28 +229,20 @@ end
 
 -- Notes
 -------------------------------
--- when ObjectUpdater has destroys
--- sweep currentLevel.objects for objects marked to destroy
--- remove from the table and create a new table without them
--- thats my best guess for right now
--- try coding this when I'm not so tired
--- bleh
+-- this is at a good place now
+-- seems to work fine
+-- still needs polishing
 
--- this has a very serious bug still trying to figure it out
--- if an object is destroyed by another means before level destroys it
--- then it FUCKS EVERYTHING THE SHIT UP
--- gotta figure out a way to fix this shit
--- the table def gets fractured somehow in memory and screws it all up
--- FIX THIS GARBAGE
-
--- NEEDED
--- default level to load
+-->NEEDED
 -- level choice menu
--- load a selected level
 -- create a new level at runtime
 -- save whats in level at runtime
--- restart current level
+-- restart current level --> might work but not tested
+-- UI controls
 
+-->DONE
+-- default level to load
+-- load a selected level
 
 -->DONE
 -- you should not be able to load a level after already loading it
@@ -191,14 +251,27 @@ end
 -- add a list of all level names
 -- so they can be switched between at runtime
 
--- this should be changed to Scene
--- or someother better name
+-->CHANGE
+-- this file should be re named to Scene
+-- or some other better name
 -- Level is too close to gameplay in meaning
+-- come up with something better
 
--- build a load level ui on top of this
--- levels should really be called "games" or carts" or something
--- but this is fine for now I  guess
+-->FIXED - with a different solution
+-- when ObjectUpdater has destroys
+-- sweep currentLevel.objects for objects marked to destroy
+-- remove from the table and create a new table without them
+-- thats my best guess for right now
+-- try coding this when I'm not so tired
+-- bleh
 
+-->FIXED
+-- this has a very serious bug still trying to figure it out
+-- if an object is destroyed by another means before level destroys it
+-- then it FUCKS EVERYTHING THE SHIT UP
+-- gotta figure out a way to fix this shit
+-- the table def gets fractured somehow in memory and screws it all up
+-- FIX THIS GARBAGE
 
 
 

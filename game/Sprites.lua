@@ -21,7 +21,7 @@ Sprites.Info = Info:New
 {
 	objectType = "Sprites",
 	dataType = "Content",
-	structureTe = "Static"
+	structureType = "Static"
 }
 
 -----------------------------

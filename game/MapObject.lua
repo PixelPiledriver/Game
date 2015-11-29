@@ -49,24 +49,6 @@ MapObject.actions = {}
 MapObject.selectedObjectForInput = nil
 MapObject.Input = Input:New{}
 
-
---[[
-local actionLeft =
-{"left", "press", 
-	function() 
-		o.direction.x = -1
-		o.direction.y = 0
-		o:UseAction(o.selectedAction) 
-	end
-}
-
-o.Input:AddKeys
-{
-	actionLeft, actionRight, actionDown, actionUp,
-	nextAction, prevAction
-}
---]]
-
 -------------
 -- Object
 -------------
@@ -220,7 +202,7 @@ function MapObject:New(data)
 				-- set action
 				o.selectedAction = o.actions.index[o.selectedActionIndex]
 			
-				--EventLog:Add{"Next Action: " .. o.selectedAction, "MapObject"}
+				EventLog:Add{"Next Action: " .. o.selectedAction, "MapObject"}
 				printDebug{"Next Action: " .. o.selectedAction, "MapObject"}
 		
 			end 
@@ -242,7 +224,7 @@ function MapObject:New(data)
 				-- set action
 				o.selectedAction = o.actions.index[o.selectedActionIndex]
 	
-				--EventLog:Add{"Prev Action: " .. o.selectedAction, "MapObject"}
+				EventLog:Add{"Prev Action: " .. o.selectedAction, "MapObject"}
 				printDebug{"Prev Action: " .. o.selectedAction, "MapObject"}
 
 			end 		
@@ -414,7 +396,7 @@ return MapObject
 
 -- Junk
 --------------------------------------------------------
---[[
+--[==[
 
 		-- select an action
 		local selectAction1 =
@@ -454,5 +436,25 @@ return MapObject
 		}
 
 
+	-- more old input stuff
 
+--[[
+local actionLeft =
+{"left", "press", 
+	function() 
+		o.direction.x = -1
+		o.direction.y = 0
+		o:UseAction(o.selectedAction) 
+	end
+}
+
+o.Input:AddKeys
+{
+	actionLeft, actionRight, actionDown, actionUp,
+	nextAction, prevAction
+}
 --]]
+
+
+
+--]==]

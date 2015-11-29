@@ -147,21 +147,14 @@ local Start = function()
 end
 
 
-
 local Update = function()
-
 end 
-
 
 local Exit = function()
-
 end 
-
 
 local Restart = function()
-
 end 
-
 
 
 -- create level object 

@@ -16,7 +16,7 @@ Timer.Info = Info:New
 {
 	objectType = "Timer",
 	dataType = "Time",
-	structureTe = "Static"
+	structureType = "Static"
 }
 
 

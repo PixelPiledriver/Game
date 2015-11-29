@@ -106,17 +106,11 @@ end
 -- any objects owned by the level are removed
 function ObjectUpdater:DestroyAllObjectsOwnedBy(ownerName)
 	
-	--print(ownerName)
-	--print(self.newObjectsOwnedBy)
-
-		print("All Owners")
-		print("------------------")
-
 	for i=1, #self.objects do
-		print(self.objects[i].ownedBy)
+
 
 		if(self.objects[i].ownedBy == ownerName) then
-			--print("yes")
+			
 			self:Destroy(self.objects[i])
 
 		end 

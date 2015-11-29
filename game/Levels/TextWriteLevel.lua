@@ -1,17 +1,25 @@
 -- TextWriteLevel.lua
+
+-- Description
+-------------------------
 -- testing grounds for TextfileWriter to make stuff
 
--- requirements
+--------------
+-- Requires
+--------------
 local Textfile = require("Textfile")
 
+-----------------------------------------------
 
--- Table to hold Level objects
-local TextWriteLevel = {}
+--------------------
+-- Level Functions
+--------------------
 
--- On Level Start
-function TextWriteLevel:Load()
 
-	print("monkey")
+local Start = function()
+
+	print("text file fun!")
+	
 	--local file = love.filesystem.newFile("monkey.txt")
 	--file:open("w")
 
@@ -32,24 +40,55 @@ function TextWriteLevel:Load()
 		filename = "readthisfile.txt"
 	}
 
-
-
 	readF:Read()
 	readF:ReadLines() 
 
-	--print(readF.text)
-	--print(readF.textTable[1])
-	--print(readF.textTable[2])
-	--print(readF.textTable[3])
-
-
-
-	--ConvertColorTextToNewFormat()
-	--StringPatternTest()
-	--AddSpaceAfterAllColmas()
 end
 
 
+local Update = function()
+
+end
+
+
+local Exit = function()
+
+end
+
+
+local Restart = function()
+
+end 
+
+
+--------------
+-- Object
+--------------
+
+local level = Level:New
+{
+	Start = Start,
+	Update = Update,
+	Exit = Exit,
+	Restart = Restart,
+
+	filename = "TextWriteLevel"
+}
+
+-----------
+-- End 
+-----------
+
+return level
+
+
+
+
+-----------------------
+-- Other Functions
+-----------------------
+
+--[==[
 -- using lua string patterns to find 
 -- the name and each value channel of a color
 -- represented as a string
@@ -137,13 +176,21 @@ function ConvertColorTextToNewFormat()
 
 end
 
--- On Level Update
-function TextWriteLevel:Update()
+--]==]
 
-end
+-- Junk
+------------------------------------------
+--[=[ 
 
--- On Level End
-function TextWriteLevel:Exit()
-end
+	--print(readF.text)
+	--print(readF.textTable[1])
+	--print(readF.textTable[2])
+	--print(readF.textTable[3])
 
-return TextWriteLevel
+
+
+	--ConvertColorTextToNewFormat()
+	--StringPatternTest()
+	--AddSpaceAfterAllColmas()
+
+==]=]
