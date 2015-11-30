@@ -71,7 +71,7 @@ DebugText.messageType =
 
 	-- Objects
 	Box = false,
-	Camera = false,
+	Camera = true,
 	Bullet = false,
 	Block = false,
 	Controller = false,

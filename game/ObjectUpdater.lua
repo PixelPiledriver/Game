@@ -186,9 +186,11 @@ function ObjectUpdater:ClearDestroyedObjects()
 
 end 
 
+--[[
 function ObjectUpdater:AddCamera(cam)
 	self.cameras[#self.cameras+1] = cam
 end 
+--]]
 
 function ObjectUpdater:PrintDebugText()
 	if(DebugText.messageType["ObjectUpdater"] == false) then
@@ -200,10 +202,10 @@ function ObjectUpdater:PrintDebugText()
 	{
 		{text = "", obj = "ObjectUpdater"},
 		{text = "ObjectUpdater"},
-		{text = "------------------"},
+		{text = "-----------------------------"},
 		{text = "Total Statics: " .. #self.statics},
 		{text = "Total Objs: " .. #self.objects},
-		{text = "------------------"},
+		{text = "-----------------------------"},
 	}
 
 	-- print all Object totals by type
@@ -343,13 +345,15 @@ function ObjectUpdater:Update()
 
 
 	-- cameras
+	--[[
 	for i=1, #self.cameras do
 		self.cameras[i]:Update()
 
 		if(self.cameras[i].PrintDebugText) then
 			self.cameras[i]:PrintDebugText()
 		end
-	end  
+	end
+	--]] 
 
 	-- statics
 	for i=1 , #self.statics do
@@ -426,10 +430,12 @@ end
 -- is this function even needed anymore?
 function ObjectUpdater:RepeatedInput()
 
+	--[[
 	-- cameras
 	for i=1, #self.cameras do
 		self.cameras[i].Input:RepeatedInputUpdate()
 	end
+	--]]
 
 	-- statics
 	for i=1 , #self.statics do
@@ -473,6 +479,7 @@ end
 -- much like draw list -->FIX
 function ObjectUpdater:InputUpdate(key, inputType)
 
+--[[
 	for i=1, #self.cameras do
 
 		if(self.cameras[i].Input) then
@@ -480,6 +487,8 @@ function ObjectUpdater:InputUpdate(key, inputType)
 		end 
 
 	end 
+
+--]]
 
 	-- Statics
 	for i=1 , #self.statics do

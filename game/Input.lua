@@ -116,6 +116,7 @@ Input.Info = Info:New
 				return
 			end 
 
+
 			local inputType = inputType .. "Keys"
 
 
@@ -125,6 +126,7 @@ Input.Info = Info:New
 
 					-- key is active? --> can be used?
 					if(self[inputType][key].active == false)then
+
 						break
 					end
 

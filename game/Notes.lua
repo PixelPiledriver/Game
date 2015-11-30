@@ -6,14 +6,25 @@
 -- features needed, ideas, etc
 -- new stuff at the top, old at the bottom
 
+--------------------------------------------------------------------------------
+
+
+
+
 -- So whats next?
 ---------------------------
 -- LevelManager UI
--- Camera overhaul
+-- Camera overhaul --> object based, fix shake, fix rotation, nodes, etc
 -- Window overhaul
 -- Sprite overhaul
 -- Ludum Dare maybe?
 -- other?
+
+
+
+
+
+
 
 -- Load Level/Game
 ----------------------
@@ -149,6 +160,21 @@
 -- Educational and useful
 -- Composition theory
 -- Creates a daily image that you get to rate and tweak
+
+
+
+
+-- Fixed
+-----------------------------------------------------
+-->FIXED
+-- Hold input type doesn't work for any objects
+-- need to update it to work how camera works
+-- call all Input:RepeatedInput of objects
+-- its different than how a single key press works
+
+
+
+
 
 
 

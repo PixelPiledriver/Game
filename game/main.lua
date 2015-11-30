@@ -87,7 +87,7 @@ require("TestCode")
 		love.graphics.setShader(Shader.britShader) -->MOVE
 
 		-- manual camera object -->REFACTOR
-		ObjectUpdater:AddCamera(Camera)
+		--ObjectUpdater:AddCamera(Camera)
 
 		LevelManager:Setup()
 
@@ -104,10 +104,15 @@ require("TestCode")
 		deltaTime = dt
 		FrameCounter:Update(dt)
 
+		-- Camera
+		-- reworking to update on its own
+		Camera:Update()
+
 		-- objects
 		ObjectUpdater:Update()
 
-		-- Input
+		-- input
+		Camera:RepeatedInput()
 		ObjectUpdater:RepeatedInput()
 		Controller.Update()
 
@@ -135,10 +140,12 @@ require("TestCode")
 	-----------
 
 	function love.keypressed(key)
+		Camera:InputUpdate(key, "press")
 		ObjectUpdater:InputUpdate(key, "press")
 	end
 
 	function love.keyreleased(key)
+		Camera:InputUpdate(key, "release")
 		ObjectUpdater:InputUpdate(key, "release")
 	end
 

@@ -51,7 +51,7 @@ local Start = function()
 
 	local fireBall = ParticleSystem:New(ParticleSystem.systems.fire1)
 
-	ObjectUpdater:AddCamera(Camera)
+	
 
 	--local sc = SinCounter:New{speed = 0.01}
 
@@ -201,5 +201,8 @@ return level
 		}
 	}
 --]]
+
+
+--ObjectUpdater:AddCamera(Camera)
 
 --]]
