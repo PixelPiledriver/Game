@@ -1,6 +1,19 @@
 -- Notes.lua
 
+-- Purpose
+------------------------------
+-- this file is a place for any and all thoughts
+-- features needed, ideas, etc
+-- new stuff at the top, old at the bottom
 
+-- So whats next?
+---------------------------
+-- LevelManager UI
+-- Camera overhaul
+-- Window overhaul
+-- Sprite overhaul
+-- Ludum Dare maybe?
+-- other?
 
 -- Load Level/Game
 ----------------------
@@ -30,8 +43,6 @@
 --------------------
 -- need to work on moving camera code soon
 
--- track stuff that needs to be coded in the future
--- gonna put new stuff at the top and push old stuff down
 
 
 
