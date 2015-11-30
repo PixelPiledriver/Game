@@ -37,7 +37,12 @@ LevelManager.levelNames =
 	"MapWorldLevel",
 	"NewLevelTypeTest",
 	"TextWriteLevel",
-	"TestLevel"
+	"TestLevel",
+	"SnapGridTestLevel",
+	"PixelDrawLevel",
+	"LerpLevel",
+	"BoxLevel",
+	"AudioTestLevel"
 }
 
 LevelManager.levelSelectIndex = 1
@@ -57,7 +62,7 @@ function LevelManager:CreateInput()
 
 	-- create keys
 	local nextLevel =
-	{"6", "press", 
+	{"b", "press", 
 		function() 
 			LevelManager.levelSelectIndex = LevelManager.levelSelectIndex + 1
 
@@ -71,7 +76,7 @@ function LevelManager:CreateInput()
 	}
 
 	local prevLevel =
-	{"5", "press", 
+	{"v", "press", 
 		function() 
 			LevelManager.levelSelectIndex = LevelManager.levelSelectIndex - 1
 

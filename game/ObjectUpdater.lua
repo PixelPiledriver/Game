@@ -42,8 +42,8 @@ ObjectUpdater.componentTypes.index = {}
 ObjectUpdater.destroyObjects = false
 
 -- debug text options
-ObjectUpdater.printAllObjectsInDebugText = true
-ObjectUpdater.printAllStaticsInDebugText = true
+ObjectUpdater.printAllObjectsInDebugText = false
+ObjectUpdater.printAllStaticsInDebugText = false
 ObjectUpdater.printTotalObjectTypes = false
 ObjectUpdater.printComponents = false
 

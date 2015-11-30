@@ -229,6 +229,14 @@ function Text:New(data)
 			return
 		end 
 
+		-- might not used this but I dunno
+		-- will disable for now until I have a better feature to replace it
+		--[[
+		if(Window:IsPosOnScreen(self.Pos) == false) then
+			return
+		end 
+		--]]
+
 		love.graphics.setColor(Color:AsTable(self.color))
 		love.graphics.setFont(self.font)
 

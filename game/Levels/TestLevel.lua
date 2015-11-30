@@ -60,37 +60,24 @@ local Start = function()
 	{
 		a = -10,
 		b = 10,
-		t = 0
+		t = 0.75
 	}
 
 	print(lerpTest)
-
---[[
-	local poly = Polygon:New
-	{
-		color = Color:Get("darkBlue"),
-		fill = false,
-		verts =
-		{
-			{x=0, y=0},
-			{x=32, y=0},
-			{x=32, y=32},
-			{x=100, y=100},
-			{x=23, y=0}
-		}
-	}
---]]
 	
 end
 
 
 local Update = function()
+
 end
 
 local Exit = function()
+
 end
 
-local Reset = function()
+local Restart = function()
+
 end 
 
 ----------
@@ -102,7 +89,7 @@ local level = Level:New
 	Start = Start,
 	Update = Update,
 	Exit = Exit,
-	Reset = Reset,
+	Restart = Restart,
 
 	filename = "TestLevel"
 }
@@ -113,15 +100,16 @@ return level
 
 
 
+-- Notes
+-------------------
+-- this file is garbage
+-->DELETE
 
 
 
 
-
-
-
--- Notes--
------------------------------------
+-- Junk
+--------------------------------------
 --[[
 
 	local redRobot = Player:New
@@ -197,5 +185,21 @@ return level
 		delay = 10
 	}
 	
+
+--[[
+	local poly = Polygon:New
+	{
+		color = Color:Get("darkBlue"),
+		fill = false,
+		verts =
+		{
+			{x=0, y=0},
+			{x=32, y=0},
+			{x=32, y=32},
+			{x=100, y=100},
+			{x=23, y=0}
+		}
+	}
+--]]
 
 --]]

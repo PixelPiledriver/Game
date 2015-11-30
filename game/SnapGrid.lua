@@ -43,7 +43,7 @@ SnapGrid.y = 0
 -------------------------
 
 function SnapGrid:CreateCell(data)
---[[
+---[[
 	local gridCell = Box:New
 	{
 		x = data.x,		

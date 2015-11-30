@@ -1,32 +1,51 @@
--- PixelDrawLevel.lua
--- draw the pixels and stuff
+-- LerpLevel.lua
 
+-- Description
+----------------------------------
+-- helped Decroded with some lerp code
+-- this level isnt really needed
+-->DELETE soon
 
-
+----------------
+-- Requires
+----------------
 local Color = require("Color")
 local Box = require("Box")
 
+--------------------------------------------
 
-local LerpLevel = {}
+-- need to premake vars
+-- that level functions share
+-- is that a problem?
+-- I don't really think so
+-- but it could make a mass of nil vars that go unused
+-- might think of another way of doing it
+-- could make a level table and then put all vars inside of it
+-- but I dunno we'll see
+-- most of the time this wont be needed since objects update themselves
+-- will give ti some thought
+local box = nil
+local t = nil
+local bigNumber = nil
 
-local box = Box:New
-{
-	width = 64,
-	height = 64,
-	x = 100,
-	y = 100,
-	color = Color:Get("black")
-}
 
-local t = 0.01
-local bigNumber = 0
+local Start = function()
 
-function LerpLevel:Load()
+	box = Box:New
+	{
+		width = 64,
+		height = 64,
+		x = 100,
+		y = 100,
+		color = Color:Get("black")
+	}
+
+	t = 0.01
+	bigNumber = 0
 
 end 
 
-
-function LerpLevel:Update()
+local Update = function()
 
 	local xStart = 100 
 	local xEnd = 400
@@ -64,15 +83,35 @@ function LerpLevel:Update()
 
 	box.Pos.x = x
 
-
 end
 
 
-function LerpLevel:Exit()
-
+local Exit = function()
 end 
 
-return LerpLevel
+
+local Restart = function()
+end 
+
+
+-----------
+-- End
+-----------
+local level = Level:New
+{
+	Start = Start,
+	Update = Update,
+	Exit = Exit,
+	Restart = Restart,
+
+	filename = "LerpLevel"
+}
+
+return level
+
+
+
+
 
 
 

@@ -1,20 +1,15 @@
---******************************************************************--
--- TestLevel.lua
--- 1st Test Level (attempts to mitigate out scene specifics to a file 
--- seperate from main)
--- writen by Adam Balk, September 2014
---******************************************************************--
+-- BoxLevel.lua
 
--- requirements for this level
+--------------
+-- Requrires
+--------------
 local Box = require("Box")
 local Color = require("Color")
 local Link = require("Link")
 
--- Table to hold Level objects
-local BoxLevel = {}
 
 -- On Level Start
-function BoxLevel:Load()
+local Start = function()
 
 	local mouse = Mouse:New{name = "mouse"}
 
@@ -43,18 +38,26 @@ function BoxLevel:Load()
 		linkType = "value"
 	}
 
-
-
 end
 
--- On Level Update
-function BoxLevel:Update()
-	
+
+local Update = function()
 end
 
--- On Level End
-function BoxLevel:Exit()
-
+local Exit = function()
 end
 
-return BoxLevel
+local Restart = function()
+end 
+
+local level = Level:New
+{
+	Start = Start,
+	Update = Update,
+	Exit = Exit,
+	Restart = Restart,
+
+	filename = "BoxLevel"
+}
+
+return level

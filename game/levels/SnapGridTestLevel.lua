@@ -1,21 +1,22 @@
 --******************************************************************--
--- Timer.lua
--- Class for timer objects
+-- SnapGridTestLevel.lua
+-- 
 -- writen by Adam Balk, August 2014
 --*******************************************************************--
+-- modified: for new level format
 
+-- Requires
+----------------------
 local SnapGrid = require("SnapGrid") 
 local SnapPlayer = require("SnapPlayer")
 local Sprites = require("Sprites")
 local PlayerSkins = require("PlayerSkins")
-
 local Guns = require("Guns")
 
-local SnapGridTestLevel = {}
+--------------------------------------------------------
 
 
-
-function SnapGridTestLevel:Load()
+local Start = function()
 	SnapGrid:CreateBoard()
 
 	local gridX = 1
@@ -27,8 +28,6 @@ function SnapGridTestLevel:Load()
 		gridX = gridX,
 		gridY = gridY,
 
---		x = gridX * SnapGrid.cellWidth,
---		y = gridY * SnapGrid.cellHeight,
 		frame = Sprites.dude.red.idle,
 		skin = PlayerSkins.red,
 		
@@ -37,11 +36,37 @@ function SnapGridTestLevel:Load()
 	}
 end
 
-function SnapGridTestLevel:Update()
-
+local Update = function()
 end
 
-function SnapGridTestLevel:Exit()
+local Exit = function()
 end
 
-return SnapGridTestLevel 
+local Restart = function()
+end
+
+local level = Level:New
+{
+	Start = Start,
+	Update = Update,
+	Exit = Exit,
+	Restart = Restart,
+
+	filename = "SnapGridTestLevel"
+}
+
+return level
+
+
+
+
+-- Notes
+-------------------
+-- this file is garbage
+-->DELETE
+
+
+-- Junk
+-----------------------------
+--		x = gridX * SnapGrid.cellWidth,
+--		y = gridY * SnapGrid.cellHeight,

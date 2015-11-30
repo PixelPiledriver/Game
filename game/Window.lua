@@ -4,9 +4,10 @@
 ----------------------------
 -- Handles the window the game is diplayed within
 
-
 ---------------------------------------------------------
-local Window = {}
+
+-- global
+Window = {}
 
 ------------------
 -- Static Info
@@ -71,10 +72,39 @@ love.window.setTitle(Window.title)
 -- sets window to full screen of current monitor
 -- love.window.setMode(0,0,{display = 1})
 
-
 ------------------
 -- Functions
 ------------------
+
+
+-- check if an Pos is inside in the window space or not
+-- pos = {x,y} or Pos object
+-- shit this wont actually work correctly if the camera is moved.... :P
+function Window:IsPosOnScreen(pos)
+	-- this is a very bare bones check
+	-- can implement a more complex version
+	-- that takes size or string length into account
+	-- all this checks is for a single point in window or not
+
+	if(pos.x < 0) then
+		return false
+	end 
+
+	if(pos.x > love.window.getWidth()) then
+		return false
+	end 
+
+	if(pos.y < 0) then
+		return false
+	end 
+
+	if(pos.y > love.window.getHeight()) then
+		return false
+	end 
+
+	return true
+
+end 
 
 function Window:PrintDebugText()
 	DebugText:TextTable
@@ -91,3 +121,12 @@ end
 ObjectUpdater:AddStatic(Window)
 
 return Window
+
+
+
+
+-- Notes
+----------------------------------
+-- changed to global
+-- to include some useful functions realated to window size
+-- will add other cool features to this later

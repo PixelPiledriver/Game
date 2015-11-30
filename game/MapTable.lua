@@ -56,6 +56,10 @@ function MapTable:New(data)
 	---------------
 
 	function o:GetEmptySlotDefault(x, y)
+
+		if(self.emptySlotDefault == nil) then
+			return nil
+		end 
 		
 		-- this will be a copy of the default
 		local temp = {}

@@ -1,245 +1,264 @@
 -- PixelDrawLevel.lua
 -- draw the pixels and stuff
 
+--------------
+-- Requires
+--------------
+local PixelTexture = nil
+local PixelBrush = nil
+local Color = nil
+local Palette = nil
+local Value = nil
+local Button = nil
+local Collision = nil
+local Point = nil
+local Line = nil
+local DrawTools = nil
+local SpriteSheet = nil
+local Sprite = nil
+local pawnGraphics = nil -- animation test with new spriteStuff
+local DrawToolsUI = nil
+local Panel = nil
+local Box = nil
+local MapTable = nil
+local Link = nil
+local InputText = nil
+local ParticleSystem = nil
+local DrawGroup = nil
+local Text = nil
 
-local PixelTexture = require("PixelTexture")
-local PixelBrush = require("PixelBrush")
-local Color = require("Color")
-local Palette = require("Palette")
-local Value = require("Value")
-local Button = require("Button")
-local Collision = require("Collision")
-local Point = require("Point")
-local Line = require("Line")
-local DrawTools = require("DrawTools")
-local SpriteSheet = require("SpriteSheet")
-local Sprite = require("Sprite")
-local pawnGraphics = require("AnimationTest") -- animation test with new spriteStuff
-local DrawToolsUI = require("DrawToolsUI")
-local Panel = require("SimplePanel")
-local Box = require("Box")
-local MapTable = require("MapTable")
-local Link = require("Link")
-local InputText = require("InputText")
-local ParticleSystem = require("ParticleSystem")
-local DrawGroup = require("DrawGroup")
-local Text = require("Text")
-
--- test stuff code and stuff
-
-local mouse = Mouse:New{name = "mouse"}
-
-local textTest = Text:New
-{
-	text = "poop",
-	size = 32,
-	x = 200,
-	y = 100,
-	timer = 100,
-	box = {color = Color:Get("green")}
-}
+------------------------------------------------------
 
 
+local Start = function()
 
--- fixing DrawGroup
-
-local greenBox = Box:New
-{
-	x = 275,
-	y = 200,
-	width = 100,
-	height = 100,
-	color = Color:Get("green")
-}
-
-local orangeBox = Box:New
-{
-	x = 300,
-	y = 225,
-	width = 100,
-	height = 100,
-	color = Color:Get("orange")
-}
-
-
-local blueBox = Box:New
-{
-	x = 250,
-	y = 150,
-	width = 100,
-	height = 100,
-	color = Color:Get("blue"),
-}
+	-------------------
+	-- Requires Load
+	-------------------
+	PixelTexture = require("PixelTexture")
+	PixelBrush = require("PixelBrush")
+	Color = require("Color")
+	Palette = require("Palette")
+	Value = require("Value")
+	Button = require("Button")
+	Collision = require("Collision")
+	Point = require("Point")
+	Line = require("Line")
+	DrawTools = require("DrawTools")
+	SpriteSheet = require("SpriteSheet")
+	Sprite = require("Sprite")
+	pawnGraphics = require("AnimationTest") -- animation test with new spriteStuff
+	DrawToolsUI = require("DrawToolsUI")
+	Panel = require("SimplePanel")
+	Box = require("Box")
+	MapTable = require("MapTable")
+	Link = require("Link")
+	InputText = require("InputText")
+	ParticleSystem = require("ParticleSystem")
+	DrawGroup = require("DrawGroup")
+	Text = require("Text")
 
 
--- DrawGroup is broken right now
--->FIX
-local group = DrawGroup:New{objects = {orangeBox, greenBox, blueBox}}
+	-- test stuff code and stuff
 
+	local mouse = Mouse:New{name = "mouse"}
 
-local bob = Box:New
-{
-	width = 32,
-	height = 32,
-	color = Color:Get("black")
-}
-
-
-Link:Simple
-{
-	a = {bob, "Pos", {"x", "y"}},
-	b = {mouse, {"x", "y"}}
-}
-
-
--- Grid Based panel object placement and size
-local gridPanel = Panel:New
-{
-	name = "Panel: the dopeness",
-	posType = "bottom",
-	gridScale = 16,
-	colorSkin = "blue"
-}
-
-local gbox1 = Box:New
-{
-	width = 16,
-	height = 16,
-	color = Color:Get("orange")
-}
-
-local gbox2 = Box:New
-{
-	width = 16,
-	height = 16,
-	color = Color:Get("black")
-}
-
-local gbox3 = Box:New
-{
-	width = 16,
-	height = 16,
-	color = Color:Get("white")
-}
-
-
-gridPanel:Add
-{
-	object = gbox1,
-	x = 1,
-	y = 1
-}
-
-gridPanel:Add
-{
-	object = gbox2,
-	x = 2,
-	y = 1
-}
-
-gridPanel:Add
-{
-	object = gbox3,
-	x = 5,
-	y = 5
-}
-
-
-
--- other stuff
-local palPos = 
-{
-	x = 500,
-	y = 200 
-}
-
-local palPos2 =
-{
-	x = 700,
-	y = 200	
-}
-
-
-
-local pix = PixelTexture:New
-{
-	width = 32,
-	height = 32,
-	filename = "RandPixels",
-	draw = true,
-	pos = 
+	local textTest = Text:New
 	{
+		text = "poop",
+		size = 32,
 		x = 200,
-		y = 200
-	},
+		y = 100,
+		timer = 100,
+		box = {color = Color:Get("green")}
+	}
 
-	scale =
+
+
+	-- fixing DrawGroup
+
+	local greenBox = Box:New
 	{
+		x = 275,
+		y = 200,
+		width = 100,
+		height = 100,
+		color = Color:Get("green")
+	}
+
+	local orangeBox = Box:New
+	{
+		x = 300,
+		y = 225,
+		width = 100,
+		height = 100,
+		color = Color:Get("orange")
+	}
+
+
+	local blueBox = Box:New
+	{
+		x = 250,
+		y = 150,
+		width = 100,
+		height = 100,
+		color = Color:Get("blue"),
+	}
+
+
+	-- DrawGroup is broken right now
+	-->FIX
+	local group = DrawGroup:New{objects = {orangeBox, greenBox, blueBox}}
+
+
+	local bob = Box:New
+	{
+		width = 32,
+		height = 32,
+		color = Color:Get("black")
+	}
+
+
+	Link:Simple
+	{
+		a = {bob, "Pos", {"x", "y"}},
+		b = {mouse, {"x", "y"}}
+	}
+
+
+	-- Grid Based panel object placement and size
+	local gridPanel = Panel:New
+	{
+		name = "Panel: the dopeness",
+		posType = "bottom",
+		gridScale = 16,
+		colorSkin = "blue"
+	}
+
+	local gbox1 = Box:New
+	{
+		width = 16,
+		height = 16,
+		color = Color:Get("orange")
+	}
+
+	local gbox2 = Box:New
+	{
+		width = 16,
+		height = 16,
+		color = Color:Get("black")
+	}
+
+	local gbox3 = Box:New
+	{
+		width = 16,
+		height = 16,
+		color = Color:Get("white")
+	}
+
+
+	gridPanel:Add
+	{
+		object = gbox1,
 		x = 1,
 		y = 1
 	}
-}
 
-DrawTools.selectedPixelTexture = pix
-
-local pix2 = PixelTexture:New
-{
-	width = 32,
-	height = 32,
-	filename = "stuff",
-	draw = true,
-	pos = 
+	gridPanel:Add
 	{
-		x = 200,
-		y = 200
-	},
-
-	scale =
-	{
-		x = 8,
-		y =8
+		object = gbox2,
+		x = 2,
+		y = 1
 	}
-}
 
-local pal2 = Palette:New
-{
-	Pos = palPos,
-	draw = true
-}
-
-pal2:Interpolated
-{
-	colors =
+	gridPanel:Add
 	{
-		"red", "blue", "green"
-	},
+		object = gbox3,
+		x = 5,
+		y = 5
+	}
 
-	indexes =
+
+
+	-- other stuff
+	local palPos = 
 	{
-		1, 5, 6
-	},
-}
+		x = 500,
+		y = 200 
+	}
+
+	local palPos2 =
+	{
+		x = 700,
+		y = 200	
+	}
 
 
 
+	local pix = PixelTexture:New
+	{
+		width = 32,
+		height = 32,
+		filename = "RandPixels",
+		draw = true,
+		pos = 
+		{
+			x = 200,
+			y = 200
+		},
 
--- draws and writes pixels to a png
--- this is just testing function
--- so feel free to go crazy and change how pixels are drawn
-local selectedPalette = pal2
+		scale =
+		{
+			x = 1,
+			y = 1
+		}
+	}
 
-function MakePixels()
-	pix:Clear()
-	pix:AllRandomFromPalette(selectedPalette)
-	pix2:Split()
-	pix:Mask(pix2)
-end 
+	DrawTools.selectedPixelTexture = pix
 
-local PixelDrawLevel = {}
+	local pix2 = PixelTexture:New
+	{
+		width = 32,
+		height = 32,
+		filename = "stuff",
+		draw = true,
+		pos = 
+		{
+			x = 200,
+			y = 200
+		},
 
+		scale =
+		{
+			x = 8,
+			y =8
+		}
+	}
 
+	local pal2 = Palette:New
+	{
+		Pos = palPos,
+		draw = true
+	}
 
-function PixelDrawLevel:Load()
+	pal2:Interpolated
+	{
+		colors =
+		{
+			"red", "blue", "green"
+		},
+
+		indexes =
+		{
+			1, 5, 6
+		},
+	}
+
+	-- draws and writes pixels to a png
+	-- this is just testing function
+	-- so feel free to go crazy and change how pixels are drawn
+	local selectedPalette = pal2
+
 
 	---------------------
 	-- Buttons
@@ -342,8 +361,6 @@ function PixelDrawLevel:Load()
 	}
 	
 
-
-
 	-- create
 	local buttonsPanel = Panel:New
 	{
@@ -376,7 +393,7 @@ end
 
 
 
-function PixelDrawLevel:Update()
+local Update = function()
 
 --[[
 	local pointTest = Collision:PointInRect
@@ -395,11 +412,33 @@ function PixelDrawLevel:Update()
 end
 
 
-function PixelDrawLevel:Exit()
+local Exit = function()
 end 
 
-return PixelDrawLevel
+local Restart = function()
+end 
 
+
+
+local function MakePixels()
+	pix:Clear()
+	pix:AllRandomFromPalette(selectedPalette)
+	pix2:Split()
+	pix:Mask(pix2)
+end 
+
+
+local level = Level:New
+{
+	Start = Start,
+	Update = Update,
+	Exit = Exit,
+	Restart = Restart,
+
+	filename = "PixelDrawLevel"
+}
+
+return level
 
 
 -- Notes

@@ -4,6 +4,20 @@
 
 -- Load Level/Game
 ----------------------
+
+-->FIX
+-- when PixelDrawLevel is Exited and then Started again
+-- the sprites don't show up
+-- this might be because they are created by a raw require load run
+-- and the next time require is called that code is not run --> require on additional runs only returns
+-- that is the most likely case
+-- or there is something weird with Sprite?
+-- but it is most likely the behaviour of require causing that --> almost positive thats the problem
+-- need to keep that in mind or it could creep in weird problems
+-- if that is the case it means its not a code bug, just stupidly placed code
+-- look into it
+
+-->PROGRESS
 -- Level loading is really old code and janky
 -- needs to be updated very soon
 

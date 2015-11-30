@@ -60,7 +60,7 @@ function ParticleSystem:New(data)
 
 
 
-	function object:CreateParticleFromTable()
+	function o:CreateParticleFromTable()
 
 		self.particleTable[self.index].x = self.x
 		self.particleTable[self.index].y = self.y
@@ -82,7 +82,7 @@ function ParticleSystem:New(data)
 	end 
 
 
-	function object:PrintDebugText()
+	function o:PrintDebugText()
 		DebugText:TextTable
 		{
 			{text = "", obj = "ParticleSystem"},
@@ -92,7 +92,7 @@ function ParticleSystem:New(data)
 		}
 	end 
 
-	function object:DelayTimer()
+	function o:DelayTimer()
 
 		self.count = self.count + 1
 
@@ -111,7 +111,7 @@ function ParticleSystem:New(data)
 
 	end 
 
-	function object:ParticleUpdate()
+	function o:ParticleUpdate()
 		for i=1, #self.particleTable do
 			self.particleTable[i].count = self.particleTable[1].count + 1
 
@@ -125,7 +125,7 @@ function ParticleSystem:New(data)
 		end
 	end
 
-	function object:FollowMouse()
+	function o:FollowMouse()
 		if(self.followMouse == nil) then
 			return
 		end 
@@ -135,7 +135,7 @@ function ParticleSystem:New(data)
 
 	end
 
-	function object:Update()
+	function o:Update()
 		
 		self:ParticleUpdate()
 		self:FollowMouse()
