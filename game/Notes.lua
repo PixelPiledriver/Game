@@ -17,6 +17,7 @@
 -- Camera overhaul --> object based, fix shake, fix rotation, nodes, etc
 -- Window overhaul
 -- Sprite overhaul
+-- Animation builder/editor
 -- Ludum Dare maybe?
 -- other?
 

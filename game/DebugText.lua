@@ -61,7 +61,7 @@ DebugText.messageType =
 	-- Statics
 	ButtonStatic = false,
 	ShaderStatic = false,
-	MouseStatic = false,
+	MouseStatic = true,
 	InputTextStatic = false,
 	Info = false,
 

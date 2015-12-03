@@ -84,14 +84,13 @@ function Camera:New(data)
 	-- zoom
 	o.zoom = {x=1, y=1}
 	o.zoomSpeed = 0.01
+	
 
 	
-	-- unused as of now I believe
-	o.moveNodes = {}
-	o.moveIndex = 0
-	o.maxShake = 100
 
 	-- doesnt seem to work anymore?
+	-->FIX
+	o.maxShake = 100
 	o.shake =
 	{
 		xMax = 0,
@@ -115,8 +114,11 @@ function Camera:New(data)
 		shakeSoft = "n",
 	}
 
+
+
+
 	--------------------------
-	-- Movement and stuff
+	-- Movement and Transforms
 	-------------------------
 
 	function o:MoveLeft()
@@ -136,7 +138,6 @@ function Camera:New(data)
 	end 
 
 	function o:ZoomIn()
-		print("balls")
 		self.zoom.x = self.zoom.x + self.zoomSpeed
 		self.zoom.y = self.zoom.y + self.zoomSpeed
 	end 
@@ -159,6 +160,73 @@ function Camera:New(data)
 		self:Shake{xMax = 10, yMax= 10}
 	end
 
+
+	----------------------
+	-- Movement Nodes
+	----------------------
+
+	o.moveNodes = {}
+	o.moveNodeIndex = 1
+	o.moveNodeVector = {x=nil, y=nil}
+
+	-- create a position node for the camera to move towards
+	function o:SetMoveNode(data)
+
+		-- create node
+		local node = {}
+
+		node.x = data.x or self.Pos.x
+		node.y = data.y or self.Pos.y
+
+		-- camera has node table?
+		if(self.moveNodes == nil) then
+			self.moveNodes = {}
+		end 
+
+		-- add node to list
+		self.moveNodes[#self.moveNodes + 1] = node
+
+	end 
+
+
+	function o:TestNodes()
+		self:SetMoveNode{x = 100, y = 100}
+	end 
+
+	-- fixing
+	function o:UpdateMoveNodes()
+
+		-- node control doesnt exist?
+		if(self.moveNodes == nil) then
+			return
+		end 
+
+		-- no nodes in list?
+		if(#self.moveNodes == 0) then
+			return 
+		end 
+
+		-- need to create vector to next node?
+		if(self.moveNodeVector.x == nil or self.moveNodeVector.y == nil) then
+			local tempVector = 
+			{
+				x = self.moveNodes[self.moveNodeIndex].x - self.Pos.x,
+				y = self.moveNodes[self.moveNodeIndex].y - self.Pos.y
+			}
+
+			local tempUnitVector = Math:UnitVector(tempVector)
+
+			self.moveNodeVector.x = tempUnitVector.x * self.moveSpeed
+			self.moveNodeVector.y = tempUnitVector.y * self.moveSpeed
+		end 
+
+		self.Pos.x = self.Pos.x + self.moveNodeVector.x
+		self.Pos.y = self.Pos.y + self.moveNodeVector.y
+
+		print(self.moveNodeVector.x .. ", " .. self.moveNodeVector.y)
+
+	end
+
 	-----------------------
 	-- Input
 	-----------------------
@@ -176,11 +244,15 @@ function Camera:New(data)
 			{o.keys.zoomOut, "hold", o.ZoomOut},
 			{o.keys.rotLeft, "hold", o.RotLeft},
 			{o.keys.rotRight, "hold", o.RotRight},
-			{o.keys.shakeSoft, "hold", o.ShakeSoft}
+			{o.keys.shakeSoft, "hold", o.ShakeSoft},
+			{"t", "press", o.TestNodes}
 		}
 	}
 
 
+	---------------
+	-- Graphics
+	---------------
 
 	-- draw all objects based on camera transformation
 	function o:Draw()
@@ -200,7 +272,6 @@ function Camera:New(data)
 		love.graphics.rotate(self.rot)
 		love.graphics.scale(self.zoom.x, self.zoom.y)
 
-
 		love.graphics.translate(-screen.x + self.Pos.x, -screen.y + self.Pos.y)
 
 	end 
@@ -218,6 +289,11 @@ function Camera:New(data)
 		love.graphics.pop()
 
 	end 
+
+
+	-----------------------------------
+	-- Other Transform Functions
+	-----------------------------------
 
 	-- move camera from current pos
 	-- {x,y}
@@ -243,6 +319,11 @@ function Camera:New(data)
 
 		return p
 	end 
+
+
+	-------------
+	-- Shake
+	-------------
 
 	-- set the shake table
 	-- should add support for multiple tables
@@ -276,36 +357,12 @@ function Camera:New(data)
 		self.shake.xMax = self.shake.xMax * self.shake.reduce
 		self.shake.yMax = self.shake.yMax * self.shake.reduce
 
-
+		
 		-- need to add duration into this
-	end 
-
-
-	-- i dont think this actually does anything
-	-- hasn't been tested yet
-	function o:SetMoveNode(data)
-		local node = {}
-		node.x = data.x or self.Pos.x
-		node.y = data.y or self.Pos.y
-
-		self.targetNodes[#self.targetNodes + 1] = node
-	end 
-
-	-- broken for now
-	function o:UpdateMoveNodes()
-
-		if(#self.moveNodes == 0) then
-			return 
-		end 
-
-		-- this actually wont work
-		-- it will move the camera instantly to node pos
-		-- need to create a vector direction and then normalize it
-		-- then scale by a given speed
-		self.Pos.x = self.Pos.x + (self.moveNodes[self.moveIndex].x - self.Pos.x)
-		self.Pos.y = self.Pos.y + (self.moveNodes[self.moveIndex].y - self.Pos.y)
 
 	end 
+
+
 
 
 	-- info
@@ -351,6 +408,11 @@ end
 -- in the future other cameras may need to be updated as well
 function Camera:Update()
 	self.cameras[self.selectedCamera]:Update()
+
+	if(self.cameras.moveNodes) then
+		self:UpdateMoveNodes()
+	end 
+
 	self.cameras[self.selectedCamera]:PrintDebugText()
 end 
 
@@ -420,3 +482,10 @@ return Camera
 -- that needs to change
 -- working on it
 --ObjectUpdater:AddStatic(Camera)
+
+
+
+-- this actually wont work
+-- it will move the camera instantly to node pos
+-- need to create a vector direction and then normalize it
+-- then scale by a given speed

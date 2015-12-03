@@ -1,11 +1,16 @@
--- Random
--- get common random numbers
+-- Math.lua
 
+-- Purpose
+--------------------------------
+-- useful math functions
 
+-----------------------------------------------------------
 
+-- global
 Math = {}
 
 
+-- get unit vector from given vector
 function Math:UnitVector(vector)
 
 	local a = vector.x * vector.x
@@ -23,7 +28,8 @@ function Math:UnitVector(vector)
 
 end 
 
-
+-- return vector from given angle
+-- angle = value
 function Math:AngleToVector(angle)
 
 
@@ -42,6 +48,9 @@ function Math:AngleToVector(angle)
 
 end 
 
+
+-- return angle from given vector
+-- vector = {x, y}
 function Math:VectorToAngle(vector)
 
 	local v = {}
