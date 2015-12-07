@@ -34,6 +34,7 @@ LevelManager.destroyObjectsOnExit = true
 -- all levels available
 LevelManager.levelNames = 
 {
+	"CameraLevel",
 	"MapWorldLevel",
 	"NewLevelTypeTest",
 	"TextWriteLevel",

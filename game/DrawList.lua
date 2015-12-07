@@ -49,6 +49,11 @@ DrawList.layers =
 	}
 }
 
+DrawList.staticLayers = 
+{
+
+}
+
 
 ---------------------
 -- Static Functions
@@ -339,6 +344,13 @@ ObjectUpdater:AddStatic(DrawList)
 
 -- Notes
 -------------------- 
+-- NEED
+-- static layers that are not affected by the camera
+-- but still are sorted just like other layers
+-- most likely will be called as a seperate function
+-- most features of self.layers can be mirrored over
+
+-->DONE
 -- needs to be part of a higherarchy called DrawManager or something
 -- so that other stuff can factor in like Cameras and Shaders and stuff!
 

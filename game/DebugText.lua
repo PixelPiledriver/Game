@@ -70,7 +70,7 @@ DebugText.messageType =
 	Link = false,
 
 	-- Objects
-	Box = false,
+	Box = true,
 	Camera = true,
 	Bullet = false,
 	Block = false,

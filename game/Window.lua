@@ -72,6 +72,9 @@ love.window.setTitle(Window.title)
 -- sets window to full screen of current monitor
 -- love.window.setMode(0,0,{display = 1})
 
+Window.width = love.window.getWidth()
+Window.height = love.window.getHeight()
+
 ------------------
 -- Functions
 ------------------

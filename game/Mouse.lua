@@ -318,7 +318,6 @@ function Mouse:New(data)
 			{text = "SpeedX: " .. self.speed.x},
 			{text = "SpeedY: " .. self.speed.y},
 			{}
-
 		}
 		
 	end
@@ -351,7 +350,9 @@ function Mouse:PrintDebugText()
 		{text = "Right Click: " .. Bool:ToString(Mouse.clickButton.r)},
 		{text = "Middle Click: " .. Bool:ToString(Mouse.clickButton.m)},
 		{text = "Wheel Up: " .. Bool:ToString(Mouse.wheelUp)},
-		{text = "Wheel Down: " .. Bool:ToString(Mouse.wheelDown)}
+		{text = "Wheel Down: " .. Bool:ToString(Mouse.wheelDown)},
+		{text = "X: " .. love.mouse.getX()},
+		{text = "Y: " .. love.mouse.getY()}
 	}
 
 end 

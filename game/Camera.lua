@@ -17,6 +17,10 @@
 local Input = require("Input")
 local Pos = require("Pos")
 
+local Link = require("Link")
+local Box = require("Box")
+local Color = require("Color")
+
 --------------------------------------------------------------------
 -- global
 Camera = {}
@@ -84,7 +88,28 @@ function Camera:New(data)
 	-- zoom
 	o.zoom = {x=1, y=1}
 	o.zoomSpeed = 0.01
+
+	-- camera debug features
+	-- objects that help determine values of camera
+	o.zoomBox = Box:New
+	{
+		width = 32,
+		height = 32,
+		color = Color:Get("yellow")
+	}
 	
+	Link:Simple
+	{
+		a = {o.zoomBox, "Pos", "x"},
+		b = {o, "Pos", "x"},
+	}
+
+	Link:Simple
+	{
+		a = {o.zoomBox, "Pos", "y"},
+		b = {o, "Pos", "y"},
+	}
+
 
 	
 
@@ -122,19 +147,19 @@ function Camera:New(data)
 	-------------------------
 
 	function o:MoveLeft()
-		self.Pos.x = self.Pos.x + self.moveSpeed
+		self.Pos.x = self.Pos.x - self.moveSpeed
 	end 
 
 	function o:MoveRight()
-		self.Pos.x = self.Pos.x - self.moveSpeed
+		self.Pos.x = self.Pos.x + self.moveSpeed
 	end
 
 	function o:MoveUp()
-		self.Pos.y = self.Pos.y + self.moveSpeed
+		self.Pos.y = self.Pos.y - self.moveSpeed
 	end 
 
 	function o:MoveDown()
-		self.Pos.y = self.Pos.y - self.moveSpeed
+		self.Pos.y = self.Pos.y + self.moveSpeed
 	end 
 
 	function o:ZoomIn()
@@ -227,6 +252,14 @@ function Camera:New(data)
 
 	end
 
+	function o:SetDefaultValues()
+		self.Pos.x = 0
+		self.Pos.y = 0
+		self.rot = 0
+		self.zoom.x = 1
+		self.zoom.y = 1
+	end 
+
 	-----------------------
 	-- Input
 	-----------------------
@@ -245,6 +278,7 @@ function Camera:New(data)
 			{o.keys.rotLeft, "hold", o.RotLeft},
 			{o.keys.rotRight, "hold", o.RotRight},
 			{o.keys.shakeSoft, "hold", o.ShakeSoft},
+			{".", "press", o.SetDefaultValues},
 			{"t", "press", o.TestNodes}
 		}
 	}
@@ -255,11 +289,14 @@ function Camera:New(data)
 	---------------
 
 	-- draw all objects based on camera transformation
-	function o:Draw()
+	function o:DrawOld()
 
 		local pos = self:CalculatePos()
 
 
+		-- this is used to correct zooming, but does not actually work
+		-- need to find a better solution for it
+		-- gonna take this out for now until I figure out the other shit
 		local screen = 
 		{
 			x = love.graphics.getWidth() / 2,
@@ -276,8 +313,29 @@ function Camera:New(data)
 
 	end 
 
+	function o:Draw()
+		local pos = self:CalculatePos()
+
+
+
+		love .graphics.push()
+
+		love.graphics.translate(-self.Pos.x, -self.Pos.y)
+		love.graphics.rotate(self.rot)
+		love.graphics.scale(self.zoom.x, self.zoom.y)
+
+		--love.graphics.translate(-self.Pos.x, -self.Pos.y)
+	end 
 
 	function o:PostDraw()
+		
+		love.graphics.pop()
+
+	end 
+
+
+
+	function o:PostDrawOld()
 		
 		local screen = 
 		{
@@ -310,7 +368,7 @@ function Camera:New(data)
 		self.Pos.y = data.y or self.Pos.y
 	end 
 
-	-- no idea what this is?
+	-- returns a combined pos of cameras actual position and its shake values
 	function o:CalculatePos()
 		local p = {x=0, y=0}
 

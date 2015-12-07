@@ -47,7 +47,7 @@ EventLog.eventIndex = 1
 EventLog.Pos = Pos:New
 {
 	--x = love.window.getWidth() * 0.05, 
-	x = love.window.getWidth() * 0.75, 
+	x = love.window.getWidth() * 0.7, 
 	y = love.window.getHeight() * 0.95
 }
 

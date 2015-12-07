@@ -5,7 +5,7 @@
 -- this file is a place for any and all thoughts
 -- features needed, ideas, etc
 -- new stuff at the top, old at the bottom
-
+ 
 --------------------------------------------------------------------------------
 
 
@@ -19,6 +19,7 @@
 -- Sprite overhaul
 -- Animation builder/editor
 -- Ludum Dare maybe?
+-- Super Sprite --> sprite with features that make it an actual game object
 -- other?
 
 
