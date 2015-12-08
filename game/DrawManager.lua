@@ -45,6 +45,8 @@ function DrawManager:Draw()
 	DebugText:Draw()
 	Camera:Draw()
 	DrawList:Draw()
+	Camera:PostDraw()
+	DrawList:DrawStatic()
 
 end
 
@@ -52,7 +54,7 @@ end
 -- anything that needs to happen after all rendering is done
 -- but still within the draw callback
 function DrawManager:PostDraw()
-	Camera:PostDraw()
+	--Camera:PostDraw()
 end
 
 

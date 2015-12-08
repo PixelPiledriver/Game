@@ -74,6 +74,7 @@ function Draw:New(data)
 	o.last = data.last or false
 	o.inGroup = false
 	o.isGroup = false
+	o.drawList = data.drawList or nil
 
 	local byName = data.byName or true
 
@@ -144,7 +145,11 @@ function Draw:New(data)
 		elseif(self.last) then
 			DrawList:SubmitLast(drawData)
 		else
-			DrawList:Submit(drawData)
+			if(self.drawList == "static") then
+				DrawList:SubmitStatic(drawData)
+			else
+				DrawList:Submit(drawData)
+			end 
 		end 
 
 	end

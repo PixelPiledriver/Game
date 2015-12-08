@@ -75,6 +75,7 @@ function EventLog:Add(data)
 		self.eventTexts[self.eventIndex] = Text:New
 		{
 			text = data[1],
+			drawList = "static"
 		}
 	else
 		-- remove old text
@@ -85,6 +86,7 @@ function EventLog:Add(data)
 		self.eventTexts[self.eventIndex] = Text:New
 		{
 			text = data[1],
+			drawList = "static"
 		}		
 	end 
 

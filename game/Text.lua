@@ -153,6 +153,7 @@ function Text:New(data)
 	{
 		parent = o,
 		layer = "Hud",
+		drawList = data.drawList,
 		GetDepth = o.GetDepth,
 		first = data.first or false,
 		last = data.last or false,

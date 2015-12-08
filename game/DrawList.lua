@@ -19,316 +19,379 @@ DrawList = Info:New
 	structureType = "Manager"
 }
 
-----------------
--- Static Vars
-----------------
 
-DrawList.mode = {}
-DrawList.mode.options = {"Static", "Submit", "Sort"}
-DrawList.mode.selected = "Submit"
+--------------
+-- Object
+--------------
+function DrawList:New(data)
 
-DrawList.objects = {}
-DrawList.objects.layerIndex = {}
-DrawList.objects.lastLayerIndex = nil
+	local o = {}
 
-DrawList.drawnThisFrame = 0
-
-DrawList.layers = 
-{
-	Skybox = {value = 1, active = false},
-	Backdrop = {value = 2, active = false},
-	Objects = {value = 3, active = true},
-	Collision = {value = 4, active = false},
-	Hud = {value = 5, active = true},
-	Overlap = {value = 6, active = true},
-	DebugText = {value = 7, active = false},
-
-	index = 
+	o.Info = Info:New
 	{
-		"Skybox", "Backdrop", "Objects", "Collision", "Hud", "Overlap", "DebugText"
+		name = data.name or "...",
+		objectType = "DrawList",
+		dataType = "Graphics",
+		structureType = "Object"
 	}
-}
 
-DrawList.staticLayers = 
-{
+	----------------
+	-- Vars
+	----------------
 
-}
+	o.mode = {}
+	o.mode.options = {"Static", "Submit", "Sort"}
+	o.mode.selected = "Submit"
 
+	o.objects = {}
+	o.objects.layerIndex = {}
+	o.objects.lastLayerIndex = nil
 
----------------------
--- Static Functions
----------------------
+	o.drawnThisFrame = 0
 
-function DrawList:Update()
-	self:UpdateMode()
-end 
+	o.layers = 
+	{
+		Skybox = {value = 1, active = false},
+		Backdrop = {value = 2, active = false},
+		Objects = {value = 3, active = true},
+		Collision = {value = 4, active = false},
+		Hud = {value = 5, active = true},
+		Overlap = {value = 6, active = true},
+		DebugText = {value = 7, active = false},
 
--- update functions for different modes
--- currently only Submit is implemented
-function DrawList:UpdateMode()
-	if(self.mode.selected == "Submit") then
-		self:Clear()
-	end 
-end 
+		index = 
+		{
+			"Skybox", "Backdrop", "Objects", "Collision", "Hud", "Overlap", "DebugText"
+		}
+	}
 
--- get a layers value by name
-function DrawList:GetLayer(name)
-	return DrawList.layers[name].value
-end 
+	---------------------
+	-- Static Functions
+	---------------------
 
--- Create a layer in the DrawList
-function DrawList:CreateLayer(layer)
-
-	-- layer doesnt exist? --> create layer
-	if(self.objects[layer] == nil) then
-		self.objects[layer] = {}
-
-		-- unordered list of all submitted objects, waiting to be sorted
-		self.objects[layer].sort = {}
-
-		-- finalized list in order
-		self.objects[layer].draw = {}
-
-		-- draws behind all other objects in this layer
-		self.objects[layer].first = nil
-
-		-- draws on top of all other objects in this layer
-		self.objects[layer].last = nil
-
+	function o:Update()
+		self:UpdateMode()
 	end 
 
-end 
+	-- update functions for different modes
+	-- currently only Submit is implemented
+	function o:UpdateMode()
+		if(self.mode.selected == "Submit") then
+			self:Clear()
+		end 
+	end 
 
--- add an object to be drawn at given layer
--- data = Draw component
-function DrawList:Submit(data)
+	-- get a layers value by name
+	function o:GetLayer(name)
+		return self.layers[name].value
+	end 
 
-	-- make layer if it doesn't exist
-	self:CreateLayer(data.layer)
+	-- Create a layer in the DrawList
+	function o:CreateLayer(layer)
 
-	-- stack object on top
-	-- there is no sorting yet :| --> there is now
-	self.objects[data.layer].sort[#self.objects[data.layer].sort + 1] = data
+		-- layer doesnt exist? --> create layer
+		if(self.objects[layer] == nil) then
+			self.objects[layer] = {}
 
-	-- store layers in use
-	self.objects.layerIndex[#self.objects.layerIndex + 1] = data.layer
+			-- unordered list of all submitted objects, waiting to be sorted
+			self.objects[layer].sort = {}
 
-end 
+			-- finalized list in order
+			self.objects[layer].draw = {}
 
--- sets the given object to draw first
--- need to add a feature that lets you bump the first object with a new one
--- data = Draw component --> not true its a local table
-function DrawList:SubmitFirst(data)
-	self:CreateLayer(data.layer)
-	self.objects[data.layer].first = data
-end 
- 
--- sets the given object to draw last
--- data = Draw component --> not true its a local table
-function DrawList:SubmitLast(data)
-	self:CreateLayer(data.layer)
-	self.objects[data.layer].last = data
-end 
+			-- draws behind all other objects in this layer
+			self.objects[layer].first = nil
 
--- after the Update call, all objects have submitted here to be drawn
--- now its time to sort them and stuff
-function DrawList:PostUpdate()
+			-- draws on top of all other objects in this layer
+			self.objects[layer].last = nil
 
-	-- create list of used layers
-	self:CompressAndSortLayerList()
-
-	-- sort draw order of all objects submitted
-	-- o.sort is just a pile of unsorted objects
-	self:Sort()
-
-end 
-
--- removes duplicate indexs of layers in use
-function DrawList:CompressAndSortLayerList()
-
-	local layerIndex = TableSort:UniqueVars(self.objects.layerIndex)
-	TableSort:SortByString(layerIndex)
-
-	self.objects.layerIndex = nil
-	self.objects.layerIndex = layerIndex
-end 
-
--- sorts all objects per layer by their depth value
--- depth is calculated by each object and passed in
--- so while sorting can always be done 
--- it may not be sorted based on the same type of depth
-function DrawList:Sort()
-
-	local function tempCompare(a,b)
-		return a.depth < b.depth
-	end
-
-
-	for i=1, #self.objects.layerIndex do
-
-		local layerIndex = self.objects.layerIndex[i]
-
-		table.sort(self.objects[layerIndex].sort, tempCompare)
-
-		for j=1, #self.objects[layerIndex].sort do
-			self.objects[layerIndex].draw[#self.objects[layerIndex].draw + 1] = self.objects[layerIndex].sort[j] 
 		end 
 
 	end 
-			
-end 
 
--- removes all objects
--- used for per frame submit style draw list
-function DrawList:Clear()
+	-- add an object to be drawn at given layer
+	-- data = Draw component
+	function o:Submit(data)
 
-	local layerIndex = self.objects.layerIndex
+		-- make layer if it doesn't exist
+		self:CreateLayer(data.layer)
 
-	-- remove each depth
-	for i=1, #layerIndex do
+		-- stack object on top
+		-- there is no sorting yet :| --> there is now
+		self.objects[data.layer].sort[#self.objects[data.layer].sort + 1] = data
 
-		-- remove each object
-		
-		for j=1, #self.objects[layerIndex[i]].draw do
-			self.objects[layerIndex[i]].draw[j] = nil
-		end 
+		-- store layers in use
+		self.objects.layerIndex[#self.objects.layerIndex + 1] = data.layer
 
-		for j=1, #self.objects[layerIndex[i]].sort do
-			self.objects[layerIndex[i]].sort[j] = nil
-		end 
-
-		self.objects[layerIndex[i]] = nil
 	end 
 
-	self.objects.lastLayerIndex = nil
-	self.objects.lastLayerIndex = self.objects.layerIndex
-	self.objects.layerIndex = nil
-	self.objects.layerIndex = {}
-end
+	-- sets the given object to draw first
+	-- need to add a feature that lets you bump the first object with a new one
+	-- data = Draw component --> not true its a local table
+	function o:SubmitFirst(data)
+		self:CreateLayer(data.layer)
+		self.objects[data.layer].first = data
+	end 
+	 
+	-- sets the given object to draw last
+	-- data = Draw component --> not true its a local table
+	function o:SubmitLast(data)
+		self:CreateLayer(data.layer)
+		self.objects[data.layer].last = data
+	end 
 
--- draw all objects in order
-function DrawList:Draw()
+	-- after the Update call, all objects have submitted here to be drawn
+	-- now its time to sort them and stuff
+	function o:PostUpdate()
 
-	-- draw all objects in all layers
-	for i=1, #self.objects.layerIndex do
+		-- create list of used layers
+		self:CompressAndSortLayerList()
 
-		repeat
+		-- sort draw order of all objects submitted
+		-- o.sort is just a pile of unsorted objects
+		self:Sort()
 
-			-- is this layer/depth active?
-			if(self.layers[self.layers.index[self.objects.layerIndex[i]]].active == false) then
-				break
-			end
+	end 
+
+	-- removes duplicate indexs of layers in use
+	function o:CompressAndSortLayerList()
+
+		local layerIndex = TableSort:UniqueVars(self.objects.layerIndex)
+		TableSort:SortByString(layerIndex)
+
+		self.objects.layerIndex = nil
+		self.objects.layerIndex = layerIndex
+	end 
+
+	-- sorts all objects per layer by their depth value
+	-- depth is calculated by each object and passed in
+	-- so while sorting can always be done 
+	-- it may not be sorted based on the same type of depth
+	function o:Sort()
+
+		local function tempCompare(a,b)
+			return a.depth < b.depth
+		end
+
+
+		for i=1, #self.objects.layerIndex do
 
 			local layerIndex = self.objects.layerIndex[i]
 
-			-- first
-			-- draw this object below all others
-			if(self.objects[layerIndex].first) then
-				self.objects[layerIndex].first.o.Draw:Draw()
-				self.drawnThisFrame = self.drawnThisFrame + 1
-			end 		
+			table.sort(self.objects[layerIndex].sort, tempCompare)
 
-			-- draw each object in this layer
-			for j=1, #self.objects[self.objects.layerIndex[i]].draw do
+			for j=1, #self.objects[layerIndex].sort do
+				self.objects[layerIndex].draw[#self.objects[layerIndex].draw + 1] = self.objects[layerIndex].sort[j] 
+			end 
 
-
-				if(self.objects[self.objects.layerIndex[i]].draw[j].isGroup) then
-
-					-- flag for after drawing		
-					local resetScissor = false
-					local x = nil
-					local y = nil
-					local width = nil
-					local height = nil
+		end 
 				
-					-- set space to draw within --> good for panels
-					if(self.objects[self.objects.layerIndex[i]].draw[j].scissorActive) then
+	end 
 
-						-- get scissor vars
-						x = self.objects[self.objects.layerIndex[i]].draw[j].scissor.x
-						y = self.objects[self.objects.layerIndex[i]].draw[j].scissor.y
-						width = self.objects[self.objects.layerIndex[i]].draw[j].scissor.width
-						height = self.objects[self.objects.layerIndex[i]].draw[j].scissor.height
+	-- removes all objects
+	-- used for per frame submit style draw list
+	function o:Clear()
 
-						-- set draw rect
-						love.graphics.setScissor(x, y, width, height)
+		local layerIndex = self.objects.layerIndex
 
-						-- set flag
-						resetScissor = true
+		-- remove each depth
+		for i=1, #layerIndex do
 
-					end 
+			-- remove each object
+			
+			for j=1, #self.objects[layerIndex[i]].draw do
+				self.objects[layerIndex[i]].draw[j] = nil
+			end 
+
+			for j=1, #self.objects[layerIndex[i]].sort do
+				self.objects[layerIndex[i]].sort[j] = nil
+			end 
+
+			self.objects[layerIndex[i]] = nil
+		end 
+
+		self.objects.lastLayerIndex = nil
+		self.objects.lastLayerIndex = self.objects.layerIndex
+		self.objects.layerIndex = nil
+		self.objects.layerIndex = {}
+	end
+
+	-- draw all objects in order
+	function o:Draw()
+
+		-- draw all objects in all layers
+		for i=1, #self.objects.layerIndex do
+
+			repeat
+
+				-- is this layer/depth active?
+				if(self.layers[self.layers.index[self.objects.layerIndex[i]]].active == false) then
+					break
+				end
+
+				local layerIndex = self.objects.layerIndex[i]
+
+				-- first
+				-- draw this object below all others
+				if(self.objects[layerIndex].first) then
+					self.objects[layerIndex].first.o.Draw:Draw()
+					self.drawnThisFrame = self.drawnThisFrame + 1
+				end 		
+
+				-- draw each object in this layer
+				for j=1, #self.objects[self.objects.layerIndex[i]].draw do
+
+
+					if(self.objects[self.objects.layerIndex[i]].draw[j].isGroup) then
+
+						-- flag for after drawing		
+						local resetScissor = false
+						local x = nil
+						local y = nil
+						local width = nil
+						local height = nil
 					
-					-- draw all objects in group
-					for k=1, #self.objects[self.objects.layerIndex[i]].draw[j].drawables do
+						-- set space to draw within --> good for panels
+						if(self.objects[self.objects.layerIndex[i]].draw[j].scissorActive) then
 
-						-- is object excluded from this groups scissor?
-						-- then disable scissor
-						if(self.objects[self.objects.layerIndex[i]].draw[j].drawables[k].parent.noScissor) then
+							-- get scissor vars
+							x = self.objects[self.objects.layerIndex[i]].draw[j].scissor.x
+							y = self.objects[self.objects.layerIndex[i]].draw[j].scissor.y
+							width = self.objects[self.objects.layerIndex[i]].draw[j].scissor.width
+							height = self.objects[self.objects.layerIndex[i]].draw[j].scissor.height
+
+							-- set draw rect
+							love.graphics.setScissor(x, y, width, height)
+
+							-- set flag
+							resetScissor = true
+
+						end 
+						
+						-- draw all objects in group
+						for k=1, #self.objects[self.objects.layerIndex[i]].draw[j].drawables do
+
+							-- is object excluded from this groups scissor?
+							-- then disable scissor
+							if(self.objects[self.objects.layerIndex[i]].draw[j].drawables[k].parent.noScissor) then
+								love.graphics.setScissor()
+							end 
+
+							self.objects[self.objects.layerIndex[i]].draw[j].drawables[k]:Draw()
+							self.drawnThisFrame = self.drawnThisFrame + 1
+
+							-- re enable scissor if object was excluded
+							if(resetScissor) then
+								love.graphics.setScissor(x, y, width, height)
+							end 
+
+						end 
+
+						-- disable scissor because group is done drawing
+						if(resetScissor) then
 							love.graphics.setScissor()
 						end 
 
-						self.objects[self.objects.layerIndex[i]].draw[j].drawables[k]:Draw()
-						self.drawnThisFrame = self.drawnThisFrame + 1
+					else
+						if(self.objects[self.objects.layerIndex[i]].draw[j].o.Draw) then	
 
-						-- re enable scissor if object was excluded
-						if(resetScissor) then
-							love.graphics.setScissor(x, y, width, height)
-						end 
-
+							self.objects[self.objects.layerIndex[i]].draw[j].o.Draw:Draw()
+							self.drawnThisFrame = self.drawnThisFrame + 1
+						end
 					end 
 
-					-- disable scissor because group is done drawing
-					if(resetScissor) then
-						love.graphics.setScissor()
-					end 
-
-				else
-					if(self.objects[self.objects.layerIndex[i]].draw[j].o.Draw) then	
-
-						self.objects[self.objects.layerIndex[i]].draw[j].o.Draw:Draw()
-						self.drawnThisFrame = self.drawnThisFrame + 1
-					end
 				end 
 
-			end 
+				-- last
+				-- draw this object on top of all others
+				if(self.objects[layerIndex].last) then
+					self.objects[layerIndex].last.o.Draw:Draw()
+					self.drawnThisFrame = self.drawnThisFrame + 1
+				end 
 
-			-- last
-			-- draw this object on top of all others
-			if(self.objects[layerIndex].last) then
-				self.objects[layerIndex].last.o.Draw:Draw()
-				self.drawnThisFrame = self.drawnThisFrame + 1
-			end 
+			until true
+		end
 
-		until true
+	end 
+
+
+	-- info
+	function o:PrintDebugText()
+
+		local layerIndexString = ""
+
+		for i=1, #self.objects.lastLayerIndex do
+			if(i == 1) then
+				layerIndexString = layerIndexString .. self.objects.lastLayerIndex[i]
+			else
+				layerIndexString = layerIndexString .. ", " .. self.objects.lastLayerIndex[i]
+			end 
+		end
+
+		DebugText:TextTable
+		{
+			{text = "", obj = "DrawList" },
+			{text = "Draw"},
+			{text = "---------------------"},
+			{text = "Layer Index: " .. layerIndexString},
+			{text = "Drawn this Frame: " .. self.drawnThisFrame}
+		}
+
+		self.drawnThisFrame = 0
 	end
+
+	return o
 
 end 
 
 
--- info
-function DrawList:PrintDebugText()
+-------------
+-- Setup
+-------------
+-- create the normal and static layer lists with DrawList.New
 
-	local layerIndexString = ""
+DrawList.objectList = DrawList:New{}
+DrawList.staticObjectList = DrawList:New{}
 
-	for i=1, #self.objects.lastLayerIndex do
-		if(i == 1) then
-			layerIndexString = layerIndexString .. self.objects.lastLayerIndex[i]
-		else
-			layerIndexString = layerIndexString .. ", " .. self.objects.lastLayerIndex[i]
-		end 
-	end
 
-	DebugText:TextTable
-	{
-		{text = "", obj = "DrawList" },
-		{text = "Draw"},
-		{text = "---------------------"},
-		{text = "Layer Index: " .. layerIndexString},
-		{text = "Drawn this Frame: " .. self.drawnThisFrame}
-	}
+----------------------
+-- Static Functions
+----------------------
 
-	self.drawnThisFrame = 0
+function DrawList:GetLayer(name)
+	return self.objectList:GetLayer(name)
 end
+
+function DrawList:GetLayerStatic(name)
+	return self.staticObjectList:GetLayer(name)
+end 
+
+function DrawList:Submit(data)
+	self.objectList:Submit(data)
+end
+
+function DrawList:SubmitStatic(data)
+	self.staticObjectList:Submit(data)
+end 
+
+function DrawList:PostUpdate()
+	self.objectList:PostUpdate()
+	self.staticObjectList:PostUpdate()
+end
+
+function DrawList:Draw()
+	self.objectList:Draw()	
+end 
+
+function DrawList:DrawStatic()
+	self.staticObjectList:Draw()
+end 
+
+function DrawList:Update()
+	self.objectList:Update()
+	self.staticObjectList:Update()
+end 
+
 
 
 ---------------
@@ -344,6 +407,12 @@ ObjectUpdater:AddStatic(DrawList)
 
 -- Notes
 -------------------- 
+-- will most likely have to convert this into a static that can create an object
+-- with all the implemented features
+-- that way it can make a .layers and .staticLayers lists
+-- that have the exact same functionality
+-- it won't be fun, but thats what I should do
+
 -- NEED
 -- static layers that are not affected by the camera
 -- but still are sorted just like other layers

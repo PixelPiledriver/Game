@@ -109,9 +109,12 @@ require("TestCode")
 		-- reworking to update on its own
 		Camera:Update()
 
+		-- draw components
+		DrawList:Update()
+
 		-- objects
 		ObjectUpdater:Update()
-
+		
 		-- input
 		Camera:RepeatedInput()
 		ObjectUpdater:RepeatedInput()
