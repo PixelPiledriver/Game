@@ -314,17 +314,32 @@ function Camera:New(data)
 	end 
 
 	function o:Draw()
+
 		local pos = self:CalculatePos()
-
-
 
 		love .graphics.push()
 
+		-- move all objects to apply camera position
+		-- this may need to be done last, not sure
+		-- not sure if it is reverse order or not like DirectX
 		love.graphics.translate(-self.Pos.x, -self.Pos.y)
+
+		-->FIX
+		-- not sure if rotation works correctly
+		-- I think this may also need to be part of center screen
 		love.graphics.rotate(self.rot)
+
+		-- need to translate to set zoom in center of screen
+		love.graphics.translate( (love.window.getWidth()/2) + self.Pos.x, (love.window.getHeight()/2) + self.Pos.y)
+
+		-- zoom in on center of view
 		love.graphics.scale(self.zoom.x, self.zoom.y)
 
-		--love.graphics.translate(-self.Pos.x, -self.Pos.y)
+		-- and then untranslate after zooming
+		love.graphics.translate( (-love.window.getWidth()/2) - self.Pos.x, (-love.window.getHeight()/2) - self.Pos.y)
+
+	
+
 	end 
 
 	function o:PostDraw()
@@ -509,6 +524,10 @@ return Camera
 
 -- Notes
 --------------
+-->DONE
+-- need to fix zoom
+-- removed it to fix some other code
+
 -- re working Camera
 -- gonna be broken for a bit
 

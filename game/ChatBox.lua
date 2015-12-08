@@ -356,5 +356,14 @@ return ChatBox
 
 -- Notes
 ----------------------------
+-->NEED 
+-- option var for setting chatbox to be unaffected by camera
+-- this is so that zooming does not make the font get blurry
+
+-->NEED
+-- better default sizing - auto detect settings needed
+-- global size options for player to adjust to their liking - manual settings
+
+-->DONE
 -- need to figure out how I'm going to do multiple lines
 -- and text typing animation
