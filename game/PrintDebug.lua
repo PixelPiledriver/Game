@@ -33,25 +33,27 @@ PrintDebugType.Info = Info:New
 local printList = {}
 
 -- switches
-printList.stuff = {false, false}
+
 printList.mathTest = {false, false}
 printList.animation = {false, false}
-printList.Health = {false, false}
+printList.Build = {false, false}
+printList.ChatBox = {true, false}
 printList.Collision = {false, false}
 printList.Collision2 = {false, false}
 printList.Collision3 = {false, false}
 printList.CollisionList = {false, false}
 printList.CollisionManager = {false, false}
-printList.Build = {false, false}
 printList.Controller = {false, false}
-printList.MapTable = {false, false}
-printList.Mouse = {true, false}
-printList.MapObject = {true, false}
-printList.ChatBox = {true, false}
-printList.Links = {false, false}
-printList.ObjectUpdater = {false, false}
 printList.Fail = {true, false}
+printList.Health = {false, false}
+printList.Links = {false, false}
 printList.LevelManager = {true, false}
+printList.MapTable = {false, false}
+printList.Matrix = {true, false}
+printList.Mouse = {false, false}
+printList.MapObject = {true, false}
+printList.ObjectUpdater = {false, false}
+printList.stuff = {false, false}
 
 
 

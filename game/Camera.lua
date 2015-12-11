@@ -19,6 +19,7 @@ local Pos = require("Pos")
 
 local Link = require("Link")
 local Box = require("Box")
+local Line = require("Line")
 local Color = require("Color")
 
 --------------------------------------------------------------------
@@ -89,7 +90,9 @@ function Camera:New(data)
 	o.zoom = {x=1, y=1}
 	o.zoomSpeed = 0.01
 
-	-- camera debug features
+	-------------------
+	-- Test Objects
+	-------------------
 	-- objects that help determine values of camera
 	o.zoomBox = Box:New
 	{
@@ -110,7 +113,19 @@ function Camera:New(data)
 		b = {o, "Pos", "y"},
 	}
 
-
+	o.centerView = {}
+	o.centerView.size = 15
+	o.centerView.verticalLine = Line:New
+	{
+		a = {x = Window.width * 0.5, y = (Window.height * 0.5) - o.centerView.size},
+		b = {x = Window.width * 0.5, y = (Window.height * 0.5) + o.centerView.size}
+	}
+	
+	o.centerView.verticalLine = Line:New
+	{
+		a = {x = Window.width * 0.5 - o.centerView.size, y = Window.height * 0.5},
+		b = {x = Window.width * 0.5 + o.centerView.size, y = Window.height * 0.5}
+	}
 	
 
 	-- doesnt seem to work anymore?
@@ -288,31 +303,8 @@ function Camera:New(data)
 	-- Graphics
 	---------------
 
-	-- draw all objects based on camera transformation
-	function o:DrawOld()
 
-		local pos = self:CalculatePos()
-
-
-		-- this is used to correct zooming, but does not actually work
-		-- need to find a better solution for it
-		-- gonna take this out for now until I figure out the other shit
-		local screen = 
-		{
-			x = love.graphics.getWidth() / 2,
-			y = love.graphics.getHeight() / 2
-		}
-
-		love .graphics.push()
-
-		love.graphics.translate(screen.x + self.Pos.x, screen.y + self.Pos.y)
-		love.graphics.rotate(self.rot)
-		love.graphics.scale(self.zoom.x, self.zoom.y)
-
-		love.graphics.translate(-screen.x + self.Pos.x, -screen.y + self.Pos.y)
-
-	end 
-
+	-- apply view transform
 	function o:Draw()
 
 		local pos = self:CalculatePos()
@@ -324,24 +316,22 @@ function Camera:New(data)
 		-- not sure if it is reverse order or not like DirectX
 		love.graphics.translate(-self.Pos.x, -self.Pos.y)
 
-		-->FIX
-		-- not sure if rotation works correctly
-		-- I think this may also need to be part of center screen
-		love.graphics.rotate(self.rot)
-
-		-- need to translate to set zoom in center of screen
+		-- translate to set screen to center of view
 		love.graphics.translate( (love.window.getWidth()/2) + self.Pos.x, (love.window.getHeight()/2) + self.Pos.y)
 
-		-- zoom in on center of view
+		-- zoom
 		love.graphics.scale(self.zoom.x, self.zoom.y)
 
-		-- and then untranslate after zooming
-		love.graphics.translate( (-love.window.getWidth()/2) - self.Pos.x, (-love.window.getHeight()/2) - self.Pos.y)
+		-- rotate
+		love.graphics.rotate(self.rot)
 
-	
+		-- and then untranslate from center of view
+		love.graphics.translate( (-love.window.getWidth()/2) - self.Pos.x, (-love.window.getHeight()/2) - self.Pos.y)
 
 	end 
 
+
+	-- remove view transform
 	function o:PostDraw()
 		
 		love.graphics.pop()
@@ -350,18 +340,7 @@ function Camera:New(data)
 
 
 
-	function o:PostDrawOld()
-		
-		local screen = 
-		{
-			x = love.graphics.getWidth() / 2,
-			y = love.graphics.getHeight() / 2
-		}
 
-		love.graphics.translate(screen.x, screen.y)
-		love.graphics.pop()
-
-	end 
 
 
 	-----------------------------------
@@ -524,15 +503,20 @@ return Camera
 
 -- Notes
 --------------
+-->FIX
+-- moving camera up, down, left, right is messed up while rotated
+-- need to create vectors based on the angle of rotation
+-- that are vertical and horizontal relative to the angle of the camera
+-- should be easy enough with subtraction I think?
+-- will have to test it
+
+
 -->DONE
 -- need to fix zoom
 -- removed it to fix some other code
 
 -- re working Camera
 -- gonna be broken for a bit
-
--- scrolling up down left right is messed up while rotated
--- need to fix this
 
 -- Camera only operates as a static currently
 -- the New function is broken and is not even used
@@ -551,7 +535,7 @@ return Camera
 
 -- Junk
 -----------------------------------
-
+--[[
 
 -- this is commented out for now because Camera is the only camera
 -- acts as a static
@@ -566,3 +550,48 @@ return Camera
 -- it will move the camera instantly to node pos
 -- need to create a vector direction and then normalize it
 -- then scale by a given speed
+
+
+
+	function o:PostDrawOld()
+		
+		local screen = 
+		{
+			x = love.graphics.getWidth() / 2,
+			y = love.graphics.getHeight() / 2
+		}
+
+		love.graphics.translate(screen.x, screen.y)
+		love.graphics.pop()
+
+	end 
+
+
+	-- draw all objects based on camera transformation
+	function o:DrawOld()
+
+		local pos = self:CalculatePos()
+
+
+		-- this is used to correct zooming, but does not actually work
+		-- need to find a better solution for it
+		-- gonna take this out for now until I figure out the other shit
+		local screen = 
+		{
+			x = love.graphics.getWidth() / 2,
+			y = love.graphics.getHeight() / 2
+		}
+
+		love .graphics.push()
+
+		love.graphics.translate(screen.x + self.Pos.x, screen.y + self.Pos.y)
+		love.graphics.rotate(self.rot)
+		love.graphics.scale(self.zoom.x, self.zoom.y)
+
+		love.graphics.translate(-screen.x + self.Pos.x, -screen.y + self.Pos.y)
+
+	end 
+
+
+
+--]]

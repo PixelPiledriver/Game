@@ -13,16 +13,19 @@ require("MemoryManager")
 require("LevelManager")
 require("ObjectUpdater")
 require("Info")
+require("Random")
 require("CollisionManager")
+require("Window")
 require("DrawList")
 require("DrawManager")
 require("DebugText")
 require("DeltaTime")
 require("Keyboard")
+require("Vertex")
 require("Math")
+require("Matrix")
 require("TableSort")
 require("PrintDebug")
-require("Random")
 require("FailNew")
 require("Bool")
 require("Mouse")
@@ -30,14 +33,17 @@ require("Game")
 require("EventLog")
 require("Level")
 
+
+--------------------
 -- Post Utilities
-----------------------
+--------------------
 LevelManager:PostRequire()
 
 
 ---------------------------------
 -- Create Important Data Types 
 ---------------------------------
+
 local App = require("App")
 local Map = require("Map")
 local Camera = require("Camera")
@@ -48,7 +54,7 @@ local Collision = require("Collision")
 local CollisionLists = require("CollisionLists")
 local FrameCounter = require("FrameCounter")
 local Sound = require("Sound")
-local Window = require("Window")
+
 local Graphics = require("Graphics")
 local Shader = require("Shader")
 local Draw = require("Draw")

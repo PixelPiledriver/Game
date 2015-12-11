@@ -29,9 +29,8 @@ function Math:UnitVector(vector)
 end 
 
 -- return vector from given angle
--- angle = value
+-- angle = #
 function Math:AngleToVector(angle)
-
 
 	local sin = math.sin(math.rad(angle))
 	local cos = math.cos(math.rad(angle))
@@ -46,6 +45,23 @@ function Math:AngleToVector(angle)
 
 	return v 
 
+end
+
+-- get vector from given radian
+-- radian = #
+function Math:RadToVector(radian)
+	local sin = math.sin(radian)
+	local cos = math.cos(radian)
+
+	local v = 
+	{
+		x = cos,
+		y = sin
+	}
+
+	v = self:UnitVector(v)
+
+	return v
 end 
 
 

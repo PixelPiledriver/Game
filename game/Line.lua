@@ -57,7 +57,7 @@ function Line:New(data)
 	o.b.y = data.b and data.b.y or 100
 
 	-- graphics
-	o.color = data.color and Color:Get(data.color) or Color:Get("black")
+	o.color = data.color or Color:Get("black")
 	o.width = data.width or 1
 
 	------------------------
@@ -98,6 +98,7 @@ function Line:New(data)
 	-- Functions
 	-----------------
 	function o:Update()
+
 	end 
 
 	function o:DrawCall()
@@ -119,10 +120,10 @@ function Line:New(data)
 			{text = "B: {" .. self.b.x .. "," .. self.b.y .. "}"},
 			{text = "LifeCompValue: " .. life},
 			{text = "Alpha: " .. self.color.a},
-			{text = "Fade: " .. self.Fade.fade}
+			--{text = "Fade: " .. (self.Fade and self.Fade.fade) or "noFade"}
 		}
 
-	end 
+	end
 
 
 	function o:Destroy()
@@ -152,9 +153,31 @@ end
 
 
 
---
-
-
 
 
 return Line
+
+
+
+
+
+
+
+
+-- Junk
+------------------------------------------------------
+--[[
+		
+		local rot = Matrix.x3:Rotation(1)
+
+		local newPointPos = Matrix.x3:MulPoint(rot, Vertex:AsPoint(self.a))
+
+
+		self.a.x = newPointPos.x
+		self.a.y = newPointPos.y
+
+
+
+		Matrix.x3:RotateAround(self.b, self.a, 2)
+		
+--]]

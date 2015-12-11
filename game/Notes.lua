@@ -9,18 +9,24 @@
 --------------------------------------------------------------------------------
 
 
-
+-- Added Matrix.lua
+-- has some decent matricie features and blah
+-- still needs some work
 
 -- So whats next?
 ---------------------------
 -- LevelManager UI
--- Camera overhaul --> object based, fix shake, fix rotation, nodes, etc
 -- Window overhaul
 -- Sprite overhaul
 -- Animation builder/editor
--- Ludum Dare maybe?
 -- Super Sprite --> sprite with features that make it an actual game object
 -- other?
+
+-->WORKING
+-- Camera overhaul --> object based, fix shake, fix rotation, nodes, etc
+
+-->NAW
+-- Ludum Dare maybe?
 
 
 
