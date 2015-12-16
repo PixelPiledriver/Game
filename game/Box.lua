@@ -334,21 +334,21 @@ function Box:New(data)
 	function o:Destroy()
 
 		if(self.xFlip) then
-			ObjectUpdater:Destroy(self.xFlip)
+			ObjectManager:Destroy(self.xFlip)
 		end 
 
 		if(self.yFlip) then
-			ObjectUpdater:Destroy(self.yFlip)
+			ObjectManager:Destroy(self.yFlip)
 		end 
 
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.Pos)
-		ObjectUpdater:Destroy(self.Size)
-		ObjectUpdater:Destroy(self.Life)
-		ObjectUpdater:Destroy(self.Fade)
-		ObjectUpdater:Destroy(self.Input)
-		ObjectUpdater:Destroy(self.Draw)
-		ObjectUpdater:Destroy(self.color)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.Pos)
+		ObjectManager:Destroy(self.Size)
+		ObjectManager:Destroy(self.Life)
+		ObjectManager:Destroy(self.Fade)
+		ObjectManager:Destroy(self.Input)
+		ObjectManager:Destroy(self.Draw)
+		ObjectManager:Destroy(self.color)
 
 	end 
 
@@ -357,7 +357,7 @@ function Box:New(data)
 	-- End
 	----------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -367,7 +367,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(Box)
+ObjectManager:AddStatic(Box)
 
 return Box
 

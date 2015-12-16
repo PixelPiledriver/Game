@@ -454,18 +454,18 @@ function Palette:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.collision)
-		ObjectUpdater:Destroy(self.hover)
-		ObjectUpdater:Destroy(self.drag)
-		ObjectUpdater:Destroy(self.Draw)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.collision)
+		ObjectManager:Destroy(self.hover)
+		ObjectManager:Destroy(self.drag)
+		ObjectManager:Destroy(self.Draw)
 	end 
 
 	------------
 	-- End
 	------------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -475,7 +475,7 @@ end
 
 
 
---ObjectUpdater:AddStat(Pallet)
+--ObjectManager:AddStat(Pallet)
 
 
 

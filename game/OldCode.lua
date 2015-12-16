@@ -190,7 +190,7 @@ function App:Input(key)
 end 
 
 
-ObjectUpdater:AddStatic(App)
+ObjectManager:AddStatic(App)
 
 return App
 
@@ -317,12 +317,12 @@ SnapGridTestLevel:Load()
 
 
 
---ObjectUpdater
+--ObjectManager
 ------------------------------------------------------------------------------------------
 -- this is def no longer needed ->DELETE
 -- out for now
 -- hooking up DrawList
-ObjectUpdater:Draw()
+ObjectManager:Draw()
 
 
 
@@ -419,7 +419,7 @@ function Link:New(data)
 
 
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -427,7 +427,7 @@ end
 
 
 
-ObjectUpdater:AddStatic(Link)
+ObjectManager:AddStatic(Link)
 
 return Link
 

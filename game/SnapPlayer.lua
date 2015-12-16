@@ -523,7 +523,7 @@ function SnapPlayer:New(data)
 	end
 
 	-- add new object to updater
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	-- done creating player object
 	return o

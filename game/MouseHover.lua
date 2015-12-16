@@ -81,7 +81,48 @@ function MouseHover:New(data)
 			{text = "Hover:" .. Bool:ToString(self.isHovering)}
 		}
 
-		--[[
+
+	end
+
+	function o:Destroy()
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.map)
+		ObjectManager:Destroy(self.Draw)
+	end 
+
+
+	--------------
+	-- End
+	--------------
+
+
+	ObjectManager:Add{o}
+
+	return o
+
+end 
+
+
+
+return MouseHover
+
+
+
+
+
+
+
+-- Notes
+-----------------------------------
+-- slightly old code but seems to work fine
+
+
+
+
+-- Junk
+---------------------------------------------
+--[=[
+
 		DebugText:TextTableSimple
 		{
 			objectType = "MouseHover",
@@ -92,28 +133,5 @@ function MouseHover:New(data)
 				{Bool:ToString(self.isHovering)}
 			}
 		}
-		--]]
 
-	end
-
-	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.map)
-		ObjectUpdater:Destroy(self.Draw)
-	end 
-
-
-	--------------
-	-- End
-	--------------
-
-
-	ObjectUpdater:Add{o}
-
-	return o
-
-end 
-
-
-
-return MouseHover
+--]=]

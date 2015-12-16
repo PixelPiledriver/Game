@@ -58,14 +58,14 @@ function Canvas:New(data)
 	-- Functions
 	---------------
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 
 	----------
 	-- End
 	----------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 end 
@@ -75,7 +75,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(Canvas)
+ObjectManager:AddStatic(Canvas)
 
 return Canvas
 

@@ -47,7 +47,7 @@ function ValueStorage:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)		
+		ObjectManager:Destroy(self.Info)		
 	end 
 
 
@@ -55,7 +55,7 @@ function ValueStorage:New(data)
 	-- End
 	----------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -64,6 +64,6 @@ end
 ----------------
 -- Static End
 ----------------
-ObjectUpdater:AddStatic(ValueStorage)
+ObjectManager:AddStatic(ValueStorage)
 
 return ValueStorage

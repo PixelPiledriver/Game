@@ -48,7 +48,7 @@ function Key:NewT(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 
 

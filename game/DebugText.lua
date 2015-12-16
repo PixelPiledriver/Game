@@ -54,8 +54,8 @@ DebugText.font = love.graphics.newFont(12)
 DebugText.messageType = 
 {
 	-- Managers
-	ObjectUpdater = true,
-	CollisionManager = false,
+	ObjectManager = true,
+	CollisionManager = true,
 	DrawList = false,
 
 	-- Statics
@@ -109,6 +109,8 @@ DebugText.messageType =
 	Shape = false,
 	Point = false,
 	Palette = false,
+	Animaition = true,
+	AnimationComponent,
 
 	-- Other
 	Generic = false
@@ -182,7 +184,7 @@ end
 
 -- add a single line
 function DebugText:Text(txt)
-	self.texts[#self.texts + 1] = { {text = txt, color = Color.white} }
+	self.texts[#self.texts + 1] = { {text = txt} }
 end 
 
 
@@ -292,7 +294,7 @@ function DebugText:Draw()
 		for t = lineIndex, #self.texts[i] do
 
 			-- draw the text
-			love.graphics.setColor(self.texts[i][t].color or Color:AsTable(Color.white))
+			love.graphics.setColor(self.texts[i][t].color and Color:AsTable(self.texts[i][t].color) or Color:AsTable(Color.white))
 			LovePrint
 			{
 				text = self.texts[i][t].text,
@@ -325,7 +327,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(DebugText)
+ObjectManager:AddStatic(DebugText)
 
 
 -- Notes

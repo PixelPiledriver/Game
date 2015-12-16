@@ -294,7 +294,7 @@ end
 -- but is updated like an object
 -- that needs to change
 -- working on it
---ObjectUpdater:AddStatic(Camera)
+--ObjectManager:AddStatic(Camera)
 
 return Camera
 
@@ -842,7 +842,7 @@ end
 
 -- is this commented out for a reason?
 -- need to look into it
---ObjectUpdater:AddStatic(Camera)
+--ObjectManager:AddStatic(Camera)
 
 return Camera
 

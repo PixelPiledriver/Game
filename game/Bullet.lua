@@ -127,7 +127,7 @@ function Bullet:New(data)
 		end
 
 		if(self.lifespan == 0) then
-			ObjectUpdater:Destroy(self)
+			ObjectManager:Destroy(self)
 		end
 
 	end 
@@ -147,8 +147,8 @@ function Bullet:New(data)
 	end
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.collision)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.collision)
 	end 
 
 
@@ -156,7 +156,7 @@ function Bullet:New(data)
 	-- End
 	----------
 	
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -167,7 +167,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(Bullet)
+ObjectManager:AddStatic(Bullet)
 
 return Bullet
 

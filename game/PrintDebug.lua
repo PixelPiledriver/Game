@@ -35,7 +35,8 @@ local printList = {}
 -- switches
 
 printList.mathTest = {false, false}
-printList.animation = {false, false}
+printList.Animation = {true, false}
+printList.AnimationComponent = {true, false}
 printList.Build = {false, false}
 printList.ChatBox = {true, false}
 printList.Collision = {false, false}
@@ -52,7 +53,7 @@ printList.MapTable = {false, false}
 printList.Matrix = {true, false}
 printList.Mouse = {false, false}
 printList.MapObject = {true, false}
-printList.ObjectUpdater = {false, false}
+printList.ObjectManager = {false, false}
 printList.stuff = {false, false}
 
 

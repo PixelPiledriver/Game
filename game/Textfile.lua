@@ -83,7 +83,7 @@ function Textfile:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy()
+		ObjectManager:Destroy()
 	end 
 
 	-----------

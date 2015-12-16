@@ -57,6 +57,13 @@ Button.buttonBeingDragged = false
 -- not sure which is better so this default can be changed
 Button.textOnSpriteDefault = false
 
+-----------------------
+-- Static Defaults
+-----------------------
+Button.default = {}
+Button.default.x = 0
+Button.default.y = 0
+
 
 ---------------------------
 -- Static Functions
@@ -78,6 +85,9 @@ function Button:ActionButton(data, funcObjects)
 
 end 
 
+----------------
+-- Object
+----------------
 
 -- {x, y, width, height, useBox = bool, repeatable = bool, actionObjects = table}
 function Button:New(data)
@@ -174,15 +184,19 @@ function Button:New(data)
 	-- Text
 	-----------
 
-	o.text = Text:New
-	{
-		text = data.text or "Button",
-		color = data.textColor and Color:Get("data.textColor") or Color:Get("black"),
-		alignment = "center",
-		displayWidth = o.Size.width,
-		displayHeight = o.Size.height,
-		size = 11
-	}
+	if(data.text == "#none") then
+
+	else 
+		o.text = Text:New
+		{
+			text = data.text or "Button",
+			color = data.textColor and Color:Get("data.textColor") or Color:Get("black"),
+			alignment = "center",
+			displayWidth = o.Size.width,
+			displayHeight = o.Size.height,
+			size = 11
+		}
+	end 
 
 	Link:Simple
 	{
@@ -207,7 +221,7 @@ function Button:New(data)
 	}
 
 
-	o.text.active = data.drawText or true
+	o.text.active = Bool:DataOrDefault(data.drawText, true)
 
 	--------------
 	-- Graphics
@@ -550,15 +564,15 @@ function Button:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.Pos)
-		ObjectUpdater:Destroy(self.Size)
-		ObjectUpdater:Destroy(self.Draw)
-		ObjectUpdater:Destroy(self.text)
-		ObjectUpdater:Destroy(self.toggleText)
-		ObjectUpdater:Destroy(self.collision)
-		ObjectUpdater:Destroy(self.hover)
-		ObjectUpdater:Destroy(self.drag)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.Pos)
+		ObjectManager:Destroy(self.Size)
+		ObjectManager:Destroy(self.Draw)
+		ObjectManager:Destroy(self.text)
+		ObjectManager:Destroy(self.toggleText)
+		ObjectManager:Destroy(self.collision)
+		ObjectManager:Destroy(self.hover)
+		ObjectManager:Destroy(self.drag)
 	end 
 
 
@@ -609,7 +623,7 @@ function Button:New(data)
 	----------
 
 	-- add object to list
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 	Button.totalCreated = Button.totalCreated + 1
 
 	-- store as most recent button created
@@ -801,7 +815,7 @@ end
 ---------------
 
 
-ObjectUpdater:AddStatic(Button)
+ObjectManager:AddStatic(Button)
 
 return Button
 

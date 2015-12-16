@@ -224,7 +224,7 @@ Name.GetIndex =
 
 
 
-ObjectUpdater:AddStatic(Name)
+ObjectManager:AddStatic(Name)
 
 return Name 
 

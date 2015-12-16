@@ -30,7 +30,8 @@ MapObject.Objects.tree =
 	},
 	x = 0,
 	y = 0,
-	sprite = "tree"
+	sprite = "tree",
+	animation = "tree"
 }
 
 MapObject.Objects.pond =
@@ -67,9 +68,6 @@ MapObject.Objects.rock =
 	sprite = "rock"
 }
 
-
-
-
 MapObject.Objects.orc =
 {
 	type = "orc",
@@ -102,7 +100,8 @@ MapObject.Objects.orc =
 	},
 	x = 4,
 	y = 5,
-	sprite = "orc"
+	sprite = "orc",
+	animation = "orc"
 }
 
 

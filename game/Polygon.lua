@@ -140,12 +140,12 @@ function Polygon:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(o.Info)
-		ObjectUpdater:Destroy(o.Pos)
-		ObjectUpdater:Destroy(o.Draw)
+		ObjectManager:Destroy(o.Info)
+		ObjectManager:Destroy(o.Pos)
+		ObjectManager:Destroy(o.Draw)
 	end 
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 end

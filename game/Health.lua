@@ -84,7 +84,7 @@ function Health:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 
 
@@ -101,6 +101,6 @@ end
 -- Static End
 ----------------
 
-ObjectUpdater:AddStatic(Health)
+ObjectManager:AddStatic(Health)
 
 return Health

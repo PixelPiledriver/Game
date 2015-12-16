@@ -758,17 +758,17 @@ function PixelTexture:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.Scale)
-		ObjectUpdater:Destroy(self.Pos)
-		ObjectUpdater:Destroy(self.Draw)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.Scale)
+		ObjectManager:Destroy(self.Pos)
+		ObjectManager:Destroy(self.Draw)
 	end 
 
 	---------------
 	-- End 
 	---------------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 

@@ -97,7 +97,7 @@ Shader.britShader = love.graphics.newShader(pixelShader, vertexShader)
 
 
 -- add to statics --> needs to update
-ObjectUpdater:AddStatic(Shader)
+ObjectManager:AddStatic(Shader)
 
 return Shader
 

@@ -57,7 +57,7 @@ function Links:New(data)
 
 	function o:DestroyAll()
 		for i=1, #o.links do
-			ObjectUpdater:Destroy(o.links[i])
+			ObjectManager:Destroy(o.links[i])
 		end 
 
 		printDebug{"All links destroyed", "Links"}
@@ -65,7 +65,7 @@ function Links:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end
 
 	-------------

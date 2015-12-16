@@ -13,10 +13,7 @@ local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
 local Animation = require("Animation")
 
-
 ---------------------------------------------------------------------------
-
-
 
 ---------------
 -- Test Code

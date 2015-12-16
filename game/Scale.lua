@@ -85,14 +85,14 @@ function Scale:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end
 
 	-----------
 	-- End 
 	-----------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 

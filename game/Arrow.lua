@@ -177,7 +177,7 @@ function Arrow:New(data)
 	-- End
 	---------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -189,7 +189,7 @@ end
 -- Static End
 ----------------
 
-ObjectUpdater:AddStatic(Arrow)
+ObjectManager:AddStatic(Arrow)
 
 return Arrow
 

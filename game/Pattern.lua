@@ -58,13 +58,13 @@ function Pattern:New(data)
 	--------------
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 
 	-------------
 	-- End
 	-------------
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 end 
@@ -72,6 +72,6 @@ end
 ------------------
 -- Static End
 ------------------
-ObjectUpdater:AddStatic(Pattern)
+ObjectManager:AddStatic(Pattern)
 
 return Pattern

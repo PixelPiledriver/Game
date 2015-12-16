@@ -106,7 +106,7 @@ function Block:New(data)
 		self.health = self.health - data.other.parent.damage
 
 		if(self.health <= 0) then
-			ObjectUpdater:Destroy(self)
+			ObjectManager:Destroy(self)
 		end 
 
 	end 
@@ -127,9 +127,9 @@ function Block:New(data)
 		BlockMap:Remove{x = self.xIndex, y = self.yIndex}
 		Camera:AddShake{x = 5, y= 5}
 
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.health)
-		ObjectUpdater:Destroy(self.collision)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.health)
+		ObjectManager:Destroy(self.collision)
 	end 
 
 	-->???
@@ -159,7 +159,7 @@ function Block:New(data)
 	----------
 
 
-	ObjectUpdater:Add{object}
+	ObjectManager:Add{object}
 
 	return object
 
@@ -170,7 +170,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(Block)
+ObjectManager:AddStatic(Block)
 
 return Block
 

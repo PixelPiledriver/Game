@@ -23,7 +23,6 @@ Matrix.x3.identity =
 	{0,0,1}	
 }
 
-
 ---------------
 -- Create
 ---------------
@@ -74,6 +73,11 @@ function Matrix.x3:Rotation(angle)
 
 end 
 
+
+------------------
+-- Operations
+------------------
+
 -- multiply a matrix with a point
 -- will also be included in matrix object as a personal
 -- (m = matrix, p = point)
@@ -88,17 +92,6 @@ function Matrix.x3:MulPoint(m, p)
 
 end 
 
--- (m = matrix, p = point)
-function Matrix.x3:MulLine(m, p)
-	local result = {0,0,0}
-
-	result[1] = (m[1][1] * point[1]) + (m[1][2] * point[2]) + (m[1][3] * point[3])
-	result[2] = (m[2][1] * point[1]) + (m[2][2] * point[2]) + (m[2][3] * point[3])
-	result[3] = (m[3][1] * point[1]) + (m[3][2] * point[2]) + (m[3][3] * point[3])
-
-	return result
-
-end
 
 -- rotate pos B around pos B
 function Matrix.x3:RotateAround(a, b, angle)
@@ -119,10 +112,7 @@ function Matrix.x3:RotateAround(a, b, angle)
 
 end 
 
-
-------------------
--- Operations
-------------------
+-- multiply 2 matricies together
 function Matrix:Multiply(a, b)
 	
 	-- fail
@@ -179,6 +169,20 @@ Matrix.x4.indentity =
 }
 
 
+-- multiply matrix with a line
+-- this function is not needed
+-- remove it
+-- (m = matrix, l = line)
+function Matrix.x3:MulLine(m, p)
+	local result = {0,0,0}
+
+	result[1] = (m[1][1] * point[1]) + (m[1][2] * point[2]) + (m[1][3] * point[3])
+	result[2] = (m[2][1] * point[1]) + (m[2][2] * point[2]) + (m[2][3] * point[3])
+	result[3] = (m[3][1] * point[1]) + (m[3][2] * point[2]) + (m[3][3] * point[3])
+
+	return result
+
+end
 
 
 

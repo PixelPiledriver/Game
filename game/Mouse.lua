@@ -9,9 +9,11 @@
 -------------
 local Line = require("Line")
 local Collision = require("Collision")
-
+local Camera = require("Camera")
+local Link = require("Link")
+local Pos = require("Pos")
 ----------------------------------------------------------
-
+-- global
 Mouse = {}
 
 -----------------
@@ -193,11 +195,22 @@ function Mouse:New(data)
 	o.speed.y = 0
 
 
-	o.x = love.mouse.getX()
-	o.y = love.mouse.getY()
+	o.Pos = Pos:New
+	{
+		x = love.mouse.getX(),
+		y = love.mouse.getY()
+	}
+	--o.x = love.mouse.getX()
+	--o.y = love.mouse.getY()
 
-	o.lastX = o.x
-	o.lastY = o.y
+	o.lastX = o.Pos.x
+	o.lastY = o.Pos.y
+
+	-- pos based on current camera
+	o.xView = nil
+	o.yView = nil
+	o.lastXView = nil
+	o.lastYView = nil
 
 
 	o.updateMouseInfo = true
@@ -216,9 +229,29 @@ function Mouse:New(data)
 		height = o.height,
 		shape = "rect",
 		name = o.objectType,
-		mouse = true,
 		collisionList = {},
 		parent = o
+	}
+
+
+	Link:Simple
+	{
+		a = {o.collision, "Pos", "x"},
+		b = {o, "Pos", "x"},
+		offsets =
+		{
+			{object = {Camera.selectedCamera.Pos, "x"}}
+		}
+	}
+
+	Link:Simple
+	{
+		a = {o.collision, "Pos", "y"},
+		b = {o, "Pos", "y"},
+		offsets =
+		{
+			{object = {Camera.selectedCamera.Pos, "y"}}
+		}
 	}
 	
 
@@ -226,29 +259,61 @@ function Mouse:New(data)
 	-- Get
 	---------------------
 	function o:GetX()
-		--return love.mouse.getX()
-		return self.x
+		return self.Pos.x
 	end
 
 	function o:GetY()
-		return self.y
+		return self.Pos.y
 	end 
 
 	----------------------------------
 	-- Functions
 	----------------------------------
 	function o:Update()
+		self:FollowCamera()
 		self:UpdateMouseInfo()
 		self:CalculateSpeed()
 		self:LineTracer()
 	end 
 
+	function o:FollowCamera()
+		self.xView = Camera.selectedCamera.Pos.x + self.Pos.x
+		self.yView = Camera.selectedCamera.Pos.y + self.Pos.y
+	end 
+
+	-- update all information using love.mouse stuff
+	function o:UpdateMouseInfo()
+		if(self.updateMouseInfo == false) then
+			return
+		end 
+
+		-- prev pos
+		self.lastX = self.Pos.x
+		self.lastY = self.Pos.y
+		self.lastTime = love.timer.getTime()
+		self.lastXView = self.xView
+		self.lastYView = self.yView
+
+		-- current pos
+		self.Pos.x = love.mouse.getX()
+		self.Pos.y = love.mouse.getY()
+
+		self.xView = love.mouse.getX() + Camera.selectedCamera.Pos.x
+		self.yView = love.mouse.getY() + Camera.selectedCamera.Pos.y
+	end 
+
+	-- how fast is the mouse moving?
+	function o:CalculateSpeed()
+		self.speed.x = math.abs(self.Pos.x - self.lastX) / 1
+		self.speed.y = math.abs(self.Pos.y - self.lastY) / 1
+	end
+
 	-- draws fading line sections wherever the mouse goes
 	-- this would be great to break off into its own component --> :D
 	function o:LineTracer()
 
-		--self.line.b.x = self.x
-		--self.line.b.y = self.y
+		--self.line.b.x = self.Pos.x
+		--self.line.b.y = self.Pos.y
 
 		-- test to see if mouse has moved from its last position
 		local samePoint = self:HasMouseMoved()
@@ -259,8 +324,8 @@ function Mouse:New(data)
 			-- then create a tracer
 			local l = Line:New
 			{
-				a = {x = self.lastX, y = self.lastY},
-				b = {x = self.x, y = self.y},
+				a = {x = self.lastXView, y = self.lastYView},
+				b = {x = self.xView, y = self.yView},
 				life = 20,
 				fade = true,
 				fadeWithLife = true
@@ -276,33 +341,10 @@ function Mouse:New(data)
 
 		return Math:TestEqualityPoints
 		{
-			a = {x = self.x, y = self.y},
+			a = {x = self.Pos.x, y = self.Pos.y},
 			b = {x = self.lastX, y = self.lastY}
 		}
 
-	end 
-
-	-- how fast is the mouse moving?
-	function o:CalculateSpeed()
-		self.speed.x = math.abs(self.x - self.lastX) / 1
-		self.speed.y = math.abs(self.y - self.lastY) / 1
-	end
-
-
-	-- update all information using love.mouse stuff
-	function o:UpdateMouseInfo()
-		if(self.updateMouseInfo == false) then
-			return
-		end 
-
-		-- prev pos
-		self.lastX = self.x
-		self.lastY = self.y
-		self.lastTime = love.timer.getTime()
-
-		-- current pos
-		self.x = love.mouse.getX()
-		self.y = love.mouse.getY()
 	end 
 
 
@@ -313,18 +355,17 @@ function Mouse:New(data)
 		{
 			{text = "", obj = "Mouse" },
 			{text = "Name: " .. self.name},
-			{text = "X: " .. self.x},
-			{text = "Y: " .. self.y},
+			{text = "X: " .. self.Pos.x},
+			{text = "Y: " .. self.Pos.y},
 			{text = "SpeedX: " .. self.speed.x},
 			{text = "SpeedY: " .. self.speed.y},
-			{}
 		}
 		
 	end
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.collision)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.collision)
 	end 
 
 
@@ -332,7 +373,7 @@ function Mouse:New(data)
 	-- End
 	----------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -352,7 +393,7 @@ function Mouse:PrintDebugText()
 		{text = "Wheel Up: " .. Bool:ToString(Mouse.wheelUp)},
 		{text = "Wheel Down: " .. Bool:ToString(Mouse.wheelDown)},
 		{text = "X: " .. love.mouse.getX()},
-		{text = "Y: " .. love.mouse.getY()}
+		{text = "Y: " .. love.mouse.getY()},
 	}
 
 end 
@@ -361,13 +402,13 @@ end
 -- Static End
 -----------------
 
-ObjectUpdater:AddStatic(Mouse)
+ObjectManager:AddStatic(Mouse)
 
 
 
 
-
-
+-- Notes
+------------------------------------------
 
 -- adding static vars for mouse
 -- used to detect single clicks without the need for the love single click callback

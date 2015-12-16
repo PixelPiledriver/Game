@@ -109,6 +109,9 @@ function Collision:New(data)
 	-- movment
 	o.mouse = data.mouse or false
 
+	-->FIX
+	-- replace this with new link function
+	--[[
 	if(o.parent and data.followParent == nil or data.followParent == true) then
 		if(o.parent.Pos) then
 			o.Pos:LinkPosTo
@@ -121,6 +124,7 @@ function Collision:New(data)
 	else
 		-- do nothing
 	end 
+	--]]
 
 	-- collision list
 	-- other objects that this object can collide with
@@ -216,7 +220,7 @@ function Collision:New(data)
 
 
 	function o:Update()
-		self:FollowMouse()
+		--self:FollowMouse()
 		--self:FollowParent()
 
 		-- clear collision state --> and save state from last frame
@@ -244,17 +248,18 @@ function Collision:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.Pos)
-		ObjectUpdater:Destroy(self.Size)
-		ObjectUpdater:Destroy(self.Draw)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.Pos)
+		ObjectManager:Destroy(self.Size)
+		ObjectManager:Destroy(self.Draw)
+		CollisionManager:Destroy(self)
 	end 
 	----------
 	-- End
 	----------
 
 	CollisionManager:Add(o)
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -278,7 +283,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(Collision)
+ObjectManager:AddStatic(Collision)
 
 return Collision
 

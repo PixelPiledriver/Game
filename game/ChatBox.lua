@@ -247,7 +247,7 @@ function ChatBox:New(data)
 
 		if(self.slideBox[self.slideBoxIndex].Size.width <= 1) then
 			self.slideBox[self.slideBoxIndex].color.a = 0
-			ObjectUpdater:Destroy(self.slideBox[self.slideBoxIndex])
+			ObjectManager:Destroy(self.slideBox[self.slideBoxIndex])
 			self.slideBoxIndex = self.slideBoxIndex +  1
 		end
 	end 
@@ -305,16 +305,16 @@ function ChatBox:New(data)
 	end
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.Pos)
-		ObjectUpdater:Destroy(self.text)
-		ObjectUpdater:Destroy(self.box)
-		ObjectUpdater:Destroy(self.boxPointer)
-		ObjectUpdater:Destroy(self.text)
-		ObjectUpdater:Destroy(self.Life)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.Pos)
+		ObjectManager:Destroy(self.text)
+		ObjectManager:Destroy(self.box)
+		ObjectManager:Destroy(self.boxPointer)
+		ObjectManager:Destroy(self.text)
+		ObjectManager:Destroy(self.Life)
 		
 		self.Links:DestroyAll()
-		ObjectUpdater:Destroy(self.Links)
+		ObjectManager:Destroy(self.Links)
 		
 
 		-- this probly wont be needed
@@ -323,7 +323,7 @@ function ChatBox:New(data)
 		-- leave it in for now
 		if(self.slideBox) then
 			for i = self.slideBoxIndex, self.slideBoxTotal do
-				ObjectUpdater:Destroy(self.slideBox[i])
+				ObjectManager:Destroy(self.slideBox[i])
 			end 
 		end
 
@@ -339,7 +339,7 @@ function ChatBox:New(data)
 	-- End
 	------------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -348,7 +348,7 @@ end
 
 
 
-ObjectUpdater:AddStatic(ChatBox)
+ObjectManager:AddStatic(ChatBox)
 
 return ChatBox
 

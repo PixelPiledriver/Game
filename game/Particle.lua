@@ -283,13 +283,13 @@ function Particle:New(data)
 
 			self.life = 0
 
-			ObjectUpdater:Destroy(self.box)
+			ObjectManager:Destroy(self.box)
 			
 			if(self.shape) then
-				ObjectUpdater:Destroy(self.shape)
+				ObjectManager:Destroy(self.shape)
 			end
 
-			ObjectUpdater:Destroy(self)
+			ObjectManager:Destroy(self)
 		end 
 
 	end 
@@ -487,11 +487,11 @@ function Particle:New(data)
 	function o:Destroy()
 
 		if(self.box) then
-			ObjectUpdater:Destroy(self.box)
+			ObjectManager:Destroy(self.box)
 		end 
 
 		if(self.shape) then
-			ObjectUpdater:Destroy(self.shape)
+			ObjectManager:Destroy(self.shape)
 		end
 	end 
 
@@ -501,7 +501,7 @@ function Particle:New(data)
 	-- End
 	---------------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 

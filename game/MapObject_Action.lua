@@ -69,7 +69,7 @@ function MapObject.Action:New(data)
 		printDebug{"used action: " .. o.name, "MapObject", 2}
 		EventLog:Add{"used action: " .. o.name, "MapObject", 2}
 		
-		-- does target reaction to this action? does this action require it?
+		-- does target have  reaction to this action? does this action require it?
 		if(self.requireReaction and object:TargetHasReaction(self.name) == false) then
 
 			-- some action types have something different to do on absence of a reaction

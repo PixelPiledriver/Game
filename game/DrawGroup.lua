@@ -179,7 +179,7 @@ function DrawGroup:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 
 	----------
@@ -187,7 +187,7 @@ function DrawGroup:New(data)
 	----------
 
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -198,7 +198,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(DrawGroup)
+ObjectManager:AddStatic(DrawGroup)
 
 return DrawGroup
 

@@ -20,7 +20,7 @@ function ValueStorage:New()
 	}
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)		
+		ObjectManager:Destroy(self.Info)		
 	end 
 
 	return o

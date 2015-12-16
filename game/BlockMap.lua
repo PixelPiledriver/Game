@@ -74,7 +74,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(BlockMap)
+ObjectManager:AddStatic(BlockMap)
 
 return BlockMap
 

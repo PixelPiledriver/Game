@@ -89,7 +89,7 @@ function Life:New(data)
 	function o:CheckDead()
 		
 		if(self.life <= 0) then
-			ObjectUpdater:Destroy(self.parent)
+			ObjectManager:Destroy(self.parent)
 		end 
 
 	end 
@@ -116,18 +116,18 @@ function Life:New(data)
 	end
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
 end
 
 
-ObjectUpdater:AddStatic(Life)
+ObjectManager:AddStatic(Life)
 
 return Life
 

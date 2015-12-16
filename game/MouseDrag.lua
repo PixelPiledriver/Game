@@ -97,9 +97,9 @@ function MouseDrag:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.map)
-		ObjectUpdater:Destroy(self.Draw)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.map)
+		ObjectManager:Destroy(self.Draw)
 	end 
 
 
@@ -107,7 +107,7 @@ function MouseDrag:New(data)
 	-- End
 	----------------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 

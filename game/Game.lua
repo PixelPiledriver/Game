@@ -45,7 +45,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(Game)
+ObjectManager:AddStatic(Game)
 
 return Game
 

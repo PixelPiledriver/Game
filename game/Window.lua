@@ -121,7 +121,7 @@ function Window:PrintDebugText()
 end
 
 
-ObjectUpdater:AddStatic(Window)
+ObjectManager:AddStatic(Window)
 
 return Window
 

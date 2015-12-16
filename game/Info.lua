@@ -197,7 +197,7 @@ Info.Info = Info:New
 -- Static End
 -----------------
 
-ObjectUpdater:AddStatic(Info)
+ObjectManager:AddStatic(Info)
 
 
 

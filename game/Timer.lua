@@ -74,7 +74,7 @@ function Timer:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(o.Info)
+		ObjectManager:Destroy(o.Info)
 	end 
 
 	-------------

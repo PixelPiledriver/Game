@@ -54,7 +54,7 @@ function DrawList:New(data)
 		Skybox = {value = 1, active = false},
 		Backdrop = {value = 2, active = false},
 		Objects = {value = 3, active = true},
-		Collision = {value = 4, active = false},
+		Collision = {value = 4, active = true},
 		Hud = {value = 5, active = true},
 		Overlap = {value = 6, active = true},
 		DebugText = {value = 7, active = false},
@@ -398,7 +398,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(DrawList)
+ObjectManager:AddStatic(DrawList)
 
 
 
@@ -407,6 +407,10 @@ ObjectUpdater:AddStatic(DrawList)
 
 -- Notes
 -------------------- 
+-- Keep in mind that the Pos values of the static list are not updated
+-- so their Pos values act as if they are still 100 from the origin
+-- need to have a conversion function I guess?
+
 -- will most likely have to convert this into a static that can create an object
 -- with all the implemented features
 -- that way it can make a .layers and .staticLayers lists
@@ -442,9 +446,9 @@ ObjectUpdater:AddStatic(DrawList)
 -- there should maybe be a way to make sure you cant submit an object more than once.... 
 -- or should there? I dunno
 
--- need to hook this up to ObjectUpdater and get draw calls based on this and nothing else
+-- need to hook this up to ObjectManager and get draw calls based on this and nothing else
 -- actually I might just call this directly from the call back
--- no need to even go thru ObjectUpdater
+-- no need to even go thru ObjectManager
 
 -- what to do when an object is deleted?
 -- how will it be removed from the list?

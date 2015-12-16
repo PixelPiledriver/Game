@@ -6,7 +6,7 @@ String = {}
 
 
 
-ObjectUpdater:AddStatic(String)
+ObjectManager:AddStatic(String)
 
 
 -- Notes

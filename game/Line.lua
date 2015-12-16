@@ -7,6 +7,7 @@ local Color = require("Color")
 local Life = require("Life")
 local Fade = require("Fade")
 local Draw = require("Draw")
+local Pos = require("Pos")
 
 -------------------------------------------------------------------
 
@@ -84,13 +85,15 @@ function Line:New(data)
 	local defaultDraw =
 	{
 		parent = o,
-		layer = "Objects",
+		layer = data.layer or "Objects",
 		GetDepth = o.GetDepth,
 		first = data.first or false,
 		last = data.last or false,
 	}
 
 	o.Draw = Draw:New(defaultDraw)
+
+	o.Pos = Pos:New{}
 
 	--o.components = {"Life", "Fade", "Draw"}
 
@@ -102,10 +105,14 @@ function Line:New(data)
 	end 
 
 	function o:DrawCall()
+
 		love.graphics.setLineWidth(self.width)
 		love.graphics.setColor(Color:AsTable(self.color))
-		love.graphics.line(self.a.x, self.a.y, self.b.x, self.b.y)
+		love.graphics.line(self.Pos.x + self.a.x, self.Pos.y + self.a.y, self.Pos.x + self.b.x, self.Pos.y + self.b.y)
+
+		-- reset width
 		love.graphics.setLineWidth(1)
+
 	end
 
 	function o:PrintDebugText()
@@ -120,7 +127,7 @@ function Line:New(data)
 			{text = "B: {" .. self.b.x .. "," .. self.b.y .. "}"},
 			{text = "LifeCompValue: " .. life},
 			{text = "Alpha: " .. self.color.a},
-			--{text = "Fade: " .. (self.Fade and self.Fade.fade) or "noFade"}
+			--{text = "Fade: " .. (self.Fade and self.Fade.fade) or "noFade"} -- something broken with this
 		}
 
 	end
@@ -128,16 +135,16 @@ function Line:New(data)
 
 	function o:Destroy()
 		
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.Life)
-		ObjectUpdater:Destroy(self.Fade)
-		ObjectUpdater:Destroy(self.Draw)
-
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.Life)
+		ObjectManager:Destroy(self.Fade)
+		ObjectManager:Destroy(self.Draw)
+		ObjectManager:Destroy(self.Pos)
 
 		--[=[
 		for i=1, #self.components do
 			if(self[self.components[i]]) then
-				ObjectUpdater:Destroy(self[self.components[i]])
+				ObjectManager:Destroy(self[self.components[i]])
 			end 
 		end 
 		--]=]
@@ -145,7 +152,7 @@ function Line:New(data)
 	end 
 
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -166,6 +173,12 @@ return Line
 
 -- Junk
 ------------------------------------------------------
+
+-->NEED
+-- currently only supports 2 verts
+-- will add multi vert lines later
+
+
 --[[
 		
 		local rot = Matrix.x3:Rotation(1)

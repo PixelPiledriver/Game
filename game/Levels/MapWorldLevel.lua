@@ -67,7 +67,13 @@ local Start = function()
 		y = 2,
 		active = false,
 		playerControlled = true,
-		sprite = "human"
+		sprite = "human",
+		animations = 
+		{
+			{"walk", "humanWalk"}, -- {name to play animation by, name of animation var used by Get function}
+			{"chat", "humanChat"},
+			{"push", "humanPush"}
+		}
 	}
 
 

@@ -215,7 +215,7 @@ function Keyboard:PrintDebugText()
 end
 
 
-ObjectUpdater:AddStatic(Keyboard)
+ObjectManager:AddStatic(Keyboard)
 
 
 

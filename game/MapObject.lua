@@ -9,6 +9,7 @@
 -- Requires
 --------------
 local Input = require("Input")
+local AnimationComponent = require("AnimationComponent")
 
 -------------------------------------------
 
@@ -36,7 +37,6 @@ MapObject.currentMapWorld = nil
 -- default actions that MapObjects can use on other MapObjects
 
 MapObject.actions = {}
-
 
 
 ----------------------
@@ -248,10 +248,49 @@ function MapObject:New(data)
 		o.sprite.parent = o
 	end 
 
+	if(data.animation) then
+		o.animation = MapObject.Animations:Get(data.animation)
+		o.animation.parent = o
+
+		-- hide sprite for now
+		o.sprite.draw = false
+
+	end 
+
+	-- component based animation control
+	if(data.animations) then
+
+		-- create component
+		o.AnimationComponent = AnimationComponent:New
+		{
+			parent = o
+		}
+
+		print(#data.animations)
+
+		-- add all animations
+		for i=1, #data.animations do
+			o.AnimationComponent:Add
+			{
+				name = data.animations[i][1],
+				animation = MapObject.Animations:Get(data.animations[i][2])
+			}
+		end 
+
+		o.sprite.draw = false
+	end 
 
 	---------------
 	-- Functions
 	---------------
+
+	function o:SetAnimation(name)
+		if(self.AnimationComponent == nil) then
+			return
+		end 
+
+		self.AnimationComponent:State(name)
+	end 
 
 
 	-- use an action that this object posses
@@ -269,6 +308,9 @@ function MapObject:New(data)
 
 		-- remove target after action is done
 		self.actionTarget = nil
+
+		-- animation
+		self:SetAnimation(actionName)
 
 	end 
 
@@ -319,8 +361,8 @@ function MapObject:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.Input)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.Input)
 	end 
 
 
@@ -328,7 +370,7 @@ function MapObject:New(data)
 	-- Object End
 	----------------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -375,7 +417,7 @@ end
 ------------------
 -- Static End
 ------------------
-ObjectUpdater:AddStatic(MapObject)
+ObjectManager:AddStatic(MapObject)
 
 
 return MapObject

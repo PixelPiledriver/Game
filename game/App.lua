@@ -50,15 +50,15 @@ App.Input = Input:New
 
 
 function App:Destroy()
-	ObjectUpdater:Destroy(self.Info)
-	ObjectUpdater:Destroy(self.Input)
+	ObjectManager:Destroy(self.Info)
+	ObjectManager:Destroy(self.Input)
 
 end 
 ---------------
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(App)
+ObjectManager:AddStatic(App)
 
 return App
 

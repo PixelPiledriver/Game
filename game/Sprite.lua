@@ -35,13 +35,17 @@ Sprite.Info = Info:New
 
 -- default values
 -- this makes it easier to load lots of sprites from the same sheet
-Sprite.defaultSpriteSheet = SpriteSheet.noImage
-Sprite.defaultWidth = 32
-Sprite.defaultHeight = 32
-Sprite.defaultXIndex = 1
-Sprite.defaultYIndex = 1
-Sprite.defaultX = 0
-Sprite.defaultY = 0
+Sprite.default = {}
+
+Sprite.default.SpriteSheet = SpriteSheet.noImage
+Sprite.default.Width = 32
+Sprite.default.Height = 32
+Sprite.default.XIndex = 1
+Sprite.default.YIndex = 1
+Sprite.default.X = 0
+Sprite.default.Y = 0
+Sprite.default.draw = false
+
 Sprite.useSpriteSheetSpriteSize = true
 
 -- global draw toggle
@@ -51,6 +55,14 @@ Sprite.drawNone = false
 ------------
 -- Object
 ------------
+
+function Sprite:Simple(data)
+	return Sprite:New
+	{
+		xIndex = data[1],
+		yIndex = data[2]
+	}
+end 
 
 -- {spriteSheet, x, y, width, height}
 function Sprite:New(data)
@@ -79,7 +91,7 @@ function Sprite:New(data)
 	-- Vars
 	------------
 
-	o.spriteSheet = data.spriteSheet or Sprite.defaultSpriteSheet
+	o.spriteSheet = data.spriteSheet or Sprite.default.SpriteSheet
 
 	-- Size
 	o.Size = Size:New{}
@@ -89,12 +101,12 @@ function Sprite:New(data)
 		o.Size.width = o.spriteSheet.spriteWidth
 		o.Size.height = o.spriteSheet.spriteHeight
 	else
-		o.Size.width = data.width or Sprite.defaultWidth
-		o.Size.height = data.height or Sprite.defaultHeight
+		o.Size.width = data.width or Sprite.default.Width
+		o.Size.height = data.height or Sprite.default.Height
 	end 
 
-	o.xIndex = data.xIndex or Sprite.defaultXIndex
-	o.yIndex = data.yIndex or Sprite.defaultYIndex
+	o.xIndex = data.xIndex or Sprite.default.XIndex
+	o.yIndex = data.yIndex or Sprite.default.YIndex
 
 	-- NOTE: calculate the x and y below using the index above after break
 
@@ -103,33 +115,29 @@ function Sprite:New(data)
 		o.x = o.Size.width * (data.xIndex - 1)
 	-- no index
 	else 
-		o.x = data.x or Sprite.defaultX
+		o.x = data.x or Sprite.default.X
 	end 
 
 	-- use index?
 	if(data.yIndex) then
 		o.y = o.Size.height * (data.yIndex - 1)
 	else
-		o.y = data.y or Sprite.defaultY
+		o.y = data.y or Sprite.default.Y
 	end 
 	
 
-	-- make this a var for new as well
-	-->FIX
-	o.color = Color:Get("white")
+	o.color = data.color or Color:Get("white")
 
 	-- create sprite from sheet
 	o.sprite = love.graphics.newQuad(o.x, o.y, o.Size.width, o.Size.height, o.spriteSheet.width, o.spriteSheet.height)
 
 	
-
-
 	-- display sprite
-	o.draw = Bool:DataOrDefault(data.draw,true)
+	o.draw = Bool:DataOrDefault(data.draw, self.default.draw)
 
-	--------------------
+	------------------
 	-- Components
-	--------------------
+	------------------
 
 	o.Pos = Pos:New(data.pos or Pos.defaultPos)
 
@@ -178,6 +186,8 @@ function Sprite:New(data)
 
 	end 
 
+	-- what?
+	-- this function might be pointless
 	function o:Copy()
 		local copy = Sprite:New
 		{
@@ -192,7 +202,9 @@ function Sprite:New(data)
 		return copy
 	end 
 
+	-- ?
 	function o:CopyFor(object)
+
 		local copy = Sprite:New
 		{
 			spriteSheet = self.spriteSheet,
@@ -202,7 +214,6 @@ function Sprite:New(data)
 			yIndex = self.yIndex,
 			draw = true,
 			parent = object,
-			
 		}		
 
 		return copy
@@ -210,17 +221,17 @@ function Sprite:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(o.Info)
-		ObjectUpdater:Destroy(o.Size)
-		ObjectUpdater:Destroy(o.Pos)
-		ObjectUpdater:Destroy(o.Draw)
+		ObjectManager:Destroy(o.Info)
+		ObjectManager:Destroy(o.Size)
+		ObjectManager:Destroy(o.Pos)
+		ObjectManager:Destroy(o.Draw)
 	end 
 
 	----------
 	-- End
 	----------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -246,7 +257,7 @@ end
 -- Static End
 ----------------
 
-ObjectUpdater:AddStatic(Sprite)
+ObjectManager:AddStatic(Sprite)
 
 return Sprite
 

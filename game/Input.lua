@@ -107,7 +107,7 @@ Input.Info = Info:New
 
 		
 
-		-- passed in from ObjectUpdater -> parent -> this object on input callbacks
+		-- passed in from ObjectManager -> parent -> this object on input callbacks
 		-- this is used for press and release only
 		-- hold needs to be done with a seperate function
 		function o:InputUpdate(key, inputType)
@@ -200,7 +200,7 @@ Input.Info = Info:New
 
 
 		function o:Destroy()
-			ObjectUpdater:Destroy(self.Info)
+			ObjectManager:Destroy(self.Info)
 		end 
 
 		----------
@@ -215,7 +215,7 @@ Input.Info = Info:New
 	-- Static End
 	-----------------
 
-ObjectUpdater:AddStatic(Input)
+ObjectManager:AddStatic(Input)
 
 return Input
 

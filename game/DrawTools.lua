@@ -204,7 +204,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(DrawTools)
+ObjectManager:AddStatic(DrawTools)
 
 return DrawTools
 

@@ -58,7 +58,6 @@ local Start = function()
 	DrawGroup = require("DrawGroup")
 	Text = require("Text")
 
-
 	-- test stuff code and stuff
 
 	local mouse = Mouse:New{name = "mouse"}
@@ -72,8 +71,6 @@ local Start = function()
 		timer = 100,
 		box = {color = Color:Get("green")}
 	}
-
-
 
 	-- fixing DrawGroup
 

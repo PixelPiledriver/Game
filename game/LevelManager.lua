@@ -34,8 +34,9 @@ LevelManager.destroyObjectsOnExit = true
 -- all levels available
 LevelManager.levelNames = 
 {
-	"CameraLevel",
 	"MapWorldLevel",
+	"AnimationEditorLevel",
+	"CameraLevel",
 	"NewLevelTypeTest",
 	"TextWriteLevel",
 	"TestLevel",
@@ -94,7 +95,7 @@ function LevelManager:CreateInput()
 		"x", "press",
 		function()
 			LevelManager:StartLevel(LevelManager.levels[LevelManager.levelNames[LevelManager.levelSelectIndex]])
-			EventLog:Add{"Start Level: " .. LevelManager.levelNames[LevelManager.levelSelectIndex], LevelManager}
+			--EventLog:Add{"Start Level: " .. LevelManager.levelNames[LevelManager.levelSelectIndex], LevelManager}
 		end 
 	}
 
@@ -135,7 +136,7 @@ function LevelManager:StartLevel(level)
 	-- set object owner to this level
 	-- this marks objects created while this level is running
 	-- so that they can be destroyed later on exit
-	ObjectUpdater.newObjectsOwnedBy = level.filename
+	ObjectManager.newObjectsOwnedBy = level.filename
 
 	-- set level and load it
 	self.currentLevel = level
@@ -170,7 +171,7 @@ function LevelManager:ExitLevel()
 		return
 	end 
 
-	ObjectUpdater:DestroyAllObjectsOwnedBy(self.currentLevel.filename)
+	ObjectManager:DestroyAllObjectsOwnedBy(self.currentLevel.filename)
 
 	self.currentLevel:Exit()
 	self.currentLevel = nil
@@ -217,7 +218,7 @@ function LevelManager:PostRequire()
 		structureType = "Manager"
 	}
 
-	ObjectUpdater:AddStatic(LevelManager)
+	ObjectManager:AddStatic(LevelManager)
 
 	-- get requires
 	Window = require("Window")
@@ -264,7 +265,7 @@ end
 -- come up with something better
 
 -->FIXED - with a different solution
--- when ObjectUpdater has destroys
+-- when ObjectManager has destroys
 -- sweep currentLevel.objects for objects marked to destroy
 -- remove from the table and create a new table without them
 -- thats my best guess for right now
@@ -330,7 +331,7 @@ end
 			-- need to figure out this bug
 			--print(self.currentLevel.objects[i].Info.objectType)
 			
-	 		ObjectUpdater:Destroy(self.currentLevel.objects[i])
+	 		ObjectManager:Destroy(self.currentLevel.objects[i])
 	 		
 
 	 	end 

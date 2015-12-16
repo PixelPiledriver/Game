@@ -86,10 +86,10 @@ function Shape:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 
 		for i=1, #self.boxes do
-			ObjectUpdater:Destroy(self.boxes[i])
+			ObjectManager:Destroy(self.boxes[i])
 		end 
 		
 	end 
@@ -99,7 +99,7 @@ function Shape:New(data)
 	-- End
 	-------------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 end 

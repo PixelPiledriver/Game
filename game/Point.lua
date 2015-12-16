@@ -125,15 +125,15 @@ function Point:New(data)
 
 	function o:Destroy()
 
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.Pos)
-		ObjectUpdater:Destroy(self.Fade)
-		ObjectUpdater:Destroy(self.Life)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.Pos)
+		ObjectManager:Destroy(self.Fade)
+		ObjectManager:Destroy(self.Life)
 
 		--[=[
 		for i=1, #self.components do
 			if(self[self.components[i]]) then
-				ObjectUpdater:Destroy(self[self.components[i]])
+				ObjectManager:Destroy(self[self.components[i]])
 			end 
 		end 
 		--]=]
@@ -145,7 +145,7 @@ function Point:New(data)
 	-- End
 	-------------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 

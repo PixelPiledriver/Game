@@ -63,7 +63,7 @@ function Level:New(data)
 	o.Exit = data.Exit -- need a default Exit
 
 	-- list of every object made while this level was running
-	-- have ObjectUpdater add to this list via LevelManager.currentLevel
+	-- have ObjectManager add to this list via LevelManager.currentLevel
 	o.objects = {}
 
 
@@ -75,7 +75,7 @@ function Level:New(data)
 end 
 
 
-ObjectUpdater:AddStatic(o)
+ObjectManager:AddStatic(o)
 
 
 
@@ -90,4 +90,4 @@ ObjectUpdater:AddStatic(o)
 
 -- come up with a creative solution for save and load
 -- levels in action, and keep all the changes on next load
--- will need to ask ObjectUpdater for some help
+-- will need to ask ObjectManager for some help

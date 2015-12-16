@@ -382,7 +382,7 @@ end
 Controller:Setup()
 
 
-ObjectUpdater:AddStatic(Controller)
+ObjectManager:AddStatic(Controller)
 
 return Controller
 

@@ -144,8 +144,8 @@ function Map:MakeTile(data)
 	self.tiles.x[data.xIndex].y[data.yIndex] = o
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.box)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.box)
 	end
 
 
@@ -154,7 +154,7 @@ function Map:MakeTile(data)
 	------------
 
 	-- add to object manager
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 end

@@ -28,6 +28,6 @@ end
 
 
 
-ObjectUpdater:AddStatic(Vertex)
+ObjectManager:AddStatic(Vertex)
 
 return Vertex

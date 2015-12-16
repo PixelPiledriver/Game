@@ -535,11 +535,11 @@ function Player:New(data)
 	end
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.GridMovementTimer)
-		ObjectUpdater:Destroy(self.health)
-		ObjectUpdater:Destroy(self.shadow)
-		ObjectUpdater:Destroy(self.collision)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.GridMovementTimer)
+		ObjectManager:Destroy(self.health)
+		ObjectManager:Destroy(self.shadow)
+		ObjectManager:Destroy(self.collision)
 	end 
 
 	------------
@@ -547,7 +547,7 @@ function Player:New(data)
 	------------
 
 	-- add new o to updater
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	-- done creating player o
 	return o

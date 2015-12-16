@@ -1441,13 +1441,13 @@ function Color:New(data)
 	end
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 
 	----------
 	-- End
 	----------
-	-- probly need to add to ObjectUpdater
+	-- probly need to add to ObjectManager
 
 	return o
 
@@ -1636,7 +1636,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(Color)
+ObjectManager:AddStatic(Color)
 
 return Color
 

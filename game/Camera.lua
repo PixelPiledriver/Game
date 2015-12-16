@@ -16,7 +16,6 @@
 
 local Input = require("Input")
 local Pos = require("Pos")
-
 local Link = require("Link")
 local Box = require("Box")
 local Line = require("Line")
@@ -42,10 +41,11 @@ Camera.Info = Info:New
 
 -- list of all cameras in scene
 Camera.cameras = {}
+Camera.selectedCamera = nil
+Camera.selectedCameraIndex = 1
 
-Camera.selectedCamera = 1
-
--- need a system for controlling from other objects
+-- need a function interface for controlling selected and non selected cameras
+-- from other objects
 
 -----------
 -- Object
@@ -89,6 +89,11 @@ function Camera:New(data)
 	-- zoom
 	o.zoom = {x=1, y=1}
 	o.zoomSpeed = 0.01
+	o.useIncreasingZoom = true
+	o.increasingZoomSpeed = 0.01
+
+	o.zoomMax = 100
+	o.zoomMin = 0
 
 	-------------------
 	-- Test Objects
@@ -103,14 +108,8 @@ function Camera:New(data)
 	
 	Link:Simple
 	{
-		a = {o.zoomBox, "Pos", "x"},
-		b = {o, "Pos", "x"},
-	}
-
-	Link:Simple
-	{
-		a = {o.zoomBox, "Pos", "y"},
-		b = {o, "Pos", "y"},
+		a = {o.zoomBox, "Pos", {"x", "y"}},
+		b = {o, "Pos", {"x", "y"}},
 	}
 
 	o.centerView = {}
@@ -118,15 +117,30 @@ function Camera:New(data)
 	o.centerView.verticalLine = Line:New
 	{
 		a = {x = Window.width * 0.5, y = (Window.height * 0.5) - o.centerView.size},
-		b = {x = Window.width * 0.5, y = (Window.height * 0.5) + o.centerView.size}
+		b = {x = Window.width * 0.5, y = (Window.height * 0.5) + o.centerView.size},
+		layer = "Hud"
 	}
 	
-	o.centerView.verticalLine = Line:New
+	o.centerView.horizontalLine = Line:New
 	{
 		a = {x = Window.width * 0.5 - o.centerView.size, y = Window.height * 0.5},
-		b = {x = Window.width * 0.5 + o.centerView.size, y = Window.height * 0.5}
+		b = {x = Window.width * 0.5 + o.centerView.size, y = Window.height * 0.5},
+		layer = "Hud"
 	}
 	
+	Link:Simple
+	{
+		a = {o.centerView.verticalLine, "Pos", {"x", "y"}},
+		b = {o, "Pos", {"x", "y"}}
+	}
+
+	Link:Simple
+	{
+		a = {o.centerView.horizontalLine, "Pos", {"x", "y"}},
+		b = {o, "Pos", {"x", "y"}}
+	}
+
+
 
 	-- doesnt seem to work anymore?
 	-->FIX
@@ -178,13 +192,47 @@ function Camera:New(data)
 	end 
 
 	function o:ZoomIn()
-		self.zoom.x = self.zoom.x + self.zoomSpeed
-		self.zoom.y = self.zoom.y + self.zoomSpeed
+
+		-- zoom faster when close?
+		if(self.useIncreasingZoom) then
+			-- makes zoom speed almost constant speed even when close up
+			self.zoom.x = self.zoom.x + self.zoomSpeed + (self.zoom.x * self.increasingZoomSpeed)
+			self.zoom.y = self.zoom.y + self.zoomSpeed + (self.zoom.y * self.increasingZoomSpeed)		
+		else
+			-- normal zoom, not good for close up tho
+			self.zoom.x = self.zoom.x + self.zoomSpeed
+			self.zoom.y = self.zoom.y + self.zoomSpeed
+		end
+
+		-- min and max
+		if(self.zoom.x > self.zoomMax) then
+			self.zoom.x = self.zoomMax
+		end 
+
+		if(self.zoom.y > self.zoomMax) then
+			self.zoom.y = self.zoomMax
+		end 
+
+
 	end 
 
 	function o:ZoomOut()
-		self.zoom.x = self.zoom.x - self.zoomSpeed
-		self.zoom.y = self.zoom.y - self.zoomSpeed
+		if(self.useIncreasingZoom) then
+			self.zoom.x = self.zoom.x - self.zoomSpeed - (self.zoom.x * self.increasingZoomSpeed)
+			self.zoom.y = self.zoom.y - self.zoomSpeed - (self.zoom.y * self.increasingZoomSpeed)
+		else 
+			self.zoom.x = self.zoom.x - self.zoomSpeed
+			self.zoom.y = self.zoom.y - self.zoomSpeed		
+		end 
+
+		if(self.zoom.x < self.zoomMin) then
+			self.zoom.x = self.zoomMin
+		end 
+
+		if(self.zoom.y < self.zoomMin) then
+			self.zoom.y = self.zoomMin
+		end 
+
 	end
 
 	function o:RotLeft()
@@ -446,7 +494,7 @@ function Camera:New(data)
 	-- End 
 	----------
 
-	--ObjectUpdater:Add{o}
+	--ObjectManager:Add{o}
 
 	return o
 
@@ -459,31 +507,31 @@ end
 -- update the selected camera
 -- in the future other cameras may need to be updated as well
 function Camera:Update()
-	self.cameras[self.selectedCamera]:Update()
+	self.cameras[self.selectedCameraIndex]:Update()
 
 	if(self.cameras.moveNodes) then
 		self:UpdateMoveNodes()
 	end 
 
-	self.cameras[self.selectedCamera]:PrintDebugText()
+	self.cameras[self.selectedCameraIndex]:PrintDebugText()
 end 
 
 function Camera:InputUpdate(key, inputType)
-	self.cameras[self.selectedCamera].Input:InputUpdate(key, inputType)
+	self.cameras[self.selectedCameraIndex].Input:InputUpdate(key, inputType)
 end
 
 function Camera:RepeatedInput()
-	self.cameras[self.selectedCamera].Input:RepeatedInputUpdate()
+	self.cameras[self.selectedCameraIndex].Input:RepeatedInputUpdate()
 end 
 
 -- draw the selected camera
 function Camera:Draw()
-	self.cameras[self.selectedCamera]:Draw()
+	self.cameras[self.selectedCameraIndex]:Draw()
 end
 
 -- draw the selected camera
 function Camera:PostDraw()
-	self.cameras[self.selectedCamera]:PostDraw()
+	self.cameras[self.selectedCameraIndex]:PostDraw()
 end 
 
 
@@ -491,6 +539,7 @@ end
 -- Create Default Camera
 ------------------------------
 Camera.cameras[1] = Camera:New{}
+Camera.selectedCamera = Camera.cameras[Camera.selectedCameraIndex]
 
 
 ---------------
@@ -542,7 +591,7 @@ return Camera
 -- but is updated like an object
 -- that needs to change
 -- working on it
---ObjectUpdater:AddStatic(Camera)
+--ObjectManager:AddStatic(Camera)
 
 
 

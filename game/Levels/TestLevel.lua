@@ -203,6 +203,6 @@ return level
 --]]
 
 
---ObjectUpdater:AddCamera(Camera)
+--ObjectManager:AddCamera(Camera)
 
 --]]

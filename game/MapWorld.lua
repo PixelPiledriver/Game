@@ -158,9 +158,9 @@ function MapWorld:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.map)
-		ObjectUpdater:Destroy(self.Draw)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.map)
+		ObjectManager:Destroy(self.Draw)
 	end 
 
 
@@ -168,7 +168,7 @@ function MapWorld:New(data)
 	-- End
 	---------------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -180,7 +180,7 @@ end
 ----------------------
 
 
-ObjectUpdater:AddStatic(MapWorld)
+ObjectManager:AddStatic(MapWorld)
 
 return MapWorld
 

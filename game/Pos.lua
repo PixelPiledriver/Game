@@ -162,7 +162,7 @@ function Pos:New(data)
 	end
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(o.Info)
+		ObjectManager:Destroy(o.Info)
 	end 
 
 	-------------
@@ -182,7 +182,7 @@ function Pos:New(data)
 	-- End 
 	-------------
 	
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 

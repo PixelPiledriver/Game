@@ -65,8 +65,9 @@ function SpriteSheet:New(data)
 	-- not sure this is actually needed anymore?
 	-- reroute attempt to make refresh work --> its a weird idea I know but seems reasonable
 	o.imageData = o.image:getData()
-	o.image = love.graphics.newImage(o.imageData)
-	o.image:setFilter("nearest", "nearest")
+
+	--o.image = love.graphics.newImage(o.imageData)
+	--o.image:setFilter("nearest", "nearest")
 
 	-- vars
 	o.width = o.image:getWidth()
@@ -87,12 +88,16 @@ function SpriteSheet:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(o.Info)
+		ObjectManager:Destroy(o.Info)
+		self.image = nil
+		self.imageData = nil
 	end 
 
 	----------
 	-- End
 	----------
+
+	ObjectManager:Add{o}
 
 	return o
 
@@ -110,7 +115,7 @@ SpriteSheet.noImage = SpriteSheet:New
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(SpriteSheet)
+ObjectManager:AddStatic(SpriteSheet)
 
 return SpriteSheet
 

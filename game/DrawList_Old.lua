@@ -335,7 +335,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(DrawList)
+ObjectManager:AddStatic(DrawList)
 
 
 
@@ -379,9 +379,9 @@ ObjectUpdater:AddStatic(DrawList)
 -- there should maybe be a way to make sure you cant submit an object more than once.... 
 -- or should there? I dunno
 
--- need to hook this up to ObjectUpdater and get draw calls based on this and nothing else
+-- need to hook this up to ObjectManager and get draw calls based on this and nothing else
 -- actually I might just call this directly from the call back
--- no need to even go thru ObjectUpdater
+-- no need to even go thru ObjectManager
 
 -- what to do when an object is deleted?
 -- how will it be removed from the list?

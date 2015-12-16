@@ -62,8 +62,8 @@ EventLog.priority =
 function EventLog:Add(data)
 
 	-- Event Log is not owned by level
-	ObjectUpdater.newObjectsOwnedBySave = ObjectUpdater.newObjectsOwnedBy
-	ObjectUpdater.newObjectsOwnedBy = nil
+	ObjectManager.newObjectsOwnedBySave = ObjectManager.newObjectsOwnedBy
+	ObjectManager.newObjectsOwnedBy = nil
 
 	local priority = data[3] or 1
 
@@ -79,7 +79,7 @@ function EventLog:Add(data)
 		}
 	else
 		-- remove old text
-		ObjectUpdater:Destroy(self.eventTexts[self.eventIndex])
+		ObjectManager:Destroy(self.eventTexts[self.eventIndex])
 		self.eventTexts[self.eventIndex] = nil
 		
 		-- replace the spot in table with this new text
@@ -117,7 +117,7 @@ function EventLog:Add(data)
 	end 
 
 	-- reset level ownership
-	ObjectUpdater.newObjectsOwnedBy = ObjectUpdater.newObjectsOwnedBySave
+	ObjectManager.newObjectsOwnedBy = ObjectManager.newObjectsOwnedBySave
 
 end 
 

@@ -138,14 +138,14 @@ function Fade:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 	
 	----------
 	-- End
 	----------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 end
@@ -155,6 +155,6 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(Fade)
+ObjectManager:AddStatic(Fade)
 
 return Fade

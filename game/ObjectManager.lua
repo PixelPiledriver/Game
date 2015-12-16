@@ -1,4 +1,4 @@
--- ObjectUpdater.lua
+-- ObjectManager.lua
 -->CLEAN
 
 -- Purpose
@@ -10,14 +10,14 @@
 ------------------------------------------------------------------------------
 
 -- global
-ObjectUpdater = {}
+ObjectManager = {}
 
 -----------------
 -- Static Info
 -----------------
-ObjectUpdater.Info =
+ObjectManager.Info =
 {
-	objectType = "ObjectUpdater",
+	objectType = "ObjectManager",
 	dataType = "Manager",
 	structureType = "Static"
 }
@@ -28,50 +28,50 @@ ObjectUpdater.Info =
 -----------------
 
 -- tables
-ObjectUpdater.statics = {}
-ObjectUpdater.objects = {}
-ObjectUpdater.links = {}
-ObjectUpdater.cameras = {}
-ObjectUpdater.postUpdateObjects = {} -- temporary
-ObjectUpdater.dataTypes = {}
+ObjectManager.statics = {}
+ObjectManager.objects = {}
+ObjectManager.links = {}
+ObjectManager.cameras = {}
+ObjectManager.postUpdateObjects = {} -- temporary
+ObjectManager.dataTypes = {}
 
-ObjectUpdater.componentTypes = {}
-ObjectUpdater.componentTypes.index = {}
+ObjectManager.componentTypes = {}
+ObjectManager.componentTypes.index = {}
 
 -- flags
-ObjectUpdater.destroyObjects = false
+ObjectManager.destroyObjects = false
 
 -- debug text options
-ObjectUpdater.printAllObjectsInDebugText = false
-ObjectUpdater.printAllStaticsInDebugText = false
-ObjectUpdater.printTotalObjectTypes = false
-ObjectUpdater.printComponents = false
+ObjectManager.printAllObjectsInDebugText = false
+ObjectManager.printAllStaticsInDebugText = false
+ObjectManager.printTotalObjectTypes = false
+ObjectManager.printComponents = false
 
 -- object tracking options
-ObjectUpdater.newObjectsOwnedBy = nil
-ObjectUpdater.newObjectsOwnedBySave = nil
+ObjectManager.newObjectsOwnedBy = nil
+ObjectManager.newObjectsOwnedBySave = nil
 
 -- flag for noting when Add actions should not occur
 -- because the objects are not new, but added after a destroy
-ObjectUpdater.rebuilding = false
+ObjectManager.rebuilding = false
 
 ----------------------
 -- Static Functions
 ----------------------
 
 -- add a new static to the static list
-function ObjectUpdater:AddStatic(staticObject)
+function ObjectManager:AddStatic(staticObject)
 	self.statics[#self.statics + 1] = staticObject
 end 
 
-function ObjectUpdater:AddLink(linkObject)
+function ObjectManager:AddLink(linkObject)
 	self.links[#self.links + 1] = linkObject
 end 
 
 -- add a new object to the object list
 -- use table even if theres only 1 object
 -- data = {objectA, objectB, objectC, ...}
-function ObjectUpdater:Add(objects)
+function ObjectManager:Add(objects)
 
 	for i=1, #objects do
 		self.objects[#self.objects+1] = objects[i]
@@ -95,7 +95,7 @@ end
 -- add to the list of component type names
 -- this serves no real purpose for now
 -- it is just some data to record
-function ObjectUpdater:AddComponentType(object)
+function ObjectManager:AddComponentType(object)
 	if(self.componentTypes[object.objectType] == nil) then
 		self.componentTypes[object.objectType] = true
 		self.componentTypes.index[#self.componentTypes.index + 1] = object.objectType
@@ -104,7 +104,7 @@ end
 
 -- used on a level Exit
 -- any objects owned by the level are removed
-function ObjectUpdater:DestroyAllObjectsOwnedBy(ownerName)
+function ObjectManager:DestroyAllObjectsOwnedBy(ownerName)
 	
 	for i=1, #self.objects do
 
@@ -120,10 +120,10 @@ function ObjectUpdater:DestroyAllObjectsOwnedBy(ownerName)
 end 
 
 -- flag an object to be destroyed on the next ClearDestroyedObjects call
-function ObjectUpdater:Destroy(obj)
+function ObjectManager:Destroy(obj)
 	
 	if(obj == nil) then
-		printDebug{"Cannot destroy, object already nil", "ObjectUpdater"}
+		printDebug{"Cannot destroy, object already nil", "ObjectManager"}
 		return
 	end 
 
@@ -144,7 +144,7 @@ function ObjectUpdater:Destroy(obj)
 	printDebug{obj.name or "Thing" .. " destroyed", "Collision"}
 end 
 
-function ObjectUpdater:ClearDestroyedObjects()
+function ObjectManager:ClearDestroyedObjects()
 
 	if(self.destroyObjects == false) then
 		return
@@ -161,18 +161,19 @@ function ObjectUpdater:ClearDestroyedObjects()
 			self:Add{temp[i]}
 			self.rebuilding = false
 		else
-			
+
+			-->FIX 
+			-- this is meant to auto destroy component
+			-- but it doesnt work exactly right, so gonna comment out for now
+			--[[
 			if(temp[i].collision) then
 				CollisionManager:Destroy(temp[i].collision)
 			end 
-
-			-- need to clear all components -->FIX
-			-- this code didnt work
-			-- figure out why
 			
 			if(temp[i].Draw) then
 				temp[i].Draw = nil
-			end 
+			end
+			--]]
 
 		end 
 
@@ -187,21 +188,21 @@ function ObjectUpdater:ClearDestroyedObjects()
 end 
 
 --[[
-function ObjectUpdater:AddCamera(cam)
+function ObjectManager:AddCamera(cam)
 	self.cameras[#self.cameras+1] = cam
 end 
 --]]
 
-function ObjectUpdater:PrintDebugText()
-	if(DebugText.messageType["ObjectUpdater"] == false) then
+function ObjectManager:PrintDebugText()
+	if(DebugText.messageType["ObjectManager"] == false) then
 		return
 	end 
 
 	-- print basic information
 	DebugText:TextTable
 	{
-		{text = "", obj = "ObjectUpdater"},
-		{text = "ObjectUpdater"},
+		{text = "", obj = "ObjectManager"},
+		{text = "ObjectManager"},
 		{text = "-----------------------------"},
 		{text = "Total Statics: " .. #self.statics},
 		{text = "Total Objs: " .. #self.objects},
@@ -209,7 +210,7 @@ function ObjectUpdater:PrintDebugText()
 	}
 
 	-- print all Object totals by type
-	if(ObjectUpdater.printTotalObjectTypes) then
+	if(ObjectManager.printTotalObjectTypes) then
 		local objectTypesTemp = {}
 		objectTypesTemp.index = {}
 
@@ -244,7 +245,7 @@ function ObjectUpdater:PrintDebugText()
 
 
 		local totalsTextTable = {}
-		totalsTextTable[1] = {text = "", obj = "ObjectUpdater"}
+		totalsTextTable[1] = {text = "", obj = "ObjectManager"}
 		totalsTextTable[2] = {text = "Object Totals"}
 		totalsTextTable[3] = {text = "----------------------"}
 
@@ -258,9 +259,9 @@ function ObjectUpdater:PrintDebugText()
 
 
 	-- print all Statics as list
-	if(ObjectUpdater.printAllStaticsInDebugText) then
+	if(ObjectManager.printAllStaticsInDebugText) then
 		local staticNames = {}
-		staticNames[1] = {text = "", obj = "ObjectUpdater"}
+		staticNames[1] = {text = "", obj = "ObjectManager"}
 		staticNames[2] = {text = "Statics"}
 		staticNames[3] = {text = "------------"}
 
@@ -279,9 +280,9 @@ function ObjectUpdater:PrintDebugText()
 	end 
 
 	-- print all Objects as list
-	if(ObjectUpdater.printAllObjectsInDebugText) then
+	if(ObjectManager.printAllObjectsInDebugText) then
 		local objectNames = {}
-		objectNames[1] = {text = "", obj = "ObjectUpdater"}
+		objectNames[1] = {text = "", obj = "ObjectManager"}
 		objectNames[2] = {text = "Objects"}
 		objectNames[3] = {text = "------------"}
 
@@ -304,9 +305,9 @@ function ObjectUpdater:PrintDebugText()
 	end 
 
 	-- print 
-	if(ObjectUpdater.printComponents) then 
+	if(ObjectManager.printComponents) then 
 		local componentNames = {}
-		componentNames[1] = {text = "Component Types", obj = "ObjectUpdater"}
+		componentNames[1] = {text = "Component Types", obj = "ObjectManager"}
 		componentNames[2] = {text = "-----------------"}
 		
 		for i=1, #self.componentTypes.index do
@@ -324,7 +325,7 @@ function ObjectUpdater:PrintDebugText()
 end 
 
 -- update all objects
-function ObjectUpdater:Update()
+function ObjectManager:Update()
 
 	-- destroy
 	self:ClearDestroyedObjects()
@@ -400,11 +401,11 @@ function ObjectUpdater:Update()
 
 end
 
-function ObjectUpdater:AddToPostUpdate(postObject)
+function ObjectManager:AddToPostUpdate(postObject)
 	self.postUpdateObjects[#self.postUpdateObjects + 1] = postObject
 end 
 
-function ObjectUpdater:ClearPostUpdate()
+function ObjectManager:ClearPostUpdate()
 	for i=1, #self.postUpdateObjects do
 		self.postUpdateObjects[i] = nil
 	end 
@@ -413,7 +414,7 @@ function ObjectUpdater:ClearPostUpdate()
 	self.postUpdateObjects = {}
 end 
 
-function ObjectUpdater:PostUpdate()
+function ObjectManager:PostUpdate()
 
 	for i=1, #self.postUpdateObjects do
 
@@ -428,7 +429,7 @@ function ObjectUpdater:PostUpdate()
 end 
 
 -- is this function even needed anymore?
-function ObjectUpdater:RepeatedInput()
+function ObjectManager:RepeatedInput()
 
 	--[[
 	-- cameras
@@ -477,7 +478,7 @@ end
 -- but after the update loop objects with input components should be added
 -- to an input list, and then only those objects are part of this input update
 -- much like draw list -->FIX
-function ObjectUpdater:InputUpdate(key, inputType)
+function ObjectManager:InputUpdate(key, inputType)
 
 --[[
 	for i=1, #self.cameras do
@@ -520,7 +521,7 @@ end
 -- destroy needs to check objects for components and run destroy on them properly
 
 -- operations on lists of objects needs to be generic
--- so that if a new list of objects is added ObjectUpdater can
+-- so that if a new list of objects is added ObjectManager can
 -- perform all tasks on it just like any other list
 -- such as updating and clearing dead objects
 -- this comes up because I need to add a postObjects list
@@ -529,7 +530,7 @@ end
 
 
 -- Global
--- changed ObjectUpdater to a global
+-- changed ObjectManager to a global
 -- since so many files use it
 -- need to remove all require calls to it
 
@@ -560,7 +561,7 @@ end
 
 
 -- replaced by Draw component
-function ObjectUpdater:Draw()
+function ObjectManager:Draw()
 	
 	-- cameras
 	for i=1, #self.cameras do
@@ -602,7 +603,7 @@ end
 
 
 
-ObjectUpdater.excludeNewFromLevel = false
+ObjectManager.excludeNewFromLevel = false
 
 
 --]]

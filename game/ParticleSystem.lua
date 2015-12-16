@@ -143,14 +143,14 @@ function ParticleSystem:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end
 
 	-------------
 	-- End
 	-------------
 
-	ObjectUpdater:Add{object}
+	ObjectManager:Add{object}
 
 	return object
 

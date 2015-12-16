@@ -102,7 +102,7 @@ function Draw:New(data)
 	---------------
 
 	
-	-- currently ObjectUpdater takes care of this like any other object
+	-- currently ObjectManager takes care of this like any other object
 	-- but actually this needs to update after all other objects
 	function o:Update()
 		self:CalculateCurrentDepth()
@@ -215,7 +215,7 @@ function Draw:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 
 
@@ -223,7 +223,7 @@ function Draw:New(data)
 	-- End
 	----------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -261,7 +261,7 @@ end
 -- Static End
 ---------------
 
-ObjectUpdater:AddStatic(Draw)
+ObjectManager:AddStatic(Draw)
 
 return Draw
 

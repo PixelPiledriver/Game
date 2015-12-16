@@ -9,7 +9,7 @@
 local SinCounter = {}
 
 -----------------
--- Static InfoObjectUpdater:Destroy(self.Info)
+-- Static InfoObjectManager:Destroy(self.Info)
 -----------------
 
 SinCounter.Info = Info:New
@@ -83,14 +83,14 @@ function SinCounter:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 
 	----------
 	-- End
 	----------
 
-	ObjectUpdater:Add{object}
+	ObjectManager:Add{object}
 
 	return object
 end 

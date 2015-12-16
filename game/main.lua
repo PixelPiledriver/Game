@@ -11,7 +11,7 @@
 ---------------------------
 require("MemoryManager")
 require("LevelManager")
-require("ObjectUpdater")
+require("ObjectManager")
 require("Info")
 require("Random")
 require("CollisionManager")
@@ -28,10 +28,14 @@ require("TableSort")
 require("PrintDebug")
 require("FailNew")
 require("Bool")
-require("Mouse")
 require("Game")
 require("EventLog")
 require("Level")
+require("Link")
+
+local Camera = require("Camera")
+require("Camera_Node")
+require("Mouse")
 
 
 --------------------
@@ -46,8 +50,6 @@ LevelManager:PostRequire()
 
 local App = require("App")
 local Map = require("Map")
-local Camera = require("Camera")
-require("Camera_Node")
 local Controller = require("Controller")
 local Color = require("Color")
 local Collision = require("Collision")
@@ -93,12 +95,9 @@ require("TestCode")
 		Graphics:Setup()
 		love.graphics.setShader(Shader.britShader) -->MOVE
 
-		-- manual camera object -->REFACTOR
-		--ObjectUpdater:AddCamera(Camera)
-
 		LevelManager:Setup()
 
-		ObjectUpdater:DestroyAllObjectsOwnedBy("shit")
+		ObjectManager:DestroyAllObjectsOwnedBy("shit")
 
 
 	end 
@@ -119,11 +118,11 @@ require("TestCode")
 		DrawList:Update()
 
 		-- objects
-		ObjectUpdater:Update()
+		ObjectManager:Update()
 		
 		-- input
 		Camera:RepeatedInput()
-		ObjectUpdater:RepeatedInput()
+		ObjectManager:RepeatedInput()
 		Controller.Update()
 
 		-- collision
@@ -141,7 +140,7 @@ require("TestCode")
 	-- a special list of objects that depend 
 	-- on calculations made in Update are updated
 	function PostUpdate(dt)
-		ObjectUpdater:PostUpdate()
+		ObjectManager:PostUpdate()
 		DrawList:PostUpdate()
 	end 
 
@@ -151,12 +150,12 @@ require("TestCode")
 
 	function love.keypressed(key)
 		Camera:InputUpdate(key, "press")
-		ObjectUpdater:InputUpdate(key, "press")
+		ObjectManager:InputUpdate(key, "press")
 	end
 
 	function love.keyreleased(key)
 		Camera:InputUpdate(key, "release")
-		ObjectUpdater:InputUpdate(key, "release")
+		ObjectManager:InputUpdate(key, "release")
 	end
 
 	-- call back for mouse wheel

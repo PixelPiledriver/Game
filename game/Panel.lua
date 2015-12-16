@@ -476,23 +476,23 @@ function Panel:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.map)
-		ObjectUpdater:Destroy(self.Size)
-		ObjectUpdater:Destroy(self.Pos)
-		ObjectUpdater:Destroy(self.Draw)
-		ObjectUpdater:Destroy(self.box)
-		ObjectUpdater:Destroy(self.topFrame)
-		ObjectUpdater:Destroy(self.topCollision)
-		ObjectUpdater:Destroy(self.hover)
-		ObjectUpdater:Destroy(self.drag)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.map)
+		ObjectManager:Destroy(self.Size)
+		ObjectManager:Destroy(self.Pos)
+		ObjectManager:Destroy(self.Draw)
+		ObjectManager:Destroy(self.box)
+		ObjectManager:Destroy(self.topFrame)
+		ObjectManager:Destroy(self.topCollision)
+		ObjectManager:Destroy(self.hover)
+		ObjectManager:Destroy(self.drag)
 	end 
 
 	-------------
 	-- End
 	-------------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -501,7 +501,7 @@ end
 
 
 
-ObjectUpdater:AddStatic(Panel)
+ObjectManager:AddStatic(Panel)
 
 
 return Panel

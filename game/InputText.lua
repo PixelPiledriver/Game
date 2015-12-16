@@ -116,15 +116,15 @@ function InputText:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.Input)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.Input)
 	end 
 
 	------------
 	-- End
 	------------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 
 	return o
@@ -135,7 +135,7 @@ end
 
 
 
-ObjectUpdater:AddStatic(InputText)
+ObjectManager:AddStatic(InputText)
 
 return InputText
 

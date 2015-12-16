@@ -112,19 +112,19 @@ function Size:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 	
 	-----------
 	-- End 
 	-----------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 end 
 
-ObjectUpdater:AddStatic(Size)
+ObjectManager:AddStatic(Size)
 
 return Size
 

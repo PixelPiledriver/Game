@@ -356,18 +356,18 @@ function Text:New(data)
 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.box)
-		ObjectUpdater:Destroy(self.Pos)
-		ObjectUpdater:Destroy(self.Draw)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.box)
+		ObjectManager:Destroy(self.Pos)
+		ObjectManager:Destroy(self.Draw)
 
 		if(self.Links) then
 			self.Links:DestroyAll()
-			ObjectUpdater:Destroy(self.Links)
+			ObjectManager:Destroy(self.Links)
 		end 
 
-		ObjectUpdater:Destroy(self.Life)
-		ObjectUpdater:Destroy(self.Fade)
+		ObjectManager:Destroy(self.Life)
+		ObjectManager:Destroy(self.Fade)
 		
 	end 
 
@@ -375,7 +375,7 @@ function Text:New(data)
 	--------
 	-- End
 	--------
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -385,7 +385,7 @@ end
 -- Static End
 ----------------
 
-ObjectUpdater:AddStatic(Text)
+ObjectManager:AddStatic(Text)
 
 
 -------------

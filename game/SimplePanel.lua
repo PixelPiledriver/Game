@@ -704,35 +704,35 @@ function Panel:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
-		ObjectUpdater:Destroy(self.map)
-		ObjectUpdater:Destroy(self.Size)
-		ObjectUpdater:Destroy(self.SizeMinimized)
+		ObjectManager:Destroy(self.Info)
+		ObjectManager:Destroy(self.map)
+		ObjectManager:Destroy(self.Size)
+		ObjectManager:Destroy(self.SizeMinimized)
 
-		ObjectUpdater:Destroy(self.Pos)
-		ObjectUpdater:Destroy(self.Draw)
+		ObjectManager:Destroy(self.Pos)
+		ObjectManager:Destroy(self.Draw)
 
-		ObjectUpdater:Destroy(self.frame)
-		ObjectUpdater:Destroy(self.bar)
-		ObjectUpdater:Destroy(self.barCollision)
-		ObjectUpdater:Destroy(self.title)
+		ObjectManager:Destroy(self.frame)
+		ObjectManager:Destroy(self.bar)
+		ObjectManager:Destroy(self.barCollision)
+		ObjectManager:Destroy(self.title)
 
-		ObjectUpdater:Destroy(self.openCloseButton)
-		ObjectUpdater:Destroy(self.scrollResetButton)
-		ObjectUpdater:Destroy(self.scrollUpButton)
-		ObjectUpdater:Destroy(self.scrollDownButton)
+		ObjectManager:Destroy(self.openCloseButton)
+		ObjectManager:Destroy(self.scrollResetButton)
+		ObjectManager:Destroy(self.scrollUpButton)
+		ObjectManager:Destroy(self.scrollDownButton)
 
-		ObjectUpdater:Destroy(self.DrawGroup)
+		ObjectManager:Destroy(self.DrawGroup)
 
-		ObjectUpdater:Destroy(self.hover)
-		ObjectUpdater:Destroy(self.drag)
+		ObjectManager:Destroy(self.hover)
+		ObjectManager:Destroy(self.drag)
 	end 
 
 	--------
 	-- End
 	--------
 
-	ObjectUpdater:Add{o}
+	ObjectManager:Add{o}
 
 	return o
 
@@ -774,7 +774,7 @@ end
 -- Static End
 ----------------
 
-ObjectUpdater:AddStatic(Panel)
+ObjectManager:AddStatic(Panel)
 
 return Panel
 

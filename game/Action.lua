@@ -59,13 +59,13 @@ function o:New(data)
 		self.arguments = nil
 		sefl.argumentIndex = nil
 
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 
 	return o
 end 
 
-ObjectUpdater:AddStatic{Action}
+ObjectManager:AddStatic{Action}
 
 return Action
 

@@ -184,7 +184,7 @@ function Link:New(data)
 	end 
 
 	function o:Destroy()
-		ObjectUpdater:Destroy(self.Info)
+		ObjectManager:Destroy(self.Info)
 	end 
 
 	------------
@@ -202,7 +202,7 @@ function Link:New(data)
 
 
 
-	ObjectUpdater:AddLink(o)
+	ObjectManager:AddLink(o)
 
 	return o
 
@@ -323,7 +323,7 @@ function Link:Simple(data)
 end 
 
 
-ObjectUpdater:AddStatic(Link)
+ObjectManager:AddStatic(Link)
 
 return Link
 
@@ -555,7 +555,7 @@ function Link:New(data)
 
 	end 
 
-	ObjectUpdater:AddLink(o)
+	ObjectManager:AddLink(o)
 
 	return o
 
@@ -638,7 +638,7 @@ function Link:Simple(data)
 end 
 
 
-ObjectUpdater:AddStatic(Link)
+ObjectManager:AddStatic(Link)
 
 return Link
 
