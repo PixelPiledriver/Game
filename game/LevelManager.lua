@@ -26,6 +26,8 @@ LevelManager = {}
 LevelManager.currentLevel = nil
 LevelManager.destroyObjectsOnExit = true
 
+LevelManager.printDescriptionOnStart = true
+
 
 --------------
 -- Levels
@@ -34,11 +36,11 @@ LevelManager.destroyObjectsOnExit = true
 -- all levels available
 LevelManager.levelNames = 
 {
+	"TextWriteLevel",
 	"MapWorldLevel",
 	"AnimationEditorLevel",
 	"CameraLevel",
 	"NewLevelTypeTest",
-	"TextWriteLevel",
 	"TestLevel",
 	"SnapGridTestLevel",
 	"PixelDrawLevel",

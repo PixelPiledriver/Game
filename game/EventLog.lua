@@ -11,6 +11,7 @@
 ----------------
 local Text = require("Text")
 local Pos = require("Pos")
+local Textfile = require("Textfile")
 
 -----------------------------------------
 
@@ -59,7 +60,10 @@ EventLog.priority =
 	false	
 }
 
+--[text, objectType, priority]
 function EventLog:Add(data)
+
+	self.allEvents[#self.allEvents+1] = data[1]
 
 	-- Event Log is not owned by level
 	ObjectManager.newObjectsOwnedBySave = ObjectManager.newObjectsOwnedBy
@@ -126,7 +130,23 @@ end
 function EventLog:Update()
 end 
 
+-- when App exits
+function EventLog:OnExit()
 
+	-- write all events to text file
+
+	local file = Textfile:New
+	{
+		filename = "EventsOnExit.txt",
+	}
+
+	for i=1, #self.allEvents do
+		file:AddLine(self.allEvents[i])
+	end 
+
+	file:Save()
+	
+end 
 
 
 

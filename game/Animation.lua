@@ -110,7 +110,16 @@ function Animation:New(data)
 	o.active = Bool:DataOrDefault(data.active, true)
 	o.draw = Bool:DataOrDefault(data.draw, true)
 
+	-- can this animation be played again
+	-- even if it is already playing
+	o.canBeReplayed = Bool:DataOrDefault(data.canBeReplayed, true)
+	o.startOverOnReplay = Bool:DataOrDefault(data.startOverOnReplay, true)
 
+
+	-- component owner of this animation
+	o.animationComponentParent = nil
+
+	o.whenDonePlay = data.whenDonePlay or nil
 
 	---------------
 	-- Components
@@ -202,12 +211,19 @@ function Animation:New(data)
 			-- not the first
 			self.currentFrame = 1
 
-			-- loop?
+			-- does this animation have a loop value?
 			if(self.loopMax > 0) then
 				self.loopCount = self.loopCount + 1
 
-				if(self.loopCount == self.loopMax) then
+				-- reached the loop limit?
+				if(self.loopCount >= self.loopMax) then
 					self.active = false
+					
+					-- notify AnimationComponent this animation is finished
+					if(self.animationComponentParent and self.selected) then
+						self.animationComponentParent:DonePlaying()
+					end 
+
 				end 
 
 			end 
@@ -216,7 +232,8 @@ function Animation:New(data)
 
 	end 
 
- 
+
+
  	-- render object to screen
 	function o:DrawCall()
 

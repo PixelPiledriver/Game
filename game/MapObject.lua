@@ -266,8 +266,6 @@ function MapObject:New(data)
 			parent = o
 		}
 
-		print(#data.animations)
-
 		-- add all animations
 		for i=1, #data.animations do
 			o.AnimationComponent:Add

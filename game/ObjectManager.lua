@@ -512,8 +512,24 @@ function ObjectManager:InputUpdate(key, inputType)
 end 
 
 
+-- runs when the game is quit by App
+function ObjectManager:OnExit()
 
+	-- run OnExit function for all Statics
+	for i=1, #self.statics do
+		if(self.statics[i].OnExit) then
+			self.statics[i]:OnExit()
+		end 
+	end 
 
+	-- run OnExit function for all Objects
+	for i=1, #self.objects do
+		if(self.objects[i].OnExit) then
+			self.statics[i]:OnExit()
+		end 
+	end 
+
+end 
 
 
 --	Notes

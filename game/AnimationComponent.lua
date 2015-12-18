@@ -69,12 +69,14 @@ function AnimationComponent:New(data)
 	function o:Add(data)
 
 		data.animation.parent = self.parent
+		data.animation.animationComponentParent = self
 		self.animations[data.name] = data.animation
 		self.animations.index[#self.animations.index+1] = data.name
 
 		if(#self.animations.index == 1) then
 			self.selectedAnimation = self.animations[data.name]
 			self.selectedAnimation.draw = true
+			self.selectedAnimation.selected = true
 		end
 
 		if(#self.animations.index > 1) then
@@ -95,7 +97,9 @@ function AnimationComponent:New(data)
 	-- this is layer above play to help control animations
 	-- simple for now, but will have more conditions later
 	function o:State(name)
-		if(name == self.state) then
+
+
+		if(self.animations[name].canBeReplayed == false and name == self.state) then
 			return
 		end 
 
@@ -110,24 +114,41 @@ function AnimationComponent:New(data)
 
 	-- play animation by given name
 	function o:Play(name)
-		print("playing animation")
-
+	
 		-- hide old animation
 		self.selectedAnimation.active = false
 		self.selectedAnimation.draw = false
+		self.selectedAnimation.selected = false
 
-		-- start new animation
-		print(name)
+		-- start new animation	
 		self.selectedAnimation = self.animations[name]
 		self.selectedAnimation.active = true
+		self.selectedAnimation.loopCount = 0
 		self.selectedAnimation.pause = false
 		self.selectedAnimation.draw = true
+		self.selectedAnimation.selected = true
+
+		if(self.selectedAnimation.startOverOnReplay) then
+			self.selectedAnimation.currentFrame = 1
+		end 
 
 	end 
 
 	-- pause the selected animation
 	function o:Pause()
 		self.selectedAnimation.pause = true
+	end 
+
+	-- call from animation to tell AnimationComponent
+	-- that its done playing and to attempt to play a fallback animation
+	function o:DonePlaying()
+
+		if(self.selectedAnimation.whenDonePlay) then
+			self:State(self.selectedAnimation.whenDonePlay)
+		end
+
+		print("playing fallback animation")
+
 	end 
 
 	function o:PrintDebugText()

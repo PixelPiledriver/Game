@@ -9,6 +9,15 @@
 --------------------------------------------------------------------------------
 
 
+-- Beefing up text write/read
+-- going to add lua code features
+-- this will be used to write and read animations
+-- that are created at runtime
+-- this is also an important feature for many other things
+-- so make it nice :P
+
+-- OnExit needed when game quits
+
 -- Added Matrix.lua
 -- has some decent matricie features and blah
 -- still needs some work

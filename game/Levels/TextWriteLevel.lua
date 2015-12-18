@@ -18,30 +18,47 @@ local Textfile = require("Textfile")
 
 local Start = function()
 
-	print("text file fun!")
+	local saveTest = Textfile:New
+	{
+		filename = "cookies.txt",
+		directory = "Mega Cookie",
+		text = "omg I love cookies"
+	}
+
+	saveTest:Save()
+
+
+	local writeStuff = Textfile:New
+	{
+		filename = "Apples.txt",
+		text = "Make apple pie"
+	}
+
+	writeStuff:Save()
+
+		
+	local readTest = Textfile:New
+	{
+		filename = "readthisfile.txt",
+		directory = "game"
+	}
+
+	readTest:Read()
+
+	print(readTest.text)
+
+	local text = readTest:ReadLinesToTable()
+
+	for i=1, #text do
+		print(text[i])
+	end
+
+	print("poop")
+
+
+
 	
-	--local file = love.filesystem.newFile("monkey.txt")
-	--file:open("w")
 
-	--local f = love.filesystem.write("dildo.txt", "this is a file bro 12345")
-
-	local t = Textfile:New
-	{
-		filename = "PoopStuff.txt",
-		text = "first line dawg"
-	}
-
-	t:AddLine("2nd line yo")
-
-	t:Save()
-
-	local readF = Textfile:New
-	{
-		filename = "readthisfile.txt"
-	}
-
-	readF:Read()
-	readF:ReadLines() 
 
 end
 
@@ -83,10 +100,40 @@ return level
 
 
 
+-- Test Code
+-------------------
+--[[
+
+	--local file = love.filesystem.newFile("monkey.txt")
+	--file:open("w")
+
+	--local f = love.filesystem.write("dildo.txt", "this is a file bro 12345")
+
+	local t = Textfile:New
+	{
+		filename = "PoopStuff.txt",
+		text = "first line dawg"
+	}
+
+	t:AddLine("2nd line yo")
+
+	t:Save()
+
+	local readF = Textfile:New
+	{
+		filename = "readthisfile.txt"
+	}
+
+	readF:Read()
+	readF:ReadLines()
+
+--]]
+
 
 -----------------------
 -- Other Functions
 -----------------------
+
 
 --[==[
 -- using lua string patterns to find 

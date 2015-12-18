@@ -31,8 +31,14 @@ App.Info = Info:New
 -----------------------
 
 -- close the program
-function App:QuitGameInput()
-		love.event.quit()
+function App:QuitGame()
+
+	-- run any exit functions that need to be done
+	ObjectManager:OnExit()
+	EventLog:OnExit()
+
+	-- close the game
+	love.event.quit()
 end 
 
 ----------------------
@@ -43,7 +49,7 @@ App.Input = Input:New
 {
 	keys = 
 	{ 
-		{ "escape", "press", App.QuitGameInput},
+		{ "escape", "press", App.QuitGame},
 	}
 }
 

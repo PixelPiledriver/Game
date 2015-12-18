@@ -356,6 +356,12 @@ return ChatBox
 
 -- Notes
 ----------------------------
+-->NEED
+-- a way to stop multiple of the same chat box from being created
+-- proby needs to be done on object that creates chatbox end
+-- but might do it here
+-- will think of something
+
 -->NEED 
 -- option var for setting chatbox to be unaffected by camera
 -- this is so that zooming does not make the font get blurry

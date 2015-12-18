@@ -72,7 +72,8 @@ local Start = function()
 		{
 			{"walk", "humanWalk"}, -- {name to play animation by, name of animation var used by Get function}
 			{"chat", "humanChat"},
-			{"push", "humanPush"}
+			{"push", "humanPush"},
+			{"idle", "humanIdle"}
 		}
 	}
 

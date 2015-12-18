@@ -64,9 +64,11 @@ function Level:New(data)
 
 	-- list of every object made while this level was running
 	-- have ObjectManager add to this list via LevelManager.currentLevel
+	-- not sure if this is used anymore
 	o.objects = {}
 
 
+	o.description = data.description or "..."
 	----------
 	-- End
 	----------

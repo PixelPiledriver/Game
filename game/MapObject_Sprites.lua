@@ -59,12 +59,14 @@ MapObject.Sprites.humanWalk2 = {1,3}
 
 MapObject.Animations.humanWalk =
 {
-	playName = "walk",
 	frames = 
 	{
 		"humanWalk1",
 		"humanWalk2"
-	}
+	},
+
+	loopMax = 1,
+	whenDonePlay = "idle"
 }
 
 MapObject.Sprites.humanChat1 = {1,4}
@@ -75,7 +77,10 @@ MapObject.Animations.humanChat =
 	{
 		"humanChat1",
 		"humanChat2"
-	}	
+	},
+
+	loopMax = 3,
+	whenDonePlay = "idle"
 }
 
 MapObject.Sprites.humanPush1 = {1,6}
@@ -86,9 +91,23 @@ MapObject.Animations.humanPush =
 	{
 		"humanPush1",
 		"humanPush2"
-	}	
+	},
+
+	loopMax = 1,
+	whenDonePlay = "idle"
 }
 
+
+MapObject.Sprites.humanIdle1 = {1,1}
+MapObject.Sprites.humanIdle2 = {1,8}
+MapObject.Animations.humanIdle =
+{
+	frames =
+	{
+		"humanIdle1",
+		"humanIdle2"
+	}
+}
 
 
 MapObject.Sprites.tree1 = {3,2}
@@ -127,6 +146,8 @@ function MapObject.Animations:Get(name)
 	local frames = {}
 
 
+
+
 	for i=1, #MapObject.Animations[name].frames do
 		frames[#frames+1] = MapObject.Sprites:Get(MapObject.Animations[name].frames[i])
 	end 
@@ -134,7 +155,9 @@ function MapObject.Animations:Get(name)
 	local newAnimation =
 	{
 		frames = frames,
-		spriteSheet = MapObject.Sprites.sheet
+		spriteSheet = MapObject.Sprites.sheet, 
+		loopMax = MapObject.Animations[name].loopMax or nil,
+		whenDonePlay = MapObject.Animations[name].whenDonePlay or nil
 	}
 
 	return Animation:New(newAnimation)
