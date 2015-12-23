@@ -40,6 +40,10 @@ function Textfile:New(data)
 		structureType = "Object"
 	}
 
+
+
+
+
 	------------
 	-- Vars
 	------------
@@ -53,20 +57,26 @@ function Textfile:New(data)
 	-- Functions
 	-------------------------------
 
-	function o:AddLine(txt)
+	-- add a new line to the text table
+	-- txt = string
+	function o:AddLine(text)
 		
 		-- no first line?
 		if(o.text == "") then
-			o.text = o.text .. txt 
+			o.text = o.text .. text 
 
 		-- else add new line as normal
 		else 
-			o.text = o.text .. "\r\n" .. txt 
+			o.text = o.text .. "\r\n" .. text 
 		end 
 
+	end
+
+	function o:AddLineCode(text)
+		o.text = o.text .. text
 	end 
 
-	--{text = {...}, spaceBetweenEach = bool}
+	--{text = {string, string, ...}}
 	function o:AddLineFromTable(data)
 
 		o.text = o.text .. "\r\n"
@@ -75,22 +85,75 @@ function Textfile:New(data)
 			o.text = o.text .. data.text[i] .. " "
 		end 
 
+	end
+
+	-- adds the vars named in .index of given table to text in a line by line format
+	-- file --
+	--------------
+	-- varName
+	-- varValue
+	-- varName
+	-- ...
+	--------------
+	-- simple but might be slow, will need to be tested
+	function o:AddAllTableVars(data)
+
+		for i=1, #data.index do
+			self:AddLine(data.index[i])
+			self:AddLine(data[data.index[i]])
+		end 
+
+	end
+
+	-- adds table as lua code to text
+	-- (t = table) 
+	function o:AddTable(t)
+
+		-- must contain .index
+		if(t.index == nil) then
+			printDebug{"Table does not contain .index", "Textfile"}
+			return
+		end 
+
+		self:AddLine("local " .. t.name .. " = {")
+
+		local indexTable = "index = {"
+
+		for i=1, #t.index do
+			self:AddLine("  " .. t.index[i] .. " = " .. t[t.index[i]] .. ",")
+			indexTable = indexTable .. t.index[i] .. ","
+		end
+
+		indexTable = indexTable .. "}"
+		self:AddLine(indexTable)
+
+
+		self:AddLine("}")
+		self:AddLine("return " .. t.name)
+
 	end 
 
+
+	-- sets the directory to save in
+	-- this will be moved to FileManager so that all file types may use it
+	-- I dont mind files storing a var where they want to be saved tho
 	function o:SetDirectory()
 
 		-- directory defined for reading/writing?
 		if(self.directory) then
 
+			print(self.directory)
 			-- last directory used is same as this object's?
 			-- do nothing
 			if(self.directory == Textfile.currentDirectory) then
+				print("already at this directory")
 				return
 			end 
 
 			-- set the directory
 			Textfile.currentDirectory = self.directory
 			love.filesystem.setIdentity(self.directory)
+			print(love.filesystem.getIdentity())
 
 		-- no directory defined?
 		else
@@ -100,9 +163,26 @@ function Textfile:New(data)
 		
 	end 
 
-	function o:Save()
-		self:SetDirectory()
+	-- (dir = string --> directory name)
+	function o:Save(dir)
+
+		--[[
+		-- no directory given?
+		if(dir == nil) then
+
+			-- use self.directory
+			self:SetDirectory()
+
+		-- directory was given as argument
+		else 
+			love.filesystem.setIdentity(dir)
+		end
+		--]]
+
+		-- write text to file
 		love.filesystem.write(self.filename, self.text)
+		EventLog:Add{"Save: " .. self.filename}
+
 	end
 
 	-- reads the whole file as a single string

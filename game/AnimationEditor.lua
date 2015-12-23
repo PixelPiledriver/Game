@@ -16,6 +16,7 @@ local Collision = require("Collision")
 local Button = require("Button")
 local Pos = require("Pos")
 local Sprite = require("Sprite")
+local Panel
 ----------------------------------------------------------
 
 local AnimationEditor = {}

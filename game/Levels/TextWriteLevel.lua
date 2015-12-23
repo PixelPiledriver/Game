@@ -18,46 +18,62 @@ local Textfile = require("Textfile")
 
 local Start = function()
 
-	local saveTest = Textfile:New
+	local value = 10
+	print(value)
+
+	local goblin = 
 	{
-		filename = "cookies.txt",
-		directory = "Mega Cookie",
-		text = "omg I love cookies"
+		name = "Goblin",
+		attack = 3,
+		defense = 6,
+		speed = 10,
+		health = 100,
+		index = {"name", "attack", "defense", "speed", "health"}
 	}
 
-	saveTest:Save()
-
-
-	local writeStuff = Textfile:New
+	local goblinFile = Textfile:New
 	{
-		filename = "Apples.txt",
-		text = "Make apple pie"
+		filename = "goblin.lua",
 	}
 
-	writeStuff:Save()
+	goblinFile:AddAllTableVars(goblin)
+	goblinFile:Save()
 
-		
-	local readTest = Textfile:New
+
+	local orc =
 	{
-		filename = "readthisfile.txt",
-		directory = "game"
+		name = "orc",
+		attack = 8,
+		defense = 12,
+		speed = 3,
+		health = 22,
+		index = {"name", "attack", "defense", "speed", "health"}
 	}
 
-	readTest:Read()
+	local orcFile = Textfile:New
+	{
+		filename = "orc.lua",
+	}
 
-	print(readTest.text)
-
-	local text = readTest:ReadLinesToTable()
-
-	for i=1, #text do
-		print(text[i])
-	end
-
-	print("poop")
-
-
-
+	orcFile:AddTable(orc)
+	orcFile:Save()
 	
+	
+	print("File exists: " .. Bool:ToString(love.filesystem.exists("orc.lua")))
+	
+
+	local loadedOrc = FileManager:LoadFile("orc.lua")
+	print(loadedOrc)
+	print(loadedOrc())
+	print(loadedOrc().health)
+
+	local orcTest = loadedOrc()
+	orcTest.health = 50
+	print(orcTest.health)
+
+	local orcTest2 = loadedOrc()
+	print(orcTest2.health)
+
 
 
 end
@@ -240,4 +256,43 @@ end
 	--StringPatternTest()
 	--AddSpaceAfterAllColmas()
 
-==]=]
+
+	local saveTest = Textfile:New
+	{
+		filename = "cookies.txt",
+		--directory = "Mega Cookie",
+		text = "omg I love cookies"
+	}
+
+	saveTest:Save()
+
+
+	local writeStuff = Textfile:New
+	{
+		filename = "Apples.txt",
+		text = "Make apple pie"
+	}
+
+	writeStuff:Save()
+
+		
+	local readTest = Textfile:New
+	{
+		filename = "readthisfile.txt",
+	}
+
+	readTest:Read()
+
+	--print(readTest.text)
+
+	local text = readTest:ReadLinesToTable()
+
+	--[[
+	for i=1, #text do
+		print(text[i])
+	end
+	--]]
+
+
+
+--]=]

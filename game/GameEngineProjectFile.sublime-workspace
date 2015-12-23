@@ -4,8 +4,100 @@
 		"selected_items":
 		[
 			[
+				"index",
+				"indexTable"
+			],
+			[
+				"load",
+				"loadedOrc"
+			],
+			[
+				"file",
+				"filesystem"
+			],
+			[
+				"allevent",
+				"allEvents"
+			],
+			[
+				"all",
+				"allEvents"
+			],
+			[
+				"Object",
+				"ObjectManager:Destroy"
+			],
+			[
+				"animation",
+				"animationComponentParent"
+			],
+			[
+				"can",
+				"canBeReplayed"
+			],
+			[
+				"loop",
+				"loopCount"
+			],
+			[
+				"sle",
+				"selectedAnimation"
+			],
+			[
+				"when",
+				"whenDonePlay"
+			],
+			[
+				"anim",
+				"animation"
+			],
+			[
+				"selected",
+				"selectedAnimation"
+			],
+			[
+				"humanCh",
+				"humanChat2"
+			],
+			[
+				"Animation",
+				"AnimationComponent"
+			],
+			[
+				"Anim",
+				"AnimationComponent"
+			],
+			[
+				"orc",
+				"orcIdle2"
+			],
+			[
+				"Ma",
+				"MapObject"
+			],
+			[
+				"hum",
+				"humanWalk1"
+			],
+			[
+				"Sprites",
+				"Sprites"
+			],
+			[
+				"Map",
+				"MapObjects"
+			],
+			[
+				"AnimationCom",
+				"AnimationComponent"
+			],
+			[
+				"play",
+				"playName"
+			],
+			[
 				"sel",
-				"selecteAnimation"
+				"selectedAnimation"
 			],
 			[
 				"incre",
@@ -60,10 +152,6 @@
 				"frames"
 			],
 			[
-				"Animation",
-				"AnimationEditor"
-			],
-			[
 				"horizontal",
 				"horizontalLine"
 			],
@@ -102,10 +190,6 @@
 			[
 				"Ar",
 				"Arrow"
-			],
-			[
-				"Object",
-				"ObjectUpdater:AddStatic"
 			],
 			[
 				"object",
@@ -190,10 +274,6 @@
 			[
 				"defa",
 				"defaultLevel"
-			],
-			[
-				"load",
-				"loadLevelAtStart"
 			],
 			[
 				"leve",
@@ -344,10 +424,6 @@
 				"tileWidth"
 			],
 			[
-				"Map",
-				"MapObject"
-			],
-			[
 				"select",
 				"selectedIndex"
 			],
@@ -386,10 +462,6 @@
 			[
 				"requi",
 				"requireReaction"
-			],
-			[
-				"selected",
-				"selectedAction"
 			],
 			[
 				"failM",
@@ -442,88 +514,103 @@
 			[
 				"empty",
 				"emptySlotDefault"
-			],
-			[
-				"map",
-				"mapWorld"
-			],
-			[
-				"O",
-				"ObjectUpdater"
-			],
-			[
-				"reaction",
-				"reactions"
-			],
-			[
-				"action",
-				"actionTarget"
-			],
-			[
-				"pr",
-				"properties"
-			],
-			[
-				"emp",
-				"emptySlotDefault"
-			],
-			[
-				"Pos",
-				"IsPosInBounds"
-			],
-			[
-				"wait",
-				"waitCount"
-			],
-			[
-				"height",
-				"heightMax"
-			],
-			[
-				"point",
-				"pointTest"
-			],
-			[
-				"active",
-				"activeRange"
-			],
-			[
-				"set",
-				"setScissor"
-			],
-			[
-				"Var",
-				"VarOf"
-			],
-			[
-				"item",
-				"itemOffset"
-			],
-			[
-				"grid",
-				"gridWidth"
-			],
-			[
-				"creat",
-				"createPix"
-			],
-			[
-				"rand",
-				"randPalette"
-			],
-			[
-				"toggle",
-				"toggleState"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "AnimationComponent.lua",
+			"file": "levels/TextWriteLevel.lua",
 			"settings":
 			{
-				"buffer_size": 965,
+				"buffer_size": 4609,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Bool.lua",
+			"settings":
+			{
+				"buffer_size": 1165,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "-- TextfileWriter.lua\n\n-- Purpose\n---------------------\n-- can read and write text file with simple function calls\n-- use for modifying large chunks of similar code and other things etc\n\n-----------------------------------------------------------\n\nlocal Textfile = {}\n\n-----------------\n-- Static Info\n-----------------\nTextfile.Info = Info:New\n{\n	objectType = \"Textfile\",\n	dataType = \"File IO\",\n	structureType = \"Static\"\n}\n\nTextfile.currentDirectory = \"game\"\n\n------------\n-- Object\n------------\nfunction Textfile:New(data)\n\n	local o = {}\n\n	------------\n	-- Info\n	------------\n\n	o.Info = Info:New\n	{\n		name = data.name or \"...\",\n		objectType = \"Textfile\",\n		dataType = \"File IO\",\n		structureType = \"Object\"\n		dostuff = function(i)\n			i = i + 1\n		end \n	}\n\n\n	o.Info[\"dostuff\"]()\n	o.Info.dostuff()\n\n	indexTable = {1,2,3,5}\n \n	print\n\n\n	------------\n	-- Vars\n	------------\n\n	o.textTable = {}\n	o.text = data.text or \"\"\n	o.filename = data.filename or \"textFile\"\n	o.directory = data.directory or nil\n\n	-------------------------------\n	-- Functions\n	-------------------------------\n\n	-- add a new line to the text table\n	-- txt = string\n	function o:AddLine(text)\n		\n		-- no first line?\n		if(o.text == \"\") then\n			o.text = o.text .. text \n\n		-- else add new line as normal\n		else \n			o.text = o.text .. \"\\r\\n\" .. text \n		end \n\n	end\n\n	function o:AddLineCode(text)\n		o.text = o.text .. text\n	end \n\n	--{text = {string, string, ...}}\n	function o:AddLineFromTable(data)\n\n		o.text = o.text .. \"\\r\\n\"\n\n		for i=1, #data.text do\n			o.text = o.text .. data.text[i] .. \" \"\n		end \n\n	end\n\n	-- adds the vars named in .index of given table to text in a line by line format\n	-- file --\n	--------------\n	-- varName\n	-- varValue\n	-- varName\n	-- ...\n	--------------\n	-- simple but might be slow, will need to be tested\n	function o:AddAllTableVars(data)\n\n		for i=1, #data.index do\n			self:AddLine(data.index[i])\n			self:AddLine(data[data.index[i]])\n		end \n\n	end\n\n	-- adds table as lua code to text\n	-- (t = table) \n	function o:AddTable(t)\n\n		-- must contain .index\n		if(t.index == nil) then\n			printDebug{\"Table does not contain .index\", \"Textfile\"}\n			return\n		end \n\n		self:AddLine(\"local \" .. t.name .. \" = {\")\n\n		local indexTable = \"index = {\"\n\n		for i=1, #t.index do\n			self:AddLine(\"  \" .. t.index[i] .. \" = \" .. t[t.index[i]] .. \",\")\n			indexTable = indexTable .. t.index[i] .. \",\"\n		end\n\n		indexTable = indexTable .. \"}\"\n		self:AddLine(indexTable)\n\n\n		self:AddLine(\"}\")\n		self:AddLine(\"return \" .. t.name)\n\n	end \n\n\n	-- sets the directory to save in\n	-- this will be moved to FileManager so that all file types may use it\n	-- I dont mind files storing a var where they want to be saved tho\n	function o:SetDirectory()\n\n		-- directory defined for reading/writing?\n		if(self.directory) then\n\n			print(self.directory)\n			-- last directory used is same as this object's?\n			-- do nothing\n			if(self.directory == Textfile.currentDirectory) then\n				print(\"already at this directory\")\n				return\n			end \n\n			-- set the directory\n			Textfile.currentDirectory = self.directory\n			love.filesystem.setIdentity(self.directory)\n			print(love.filesystem.getIdentity())\n\n		-- no directory defined?\n		else\n			-- set to default game directory -->turn into var\n			love.filesystem.setIdentity(\"game\")\n		end\n		\n	end \n\n	-- (dir = string --> directory name)\n	function o:Save(dir)\n\n		--[[\n		-- no directory given?\n		if(dir == nil) then\n\n			-- use self.directory\n			self:SetDirectory()\n\n		-- directory was given as argument\n		else \n			love.filesystem.setIdentity(dir)\n		end\n		--]]\n\n		-- write text to file\n		love.filesystem.write(self.filename, self.text)\n		EventLog:Add{\"Save: \" .. self.filename}\n\n	end\n\n	-- reads the whole file as a single string\n	function o:Read()\n		self:SetDirectory()\n		self.text = love.filesystem.read(self.filename)\n	end\n\n	function o:GetRead()\n		return love.filesystem.read(self.filename)\n	end \n	\n	-- reads file into indexed table\n	function o:ReadLines()\n		for line in love.filesystem.lines(self.filename) do\n			self.textTable[#self.textTable + 1] = line\n		end\n	end\n\n	-- return file as indexed table\n	function o:ReadLinesToTable()\n		local tempTable = {}\n\n		for line in love.filesystem.lines(self.filename) do\n			tempTable[#tempTable+1] = line\n		end \n\n		return tempTable\n	end\n\n	function o:Destroy()\n		ObjectManager:Destroy()\n	end \n\n	-----------\n	-- End\n	-----------\n\n	return o\n\nend \n\n\n\nreturn Textfile\n\n\n-- Notes\n--------------------------------------\n-->NEED\n-- lua file writing/reading features \n-- such as tables, functions, vars etc\n\n\n-- Text Commands\n--[[\n\n\\a	bell\n\\b	back space\n\\f	form feed\n\\n	newline\n\\r	carriage return\n\\t	horizontal tab\n\\v	vertical tab\n\\\\	backslash\n\\\"	double quote\n\\'	single quote\n\\[	left square bracket\n\\]	right square bracket\n\n--]]\n",
+			"file": "Textfile.lua",
+			"file_size": 4957,
+			"file_write_time": 130950672772520816,
+			"settings":
+			{
+				"buffer_size": 4735,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "main.lua",
+			"settings":
+			{
+				"buffer_size": 3759,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Text.lua",
+			"settings":
+			{
+				"buffer_size": 8767,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "FileManager.lua",
+			"settings":
+			{
+				"buffer_size": 3455,
+				"line_ending": "Windows",
+				"name": "-- FileManager.lua"
+			}
+		},
+		{
+			"contents": "-- EventLog.lua\n\n-- Purpose\n--------------------------\n-- records and displays things that happen at runtime\n-- in text format\n\n\n----------------\n-- Requires\n----------------\nlocal Text = require(\"Text\")\nlocal Pos = require(\"Pos\")\nlocal Textfile = require(\"Textfile\")\n\n-----------------------------------------\n\n-- global\nEventLog = {}\n\n\n\n-------------\n-- Info\n-------------\nEventLog.Info = Info:New\n{\n	objectType = \"EventLog\",\n	dataType = \"Information\",\n	structureType = \"Manager\"\n}\n\n-----------------\n-- Vars\n-----------------\nEventLog.eventTexts = {}\nEventLog.allEvents = {}\nEventLog.maxCount = 5\nEventLog.ySpace = 18\nEventLog.eventIndex = 1\n\n-- this is the rogue object at the start of main\n-- before any objects are loaded\n-- seems fine\n-- there will also be ui before load so no big deal\n-- problem is it keeps getting deleted on level Exit\n-- trying to figure out why\nEventLog.Pos = Pos:New\n{\n	--x = love.window.getWidth() * 0.05, \n	x = love.window.getWidth() * 0.7, \n	y = love.window.getHeight() * 0.95\n}\n\nEventLog.priority =\n{\n	true,\n	false,\n	false,\n	false	\n}\n\n--[text, objectType, priority]\nfunction EventLog:Add(data)\n\n	self.allEvents[#self.allEvents+1] = data[1]\n\n	-- Event Log is not owned by level\n	ObjectManager.newObjectsOwnedBySave = ObjectManager.newObjectsOwnedBy\n	ObjectManager.newObjectsOwnedBy = nil\n\n	local priority = data[3] or 1\n\n	if(self.priority[priority] == false) then\n		return\n	end \n\n	if(self.eventTexts[self.eventIndex] == nil) then\n		self.eventTexts[self.eventIndex] = Text:New\n		{\n			text = data[1],\n			drawList = \"static\"\n		}\n	else\n		-- remove old text\n		ObjectManager:Destroy(self.eventTexts[self.eventIndex])\n		self.eventTexts[self.eventIndex] = nil\n		\n		-- replace the spot in table with this new text\n		self.eventTexts[self.eventIndex] = Text:New\n		{\n			text = data[1],\n			drawList = \"static\"\n		}		\n	end \n\n	-- set x\n	self.eventTexts[self.eventIndex].Pos.x = self.Pos.x\n\n	-- place new text at bottom of diplayed list\n	self.eventTexts[self.eventIndex].Pos.y = self.Pos.y - self.ySpace\n\n	-- push up all other messages\n	for i=1, #self.eventTexts do\n		repeat\n\n		-- skip the brand new text\n		if(i == self.eventIndex) then\n			break\n		end \n\n		self.eventTexts[i].Pos.y = self.eventTexts[i].Pos.y - self.ySpace\n\n		until true\n	end \n\n	self.eventIndex = self.eventIndex + 1\n\n	if(self.eventIndex > self.maxCount) then\n		self.eventIndex = 1\n	end \n\n	-- reset level ownership\n	ObjectManager.newObjectsOwnedBy = ObjectManager.newObjectsOwnedBySave\n\nend \n\n\n\nfunction EventLog:Update()\nend \n\n-- when App exits\nfunction EventLog:OnExit()\n\n	-- write all events to text file\n\n	local file = Textfile:New\n	{\n		filename = \"EventsOnExit.txt\",\n	}\n\n	for i=1, #self.allEvents do\n		file:AddLine(self.allEvents[i])\n	end \n\n	file:Save()\n	\nend \n\n\n\n\n\n-- Notes\n-------------------\n-- seems to work alright\n-- might add a panel to this object\n-- so it can be dragged around\n-- or might just go simple with a box\n\n-- may need to have table sliding function for this object\n-- so that new messages can push old ones upwards\n\n-- funnel stuff from here to printDebug so they can be\n-- sort of the same thing\n\n-- different types\n-- for now just going to do a stack of 5-10 events\n-- that it clears as it pushes them out\n\n\n\n\n-- Junk\n----------------------------------------------\n\n\n--[[\n\n\nfunction EventLog:Add2(data)\n	self.allEvents[#self.allEvents+1] = data\n\n	self.eventTexts[#self.eventTexts+1] = Text:New\n	{\n		text = data[1],\n		objectType = data[2]\n	}\n\n	self.eventTexts[#self.eventTexts].Pos.x = self.Pos.x\n	self.eventTexts[#self.eventTexts].Pos.y = self.Pos.y + (#self.eventTexts * self.ySpace)\n	self.Pos.y = self.Pos.y - self.ySpace\n\n	-- push other messages up\n	-- this is only used for nonslide mode\n	for i=1, #self.eventTexts do\n		self.eventTexts[i].Pos.y = self.eventTexts[i].Pos.y - self.ySpace\n	end \n\nend \n\n\n\n\n\n\n\n\n\n\n--]]",
+			"file": "EventLog.lua",
+			"file_size": 4036,
+			"file_write_time": 130948602870426926,
+			"settings":
+			{
+				"buffer_size": 3825,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "MapObject_Sprites.lua",
+			"settings":
+			{
+				"buffer_size": 2990,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Level.lua",
+			"settings":
+			{
+				"buffer_size": 1875,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Notes.lua",
+			"settings":
+			{
+				"buffer_size": 4723,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ChatBox.lua",
+			"settings":
+			{
+				"buffer_size": 7951,
 				"line_ending": "Windows"
 			}
 		},
@@ -531,7 +618,145 @@
 			"file": "Animation.lua",
 			"settings":
 			{
-				"buffer_size": 5960,
+				"buffer_size": 6693,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "AnimationComponent.lua",
+			"settings":
+			{
+				"buffer_size": 4043,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "MapObject.lua",
+			"settings":
+			{
+				"buffer_size": 9420,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "MapObject_Action.lua",
+			"settings":
+			{
+				"buffer_size": 11525,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "MapObject_Objects.lua",
+			"settings":
+			{
+				"buffer_size": 2272,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "levels/MapWorldLevel.lua",
+			"settings":
+			{
+				"buffer_size": 3562,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "DebugText.lua",
+			"settings":
+			{
+				"buffer_size": 6903,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "PrintDebug.lua",
+			"settings":
+			{
+				"buffer_size": 3035,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Box.lua",
+			"settings":
+			{
+				"buffer_size": 7535,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "LevelManager.lua",
+			"settings":
+			{
+				"buffer_size": 7396,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "levels/TestLevel.lua",
+			"settings":
+			{
+				"buffer_size": 2896,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Window.lua",
+			"settings":
+			{
+				"buffer_size": 2439,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "App.lua",
+			"settings":
+			{
+				"buffer_size": 1340,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 148 files for \"QuitGameInput\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\App.lua:\n   32  \n   33  -- close the program\n   34: function App:QuitGameInput()\n   35  		\n   36  		love.event.quit()\n   ..\n   45  	keys = \n   46  	{ \n   47: 		{ \"escape\", \"press\", App.QuitGameInput},\n   48  	}\n   49  }\n\nD:\\GitRepos\\Game\\game\\Input.lua:\n  238  	key = \"escape\",\n  239  	type = \"press\",\n  240: 	func = App.QuitGameInput,\n  241  }\n  242  --]]\n  ...\n  246  App.Input = Input:New\n  247  {\n  248: 	{\"escape\", \"press\", App.QuitGameInput}, -- key 1\n  249  	{key, inputType, function}, -- key 2\n  250  	{..., ..., ...} -- key 3\n\nD:\\GitRepos\\Game\\game\\OldCode.lua:\n  178  ---------------------\n  179  \n  180: function App:QuitGameInput(key)\n  181  	-- exit game\n  182  	if(key == \"escape\") then\n  ...\n  187  \n  188  function App:Input(key)\n  189: 	self:QuitGameInput(key)\n  190  end \n  191  \n\n6 matches across 3 files\n",
+			"settings":
+			{
+				"buffer_size": 905,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "Input.lua",
+			"settings":
+			{
+				"buffer_size": 4736,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Sprite.lua",
+			"settings":
+			{
+				"buffer_size": 5279,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Pos.lua",
+			"settings":
+			{
+				"buffer_size": 4026,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "SpriteSheet.lua",
+			"settings":
+			{
+				"buffer_size": 2428,
 				"line_ending": "Windows"
 			}
 		},
@@ -539,7 +764,7 @@
 			"file": "ObjectManager.lua",
 			"settings":
 			{
-				"buffer_size": 12670,
+				"buffer_size": 13029,
 				"line_ending": "Windows"
 			}
 		},
@@ -547,7 +772,7 @@
 			"file": "Camera.lua",
 			"settings":
 			{
-				"buffer_size": 12851,
+				"buffer_size": 12853,
 				"line_ending": "Windows"
 			}
 		},
@@ -556,6 +781,13 @@
 			"settings":
 			{
 				"buffer_size": 4467,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		}
@@ -600,6 +832,18 @@
 	},
 	"file_history":
 	[
+		"/D/GitRepos/Game/game/FileManager.lua",
+		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/User/JSON.sublime-settings",
+		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/User/CoronaSDKLua.sublime-settings",
+		"/D/GitRepos/Game/game/main.lua",
+		"/D/GitRepos/Game/game/lib1.lua",
+		"/C/Users/PixelPiledriver/AppData/Roaming/LOVE/Mega Cookie/orc.txt",
+		"/C/Users/PixelPiledriver/AppData/Roaming/LOVE/MetanetHunter/config.lua",
+		"/D/GitRepos/Game/game/Graphics.lua",
+		"/D/GitRepos/Game/game/Box.lua",
+		"/D/GitRepos/Game/game/MapObject_Art.lua",
 		"/D/GitRepos/Game/game/levels/AudioTestLevel.lua",
 		"/D/GitRepos/Game/game/levels/PixelDrawLevel.lua",
 		"/D/GitRepos/Game/game/DrawManager.lua",
@@ -609,7 +853,6 @@
 		"/D/GitRepos/Game/game/AnimationEditor.lua",
 		"/D/GitRepos/Game/game/App.lua",
 		"/D/GitRepos/Game/game/Block.lua",
-		"/D/GitRepos/Game/game/Box.lua",
 		"/D/GitRepos/Game/game/Bullet.lua",
 		"/D/GitRepos/Game/game/Button.lua",
 		"/D/GitRepos/Game/game/Camera.lua",
@@ -643,7 +886,6 @@
 		"/D/GitRepos/Game/game/Line.lua",
 		"/D/GitRepos/Game/game/Link.lua",
 		"/D/GitRepos/Game/game/Links.lua",
-		"/D/GitRepos/Game/game/main.lua",
 		"/D/GitRepos/Game/game/Map.lua",
 		"/D/GitRepos/Game/game/MapObject.lua",
 		"/D/GitRepos/Game/game/MapTable.lua",
@@ -717,17 +959,7 @@
 		"/C/Users/PixelPiledriver/Desktop/why bitches hate games and stuff",
 		"/D/GitRepos/Game/game/Random.lua",
 		"/D/GitRepos/Game/game/TableSort.lua",
-		"/D/GitRepos/Game/game/Math",
-		"/D/GitRepos/Game/game/DeltaTime.lua",
-		"/D/GitRepos/Game/game/MemoryManager.lua",
-		"/D/GitRepos/Game/game/FrameCounter.lua",
-		"/D/GitRepos/Game/game/debu",
-		"/D/GitRepos/Game/game/PostRequireUtilities.lua",
-		"/D/GitRepos/Game/game/Graphics.lua",
-		"/D/GitRepos/Game/game/LevelManager_Adam.lua",
-		"/D/GitRepos/Game/game/box",
-		"/D/GitRepos/Game/game/Camera",
-		"/D/GitRepos/Game/game/Levels/MapWorldLevel.lua"
+		"/D/GitRepos/Game/game/Math"
 	],
 	"find":
 	{
@@ -735,7 +967,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 132.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"D:\\GitRepos\\Game\\game",
@@ -747,6 +979,54 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"tab",
+			"save",
+			"health",
+			"speed",
+			"\n",
+			"data[2]",
+			"data",
+			"allEvent",
+			" \n",
+			"line",
+			"QuitGameInput",
+			"Parent",
+			"parent",
+			"currentFrame",
+			"index",
+			"frame",
+			"startOverOnReplay",
+			"loopCount",
+			"parent",
+			"frames",
+			"loop",
+			"playName",
+			"reaction",
+			".draw",
+			"o.",
+			"playName",
+			"o.draw",
+			"Fail",
+			"FailNew",
+			"print",
+			"orc",
+			"tree",
+			"Pos:New",
+			"animation",
+			"xAbs",
+			".spriteSheet",
+			"human",
+			"parent",
+			"default",
+			"piss",
+			".default",
+			"default",
+			"defautl",
+			"noImage",
+			"Sprite",
+			".x",
+			"Animation",
+			"Graphics",
 			"true",
 			".draw",
 			"o.draw",
@@ -826,55 +1106,7 @@
 			"New",
 			"Destroy",
 			"New",
-			"piss",
-			"Mouse",
-			"Pos",
-			".x",
-			"x",
-			".x",
-			"Button:New",
-			"Button",
-			"o.color",
-			"o.colro",
-			"o.frames = ",
-			".draw",
-			"yezz",
-			"Object",
-			"Draw",
-			"frames",
-			"vertical",
-			"\"x\", \"y\"",
-			"\"x\",\"y\"",
-			"offsets",
-			"print",
-			"Window",
-			"vertical",
-			"elseif",
-			"width",
-			"print",
-			"Line",
-			"Math",
-			"()\n",
-			"Info",
-			"Text:New",
-			"Text",
-			"drawList",
-			"Submit",
-			"layer",
-			"print",
-			"Submit",
-			"Clear",
-			"well",
-			"Hud",
-			"DebugText",
-			"Pos",
-			"Draw",
-			"offsets",
-			"Link",
-			"self.zoom",
-			"},\n",
-			"self.rot",
-			"Pos"
+			"piss"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -882,6 +1114,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"self.",
+			"default.",
 			"ObjectManager",
 			"self.Pos.y",
 			"self.Pos.x",
@@ -1007,9 +1241,7 @@
 			"rotDirection.angle",
 			"{",
 			", 255}",
-			"type",
-			"t.data",
-			"t."
+			"type"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1020,23 +1252,23 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "AnimationComponent.lua",
+					"file": "levels/TextWriteLevel.lua",
 					"settings":
 					{
-						"buffer_size": 965,
+						"buffer_size": 4609,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								485,
-								485
+								1480,
+								1480
 							]
 						],
 						"settings":
@@ -1052,96 +1284,21 @@
 									"selector": "source.lua.corona"
 								}
 							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 960.0,
+						"translation.y": 3069.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "Animation.lua",
+					"file": "Bool.lua",
 					"settings":
 					{
-						"buffer_size": 5960,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3120,
-								3120
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 4927.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "ObjectManager.lua",
-					"settings":
-					{
-						"buffer_size": 12670,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								266,
-								284
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 576.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "Camera.lua",
-					"settings":
-					{
-						"buffer_size": 12851,
+						"buffer_size": 1165,
 						"regions":
 						{
 						},
@@ -1169,13 +1326,1152 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6432.0,
+						"translation.y": 297.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Textfile.lua",
+					"settings":
+					{
+						"buffer_size": 4735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								656,
+								656
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1089.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "main.lua",
+					"settings":
+					{
+						"buffer_size": 3759,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1528,
+								1543
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4059.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
+					"file": "Text.lua",
+					"settings":
+					{
+						"buffer_size": 8767,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4257.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "FileManager.lua",
+					"settings":
+					{
+						"buffer_size": 3455,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1030,
+								1030
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"auto_name": "-- FileManager.lua",
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1089.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "EventLog.lua",
+					"settings":
+					{
+						"buffer_size": 3825,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2091,
+								2091
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3267.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "MapObject_Sprites.lua",
+					"settings":
+					{
+						"buffer_size": 2990,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								615,
+								615
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 396.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "Level.lua",
+					"settings":
+					{
+						"buffer_size": 1875,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1456,
+								1456
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "Notes.lua",
+					"settings":
+					{
+						"buffer_size": 4723,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								523,
+								523
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "ChatBox.lua",
+					"settings":
+					{
+						"buffer_size": 7951,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4611,
+								4611
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 7393.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "Animation.lua",
+					"settings":
+					{
+						"buffer_size": 6693,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2454,
+								2454
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3528.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "AnimationComponent.lua",
+					"settings":
+					{
+						"buffer_size": 4043,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3199,
+								3199
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2604.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "MapObject.lua",
+					"settings":
+					{
+						"buffer_size": 9420,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4929,
+								4929
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 8611.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "MapObject_Action.lua",
+					"settings":
+					{
+						"buffer_size": 11525,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2155,
+								2155
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2079.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "MapObject_Objects.lua",
+					"settings":
+					{
+						"buffer_size": 2272,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1925,
+								1925
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2673.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "levels/MapWorldLevel.lua",
+					"settings":
+					{
+						"buffer_size": 3562,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1665,
+								1665
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1945.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "DebugText.lua",
+					"settings":
+					{
+						"buffer_size": 6903,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1847,
+								1847
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3072.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "PrintDebug.lua",
+					"settings":
+					{
+						"buffer_size": 3035,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1461,
+								1461
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1347.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "Box.lua",
+					"settings":
+					{
+						"buffer_size": 7535,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								497,
+								647
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 594.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "LevelManager.lua",
+					"settings":
+					{
+						"buffer_size": 7396,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								339,
+								322
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5596.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"file": "levels/TestLevel.lua",
+					"settings":
+					{
+						"buffer_size": 2896,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1585,
+								1585
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2673.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 22,
+					"file": "Window.lua",
+					"settings":
+					{
+						"buffer_size": 2439,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 990.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "App.lua",
+					"settings":
+					{
+						"buffer_size": 1340,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								635,
+								635
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1485.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"settings":
+					{
+						"buffer_size": 905,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										145,
+										158
+									],
+									[
+										265,
+										278
+									],
+									[
+										401,
+										414
+									],
+									[
+										513,
+										526
+									],
+									[
+										709,
+										722
+									],
+									[
+										840,
+										853
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								442,
+								442
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"detect_indentation": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 396.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 25,
+					"file": "Input.lua",
+					"settings":
+					{
+						"buffer_size": 4736,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4337,
+								4337
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 7958.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 26,
+					"file": "Sprite.lua",
+					"settings":
+					{
+						"buffer_size": 5279,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1202,
+								1202
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1898.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "Pos.lua",
+					"settings":
+					{
+						"buffer_size": 4026,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								363,
+								363
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 480.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 28,
+					"file": "SpriteSheet.lua",
+					"settings":
+					{
+						"buffer_size": 2428,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								672,
+								620
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 735.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 29,
+					"file": "ObjectManager.lua",
+					"settings":
+					{
+						"buffer_size": 13029,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11065,
+								11065
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 16674.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 30,
+					"file": "Camera.lua",
+					"settings":
+					{
+						"buffer_size": 12853,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1615,
+								1615
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2688.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 31,
 					"file": "AnimationEditor.lua",
 					"settings":
 					{
@@ -1186,8 +2482,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								926,
+								926
 							]
 						],
 						"settings":
@@ -1207,7 +2503,43 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2784.0,
+						"translation.y": 768.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 32,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1248,7 +2580,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 171.0
+		"height": 158.0
 	},
 	"replace":
 	{

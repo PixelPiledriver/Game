@@ -55,6 +55,7 @@ printList.Mouse = {false, false}
 printList.MapObject = {true, false}
 printList.ObjectManager = {false, false}
 printList.stuff = {false, false}
+printList.Textfile = {true, false}
 
 
 

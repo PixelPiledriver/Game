@@ -1,6 +1,8 @@
 -- Panel.lua
 
--- in game window that holds buttons and stuff
+-- Basic user interface container
+-- New version of Panel.lua
+
 
 -------------
 -- Requires
@@ -14,30 +16,60 @@ local Collision = require("Collision")
 local MouseHover = require("MouseHover")
 local MouseDrag = require("MouseDrag")
 local MapTable = require("MapTable")
+local Button = require("Button")
+local Link = require("Link")
 local Draw = require("Draw")
+local Text = require("Text")
+local DrawGroup = require("DrawGroup")
 
 ---------------------------------------------------------------
 
 local Panel = {}
 
------------------
+----------------
 -- Static Info
------------------
+----------------
+
 Panel.Info = Info:New
 {
-	objectType = "Panel",
+	objectType = "SimplePanel",
 	dataType = "User Interface",
 	structureType = "Static"
 }
 
-----------------
+-----------------
 -- Static Vars
-----------------
+-----------------
+
+Panel.objectsMade = {}
+
+Panel.colorSkins =
+{
+	blue = 
+	{
+		frame = Color:Get("darkGray"),
+		bar = Color:Get("lightBlue")
+	},
+
+	green = 
+	{
+		frame = Color:Get("lightGreen"),
+		bar = Color:Get("green")
+	},
+
+	gray =
+	{
+		frame = Color:Get("lightGray"),
+		bar = Color:Get("darkGray")
+	}
+}
+
+Panel.defaultColorSkin = "gray"
 
 Panel.defaultPanelColor = Color:New
-{ r = 0, g = 0, b = 0, a = 128}
+{ r = 0, g = 0, b = 0, a = 255}
 
-Panel.defaultTopFrame = 
+Panel.defaultTopFrame =
 {
 	height = 16,
 	color = Color:New
@@ -46,66 +78,71 @@ Panel.defaultTopFrame =
 
 Panel.defaultNameColor = Color:Get("black")
 
+-- safe space buffer 
+Panel.windowBorderSpace = 32
 
-Panel.windowBorderSpace = 16
-Panel.objectToPanelPad = 8
+Panel.objectToPanelPad = 32
 Panel.objectToObjectPad = 16
 Panel.objectDirections = {"left, right, up, down"}
 
-------------------------
--- Static Functions
-------------------------
+-----------
+-- Object
+-----------
 
 function Panel:New(data)
 
 	local o = {}
 
+	self.objectsMade[#self.objectsMade + 1] = o
+
 	----------
 	-- Info
 	----------
+
 	o.Info = Info:New
 	{
-		name = "...",
-		objectType = "Panel",
+		name = data.name or "...",
+		objectType = "SimplePanel",
 		dataType = "User Interface",
 		structureType = "Object"
 	}
 
-
-	---------------------
+	-----------
 	-- Vars
-	---------------------
+	-----------
 	o.active = true
 	o.draw = true
 
-
-	-------------------------------------
+	-------------------------
 	-- Objects in Panel
-	-------------------------------------
+	-------------------------
 	o.items = {}
 	o.objectDirection = data.objectDirection or "right"
+
+	o.itemOffset = {x = 0, y = 0}
 
 	-------------------
 	-- Object Map
 	-------------------
-	o.gridScale = data.gridScale or 32
-	o.gridPads = {}
-	o.gridPads.width =  data.gridPadWidth or 16
-	o.gridPads.height =  data.gridPadHeight or 16
+	o.gridScale = data.gridScale or 32 --> size of items
+	o.gridWidth = data.gridWidth or o.gridScale
+	o.gridHeight = data.gridHeight or o.gridScale
+	o.gridPad = data.gridPad or 8
 
+	o.itemPad = data.itemPad or 8 --> space between items
 
 	----------------------
 	-- Panel Type
-	--[[
-		ObjectBased - adding objects to the panel expands the panel
-		MapBased
-	--]]								
+		-- ObjectBased - adding objects to the panel expands the panel
+		-- MapBased
 	----------------------
 	o.panelType = data.panelType or "ObjectBased"
+
+	-- 2D array of item locations
 	o.map = MapTable:New
 	{
-		width = 2,
-		height = 2,
+		width = 1,
+		height = 1,
 	}
 
 	---------------
@@ -117,15 +154,30 @@ function Panel:New(data)
 		height = data.height or 32
 	}
 
+	o.heightMax = data.heightMax or 300
+
+	-- this is not in use yet
+	-- because making it work will be awkward
+	-- .Size needs to be a pointer and other Size components need to hold
+	-- the size data and .Size should switch between them
+	-- fix later
+	o.SizeMinimized = Size:New
+	{
+		width = 16,
+		height = 8
+	}
+
 	o.Pos = Pos:New(Pos.defaultPos)
 
 	o.posType = data.posType or "none"
 
+	-- this is super weird and I don't think matters at all?
+	-- need a better solution/feature than this
 	if(o.posType == "bottom") then
 		o.Pos:SetPos
 		{
-			x = Panel.windowBorderSpace,
-			y = love.window.getHeight() - o.Size.height - Panel.windowBorderSpace
+			x = love.window.getWidth() - 100,
+			y = Panel.windowBorderSpace
 		}
 	end
 
@@ -138,62 +190,301 @@ function Panel:New(data)
 	-------------------------------
 	-- Graphics
 	-------------------------------
-	-- main panel area
-	o.box = Box:New
+
+	-- color skin
+	o.colorSkin = Panel.colorSkins[Panel.defaultColorSkin] or Panel.colorSkins[data.colorSkin]
+
+	-- main panel area - holds panel items
+	---------------------------------------------------
+	o.frame = Box:New
 	{
-		color = Panel.defaultPanelColor,
+		color = o.colorSkin and o.colorSkin.frame or Panel.defaultPanelColor,
 		parent = o,
 	}
 
-	o.box.Pos:LinkPosTo
+	Link:Simple
 	{
-		link = o.Pos
+		a = {o.frame, "Pos", {"x", "y"}},
+		b = {o, "Pos", {"x", "y"}},
 	}
 
-	o.box.Size:LinkSizeTo
+	Link:Simple
 	{
-		link = o.Size
+		a = {o.frame, "Size", {"width", "height"}},
+		b = {o, "Size", {"width", "height"}}
 	}
 
-	--o.box.Pos = o.Pos
-	--o.box.Size = o.Size
-
-	-- above panel
-	o.topFrame = Box:New
+	-- above panel bar - move panel and holds title
+	------------------------------------------------
+	o.bar = Box:New
 	{
 		x = o.Pos.x,
 		y = o.Pos.y - Panel.defaultTopFrame.height,
 		height = Panel.defaultTopFrame.height,
 		width = o.Size.width,
-		color = Panel.defaultTopFrame.color,
+		color = o.colorSkin and o.colorSkin.bar or Panel.defaultTopFrame.color,
 		parent = o,
 	}
 
-	o.topFrame.Pos:LinkPosTo
+	o.bar.noScissor = true
+
+	Link:Simple
 	{
-		link = o.Pos,
-		x = o.topFrame.Pos.x - o.Pos.x,
-		y = o.topFrame.Pos.y - o.Pos.y
+		a = {o.bar, "Size", "width"},
+		b = {o, "Size", "width"}
 	}
 
-	--------------------
+	Link:Simple
+	{
+		a = {o.bar, "Pos", "x"},
+		b = {o, "Pos", "x"}
+	}
+
+	Link:Simple
+	{
+		a = {o.bar, "Pos", "y"},
+		b = {o, "Pos", "y"},
+		offsets =
+		{
+			{object = {o.bar.Size, "height", "Sub"}}
+		}
+	}
+
+	-----------------
 	-- Collision
-	--------------------
-	o.topCollision = Collision:New
+	-----------------
+
+	o.barCollision = Collision:New
 	{
 		x = o.Pos.x,
-		y = o.Pos.y - o.topFrame.Size.height,
-		width = o.topFrame.Size.width,
-		height = o.topFrame.Size.height,
+		y = o.Pos.y - o.bar.Size.height,
+		width = o.bar.Size.width,
+		height = o.bar.Size.height,
 		name = o.name,
 		shape = "rect",
 		collisionList = {"Mouse"},
 	}
 
-	o.topCollision.Pos:LinkPosTo
+	Link:Simple
 	{
-		link = o.topFrame.Pos
+		a = {o.barCollision, "Pos", {"x", "y"}},
+		b = {o.bar, "Pos", {"x", "y"}},
 	}
+
+	Link:Simple
+	{
+		a = {o.barCollision, "Size", "width"},
+		b = {o.bar, "Size", "width"}
+	}
+
+	---------------
+	-- Title
+	---------------
+
+	o.title = Text:New
+	{
+		text = o.Info.name,
+		color = Color:Get("black"),
+	}
+
+	Link:Simple
+	{
+		a = {o.title, "Pos", "x"},
+		b = {o.bar, "Pos", "x"}
+	}
+
+	Link:Simple
+	{
+		a = {o.title, "Pos", "y"},
+		b = {o.bar, "Pos", "y"},
+		offsets =
+		{
+			{value = {o.bar.Size.height, "Sub"}}
+		}
+	}
+
+	-- hide title if too long to fit in window bar
+	if(o.title:GetWidth() > o.bar.Size.width) then
+		o.title:SetActive(false)
+		o.title.useTimer = true
+		o.title.timerMax = 30
+		o.title.timerTrigger = {o.barCollision, "collidedLastFrame"}
+	end
+
+	-- add this feature in a min
+	if(data.toolTipTitle) then
+
+	end 
+
+	--o.showTitle = data.showTitle or true
+	--o.title.active = o.showTitle
+
+
+
+	--------------
+	-- Buttons
+	--------------
+
+	o.openCloseButton = Button:New
+	{
+		name = "panel close",
+		text = "x",
+		toggleText = "o",
+		width = 16,
+		height = 16,
+		toggle = true,
+
+		toggleOnFunc = function() 
+			o:ToggleDraw()
+		end,
+
+		toggleOffFunc = function()
+			o:ToggleDraw()
+		end
+	}
+
+	Link:Simple
+	{
+		a = {o.openCloseButton, "Pos", "x"},
+		b = {o.bar, "Pos", "x"},
+		offsets =
+		{
+			{object = {o.frame.Size, "width"}}
+		}
+	}
+
+	Link:Simple
+	{
+		a = {o.openCloseButton, "Pos", "y"},
+		b = {o.bar, "Pos", "y"}
+	}
+
+	------------------------
+	-- Scroll Buttons
+	------------------------
+	
+	-- add scroll bars later
+
+	-- sets scroll back to zero
+	o.scrollResetButton = Button:New
+	{
+		name = "scroll reset",
+		text = "o",
+		width = 16,
+		height = 16,
+		func = function() 
+			o.itemOffset.y = 0
+		end,
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollResetButton, "Pos", "x"},
+		b = {o.bar, "Pos", "x"},
+		offsets =
+		{
+			{object = {o.frame.Size, "width"}},
+		}
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollResetButton, "Pos", "y"},
+		b = {o.bar, "Pos", "y"},
+		offsets =
+		{
+			{value = {48}}
+		}	
+	}
+
+
+	-- up
+	o.scrollUpButton = Button:New
+	{
+		name = "scroll up",
+		text = "^",
+		width = 16,
+		height = 16,
+		holdable = true,
+		func = function() 
+			o:ScrollY(1)
+		end,
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollUpButton, "Pos", "x"},
+		b = {o.bar, "Pos", "x"},
+		offsets =
+		{
+			{object = {o.frame.Size, "width"}},
+		}
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollUpButton, "Pos", "y"},
+		b = {o.bar, "Pos", "y"},
+		offsets =
+		{
+			{value = {16}}
+		}	
+	}
+
+
+
+	-- down
+	o.scrollDownButton = Button:New
+	{
+		name = "scroll down",
+		text = "v",
+		width = 16,
+		height = 16,
+		holdable = true,
+		func = function() 
+			o:ScrollY(-1)
+		end,
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollDownButton, "Pos", "x"},
+		b = {o.bar, "Pos", "x"},
+		offsets =
+		{
+			{object = {o.frame.Size, "width"}},
+		}
+	}
+
+	Link:Simple
+	{
+		a = {o.scrollDownButton, "Pos", "y"},
+		b = {o.bar, "Pos", "y"},
+		offsets =
+		{
+			{value = {32}}
+		}	
+	}
+
+	--------------
+	-- DrawGroup
+	--------------
+	-- set draw order of objects
+	-- will need to be changed as new items are added to panel
+	-- but no worries, just do items last
+	o.DrawGroup = DrawGroup:New
+	{
+		objects = {o.frame, o.bar},
+		scissor = 
+		{
+			x = {o.frame, "Pos", "x"},
+			y = {o.frame, "Pos", "y"},
+			width = {o.frame, "Size", "width"},
+			height = {o.frame, "Size", "height"},
+		}
+	}
+
+	--o.DrawGroup:SetDepthObject(o.bar)
 
 	------------------------
 	-- Mouse Interaction
@@ -201,7 +492,7 @@ function Panel:New(data)
 	o.hover = MouseHover:New
 	{
 		parent = o,
-		collision = o.topCollision
+		collision = o.barCollision
 	}
 
 	o.drag = MouseDrag:New
@@ -209,144 +500,59 @@ function Panel:New(data)
 		parent = o
 	}
 
-	-------------------------
-	-- Object Functions
-	-------------------------
+
+	----------------
+	-- Functions
+	----------------
+
+	function o:ScrollY(value)
+		o.itemOffset.y = o.itemOffset.y + value
+	end 
+
+	function o:ScrollX(value)
+		o.itemOffset.x = o.itemOffset.x + value
+	end 
+
 
 	function o:Update()
 
-		if(self.panelType == "ObjectBased") then
-			self:Activate()
-			self:UpdatePanel()
-			self:UpdateObjects()
-		end
-
-		if(self.panelType == "GridBased") then
-		end 
-
-	end
-
-	function o:UpdatePanel()
+		--self.itemOffset.y = self.itemOffset.y - 0.5
 	end 
 
-	function o:UpdateObjects()
-	end
-
+	-- empty for now
 	function o:DrawCall()
-		love.graphics.setColor(Color:AsTable(Panel.defaultPanelColor))
-		LovePrint
-		{
-			text = self.name,
-			x = self.Pos.x + 6,
-			y = self.Pos.y - 14
-		}
-	end
-
-	function o:Activate()
-		--[[
-		if(self.active) then
-			self.box.draw = true
-		else
-			self.box.draw = false
-		end 
-		--]]
 
 	end
 
 	function o:ToggleDraw()
-		self.draw = Bool:Toggle(self.draw)
 
 		for i=1, #self.items do
+
+			if(self.items[i].Draw) then
+				self.items[i].Draw:ToggleDraw()
+			end 
+
 			if(self.items[i].ToggleDraw) then
 				self.items[i]:ToggleDraw()
-			else
-				self.items[i].draw = self.draw
 			end 
 
-		end 		
-	end 
+		end
 
-	------------------
-	-- Get Funcitons
-	------------------
-	-- returns the greatest object height
-	function o:GetMaxObjectHeight()
-		local max = 0
+		self.frame.Draw:ToggleDraw()
+		--self.bar.Draw:ToggleDraw()
 
-			for i=1, #self.items do
-				if(self.items[i].Size.height > max) then
-					max = self.items[i].Size.height
-				end 
-			end 
-
-		return max
-	end 
-
-	function o:GetMaxObjectWidth()
-		local max = 0
-
-			for i=1, #self.items do
-				if(self.items[i].Size.width > max) then
-					max = self.items[i].Size.width
-				end 
-			end 
-
-		return max
-	end 
-
-	function o:GetObjectsHeight()
-		local height = 0
-			for i=1, #self.items do
-				height = height + self.items[i].Size.height
-			end
-		return height
-	end 
-
-	function o:GetPadHeight()
-		return (#self.items * Panel.objectToObjectPad) + (Panel.objectToPanelPad * 2)
-	end 
-
-	-- get the total width of all objects in the panel
-	function o:GetObjectsWidth()
-		local width = 0
-
-		for i=1, #self.items do
-			width = width + self.items[i].Size.width
-		end 
-
-		return width
-	end 
-	
-	-- get the total width of all padding in the panel
-	function o:GetPadWidth()	
-		return (#self.items * Panel.objectToObjectPad) + (Panel.objectToPanelPad * 2)
-	end
-
-	function o:GetObjectPadWidth()
-		return (Panel.objectToObjectPad * (#self.items - 1))
 	end 
 
 
-	-----------------------
-	-- Add Functions
-	-----------------------
-	-- add an object to the panel
-	-- (object) <-- needs to have components
+	--------------------------------------------
+	-- Add Functions - put objects in panel
+	--------------------------------------------
 
-	function o:Add(object)
+	-- add an object to this panel at a specific position
+	-- {object, x, y}
+	function o:Add(data)
 
-		--if(self.panelType == "ObjectBased") then
-			self:AddObjectBased(object)
-		--elseif(self.panelType == "GridBased") then
-			--self.AddGridBased(object)
-		--end
-		
-	end 
-
-	function o:AddToGrid(data)	
-
-		print("panel adding to grid")
-		print(data.object)
+		self.items[#self.items + 1] = data.object
 
 		self.map:Add
 		{
@@ -355,116 +561,130 @@ function Panel:New(data)
 			y = data.y,
 		}
 	
-		self.width = self.map.width * self.gridScale
-		self.height = self.map.height * self.gridScale
-
+		-- increase size of panel to make room for new object
+		-- not sure why the shit on the right is commented out --> move to junk soon :P
+		--local w = (self.gridScale * self.map.width) + self.gridPad	--+ ((self.map.width-2) * self.gridPad)
+		--local h = (self.gridScale * self.map.height) + self.gridPad --+ ((self.map.height-2) * self.gridPad)
+		local w = (self.gridWidth * self.map.width) + self.gridPad * 2
+		local h = (self.gridHeight * self.map.height) + self.gridPad * 2
 		
---[[
-		self.map[data.x][data.y].Pos:SetFollow
+		-- height max constraint
+		if(h > self.heightMax) then
+			h = self.heightMax
+		end 
+
+		self.Size:Set(w,h)
+
+		-- link object added
+		-- follow the panel based on their map position
+		Link:Simple
 		{
-			object = self.Pos,
-			x = data.x * self.gridScale,
-			y = data.y * self.gridScale
-		}
-		--]]
-
-
-	end 
-
-	function o:AddObjectBased(object)
-
-		local totalObjectsWidth = self:GetObjectsWidth()
-		local totalPadWidth = self:GetPadWidth()
-
-		-- add object to table of objects
-		self.items[#self.items + 1] = object
-
-		-- resize panel to accomodate new object
-
-		-- width
-		--------------
-		local changeWidth = false
-
-		if(totalObjectsWidth + totalPadWidth + object.Size.width > self.Size.width) then
-			changeWidth = true
-		end
-
-		if(changeWidth) then
-			self.Size.width = totalObjectsWidth + totalPadWidth + object.Size.width
-		end 
-
-		local objectToObjectPad = 0
-
-		if(#self.items > 1) then
-			objectToObjectPad = self:GetObjectPadWidth()
-		end
-
-		-- height
-		---------------
-		local changeHeight = false
-
-		if(object.Size.height + Panel.objectToPanelPad * 2 > self.Size.height) then
-			changeHeight = true
-		end 
-
-		if(changeHeight) then
-			self.Size.height = object.Size.height + (Panel.objectToPanelPad * 2)
-		end 
-
-		local x = self.Pos.x + Panel.objectToPanelPad + totalObjectsWidth + objectToObjectPad
-		local y = self.Pos.y + Panel.objectToPanelPad
-
-		local offsetX = x - self.Pos.x
-		local offsetY = y - self.Pos.y
-
-		object.Pos:LinkPosTo
-		{
-			link = self.Pos,
-			x = offsetX,
-			y = offsetY
+			a = {data.object, "Pos", "x"},
+			b = {o, "Pos", "x"},
+			offsets = 
+			{
+				{value = {data.x - 1}}, --> needs to update if map position changes
+				{object = {self,"gridWidth", "Mul"}},
+				{object = {self, "gridPad"}},
+				{object = {self.itemOffset, "x"}}
+			}
 		}
 
-		
-		self:Refresh()
-	end 
+		Link:Simple
+		{
+			a = {data.object, "Pos", "y"},
+			b = {o, "Pos", "y"},
+			offsets = 
+			{
+				{value = {data.y - 1}}, --> needs to update if map position changes
+				{object = {self, "gridHeight", "Mul"}},
+				{object = {self, "gridPad"}},
+				{object = {self.itemOffset, "y"}}
+			}
+		}
 
-	-- might want to change these refresh functions
-	-- to be categorized by object group rather than what it does
-	function o:Refresh()
-		self:ApplySize()
-		self:ApplyWindowPadding()
-		self:ApplyFramePosition()
-	end 
-
-	function o:ApplySize()
-		self.topFrame.Size.width = self.Size.width
-		
-		self.topCollision.width = self.topFrame.Size.width
-		self.topCollision.height = self.topFrame.Size.height
-	end
-
-	function o:ApplyWindowPadding()
-		if(self.posType == "bottom") then
-			self.Pos.y = love.window.getHeight() - self.Size.height - Panel.windowBorderSpace
+		-- add graphics objects of added object
+		if(data.object.drawables) then
+			self.DrawGroup:AddDrawablesOf(data.object)
+		else 
+			self.DrawGroup:Add(data.object.Draw)
 		end 
-	end 
 
-	function o:ApplyObjectPosition()
-		for i=1, #self.items do
-			self.items[i].Pos.x = self.Pos.x + self.items[i].panelPos.x
-			self.items[i].Pos.y = self.Pos.y + self.items[i].panelPos.y
+		-- buttons
+		if(data.object.Info.objectType == "Button") then
+
+
+			-- a of rect
+			Link:Simple
+			{
+				a = {data.object.activeRange, "a", {"x", "y"}},
+				b = {self, "Pos", {"x", "y"}},			
+			}
+
+			-- b of rect
+			Link:Simple
+			{
+				a = {data.object.activeRange, "b", "x"},
+				b = {self, "Pos", "x"},
+				offsets =
+	  		{
+	  			{object = {self.Size, "width"}}
+	  		}
+	  	}
+
+			Link:Simple
+			{
+				a = {data.object.activeRange, "b", "y"},
+				b = {self, "Pos", "y"},
+				offsets =
+	  		{
+	  			{object = {self.Size, "height"}}
+	  		}
+	  	}
+
+	  	data.object.activeRange.use =  true
+
+
 		end 
-	end
-
-	function o:ApplyFramePosition()
-		self.topFrame.Pos.x = self.Pos.x
-		self.topFrame.Pos.y = self.Pos.y - self.topFrame.Size.height
 
 	end 
 
+	-- add multiple objects to panel from left to right
+	-- {a, b, c, ...}
+	function o:AddHorizontal(data)
+
+		for i=1, #data do
+			local table = 
+			{
+				object = data[i],
+				x = i,
+				y = data.yStart or 1 -- there is no way to input yStart since data is indexed
+			}
+
+			o:Add(table)
+		end
+
+	end 
+
+	-- add multiple objects to panel from top to bottom
+	-- {a, b, c, ...}
+	function o:AddVertical(data)
+
+		for i=1, #data do
+			local table = 
+			{
+				object = data[i],
+				x = data.xStart or 1, -- there is no way to input xStart since data is indexed
+				y = i
+			}
+
+			o:Add(table)
+		end
+
+	end 
+
+	-- display vars
 	function o:PrintDebugText()	
-
-
 
 		DebugText:TextTable
 		{
@@ -473,24 +693,38 @@ function Panel:New(data)
 			{text = "-------------------------"},
 			{text = #self.items}
 		}
+
 	end 
+
 
 	function o:Destroy()
 		ObjectManager:Destroy(self.Info)
 		ObjectManager:Destroy(self.map)
 		ObjectManager:Destroy(self.Size)
+		ObjectManager:Destroy(self.SizeMinimized)
+
 		ObjectManager:Destroy(self.Pos)
 		ObjectManager:Destroy(self.Draw)
-		ObjectManager:Destroy(self.box)
-		ObjectManager:Destroy(self.topFrame)
-		ObjectManager:Destroy(self.topCollision)
+
+		ObjectManager:Destroy(self.frame)
+		ObjectManager:Destroy(self.bar)
+		ObjectManager:Destroy(self.barCollision)
+		ObjectManager:Destroy(self.title)
+
+		ObjectManager:Destroy(self.openCloseButton)
+		ObjectManager:Destroy(self.scrollResetButton)
+		ObjectManager:Destroy(self.scrollUpButton)
+		ObjectManager:Destroy(self.scrollDownButton)
+
+		ObjectManager:Destroy(self.DrawGroup)
+
 		ObjectManager:Destroy(self.hover)
 		ObjectManager:Destroy(self.drag)
 	end 
 
-	-------------
+	--------
 	-- End
-	-------------
+	--------
 
 	ObjectManager:Add{o}
 
@@ -498,57 +732,75 @@ function Panel:New(data)
 
 end 
 
+---------------------
+-- Static Functions
+---------------------
+
+function Panel:Update()
+
+	self:SamePosGuard()
+
+end 
+
+function Panel:SamePosGuard()
+
+	if(#self.objectsMade < 2) then
+		return
+	end
+
+	local a = self.objectsMade[1]
+
+		-- y position of all panels
+	for i=2, #self.objectsMade do
+
+		local b = self.objectsMade[i]
+
+		if(a.Pos.y == b.Pos.y) then
+			a.Pos.y = a.Pos.y + 0.1
+		end 
+
+	end 
+
+end 
 
 
+----------------
+-- Static End
+----------------
 
 ObjectManager:AddStatic(Panel)
-
 
 return Panel
 
 
--- notes
-----------------------
+-- Notes
+---------------
+-- still a bit confusing
+-- need to break down this file a bit
 
--- needs to be an object that holds buttons
--- can slide in and out
--- be summoned when needed
--- closed when not
--- etc
+-- need 
+-- Minimized size - bar has a small size
+-- then restores to open size when restored
 
--- object that holds other objects
--- can be moved around
--- mostly for buttons but can be used for other stuff as well
+-- max panel size should probly be to the screen height or slightly less?
+-- def need to put in something to make that more restricted and useful 
 
--- not gonna work on this right now :P
--- but gonna need it eventually
+-- DrawGroup needs to be figured out
+-- so panels can draw behind their items
 
--- Panels should be able to be built from a grid
--- # of objects and scale should determine how it fits objects
--- rather than object sizes <---- optional
--- good idea for a simpler panel setup
+--> TO DO
+-- fit width to panel name
+-- or have title overhang the panel
 
 
+-- TO DO --> much later
+-- drag and drop objects
+-- move out of panel
+-- move into panel
+-- change position in panel
 
-
--- multiple direction stuff
--- some complicated code I will just fix later
--- left
---object.Pos.x = self.Pos.x - Panel.objectToPanelPad - totalObjectsWidth - objectToObjectPad
---object.Pos.y = self.Pos.y + Panel.objectToPanelPad
-
--- vertical
---[[
-local changeHeight = false
-
-if(object.Size.height + Panel.objectToPanelPad * 2 > self.Size.height) then
-	changeHeight = true
-end 
-
-if(changeHeight) then
-	self.Size.height = object.Size.height + (Panel.objectToPanelPad * 2)
-end 
---]]
+-- DONE
+-- a open and close button in the top right of the panel
 
 
 
@@ -556,35 +808,55 @@ end
 
 
 
--- add these in as funcitons later
--- and call from an Add function based on panel direction type
---[[
 
-	function o:AddHorizontal()
+-- Junk
+-------------------------------------
+	--[==[
 
-	end 
+	-- old links
+	o.bar.Pos:LinkPosTo
+	{
+		link = o.Pos,
+		x = o.bar.Pos.x - o.Pos.x,
+		y = o.bar.Pos.y - o.Pos.y
+	}
 
-	function o:AddVertical()
+	o.bar.Size:LinkWidthTo{link = o.Size}
 
-	end
+	o.frame.Size:LinkSizeTo
+	{
+		link = o.Size
+	}
 
---]]
+
+
+	-- old title text
+	love.graphics.setColor(Color:AsTable(Color:Get("black")))
+	LovePrint
+	{
+		text = self.Info.name,
+		x = self.bar.Pos.x,
+		y = self.bar.Pos.y,
+	}
 
 
 
---[[
+			-- this doesnt work
+			-- needs to use a Link
+			data.object.activeRange = 
+			{
+				use = true,
+				a = {x = self.Pos.x, y = self.Pos.y},
+				b = {x = self.Pos.x + self.Size.width, y = self.Pos.y + self.Size.height}
+			}
+			
 
-		-- old panel position for new objects code
-		--[[
-		-- set position of new object into panel
-		--object.Pos.x = self.Pos.x + Panel.objectToPanelPad + totalObjectsWidth + objectToObjectPad
-		--object.Pos.y = self.Pos.y + Panel.objectToPanelPad
 
-		object.panelPos =
-		{
-			x = object.Pos.x - self.Pos.x,
-			y = object.Pos.y - self.Pos.y,
-		}
-		--]]
 
---]]
+
+
+
+	--]==]
+
+
+
