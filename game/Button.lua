@@ -63,7 +63,8 @@ Button.textOnSpriteDefault = false
 Button.default = {}
 Button.default.x = 0
 Button.default.y = 0
-
+Button.default.width = 100
+Button.default.height = 50
 
 ---------------------------
 -- Static Functions
@@ -122,8 +123,8 @@ function Button:New(data)
 	-- Size
 	o.Size = Size:New
 	{
-		width = data.width or 100,
-		height = data.height or 50
+		width = data.width or self.default.width,
+		height = data.height or self.default.height
 	}
 
 	o.Draw = Draw:New

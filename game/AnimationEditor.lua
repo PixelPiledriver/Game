@@ -16,7 +16,8 @@ local Collision = require("Collision")
 local Button = require("Button")
 local Pos = require("Pos")
 local Sprite = require("Sprite")
-local Panel
+local Panel = require("Panel")
+local Text  = require("Text")
 ----------------------------------------------------------
 
 local AnimationEditor = {}
@@ -45,8 +46,9 @@ AnimationEditor.color = Color:Get("white")
 
 AnimationEditor.sprites = nil
 
-AnimationEditor.currentAnimaion = nil
+AnimationEditor.currentAnimation = nil
 
+AnimationEditor.frameIndex = 1
 ----------------
 -- Components
 ----------------
@@ -59,21 +61,132 @@ AnimationEditor.Pos = Pos:New
 --------------
 -- Functions
 --------------
+
+function AnimationEditor:Update()
+
+	if(self.currentAnimation.frames) then
+		self.infoPanel.frameCount.text = "Frames:" .. #self.currentAnimation.frames
+		self.infoPanel.framePos.text = "FrameIndex:" .. self.frameIndex
+	else
+		self.infoPanel.frameCount.text = "Frames:0"
+		self.infoPanel.framePos.text = "FrameIndex:1"
+	end
+
+end 
+
 function AnimationEditor:Setup()
+	-- create draw component
 	self.Draw = Draw:New
 	{
 		parent = self	
 	}	
 
-	self.currentAnimaion = Animation:New{x = 200, y = 200}
+	-- create a blank animation, ready to be filled with frames
+	self.currentAnimation = Animation:New{x = 200, y = 200}
+
+	------------------
+	-- Info Panel -->move to new file as sub file
+	------------------
+	self.infoPanel = {}
+	self.infoPanel.panel = Panel:New
+	{
+		name = "Info",
+		gridWidth = 80,
+		gridHeight = 16,
+		x = 100, 
+		y = 100,
+	}
+
+	Text.default.color = "black"
+	Text.default.size = 10
+
+	self.infoPanel.frameCount = Text:New{}
+	self.infoPanel.framePos = Text:New{}
+
+	self.infoPanel.panel:AddVertical
+	{
+		self.infoPanel.frameCount,
+		self.infoPanel.framePos
+	}
+
+	self.buttonsPanel = Panel:New
+	{
+		name = "Buttons",
+		x = 200,
+		y = 200,
+		gridWidth = 32,
+		gridHeight = 32,
+	}
+
+	self:CreateIndexButtons()
+
+	self.spriteSheetPanel = Panel:New
+	{
+		name = "SpriteSheet",
+		x = 300,
+		y = 300,	
+	}
 
 end
 
 
+
+
+function AnimationEditor:CreateIndexButtons()
+
+	local buttonSize = 24
+
+	self.nextFrameIndexButton = Button:New
+	{
+		name = "NextFrameIndex",
+		text = ">",
+		x = 250,
+		y = 400,
+		width = buttonSize,
+		height = buttonSize,
+
+		func = function()
+			self.frameIndex = self.frameIndex + 1
+
+			if(self.currentAnimation.frames) then
+				if(self.frameIndex > #self.currentAnimation.frames) then
+					self.frameIndex = #self.currentAnimation.frames
+				end
+			else
+				self.frameIndex = 1
+			end 
+		end 
+	}
+
+	self.prevFrameIndexButton = Button:New
+	{
+		name = "PrevFrameIndex",
+		text = "<",
+		x = 200,
+		y = 400,
+		width = buttonSize,
+		height = buttonSize,
+
+		func = function()
+			self.frameIndex = self.frameIndex - 1
+			if(self.frameIndex < 1) then
+				self.frameIndex = 1
+			end 
+		end
+	}
+
+	self.buttonsPanel:AddHorizontal
+	{
+		self.prevFrameIndexButton,
+		self.nextFrameIndexButton
+	}
+
+end
+
 function AnimationEditor:LoadSpriteSheet(spriteSheet)
 	self.spriteSheet = spriteSheet
 	self.spriteSheetQuad = love.graphics.newQuad(0, 0, spriteSheet.width, spriteSheet.height, spriteSheet.width, spriteSheet.height)
-	self.currentAnimaion.spriteSheet = self.spriteSheet
+	self.currentAnimation.spriteSheet = self.spriteSheet
 	self.spriteSheetPos = Pos:New
 	{
 		x = 300,
@@ -98,30 +211,23 @@ function AnimationEditor:LoadSpriteSheet(spriteSheet)
 
 				func = function()
 					self:CreateSpriteFromSheet(i, j)
-					self.currentAnimaion:AddFrame(self.newSprite)
+					self.currentAnimation:AddFrame(self.newSprite)
 					print("add frame")
-				end,
+				end
+			}
+
+			self.spriteSheetPanel:AddHorizontal
+			{
+				self.addFrameButtons[#self.addFrameButtons]
 			}
 
 		end 
-	end 
+	end
 
-	--[[
-	self.addFrameButton = Button:New
-	{
-		name = "Add Frame",
-		text = "Add Frame",
-		x = self.spriteSheetPos.x,
-		y = self.spriteSheetPos.y,
-		width = self.spriteSheet.spriteWidth,
-		height = self.spriteSheet.spriteHeight,
+	--self.spriteSheetPanel:AddHorizontal{self.spriteSheet}
 
-		func = function()
-			self:CreateSpriteFromSheet()
-			self.currentAnimaion:AddFrame(self.newSprite)
-		end,
-	}
-	--]]
+
+
 end 
 
 function AnimationEditor:CreateSpriteFromSheet(x, y)
@@ -137,6 +243,12 @@ function AnimationEditor:CreateSpriteFromSheet(x, y)
 
 end 
 
+
+
+
+-- editor draws its spritesheet manually
+-- this might not be neccessary
+-- maybe change
 function AnimationEditor:DrawCall()
 	love.graphics.setColor(Color:AsTable(self.color))
 	love.graphics.draw(self.spriteSheet.image, self.spriteSheetQuad, self.spriteSheetPos.x, self.spriteSheetPos.y, angle, xScale, yScale)
@@ -144,7 +256,7 @@ end
 
 -- runs on level exit
 function AnimationEditor:Exit()
-	ObjectManager:Destroy(self.currentAnimaion)
+	ObjectManager:Destroy(self.currentAnimation)
 	ObjectManager:Destroy(self.Draw)
 	ObjectManager:Destroy(self.Pos)
 	ObjectManager:Destroy(self.addFrameButton)
@@ -227,16 +339,6 @@ pawnGraphics.animations.walk = Animation:New
 
 
 
-
-
-
-
-
-
-
-
-
-
 return AnimationEditor
 
 
@@ -248,3 +350,34 @@ return AnimationEditor
 ----------------------
 -- this will be a somewhat complex and changing file
 -- changes to Sprite and SpriteSheet may be needed
+
+
+
+
+
+
+
+
+-- Junk
+--------------------------------------------------
+--[==[
+
+	--[[
+	self.addFrameButton = Button:New
+	{
+		name = "Add Frame",
+		text = "Add Frame",
+		x = self.spriteSheetPos.x,
+		y = self.spriteSheetPos.y,
+		width = self.spriteSheet.spriteWidth,
+		height = self.spriteSheet.spriteHeight,
+
+		func = function()
+			self:CreateSpriteFromSheet()
+			self.currentAnimation:AddFrame(self.newSprite)
+		end,
+	}
+	--]]
+
+
+--]==]

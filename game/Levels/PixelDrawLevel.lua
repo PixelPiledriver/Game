@@ -1,5 +1,9 @@
 -- PixelDrawLevel.lua
--- draw the pixels and stuff
+
+
+-- Description
+------------------------------------
+-- test level for pixels drawing tools and other stuff
 
 --------------
 -- Requires
@@ -103,8 +107,8 @@ local Start = function()
 	}
 
 
-	-- DrawGroup is broken right now
 	-->FIX
+	-- DrawGroup is broken right now
 	local group = DrawGroup:New{objects = {orangeBox, greenBox, blueBox}}
 
 

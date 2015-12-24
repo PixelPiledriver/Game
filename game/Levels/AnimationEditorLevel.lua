@@ -36,6 +36,7 @@ local Start = function()
 end 
 
 local Update = function()
+	AnimationEditor:Update()
 end
 
 local Exit = function()

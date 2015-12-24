@@ -1,12 +1,13 @@
 -- Panel.lua
 
+-- Purpose
+--------------------------------------------
 -- Basic user interface container
 -- New version of Panel.lua
 
-
--------------
+---------------
 -- Requires
--------------
+---------------
 
 local Color = require("Color")
 local Box = require("Box")
@@ -64,26 +65,32 @@ Panel.colorSkins =
 	}
 }
 
-Panel.defaultColorSkin = "gray"
+Panel.default = {}
 
-Panel.defaultPanelColor = Color:New
+Panel.default.ColorSkin = "gray"
+
+Panel.default.PanelColor = Color:New
 { r = 0, g = 0, b = 0, a = 255}
 
-Panel.defaultTopFrame =
+Panel.default.TopFrame =
 {
 	height = 16,
 	color = Color:New
 	{r = 255, g = 255, b = 255, a = 128}
 }
 
-Panel.defaultNameColor = Color:Get("black")
+Panel.default.NameColor = Color:Get("black")
+
+
 
 -- safe space buffer 
 Panel.windowBorderSpace = 32
 
 Panel.objectToPanelPad = 32
 Panel.objectToObjectPad = 16
+
 Panel.objectDirections = {"left, right, up, down"}
+
 
 -----------
 -- Object
@@ -167,7 +174,11 @@ function Panel:New(data)
 		height = 8
 	}
 
-	o.Pos = Pos:New(Pos.defaultPos)
+	o.Pos = Pos:New
+	{
+		x = data.x or 0,
+		y = data.y or 0
+	}
 
 	o.posType = data.posType or "none"
 
@@ -192,13 +203,13 @@ function Panel:New(data)
 	-------------------------------
 
 	-- color skin
-	o.colorSkin = Panel.colorSkins[Panel.defaultColorSkin] or Panel.colorSkins[data.colorSkin]
+	o.colorSkin = Panel.colorSkins[Panel.default.ColorSkin] or Panel.colorSkins[data.colorSkin]
 
 	-- main panel area - holds panel items
 	---------------------------------------------------
 	o.frame = Box:New
 	{
-		color = o.colorSkin and o.colorSkin.frame or Panel.defaultPanelColor,
+		color = o.colorSkin and o.colorSkin.frame or Panel.default.PanelColor,
 		parent = o,
 	}
 
@@ -219,10 +230,10 @@ function Panel:New(data)
 	o.bar = Box:New
 	{
 		x = o.Pos.x,
-		y = o.Pos.y - Panel.defaultTopFrame.height,
-		height = Panel.defaultTopFrame.height,
+		y = o.Pos.y - Panel.default.TopFrame.height,
+		height = Panel.default.TopFrame.height,
 		width = o.Size.width,
-		color = o.colorSkin and o.colorSkin.bar or Panel.defaultTopFrame.color,
+		color = o.colorSkin and o.colorSkin.bar or Panel.default.TopFrame.color,
 		parent = o,
 	}
 
@@ -263,6 +274,7 @@ function Panel:New(data)
 		name = o.name,
 		shape = "rect",
 		collisionList = {"Mouse"},
+		draw = false
 	}
 
 	Link:Simple
@@ -285,6 +297,7 @@ function Panel:New(data)
 	{
 		text = o.Info.name,
 		color = Color:Get("black"),
+		size = 12,
 	}
 
 	Link:Simple
@@ -293,14 +306,23 @@ function Panel:New(data)
 		b = {o.bar, "Pos", "x"}
 	}
 
+
+	local titleOffset =
+	{
+		{value = {o.bar.Size.height, "Sub"}}
+	}
+
+	self.titleInBar = Bool:DataOrDefault(data.titleInBar, true)
+
+	if(self.titleInBar) then
+		titleOffset = nil
+	end 
+
 	Link:Simple
 	{
 		a = {o.title, "Pos", "y"},
 		b = {o.bar, "Pos", "y"},
-		offsets =
-		{
-			{value = {o.bar.Size.height, "Sub"}}
-		}
+		offsets = titleOffset
 	}
 
 	-- hide title if too long to fit in window bar
@@ -325,146 +347,150 @@ function Panel:New(data)
 	-- Buttons
 	--------------
 
-	o.openCloseButton = Button:New
-	{
-		name = "panel close",
-		text = "x",
-		toggleText = "o",
-		width = 16,
-		height = 16,
-		toggle = true,
+	o.useButtons = Bool:DataOrDefault(data.useButtons, false)
 
-		toggleOnFunc = function() 
-			o:ToggleDraw()
-		end,
-
-		toggleOffFunc = function()
-			o:ToggleDraw()
-		end
-	}
-
-	Link:Simple
-	{
-		a = {o.openCloseButton, "Pos", "x"},
-		b = {o.bar, "Pos", "x"},
-		offsets =
+	function o:CreateButtons()
+		o.openCloseButton = Button:New
 		{
-			{object = {o.frame.Size, "width"}}
+			name = "panel close",
+			text = "x",
+			toggleText = "o",
+			width = 16,
+			height = 16,
+			toggle = true,
+
+			toggleOnFunc = function() 
+				o:ToggleDraw()
+			end,
+
+			toggleOffFunc = function()
+				o:ToggleDraw()
+			end
 		}
-	}
 
-	Link:Simple
-	{
-		a = {o.openCloseButton, "Pos", "y"},
-		b = {o.bar, "Pos", "y"}
-	}
-
-	------------------------
-	-- Scroll Buttons
-	------------------------
-	
-	-- add scroll bars later
-
-	-- sets scroll back to zero
-	o.scrollResetButton = Button:New
-	{
-		name = "scroll reset",
-		text = "o",
-		width = 16,
-		height = 16,
-		func = function() 
-			o.itemOffset.y = 0
-		end,
-	}
-
-	Link:Simple
-	{
-		a = {o.scrollResetButton, "Pos", "x"},
-		b = {o.bar, "Pos", "x"},
-		offsets =
+		Link:Simple
 		{
-			{object = {o.frame.Size, "width"}},
+			a = {o.openCloseButton, "Pos", "x"},
+			b = {o.bar, "Pos", "x"},
+			offsets =
+			{
+				{object = {o.frame.Size, "width"}}
+			}
 		}
-	}
 
-	Link:Simple
-	{
-		a = {o.scrollResetButton, "Pos", "y"},
-		b = {o.bar, "Pos", "y"},
-		offsets =
+		Link:Simple
 		{
-			{value = {48}}
-		}	
-	}
-
-
-	-- up
-	o.scrollUpButton = Button:New
-	{
-		name = "scroll up",
-		text = "^",
-		width = 16,
-		height = 16,
-		holdable = true,
-		func = function() 
-			o:ScrollY(1)
-		end,
-	}
-
-	Link:Simple
-	{
-		a = {o.scrollUpButton, "Pos", "x"},
-		b = {o.bar, "Pos", "x"},
-		offsets =
-		{
-			{object = {o.frame.Size, "width"}},
+			a = {o.openCloseButton, "Pos", "y"},
+			b = {o.bar, "Pos", "y"}
 		}
-	}
 
-	Link:Simple
-	{
-		a = {o.scrollUpButton, "Pos", "y"},
-		b = {o.bar, "Pos", "y"},
-		offsets =
+		------------------------
+		-- Scroll Buttons
+		------------------------
+		
+		-- add scroll bars later
+
+		-- sets scroll back to zero
+		o.scrollResetButton = Button:New
 		{
-			{value = {16}}
-		}	
-	}
-
-
-
-	-- down
-	o.scrollDownButton = Button:New
-	{
-		name = "scroll down",
-		text = "v",
-		width = 16,
-		height = 16,
-		holdable = true,
-		func = function() 
-			o:ScrollY(-1)
-		end,
-	}
-
-	Link:Simple
-	{
-		a = {o.scrollDownButton, "Pos", "x"},
-		b = {o.bar, "Pos", "x"},
-		offsets =
-		{
-			{object = {o.frame.Size, "width"}},
+			name = "scroll reset",
+			text = "o",
+			width = 16,
+			height = 16,
+			func = function() 
+				o.itemOffset.y = 0
+			end,
 		}
-	}
 
-	Link:Simple
-	{
-		a = {o.scrollDownButton, "Pos", "y"},
-		b = {o.bar, "Pos", "y"},
-		offsets =
+		Link:Simple
 		{
-			{value = {32}}
-		}	
-	}
+			a = {o.scrollResetButton, "Pos", "x"},
+			b = {o.bar, "Pos", "x"},
+			offsets =
+			{
+				{object = {o.frame.Size, "width"}},
+			}
+		}
+
+		Link:Simple
+		{
+			a = {o.scrollResetButton, "Pos", "y"},
+			b = {o.bar, "Pos", "y"},
+			offsets =
+			{
+				{value = {48}}
+			}	
+		}
+
+
+		-- up
+		o.scrollUpButton = Button:New
+		{
+			name = "scroll up",
+			text = "^",
+			width = 16,
+			height = 16,
+			holdable = true,
+			func = function() 
+				o:ScrollY(1)
+			end,
+		}
+
+		Link:Simple
+		{
+			a = {o.scrollUpButton, "Pos", "x"},
+			b = {o.bar, "Pos", "x"},
+			offsets =
+			{
+				{object = {o.frame.Size, "width"}},
+			}
+		}
+
+		Link:Simple
+		{
+			a = {o.scrollUpButton, "Pos", "y"},
+			b = {o.bar, "Pos", "y"},
+			offsets =
+			{
+				{value = {16}}
+			}	
+		}
+
+
+
+		-- down
+		o.scrollDownButton = Button:New
+		{
+			name = "scroll down",
+			text = "v",
+			width = 16,
+			height = 16,
+			holdable = true,
+			func = function() 
+				o:ScrollY(-1)
+			end,
+		}
+
+		Link:Simple
+		{
+			a = {o.scrollDownButton, "Pos", "x"},
+			b = {o.bar, "Pos", "x"},
+			offsets =
+			{
+				{object = {o.frame.Size, "width"}},
+			}
+		}
+
+		Link:Simple
+		{
+			a = {o.scrollDownButton, "Pos", "y"},
+			b = {o.bar, "Pos", "y"},
+			offsets =
+			{
+				{value = {32}}
+			}	
+		}
+	end 
 
 	--------------
 	-- DrawGroup
@@ -775,6 +801,10 @@ return Panel
 
 -- Notes
 ---------------
+-- NEED
+-- option to spread and center total objects to width
+-- this way items of a smaller size can still be centered in any size paneladd
+
 -- still a bit confusing
 -- need to break down this file a bit
 

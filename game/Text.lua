@@ -36,8 +36,11 @@ Text.Info = Info:New
 Text.default =
 {
 	fade = false,
-	life = false,	
+	life = false,
+	color = "white",
+	size = 14
 }
+
 
 ------------
 -- Object
@@ -66,8 +69,8 @@ function Text:New(data)
 	o.text = data.text or ""
 	o.tempText = nil
 	
-	o.color = data.color or Color:Get("white")
-	o.font = love.graphics.newFont(data.size)
+	o.color = data.color or Color:Get(self.default.color)
+	o.font = love.graphics.newFont(data.size or self.default.size)
 
 	-- size of area that text is within -> ex: button size
 	o.displayWidth = data.displayWidth or o.font:getWidth(o.text)
