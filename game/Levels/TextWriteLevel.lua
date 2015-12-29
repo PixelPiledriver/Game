@@ -74,7 +74,7 @@ local Start = function()
 	local orcTest2 = loadedOrc()
 	print(orcTest2.health)
 
-
+	
 
 end
 

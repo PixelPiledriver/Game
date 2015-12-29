@@ -9,6 +9,23 @@
 --------------------------------------------------------------------------------
 
 
+-- Thoughts on Game production
+-------------------------------------------
+-- http://wayofthepixel.net/index.php?action=profile;u=9280;area=showposts;start=720
+
+
+-- Animation Editor
+-------------------------------
+-- look at this post
+-- http://wayofthepixel.net/index.php?action=profile;u=9280;area=showposts;start=730
+
+-- i want to be able to create animations like this easily in the editor
+-- so be able to keyframe objects to move and rotate in space
+
+-- also want vector animation to create skeletons to trace like that online pixel editor
+-- i forget the name
+
+
 -- Beefing up text write/read
 -- going to add lua code features
 -- this will be used to write and read animations
@@ -251,5 +268,10 @@ local box1 = Box:New
 	y = 150,
 	color = Color.green
 }
+
+
+
+
+
 
 --]]

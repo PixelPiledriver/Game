@@ -40,10 +40,6 @@ function Textfile:New(data)
 		structureType = "Object"
 	}
 
-
-
-
-
 	------------
 	-- Vars
 	------------
