@@ -4,11 +4,11 @@
 ---------------------------------------
 -- test vector drawing
 
-require("DrawLine")
+local DrawLine = require("DrawLine")
 ---------------------------------------------------------
 
 local Start = function()
-
+	DrawLine.active = true
 end
 
 
@@ -18,7 +18,7 @@ end
 
 
 local Exit = function()
-
+	DrawLine.active = false
 end
 
 

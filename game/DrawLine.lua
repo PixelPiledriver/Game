@@ -29,7 +29,7 @@ DrawLine.Info = Info:New
 -- Static Vars
 -------------------
 
-DrawLine.active = true
+DrawLine.active = false
 
 DrawLine.lines = {}
 
@@ -39,13 +39,13 @@ DrawLine.newPoints =
 	b = nil
 }
 
-DrawLine.number = 0
+
 
 function DrawLine:Update()
 	if(self.active == false) then
 		return
 	end 
-	
+
 	self:SetPoint()
 end 
 
@@ -99,7 +99,7 @@ function DrawLine:PrintDebugText()
 		{text = "DrawLine"},
 		{text = "---------------------"},
 		{text = "Lines: " .. #self.lines},
-		{text = "number: " .. self.number}
+		{text = "Active: " .. Bool:ToString(self.active)}
 	}
 
 end 
