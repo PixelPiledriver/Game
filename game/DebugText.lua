@@ -109,8 +109,9 @@ DebugText.messageType =
 	Shape = false,
 	Point = false,
 	Palette = false,
-	Animaition = true,
-	AnimationComponent,
+	Animation = true,
+	AnimationComponent = false,
+	DrawLine = true,
 
 	-- Other
 	Generic = false

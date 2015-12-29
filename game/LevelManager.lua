@@ -36,6 +36,7 @@ LevelManager.printDescriptionOnStart = true
 -- all levels available
 LevelManager.levelNames = 
 {
+	"DrawLineLevel",
 	"AnimationEditorLevel",
 	"TextWriteLevel",
 	"MapWorldLevel",

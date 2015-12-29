@@ -4,6 +4,7 @@
 ---------------------------------------------
 -- input component for objects
 -- add keys and functions to be run when they are pressed
+-- keyboard input only --> for now
 
 
 
