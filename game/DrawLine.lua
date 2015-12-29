@@ -9,7 +9,7 @@
 -- Requires 
 ----------------
 local Line = require("Line")
-
+local Input = require("Input")
 -------------------------------------------------------------
 
 local DrawLine = {}
@@ -42,7 +42,40 @@ DrawLine.newPoints =
 }
 
 DrawLine.selectedPoints = {}
+DrawLine.selectIndex = Index:New(DrawLine.lines)
+DrawLine.selectIndex.maxOffset = 1
+DrawLine.selectType = "Index"
 
+
+-------------
+-- Input
+-------------
+DrawLine.Input = Input:New{}
+
+local nextIndex =
+{
+	"6", "press",
+	function()
+		DrawLine.selectIndex:Plus()
+	end 
+}
+
+local prevIndex =
+{
+	"5", "press",
+	function()
+		DrawLine.selectIndex:Minus()
+	end 
+}
+
+DrawLine.Input:AddKeys
+{
+	nextIndex, prevIndex
+}
+
+------------------------
+-- Static Functions
+------------------------
 
 function DrawLine:Update()
 	if(self.active == false) then
@@ -51,10 +84,6 @@ function DrawLine:Update()
 
 	self:SetPoint()
 	self:MoveSelectedPoints()
-
-	if(self.lines[4]) then
-		self.selectedPoints[1] = self.lines[4].a
-	end 
 
 end 
 
@@ -72,7 +101,7 @@ function DrawLine:SetPoint()
 
 		if(self.newPoints.b == nil) then
 
-			print("make B")
+			--print("make B")
 
 			self.newPoints.b = {}
 			self.newPoints.b.x = love.mouse.getX()
@@ -113,13 +142,40 @@ function DrawLine:SetPoint()
 
 end 
 
-function DrawLine:MoveSelectedPoints()
 
-	for i=1, #self.selectedPoints do
-		print("move")
-		self.selectedPoints[i].x = love.mouse.getX()
-		self.selectedPoints[i].y = love.mouse.getY()
+
+-- move position of points with mouse
+-- basic bullshit right now
+function DrawLine:MoveSelectedPoints()
+	if(#self.lines == 0) then
+		return
 	end 
+
+	if(self.selectType == "Index") then
+
+		if(self.selectIndex.index == 1) then
+			self.lines[1].a.x = love.mouse.getX()
+			self.lines[1].a.y = love.mouse.getY()
+		
+		elseif(self.selectIndex:IsMax()) then
+
+			self.lines[#self.lines].b.x = love.mouse.getX()
+			self.lines[#self.lines].b.y = love.mouse.getY()
+
+		else
+			self.lines[self.selectIndex.index-1].b.x = love.mouse.getX()
+			self.lines[self.selectIndex.index-1].b.y = love.mouse.getY()
+
+			self.lines[self.selectIndex.index].a.x = love.mouse.getX()
+			self.lines[self.selectIndex.index].a.y = love.mouse.getY()
+
+		end
+
+	end 
+
+
+
+
 end 
 
 
@@ -130,7 +186,8 @@ function DrawLine:PrintDebugText()
 		{text = "DrawLine"},
 		{text = "---------------------"},
 		{text = "Lines: " .. #self.lines},
-		{text = "Active: " .. Bool:ToString(self.active)}
+		{text = "Active: " .. Bool:ToString(self.active)},
+		{text = "Index: " .. self.selectIndex.index}
 	}
 end
 
@@ -156,5 +213,17 @@ end
 ObjectManager:AddStatic(DrawLine)
 
 return DrawLine
+
+-- Notes
+--------------------------
+
+
+	--[[
+	for i=1, #self.selectedPoints do
+		print("move")
+		self.selectedPoints[i].x = love.mouse.getX()
+		self.selectedPoints[i].y = love.mouse.getY()
+	end
+	--]]
 
 

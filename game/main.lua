@@ -33,6 +33,7 @@ require("Game")
 require("EventLog")
 require("Level")
 require("Link")
+require("Index")
 
 local Camera = require("Camera")
 require("Camera_Node")
