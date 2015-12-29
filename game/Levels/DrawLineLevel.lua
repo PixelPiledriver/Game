@@ -19,6 +19,7 @@ end
 
 local Exit = function()
 	DrawLine.active = false
+	DrawLine:Exit()
 end
 
 

@@ -31,6 +31,8 @@ DrawLine.Info = Info:New
 
 DrawLine.active = false
 
+DrawLine.connetToLast = true
+
 DrawLine.lines = {}
 
 DrawLine.newPoints =
@@ -39,6 +41,7 @@ DrawLine.newPoints =
 	b = nil
 }
 
+DrawLine.selectedPoints = {}
 
 
 function DrawLine:Update()
@@ -47,6 +50,12 @@ function DrawLine:Update()
 	end 
 
 	self:SetPoint()
+	self:MoveSelectedPoints()
+
+	if(self.lines[4]) then
+		self.selectedPoints[1] = self.lines[4].a
+	end 
+
 end 
 
 function DrawLine:SetPoint()
@@ -62,6 +71,9 @@ function DrawLine:SetPoint()
 		end 
 
 		if(self.newPoints.b == nil) then
+
+			print("make B")
+
 			self.newPoints.b = {}
 			self.newPoints.b.x = love.mouse.getX()
 			self.newPoints.b.y = love.mouse.getY()
@@ -73,8 +85,25 @@ function DrawLine:SetPoint()
 				b = self.newPoints.b
 			}
 
+			local copyB = nil
+			
+			if(self.connetToLast) then
+				copyB = 
+				{
+					x = self.newPoints.b.x,
+					y = self.newPoints.b.y
+				}
+			end 
+
 			self.newPoints.a = nil
 			self.newPoints.b = nil
+
+			self.newPoints.a = 
+			{
+				x = copyB.x,
+				y = copyB.y
+			}
+
 			break
 		end 
 
@@ -84,15 +113,17 @@ function DrawLine:SetPoint()
 
 end 
 
-function DrawLine:CreateLine()
-	if(self.newPoints.a and self.newPoints.b) then
+function DrawLine:MoveSelectedPoints()
 
+	for i=1, #self.selectedPoints do
+		print("move")
+		self.selectedPoints[i].x = love.mouse.getX()
+		self.selectedPoints[i].y = love.mouse.getY()
 	end 
-
 end 
 
-function DrawLine:PrintDebugText()
 
+function DrawLine:PrintDebugText()
 	DebugText:TextTable
 	{
 		{text = "", obj = "DrawLine" },
@@ -101,8 +132,25 @@ function DrawLine:PrintDebugText()
 		{text = "Lines: " .. #self.lines},
 		{text = "Active: " .. Bool:ToString(self.active)}
 	}
+end
+
+
+
+function DrawLine:Exit()
+
+	for i=1, #self.lines do
+		ObjectManager:Destroy(self.lines[i])
+		self.lines[i] = nil
+	end
+
+	self.lines = nil
+	self.lines = {}
+
+	print(#self.lines)
 
 end 
+
+
 
 
 ObjectManager:AddStatic(DrawLine)

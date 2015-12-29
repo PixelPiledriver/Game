@@ -54,14 +54,14 @@ DebugText.font = love.graphics.newFont(12)
 DebugText.messageType = 
 {
 	-- Managers
-	ObjectManager = true,
-	CollisionManager = true,
+	ObjectManager = false,
+	CollisionManager = false,
 	DrawList = false,
 
 	-- Statics
 	ButtonStatic = false,
 	ShaderStatic = false,
-	MouseStatic = true,
+	MouseStatic = false,
 	InputTextStatic = false,
 	Info = false,
 
@@ -105,11 +105,11 @@ DebugText.messageType =
 	SinCounter = false,
 
 	-- Graphics
-	Line = false,
+	Line = true,
 	Shape = false,
 	Point = false,
 	Palette = false,
-	Animation = true,
+	Animation = false,
 	AnimationComponent = false,
 	DrawLine = true,
 
