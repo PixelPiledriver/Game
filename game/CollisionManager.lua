@@ -47,7 +47,7 @@ end
 
 -- {point = {x,y}, rect = {x,y,width,height} }
 function CollisionManager:PointToRect(point, rect)
-	if(point.Pos.x > rect.Pos.x and point.Pos.x < rect.Pos.x + rect.width and point.Pos.y > rect.Pos.y ) then
+	if(point.x > rect.Pos.x and point.x < rect.Pos.x + rect.width and point.y > rect.Pos.y and point.y < rect.Pos.y + rect.height) then
 		return true
 	end
 
@@ -281,38 +281,55 @@ function CollisionManager:CheckForCollisions()
 
 			local obj = objList[a]
 
-			for c=1, #obj.collisionList do
-				local collisionObjectName = obj.collisionList[c]
+			if(obj.collissionList) then
+				for c=1, #obj.collisionList do
+					local collisionObjectName = obj.collisionList[c]
 
-				if(self.objects[collisionObjectName]) then
+					if(self.objects[collisionObjectName]) then
 
-					repeat
+						repeat
 
-						for b=1, #self.objects[collisionObjectName] do
+							for b=1, #self.objects[collisionObjectName] do
 
-							local B = self.objects[collisionObjectName][b]
-							local A = obj
+								local B = self.objects[collisionObjectName][b]
+								local A = obj
 
-							-- only collide once?
-							if((A.oneCollision and A.firstCollision) or (B.oneCollision and B.firstCollision)) then
-								break
+								-- only collide once?
+								if((A.oneCollision and A.firstCollision) or (B.oneCollision and B.firstCollision)) then
+									break
+								end 
+
+								if(self:RectToRect(A, B)) then
+
+									A:CollisionWith{other = B}
+									B:CollisionWith{other = A}
+
+									printDebug{A.Info.name .. " +collision+ " .. B.Info.name, "CollisionManager"}
+								end 
+
 							end 
 
-							if(self:RectToRect(A, B)) then
+						until true
 
-								A:CollisionWith{other = B}
-								B:CollisionWith{other = A}
-
-								printDebug{A.Info.name .. " +collision+ " .. B.Info.name, "CollisionManager"}
-							end 
-
-						end 
-
-					until true
+					end 
 
 				end 
-
 			end 
+
+
+			-- points to collide with
+			if(obj.pointsList) then
+				for i=1, #obj.pointsList do
+					if(self:PointToRect(obj.pointsList[i], obj))then
+						obj:CollisionWith(self.pointsList[i])
+					end 
+				end 
+
+				if(obj.clearPoints) then
+					obj.pointsList = nil
+				end 
+			end 
+
 			
 			
 

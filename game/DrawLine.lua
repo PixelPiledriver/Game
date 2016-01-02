@@ -10,6 +10,7 @@
 ----------------
 local Line = require("Line")
 local Input = require("Input")
+local Collision = require("Collision")
 -------------------------------------------------------------
 
 local DrawLine = {}
@@ -73,6 +74,16 @@ DrawLine.Input:AddKeys
 	nextIndex, prevIndex
 }
 
+----------------
+-- Collision
+----------------
+DrawLine.collision = Collision:New
+{
+	width = 200,
+	height = 200,
+	mouse = true
+}
+
 ------------------------
 -- Static Functions
 ------------------------
@@ -84,6 +95,23 @@ function DrawLine:Update()
 
 	self:SetPoint()
 	self:MoveSelectedPoints()
+	self:TestPointsToCollision()
+
+end 
+
+-- check for points under mouse selection
+function DrawLine:TestPointsToCollision()
+
+	-- points to test?
+	if(self.collision.pointsList == nil) then
+		self.collision.pointsList = {}
+	end 
+
+	-- add all points to collision
+	for i=1, #self.lines do
+		self.collision.pointsList[#self.collision.pointsList+1] = self.lines[i].a
+		self.collision.pointsList[#self.collision.pointsList+1] = self.lines[i].b
+	end 
 
 end 
 
@@ -225,5 +253,12 @@ return DrawLine
 		self.selectedPoints[i].y = love.mouse.getY()
 	end
 	--]]
+
+
+
+
+
+
+
 
 

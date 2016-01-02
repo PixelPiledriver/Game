@@ -61,8 +61,8 @@ function Collision:New(data)
 	-- pos
 	o.Pos = Pos:New
 	{
-		x = data.x or 100,
-		y = data.y or 100
+		x = data.x or 0,
+		y = data.y or 0
 	}
 
 	o.offsetX = o.Pos.x
@@ -129,6 +129,10 @@ function Collision:New(data)
 	-- collision list
 	-- other objects that this object can collide with
 	o.collisionList = data.collisionList or nil
+
+	-- points to test within collision
+	o.pointsList = data.pointsList or nil
+	o.clearPoints = true
 
 	-- alignment
 	o.vertCenter = data.vertCenter or false
@@ -220,7 +224,7 @@ function Collision:New(data)
 
 
 	function o:Update()
-		--self:FollowMouse()
+		self:FollowMouse()
 		--self:FollowParent()
 
 		-- clear collision state --> and save state from last frame
