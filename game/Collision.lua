@@ -182,8 +182,13 @@ function Collision:New(data)
 
 	function o:CollisionWith(data)
 
-		printDebug{self.collisionList, "Collision3"}
-		printDebug{data.other.collisionList, "Collision3"}
+		if(self.collisionList) then
+			printDebug{self.collisionList, "Collision3"}
+		end 
+
+		if(data.other.collisionList) then
+			printDebug{data.other.collisionList, "Collision3"}
+		end 
 
 
 		self.collided = true

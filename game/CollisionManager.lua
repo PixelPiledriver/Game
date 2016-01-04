@@ -47,7 +47,7 @@ end
 
 -- {point = {x,y}, rect = {x,y,width,height} }
 function CollisionManager:PointToRect(point, rect)
-	if(point.x > rect.Pos.x and point.x < rect.Pos.x + rect.width and point.y > rect.Pos.y and point.y < rect.Pos.y + rect.height) then
+	if(point.x > rect.Pos.x and point.x < rect.Pos.x + rect.Size.width and point.y > rect.Pos.y and point.y < rect.Pos.y + rect.Size.height) then
 		return true
 	end
 
@@ -320,9 +320,11 @@ function CollisionManager:CheckForCollisions()
 			-- points to collide with
 			if(obj.pointsList) then
 				for i=1, #obj.pointsList do
+
 					if(self:PointToRect(obj.pointsList[i], obj))then
-						obj:CollisionWith(self.pointsList[i])
+						obj:CollisionWith{other = obj.pointsList[i]}
 					end 
+
 				end 
 
 				if(obj.clearPoints) then
