@@ -534,7 +534,7 @@ function Button:New(data)
 
 					-- no fucntion or toggle defined --> this button is useless --> but can change in appearance
 					else
-						print("this button has no function")
+						printDebug{"this button has no function", "Button"}
 						wasClicked = true
 					end 
 

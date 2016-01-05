@@ -311,7 +311,7 @@ function Camera:New(data)
 		self.Pos.x = self.Pos.x + self.moveNodeVector.x
 		self.Pos.y = self.Pos.y + self.moveNodeVector.y
 
-		print(self.moveNodeVector.x .. ", " .. self.moveNodeVector.y)
+		printDebug{self.moveNodeVector.x .. ", " .. self.moveNodeVector.y, "Camera"}
 
 	end
 

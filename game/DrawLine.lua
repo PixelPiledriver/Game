@@ -256,8 +256,6 @@ function DrawLine:SetPoint()
 
 		if(self.newPoints.b == nil) then
 
-			--print("make B")
-
 			self.newPoints.b = {}
 			self.newPoints.b.x = love.mouse.getX()
 			self.newPoints.b.y = love.mouse.getY()
@@ -390,8 +388,7 @@ return DrawLine
 
 -- Junk
 ------------------------------------------------------------------
-
-	--[[
+--[==[
 
 	if(self.selectType == "Index") then
 
@@ -415,16 +412,22 @@ return DrawLine
 
 	end 
 
-	--]]
+	
 
 
-	--[[
+	
 	for i=1, #self.selectedPoints do
 		print("move")
 		self.selectedPoints[i].x = love.mouse.getX()
 		self.selectedPoints[i].y = love.mouse.getY()
 	end
-	--]]
+
+
+
+
+
+
+--]==]
 
 
 

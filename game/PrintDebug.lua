@@ -37,11 +37,12 @@ local printList =
 	mathTest = {false, false},
 	Animation = {true, false},
 	AnimationComponent = {true, false},
+	AnimationEditor = {true, false},
 	Build = {false, false},
 	ChatBox = {true, false},
 	Collision = {false, false},
 	Collision2 = {false, false},
-	Collision3 = {true, false},
+	Collision3 = {false, false},
 	CollisionList = {false, false},
 	CollisionManager = {false, false},
 	Controller = {false, false},
@@ -84,7 +85,7 @@ function printDebug(data)
 
 	-- not on list
 	else
-		print("printDebug fail: object type not found in printList")
+		print("printDebug fail: object type '" .. data[2] .. "' not found in printList")
 	end 
 
 end 

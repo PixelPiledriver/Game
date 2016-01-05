@@ -61,7 +61,7 @@ DebugText.messageType =
 	-- Statics
 	ButtonStatic = false,
 	ShaderStatic = false,
-	MouseStatic = true,
+	MouseStatic = false,
 	InputTextStatic = false,
 	Info = false,
 
@@ -86,7 +86,7 @@ DebugText.messageType =
 	InputText = false,
 
 	-- Input
-	Mouse = true,
+	Mouse = false,
 	Keyboard = false,
 
 	-- HUD
@@ -105,7 +105,7 @@ DebugText.messageType =
 	SinCounter = false,
 
 	-- Graphics
-	Line = true,
+	Line = false,
 	Shape = false,
 	Point = false,
 	Palette = false,
@@ -296,13 +296,14 @@ function DebugText:Draw()
 
 			-- draw the text
 			love.graphics.setColor(self.texts[i][t].color and Color:AsTable(self.texts[i][t].color) or Color:AsTable(Color.white))
+
 			LovePrint
 			{
 				text = self.texts[i][t].text,
 				x = self.xStart,
 				y = self.yStart + (self.ySpace * (index-1) ),
 			}
-			--love.graphics.print(self.texts[i][t].text, self.xStart, self.yStart + (self.ySpace * (index-1) ) )
+	
 
 			index = index + 1
 		end 
@@ -359,3 +360,10 @@ ObjectManager:AddStatic(DebugText)
 -->REFACTOR
 
 
+-- Junk
+-------------------------------------------------------------------
+--[==[
+
+--love.graphics.print(self.texts[i][t].text, self.xStart, self.yStart + (self.ySpace * (index-1) ) )
+
+--]==]

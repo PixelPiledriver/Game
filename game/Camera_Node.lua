@@ -46,7 +46,7 @@ function Camera.Node:SetupCamera(index)
 		tempUnitVector.x = tempUnitVector.x * self.moveSpeed
 		tempUnitVector.y = tempUnitVector.y * self.moveSpeed
 
-		print(tempUnitVector.x .. ", " .. tempUnitVector.y)
+		printDebug{tempUnitVector.x .. ", " .. tempUnitVector.y, "Camera"}
 
 	end
 

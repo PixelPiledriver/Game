@@ -41,7 +41,7 @@ FileManager.directories.identity = love.filesystem.getIdentity() --> name only, 
 -- Functions
 function FileManager:DoFile(filename)
 	
-	print(dofile(FileManager.directories.save .. [[/]] .. filename))
+	printDebug{dofile(FileManager.directories.save .. [[/]] .. filename), "FileManager"}
 
 end
 
@@ -56,13 +56,13 @@ function FileManager:PrintDirectoryItems(folderName)
 	local filenames = love.filesystem.getDirectoryItems(folderName)
 
 	for i=1, #filenames do
-	print(filenames[i])
+		printDebug{filenames[i], "FileManager"}
 	end
 
 end 
 
 --FileManager:PrintDirectoryItems()
-print(FileManager.directories.save)
+printDebug{FileManager.directories.save, "FileManager"}
 
 
 

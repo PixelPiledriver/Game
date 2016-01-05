@@ -90,7 +90,7 @@ function Controller:ButtonTest(controller)
 		-----------------
 		if(down == false ) then
 			if(controller.buttons[buttons.buttonsList[i]].lastValue == true) then
-				print(buttons.buttonsList[i] .. " UP!")
+				printDebug{buttons.buttonsList[i] .. " UP!", "Controller"}
 			end
 		end
 
