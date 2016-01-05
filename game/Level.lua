@@ -61,6 +61,7 @@ function Level:New(data)
 	o.Update = data.Update
 	o.Restart = data.Restart
 	o.Exit = data.Exit -- need a default Exit
+	o.PostUpdate = data.PostUpdate or nil
 
 	-- list of every object made while this level was running
 	-- have ObjectManager add to this list via LevelManager.currentLevel

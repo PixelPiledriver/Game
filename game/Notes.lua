@@ -8,6 +8,26 @@
  
 --------------------------------------------------------------------------------
 
+-- DrawLine
+------------------
+-->NEED
+-- color
+-- keyframes
+-- break apart points
+-- scale points
+-- rotate from A or B
+-- fast click or hold click draw
+-- line preview
+-- draw cancel
+-- select only 1 point --> keyboard choices
+
+-->DONE
+-- join points
+-- move points
+-- select area
+
+
+-- simple vector drawing and editing tools
 
 -- Thoughts on Game production
 -------------------------------------------
@@ -53,10 +73,6 @@
 
 -->NAW
 -- Ludum Dare maybe?
-
-
-
-
 
 
 

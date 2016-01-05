@@ -151,15 +151,28 @@ function LevelManager:StartLevel(level)
 end 
 
 function LevelManager:UpdateLevel()
-	if(self.currentLevel == nil) then
-		printDebug{"No level", "LevelManager", 2}
+	if(self:IsLevelLoaded() == false) then
 		return
 	end 
 
 	self.currentLevel:Update()
+end
+
+function LevelManager:PostUpdate()
+	if(self:IsLevelLoaded() == false) then
+		return
+	end 
+
+	if(self.currentLevel.PostUpdate) then
+		self.currentLevel:PostUpdate()
+	end 
 end 
 
 function LevelManager:RestartLevel()
+	if(self:IsLevelLoaded() == false) then
+		return
+	end 
+
 	self:ExitLevel()
 	self:StartLevel()
 
@@ -169,10 +182,10 @@ end
 
 function LevelManager:ExitLevel()
 
-	if(self.currentLevel == nil) then
-		printDebug{"No level", "LevelManager", 2}
+	if(self:IsLevelLoaded() == false) then
 		return
 	end 
+
 
 	ObjectManager:DestroyAllObjectsOwnedBy(self.currentLevel.filename)
 
@@ -231,6 +244,17 @@ function LevelManager:PostRequire()
 	-- Input
 	self:CreateInput()
 
+end
+
+-- check to see if a level is running
+function LevelManager:IsLevelLoaded()
+
+	if(self.currentLevel == nil) then
+		printDebug{"No level", "LevelManager", 2}
+		return false
+	end 
+
+	return true
 end 
 
 

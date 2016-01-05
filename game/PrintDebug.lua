@@ -29,33 +29,38 @@ PrintDebugType.Info = Info:New
 
 
 
--- name of this needs to be change to printList
-local printList = {}
 
--- switches
-
-printList.mathTest = {false, false}
-printList.Animation = {true, false}
-printList.AnimationComponent = {true, false}
-printList.Build = {false, false}
-printList.ChatBox = {true, false}
-printList.Collision = {false, false}
-printList.Collision2 = {false, false}
-printList.Collision3 = {false, false}
-printList.CollisionList = {false, false}
-printList.CollisionManager = {false, false}
-printList.Controller = {false, false}
-printList.Fail = {true, false}
-printList.Health = {false, false}
-printList.Links = {false, false}
-printList.LevelManager = {true, false}
-printList.MapTable = {false, false}
-printList.Matrix = {true, false}
-printList.Mouse = {false, false}
-printList.MapObject = {true, false}
-printList.ObjectManager = {false, false}
-printList.stuff = {false, false}
-printList.Textfile = {true, false}
+-- Set which message types to print or not
+-- ObjectName = {priority1, priority2, ...}
+local printList = 
+{
+	mathTest = {false, false},
+	Animation = {true, false},
+	AnimationComponent = {true, false},
+	Build = {false, false},
+	ChatBox = {true, false},
+	Collision = {false, false},
+	Collision2 = {false, false},
+	Collision3 = {true, false},
+	CollisionList = {false, false},
+	CollisionManager = {false, false},
+	Controller = {false, false},
+	DrawLine = {true, false},
+	Fail = {true, false},
+	Health = {false, false},
+	Line = {false, false},
+	Links = {false, false},
+	LevelManager = {true, false},
+	MapObject = {true, false},
+	MapTable = {false, false},
+	Matrix = {true, false},
+	MemoryManager = {true, false},
+	Mouse = {false, false},
+	ObjectManager = {false, false},
+	stuff = {false, false},
+	Text = {true, false},
+	Textfile = {true, false}
+}
 
 
 
@@ -69,8 +74,17 @@ function printDebug(data)
 	
 	local priority = data[3] or 1
 
-	if(printList[data[2]][priority]) then
-		print(data[1])
+	-- object type on list??
+	if(printList[data[2]]) then
+
+		-- then print it
+		if(printList[data[2]][priority]) then
+			print(data[1])
+		end 
+
+	-- not on list
+	else
+		print("printDebug fail: object type not found in printList")
 	end 
 
 end 

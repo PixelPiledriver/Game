@@ -112,6 +112,9 @@ require("TestCode")
 		deltaTime = dt
 		FrameCounter:Update(dt)
 
+		-- Level/Scene
+		LevelManager:UpdateLevel()
+
 		-- Camera
 		-- reworking to update on its own
 		Camera:Update()
@@ -130,8 +133,6 @@ require("TestCode")
 		-- collision
 		CollisionManager:Update()
 
-		-- Level/Scene
-		LevelManager:UpdateLevel()
 		
 		-- things to do after
 		PostUpdate(dt)
@@ -142,6 +143,7 @@ require("TestCode")
 	-- a special list of objects that depend 
 	-- on calculations made in Update are updated
 	function PostUpdate(dt)
+		LevelManager:PostUpdate()
 		ObjectManager:PostUpdate()
 		DrawList:PostUpdate()
 	end 

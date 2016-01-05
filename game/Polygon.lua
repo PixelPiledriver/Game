@@ -36,7 +36,7 @@ function Polygon:New(data)
 
 	local o = {}
 
-	print("poly")
+	printDebug{"Polygon:New", "Polygon"}
 	-----------
 	-- Info
 	-----------

@@ -61,7 +61,7 @@ DebugText.messageType =
 	-- Statics
 	ButtonStatic = false,
 	ShaderStatic = false,
-	MouseStatic = false,
+	MouseStatic = true,
 	InputTextStatic = false,
 	Info = false,
 
@@ -86,7 +86,7 @@ DebugText.messageType =
 	InputText = false,
 
 	-- Input
-	Mouse = false,
+	Mouse = true,
 	Keyboard = false,
 
 	-- HUD
@@ -145,11 +145,11 @@ end
 function DebugText:ScrollMessagesControl()
 
 	-- scroll object message index
-	if(Mouse.wheelUp) then
+	if(Keyboard:Key("5")) then
 		self.messageIndex = self.messageIndex - 1
 	end 
 
-	if(Mouse.wheelDown) then
+	if(Keyboard:Key("6")) then
 		self.messageIndex = self.messageIndex + 1
 	end
 

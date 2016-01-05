@@ -48,18 +48,26 @@ function Line:New(data)
 	------------
 	-- Vars
 	------------
+
+	-- start point
 	o.a = {}
 	o.a.x = data.a and data.a.x or 0
 	o.a.y = data.a and data.a.y or 0
+	o.a.parent = o
 
-	-- end
+	-- end point
 	o.b = {}
 	o.b.x = data.b and data.b.x or 100
 	o.b.y = data.b and data.b.y or 100
+	o.b.parent = o
 
 	-- graphics
 	o.color = data.color or Color:Get("black")
 	o.width = data.width or 1
+
+	-- other
+	o.collidablePoints = data.collidablePoints
+	o.DrawLine = data.DrawLine
 
 	------------------------
 	-- Components
@@ -101,6 +109,15 @@ function Line:New(data)
 	-- Functions
 	-----------------
 	function o:Update()
+	end
+
+	function o:PostUpdate()
+
+		if(self.collidablePoints) then
+			self.a.collided = false
+			self.b.collided = false			
+		end 
+
 
 	end 
 
@@ -114,6 +131,23 @@ function Line:New(data)
 		love.graphics.setLineWidth(1)
 
 	end
+
+	function o:OnCollision()
+		printDebug{"point of line collided", "Line"}
+
+		if(self.DrawLine and self.collidablePoints) then
+
+			if(self.a.collided) then
+				self.DrawLine:AddSelectedPoint(self.a)
+			end 
+
+			if(self.b.collided) then
+				self.DrawLine:AddSelectedPoint(self.b)
+			end 
+
+		end 
+
+	end 
 
 	function o:PrintDebugText()
 

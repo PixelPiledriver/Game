@@ -10,7 +10,7 @@
 -- initial memory usage
 -- taken up by LÖVE
 local initialMemory = collectgarbage("count")
-print(initialMemory)
+print("Initial Memory: " .. initialMemory)
 
 -- global
 MemoryManager = {}

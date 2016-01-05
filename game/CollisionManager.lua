@@ -281,7 +281,8 @@ function CollisionManager:CheckForCollisions()
 
 			local obj = objList[a]
 
-			if(obj.collissionList) then
+			if(obj.collisionList) then
+				
 				for c=1, #obj.collisionList do
 					local collisionObjectName = obj.collisionList[c]
 

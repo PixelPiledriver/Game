@@ -138,18 +138,18 @@ function Textfile:New(data)
 		-- directory defined for reading/writing?
 		if(self.directory) then
 
-			print(self.directory)
+			printDebug{self.directory, "Textfile"}
 			-- last directory used is same as this object's?
 			-- do nothing
 			if(self.directory == Textfile.currentDirectory) then
-				print("already at this directory")
+				printDebug{"already at this directory", "Textfile"}
 				return
 			end 
 
 			-- set the directory
 			Textfile.currentDirectory = self.directory
 			love.filesystem.setIdentity(self.directory)
-			print(love.filesystem.getIdentity())
+			printDebug{love.filesystem.getIdentity(), "Textfile"}
 
 		-- no directory defined?
 		else

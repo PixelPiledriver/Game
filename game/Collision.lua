@@ -65,8 +65,8 @@ function Collision:New(data)
 		y = data.y or 0
 	}
 
-	o.offsetX = o.Pos.x
-	o.offsetY = o.Pos.y
+	o.xOffset = data.xOffset or 0
+	o.yOffset = data.yOffset or 0
 
 	-- NEED TO convert thos over to use Size component
 	--	o.width = data.width or nil
@@ -139,10 +139,7 @@ function Collision:New(data)
 	o.horzCenter = data.horzCenter or false
 
 	-- draw
-	o.draw = data.draw
-	if(o.draw == nil) then
-		o.draw = true
-	end 
+	o.draw = Bool:DataOrDefault(data.draw, true)
 
 
 	
@@ -190,8 +187,8 @@ function Collision:New(data)
 			printDebug{data.other.collisionList, "Collision3"}
 		end 
 
-
 		self.collided = true
+		data.other.collided = true
 
 		if(self.oneCollision) then
 			self.firstCollision = true
@@ -201,6 +198,10 @@ function Collision:New(data)
 		if(self.parent and self.parent.OnCollision) then
 			self.parent:OnCollision(data)	
 		end
+
+		if(data.other.parent and data.other.parent.OnCollision) then
+			data.other.parent:OnCollision()
+		end 
 
 	end 
 
@@ -221,8 +222,8 @@ function Collision:New(data)
 			return
 		end 
 
-			self.Pos.x = love.mouse.getX() + self.offsetX
-			self.Pos.y = love.mouse.getY() + self.offsetY
+			self.Pos.x = love.mouse.getX() + self.xOffset
+			self.Pos.y = love.mouse.getY() + self.yOffset
 		
 	end 
 

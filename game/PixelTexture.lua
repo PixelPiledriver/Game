@@ -708,7 +708,7 @@ function PixelTexture:New(data)
 		if(self.palette) then
 			self.image:mapPixel(self.AllRandomFromPaletteFunction)
 		else
-			print("PixelTexture Has no palette")
+			printDebug{"PixelTexture Has no palette", "PixelTexture"}
 		end 
 
 	end 

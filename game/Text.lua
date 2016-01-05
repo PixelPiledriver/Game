@@ -179,7 +179,7 @@ function Text:New(data)
 		end
 
 		if(self.timerTrigger) then
-			--print(self.timerTrigger[1][self.timerTrigger[2]])
+			
 			if(self.timerTrigger[1][self.timerTrigger[2]]) then
 				self.timer = self.timerMax
 				self:SetActive(true)
@@ -438,7 +438,7 @@ return Text
 
 -- Junk
 -----------------------------------------------
---[[
+--[==[
 -- changing BreakIntoLines a bit
 -- here is the old version
 
@@ -477,4 +477,10 @@ return Text
 	end 
 
 
---]]
+
+
+
+printDebug{self.timerTrigger[1][self.timerTrigger[2]], "Text"}
+
+
+--]==]

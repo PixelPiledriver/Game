@@ -274,7 +274,7 @@ function Panel:New(data)
 		name = o.name,
 		shape = "rect",
 		collisionList = {"Mouse"},
-		draw = false
+		--draw = false
 	}
 
 	Link:Simple
