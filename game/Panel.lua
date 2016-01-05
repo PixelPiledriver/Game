@@ -128,9 +128,9 @@ function Panel:New(data)
 
 	o.itemOffset = {x = 0, y = 0}
 
-	-------------------
-	-- Object Map
-	-------------------
+	-------------------------------
+	-- Grid field holds items
+	-------------------------------
 	o.gridScale = data.gridScale or 32 --> size of items
 	o.gridWidth = data.gridWidth or o.gridScale
 	o.gridHeight = data.gridHeight or o.gridScale

@@ -12,7 +12,8 @@ local Line = require("Line")
 local Input = require("Input")
 local Collision = require("Collision")
 local Color = require("Color")
-local Panel= require("Panel")
+local Panel = require("Panel")
+local Text = require("Text") 
 -------------------------------------------------------------
 
 local DrawLine = {}
@@ -130,8 +131,18 @@ function DrawLine:Start()
 	DrawLine.resizeBy = 25
 	DrawLine.resizeAcceleration = 1.2
 
+
+	-----------
 	-- Panel
 	-----------
+
+	DrawLine.colorText = Text:New
+	{
+		text = "Color",
+		color = self.color
+	}
+	DrawLine.colorNext = Button:New
+	P{O}
 
 	DrawLine.panel = Panel:New
 	{
@@ -141,6 +152,8 @@ function DrawLine:Start()
 		x = 100,
 		y = 100
 	}
+
+	DrawLine.panel:AddVertical{DrawLine.colorText}
 
 
 end 

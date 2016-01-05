@@ -8,6 +8,15 @@
  
 --------------------------------------------------------------------------------
 
+
+-- Panel
+-----------------------
+-- code Add functions for basic ui object types
+-- text, button, box, color select, etc
+-- make a way to pass in a var of the object to update
+-- this way new panel handles all ui objects instead of the static
+-- will clean up panel creation and make it faster? easier at least
+
 -- DrawLine
 ------------------
 -->NEED
