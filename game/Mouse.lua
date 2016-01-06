@@ -76,6 +76,12 @@ Mouse.default.lineTracerActive = false
 function Mouse:Update()
 	self:ClearHolds()
 	self:TrackClicks()
+	self:UpdateVars()
+end 
+
+function Mouse:UpdateVars()
+	self.xView = love.mouse.getX() + Camera.selectedCamera.Pos.x
+	self.yView = love.mouse.getY() + Camera.selectedCamera.Pos.y
 end 
 
 
@@ -185,7 +191,6 @@ function Mouse:ClearHolds()
 end 
 
 -- reads the mouse only once
--- this can be removed for the MousePressed callback I think
 function Mouse:SingleClick(mouseButton)
 
 	if(self.clickButton[mouseButton] and self.lastClickButton[mouseButton] == false) then
@@ -455,3 +460,9 @@ ObjectManager:AddStatic(Mouse)
 
 -- adding static vars for mouse
 -- used to detect single clicks without the need for the love single click callback
+
+
+
+-- Junk
+-------------------------------------
+-- this can be removed for the MousePressed callback I think

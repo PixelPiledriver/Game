@@ -138,11 +138,11 @@ function Panel:New(data)
 
 	o.itemPad = data.itemPad or 8 --> space between items
 
-	----------------------
+	-----------------------------------------------------------------------
 	-- Panel Type
 		-- ObjectBased - adding objects to the panel expands the panel
 		-- MapBased
-	----------------------
+	-----------------------------------------------------------------------
 	o.panelType = data.panelType or "ObjectBased"
 
 	-- 2D array of item locations
@@ -359,11 +359,11 @@ function Panel:New(data)
 			height = 16,
 			toggle = true,
 
-			toggleOnFunc = function() 
+			on = function() 
 				o:ToggleDraw()
 			end,
 
-			toggleOffFunc = function()
+			off = function()
 				o:ToggleDraw()
 			end
 		}
@@ -542,7 +542,7 @@ function Panel:New(data)
 
 	function o:Update()
 
-		--self.itemOffset.y = self.itemOffset.y - 0.5
+		
 	end 
 
 	-- empty for now
@@ -696,13 +696,21 @@ function Panel:New(data)
 	-- {a, b, c, ...}
 	function o:AddVertical(data)
 
+		local yOffset = 0
+
+		if(self.map.height > 1) then
+			yOffset = self.map.height
+		end 
+
+
 		for i=1, #data do
 			local table = 
 			{
 				object = data[i],
-				x = data.xStart or 1, -- there is no way to input xStart since data is indexed
-				y = i
+				x = data.xStart or 1, -->? -- there is no way to input xStart since data is indexed
+				y = i + yOffset
 			}
+
 
 			o:Add(table)
 		end
@@ -746,6 +754,10 @@ function Panel:New(data)
 
 		ObjectManager:Destroy(self.hover)
 		ObjectManager:Destroy(self.drag)
+
+		-- should destroy all items?
+		-- optional?
+		self.items = nil
 	end 
 
 	--------
@@ -768,6 +780,8 @@ function Panel:Update()
 
 end 
 
+
+-- stops 2 panels from being in the same position
 function Panel:SamePosGuard()
 
 	if(#self.objectsMade < 2) then
@@ -842,6 +856,8 @@ return Panel
 -- Junk
 -------------------------------------
 	--[==[
+
+	--self.itemOffset.y = self.itemOffset.y - 0.5
 
 	-- old links
 	o.bar.Pos:LinkPosTo

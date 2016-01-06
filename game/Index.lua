@@ -78,6 +78,14 @@ function Index:New(table)
 		self:Minus()
 	end
 
+	function o:Next()
+		self:Plus()
+	end 
+
+	function o:Prev()
+		self:Minus()
+	end 
+
 	-- check if index is at max length of table
 	function o:IsMax()
 		if(self.index == #self.table + self.maxOffset) then

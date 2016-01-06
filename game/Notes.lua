@@ -8,6 +8,14 @@
  
 --------------------------------------------------------------------------------
 
+-- Sprite Bank
+----------------------
+-- add and get sprites
+
+-- Button
+--------------
+-- prev <-  -> next
+-- button type that comes with two buttons in 1 call
 
 -- Panel
 -----------------------

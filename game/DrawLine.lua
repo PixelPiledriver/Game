@@ -13,7 +13,8 @@ local Input = require("Input")
 local Collision = require("Collision")
 local Color = require("Color")
 local Panel = require("Panel")
-local Text = require("Text") 
+local Text = require("Text")
+local Button = require("Button")
 -------------------------------------------------------------
 
 local DrawLine = {}
@@ -45,6 +46,11 @@ DrawLine.newPoints =
 	b = nil
 }
 
+DrawLine.previewLine = Line:New
+{
+	color = Color:Get("hidden")
+}
+
 DrawLine.selectedPoints = {}
 DrawLine.selectIndex = Index:New(DrawLine.lines)
 DrawLine.selectIndex.maxOffset = 1
@@ -62,31 +68,27 @@ DrawLine.breakPoints =
 	b = nil
 }
 
+------------
 -- Color
 ------------
 
 DrawLine.color = Color:Get("white")
+DrawLine.colors =
+{
+	Color:Get("white"),
+	Color:Get("orange"),
+	Color:Get("black"),
+	Color:Get("red"),
+	Color:Get("blue"),
+	Color:Get("green"),
+	Color:Get("pink")
+}
+DrawLine.colorsIndex = Index:New(DrawLine.colors)
 
 -------------
 -- Input
 -------------
 DrawLine.Input = Input:New{}
-
-local nextIndex =
-{
-	"6", "press",
-	function()
-		DrawLine.selectIndex:Plus()
-	end 
-}
-
-local prevIndex =
-{
-	"5", "press",
-	function()
-		DrawLine.selectIndex:Minus()
-	end 
-}
 
 local joinPoints =
 {
@@ -99,14 +101,125 @@ local joinPoints =
 local breakPoints =
 {
 	"3", "press",
-
+	function()
+		DrawLine:BreakPoints()
+	end 
 }
 
 DrawLine.Input:AddKeys
 {
-	nextIndex, prevIndex, joinPoints
+	joinPoints, breakPoints
 }
 
+-------------
+-- Tools
+-------------
+DrawLine.tools = {}
+DrawLine.tools.line =
+{
+	active = false,
+	
+	On = function()
+		DrawLine.tools.line.active = true
+	end,
+	
+	Off = function()
+		DrawLine.newPoints.a = nil
+		DrawLine.newPoints.b = nil
+		DrawLine.tools.line.active = false
+		DrawLine:ShowPreviewLine(false)
+	end,
+
+	Use = function()
+		--print("line use")
+	end
+}
+
+DrawLine.tools.movePoints = 
+{
+	active = false,
+
+	On = function()
+		DrawLine.tools.movePoints.active = true
+	end,
+
+	Off = function()
+		DrawLine.tools.movePoints.active = false
+	end,
+
+	Use = function()
+		--print("move use")
+	end
+
+}
+
+DrawLine.tools.joinPoints = 
+{
+	active = false,
+
+	On = function()
+		DrawLine.tools.joinPoints.active = true
+	end,
+
+	Off = function()
+		DrawLine.tools.joinPoints.active = false
+	end,
+
+	Use = function()
+
+		if(Mouse:SingleClick("l")) then
+
+			if(DrawLine.collision.collided) then
+
+				if(DrawLine.joinPoints.a == nil) then
+
+					print(DrawLine.joinPoints.a)
+					print(DrawLine.selectedPoints[1])
+					DrawLine.joinPoints.a = DrawLine.selectedPoints[1]
+					
+					printDebug{"JoinPoints: set point A", "DrawLine"}
+
+				else
+					DrawLine.joinPoints.b = DrawLine.selectedPoints[1]
+					printDebug{"JoinPoints: set point B", "DrawLine"}
+
+					DrawLine.joinPoints.a.x = DrawLine.joinPoints.b.x
+					DrawLine.joinPoints.a.y = DrawLine.joinPoints.b.y
+					
+					printDebug{"JoinPoints!", "DrawLine"}
+
+					DrawLine.joinPoints.a = nil
+					DrawLine.joinPoints.b = nil
+				end 
+			end 
+
+		end
+
+	end
+
+}
+
+DrawLine.tools.index =
+{
+	"line", "movePoints", "joinPoints",	
+}
+
+-- runs all tool functions, if they are activated
+function DrawLine.tools:UpdateAllTools()
+
+	for i=1, #DrawLine.tools.index do
+		if(DrawLine.tools[DrawLine.tools.index[i]].active) then
+			DrawLine.tools[DrawLine.tools.index[i]].Use()
+		end 
+	end 
+
+end 
+
+DrawLine.number = 0
+
+function DrawLine.tools:ChangeTest()
+	DrawLine.number = DrawLine.number + 1
+end 
 
 ------------------------
 -- Static Functions
@@ -139,40 +252,92 @@ function DrawLine:Start()
 	DrawLine.colorText = Text:New
 	{
 		text = "Color",
-		color = self.color
+		color = self.color,
+		box = {}
 	}
+
+
+
 	DrawLine.colorNext = Button:New
-	P{O}
+	{
+		name = "Next Color",
+		text = ">",
+		width = 32,
+		height = 32,
+		func = function()
+			DrawLine.colorsIndex:Next()
+			DrawLine.color = DrawLine.colors[DrawLine.colorsIndex.index] 
+		end 
+	}
+
+	DrawLine.colorPrev = Button:New
+	{
+		name = "Prev Color",
+		text = "<",
+		width = 32,
+		height = 32,
+		func = function()
+			DrawLine.colorsIndex:Prev()
+			DrawLine.color = DrawLine.colors[DrawLine.colorsIndex.index] 
+		end 
+	}
 
 	DrawLine.panel = Panel:New
 	{
 		name = "DrawLine",
-		gridWidth = 32,
+		gridWidth = 48,
 		gridHeight = 32,
 		x = 100,
 		y = 100
 	}
 
-	DrawLine.panel:AddVertical{DrawLine.colorText}
+	DrawLine.panel:AddVertical
+	{
+		DrawLine.colorText, DrawLine.colorPrev, DrawLine.colorNext
+	}
 
+	--DrawLine.panel:AddHorizontal{DrawLine.colorNext}
+
+	require("DrawLine_UI")
 
 end 
+
 
 function DrawLine:Update()
 	if(self.active == false) then
 		return
 	end 
 
-	self:SetPoint() --> draw
-	self:MoveSelectedPoints()
+	self.tools:UpdateAllTools()
+	--self:SetPoint() --> draw
+	--self:MoveSelectedPoints()
 	self:TestPointsToCollision()
 	self:ClearSelectedPoints()
 	self:ResizeSelectionBox()
+	self:UpdatePreviewLine()
+	self:CancelDraw()
+
+
+	
+
+	self.colorText.color = self.color
+end 
+ 
+function DrawLine:CancelDraw()
+
+	if(Mouse:SingleClick("r") and self.newPoints.a) then
+		self:ShowPreviewLine(false)
+		self.newPoints.a = nil
+		printDebug{"Line draw canceled", "DrawLine"}
+	end 
 
 end 
 
 function DrawLine:JoinPoints()
 
+	if(self.tools.joinPoints.active == false) then
+		return
+	end
 
 	if(self.collision.collided) then
 
@@ -188,14 +353,53 @@ function DrawLine:JoinPoints()
 			self.joinPoints.a.x = self.joinPoints.b.x
 			self.joinPoints.a.y = self.joinPoints.b.y
 			
-			printDebug{"JoinPoints!", "DrawLine", 2}
+			printDebug{"JoinPoints!", "DrawLine"}
 
 			self.joinPoints.a = nil
 			self.joinPoints.b = nil
 		end 
+	end 
 
+
+
+end 
+
+
+local breakDistance = 8
+function DrawLine:BreakPoints()
+
+	if(self.tools.breakPoints.active == false) then
+		return
+	end 
+
+	if(#self.selectedPoints > 1) then
+
+		local broken = false
+
+		for i=1, #self.selectedPoints do
+			for j=i+1, #self.selectedPoints do
+
+				if(self.selectedPoints[i].x == self.selectedPoints[j].x and self.selectedPoints[i].y == self.selectedPoints[j].y) then
+
+					self.selectedPoints[i].x = self.selectedPoints[i].x - breakDistance
+					self.selectedPoints[j].x = self.selectedPoints[j].x + breakDistance
+
+					self.selectedPoints[i].y = self.selectedPoints[i].y - breakDistance
+					self.selectedPoints[j].y = self.selectedPoints[j].y + breakDistance
+
+					broken = true
+				end 
+			end 	
+		end 
+
+		if(broken) then
+			printDebug{"points broken apart", "DrawLine"}
+		end 
 
 	end 
+
+
+	-- nothing here yet
 end 
 
 function DrawLine:ResizeSelectionBox()
@@ -254,7 +458,48 @@ function DrawLine:TestPointsToCollision()
 
 end 
 
+function DrawLine:UpdatePreviewLine()
+	if(self.showPreviewLine == false) then
+		return 
+	end 
+
+	self.previewLine.color.r = self.color.r
+	self.previewLine.color.g = self.color.g
+	self.previewLine.color.b = self.color.b
+
+	self.previewLine.b.x = Mouse.xView
+	self.previewLine.b.y = Mouse.yView
+end
+
+function DrawLine:ShowPreviewLine(state)
+
+	-- hide
+	if(state == false) then
+		self.previewLine.color.a = 0
+		self.showPreviewLine = false
+	end 
+
+	-- show
+	if(state == true) then
+		self.previewLine.a.x = Mouse.xView
+		self.previewLine.a.y = Mouse.yView
+
+		self.previewLine.color.a = 255
+		self.showPreviewLine = true
+	end 
+
+end 
+
+
+
+
 function DrawLine:SetPoint()
+
+	if(DrawLine.tools.line.active == false) then
+		printDebug{"Line tool not active", "DrawLine", 2}
+		return
+	end 
+
 
 	if(Mouse:SingleClick("l")) then
 
@@ -262,16 +507,18 @@ function DrawLine:SetPoint()
 
 		if(self.newPoints.a == nil) then
 			self.newPoints.a = {}
-			self.newPoints.a.x = love.mouse.getX()
-			self.newPoints.a.y = love.mouse.getY()
+			self.newPoints.a.x = Mouse.xView
+			self.newPoints.a.y = Mouse.yView
+
+			self:ShowPreviewLine(true)
 			break
 		end 
 
 		if(self.newPoints.b == nil) then
 
 			self.newPoints.b = {}
-			self.newPoints.b.x = love.mouse.getX()
-			self.newPoints.b.y = love.mouse.getY()
+			self.newPoints.b.x = Mouse.xView
+			self.newPoints.b.y = Mouse.yView
 
 			-- create new line
 			self.lines[#self.lines+1] = Line:New
@@ -302,6 +549,8 @@ function DrawLine:SetPoint()
 				y = copyB.y
 			}
 
+			self:ShowPreviewLine(true)
+
 			break
 		end 
 
@@ -321,7 +570,12 @@ end
 -- move position of points with mouse
 -- basic bullshit right now
 function DrawLine:MoveSelectedPoints()
+
 	if(#self.lines == 0) then
+		return
+	end 
+
+	if(self.tools.movePoints.active == false) then
 		return
 	end 
 
@@ -392,9 +646,17 @@ return DrawLine
 
 -- Notes
 --------------------------
+-- select point max
 
+-- select line
+
+-->works
+-- preview line
+
+-->works
 -- break points
 
+-->works
 -- join points
 
 
@@ -437,6 +699,26 @@ return DrawLine
 
 
 
+
+
+
+-- old input 
+----------------
+local nextIndex =
+{
+	"6", "press",
+	function()
+		DrawLine.selectIndex:Plus()
+	end 
+}
+
+local prevIndex =
+{
+	"5", "press",
+	function()
+		DrawLine.selectIndex:Minus()
+	end 
+}
 
 
 

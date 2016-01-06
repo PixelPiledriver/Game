@@ -568,10 +568,10 @@ panel:Add(button1)
 	{
 		text = "Hide Panel",
 		toggle = true,
-		toggleOnFunc = function()
+		on = function()
 			panel:ToggleDraw()
 		end,
-		toggleOffFunc = function()
+		off = function()
 			panel:ToggleDraw()
 		end 
 	}
