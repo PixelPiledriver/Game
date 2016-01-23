@@ -17,7 +17,7 @@ local mouse = nil
 
 local Start = function()
 
-	mouse = Mouse:New{name = "mouse"}
+	local mouse = Mouse:New{name = "mouse"}
 
 	AnimationEditor = require("AnimationEditor")
 

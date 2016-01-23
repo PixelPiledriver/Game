@@ -76,10 +76,10 @@ DrawToolsUI.drawButton = Button:New
 	toggle = true,
 	sprite = DrawToolsUI.drawIcon,
 	printDebugTextActive = true,
-	toggleOnFunc = function() 
+	on = function() 
 		DrawTools:ToggleTool("Draw")
 	end,
-	toggleOffFunc = function()
+	off = function()
 		DrawTools:ToggleTool("Draw")
 	end 
 }
@@ -92,10 +92,10 @@ DrawToolsUI.moveButton = Button:New
 	buttonName = "Move",
 	toggle = true,
 	sprite = DrawToolsUI.moveIcon,
-	toggleOnFunc = function()
+	on = function()
 		DrawTools:ToggleTool("Move")
 	end,
-	toggleOffFunc = function()
+	off = function()
 		DrawTools:ToggleTool("Move")
 	end 
 }
@@ -107,10 +107,10 @@ DrawToolsUI.zoomButton = Button:New
 	text = "toggle!",
 	toggle = true,
 	sprite = DrawToolsUI.zoomIcon,
-	toggleOnFunc = function()
+	on = function()
 		DrawTools:ToggleTool("Zoom")
 	end,
-	toggleOffFunc = function()
+	off = function()
 		DrawTools:ToggleTool("Zoom")
 	end
 }
@@ -122,10 +122,10 @@ DrawToolsUI.colorDropButton = Button:New
 	text = "toggle!",
 	toggle = true,
 	sprite = DrawToolsUI.colorDropIcon,
-	toggleOnFunc = function()
+	on = function()
 		DrawTools:ToggleTool("ColorDrop")
 	end,
-	toggleOffFunc = function()
+	off = function()
 		DrawTools:ToggleTool("ColorDrop")
 	end 
 }

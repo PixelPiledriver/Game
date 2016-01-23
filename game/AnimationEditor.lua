@@ -212,7 +212,7 @@ function AnimationEditor:LoadSpriteSheet(spriteSheet)
 				func = function()
 					self:CreateSpriteFromSheet(i, j)
 					self.currentAnimation:AddFrame(self.newSprite)
-					print("add frame")
+					printDebug{"add frame", "AnimationEditor"}
 				end
 			}
 

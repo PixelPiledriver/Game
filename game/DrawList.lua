@@ -255,8 +255,8 @@ function DrawList:New(data)
 						if(self.objects[self.objects.layerIndex[i]].draw[j].scissorActive) then
 
 							-- get scissor vars
-							x = self.objects[self.objects.layerIndex[i]].draw[j].scissor.x
-							y = self.objects[self.objects.layerIndex[i]].draw[j].scissor.y
+							x = self.objects[self.objects.layerIndex[i]].draw[j].scissor.x - Camera.selectedCamera.Pos.x
+							y = self.objects[self.objects.layerIndex[i]].draw[j].scissor.y - Camera.selectedCamera.Pos.y
 							width = self.objects[self.objects.layerIndex[i]].draw[j].scissor.width
 							height = self.objects[self.objects.layerIndex[i]].draw[j].scissor.height
 

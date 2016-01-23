@@ -49,6 +49,12 @@ Mouse.clickButton =
 	wd = false, -- wheel down
 }
 
+Mouse.holdButton = 
+{
+	l = false,
+	r = false,
+	m = false
+}
 
 
 -- wheel
@@ -59,16 +65,28 @@ Mouse.wheelDownSkip = false
 Mouse.wheelUp = false
 Mouse.wheelDown = false
 
+-- options
+Mouse.default = {}
+Mouse.default.lineTracerActive = false
+
 ---------------------
 -- Static Functions
 ---------------------
 
 function Mouse:Update()
+	self:ClearHolds()
 	self:TrackClicks()
+	self:UpdateVars()
 end 
 
+function Mouse:UpdateVars()
+	self.xView = love.mouse.getX() + Camera.selectedCamera.Pos.x
+	self.yView = love.mouse.getY() + Camera.selectedCamera.Pos.y
+end 
+
+
 -- from love call back
--- used to get mouse wheel input
+-- used to get mouse wheel input --> only!
 -- only is called back when a button is pressed
 function Mouse:MousePressed(x,y,button)
 
@@ -78,14 +96,17 @@ function Mouse:MousePressed(x,y,button)
 
 	-- clicks
 	if(button == "l") then
+		self.holdButton.l = true
 		printDebug{"Mouse: Left Click", "Mouse"}
 	end
 	
 	if(button == "r") then
+		self.holdButton.r = true
 		printDebug{"Mouse: Right Click", "Mouse"}
 	end 
 
 	if(button == "m") then
+		self.holdButton.m = true
 		printDebug{"Mouse: Middle Click", "Mouse"}
 	end 
 
@@ -135,27 +156,41 @@ function Mouse:TrackClicks()
 	self.lastWheelDown = self.wheelDown
 
 
-
-
-
 	
 	if(love.mouse.isDown("l")) then
 		self.clickButton.l = true
+		self.holdButton.l = true
 	end
 
 	if(love.mouse.isDown("r")) then
 		self.clickButton.r = true
+		self.holdButton.r = true
 	end 
 
 	if(love.mouse.isDown("m")) then
 		self.clickButton.m = true
-		--print("middle click")
+		self.holdButton.m = true
 	end
+
+end
+
+function Mouse:ClearHolds()
+
+	if(love.mouse.isDown("l") == false) then
+		self.holdButton.l = false
+	end 
+
+	if(love.mouse.isDown("r") == false) then
+		self.holdButton.l = false
+	end 
+
+	if(love.mouse.isDown("m") == false) then
+		self.holdButton.l = false
+	end 
 
 end 
 
 -- reads the mouse only once
--- this can be removed for the MousePressed callback I think
 function Mouse:SingleClick(mouseButton)
 
 	if(self.clickButton[mouseButton] and self.lastClickButton[mouseButton] == false) then
@@ -166,17 +201,17 @@ function Mouse:SingleClick(mouseButton)
 
 end
 
-
+--------------
+-- Object
+--------------
  
 function Mouse:New(data)
 	
 	local o =  {}
 
 	----------------
-	-- Object Info
+	-- Info
 	----------------
-	
-	-- object
 	o.Info = Info:New
 	{
 		name = data.name or "...",
@@ -185,6 +220,9 @@ function Mouse:New(data)
 		structureType = "Object"
 	}
 
+	-------------
+	-- Vars
+	-------------
 	o.name = data.name or "..."
 	o.objectType = "Mouse"
 	o.dataType = "Control Object"
@@ -219,6 +257,8 @@ function Mouse:New(data)
 
 	o.width = data.width or 8
 	o.height = data.height or 8
+
+	o.lineTracerActive = Bool:DataOrDefault(data.lineTracerActive, Mouse.default.lineTracerActive)
 
 	-- collision for mouse cursor
 	o.collision = Collision:New
@@ -312,6 +352,10 @@ function Mouse:New(data)
 	-- this would be great to break off into its own component --> :D
 	function o:LineTracer()
 
+		if(self.lineTracerActive == false) then
+			return
+		end 
+
 		--self.line.b.x = self.Pos.x
 		--self.line.b.y = self.Pos.y
 
@@ -394,6 +438,10 @@ function Mouse:PrintDebugText()
 		{text = "Wheel Down: " .. Bool:ToString(Mouse.wheelDown)},
 		{text = "X: " .. love.mouse.getX()},
 		{text = "Y: " .. love.mouse.getY()},
+
+		{text = "Left Hold: " .. Bool:ToString(Mouse.holdButton.l)},
+		{text = "Right Hold: " .. Bool:ToString(Mouse.holdButton.r)},
+		{text = "Middle Hold: " .. Bool:ToString(Mouse.holdButton.m)},
 	}
 
 end 
@@ -412,3 +460,9 @@ ObjectManager:AddStatic(Mouse)
 
 -- adding static vars for mouse
 -- used to detect single clicks without the need for the love single click callback
+
+
+
+-- Junk
+-------------------------------------
+-- this can be removed for the MousePressed callback I think

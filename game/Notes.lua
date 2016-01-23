@@ -8,6 +8,43 @@
  
 --------------------------------------------------------------------------------
 
+-- Sprite Bank
+----------------------
+-- add and get sprites
+
+-- Button
+--------------
+-- prev <-  -> next
+-- button type that comes with two buttons in 1 call
+
+-- Panel
+-----------------------
+-- code Add functions for basic ui object types
+-- text, button, box, color select, etc
+-- make a way to pass in a var of the object to update
+-- this way new panel handles all ui objects instead of the static
+-- will clean up panel creation and make it faster? easier at least
+
+-- DrawLine
+------------------
+-->NEED
+-- color
+-- keyframes
+-- break apart points
+-- scale points
+-- rotate from A or B
+-- fast click or hold click draw
+-- line preview
+-- draw cancel
+-- select only 1 point --> keyboard choices
+
+-->DONE
+-- join points
+-- move points
+-- select area
+
+
+-- simple vector drawing and editing tools
 
 -- Thoughts on Game production
 -------------------------------------------
@@ -53,10 +90,6 @@
 
 -->NAW
 -- Ludum Dare maybe?
-
-
-
-
 
 
 

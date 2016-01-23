@@ -189,7 +189,7 @@ MapObject.Action.chat =
 
 	-- dialog
 	func = function(object)
-		print(object.actionTarget.reactions.chat.chat)
+		printDebug{object.actionTarget.reactions.chat.chat, "MapObject"}
 		ChatBox:New
 		{
 			x = object.actionTarget.xAbs,

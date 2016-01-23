@@ -32,6 +32,9 @@ Window.titleFlavor =
 	"[o___o]",
 	"[+___-]",
 	"[-___*]",
+	"[>___>]",
+	"[<___<]",
+	"[-___-]",
 	":D",
 	":)",
 	":O",
@@ -56,6 +59,8 @@ Window.titleFlavor =
 	"The path of life is not always short and sweet",
 	"loves you...",
 	"has vivid dreams of you...",
+	"thinks about you when you're not around...",
+	"saw you sleeping last night...",
 	"Hello World",
 	"You can do this!",
 	"you just gotta BELIEVE",
@@ -124,7 +129,6 @@ end
 ObjectManager:AddStatic(Window)
 
 return Window
-
 
 
 

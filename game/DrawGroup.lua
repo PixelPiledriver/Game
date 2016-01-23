@@ -104,8 +104,7 @@ function DrawGroup:New(data)
 			a = {o, "scissor", "height"},
 			b = data.scissor.height
 		}
-
-
+		
 	end 
 
 

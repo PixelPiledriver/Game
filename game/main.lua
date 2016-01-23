@@ -13,6 +13,7 @@ require("MemoryManager")
 require("LevelManager")
 require("ObjectManager")
 require("Info")
+require("PrintDebug")
 require("FileManager")
 require("Random")
 require("CollisionManager")
@@ -26,13 +27,13 @@ require("Vertex")
 require("Math")
 require("Matrix")
 require("TableSort")
-require("PrintDebug")
 require("FailNew")
 require("Bool")
 require("Game")
 require("EventLog")
 require("Level")
 require("Link")
+require("Index")
 
 local Camera = require("Camera")
 require("Camera_Node")
@@ -111,6 +112,9 @@ require("TestCode")
 		deltaTime = dt
 		FrameCounter:Update(dt)
 
+		-- Level/Scene
+		LevelManager:UpdateLevel()
+
 		-- Camera
 		-- reworking to update on its own
 		Camera:Update()
@@ -129,8 +133,6 @@ require("TestCode")
 		-- collision
 		CollisionManager:Update()
 
-		-- Level/Scene
-		LevelManager:UpdateLevel()
 		
 		-- things to do after
 		PostUpdate(dt)
@@ -141,6 +143,7 @@ require("TestCode")
 	-- a special list of objects that depend 
 	-- on calculations made in Update are updated
 	function PostUpdate(dt)
+		LevelManager:PostUpdate()
 		ObjectManager:PostUpdate()
 		DrawList:PostUpdate()
 	end 

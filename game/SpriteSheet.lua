@@ -34,11 +34,16 @@ SpriteSheet.loadPath = "graphics/"
 --{image, width, height, spriteWidth, spriteHeight}
 function SpriteSheet:New(data)
 
-	FailNew
+	local fail = FailNew
 	{
 		table = data,
 		members = {"image"}
 	}
+
+	if(fail) then
+		return
+	end 
+
 
 	local o = {}
 

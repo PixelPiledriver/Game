@@ -31,6 +31,14 @@ Color.Info = Info:New
 ----------------------
 -- Colors
 ----------------------
+Color.hidden =
+{
+	r = 0,
+	g = 0,
+	b = 0,
+	a = 0,
+	name = "hidden"	
+}
 
 Color.maroon = 
 {
@@ -1308,7 +1316,8 @@ Color.index =
 	"moccasin", "navajoWhite", "peachPuff", "mistyRose", "lavenderBlush", "linen", "oldLace",
 	"papayaWhip", "seaShell", "mintCream","slateGray", "lightSlateGray", "lightSteelBlue", "lavender",
 	"floralWhite", "aliceBlue", "ghostWhite", "honeydew", "ivory", "azure", "snow", "black",
-	"dimGray", "gray", "darkGray", "silver", "lightGray", "gainsboro", "whiteSmoke", "white"
+	"dimGray", "gray", "darkGray", "silver", "lightGray", "gainsboro", "whiteSmoke", "white",
+	"hidden"
 }
 
 -----------------------
@@ -1468,7 +1477,7 @@ function Color:AsTable(data)
 		data.r,
 		data.g,
 		data.b,
-		data.a
+		data.a or 255
 	}
 
 	return copy

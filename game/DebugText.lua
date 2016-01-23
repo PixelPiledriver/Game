@@ -54,14 +54,14 @@ DebugText.font = love.graphics.newFont(12)
 DebugText.messageType = 
 {
 	-- Managers
-	ObjectManager = true,
-	CollisionManager = true,
+	ObjectManager = false,
+	CollisionManager = false,
 	DrawList = false,
 
 	-- Statics
 	ButtonStatic = false,
 	ShaderStatic = false,
-	MouseStatic = true,
+	MouseStatic = false,
 	InputTextStatic = false,
 	Info = false,
 
@@ -109,7 +109,7 @@ DebugText.messageType =
 	Shape = false,
 	Point = false,
 	Palette = false,
-	Animation = true,
+	Animation = false,
 	AnimationComponent = false,
 	DrawLine = true,
 
@@ -145,11 +145,11 @@ end
 function DebugText:ScrollMessagesControl()
 
 	-- scroll object message index
-	if(Mouse.wheelUp) then
+	if(Keyboard:Key("5")) then
 		self.messageIndex = self.messageIndex - 1
 	end 
 
-	if(Mouse.wheelDown) then
+	if(Keyboard:Key("6")) then
 		self.messageIndex = self.messageIndex + 1
 	end
 
@@ -296,13 +296,14 @@ function DebugText:Draw()
 
 			-- draw the text
 			love.graphics.setColor(self.texts[i][t].color and Color:AsTable(self.texts[i][t].color) or Color:AsTable(Color.white))
+
 			LovePrint
 			{
 				text = self.texts[i][t].text,
 				x = self.xStart,
 				y = self.yStart + (self.ySpace * (index-1) ),
 			}
-			--love.graphics.print(self.texts[i][t].text, self.xStart, self.yStart + (self.ySpace * (index-1) ) )
+	
 
 			index = index + 1
 		end 
@@ -359,3 +360,10 @@ ObjectManager:AddStatic(DebugText)
 -->REFACTOR
 
 
+-- Junk
+-------------------------------------------------------------------
+--[==[
+
+--love.graphics.print(self.texts[i][t].text, self.xStart, self.yStart + (self.ySpace * (index-1) ) )
+
+--]==]

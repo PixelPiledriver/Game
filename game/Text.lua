@@ -38,7 +38,10 @@ Text.default =
 	fade = false,
 	life = false,
 	color = "white",
-	size = 14
+	size = 14,
+	boxPad = 4,
+	boxColor = "black",
+	boxAutoContrastColor = true
 }
 
 
@@ -105,14 +108,26 @@ function Text:New(data)
 	-- Graphics
 	---------------
 
-	o.boxPad = data.boxPad or 0
+	
 
 	-- optional simple box backdrop for text
 	if(data.box) then
+
+		o.box = {}
+		o.box.pad = data.box.pad or self.default.boxPad
+		o.box.width = o.font:getWidth(o.text) + o.box.pad
+		o.box.height = o.font:getHeight() + o.box.pad
+		o.box.color = data.box.color or Color:Get(self.default.boxColor)
+
+		o.box.autoContrastColor = Bool:DataOrDefault(data.autoContrastColor, self.default.boxAutoContrastColor)
+
+		-->OPTION
+		-- object type
+		--[[
 		o.box = Box:New
 		{
-			width = o.font:getWidth(o.text) + o.boxPad,
-			height = o.font:getHeight() + o.boxPad,
+			width = o.font:getWidth(o.text) + o.box.pad,
+			height = o.font:getHeight() + o.box.pad,
 			color = data.box.color
 		}
 
@@ -122,6 +137,7 @@ function Text:New(data)
 			a = {o.box, "Pos", {"x", "y"}},
 			b = {o, "Pos", {"x", "y"}}
 		}
+		--]]
 
 	end
 
@@ -170,8 +186,18 @@ function Text:New(data)
 
 	function o:Update()
 		self:UpdateTimer()
+		self:AutoContrast()
 	end 
 
+	function o:AutoContrast()
+		-- make box opposite color of text
+		if(self.box) then
+			self.box.color.r = 255 - self.color.r
+			self.box.color.g = 255 - self.color.g
+			self.box.color.b = 255 - self.color.b
+		end 
+
+	end 
 
 	function o:UpdateTimer()
 		if(self.useTimer == false) then
@@ -179,7 +205,7 @@ function Text:New(data)
 		end
 
 		if(self.timerTrigger) then
-			--print(self.timerTrigger[1][self.timerTrigger[2]])
+			
 			if(self.timerTrigger[1][self.timerTrigger[2]]) then
 				self.timer = self.timerMax
 				self:SetActive(true)
@@ -241,6 +267,16 @@ function Text:New(data)
 		end 
 		--]]
 
+		-- box 
+		-- draws behind text so down as straight draw call for simplicity
+		if(self.box) then
+			love.graphics.setColor(Color:AsTable(self.box.color))
+			love.graphics.rectangle("fill", self.Pos.x - self.box.pad/2, self.Pos.y - self.box.pad/2, self.box.width, self.box.height)
+		end 
+
+
+
+		-- text
 		love.graphics.setColor(Color:AsTable(self.color))
 		love.graphics.setFont(self.font)
 
@@ -421,6 +457,8 @@ return Text
 
 -- Notes
 ------------------------
+-- s
+
 -->FIX
 -- BreakIntoLines fails on long overstretched words
 -- like BOOOOOOOOOOOOOOOOOO!!!!!
@@ -438,7 +476,7 @@ return Text
 
 -- Junk
 -----------------------------------------------
---[[
+--[==[
 -- changing BreakIntoLines a bit
 -- here is the old version
 
@@ -477,4 +515,10 @@ return Text
 	end 
 
 
---]]
+
+
+
+printDebug{self.timerTrigger[1][self.timerTrigger[2]], "Text"}
+
+
+--]==]

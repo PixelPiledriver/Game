@@ -416,6 +416,15 @@ end
 
 function ObjectManager:PostUpdate()
 
+	-- statics
+	for i=1 , #self.statics do
+		if(self.statics[i].PostUpdate) then
+			self.statics[i]:PostUpdate()
+		end 
+	end 
+
+
+	-- objects
 	for i=1, #self.postUpdateObjects do
 
 		if(self.postUpdateObjects[i].PostUpdate) then 

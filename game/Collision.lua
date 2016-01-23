@@ -61,12 +61,12 @@ function Collision:New(data)
 	-- pos
 	o.Pos = Pos:New
 	{
-		x = data.x or 100,
-		y = data.y or 100
+		x = data.x or 0,
+		y = data.y or 0
 	}
 
-	o.offsetX = o.Pos.x
-	o.offsetY = o.Pos.y
+	o.xOffset = data.xOffset or 0
+	o.yOffset = data.yOffset or 0
 
 	-- NEED TO convert thos over to use Size component
 	--	o.width = data.width or nil
@@ -130,15 +130,16 @@ function Collision:New(data)
 	-- other objects that this object can collide with
 	o.collisionList = data.collisionList or nil
 
+	-- points to test within collision
+	o.pointsList = data.pointsList or nil
+	o.clearPoints = true
+
 	-- alignment
 	o.vertCenter = data.vertCenter or false
 	o.horzCenter = data.horzCenter or false
 
 	-- draw
-	o.draw = data.draw
-	if(o.draw == nil) then
-		o.draw = true
-	end 
+	o.draw = Bool:DataOrDefault(data.draw, true)
 
 
 	
@@ -178,11 +179,16 @@ function Collision:New(data)
 
 	function o:CollisionWith(data)
 
-		printDebug{self.collisionList, "Collision3"}
-		printDebug{data.other.collisionList, "Collision3"}
+		if(self.collisionList) then
+			printDebug{self.collisionList, "Collision3"}
+		end 
 
+		if(data.other.collisionList) then
+			printDebug{data.other.collisionList, "Collision3"}
+		end 
 
 		self.collided = true
+		data.other.collided = true
 
 		if(self.oneCollision) then
 			self.firstCollision = true
@@ -192,6 +198,10 @@ function Collision:New(data)
 		if(self.parent and self.parent.OnCollision) then
 			self.parent:OnCollision(data)	
 		end
+
+		if(data.other.parent and data.other.parent.OnCollision) then
+			data.other.parent:OnCollision()
+		end 
 
 	end 
 
@@ -212,15 +222,15 @@ function Collision:New(data)
 			return
 		end 
 
-			self.Pos.x = love.mouse.getX() + self.offsetX
-			self.Pos.y = love.mouse.getY() + self.offsetY
+			self.Pos.x = love.mouse.getX() + self.xOffset
+			self.Pos.y = love.mouse.getY() + self.yOffset
 		
 	end 
 
 
 
 	function o:Update()
-		--self:FollowMouse()
+		self:FollowMouse()
 		--self:FollowParent()
 
 		-- clear collision state --> and save state from last frame

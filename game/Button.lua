@@ -178,8 +178,8 @@ function Button:New(data)
 	o.toggleName = data.toggleName or data.text
 
 	-- functions for toggle type buttons
-	o.toggleOnFunc = data.toggleOnFunc or nil
-	o.toggleOffFunc = data.toggleOffFunc or nil
+	o.toggleOnFunc = data.on or nil
+	o.toggleOffFunc = data.off or nil
 
 	-----------
 	-- Text
@@ -534,7 +534,7 @@ function Button:New(data)
 
 					-- no fucntion or toggle defined --> this button is useless --> but can change in appearance
 					else
-						print("this button has no function")
+						printDebug{"this button has no function", "Button"}
 						wasClicked = true
 					end 
 

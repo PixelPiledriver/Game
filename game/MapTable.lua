@@ -183,14 +183,14 @@ function MapTable:New(data)
 
 		-- x doesnt exist?
 		if(self.map[data.x] == nil) then
-			--print("create X")
+			printDebug{"create X", "MapTable"}
 			self.map[data.x] = {}
 		end
 
 		-- slot is empty so put object inside?
 		--if(self.map[data.x][data.y] == "_nil") then 
 			self.map[data.x][data.y] = data.object
-			--print(self.map[data.x][data.y])
+			printDebug{self.map[data.x][data.y], "MapTable"}
 		--end
 
 	end 
