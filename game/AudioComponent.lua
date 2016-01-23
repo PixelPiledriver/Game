@@ -131,8 +131,6 @@ function AudioComponent:New(data)
 		end
 	end
 
-
-
 	function o:Stop(soundSourceName)
 		if(o.SoundSources[soundSourceName] == nil) then			
 			return

@@ -8,6 +8,7 @@
 -- Requires
 --------------
 local AudioComponent = require("AudioComponent")
+local MasterAudio = require("MasterAudio")
 local Input = require("Input")
 
 local Start = function()
@@ -95,10 +96,51 @@ local Start = function()
 		end 	
 	}
 
+	local MasterDown =
+	{
+		"left", "press",
+		function()				
+			MasterAudio:MasterVolumeDown(0.1)
+			print("Master Volume: " .. MasterAudio:GetMasterVolume())
+		end 	
+	}
+
+	local MasterUp =
+	{
+		"right", "press",
+		function()				
+			MasterAudio:MasterVolumeUp(0.1)
+			print("Master Volume: " .. MasterAudio:GetMasterVolume())			
+		end 	
+	}
+
+	local MasterPlayPause =
+	{
+		"v", "press",
+		function()				
+			MasterAudio:ToggleAllAudio()
+			if(MasterAudio.paused) then
+				print("PAUSE Master Volume")
+			else
+				print("RESUME Master Volume")
+			end
+		end 	
+	}
+
+	local MasterStop =
+	{
+		"b", "press",
+		function()				
+			MasterAudio:StopAllAudio()
+			print("STOP Master Volume")
+		end 	
+	}
 	
 	gameObject.Input:AddKeys
 	{
-		PlaySFX, PlayBGMusic, StopBGMusic, VolumeUp, VolumeDown, PlayWilhelm, ToggleLoop 
+		PlaySFX,     PlayBGMusic, StopBGMusic, VolumeUp, VolumeDown, 
+		PlayWilhelm, ToggleLoop,  MasterDown,  MasterUp, MasterPlayPause,
+		MasterStop 
 	}
 
 end 
