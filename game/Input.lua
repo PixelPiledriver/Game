@@ -131,8 +131,6 @@ Input.Info = Info:New
 						break
 					end
 
-					print(":sdkfjlkj")
-
 					-- key has parent? --> overrides component
 					if(self[inputType][key].parent) then
 						self[inputType][key].func(self[inputType][key].parent)

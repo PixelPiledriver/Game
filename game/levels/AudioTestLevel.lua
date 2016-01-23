@@ -20,26 +20,23 @@ local Start = function()
 		parent = gameObject
 	}
 
-	gameObject.Input = Input:New
-	{
-		parent = gameObject
-	}
+	gameObject.Input = Input:New{}
 
 	gameObject.AudioComponent:CreateSoundData("WilhelmScream.ogg")
 	gameObject.AudioComponent:CreateSoundData("SuperMarioWorld.mp3")
 	gameObject.AudioComponent:StoreNewSoundSource ("SuperMarioWorld.mp3", "BGMusic", "stream")
+	gameObject.AudioComponent:StoreNewSoundSource ("WilhelmScream.ogg", "Wilhelm")
 
 	-- select action
 	local PlayBGMusic =
 	{
 		" ", "press",
 		function() 
+			gameObject.AudioComponent:TogglePlay("BGMusic")
 			if(gameObject.AudioComponent:IsPlaying("BGMusic")) then
-				gameObject.AudioComponent:Pause("BGMusic")
-				print("PAUSE background music")			
-			else
-				gameObject.AudioComponent:Play("BGMusic")
 				print("PLAY background music")			
+			else
+				print("PAUSE background music")			
 			end
 		end 
 	}
@@ -64,35 +61,44 @@ local Start = function()
 
 	local VolumeUp =
 	{
-		"up", "press",
+		"up", "hold",
 		function()
-			local currVol = gameObject.AudioComponent:GetVolume("BGMusic")
-			currVol = currVol + 0.1
-			gameObject.AudioComponent:SetVolume("BGMusic", currVol)
-			print("Current Volume: " .. currVol)
+			gameObject.AudioComponent:VolumeUp("BGMusic", 0.01)
+			print("Current Volume: " .. gameObject.AudioComponent:GetVolume("BGMusic"))
 		end 
 	}
 
 	local VolumeDown =
 	{
-		"down", "press",
+		"down", "hold",
 		function()
-			local currVol = gameObject.AudioComponent:GetVolume("BGMusic")
-			currVol = currVol - 0.1
-			gameObject.AudioComponent:SetVolume("BGMusic", currVol)
-			print("Current Volume: " .. currVol)			
+			gameObject.AudioComponent:VolumeDown("BGMusic", 0.01)
+			print("Current Volume: " .. gameObject.AudioComponent:GetVolume("BGMusic"))			
 		end 	
 	}
 
-	-- Looping 
-	-- function o:ToggleLooping(soundSourceName)
-	-- function o:SetLooping(soundSourceName, isLooping)
-	-- function o:isLooping(soundSourceName)
+	local PlayWilhelm =
+	{
+		"f", "press",
+		function()				
+			gameObject.AudioComponent:Play("Wilhelm")
+			print("PLAY Wilhelm soundSource")			
+		end 	
+	}	
 
+	local ToggleLoop =
+	{
+		"d", "press",
+		function()				
+			gameObject.AudioComponent:ToggleLooping("Wilhelm")
+			print(gameObject.AudioComponent:isLooping("Wilhelm"))			
+		end 	
+	}
 
+	
 	gameObject.Input:AddKeys
 	{
-		PlaySFX, PlayBGMusic, StopBGMusic, VolumeUp, VolumeDown
+		PlaySFX, PlayBGMusic, StopBGMusic, VolumeUp, VolumeDown, PlayWilhelm, ToggleLoop 
 	}
 
 end 

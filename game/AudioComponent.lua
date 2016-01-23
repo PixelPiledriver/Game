@@ -21,27 +21,27 @@ AudioComponent.Info = Info:New
 -- Static Functions
 -----------------------
 function AudioComponent:New(data)
--- Fail Check/Ensure this is being used as a component
-	-- if(data.parent == nil) then
-	-- 	print("parent required!")
-	-- 	return
-	-- end
+	-- Fail Check/Ensure this is being used as a component
+	if(data.parent == nil) then
+		print("AudioComponent requires a parent!")
+		return
+	end
 
 	local o = {}
-	o.parent = data.parent
+	o.parent = data.parent	
 	-- Table of SoundData objects (ID'd by filenames) this AudioComponent contains
-	-- key: fileName
+	-- key: audio fileName
 	-- data: love2D soundData object
 	-- this Audio component will only play sounds found in its SoundData table
 	o.SoundData = {}
+
 	-- key: soundSourceName
 	-- data: love2D soundSource object
-	-- this is where this AudioComponent will store soundSources created with the SoundSource method
+	-- this is where this AudioComponent will store soundSources created with the StoreNewSoundSource method
 	o.SoundSources = {}
-	-- o.PrivateSoundSources = {}
 
-	-- How do I make this actually private?
-	--Private Table
+	-- TODO: How do I make this actually private?
+	-- Private Table DO NOT ACCESS
 	o.SoundSourceMasters = {};
 
 	------------------
@@ -55,16 +55,17 @@ function AudioComponent:New(data)
 		structureType = "Component"
 	}
 
+	-- key: fileName
+	-- data: love2D soundData object
+	-- The AudioComponent will only play sounds listed in its SoundData table
 	function o:CreateSoundData(fileName)
 		if (o.SoundData[fileName] ~= nil) then			
 			printDebug{"Did not create " .. fileName .. " SoundData already exists with that name", "AudioComponent"}
 			return --already exists
 		end
-		-- default to static sound
-		-- 
 		soundData = love.sound.newSoundData("sounds/" .. fileName)
 		o.SoundData[fileName] = soundData 
-
+		-- default to static sound
 		soundSource = love.audio.newSource(soundData, stream or "static")
 		o.SoundSourceMasters[fileName] = soundSource
 	end
@@ -73,38 +74,22 @@ function AudioComponent:New(data)
 	-- and appends it to the SoundSources table
 	-- key: fileName
 	-- data: love2D soundData object
-
-	-- NOTE TO SELF WHEN LESS HIGH:
-	-- make a comment about the design paradigm of the naming behind the last variable of this function,
-	-- and how this naming/design pattern can be future applied in binary "this or that" scenarios
-	-- Hah. 
-	-- Hmm.
-	-- I don't really like this pattern anymore....Maybe the variable should be self evident that it is 
-	-- in fact a "this or that" variable
-	--streamOR?
 	function o:StoreNewSoundSource(fileName, soundSourceName, stream)		
 		--if it doesn't exist in the SoundData table
-		if (o.SoundData[soundSourceName] ~= nil) then
-			printDebug{"Did not create " .. soundSourceName .. " SoundSource already exists with that name", "AudioComponent"}			
+		if (o.SoundData[fileName] == nil) then
+			printDebug{"Could not create " .. soundSourceName .. ". Did you call  CreateSoundData(" .. fileName .. ")?", "AudioComponent"}			
 			return --already exists
 		end
+		soundData = o.SoundData[fileName]
 		-- default to static sound
 		soundSource = love.audio.newSource(soundData, stream or "static");
 		o.SoundSources[soundSourceName] = soundSource;
 	end
 
-	--TO DO: Make more robust print methods for AudioComponent
-	-- you copy pasta'd this shit from the internet when you were stoned
-	-- figure out a better way to do this, ya jackass
-	function o:PrintSoundSources()
-		for k, v in pairs(o.SoundSources) do
-   			print(k, v)
-		end
-	end
 	----------------------------------------------------------------------
 	-- Basic Methods for Playing Audio  --
 	----------------------------------------------------------------------
-	-- Play/Pause/Stop
+
 	-- if you don't care about manipulating the sound, you can just play the sound
 	-- using this function and forget about it 
 	function o:PlaySFX(fileName)
@@ -115,10 +100,6 @@ function AudioComponent:New(data)
 		soundSourceClone:play()
 	end
 
-	-- For the stop and pause methods to make sense, we need to make sure
-	-- we're grabbing a particular soundSource
-
-	-- These functions are only used to manipulate SoundSources
 	function o:Play(soundSourceName)
 		if(o.SoundSources[soundSourceName] == nil) then			
 			return
@@ -126,7 +107,6 @@ function AudioComponent:New(data)
 		o.SoundSources[soundSourceName]:play()
 	end
 
-	-- Returns whether or not this soundSource is currently playing
 	function o:IsPlaying(soundSourceName)
 		return o.SoundSources[soundSourceName]:isPlaying()
 	end
@@ -138,6 +118,21 @@ function AudioComponent:New(data)
 		o.SoundSources[soundSourceName]:pause()
 	end
 
+	-- Toggles between Play/Pause for a soundSource
+	function o:TogglePlay(soundSourceName)
+		if(o.SoundSources[soundSourceName] == nil) then
+			--TODO: Add messages so these sort of things don't fail silently			
+			return
+		end				
+		if(o:IsPlaying(soundSourceName)) then
+			o:Pause(soundSourceName)
+		else
+			o:Play(soundSourceName)
+		end
+	end
+
+
+
 	function o:Stop(soundSourceName)
 		if(o.SoundSources[soundSourceName] == nil) then			
 			return
@@ -145,7 +140,7 @@ function AudioComponent:New(data)
 		o.SoundSources[soundSourceName]:stop()
 	end
 
-	-- Volume
+	-- Volume for SoundSources 
 	function o:SetVolume(soundSourceName, newVolume)
 		if(o.SoundSources[soundSourceName] == nil) then			
 			return
@@ -164,7 +159,31 @@ function AudioComponent:New(data)
 		return o.SoundSources[soundSourceName]:getVolume()
 	end
 
-	-- Looping 
+	function o:VolumeUp(soundSourceName, volIncrement)
+		if(o.SoundSources[soundSourceName] == nil) then			
+			return
+		end
+		local currVol = o:GetVolume(soundSourceName)
+		if ((currVol+volIncrement) > 1) then
+			o.SoundSources[soundSourceName]:setVolume(1)
+		else
+			o.SoundSources[soundSourceName]:setVolume(currVol+volIncrement)
+		end
+	end
+
+	function o:VolumeDown(soundSourceName, volIncrement)
+		if(o.SoundSources[soundSourceName] == nil) then			
+			return
+		end
+		local currVol = o:GetVolume(soundSourceName)
+		if ((currVol-volIncrement) < 0) then
+			o.SoundSources[soundSourceName]:setVolume(0)
+		else
+			o.SoundSources[soundSourceName]:setVolume(currVol-volIncrement)
+		end
+	end
+
+	-- Looping for SoundSources 
 	function o:ToggleLooping(soundSourceName)
 		o.SoundSources[soundSourceName]:setLooping(not o.SoundSources[soundSourceName]:isLooping()) 
 	end
