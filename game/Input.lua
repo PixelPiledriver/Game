@@ -70,7 +70,7 @@ Input.Info = Info:New
 				for i=1, #data do
 					local inputType = data[i][2] .. "Keys"
 					
-					o[inputType][data[i][1]] =
+					self[inputType][data[i][1]] =
 					{
 						key = data[i][1],
 						func = data[i][3],
@@ -80,7 +80,7 @@ Input.Info = Info:New
 						active = data[i][6] or true
 					}
 
-					o[inputType]["index"][#o[inputType]["index"]+1] = data[i][1]
+					self[inputType]["index"][#self[inputType]["index"]+1] = data[i][1]
 				end 
 			end 
 		end 
@@ -130,6 +130,8 @@ Input.Info = Info:New
 
 						break
 					end
+
+					print(":sdkfjlkj")
 
 					-- key has parent? --> overrides component
 					if(self[inputType][key].parent) then

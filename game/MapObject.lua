@@ -150,7 +150,7 @@ function MapObject:New(data)
 
 		-- use selected action in a dire
 		local actionLeft =
-		{"left", "press", 
+		{"left", "hold", 
 			function() 
 				o.direction.x = -1
 				o.direction.y = 0

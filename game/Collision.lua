@@ -68,6 +68,8 @@ function Collision:New(data)
 	o.xOffset = data.xOffset or 0
 	o.yOffset = data.yOffset or 0
 
+	o.offsetBySize = Bool:DataOrDefault(data.offsetBySize, false)
+
 	-- NEED TO convert thos over to use Size component
 	--	o.width = data.width or nil
 	--	o.height = data.height or nil
@@ -230,12 +232,22 @@ function Collision:New(data)
 
 
 	function o:Update()
+
+		-- follow
 		self:FollowMouse()
 		--self:FollowParent()
 
-		-- clear collision state --> and save state from last frame
+		-- clear collision state and save state from last frame
 		self.collidedLastFrame = self.collided
 		self.collided = false
+
+		-- offset from size
+		if(self.offsetBySize) then
+			self.xOffset = -self.Size.width/2
+			self.yOffset = -self.Size.height/2
+		end 
+
+
 
 	end 
 
