@@ -37,6 +37,7 @@ local printList = {}
 printList.mathTest = {false, false}
 printList.Animation = {true, false}
 printList.AnimationComponent = {true, false}
+printList.AudioComponent = {true, false}
 printList.Build = {false, false}
 printList.ChatBox = {true, false}
 printList.Collision = {false, false}

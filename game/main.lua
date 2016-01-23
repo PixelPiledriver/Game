@@ -56,7 +56,7 @@ local Color = require("Color")
 local Collision = require("Collision")
 local CollisionLists = require("CollisionLists")
 local FrameCounter = require("FrameCounter")
-local Sound = require("Sound")
+--local Sound = require("Sound")
 
 local Graphics = require("Graphics")
 local Shader = require("Shader")

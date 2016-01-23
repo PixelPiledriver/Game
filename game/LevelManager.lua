@@ -36,6 +36,7 @@ LevelManager.printDescriptionOnStart = true
 -- all levels available
 LevelManager.levelNames = 
 {
+	"AudioTestLevel",
 	"DrawLineLevel",
 	"AnimationEditorLevel",
 	"TextWriteLevel",
@@ -46,8 +47,7 @@ LevelManager.levelNames =
 	"SnapGridTestLevel",
 	"PixelDrawLevel",
 	"LerpLevel",
-	"BoxLevel",
-	"AudioTestLevel"
+	"BoxLevel"
 }
 
 LevelManager.levelSelectIndex = 1
