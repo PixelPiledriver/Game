@@ -465,6 +465,11 @@ function ObjectManager:RepeatedInput()
 	-- objects
 	for i=1, #self.objects do
 
+		-- Input component
+		if(self.objects[i].Input) then
+			self.objects[i].Input:RepeatedInputUpdate()
+		end
+
 		-- keyboard input
 		if(self.objects[i].RepeatedInput) then
 			self.objects[i]:RepeatedInput()

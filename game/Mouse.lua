@@ -201,6 +201,15 @@ function Mouse:SingleClick(mouseButton)
 
 end
 
+
+function Mouse:Hold(mouseButton)
+	if(love.mouse.isDown(mouseButton)) then
+		return true
+	end 
+
+	return false
+end
+
 --------------
 -- Object
 --------------
@@ -255,25 +264,27 @@ function Mouse:New(data)
 
 	--o.line = Line:New{drain = false}
 
-	o.width = data.width or 8
-	o.height = data.height or 8
+	o.width = data.width or 4
+	o.height = data.height or 4
 
 	o.lineTracerActive = Bool:DataOrDefault(data.lineTracerActive, Mouse.default.lineTracerActive)
 
 	-- collision for mouse cursor
 	o.collision = Collision:New
 	{
-		x = -o.width/2,
-		y = -o.height/2,
+		xOffset = -o.width/2,
+		yOffset = -o.height/2,
 		width = o.width,
 		height = o.height,
 		shape = "rect",
 		name = o.objectType,
 		collisionList = {},
-		parent = o
+		parent = o,
+		mouse = true
 	}
 
 
+	--[[
 	Link:Simple
 	{
 		a = {o.collision, "Pos", "x"},
@@ -293,6 +304,7 @@ function Mouse:New(data)
 			{object = {Camera.selectedCamera.Pos, "y"}}
 		}
 	}
+	--]]
 	
 
 	---------------------
