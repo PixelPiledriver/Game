@@ -27,36 +27,6 @@ PrintDebugType.Info = Info:New
 	structureType = "Static"
 }
 
-
-
-
-<<<<<<< HEAD
--- switches
-
-printList.mathTest = {false, false}
-printList.Animation = {true, false}
-printList.AnimationComponent = {true, false}
-printList.AudioComponent = {true, false}
-printList.Build = {false, false}
-printList.ChatBox = {true, false}
-printList.Collision = {false, false}
-printList.Collision2 = {false, false}
-printList.Collision3 = {false, false}
-printList.CollisionList = {false, false}
-printList.CollisionManager = {false, false}
-printList.Controller = {false, false}
-printList.Fail = {true, false}
-printList.Health = {false, false}
-printList.Links = {false, false}
-printList.LevelManager = {true, false}
-printList.MapTable = {false, false}
-printList.Matrix = {true, false}
-printList.Mouse = {false, false}
-printList.MapObject = {true, false}
-printList.ObjectManager = {false, false}
-printList.stuff = {false, false}
-printList.Textfile = {true, false}
-=======
 -- Set which message types to print or not
 -- ObjectName = {priority1, priority2, ...}
 local printList = 
@@ -89,9 +59,31 @@ local printList =
 	Text = {true, false},
 	Textfile = {true, false}
 }
->>>>>>> origin/master
 
-
+-- switches
+printList.mathTest = {false, false}
+printList.Animation = {true, false}
+printList.AnimationComponent = {true, false}
+printList.AudioComponent = {true, false}
+printList.Build = {false, false}
+printList.ChatBox = {true, false}
+printList.Collision = {false, false}
+printList.Collision2 = {false, false}
+printList.Collision3 = {false, false}
+printList.CollisionList = {false, false}
+printList.CollisionManager = {false, false}
+printList.Controller = {false, false}
+printList.Fail = {true, false}
+printList.Health = {false, false}
+printList.Links = {false, false}
+printList.LevelManager = {true, false}
+printList.MapTable = {false, false}
+printList.Matrix = {true, false}
+printList.Mouse = {false, false}
+printList.MapObject = {true, false}
+printList.ObjectManager = {false, false}
+printList.stuff = {false, false}
+printList.Textfile = {true, false}
 
 --------------
 -- Functions
