@@ -461,7 +461,7 @@ function ObjectManager:RepeatedInput()
 		end
 
 	end
-
+	
 	-- objects
 	for i=1, #self.objects do
 
