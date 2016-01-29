@@ -24,7 +24,13 @@ Line.Info = Info:New
 }
 
 ---------------------
--- Static Functions
+-- Static Vars
+---------------------
+Line.normalColor = Color:Get("darkGreen")
+Line.normalHingePoint = "startPoint"
+
+---------------------
+-- Object
 ---------------------
 
 -- {a = {x,y}, b = {x,y}, width, color}
@@ -65,9 +71,13 @@ function Line:New(data)
 	o.color = data.color or Color:Get("black")
 	o.width = data.width or 1
 
+	-- normal
+	o.showNormal = true
+
 	-- other
 	o.collidablePoints = data.collidablePoints
 	o.DrawLine = data.DrawLine
+
 
 	------------------------
 	-- Components
@@ -108,6 +118,32 @@ function Line:New(data)
 	-----------------
 	-- Functions
 	-----------------
+
+	-- returns a normal vector of this line
+	function o:GetNormal()
+		local dx = self.b.x - self.a.x
+		local dy = self.b.y - self.a.y
+
+		local normalRight = {x = -dy, y = dx}
+		local normalLeft = {x = dy, y = -dx}
+
+		return normalRight
+	end
+
+	function o:GetVector()
+		return Math:LineToVector(self)
+	end
+
+	function o:GetLength()
+		local dx = self.b.x - self.a.x
+		local dy = self.b.y - self.a.y
+
+		dx = dx * dx
+		dy = dy * dy
+
+		return math.sqrt(dx + dy)
+	end 
+
 	function o:Update()
 	end
 
@@ -123,12 +159,40 @@ function Line:New(data)
 
 	function o:DrawCall()
 
+		-- draw this line
 		love.graphics.setLineWidth(self.width)
 		love.graphics.setColor(Color:AsTable(self.color))
 		love.graphics.line(self.Pos.x + self.a.x, self.Pos.y + self.a.y, self.Pos.x + self.b.x, self.Pos.y + self.b.y)
 
 		-- reset width
 		love.graphics.setLineWidth(1)
+
+		-- display normal or line
+		if(self.showNormal) then
+			love.graphics.setColor(Color:AsTable(Line.normalColor))
+
+			local normal = self:GetNormal()
+			normal = Math:UnitVector(normal)
+
+			local vector = Math:LineToVector(self)
+			local length = self:GetLength()
+
+			local a =
+			{
+				x = self.Pos.x + self.a.x + (vector.x * (length/2)),
+				y = self.Pos.y + self.a.y + (vector.y * (length/2)),
+			}
+
+			local b =
+			{
+				x = self.Pos.x + self.a.x + (vector.x * (length/2)) + (normal.x * 20),
+				y = self.Pos.y + self.a.y + (vector.y * (length/2)) + (normal.y * 20)
+			}
+
+			love.graphics.line(a.x, a.y, b.x, b.y)
+
+		end 
+
 
 	end
 

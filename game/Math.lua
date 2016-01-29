@@ -10,6 +10,14 @@
 Math = {}
 
 
+function Math:NormalOfVector(vector)
+	local line = 
+	{
+		a = {x = 0, y = 0},
+		b = {x = vector.x, y = vector.y}
+	}
+end
+
 -- get unit vector from given vector
 function Math:UnitVector(vector)
 
@@ -26,6 +34,18 @@ function Math:UnitVector(vector)
 
 	return unitVec
 
+end 
+
+function Math:LineToVector(line)
+	local vector =
+	{
+		x = line.b.x - line.a.x,
+		y = line.b.y - line.a.y	
+	}
+
+	vector = self:UnitVector(vector)
+
+	return vector
 end 
 
 -- return vector from given angle
@@ -64,7 +84,6 @@ function Math:RadToVector(radian)
 	return v
 end 
 
-
 -- return angle from given vector
 -- vector = {x, y}
 function Math:VectorToAngle(vector)
@@ -91,6 +110,7 @@ function Math:InverseLerp(data)
 	return  data.t/(data.a + (data.b-data.a))
 end
 
+-- see if the two given points share the same position
 --{a={x,y}, b={x,y}}
 function Math:TestEqualityPoints(data)
 
@@ -103,7 +123,8 @@ function Math:TestEqualityPoints(data)
 end 
 
 
--- compares a value to a range and keeps it within
+-- compares a value to a given range, if it falls outside it puts it within
+-- works as a Floor and Ceiling at the same time
 -- {value, min, max}
 function Math:Bind(data)
 	if(data.value < data.min) then
