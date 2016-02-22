@@ -64,9 +64,12 @@ function Pos:New(data)
 	}
 
 
+	-------------
+	-- Vars
+	-------------
+
 	o.parent = data.parent
 
-	-- vars
 	o.x = data.x or 0
 	o.y = data.y or 0
 	o.z = data.z or 0
@@ -87,7 +90,23 @@ function Pos:New(data)
 	o.speed.y = data.speed and data.speed.y or 0
 	o.speed.z = data.speed and data.speed.z or 0
 
+	o.dash = 
+	{
+		left = 0, right = 0,
+		up = 0, down = 0
+	}
 
+
+	
+	o.gravity = 
+	{
+		x = 0,
+		y = data.gravity or 0,
+		z = 0,
+		active = Bool:IfExists(data.gravity)
+	}
+	
+	
 	-- link this pos component to another pos component
 	o.followPos = data.followPos or nil
 	o.followOffsetX = 0
@@ -134,7 +153,32 @@ function Pos:New(data)
 		self:PosSpeedUpdate()
 		self:LastPosUpdate()
 		self:FollowPosUpdate()
+		self:GravityUpdate()
+		self:DashUpdate()
 	end 
+
+	function o:DashUpdate()
+		self.x = self.x + self.dash.right
+		self.x = self.x - self.dash.left
+		
+		if(self.dash.right > 0) then
+			self.dash.right = self.dash.right - 1
+		end
+
+		if(self.dash.left > 0) then
+			self.dash.left = self.dash.left - 1
+		end 
+		
+	end 
+
+	function o:GravityUpdate()
+		if(self.gravityActive == false) then
+			return
+		end 
+
+		self.speed.y = self.speed.y + self.gravity.y
+
+	end
 
 	function o:LastPosUpdate()
 		self.lastX = self.x

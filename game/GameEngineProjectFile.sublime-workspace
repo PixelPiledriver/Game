@@ -4,6 +4,194 @@
 		"selected_items":
 		[
 			[
+				"spin",
+				"spinKick2"
+			],
+			[
+				"spinK",
+				"spinKick"
+			],
+			[
+				"Sprite",
+				"Sprites"
+			],
+			[
+				"FightChc",
+				"FightCharacter"
+			],
+			[
+				"fire",
+				"fireball2"
+			],
+			[
+				"firebal",
+				"fireball1"
+			],
+			[
+				"timer",
+				"timerMax"
+			],
+			[
+				"res",
+				"resetAll"
+			],
+			[
+				"AddSe",
+				"AddSequence2"
+			],
+			[
+				"Key",
+				"KeySequence"
+			],
+			[
+				"seq",
+				"sequenceKeys"
+			],
+			[
+				"AddSeq",
+				"AddSequence"
+			],
+			[
+				"input",
+				"inputType"
+			],
+			[
+				"dash",
+				"dashLeft"
+			],
+			[
+				"sequen",
+				"sequenceIndex"
+			],
+			[
+				"se",
+				"sequenceKeys"
+			],
+			[
+				"sequ",
+				"sequenceIndex"
+			],
+			[
+				"s",
+				"sequenceIndex"
+			],
+			[
+				"seque",
+				"sequenceIndex"
+			],
+			[
+				"star",
+				"StartNewRound"
+			],
+			[
+				"player",
+				"players"
+			],
+			[
+				"gra",
+				"gravity"
+			],
+			[
+				"member",
+				"memberName"
+			],
+			[
+				"gr",
+				"gravity"
+			],
+			[
+				"grai",
+				"gravityActive"
+			],
+			[
+				"time",
+				"timeMax"
+			],
+			[
+				"Aud",
+				"AudioComponent"
+			],
+			[
+				"play",
+				"playerIndex"
+			],
+			[
+				"Fight",
+				"FightManager"
+			],
+			[
+				"Fn",
+				"FightManager"
+			],
+			[
+				"charac",
+				"characterName"
+			],
+			[
+				"char",
+				"characterName"
+			],
+			[
+				"FightingChar",
+				"FightingCharacter:New"
+			],
+			[
+				"Spr",
+				"Sprites"
+			],
+			[
+				"Figint",
+				"FightingCharacter"
+			],
+			[
+				"sr",
+				"spritesheet"
+			],
+			[
+				"sprite",
+				"sprite"
+			],
+			[
+				"Fighting",
+				"FightingCharacter"
+			],
+			[
+				"move",
+				"moveSpeed"
+			],
+			[
+				"frame",
+				"frameX"
+			],
+			[
+				"frameP",
+				"framePadX"
+			],
+			[
+				"draw",
+				"drawMode"
+			],
+			[
+				"hit",
+				"hitpoints"
+			],
+			[
+				"value",
+				"valueColors"
+			],
+			[
+				"show",
+				"showNormal"
+			],
+			[
+				"norm",
+				"normalColor"
+			],
+			[
+				"set",
+				"setLineWidth"
+			],
+			[
 				"Repeated",
 				"RepeatedInputUpdate"
 			],
@@ -52,10 +240,6 @@
 				"DrawLineUI"
 			],
 			[
-				"Sprite",
-				"SpriteBank"
-			],
-			[
 				"selec",
 				"selectedPoints"
 			],
@@ -86,10 +270,6 @@
 			[
 				"lin",
 				"lineTool"
-			],
-			[
-				"sprite",
-				"spritesheet"
 			],
 			[
 				"Spri",
@@ -176,10 +356,6 @@
 				"PostUpdate"
 			],
 			[
-				"se",
-				"selectedPoints"
-			],
-			[
 				"selte",
 				"selectedPoints"
 			],
@@ -206,10 +382,6 @@
 			[
 				"spriteSheeP",
 				"spriteSheetPanel"
-			],
-			[
-				"frame",
-				"frameIndex"
 			],
 			[
 				"defau",
@@ -308,10 +480,6 @@
 				"AnimationComponent"
 			],
 			[
-				"play",
-				"playName"
-			],
-			[
 				"incre",
 				"increasingZoomSpeed"
 			],
@@ -346,209 +514,158 @@
 			[
 				"spriteShe",
 				"spriteSheet"
-			],
-			[
-				"horizontal",
-				"horizontalLine"
-			],
-			[
-				"Mul",
-				"MulPoint"
-			],
-			[
-				"Mat",
-				"Matrix:Multiply"
-			],
-			[
-				"cente",
-				"centerView"
-			],
-			[
-				"head",
-				"headLength"
-			],
-			[
-				"vis",
-				"visualStyle"
-			],
-			[
-				"vi",
-				"visualStyleFunctions"
-			],
-			[
-				"Crea",
-				"CreatePixelBoxStyle"
-			],
-			[
-				"Create",
-				"CreatePolygonStyle"
-			],
-			[
-				"Ar",
-				"Arrow"
-			],
-			[
-				"object",
-				"objectList"
-			],
-			[
-				"move",
-				"moveNodeVector"
-			],
-			[
-				"Updat",
-				"UpdateMoveNodes"
-			],
-			[
-				"mov",
-				"moveNodes"
-			],
-			[
-				"tempVecto",
-				"tempVector"
-			],
-			[
-				"selecte",
-				"selectedCamera"
-			],
-			[
-				"camera",
-				"cameras"
-			],
-			[
-				"empy",
-				"emptySlotDefault"
-			],
-			[
-				"SnapG",
-				"SnapGridTestLevel"
-			],
-			[
-				"level",
-				"LevelManager"
-			],
-			[
-				"le",
-				"levelNames"
-			],
-			[
-				"Leel",
-				"LevelManager"
-			],
-			[
-				"next",
-				"nextLevel"
-			],
-			[
-				"LEvel",
-				"LevelManager"
-			],
-			[
-				"levelS",
-				"levelSelectIndex"
-			],
-			[
-				"levle",
-				"levelSelectIndex"
-			],
-			[
-				"exclude",
-				"excludeNewFromLevel"
-			],
-			[
-				"exclu",
-				"excludeNewFromLevel"
-			],
-			[
-				"defa",
-				"defaultLevel"
-			],
-			[
-				"leve",
-				"levelNames"
-			],
-			[
-				"Level",
-				"LevelManager"
-			],
-			[
-				"current",
-				"currentLevel"
-			],
-			[
-				"curren",
-				"currentLevel"
-			],
-			[
-				"curr",
-				"currentLevel"
-			],
-			[
-				"even",
-				"eventIndex"
-			],
-			[
-				"event",
-				"eventTexts"
-			],
-			[
-				"scroll",
-				"scrollDownButton"
-			],
-			[
-				"scrol",
-				"scrollUpButton"
-			],
-			[
-				"butt",
-				"openCloseButton"
-			],
-			[
-				"bar",
-				"barCollision"
-			],
-			[
-				"size",
-				"SizeMinimized"
-			],
-			[
-				"ObjectUpdat",
-				"ObjectUpdater:Destroy"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "Camera.lua",
+			"file": "Input.lua",
 			"settings":
 			{
-				"buffer_size": 12868,
+				"buffer_size": 7381,
 				"line_ending": "Windows"
 			}
 		},
 		{
+			"file": "KeySequence.lua",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Searching 158 files for \"Input\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\App.lua:\n    9  -- Requires\n   10  ------------------\n   11: local Input = require(\"Input\")\n   12  \n   13  \n   ..\n   43  \n   44  ----------------------\n   45: -- Input\n   46  ----------------------\n   47  \n   48: App.Input = Input:New\n   49  {\n   50  	keys = \n   ..\n   58  function App:Destroy()\n   59  	ObjectManager:Destroy(self.Info)\n   60: 	ObjectManager:Destroy(self.Input)\n   61  \n   62  end \n\nD:\\GitRepos\\Game\\game\\Box.lua:\n   17  local Size = require(\"Size\")\n   18  local Pos = require(\"Pos\")\n   19: local Input = require(\"Input\")\n   20  local Draw = require(\"Draw\")\n   21  \n   ..\n  164  	}\n  165  \n  166: 	o.Input = Input:New{}\n  167  \n  168  	-- new draw component\n  ...\n  280  \n  281  	-- only used for down\n  282: 	function o:RepeatedInput()\n  283  		self:Rotate()\n  284  		self:Move()\n  ...\n  347  		ObjectManager:Destroy(self.Life)\n  348  		ObjectManager:Destroy(self.Fade)\n  349: 		ObjectManager:Destroy(self.Input)\n  350  		ObjectManager:Destroy(self.Draw)\n  351  		ObjectManager:Destroy(self.color)\n  ...\n  395  --------------------\n  396  \n  397: 	o.Input = Input:New\n  398  	{\n  399  		{\"a\", \"press\", \n\nD:\\GitRepos\\Game\\game\\Camera.lua:\n   15  ------------------\n   16  \n   17: local Input = require(\"Input\")\n   18  local Pos = require(\"Pos\")\n   19  local Link = require(\"Link\")\n   ..\n  325  \n  326  	-----------------------\n  327: 	-- Input\n  328  	-----------------------\n  329  \n  330: 	o.Input = Input:New\n  331  	{\n  332  		parent = o,\n  ...\n  517  end \n  518  \n  519: function Camera:InputUpdate(key, inputType)\n  520: 	self.cameras[self.selectedCameraIndex].Input:InputUpdate(key, inputType)\n  521  end\n  522  \n  523: function Camera:RepeatedInput()\n  524: 	self.cameras[self.selectedCameraIndex].Input:RepeatedInputUpdate()\n  525  end \n  526  \n\nD:\\GitRepos\\Game\\game\\CameraOld.lua:\n   13  -- Requires\n   14  ------------------\n   15: local Input = require(\"Input\")\n   16  \n   17  --------------------------------------------------------------------\n   ..\n  131  \n  132  \n  133: Camera.Input = Input:New\n  134  {\n  135  	parent = Camera,\n  ...\n  339  -- Requires\n  340  ------------------\n  341: local Input = require(\"Input\")\n  342  \n  343  \n  ...\n  458  	-- manually control the camera\n  459  	-- test stuff\n  460: 	function o:RepeatedInput()\n  461  		print(\"yes\")\n  462  		-- move\n  ...\n  687  \n  688  \n  689: Camera.Input = Input:New\n  690  {\n  691  	parent = Camera,\n\nD:\\GitRepos\\Game\\game\\Code Tags and Tools.lua:\n   30  Static.name = \"Controller\" -- name of file\n   31  Static.objectType = \"Static\" -- statics are not part of the game directly but create objects used in game\n   32: Static.dataType = \"Input Constructor & Manager\" -- the function of this static\n   33  \n   34  ----------------\n\nD:\\GitRepos\\Game\\game\\Controller.lua:\n   20  {\n   21  	objectType = \"Controller\",\n   22: 	dataType = \"Input\",\n   23  	structureType = \"Manager\"\n   24  }\n\nD:\\GitRepos\\Game\\game\\DebugText.lua:\n   15  ------------------\n   16  local Color = require(\"Color\")\n   17: local Input = require(\"Input\")\n   18  \n   19  -----------------------------------------------------------------------------\n   ..\n   63  	ShaderStatic = false,\n   64  	MouseStatic = false,\n   65: 	InputTextStatic = false,\n   66  	Info = false,\n   67  \n   ..\n   84  	\n   85  	-- Text\n   86: 	InputText = false,\n   87  \n   88: 	-- Input\n   89  	Mouse = false,\n   90  	Keyboard = false,\n   ..\n  350  	-- DebugText is a Global, no need to require, just use\n  351  \n  352: 	-- Input wont work here because texts need to be gathered first....\n  353  	-- hrmmm weid... not sure what to do about that at this point :(\n  354  \n\nD:\\GitRepos\\Game\\game\\DrawLine.lua:\n   10  ----------------\n   11  local Line = require(\"Line\")\n   12: local Input = require(\"Input\")\n   13  local Collision = require(\"Collision\")\n   14  local Color = require(\"Color\")\n   ..\n   87  \n   88  -------------\n   89: -- Input\n   90  -------------\n   91: DrawLine.Input = Input:New{}\n   92  \n   93  local joinPoints =\n   ..\n  107  }\n  108  \n  109: DrawLine.Input:AddKeys\n  110  {\n  111  	joinPoints, breakPoints\n\nD:\\GitRepos\\Game\\game\\GameEngineProjectFile.sublime-workspace:\n  839  		\"/D/GitRepos/Game/game/MouseDrag.lua\",\n  840  		\"/D/GitRepos/Game/game/Window.lua\",\n  841: 		\"/D/GitRepos/Game/game/Input.lua\",\n  842  		\"/D/GitRepos/Game/game/Keyboard.lua\",\n  843  		\"/D/GitRepos/Game/game/DrawManager.lua\",\n  ...\n  895  		\"/D/GitRepos/Game/game/Health.lua\",\n  896  		\"/D/GitRepos/Game/game/Info.lua\",\n  897: 		\"/D/GitRepos/Game/game/InputText.lua\",\n  898  		\"/D/GitRepos/Game/game/Key.lua\",\n  899  		\"/D/GitRepos/Game/game/Life.lua\",\n  ...\n 1042  			\"Line:\",\n 1043  			\"printDebug\",\n 1044: 			\"Input\",\n 1045  			\"joinPoints\",\n 1046: 			\"Input\",\n 1047  			\"press\",\n 1048  			\"Mouse\",\n\nD:\\GitRepos\\Game\\game\\Input.lua:\n    1: -- Input.lua\n    2  \n    3  -- Purpose\n    .\n   11  ----------------------------------------------------------------------------\n   12  \n   13: local Input = {}\n   14  \n   15  -----------------\n   16  -- Static Info\n   17  -----------------\n   18: Input.Info = Info:New\n   19  {\n   20: 	objectType = \"Input\",\n   21: 	dataType = \"Input\",\n   22  	structureType = \"Static\"\n   23  }\n   ..\n   28  ----------------------\n   29  \n   30: 	function Input:New(data)\n   31  \n   32  		local o = {}\n   ..\n   38  		{\n   39  			name = \"...\" or data.name,\n   40: 			objectType = \"Input\",\n   41: 			dataType = \"Input\",\n   42  			structureType = \"Component\"\n   43  		}\n   ..\n  112  		-- this is used for press and release only\n  113  		-- hold needs to be done with a seperate function\n  114: 		function o:InputUpdate(key, inputType)\n  115  \n  116  			if(self.active == false) then\n  ...\n  155  \n  156  		-- update all holdKeys\n  157: 		function o:RepeatedInputUpdate()\n  158  \n  159  			if(self.active == false) then\n  ...\n  217  	-----------------\n  218  \n  219: ObjectManager:AddStatic(Input)\n  220  \n  221: return Input\n  222  \n  223  \n  ...\n  229  \n  230  \n  231: -- Creating an Input Component\n  232  --------------------------------------\n  233  \n  234  -- long hand\n  235  --[[\n  236: App.Input = Input:New()\n  237: App.Input:AddKey\n  238  {\n  239  	key = \"escape\",\n  240  	type = \"press\",\n  241: 	func = App.QuitGameInput,\n  242  }\n  243  --]]\n  ...\n  245  -- short hand\n  246  --[[\n  247: App.Input = Input:New\n  248  {\n  249: 	{\"escape\", \"press\", App.QuitGameInput}, -- key 1\n  250  	{key, inputType, function}, -- key 2\n  251  	{..., ..., ...} -- key 3\n\nD:\\GitRepos\\Game\\game\\InputList.lua:\n    1: -- InputList.lua\n    2  -->EMPTY\n    3  \n\nD:\\GitRepos\\Game\\game\\InputText.lua:\n    1: --InputText.lua\n    2  \n    3  -- Purpose\n    .\n    9  --------------\n   10  local Keyboard = require(\"Keyboard\")\n   11: local Input = require(\"Input\")\n   12  \n   13  \n   14  ----------------------------------------------------------\n   15: local InputText = {}\n   16  \n   17  \n   ..\n   19  -- Static Info\n   20  -----------------\n   21: InputText.Info = Info:New\n   22  {\n   23: 	objectType = \"InputText\",\n   24: 	dataType = \"Input\",\n   25  	structureType = \"Static\"\n   26  }\n   27  \n   28  \n   29: function InputText:New(data)\n   30  \n   31  	local o = {}\n   ..\n   36  	o.Info = Info:New\n   37  	{\n   38: 		objectType = \"InputText\",\n   39: 		dataType = \"Input\",\n   40  		structureType = \"Object\"		\n   41  	}\n   ..\n   63  \n   64  	-- adds a single character to the string\n   65: 	-- used by Input, but can also be set directly\n   66  	function o:AddToText(key)\n   67  \n   ..\n   84  		DebugText:TextTable\n   85  		{\n   86: 			{text = \"\", obj = \"InputText\"},\n   87: 			{text = \"InputText\"},\n   88  			{text = \"-------------------------\"},\n   89  			{text = self.text}\n   ..\n   92  \n   93  	----------------\n   94: 	-- Input\n   95  	----------------\n   96: 	o.Input = Input:New{}\n   97  	o.keys = data.keys or {}\n   98  \n   ..\n  104  		end\n  105  \n  106: 		o.Input:AddKeys(keysToAdd)\n  107  \n  108  	end\n  109  \n  110  	-- editing keys\n  111: 	o.Input:AddKeys\n  112  	{\n  113  		{\"backspace\", \"press\", function() o:Backspace() end},\n  ...\n  118  	function o:Destroy()\n  119  		ObjectManager:Destroy(self.Info)\n  120: 		ObjectManager:Destroy(self.Input)\n  121  	end \n  122  \n  ...\n  136  \n  137  \n  138: ObjectManager:AddStatic(InputText)\n  139  \n  140: return InputText\n  141  \n  142  \n  ...\n  170  \n  171  -- DONE\n  172: -- implement Input component\n  173  -- each input string only responds to specific keys\n  174  -- so easy to make number or letter input only strings\n\nD:\\GitRepos\\Game\\game\\Key.lua:\n   16  {\n   17  	objectType = \"Key\",\n   18: 	dataType = \"Input\",\n   19  	structureType = \"Static\",\n   20  }\n   ..\n   39  		name = data.name or \"...\",\n   40  		objectType = \"Key\",\n   41: 		dataType = \"Input\",\n   42  		structureType = \"Object\",\n   43  	}\n\nD:\\GitRepos\\Game\\game\\Keyboard.lua:\n   17  {\n   18  	objectType = \"Keyboard\",\n   19: 	dataType = \"Input\",\n   20  	structureType = \"Static\"\n   21  }\n   ..\n  184  end\n  185  \n  186: function Keyboard:RepeatedInput()\n  187  \n  188  end\n\nD:\\GitRepos\\Game\\game\\LevelManager.lua:\n   11  -- requires are filled in LevelManager.PostRequire()\n   12  local Window = nil\n   13: local Input = nil\n   14  local Text = nil\n   15  \n   ..\n   60  \n   61  ----------------\n   62: -- Input\n   63  ---------------\n   64  -- after this works move to buttons\n   65: function LevelManager:CreateInput()\n   66: 	self.Input = Input:New{}\n   67  \n   68  	-- create keys\n   ..\n  111  	}\n  112  \n  113: 	self.Input:AddKeys\n  114  	{\n  115  		nextLevel, prevLevel, \n  ...\n  240  	Window = require(\"Window\")\n  241  	Text = require(\"Text\")\n  242: 	Input = require(\"Input\")\n  243  \n  244: 	-- Input\n  245: 	self:CreateInput()\n  246  \n  247  end\n\nD:\\GitRepos\\Game\\game\\levels\\PixelDrawLevel.lua:\n   27  local MapTable = nil\n   28  local Link = nil\n   29: local InputText = nil\n   30  local ParticleSystem = nil\n   31  local DrawGroup = nil\n   ..\n   58  	MapTable = require(\"MapTable\")\n   59  	Link = require(\"Link\")\n   60: 	InputText = require(\"InputText\")\n   61  	ParticleSystem = require(\"ParticleSystem\")\n   62  	DrawGroup = require(\"DrawGroup\")\n   ..\n  458  local boxy = Box:New{}\n  459  \n  460: local inputTextTest = InputText:New\n  461  {\n  462  	keys =\n\nD:\\GitRepos\\Game\\game\\main.lua:\n  127  		\n  128  		-- input\n  129: 		Camera:RepeatedInput()\n  130: 		ObjectManager:RepeatedInput()\n  131  		Controller.Update()\n  132  \n  ...\n  150  \n  151  	-----------\n  152: 	-- Input \n  153  	-----------\n  154  \n  155  	function love.keypressed(key)\n  156: 		Camera:InputUpdate(key, \"press\")\n  157: 		ObjectManager:InputUpdate(key, \"press\")\n  158  	end\n  159  \n  160  	function love.keyreleased(key)\n  161: 		Camera:InputUpdate(key, \"release\")\n  162: 		ObjectManager:InputUpdate(key, \"release\")\n  163  	end\n  164  \n\nD:\\GitRepos\\Game\\game\\MapObject.lua:\n    9  -- Requires\n   10  --------------\n   11: local Input = require(\"Input\")\n   12  local AnimationComponent = require(\"AnimationComponent\")\n   13  \n   ..\n   41  \n   42  ----------------------\n   43: -- Static Input\n   44  ----------------------\n   45  -- for controlling any object\n   ..\n   47  -- needs to be put into its own file\n   48  \n   49: MapObject.selectedObjectForInput = nil\n   50: MapObject.Input = Input:New{}\n   51  \n   52  -------------\n   ..\n  141  \n  142  	-------------\n  143: 	-- Input\n  144  	-------------\n  145  	o.playerControlled = data.playerControlled or false\n  ...\n  147  	-- is this object manually controlled by the player?\n  148  	if(o.playerControlled) then\n  149: 		o.Input = Input:New{}\n  150  \n  151  		-- use selected action in a dire\n  ...\n  231  		}\n  232  \n  233: 		o.Input:AddKeys\n  234  		{\n  235  			actionLeft, actionRight, actionDown, actionUp,\n  ...\n  361  	function o:Destroy()\n  362  		ObjectManager:Destroy(self.Info)\n  363: 		ObjectManager:Destroy(self.Input)\n  364  	end \n  365  \n  ...\n  424  ----------------------\n  425  \n  426: -- Input should be made static to MapObject\n  427  -- that way any object can be controlled\n  428  -- object to control will be selected with a variable\n  ...\n  489  }\n  490  \n  491: o.Input:AddKeys\n  492  {\n  493  	actionLeft, actionRight, actionDown, actionUp,\n\nD:\\GitRepos\\Game\\game\\Mouse.lua:\n   23  {\n   24  	objectType = \"Mouse\",\n   25: 	dataType = \"Input\",\n   26  	structureType = \"Static\"	\n   27  }\n   ..\n  226  		name = data.name or \"...\",\n  227  		objectType = \"Mouse\",\n  228: 		dataType = \"Input\",\n  229  		structureType = \"Object\"\n  230  	}\n\nD:\\GitRepos\\Game\\game\\MouseDrag.lua:\n   14  {\n   15  	objectType = \"MouseDrag\",\n   16: 	dataType = \"Input\",\n   17  	structureType = \"Static\"\n   18  }\n   ..\n   36  	{\n   37  		objectType = \"MouseDrag\",\n   38: 		dataType = \"Input\",\n   39  		structureType = \"Component\"\n   40  	}\n\nD:\\GitRepos\\Game\\game\\MouseHover.lua:\n   15  {\n   16  	objectType = \"MouseHover\",\n   17: 	dataType = \"Input\",\n   18  	structureType = \"Static\"\n   19  }\n   ..\n   29  	{\n   30  		objectType = \"MouseHover\",\n   31: 		dataType = \"Input\",\n   32  		structureType = \"Component\"\n   33  	}\n\nD:\\GitRepos\\Game\\game\\Notes.lua:\n  164  -- Object creator factory\n  165  \n  166: -- Input list \n  167  -- only check objects with input component during input call back \n  168  -- like draw list\n  ...\n  237  -- Hold input type doesn't work for any objects\n  238  -- need to update it to work how camera works\n  239: -- call all Input:RepeatedInput of objects\n  240  -- its different than how a single key press works\n  241  \n\nD:\\GitRepos\\Game\\game\\ObjectManager.lua:\n  439  \n  440  -- is this function even needed anymore?\n  441: function ObjectManager:RepeatedInput()\n  442  \n  443  	--[[\n  444  	-- cameras\n  445  	for i=1, #self.cameras do\n  446: 		self.cameras[i].Input:RepeatedInputUpdate()\n  447  	end\n  448  	--]]\n  ...\n  452  \n  453  		-- update\n  454: 		if(self.statics[i].RepeatedInput) then\n  455: 			self.statics[i]:RepeatedInput()\n  456  		end \n  457  \n  458  		-- debug text\n  459: 		if(self.statics[i].ControllerInput) then\n  460: 			self.statics[i]:ControllerInput()\n  461  		end\n  462  \n  ...\n  467  \n  468  		-- keyboard input\n  469: 		if(self.objects[i].RepeatedInput) then\n  470: 			self.objects[i]:RepeatedInput()\n  471  		end \n  472  \n  473  		-- controller input\n  474: 		if(self.objects[i].ControllerInput) then\n  475: 			self.objects[i]:ControllerInput()\n  476  		end \n  477  \n  ...\n  488  -- to an input list, and then only those objects are part of this input update\n  489  -- much like draw list -->FIX\n  490: function ObjectManager:InputUpdate(key, inputType)\n  491  \n  492  --[[\n  493  	for i=1, #self.cameras do\n  494  \n  495: 		if(self.cameras[i].Input) then\n  496: 			self.cameras[i].Input:InputUpdate(key, inputType)\n  497  		end \n  498  \n  ...\n  504  	for i=1 , #self.statics do\n  505  \n  506: 		if(self.statics[i].Input) then\n  507: 			self.statics[i].Input:InputUpdate(key, inputType)\n  508  		end\n  509  \n  ...\n  513  	for i=1, #self.objects do\n  514  \n  515: 		if(self.objects[i].Input) then\n  516: 			self.objects[i].Input:InputUpdate(key, inputType)\n  517  		end \n  518  \n\nD:\\GitRepos\\Game\\game\\OldCode.lua:\n  156  -- control the window, blah blah blah\n  157  \n  158: local Input = require(\"Input\")\n  159  \n  160  local App = {}\n  ...\n  171  -- Components\n  172  ----------------------\n  173: App.Input = Input:New()\n  174  \n  175  \n  ...\n  178  ---------------------\n  179  \n  180: function App:QuitGameInput(key)\n  181  	-- exit game\n  182  	if(key == \"escape\") then\n  ...\n  186  end \n  187  \n  188: function App:Input(key)\n  189: 	self:QuitGameInput(key)\n  190  end \n  191  \n  ...\n  207  -- manually control the camera\n  208  -- test stuff\n  209: function Camera:RepeatedInput()\n  210  \n  211  	-- move\n  ...\n  559  \n  560  \n  561: -- Input\n  562  -------------------------------------------------------------------------------\n  563  \n\nD:\\GitRepos\\Game\\game\\Player.lua:\n  391  \n  392  	---------------\n  393: 	-- Input\n  394  	---------------\n  395  \n  396  	-- only used for press and release\n  397: 	function o:InputUpdate(key, inputype)\n  398  \n  399  		if(key == \"d\") then \n  ...\n  424  	-- only used for isDown=pressed \n  425  	-- not for button down or up\n  426: 	function o:RepeatedInput()\n  427  		-- simple controls\n  428  		if(love.keyboard.isDown(self.keys.left)) then\n  ...\n  479  	}\n  480  \n  481: 	function o:ControllerInput()\n  482  \n  483  		if(self.useController == false) then\n\nD:\\GitRepos\\Game\\game\\SnapPlayer.lua:\n  380  \n  381  	---------------\n  382: 	-- Input\n  383  	---------------\n  384  \n  385  	-- only used for press and release\n  386: 	function o:InputControls(key)\n  387  \n  388  		if(key == \"d\") then \n  ...\n  405  	-- only used for isDown=pressed \n  406  	-- not for button down or up\n  407: 	function o:RepeatedInput()\n  408  		-- Grid Snap Movement		\n  409  		if(self.GridMovementTimer:TimeElapsedMs(100)) then			\n  ...\n  467  	}\n  468  \n  469: 	function o:ControllerInput()\n  470  \n  471  		if(self.useController == false) then\n\n180 matches across 26 files\n\n\nSearching 158 files for \"keys =\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\App.lua:\n   48  App.Input = Input:New\n   49  {\n   50: 	keys = \n   51  	{ \n   52  		{ \"escape\", \"press\", App.QuitGame},\n\nD:\\GitRepos\\Game\\game\\Box.lua:\n  154  	-- convert all of this stuff into a component\n  155  	-->MOVE\n  156: 	o.keys =\n  157  	{\n  158  		left = data.keys and data.keys.left or \"a\",\n\nD:\\GitRepos\\Game\\game\\Camera.lua:\n  156  \n  157  	-- fine for now but change later\n  158: 	o.keys =\n  159  	{\n  160  		left = \"l\",\n  ...\n  331  	{\n  332  		parent = o,\n  333: 		keys =\n  334  		{\n  335  			{o.keys.left, \"hold\", o.MoveLeft},\n\nD:\\GitRepos\\Game\\game\\CameraOld.lua:\n   55  } \n   56  \n   57: Camera.keys =\n   58  {\n   59  	left = \"l\",\n   ..\n  134  {\n  135  	parent = Camera,\n  136: 	keys =\n  137  	{\n  138  		{Camera.keys.left, \"hold\", Camera.MoveLeft},\n  ...\n  379  } \n  380  \n  381: Camera.keys =\n  382  {\n  383  	left = \"l\",\n  ...\n  433  	} \n  434  \n  435: 	o.keys =\n  436  	{\n  437  		left = \"l\",\n  ...\n  690  {\n  691  	parent = Camera,\n  692: 	keys =\n  693  	{\n  694  		{Camera.keys.left, \"hold\", Camera.MoveLeft},\n\nD:\\GitRepos\\Game\\game\\InputText.lua:\n   95  	----------------\n   96  	o.Input = Input:New{}\n   97: 	o.keys = data.keys or {}\n   98  \n   99  	if(#o.keys > 0) then\n\nD:\\GitRepos\\Game\\game\\Keyboard.lua:\n  116  }\n  117  \n  118: Keyboard.keys = {}\n  119  \n  120  for i=1, #Keyboard.allKeys do\n  ...\n  249  -------------------------\n  250  \n  251: local keys = Keyboard:Keys{\"lshift\", \"t\"}\n  252  \n  253  \n  ...\n  274  \n  275  \n  276: Keyboard.keys = \n  277  {\n  278  	a = false,\n\nD:\\GitRepos\\Game\\game\\levels\\PixelDrawLevel.lua:\n  460  local inputTextTest = InputText:New\n  461  {\n  462: 	keys =\n  463  	{\n  464  		\"q\",\"w\",\"e\",\"r\",\"t\",\"y\",\n\nD:\\GitRepos\\Game\\game\\levels\\TestLevel.lua:\n  140  		shootDirection = -1,\n  141  \n  142: 		keys = \n  143  		{\n  144  			left = \"left\",\n\nD:\\GitRepos\\Game\\game\\Notes.lua:\n  257  	animation = Sprites.pawn.animation1,\n  258  \n  259: 	keys = \n  260  	{\n  261  		left = \"left\",\n\nD:\\GitRepos\\Game\\game\\Player.lua:\n  121  \n  122  	-- controls\n  123: 	o.keys =\n  124  	{\n  125  		left = data.keys and data.keys.left or \"a\",\n\nD:\\GitRepos\\Game\\game\\SnapPlayer.lua:\n  113  \n  114  	-- controls\n  115: 	o.keys =\n  116  	{\n  117  		left = data.keys and data.keys.left or \"a\",\n\n18 matches across 11 files\n\n\nSearching 158 files for \"InputUpdate\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Camera.lua:\n  517  end \n  518  \n  519: function Camera:InputUpdate(key, inputType)\n  520: 	self.cameras[self.selectedCameraIndex].Input:InputUpdate(key, inputType)\n  521  end\n  522  \n  523  function Camera:RepeatedInput()\n  524: 	self.cameras[self.selectedCameraIndex].Input:RepeatedInputUpdate()\n  525  end \n  526  \n\nD:\\GitRepos\\Game\\game\\Input.lua:\n  112  		-- this is used for press and release only\n  113  		-- hold needs to be done with a seperate function\n  114: 		function o:InputUpdate(key, inputType)\n  115  \n  116  			if(self.active == false) then\n  ...\n  157  \n  158  		-- update all holdKeys\n  159: 		function o:RepeatedInputUpdate()\n  160  \n  161  			if(self.active == false) then\n\nD:\\GitRepos\\Game\\game\\main.lua:\n  154  \n  155  	function love.keypressed(key)\n  156: 		Camera:InputUpdate(key, \"press\")\n  157: 		ObjectManager:InputUpdate(key, \"press\")\n  158  	end\n  159  \n  160  	function love.keyreleased(key)\n  161: 		Camera:InputUpdate(key, \"release\")\n  162: 		ObjectManager:InputUpdate(key, \"release\")\n  163  	end\n  164  \n\nD:\\GitRepos\\Game\\game\\ObjectManager.lua:\n  444  	-- cameras\n  445  	for i=1, #self.cameras do\n  446: 		self.cameras[i].Input:RepeatedInputUpdate()\n  447  	end\n  448  	--]]\n  ...\n  488  -- to an input list, and then only those objects are part of this input update\n  489  -- much like draw list -->FIX\n  490: function ObjectManager:InputUpdate(key, inputType)\n  491  \n  492  --[[\n  ...\n  494  \n  495  		if(self.cameras[i].Input) then\n  496: 			self.cameras[i].Input:InputUpdate(key, inputType)\n  497  		end \n  498  \n  ...\n  505  \n  506  		if(self.statics[i].Input) then\n  507: 			self.statics[i].Input:InputUpdate(key, inputType)\n  508  		end\n  509  \n  ...\n  514  \n  515  		if(self.objects[i].Input) then\n  516: 			self.objects[i].Input:InputUpdate(key, inputType)\n  517  		end \n  518  \n\nD:\\GitRepos\\Game\\game\\Player.lua:\n  395  \n  396  	-- only used for press and release\n  397: 	function o:InputUpdate(key, inputype)\n  398  \n  399  		if(key == \"d\") then \n\n15 matches across 5 files\n\n\nSearching 158 files for \"InputUpdate(\"hold\"\" (case sensitive)\n\n0 matches across 0 files\n\n\noSearching 158 files for \"o:RepeatedInputUpdate\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Input.lua:\n  157  \n  158  		-- update all holdKeys\n  159: 		function o:RepeatedInputUpdate()\n  160  \n  161  			if(self.active == false) then\n\n1 match in 1 file\n\n\nSearching 158 files for \"o:RepeatedInputUpdate\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Input.lua:\n  157  \n  158  		-- update all holdKeys\n  159: 		function o:RepeatedInputUpdate()\n  160  \n  161  			if(self.active == false) then\n\n1 match in 1 file\n\n\nSearching 158 files for \"RepeatedInputUpdate\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Camera.lua:\n  522  \n  523  function Camera:RepeatedInput()\n  524: 	self.cameras[self.selectedCameraIndex].Input:RepeatedInputUpdate()\n  525  end \n  526  \n\nD:\\GitRepos\\Game\\game\\Input.lua:\n  157  \n  158  		-- update all holdKeys\n  159: 		function o:RepeatedInputUpdate()\n  160  \n  161  			if(self.active == false) then\n\nD:\\GitRepos\\Game\\game\\ObjectManager.lua:\n  444  	-- cameras\n  445  	for i=1, #self.cameras do\n  446: 		self.cameras[i].Input:RepeatedInputUpdate()\n  447  	end\n  448  	--]]\n\n3 matches across 3 files\n",
-			"settings":
-			{
-				"buffer_size": 22568,
+				"buffer_size": 1589,
 				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
+				"name": "-- KeySequence.lua"
 			}
 		},
 		{
-			"file": "App.lua",
+			"file": "FightCharacter.lua",
 			"settings":
 			{
-				"buffer_size": 1340,
+				"buffer_size": 4591,
+				"line_ending": "Windows",
+				"name": "-- FightingCharacter.lua"
+			}
+		},
+		{
+			"file": "FightCharacter_Sprites.lua",
+			"settings":
+			{
+				"buffer_size": 2300,
+				"line_ending": "Windows",
+				"name": "-- FightingCharacer_Sprites.lua"
+			}
+		},
+		{
+			"file": "SpriteBank.lua",
+			"settings":
+			{
+				"buffer_size": 2891,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Animation.lua",
+			"settings":
+			{
+				"buffer_size": 6693,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "FightManager.lua",
+			"settings":
+			{
+				"buffer_size": 2531,
+				"line_ending": "Windows",
+				"name": "-- FightingManager.lua"
+			}
+		},
+		{
+			"file": "FightStage.lua",
+			"settings":
+			{
+				"buffer_size": 265,
+				"line_ending": "Windows",
+				"name": "-- FightStage.lua"
+			}
+		},
+		{
+			"file": "AnimationComponent.lua",
+			"settings":
+			{
+				"buffer_size": 4206,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "FightPlayer.lua",
+			"settings":
+			{
+				"buffer_size": 675,
+				"line_ending": "Windows",
+				"name": "-- FightPlayer.lua"
+			}
+		},
+		{
+			"file": "levels/FightingGameLevel.lua",
+			"settings":
+			{
+				"buffer_size": 1101,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "LifeBar.lua",
+			"settings":
+			{
+				"buffer_size": 3030,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Text.lua",
+			"settings":
+			{
+				"buffer_size": 9820,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Pos.lua",
+			"settings":
+			{
+				"buffer_size": 4671,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Bool.lua",
+			"settings":
+			{
+				"buffer_size": 1371,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Sprite.lua",
+			"settings":
+			{
+				"buffer_size": 5279,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Window.lua",
+			"settings":
+			{
+				"buffer_size": 2578,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "AudioComponent.lua",
+			"settings":
+			{
+				"buffer_size": 5941,
 				"line_ending": "Windows"
 			}
 		},
@@ -556,87 +673,15 @@
 			"file": "Box.lua",
 			"settings":
 			{
-				"buffer_size": 7535,
+				"buffer_size": 7587,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "main.lua",
+			"file": "Name.lua",
 			"settings":
 			{
-				"buffer_size": 3805,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Panel.lua",
-			"settings":
-			{
-				"buffer_size": 15880,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "MapTable.lua",
-			"settings":
-			{
-				"buffer_size": 7741,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "DrawToolsUI.lua",
-			"settings":
-			{
-				"buffer_size": 3056,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Line.lua",
-			"settings":
-			{
-				"buffer_size": 3880,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "MapObject_Sprites.lua",
-			"settings":
-			{
-				"buffer_size": 2990,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "DrawGroup.lua",
-			"settings":
-			{
-				"buffer_size": 5766,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "DrawList.lua",
-			"settings":
-			{
-				"buffer_size": 13087,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Input.lua",
-			"settings":
-			{
-				"buffer_size": 4805,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "MapObject.lua",
-			"settings":
-			{
-				"buffer_size": 9419,
+				"buffer_size": 9984,
 				"line_ending": "Windows"
 			}
 		}
@@ -681,49 +726,64 @@
 	},
 	"file_history":
 	[
-		"/D/GitRepos/Game/game/ObjectManager.lua",
-		"/D/GitRepos/Game/game/Input",
-		"/D/GitRepos/Game/game/Color.lua",
-		"/D/GitRepos/Game/game/Input.lua",
-		"/D/GitRepos/Game/game/SpriteBank.lua",
+		"/D/GitRepos/Game/game/FrameCounter.lua",
+		"/D/GitRepos/Game/game/Key.lua",
 		"/D/GitRepos/Game/game/MapObject.lua",
+		"/D/GitRepos/Game/game/MapObject_Action.lua",
+		"/D/GitRepos/Game/game/MapObject_Sprites.lua",
+		"/D/GitRepos/Ideas-and-Writing/Words and stuff_36.txt",
+		"/D/GitRepos/Game/game/Arrow.lua",
+		"/D/GitRepos/Game/game/LevelManager.lua",
+		"/D/GitRepos/Game/game/levels/DrawLineLevel.lua",
+		"/D/GitRepos/Game/game/levels/TemplateLevel.lua",
+		"/D/GitRepos/Game/game/DrawLine_UI.lua",
+		"/D/GitRepos/Game/game/Button.lua",
+		"/D/GitRepos/Game/game/Panel.lua",
+		"/D/GitRepos/Game/game/DrawList.lua",
+		"/D/GitRepos/Game/game/Input.lua",
+		"/D/GitRepos/Game/game/PrintDebug.lua",
+		"/D/GitRepos/Game/game/DrawLine.lua",
+		"/D/GitRepos/Game/game/DebugText.lua",
+		"/D/GitRepos/Game/game/ObjectManager.lua",
+		"/D/GitRepos/Game/game/Text.lua",
+		"/D/GitRepos/Game/game/Line.lua",
+		"/D/GitRepos/Game/game/DrawGroup.lua",
+		"/D/GitRepos/Game/game/Bool.lua",
+		"/D/GitRepos/Game/game/Math.lua",
+		"/D/GitRepos/Game/game/DrawToolsUI.lua",
+		"/D/GitRepos/Game/game/Color.lua",
+		"/D/GitRepos/Game/game/Collision.lua",
+		"/D/GitRepos/Game/game/main.lua",
+		"/D/GitRepos/Game/game/MapTable.lua",
+		"/D/GitRepos/Game/game/levels/FightingGameLevel.lua",
+		"/D/GitRepos/Game/game/LifeBar.lua",
+		"/D/GitRepos/Game/game/levels/TestLevel.lua",
+		"/D/GitRepos/Game/game/App.lua",
+		"/D/GitRepos/Game/game/AudioComponent.lua",
+		"/D/GitRepos/Game/game/Camera.lua",
+		"/D/GitRepos/Game/game/DrawLineUI.lua",
+		"/D/GitRepos/Game/game/Input",
+		"/D/GitRepos/Game/game/SpriteBank.lua",
 		"/D/GitRepos/Game/game/InputList.lua",
 		"/D/GitRepos/Game/game/levels/PixelDrawLevel.lua",
-		"/D/GitRepos/Game/game/Button.lua",
-		"/D/GitRepos/Game/game/levels/DrawLineLevel.lua",
-		"/D/GitRepos/Game/game/Collision.lua",
 		"/D/GitRepos/Game/game/Mouse.lua",
 		"/C/Users/PixelPiledriver/AppData/Roaming/LOVE/game/orc.lua",
 		"/C/Users/PixelPiledriver/AppData/Roaming/LOVE/game/goblin.lua",
 		"/D/GitRepos/Game/game/FileManager.lua",
 		"/G/PixelPiledriver/Jobs/Starr Mazer/Bar Patreons/Bar Notes_9.txt",
-		"/D/GitRepos/Game/game/DrawLine_UI.lua",
 		"/C/Users/PixelPiledriver/Desktop/Animations broken on blog.txt",
-		"/D/GitRepos/Game/game/DrawLine.lua",
 		"/G/PixelPiledriver/Jobs/Starr Mazer/Bar Patreons/Character Descriptions.txt",
-		"/D/GitRepos/Game/game/PrintDebug.lua",
-		"/D/GitRepos/Game/game/MapObject_Action.lua",
 		"/D/GitRepos/Game/game/SpriteSheet.lua",
 		"/D/GitRepos/Game/game/FailNew.lua",
 		"/D/GitRepos/Game/game/AnimationEditor.lua",
 		"/D/GitRepos/Game/game/TableSort.lua",
-		"/D/GitRepos/Game/game/Text.lua",
 		"/D/GitRepos/Game/game/Box.lua",
 		"/D/GitRepos/Game/game/Index.lua",
 		"/D/GitRepos/Game/game/Notes.lua",
-		"/D/GitRepos/Game/game/DrawToolsUI.lua",
-		"/D/GitRepos/Game/game/MapObject_Sprites.lua",
 		"/D/GitRepos/Game/game/Sprites.lua",
-		"/D/GitRepos/Game/game/Panel.lua",
-		"/D/GitRepos/Game/game/DebugText.lua",
-		"/D/GitRepos/Game/game/Camera.lua",
 		"/D/GitRepos/Game/game/Camera_Node.lua",
 		"/D/GitRepos/Game/game/CollisionManager.lua",
 		"/D/GitRepos/Game/game/Controller.lua",
-		"/D/GitRepos/Game/game/main.lua",
-		"/D/GitRepos/Game/game/FrameCounter.lua",
-		"/D/GitRepos/Game/game/LevelManager.lua",
-		"/D/GitRepos/Game/game/MapTable.lua",
 		"/D/GitRepos/Game/game/MemoryManager.lua",
 		"/D/GitRepos/Game/game/Name.lua",
 		"/D/GitRepos/Game/game/Palette.lua",
@@ -735,12 +795,9 @@
 		"/D/GitRepos/Game/game/Keyboard.lua",
 		"/D/GitRepos/Game/game/DrawManager.lua",
 		"/D/GitRepos/Game/game/ObjectCreator.lua",
-		"/D/GitRepos/Game/game/Line.lua",
-		"/D/GitRepos/Game/game/Bool.lua",
 		"/D/GitRepos/Game/game/Textfile.lua",
 		"/D/GitRepos/Game/game/levels/AnimationEditorLevel.lua",
 		"/D/GitRepos/Game/game/panel",
-		"/D/GitRepos/Game/game/DrawList.lua",
 		"/D/GitRepos/Game/game/Draw.lua",
 		"/D/GitRepos/Game/game/Link.lua",
 		"/D/GitRepos/Game/game/Pos.lua",
@@ -754,8 +811,6 @@
 		"/D/GitRepos/Game/game/SimplePanel.lua",
 		"/D/GitRepos/Game/game/MapObject_Objects.lua",
 		"/D/GitRepos/Game/game/levels/MapWorldLevel.lua",
-		"/D/GitRepos/Game/game/levels/TestLevel.lua",
-		"/D/GitRepos/Game/game/App.lua",
 		"/D/GitRepos/Game/game/Sprite.lua",
 		"/D/GitRepos/Game/game/main",
 		"/C/Users/PixelPiledriver/AppData/Roaming/LOVE/game/bomb/orc.lua",
@@ -774,7 +829,6 @@
 		"/D/GitRepos/Game/game/Bullet.lua",
 		"/D/GitRepos/Game/game/CameraOld.lua",
 		"/D/GitRepos/Game/game/Canvas.lua",
-		"/D/GitRepos/Game/game/DrawGroup.lua",
 		"/D/GitRepos/Game/game/DrawList_Old.lua",
 		"/D/GitRepos/Game/game/DrawTools.lua",
 		"/D/GitRepos/Game/game/Fade.lua",
@@ -783,7 +837,6 @@
 		"/D/GitRepos/Game/game/Health.lua",
 		"/D/GitRepos/Game/game/Info.lua",
 		"/D/GitRepos/Game/game/InputText.lua",
-		"/D/GitRepos/Game/game/Key.lua",
 		"/D/GitRepos/Game/game/Life.lua",
 		"/D/GitRepos/Game/game/Links.lua",
 		"/D/GitRepos/Game/game/Map.lua",
@@ -800,15 +853,7 @@
 		"/D/GitRepos/Game/game/Scale.lua",
 		"/D/GitRepos/Game/game/Shader.lua",
 		"/D/GitRepos/Game/game/Shape.lua",
-		"/D/GitRepos/Game/game/SinCounter.lua",
-		"/D/GitRepos/Game/game/Size.lua",
-		"/D/GitRepos/Game/game/SnapPlayer.lua",
-		"/D/GitRepos/Game/game/String.lua",
-		"/D/GitRepos/Game/game/Timer.lua",
-		"/D/GitRepos/Game/game/ValueStorage.lua",
-		"/D/GitRepos/Game/game/ValueStore.lua",
-		"/D/GitRepos/Game/game/Vertex.lua",
-		"/D/GitRepos/Game/game/BlockMap.lua"
+		"/D/GitRepos/Game/game/SinCounter.lua"
 	],
 	"find":
 	{
@@ -816,7 +861,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 138.0,
 		"where_history":
 		[
 			"D:\\GitRepos\\Game\\game",
@@ -828,6 +873,107 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"speed",
+			"AnimationComponent",
+			"Audio",
+			"AnimationComponent:State",
+			"2",
+			"1",
+			"actions",
+			"action",
+			".Action",
+			"key",
+			"release",
+			"7",
+			"\"press\"",
+			".x",
+			"AudioComponent",
+			"FightManager:AddCharacter",
+			"AudioComponent",
+			"gravity",
+			"FightManager",
+			"Fight",
+			"FightingCharacter",
+			"parent",
+			"parent.sprite",
+			"whenDone",
+			"playing",
+			"PrintSprites",
+			"print",
+			"AnimationComponent",
+			"next",
+			"Input",
+			"o:Update",
+			"SetAnimation",
+			"State",
+			"animation",
+			"sprite",
+			"o:Destroy",
+			"}\n",
+			"moveLeft",
+			"}\n",
+			"\"Alice\",",
+			"Input",
+			"SpriteBank",
+			"alignment",
+			"alingment",
+			"Vars",
+			"self.fill",
+			"o.fill",
+			"Vars",
+			"line",
+			"\"fill\"",
+			"line",
+			"angle",
+			"self.Pos.x",
+			"o.Pos.x",
+			"data.x",
+			"o.Pos.x",
+			"data.x",
+			"Bool",
+			"boll",
+			"Line",
+			"Line:",
+			"width",
+			"Bound",
+			"Static",
+			"self.optionFunc",
+			"this button",
+			"optionFunc",
+			"optionsFunc",
+			"Panel",
+			"Panel:New",
+			"Option",
+			"activeRange",
+			"previewLine",
+			"previewLine.showNormal",
+			"DrawLine.previewLine.showNormal",
+			"previewLine",
+			"previewLine.normal",
+			"toggle",
+			"Input",
+			"JoinPoints(",
+			"show",
+			"hide",
+			"ShowPreviewLine",
+			"previewLine",
+			"newPoints",
+			"self.newPoints",
+			"canceled",
+			"cancelled",
+			"Color",
+			"Text",
+			"Color",
+			"Box",
+			"Panel",
+			"color",
+			"length",
+			"Length",
+			"vector",
+			"darkGreen",
+			"dark green",
+			"Line:",
+			"normal",
 			".Input",
 			"Repeated",
 			"RepeatedInputUpdate",
@@ -854,108 +1000,7 @@
 			".swf",
 			"/>\n",
 			".swf",
-			"/*.swf",
-			".swf",
-			"Box",
-			"box",
-			"Mouse",
-			"true",
-			"wD",
-			"wd",
-			"Collision",
-			"collision",
-			"mouse",
-			"points broken",
-			"parent",
-			".lines",
-			"self",
-			"tools",
-			"DrawLine.joinPoints.a",
-			"print",
-			"self",
-			"Mouse",
-			"tools.joinPoints =",
-			".joinPoints",
-			"tools",
-			"items",
-			".map =",
-			"color.a",
-			".a",
-			"xView",
-			"Camera",
-			"mouse",
-			"camera",
-			"Camera",
-			"0",
-			"toggle",
-			"toggle = true",
-			"toggleOn",
-			"tools",
-			"DrawToolsUI.drawIcon",
-			"toggle",
-			"FailNew",
-			"Fails",
-			"Info",
-			"sprite",
-			"auto",
-			"boxPad",
-			"box =",
-			"Box",
-			"Panel",
-			"Panel:",
-			"color",
-			"Panel",
-			"camera",
-			"Camera",
-			"scissor",
-			"DrawGroup",
-			"DrawGroup:New",
-			"scissor",
-			"print",
-			"print(",
-			"print",
-			"print(",
-			"print",
-			"print(",
-			"print",
-			"print(",
-			"print",
-			"-- Obj",
-			"LineTracer",
-			"Line:New",
-			"print(",
-			"print",
-			"print(",
-			"print",
-			"joinPoints =",
-			"Panel",
-			"print",
-			"RectTo",
-			"xOffset",
-			"mouse",
-			"DataOrDefault",
-			"draw",
-			"o:CollisionWith",
-			"Collision",
-			"Collision:New",
-			"Line:New",
-			"Line:",
-			"printDebug",
-			"Input",
-			"joinPoints",
-			"Input",
-			"press",
-			"Mouse",
-			"Box:",
-			"Box",
-			"Box:",
-			"width",
-			"xOffset",
-			"offsetY",
-			"offsetX",
-			"mouse",
-			"Collision:",
-			"Collision"
+			"/*.swf"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -963,6 +1008,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"FightCharacter",
+			"align",
 			"DrawLine",
 			"box.pad",
 			"newPoints",
@@ -1088,9 +1135,7 @@
 			"o:",
 			"o.",
 			"o",
-			"rot",
-			"Polygon",
-			"self.colors"
+			"rot"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1101,23 +1146,23 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Camera.lua",
+					"file": "Input.lua",
 					"settings":
 					{
-						"buffer_size": 12868,
+						"buffer_size": 7381,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10073,
-								10072
+								2785,
+								2785
 							]
 						],
 						"settings":
@@ -1137,929 +1182,64 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 17304.0,
+						"translation.y": 4051.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+					"file": "KeySequence.lua",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 1589,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								697,
+								697
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"auto_name": "-- KeySequence.lua",
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2448.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "FightCharacter.lua",
 					"settings":
 					{
-						"buffer_size": 22568,
+						"buffer_size": 4591,
 						"regions":
 						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										139,
-										144
-									],
-									[
-										156,
-										161
-									],
-									[
-										234,
-										239
-									],
-									[
-										289,
-										294
-									],
-									[
-										297,
-										302
-									],
-									[
-										444,
-										449
-									],
-									[
-										586,
-										591
-									],
-									[
-										603,
-										608
-									],
-									[
-										689,
-										694
-									],
-									[
-										697,
-										702
-									],
-									[
-										818,
-										823
-									],
-									[
-										996,
-										1001
-									],
-									[
-										1140,
-										1145
-									],
-									[
-										1148,
-										1153
-									],
-									[
-										1275,
-										1280
-									],
-									[
-										1292,
-										1297
-									],
-									[
-										1427,
-										1432
-									],
-									[
-										1483,
-										1488
-									],
-									[
-										1491,
-										1496
-									],
-									[
-										1581,
-										1586
-									],
-									[
-										1656,
-										1661
-									],
-									[
-										1662,
-										1667
-									],
-									[
-										1740,
-										1745
-									],
-									[
-										1795,
-										1800
-									],
-									[
-										1809,
-										1814
-									],
-									[
-										1939,
-										1944
-									],
-									[
-										1956,
-										1961
-									],
-									[
-										2084,
-										2089
-									],
-									[
-										2092,
-										2097
-									],
-									[
-										2200,
-										2205
-									],
-									[
-										2217,
-										2222
-									],
-									[
-										2335,
-										2340
-									],
-									[
-										2418,
-										2423
-									],
-									[
-										2426,
-										2431
-									],
-									[
-										2707,
-										2712
-									],
-									[
-										2902,
-										2907
-									],
-									[
-										3068,
-										3073
-									],
-									[
-										3085,
-										3090
-									],
-									[
-										3259,
-										3264
-									],
-									[
-										3353,
-										3358
-									],
-									[
-										3391,
-										3396
-									],
-									[
-										3534,
-										3539
-									],
-									[
-										3790,
-										3795
-									],
-									[
-										3807,
-										3812
-									],
-									[
-										3944,
-										3949
-									],
-									[
-										3987,
-										3992
-									],
-									[
-										3995,
-										4000
-									],
-									[
-										4080,
-										4085
-									],
-									[
-										4324,
-										4329
-									],
-									[
-										4559,
-										4564
-									],
-									[
-										4720,
-										4725
-									],
-									[
-										4763,
-										4768
-									],
-									[
-										4853,
-										4858
-									],
-									[
-										5000,
-										5005
-									],
-									[
-										5098,
-										5103
-									],
-									[
-										5151,
-										5156
-									],
-									[
-										5179,
-										5184
-									],
-									[
-										5290,
-										5295
-									],
-									[
-										5414,
-										5419
-									],
-									[
-										5444,
-										5449
-									],
-									[
-										5638,
-										5643
-									],
-									[
-										5788,
-										5793
-									],
-									[
-										5921,
-										5926
-									],
-									[
-										5950,
-										5955
-									],
-									[
-										6016,
-										6021
-									],
-									[
-										6129,
-										6134
-									],
-									[
-										6137,
-										6142
-									],
-									[
-										6160,
-										6165
-									],
-									[
-										6257,
-										6262
-									],
-									[
-										6335,
-										6340
-									],
-									[
-										6343,
-										6348
-									],
-									[
-										6402,
-										6407
-									],
-									[
-										6545,
-										6550
-									],
-									[
-										6630,
-										6635
-									],
-									[
-										6755,
-										6760
-									],
-									[
-										6772,
-										6777
-									],
-									[
-										6875,
-										6880
-									],
-									[
-										6966,
-										6971
-									],
-									[
-										7023,
-										7028
-									],
-									[
-										7055,
-										7060
-									],
-									[
-										7137,
-										7142
-									],
-									[
-										7251,
-										7256
-									],
-									[
-										7284,
-										7289
-									],
-									[
-										7420,
-										7425
-									],
-									[
-										7573,
-										7578
-									],
-									[
-										7605,
-										7610
-									],
-									[
-										7745,
-										7750
-									],
-									[
-										7786,
-										7791
-									],
-									[
-										7794,
-										7799
-									],
-									[
-										7885,
-										7890
-									],
-									[
-										7972,
-										7977
-									],
-									[
-										8172,
-										8177
-									],
-									[
-										8253,
-										8258
-									],
-									[
-										8286,
-										8291
-									],
-									[
-										8361,
-										8366
-									],
-									[
-										8587,
-										8592
-									],
-									[
-										8730,
-										8735
-									],
-									[
-										8882,
-										8887
-									],
-									[
-										8990,
-										8995
-									],
-									[
-										9157,
-										9162
-									],
-									[
-										9249,
-										9254
-									],
-									[
-										9356,
-										9361
-									],
-									[
-										9377,
-										9382
-									],
-									[
-										9385,
-										9390
-									],
-									[
-										9465,
-										9470
-									],
-									[
-										9601,
-										9606
-									],
-									[
-										9618,
-										9623
-									],
-									[
-										9645,
-										9650
-									],
-									[
-										9670,
-										9675
-									],
-									[
-										9812,
-										9817
-									],
-									[
-										9975,
-										9980
-									],
-									[
-										9996,
-										10001
-									],
-									[
-										10173,
-										10178
-									],
-									[
-										10296,
-										10301
-									],
-									[
-										10335,
-										10340
-									],
-									[
-										10425,
-										10430
-									],
-									[
-										10514,
-										10519
-									],
-									[
-										10563,
-										10568
-									],
-									[
-										10664,
-										10669
-									],
-									[
-										10715,
-										10720
-									],
-									[
-										10855,
-										10860
-									],
-									[
-										10872,
-										10877
-									],
-									[
-										11013,
-										11018
-									],
-									[
-										11178,
-										11183
-									],
-									[
-										11207,
-										11212
-									],
-									[
-										11215,
-										11220
-									],
-									[
-										11303,
-										11308
-									],
-									[
-										11505,
-										11510
-									],
-									[
-										11513,
-										11518
-									],
-									[
-										11611,
-										11616
-									],
-									[
-										11806,
-										11811
-									],
-									[
-										11888,
-										11893
-									],
-									[
-										12070,
-										12075
-									],
-									[
-										12241,
-										12246
-									],
-									[
-										12386,
-										12391
-									],
-									[
-										12539,
-										12544
-									],
-									[
-										12661,
-										12666
-									],
-									[
-										12819,
-										12824
-									],
-									[
-										12942,
-										12947
-									],
-									[
-										13082,
-										13087
-									],
-									[
-										13326,
-										13331
-									],
-									[
-										13340,
-										13345
-									],
-									[
-										13559,
-										13564
-									],
-									[
-										13666,
-										13671
-									],
-									[
-										13680,
-										13685
-									],
-									[
-										13788,
-										13793
-									],
-									[
-										13834,
-										13839
-									],
-									[
-										13925,
-										13930
-									],
-									[
-										13973,
-										13978
-									],
-									[
-										14079,
-										14084
-									],
-									[
-										14125,
-										14130
-									],
-									[
-										14222,
-										14227
-									],
-									[
-										14270,
-										14275
-									],
-									[
-										14459,
-										14464
-									],
-									[
-										14577,
-										14582
-									],
-									[
-										14615,
-										14620
-									],
-									[
-										14621,
-										14626
-									],
-									[
-										14748,
-										14753
-									],
-									[
-										14786,
-										14791
-									],
-									[
-										14792,
-										14797
-									],
-									[
-										14917,
-										14922
-									],
-									[
-										14955,
-										14960
-									],
-									[
-										14961,
-										14966
-									],
-									[
-										15113,
-										15118
-									],
-									[
-										15130,
-										15135
-									],
-									[
-										15236,
-										15241
-									],
-									[
-										15244,
-										15249
-									],
-									[
-										15343,
-										15348
-									],
-									[
-										15454,
-										15459
-									],
-									[
-										15486,
-										15491
-									],
-									[
-										15613,
-										15618
-									],
-									[
-										15677,
-										15682
-									],
-									[
-										15856,
-										15861
-									],
-									[
-										15956,
-										15961
-									],
-									[
-										16132,
-										16137
-									],
-									[
-										16276,
-										16281
-									],
-									[
-										16420,
-										16425
-									],
-									[
-										16520,
-										16525
-									],
-									[
-										16688,
-										16693
-									],
-									[
-										16845,
-										16850
-									],
-									[
-										17066,
-										17072
-									],
-									[
-										17242,
-										17248
-									],
-									[
-										17406,
-										17412
-									],
-									[
-										17490,
-										17496
-									],
-									[
-										17623,
-										17629
-									],
-									[
-										17707,
-										17713
-									],
-									[
-										17816,
-										17822
-									],
-									[
-										17887,
-										17893
-									],
-									[
-										17973,
-										17979
-									],
-									[
-										18147,
-										18153
-									],
-									[
-										18277,
-										18283
-									],
-									[
-										18392,
-										18398
-									],
-									[
-										18482,
-										18488
-									],
-									[
-										18628,
-										18634
-									],
-									[
-										18771,
-										18777
-									],
-									[
-										18910,
-										18916
-									],
-									[
-										19025,
-										19031
-									],
-									[
-										19172,
-										19178
-									],
-									[
-										19405,
-										19416
-									],
-									[
-										19486,
-										19497
-									],
-									[
-										19633,
-										19644
-									],
-									[
-										19832,
-										19843
-									],
-									[
-										19982,
-										19993
-									],
-									[
-										20139,
-										20150
-									],
-									[
-										20188,
-										20199
-									],
-									[
-										20289,
-										20300
-									],
-									[
-										20340,
-										20351
-									],
-									[
-										20522,
-										20533
-									],
-									[
-										20720,
-										20731
-									],
-									[
-										20854,
-										20865
-									],
-									[
-										20990,
-										21001
-									],
-									[
-										21125,
-										21136
-									],
-									[
-										21280,
-										21291
-									],
-									[
-										21622,
-										21643
-									],
-									[
-										21872,
-										21893
-									],
-									[
-										22163,
-										22182
-									],
-									[
-										22299,
-										22318
-									],
-									[
-										22495,
-										22514
-									]
-								],
-								"scope": ""
-							}
 						},
 						"selection":
 						[
 							[
-								21965,
-								21965
+								1747,
+								1747
 							]
 						],
 						"settings":
@@ -2075,34 +1255,30 @@
 									"selector": "source.lua.corona"
 								}
 							],
-							"detect_indentation": false,
-							"output_tag": 7,
-							"result_base_dir": "",
-							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+							"auto_name": "-- FightingCharacter.lua",
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1700.0,
+						"translation.y": 3887.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "App.lua",
+					"file": "FightCharacter_Sprites.lua",
 					"settings":
 					{
-						"buffer_size": 1340,
+						"buffer_size": 2300,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								946,
+								946
 							]
 						],
 						"settings":
@@ -2118,29 +1294,30 @@
 									"selector": "source.lua.corona"
 								}
 							],
+							"auto_name": "-- FightingCharacer_Sprites.lua",
 							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1326.0,
+						"translation.y": 1632.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "Box.lua",
+					"file": "SpriteBank.lua",
 					"settings":
 					{
-						"buffer_size": 7535,
+						"buffer_size": 2891,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2601,
-								2607
+								1897,
+								1911
 							]
 						],
 						"settings":
@@ -2160,25 +1337,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4826.0,
+						"translation.y": 3784.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "main.lua",
+					"file": "Animation.lua",
 					"settings":
 					{
-						"buffer_size": 3805,
+						"buffer_size": 6693,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								351,
-								351
+								1881,
+								1886
 							]
 						],
 						"settings":
@@ -2198,25 +1375,53 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3669.0,
+						"translation.y": 1922.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 6,
-					"file": "Panel.lua",
+					"file": "FightManager.lua",
 					"settings":
 					{
-						"buffer_size": 15880,
+						"buffer_size": 2531,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12513,
-								12513
+								2214,
+								2214
+							],
+							[
+								2218,
+								2218
+							],
+							[
+								2219,
+								2219
+							],
+							[
+								2239,
+								2239
+							],
+							[
+								2287,
+								2287
+							],
+							[
+								2288,
+								2288
+							],
+							[
+								2305,
+								2305
+							],
+							[
+								2316,
+								2316
 							]
 						],
 						"settings":
@@ -2232,29 +1437,30 @@
 									"selector": "source.lua.corona"
 								}
 							],
+							"auto_name": "-- FightingManager.lua",
 							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 22954.0,
+						"translation.y": 816.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 7,
-					"file": "MapTable.lua",
+					"file": "FightStage.lua",
 					"settings":
 					{
-						"buffer_size": 7741,
+						"buffer_size": 265,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								196,
+								196
 							]
 						],
 						"settings":
@@ -2270,21 +1476,174 @@
 									"selector": "source.lua.corona"
 								}
 							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"auto_name": "-- FightStage.lua",
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1683.0,
+						"translation.y": 102.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 8,
-					"file": "DrawToolsUI.lua",
+					"file": "AnimationComponent.lua",
 					"settings":
 					{
-						"buffer_size": 3056,
+						"buffer_size": 4206,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1183,
+								1183
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2272.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "FightPlayer.lua",
+					"settings":
+					{
+						"buffer_size": 675,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								400,
+								400
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"auto_name": "-- FightPlayer.lua",
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 510.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "levels/FightingGameLevel.lua",
+					"settings":
+					{
+						"buffer_size": 1101,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								857,
+								857
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 816.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "LifeBar.lua",
+					"settings":
+					{
+						"buffer_size": 3030,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								845,
+								854
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 854.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "Text.lua",
+					"settings":
+					{
+						"buffer_size": 9820,
 						"regions":
 						{
 						},
@@ -2312,190 +1671,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4554.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "Line.lua",
-					"settings":
-					{
-						"buffer_size": 3880,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								930,
-								936
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1405.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "MapObject_Sprites.lua",
-					"settings":
-					{
-						"buffer_size": 2990,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								337,
-								337
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 4356.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "DrawGroup.lua",
-					"settings":
-					{
-						"buffer_size": 5766,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2043,
-								2043
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 198.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "DrawList.lua",
-					"settings":
-					{
-						"buffer_size": 13087,
-						"regions":
-						{
-							"bookmarks":
-							{
-								"flags": 144,
-								"icon": "bookmark",
-								"regions":
-								[
-									[
-										6127,
-										6127
-									]
-								],
-								"scope": "bookmarks"
-							}
-						},
-						"selection":
-						[
-							[
-								6127,
-								6127
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 9569.0,
+						"translation.y": 204.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 13,
-					"file": "Input.lua",
+					"file": "Pos.lua",
 					"settings":
 					{
-						"buffer_size": 4805,
+						"buffer_size": 4671,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3030,
-								3051
+								2927,
+								2927
 							]
 						],
 						"settings":
@@ -2515,25 +1709,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5194.0,
+						"translation.y": 5201.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 14,
-					"file": "MapObject.lua",
+					"file": "Bool.lua",
 					"settings":
 					{
-						"buffer_size": 9419,
+						"buffer_size": 1371,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2981,
-								2981
+								1220,
+								1220
 							]
 						],
 						"settings":
@@ -2553,7 +1747,197 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 7682.0,
+						"translation.y": 1840.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "Sprite.lua",
+					"settings":
+					{
+						"buffer_size": 5279,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2941,
+								2951
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5790.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "Window.lua",
+					"settings":
+					{
+						"buffer_size": 2578,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								751,
+								751
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1734.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "AudioComponent.lua",
+					"settings":
+					{
+						"buffer_size": 5941,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5026,
+								5026
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5304.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "Box.lua",
+					"settings":
+					{
+						"buffer_size": 7587,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								907,
+								907
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1359.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "Name.lua",
+					"settings":
+					{
+						"buffer_size": 9984,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9114,
+								9114
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 8535.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -2594,7 +1978,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 158.0
+		"height": 190.0
 	},
 	"replace":
 	{

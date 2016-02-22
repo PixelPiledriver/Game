@@ -63,6 +63,18 @@ function Bool:DataOrDefault(b, default)
 
 end 
 
+
+-- if the given name is not nil then true, else false
+-- it does not matter what value member actually holds
+function Bool:IfExists(member)
+	if(member ~= nil) then
+		return true
+	end
+
+	return false
+end 
+
+
 ---------------
 -- Static End
 ---------------

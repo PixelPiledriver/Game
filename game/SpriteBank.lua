@@ -9,7 +9,7 @@
 -----------------
 local SpriteSheet = require("SpriteSheet")
 local Sprite = require("Sprite")
-
+local Animation = require("Animation")
 ---------------------------------------------------
 local SpriteBank = {}
 
@@ -71,6 +71,8 @@ function SpriteBank:New(data)
 	o.sprites = {}
 	o.sprites.index = {}
 
+	o.animations = {}
+
 	---------------
 	-- Functions
 	---------------
@@ -78,10 +80,12 @@ function SpriteBank:New(data)
 	-- add sprites
 	-- data = { {name,x,y}, ...}
 	function o:Add(data)
+
 		for i=1, #data do
 			self.sprites[data[i][1]] = {data[i][2], data[i][3]}
 			self.sprites.index[#self.sprites.index+1] = data[i][1]
 		end 
+
 	end
 
 	-- get a new duplicate of sprite by name
@@ -92,14 +96,43 @@ function SpriteBank:New(data)
 		Sprite.default.SpriteSheet = self.spriteSheet
 		
 		-->MAKE OPTIONAL
-		Sprite.default.draw = true 
+		--Sprite.default.draw = false
 
 		local newSprite = Sprite:Simple(self.sprites[name])
 
-		Sprite.default.draw = false
+		--Sprite.default.draw = false
 
 		return newSprite
 	end
+
+
+	-- pass in table for animation definition
+	function o:AddAnimation(data)
+		self.animations[data.name] = data
+	end 
+
+	function o:GetAnimation(name)
+
+		local frames = {}
+
+		for i=1, #self.animations[name].frames do
+			frames[#frames+1] = self:Get(self.animations[name].frames[i])
+		end 
+
+		local newAnimation =
+		{
+			frames = frames,
+			spriteSheet = self.spriteSheet,
+			loopMax = self.animations[name].loopMax or nil,
+			whenDonePlay = self.animations[name].whenDonePlay or nil
+		}
+
+		--print(newAnimation.whenDonePlay)
+
+		return Animation:New(newAnimation)	
+
+	end
+
 
 
 	-- print list of sprites in this bank
@@ -123,6 +156,9 @@ return SpriteBank
 
 -- Notes
 --------------------------------
+-- add function GetAnimation --> returns table of values to be passed to 
+-- an AnimationComponent
+
 -- this file might seem redundant
 -- but it makes using sprites waaaay easier
 -- so fuck it

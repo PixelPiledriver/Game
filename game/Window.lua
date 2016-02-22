@@ -64,6 +64,7 @@ Window.titleFlavor =
 	"Hello World",
 	"You can do this!",
 	"you just gotta BELIEVE",
+	"KUNAI WITH CHAIN!",
 }
 
 Window.title = "PixelRobot: " .. Random:ChooseRandomlyFrom(Window.titleFlavor)

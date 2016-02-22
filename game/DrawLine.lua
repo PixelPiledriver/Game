@@ -50,6 +50,7 @@ DrawLine.previewLine = Line:New
 {
 	color = Color:Get("hidden")
 }
+DrawLine.previewLine.showNormal = false
 
 DrawLine.selectedPoints = {}
 DrawLine.selectIndex = Index:New(DrawLine.lines)
@@ -90,25 +91,8 @@ DrawLine.colorsIndex = Index:New(DrawLine.colors)
 -------------
 DrawLine.Input = Input:New{}
 
-local joinPoints =
-{
-	"4", "press",
-	function()
-		DrawLine:JoinPoints()
-	end 	
-}
-
-local breakPoints =
-{
-	"3", "press",
-	function()
-		DrawLine:BreakPoints()
-	end 
-}
-
 DrawLine.Input:AddKeys
 {
-	joinPoints, breakPoints
 }
 
 -------------
@@ -396,8 +380,11 @@ end
 
 function DrawLine:Start()
 
+	------------
+	-- Other
+	------------
 	DrawLine.active = true
-
+	
 	----------------
 	-- Collision
 	----------------
@@ -413,6 +400,7 @@ function DrawLine:Start()
 	DrawLine.resizeAcceleration = 1.2
 
 
+
 	-----------
 	-- Panel
 	-----------
@@ -421,7 +409,8 @@ function DrawLine:Start()
 	{
 		text = "Color",
 		color = self.color,
-		box = {}
+		box = {},
+		--autoContrastColor = false
 	}
 
 
@@ -496,7 +485,7 @@ function DrawLine:CancelDraw()
 	if(Mouse:SingleClick("r") and self.newPoints.a) then
 		self:ShowPreviewLine(false)
 		self.newPoints.a = nil
-		printDebug{"Line draw canceled", "DrawLine"}
+		printDebug{"Line draw cancelled", "DrawLine"}
 	end 
 
 end 
@@ -611,6 +600,7 @@ function DrawLine:ShowPreviewLine(state)
 	-- hide
 	if(state == false) then
 		self.previewLine.color.a = 0
+		self.previewLine.showNormal = false
 		self.showPreviewLine = false
 	end 
 
@@ -619,6 +609,7 @@ function DrawLine:ShowPreviewLine(state)
 		self.previewLine.a.x = Mouse.xView
 		self.previewLine.a.y = Mouse.yView
 
+		self.previewLine.showNormal = true
 		self.previewLine.color.a = 255
 		self.showPreviewLine = true
 	end 
@@ -907,6 +898,24 @@ function DrawLine:JoinPoints()
 end 
 
 
+
+-- Test Input
+
+local joinPoints =
+{
+	"4", "press",
+	function()
+		DrawLine:JoinPoints()
+	end 	
+}
+
+local breakPoints =
+{
+	"3", "press",
+	function()
+		DrawLine:BreakPoints()
+	end 
+}
 
 
 --]==]

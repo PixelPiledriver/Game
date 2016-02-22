@@ -145,9 +145,6 @@ function MapObject.Animations:Get(name)
 
 	local frames = {}
 
-
-
-
 	for i=1, #MapObject.Animations[name].frames do
 		frames[#frames+1] = MapObject.Sprites:Get(MapObject.Animations[name].frames[i])
 	end 

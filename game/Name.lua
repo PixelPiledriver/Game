@@ -26,7 +26,53 @@ Name.human = {}
 
 Name.human.female =
 {	
-	"Alice",
+	"Aaron","Abbey",
+	"Abbie","Abby","Abigail","Ada","Adah","Adaline","Adam","Addie",
+	"Adela","Adelaida","Adelaide","Adele","Adelia","Adelina","Adeline",
+	"Adell","Adella","Adelle","Adena","Adina","Adria","Adrian",
+	"Adriana","Adriane","Adrianna","Adrianne","Adrien","Adriene",
+	"Adrienne","Afton","Agatha","Agnes","Agnus","Agripina","Agueda",
+	"Agustina","Ai","Aida","Aide","Aiko","Aileen","Ailene","Aimee",
+	"Aisha","Aja","Akiko","Akilah","Alaina","Alaine","Alana","Alane",
+	"Alanna","Alayna","Alba","Albert","Alberta","Albertha","Albertina",
+	"Albertine","Albina","Alda","Alease","Alecia","Aleen","Aleida",
+	"Aleisha","Alejandra","Alejandrina","Alena","Alene","Alesha",
+	"Aleshia","Alesia","Alessandra","Aleta","Aletha","Alethea","Alethia",
+	"Alex","Alexa","Alexander","Alexandra","Alexandria","Alexia",
+	"Alexis","Alfreda","Alfredia","Ali","Alia","Alica","Alice",
+	"Alicia","Alida","Alina","Aline","Alisa","Alise","Alisha",
+	"Alishia","Alisia","Alison","Alissa","Alita","Alix","Aliza","Alla",
+	"Alleen","Allegra","Allen","Allena","Allene","Allie","Alline","Allison",
+	"Allyn","Allyson","Alma","Almeda","Almeta","Alona","Alpha",
+	"Alta","Altagracia","Altha","Althea","Alva","Alvera","Alverta","Alvina",
+	"Alyce","Alycia","Alysa","Alyse","Alysha","Alysia","Alyson",
+	"Alyssa","Amada","Amal","Amalia","Amanda","Amber","Amberly",
+	"Amee","Amelia","America","Ami","Amie","Amiee","Amina","Amira",
+	"Ammie","Amparo","Amy","An","Ana","Anabel","Analisa","Anamaria",
+	"Anastacia","Anastasia","Andera","Andra","Andre","Andrea","Andree","Andrew",
+	"Andria","Anette","Angel","Angela","Angele","Angelena","Angeles",
+	"Angelia","Angelic","Angelica","Angelika","Angelina","Angeline",
+	"Angelique","Angelita","Angella","Angelo","Angelyn","Angie","Angila",
+	"Angla","Angle","Anglea","Anh","Anika","Anisa","Anisha","Anissa","Anita","Anitra",
+	"Anja","Anjanette","Anjelica","Ann","Anna","Annabel","Annabell",
+	"Annabelle","Annalee","Annalisa","Annamae","Annamaria","Annamarie","Anne",
+	"Anneliese","Annelle","Annemarie","Annett","Annetta","Annette",
+	"Annice","Annie","Annika","Annis","Annita","Annmarie","Anthony",
+	"Antionette","Antoinette","Antonetta","Antonette","Antonia","Antonietta",
+	"Antonina","Antonio","Anya","Apolonia","April","Apryl","Ara","Araceli",
+	"Aracelis","Aracely","Arcelia","Ardath","Ardelia","Ardell","Ardella",
+	"Ardelle","Ardis","Ardith","Aretha","Argelia","Argentina","Ariana",
+	"Ariane","Arianna","Arianne","Arica","Arie","Ariel","Arielle",
+	"Arla","Arlean","Arleen","Arlena","Arlene","Arletha","Arletta",
+	"Arlette","Arlinda","Arline","Arlyne","Armanda","Armandina","Armida",
+	"Arminda","Arnetta","Arnette","Arnita","Arthur","Artie","Arvilla",
+	"Asha","Ashanti","Ashely","Ashlea","Ashlee","Ashleigh",
+	"Ashley","Ashli","Ashlie","Ashly","Ashlyn","Ashton","Asia",
+	"Asley","Assunta","Astrid","Asuncion","Athena","Aubrey","Audie",
+	"Audra","Audrea","Audrey","Audria","Audrie","Audry","Augusta",
+	"Augustina","Augustine","Aundrea","Aura","Aurea","Aurelia","Aurora",
+	"Aurore","Austin","Autumn","Ava","Avelina","Avery","Avis","Avril",
+	"Awilda","Ayako","Ayana","Ayanna","Ayesha","Azalee","Azucena","Azzie",
 
 	"Babara","Babette","Bailey","Bambi","Bao","Barabara","Barb","Barbar",
 	"Barbara","Barbera","Barbie","Barbra","Bari","Barrie","Basilia","Bea",
@@ -122,23 +168,24 @@ Name.human.family =
 Name.pet =
 {
 	"Bubbles","Bagel","Buddy", "Boots", "Benny",
-	"Buddy", "Booby",
+	"Booby", "Butter",
 	"Crooky", "Cleo",
 	"Egypt", 
 	"Furball","Fuzzy","Fug",
 	"Gatito Puente",
 	"Meat","Monkey","Max",
 	"Runner", "Rex",
-	"Wiggles", "Weenie", "Woof",
+	"Wiggles", "Weenie", "Weener", "Woof",
 	"Lady",
-	"Smokey","Sylvia", "Sooty", "Skippy"
+	"Smokey","Sylvia", "Sooty", "Skippy",
+
 
 }
 
 Name.monster =
 {
-	"Armorgore",
-	"Breaker",
+	"Azar",
+	"Brute",
 	"Cyx",
 	"Damninator",
 	"Ezofe",
@@ -146,18 +193,23 @@ Name.monster =
 	"Grog",
 	"Gorge",
 	"Gore",
-	"Howl",
+	"Gouge",
+	"Grim",
+	"Grawl",
 	"Hauz",
+	"HunGur",
+	"Howl",
 	"Isykklz",
 	"Radish",
 	"Razor",
+	"Roar",
 	"Skunk",
 	"Worf",
 	"Xiz",
 	"Zoar",
 }
 
-Name.endearing =
+Name.lover =
 {
 	"sweetie",
 	"honey",
@@ -168,6 +220,7 @@ Name.endearing =
 	"buddy",
 	"sweet thing",
 	"muffin",
+	"pudding",
 }
 
 Name.insulting =
@@ -179,8 +232,43 @@ Name.insulting =
 	"moron",
 	"stupid",
 	"idiot",
-	"dummy"
+	"dummy",
+	"chode",
+	"bitch",
+	"cunt",
+	"pussy"
 }
+
+Name.fantasy = 
+{
+	"Breaker",
+	"Ore",
+	"Rork",
+	"Spark",
+	"Rain",
+	"Ever",
+	"Sky",
+	"Wind",
+	"Rust",
+	"Silph",
+}
+
+Name.titles =
+{
+	"Brother",
+	"Captain",
+	"President",
+	"Councilman",
+	"Senator",
+	"Mayor",
+	"Minister",
+	"Father",
+	"Mr.",
+	"Ms.",
+	"Mrs."
+
+}
+
 
 ------------------------
 -- Static Functions

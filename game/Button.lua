@@ -21,6 +21,7 @@ local MouseDrag = require("MouseDrag")
 local Draw = require("Draw")
 local Text = require("Text")
 local Link = require("Link")
+local Panel = nil
 
 
 
@@ -172,14 +173,71 @@ function Button:New(data)
 	o.move = false       								-- currently being moved
 	o.draw = true
 
-	-- toggle
+	---------------------
+	-- Toggle Type
+	---------------------
+	-- vars
 	o.toggle = data.toggle or false     -- click once to set --> this is the button type not state
 	o.toggleState = false
 	o.toggleName = data.toggleName or data.text
 
-	-- functions for toggle type buttons
+	-- functions --> run on switch button on and off
 	o.toggleOnFunc = data.on or nil
 	o.toggleOffFunc = data.off or nil
+
+
+	--------------------
+	-- Option Type
+	--------------------
+	if(data.options) then
+
+		printDebug{"setup options", "Button"}
+
+		Panel = require("Panel")
+
+		o.options = {}
+
+		o.options.index = 1
+
+		o.options.list = data.options
+
+
+		o.optionFunc = function()
+
+			print("run option func")
+
+			o.options.panel = Panel:New
+			{
+				name = "Options",
+				gridWidth = 32,
+				gridHeight = 32,
+				x = 100,
+				y = 100
+			}
+
+			o.options.objects = {}
+
+			for i=1, #o.options.list do
+
+				-- text
+				o.options.objects[#o.options.objects+1] = Button:New
+				{
+					text = o.options.list[i],
+					width = 32,
+					height = 32
+					--color = Color:Get("black")
+				}
+
+			end 
+
+			o.options.panel:AddVertical(o.options.objects)
+
+		end 
+
+		print(o.optionFunc)
+
+
+	end 
 
 	-----------
 	-- Text
@@ -454,6 +512,7 @@ function Button:New(data)
 			return
 		end 
 
+		-- button is withing active range view? --> used for buttons in panels that scroll out of sight
 		if(self.activeRange.use == true) then
 
 			local inRange = Collision:PointInRect
@@ -462,8 +521,6 @@ function Button:New(data)
 				rect = self.activeRange
 			}
 
-			--print(inRange)
-			
 			if(inRange == false) then
 				return
 			end 
@@ -472,16 +529,22 @@ function Button:New(data)
 
 		local wasClicked = false
 
+
+
+		-- mouse is over button?
 		if(self.hover.isHovering == true)then
 			
 			if(Mouse:SingleClick("l")) then --> single click fixed
-			--if(love.mouse.isDown("l")) then
 
+				print(self.options)
 				self.clicked = true
 
 				if(self.lastClicked == false) then
 
 					if(self.func) then
+
+						printDebug{"button run func", "Button"}
+
 
 						-- button type = function repeats more than once
 						if(self.repeatable) then
@@ -511,6 +574,7 @@ function Button:New(data)
 
 					-- toggle button
 					elseif(self.toggle) then
+						printDebug{"button run toggle", "Button"}
 			
 						if(self.toggleState == false) then
 							self.toggleState = true
@@ -531,6 +595,11 @@ function Button:New(data)
 						end 
 
 						wasClicked = true
+
+					elseif(self.optionFunc) then
+						printDebug{"button run options", "Button"}
+
+						self:optionFunc()
 
 					-- no fucntion or toggle defined --> this button is useless --> but can change in appearance
 					else

@@ -61,6 +61,12 @@ local NewToolsButton = function(toolName)
 
 end 
 
+DrawLine.UI.pickColor = Button:New
+{
+	text = "Options",
+	options = {"this", "that", "cat", "dog"}
+}
+
 DrawLine.UI.lineButton = NewToolsButton("line")
 DrawLine.UI.movePointsButton = NewToolsButton("movePoints")
 DrawLine.UI.joinPointsButton = NewToolsButton("joinPoints")
@@ -73,7 +79,7 @@ DrawLine.panel:AddVertical
 	DrawLine.UI.buttons.movePoints,
 	DrawLine.UI.buttons.joinPoints,
 	DrawLine.UI.buttons.breakPoints,
-	DrawLine.UI.buttons.paint
+	DrawLine.UI.buttons.paint,
 }
 
 

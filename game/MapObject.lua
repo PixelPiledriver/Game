@@ -188,7 +188,7 @@ function MapObject:New(data)
 		-- select action
 		local nextAction =
 		{
-			"shift", "press",
+			"e", "press",
 			function()
 
 				-- next

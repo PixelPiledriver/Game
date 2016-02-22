@@ -36,6 +36,7 @@ local printList =
 	AnimationComponent = {true, false},
 	AnimationEditor = {true, false},
 	Build = {false, false},
+	Button = {true, false},
 	ChatBox = {true, false},
 	Collision = {false, false},
 	Collision2 = {false, false},

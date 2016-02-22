@@ -62,7 +62,6 @@ function Arrow:New(data)
 	o.Pos = Pos:New
 	{
 		x = data.x or Window.width * 0.5,
-		x = data.y or Window.height * 0.5,
 		y = data.y or 100
 	}
 
@@ -111,9 +110,10 @@ function Arrow:New(data)
 		o.stem = Line:New
 		{
 			a = {x = self.Pos.x, y = self.Pos.y},
-			b = {x = self.Pos.x + vector.x, y = self.Pos.y + vector.y},
+			b = {x = self.Pos.x + vector.x, y = self.Pos.y - vector.y},
 			color = self.color,
-			width = self.width
+			width = self.width,
+			showNormal = false
 		}
 
 		-- get vector for arrow head
@@ -131,9 +131,10 @@ function Arrow:New(data)
 		o.headLeft = Line:New
 		{
 			a = {x = self.Pos.x, y = self.Pos.y},
-			b = {x = self.Pos.x + vector.x, y = self.Pos.y + vector.y},
+			b = {x = self.Pos.x + vector.x, y = self.Pos.y - vector.y},
 			color = self.color,
-			width = self.width
+			width = self.width,
+			showNormal = false
 		}
 
 		-- get vector for arrow head other side
@@ -146,9 +147,10 @@ function Arrow:New(data)
 		o.headRight = Line:New
 		{
 			a = {x = self.Pos.x, y = self.Pos.y},
-			b = {x = self.Pos.x + vector.x, y = self.Pos.y + vector.y},
+			b = {x = self.Pos.x + vector.x, y = self.Pos.y - vector.y},
 			color = self.color,
-			width = self.width
+			width = self.width,
+			showNormal = false
 		}
 
 --]]

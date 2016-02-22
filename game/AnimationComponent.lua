@@ -98,6 +98,12 @@ function AnimationComponent:New(data)
 	-- simple for now, but will have more conditions later
 	function o:State(name)
 
+		-- animation does not exist
+		if(self.animations[name] == nil) then
+			print("no animation by that name")
+			return
+		end 
+
 
 		if(self.animations[name].canBeReplayed == false and name == self.state) then
 			return
@@ -145,9 +151,8 @@ function AnimationComponent:New(data)
 
 		if(self.selectedAnimation.whenDonePlay) then
 			self:State(self.selectedAnimation.whenDonePlay)
+			--print("when done playing --> " .. self.selectedAnimation.whenDonePlay)
 		end
-
-		print("playing fallback animation")
 
 	end 
 

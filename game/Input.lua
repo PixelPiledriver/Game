@@ -4,9 +4,12 @@
 ---------------------------------------------
 -- input component for objects
 -- add keys and functions to be run when they are pressed
--- keyboard input only --> for now
+-- keyboard input only --> need to add controller in future
 
-
+-----------------
+-- Requires
+-----------------
+local KeySequence = require("KeySequence")
 
 ----------------------------------------------------------------------------
 
@@ -50,6 +53,9 @@ Input.Info = Info:New
 		o.pressKeys = {index = {}}
 		o.releaseKeys = {index = {}}
 		o.holdKeys = {index = {}}
+		o.sequenceKeys = {}
+
+		o.sequenceIndex = o.sequenceKeys
 
 		-- other
 		o.parent = data.parent or nil
@@ -102,9 +108,45 @@ Input.Info = Info:New
 
 			self[inputType]["index"][#self[inputType]["index"]+1] = data.key
 
-
-
 		end
+
+		function o:AddSequences(list)
+			for i=1, #list do
+				self:AddSequence(list[i])
+			end 
+		end 
+
+		function o:AddSequence(data)
+			self.sequenceKeys[#self.sequenceKeys+1] = KeySequence:New(data)
+		end 
+
+		function o:SequenceInputUpdate(key)
+
+			local resetAll = false
+
+			-- check to see if any sequence has given key next
+			for i=1, #self.sequenceKeys do
+				local complete = self.sequenceKeys[i]:TestKey(key)
+
+				-- sequence done?
+				if(complete) then
+					resetAll = true
+				end
+				
+			end
+
+			-- reset all indexes?
+			if(resetAll) then
+				for i=1, #self.sequenceKeys do
+					self.sequenceKeys[i]:ResetIndex()
+				end 
+
+				return true
+			end
+
+			-- priority over non sequences
+		end 
+
 
 		
 
@@ -113,21 +155,36 @@ Input.Info = Info:New
 		-- hold needs to be done with a seperate function
 		function o:InputUpdate(key, inputType)
 
+			-- is input on?
 			if(self.active == false) then
 				return
 			end 
 
+			-- run this key as part of sequence
+			if(inputType == "press") then
+				local complete = self:SequenceInputUpdate(key)
 
+				-- cancel all basic input if a sequence is completed
+				if(complete) then
+					print("shit")
+					return
+				end 
+
+			end
+
+
+
+			-- make table name
 			local inputType = inputType .. "Keys"
 
-
+			
+			-- does key exist?
 			if(self[inputType][key]) then
 
 				repeat
 
 					-- key is active? --> can be used?
 					if(self[inputType][key].active == false)then
-
 						break
 					end
 
@@ -142,8 +199,9 @@ Input.Info = Info:New
 					-- no parent
 					else 
 						self[inputType][key].func()
-					end 
+					end
 
+					-- number of times this key has been pressed
 					self.count = self.count + 1
 
 					until true
@@ -151,6 +209,8 @@ Input.Info = Info:New
 			end
 
 		end
+
+
 
 
 		-- update all holdKeys
@@ -224,6 +284,11 @@ return Input
 
 -- Notes
 --------------------
+-- gotta take a huge shit
+-- add "sequence" input type, for double taps, and fighting game moves
+-- also should add "multi" for buttons at the same time
+
+
 -- should this component handle mouse and controller input as well?
 -- for now it only handles keyboard input
 
@@ -262,3 +327,67 @@ App.Input = Input:New
 -- the comps parent will pass in the data for updating
 
 -- has to be added to the end of an objects file
+
+
+
+-- Junk
+----------------------------------
+--[==[
+
+		-- { list = {key1, key2, ...}, func = function() 
+		function o:AddSequence2(data)
+
+			-- add to index list
+			self.sequenceKeys.index[#self.sequenceKeys.index + 1] = data.list[1]
+
+			-- use to save place in tables to move deeper
+			local slot = self.sequenceKeys
+
+			-- add buttons to sequence as table branches
+			for i=1, #data.list do
+				if(slot[data.list[i]] == nil) then
+					slot[data.list[i]] = {}
+				end
+
+				slot = slot[data.list[i]]
+
+				-- last button in sequence
+				if(i == #data.list) then
+					slot.complete = true
+					slot.func = data.func
+				end 
+			end 
+
+		end 
+
+
+
+		-- simple version, needs changes to be functional in the future
+		function o:SequenceInputUpdate2(key)
+		
+			--print(self.sequenceKeys[key])
+			-- key in sequence?
+			if(self.sequenceIndex[key]) then
+				print("step + in sequence: " .. key)
+
+				-- go to next
+				self.sequenceIndex = self.sequenceIndex[key]
+
+
+				-- last key in squence?
+				if(self.sequenceIndex.complete == true) then
+					
+					print("sequence completed!")
+					self.sequenceIndex:func()
+
+					-- return to start
+					self.sequenceIndex = self.sequenceKeys
+				end 
+
+			end
+
+
+		end 
+
+
+--]==]

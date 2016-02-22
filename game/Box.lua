@@ -84,6 +84,7 @@ function Box:New(data)
 	-- draw
 	o.fill = data.fill or true
 	o.draw = data.draw or true
+	o.drawMode = data.drawMode or "fill"
 
 	-- rotation
 	o.angle = data.angle or 0
@@ -226,10 +227,10 @@ function Box:New(data)
 			love.graphics.scale(self.xScale, self.yScale)
 			love.graphics.rotate(self.angle)
 			love.graphics.translate(-self.Pos.x - (self.pivot.x * self.Size.width), -self.Pos.y - (self.pivot.y * self.Size.height))
-			love.graphics.rectangle("fill", self.Pos.x, self.Pos.y - (self.z or 0), self.Size.width, self.Size.height)
+			love.graphics.rectangle(self.drawMode, self.Pos.x, self.Pos.y - (self.z or 0), self.Size.width, self.Size.height)
 			love.graphics.pop()
 		else 
-			love.graphics.rectangle("fill", self.Pos.x, self.Pos.y - (self.z or 0), self.Size.width, self.Size.height)
+			love.graphics.rectangle(self.drawMode, self.Pos.x, self.Pos.y - (self.z or 0), self.Size.width, self.Size.height)
 		end 
 
 		if(self.fill == false) then

@@ -38,6 +38,7 @@ LevelManager.levelNames =
 {
 	"AudioTestLevel",
 	"DrawLineLevel",
+	"FightingGameLevel",
 	"AnimationEditorLevel",
 	"TextWriteLevel",
 	"MapWorldLevel",
