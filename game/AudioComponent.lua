@@ -40,7 +40,6 @@ function AudioComponent:New(data)
 	-- this is where this AudioComponent will store soundSources created with the StoreNewSoundSource method
 	o.SoundSources = {}
 
-	-- TODO: How do I make this actually private?
 	-- Private Table DO NOT ACCESS
 	o.SoundSourceMasters = {};
 
