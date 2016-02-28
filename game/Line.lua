@@ -72,7 +72,7 @@ function Line:New(data)
 	o.width = data.width or 1
 
 	-- normal
-	o.showNormal = Bool:DataOrDefault(data.showNormal, true)
+	o.showNormal = Bool:DataOrDefault(data.showNormal, false)
 
 	-- other
 	o.collidablePoints = data.collidablePoints

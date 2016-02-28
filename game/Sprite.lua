@@ -12,6 +12,7 @@ local SpriteSheet = require("SpriteSheet")
 local Color = require("Color")
 local Pos = require("Pos")
 local Size = require("Size")
+local Scale = require("Scale")
 local Draw = require("Draw")
 
 -------------------------------------------------------------------------------
@@ -141,6 +142,8 @@ function Sprite:New(data)
 
 	o.Pos = Pos:New(data.pos or Pos.defaultPos)
 
+	o.Scale = Scale:New{}
+
 	o.Draw = Draw:New
 	{
 		parent = o,
@@ -182,7 +185,7 @@ function Sprite:New(data)
 		local xScale = 1
 		local yScale = 1
 
-		love.graphics.draw(self.spriteSheet.image, self.sprite, x, y, angle, xScale, yScale)
+		love.graphics.draw(self.spriteSheet.image, self.sprite, x, y, angle, self.Scale.x, self.Scale.y)
 
 	end 
 

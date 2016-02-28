@@ -57,6 +57,7 @@ function FightCharacter:New(data)
 		o.opponentIndex = 1
 	end 
 
+	o.direction = {}
 
 
 	---------------
@@ -107,12 +108,10 @@ function FightCharacter:New(data)
 	-----------------
 	o.FightManager = data.FightManager
 
-	o.controls = o.FightManager.players[o.playerIndex].controls
-
 	o.Pos = Pos:New
 	{
-		x = 150,
-		y = 250,
+		x = o.FightManager.stage.playerStart[o.playerIndex].x,
+		y = o.FightManager.stage.playerStart[o.playerIndex].y,
 		--gravity = 0.1
 	}
 
@@ -120,7 +119,42 @@ function FightCharacter:New(data)
 	-- Input
 	-----------------
 
+	o.controls = o.FightManager.players[o.playerIndex].controls
+	--[[
+	o.controls.direction = 
+	{
+		left = 
+		{
+			left = o.controls.right,
+			right = o.controls.left
+		},
+
+		right =
+		{
+			left = o.controls.left,
+			right = o.controls.right
+		}
+	}
+	--]]
+
 	o.Input = Input:New{}
+
+	---[[
+	o.Input:AddConvertKey
+	{
+		mode = "left",
+		key = "a",
+		keyConvertsTo = "d"
+	}
+
+	o.Input:AddConvertKey
+	{
+		mode = "left",
+		key = "d",
+		keyConvertsTo = "a"
+	}
+
+	--]]
 
 	local moveRight =
 	{
@@ -129,8 +163,8 @@ function FightCharacter:New(data)
 			o.Pos:Move{x = o.moveSpeed}
 
 			-- edge of screen stop
-			if(o.Pos.x > o.FightManager.stage.width) then
-				o.Pos.x = o.FightManager.stage.width
+			if(o.Pos.x > o.FightManager.stage:RightEdge()) then
+				o.Pos.x = o.FightManager.stage:RightEdge()
 			end 
 
 		end 
@@ -143,8 +177,8 @@ function FightCharacter:New(data)
 			o.Pos:Move{x = -o.moveSpeed}
 
 			-- edge of screen stop
-			if(o.Pos.x < 0) then
-				o.Pos.x = 0
+			if(o.Pos.x < o.FightManager.stage:LeftEdge()) then
+				o.Pos.x = o.FightManager.stage:LeftEdge()
 			end 
 
 		end 
@@ -192,7 +226,7 @@ function FightCharacter:New(data)
 
 	local fireball =
 	{
-		list = {o.controls.left, o.controls.right, o.controls.punch},
+		list = {o.controls.down, o.controls.right, o.controls.punch},
 		func = function()
 
 			if(o.FightManager.attacksActive == false) then
@@ -200,7 +234,7 @@ function FightCharacter:New(data)
 			end 
 
 			o.AnimationComponent:State("fireball")
-			o.FightManager:AttackOpponent(50, o.opponentIndex)
+			o.FightManager:AttackOpponent(20, o.opponentIndex)
 			o.AudioComponent:PlaySFX("fireball.wav")
 		end
 	}
@@ -226,6 +260,24 @@ function FightCharacter:New(data)
 	------------------
  	-- Functions
  	------------------
+
+ 	function o:SetDirection(direction)
+ 		
+ 		if(self.playerIndex == 1) then
+	 		--print(self.controls.left)
+	 	end
+
+ 		self.direction = direction
+ 		
+ 		if(self.direction == "left") then
+ 			self.Input.convert.mode = "left"
+ 		else
+ 			self.Input.convert.mode = "right"
+ 		end
+
+ 		
+
+ 	end 
 
 
 	-------------

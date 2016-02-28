@@ -13,12 +13,13 @@ local Start = function()
 	FightManager.players[1].LifeBar = LifeBar:New
 	{
 		align = "right",
+		x = Window.width * 0.5 - 25
 	}
 
 	FightManager.players[2].LifeBar = LifeBar:New
 	{
 		align = "left",
-		x = 450
+		x = Window.width * 0.5 + 25
 	}
 
 	local red = FightCharacter:New

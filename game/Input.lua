@@ -147,7 +147,34 @@ Input.Info = Info:New
 			-- priority over non sequences
 		end 
 
+		o.convert = {}
+		o.convert.active = true
+		o.convert.mode = nil
 
+		function o:ConvertToggle()
+			Bool:Toggle(o.convert.active)
+		end 
+
+		function o:AddConvertKey(data)
+			if(self.convert[data.mode] == nil) then
+				self.convert[data.mode] = {}
+			end 
+
+			self.convert[data.mode][data.key] = data.keyConvertsTo
+		end 
+
+
+		function o:ConvertKey(key)
+			if(self.convert.active == false) then
+				return key
+			end 
+
+			if(self.convert[self.convert.mode] and self.convert[self.convert.mode][key]) then
+				return self.convert[self.convert.mode][key]
+			end 
+
+			return key
+		end
 		
 
 		-- passed in from ObjectManager -> parent -> this object on input callbacks
@@ -160,6 +187,9 @@ Input.Info = Info:New
 				return
 			end 
 
+			-- convert keys mode
+			key = self:ConvertKey(key)
+
 			-- run this key as part of sequence
 			if(inputType == "press") then
 				local complete = self:SequenceInputUpdate(key)
@@ -171,8 +201,6 @@ Input.Info = Info:New
 				end 
 
 			end
-
-
 
 			-- make table name
 			local inputType = inputType .. "Keys"

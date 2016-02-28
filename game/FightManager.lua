@@ -102,6 +102,21 @@ end
 
 function FightManager:Update()
 	self:TimeAdvance()
+	self:DetermineDirection()
+end 
+
+function FightManager:DetermineDirection()
+	if(self.players[1].character == nil or self.players[2].character == nil) then
+		return
+	end 
+
+	if(self.players[1].character.Pos.x < self.players[2].character.Pos.x) then
+		self.players[1].character:SetDirection("right")
+		self.players[2].character:SetDirection("left")
+	else
+		self.players[2].character:SetDirection("right")
+		self.players[1].character:SetDirection("left")		
+	end 
 end 
 
 function FightManager:TimeAdvance()
@@ -126,6 +141,8 @@ function FightManager:Victory(playerIndex)
 
 	self.AudioComponent:PlaySFX("win.wav")
 
-end 
+end
+
+ObjectManager:AddStatic(FightManager)
 
 return FightManager
