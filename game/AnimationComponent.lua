@@ -85,10 +85,10 @@ function AnimationComponent:New(data)
 
 
 		for i=1, #self.animations.index do
-			print(self.animations.index[i])
-			print(self.animations[self.animations.index[i]].draw)
+			--print(self.animations.index[i])
+			--print(self.animations[self.animations.index[i]].draw)
 		end 
-		print("----------")
+		--print("----------")
 
 
 	end
@@ -100,14 +100,13 @@ function AnimationComponent:New(data)
 
 		-- animation does not exist
 		if(self.animations[name] == nil) then
-			print("no animation by that name")
+			printDebug{"no animation by that name", "AnimationComponent"}
 			return
 		end 
-
 
 		if(self.animations[name].canBeReplayed == false and name == self.state) then
 			return
-		end 
+		end
 
 		if(self.animations[name] == nil) then
 			printDebug{"no animation by that name...", "AnimationComponent"}

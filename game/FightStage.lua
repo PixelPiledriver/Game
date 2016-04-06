@@ -42,26 +42,28 @@ end
 -- Graphics
 ----------------
 
-local leftCornerPoint = {x = FightStage.x - FightStage.width/2, y = FightStage.y}
-local rightCornerPoint = {x = FightStage.x + FightStage.width/2, y = FightStage.y}
--- debug stage layout
-FightStage.floor = Line:New
-{
-	a = leftCornerPoint,
-	b = rightCornerPoint,
-	color = Color:Get("yellow")
-}
+function FightStage:CreateStage()
+	local leftCornerPoint = {x = FightStage.x - FightStage.width/2, y = FightStage.y}
+	local rightCornerPoint = {x = FightStage.x + FightStage.width/2, y = FightStage.y}
+	-- debug stage layout
+	FightStage.floor = Line:New
+	{
+		a = leftCornerPoint,
+		b = rightCornerPoint,
+		color = Color:Get("yellow")
+	}
 
-FightStage.wallLeft = Line:New
-{
-	a = leftCornerPoint,
-	b = {x = leftCornerPoint.x, y = leftCornerPoint.y - 100}	
-}
+	FightStage.wallLeft = Line:New
+	{
+		a = leftCornerPoint,
+		b = {x = leftCornerPoint.x, y = leftCornerPoint.y - 100}	
+	}
 
-FightStage.wallRight = Line:New
-{
-	a = rightCornerPoint,
-	b = {x = rightCornerPoint.x, y = rightCornerPoint.y -  100}
-}
+	FightStage.wallRight = Line:New
+	{
+		a = rightCornerPoint,
+		b = {x = rightCornerPoint.x, y = rightCornerPoint.y -  100}
+	}
+end 
 
 return FightStage

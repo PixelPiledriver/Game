@@ -95,52 +95,58 @@ function Camera:New(data)
 	o.zoomMax = 100
 	o.zoomMin = 0
 
-	-------------------
-	-- Test Objects
-	-------------------
-	-- objects that help determine values of camera
-	o.zoomBox = Box:New
-	{
-		width = 32,
-		height = 32,
-		color = Color:Get("yellow")
-	}
-	
-	Link:Simple
-	{
-		a = {o.zoomBox, "Pos", {"x", "y"}},
-		b = {o, "Pos", {"x", "y"}},
-	}
 
-	o.centerView = {}
-	o.centerView.size = 15
-	o.centerView.verticalLine = Line:New
-	{
-		a = {x = Window.width * 0.5, y = (Window.height * 0.5) - o.centerView.size},
-		b = {x = Window.width * 0.5, y = (Window.height * 0.5) + o.centerView.size},
-		layer = "Hud"
-	}
-	
-	o.centerView.horizontalLine = Line:New
-	{
-		a = {x = Window.width * 0.5 - o.centerView.size, y = Window.height * 0.5},
-		b = {x = Window.width * 0.5 + o.centerView.size, y = Window.height * 0.5},
-		layer = "Hud"
-	}
-	
-	Link:Simple
-	{
-		a = {o.centerView.verticalLine, "Pos", {"x", "y"}},
-		b = {o, "Pos", {"x", "y"}}
-	}
+	function o:CreateTestObjects()
+		-------------------
+		-- Test Objects
+		-------------------
+		-- objects that help determine values of camera
+		o.zoomBox = Box:New
+		{
+			width = 32,
+			height = 32,
+			color = Color:Get("yellow")
+		}
+		
+		Link:Simple
+		{
+			a = {o.zoomBox, "Pos", {"x", "y"}},
+			b = {o, "Pos", {"x", "y"}},
+		}
 
-	Link:Simple
-	{
-		a = {o.centerView.horizontalLine, "Pos", {"x", "y"}},
-		b = {o, "Pos", {"x", "y"}}
-	}
+		o.centerView = {}
+		o.centerView.size = 15
+		o.centerView.verticalLine = Line:New
+		{
+			a = {x = Window.width * 0.5, y = (Window.height * 0.5) - o.centerView.size},
+			b = {x = Window.width * 0.5, y = (Window.height * 0.5) + o.centerView.size},
+			layer = "Hud"
+		}
+		
+		o.centerView.horizontalLine = Line:New
+		{
+			a = {x = Window.width * 0.5 - o.centerView.size, y = Window.height * 0.5},
+			b = {x = Window.width * 0.5 + o.centerView.size, y = Window.height * 0.5},
+			layer = "Hud"
+		}
+		
+		Link:Simple
+		{
+			a = {o.centerView.verticalLine, "Pos", {"x", "y"}},
+			b = {o, "Pos", {"x", "y"}}
+		}
 
+		Link:Simple
+		{
+			a = {o.centerView.horizontalLine, "Pos", {"x", "y"}},
+			b = {o, "Pos", {"x", "y"}}
+		}
 
+	end
+
+	--------------
+	-- Shake
+	--------------
 
 	-- doesnt seem to work anymore?
 	-->FIX

@@ -83,6 +83,11 @@ function Scale:New(data)
 		self.speed.y = data.ySpeed or self.speed.y
 	end
 
+	function o:SetScale(size)
+		self.x = size
+		self.y = size
+	end 
+
 	function o:FlipHorizontal()
 		self.x = -self.x
 	end

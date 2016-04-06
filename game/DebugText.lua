@@ -54,7 +54,7 @@ DebugText.font = love.graphics.newFont(12)
 DebugText.messageType = 
 {
 	-- Managers
-	ObjectManager = false,
+	ObjectManager = true,
 	CollisionManager = false,
 	DrawList = false,
 
@@ -71,7 +71,7 @@ DebugText.messageType =
 
 	-- Objects
 	Box = false,
-	Camera = true,
+	Camera = false,
 	Bullet = false,
 	Block = false,
 	Controller = false,
@@ -111,7 +111,7 @@ DebugText.messageType =
 	Palette = false,
 	Animation = false,
 	AnimationComponent = false,
-	DrawLine = true,
+	DrawLine = false,
 
 	-- Other
 	Generic = false

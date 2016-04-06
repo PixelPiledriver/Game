@@ -45,7 +45,7 @@ Sprite.default.XIndex = 1
 Sprite.default.YIndex = 1
 Sprite.default.X = 0
 Sprite.default.Y = 0
-Sprite.default.draw = false
+Sprite.default.draw = true
 
 Sprite.useSpriteSheetSpriteSize = true
 
@@ -224,6 +224,7 @@ function Sprite:New(data)
 	end 
 
 	function o:Destroy()
+		print("ok!")
 		ObjectManager:Destroy(o.Info)
 		ObjectManager:Destroy(o.Size)
 		ObjectManager:Destroy(o.Pos)

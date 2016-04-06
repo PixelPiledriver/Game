@@ -38,7 +38,7 @@ Animation.Info = Info:New
 Animation.default = {}
 Animation.default.color = Color:Get("white")
 Animation.default.frame = nil --> change to a "No Frame" image
-Animation.default.delay = 10
+Animation.default.delay = 3
 
 ---------------------
 -- Static Functions
@@ -279,6 +279,7 @@ function Animation:New(data)
 	end 
 
 	function o:Destroy()
+		print("yes!")
 		ObjectManager:Destroy(self.Info)
 		ObjectManager:Destroy(self.Pos)
 		ObjectManager:Destroy(self.Draw)

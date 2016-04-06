@@ -543,7 +543,7 @@ function Button:New(data)
 
 					if(self.func) then
 
-						printDebug{"button run func", "Button"}
+						--printDebug{"button run func", "Button"}
 
 
 						-- button type = function repeats more than once

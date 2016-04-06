@@ -72,6 +72,9 @@ function SpriteBank:New(data)
 	o.sprites.index = {}
 
 	o.animations = {}
+	o.animations.index = {}
+
+	o.createdSprites = {}
 
 	---------------
 	-- Functions
@@ -109,6 +112,7 @@ function SpriteBank:New(data)
 	-- pass in table for animation definition
 	function o:AddAnimation(data)
 		self.animations[data.name] = data
+		self.animations.index[#self.animations.index + 1] = data.name
 	end 
 
 	function o:GetAnimation(name)
@@ -133,6 +137,39 @@ function SpriteBank:New(data)
 
 	end
 
+	function o:CreateAnimation(name)
+		local frames = {}
+
+		for i=1, #self.animations[name].frames do
+			frames[#frames+1] = self:Get(self.animations[name].frames[i])
+		end
+
+		self.createdSprites[name] = frames
+
+		local newAnimation =
+		{
+			frames = frames,
+			spriteSheet = self.spriteSheet,
+			loopMax = self.animations[name].loopMax or nil,
+			whenDonePlay = self.animations[name].whenDonePlay or nil
+		}
+
+		return Animation:New(newAnimation)	
+	end 
+
+	function o:CopyAnimation(name)
+
+		local newAnimation =
+		{
+			frames = self.createdSprites[name],
+			spriteSheet = self.spriteSheet,
+			loopMax = self.animations[name].loopMax or nil,
+			whenDonePlay = self.animations[name].whenDonePlay or nil
+		}
+
+		return Animation:New(newAnimation)	
+	end 
+
 
 
 	-- print list of sprites in this bank
@@ -142,8 +179,22 @@ function SpriteBank:New(data)
 		end 
 	end 
 
+	function o:Destroy()
+		print("SPRITE BANK")
+		for i=1, #self.sprites.index do
+			print(self.sprites.index[i])
+			ObjectManager:Destroy(self.sprites[self.sprites.index[i]])
+		end 
+
+		for i=1, #self.animations.index do
+			print(self.animations.index[i])
+			ObjectManager:Destroy(self.animations[self.animations.index[i]])
+		end 
+
+	end
+
 	-------------
-	-- Setup
+	-- End
 	-------------
 
 	return o

@@ -1,178 +1,155 @@
--- Bullet.lua
--->OLD
+--Bullet.lua
 
--- Purpose
-----------------------------
--- simple bullet
-
-
-------------------
 -- Requires
-------------------
-local Collision = require("Collision")
+--------------------------
 
+local Color = require("Color")
+local SpriteBank = require("SpriteBank")
+local BulletShot = require("BulletShot")
 
----------------------------------------------------------------------------
+----------------------------------------------------------------
 
 local Bullet = {}
 
-----------------
+-------------------
 -- Static Info
-----------------
+-------------------
 Bullet.Info = Info:New
 {
 	objectType = "Bullet",
-	dataType = "Game",
+	dataType = "GameObject",
 	structureType = "Static"
 }
 
 function Bullet:New(data)
 
-	---------------------
-	-- Create
-	---------------------
-
 	local o = {}
 
 	------------------
-	-- Object Info
+	-- Info
 	------------------
 	o.Info = Info:New
 	{
 		name = data.name or "...",
 		objectType = "Bullet",
-		dataType = "Game",
-		StructureType = "Object"
+		dataType = "GameObject",
+		structureType = "Object"
 	}
 
-	
-	----------------
+	------------
 	-- Vars
-	----------------
+	------------
+	o.frameDirection = data.frameDirection or "x"
 
-	if(data.bulletType) then
-		
-		o.frame = data.frame
-		o.bulletType = data.bulletType
+	o.speed = data.speed or 10
 
-		-- pos
-		o.x = data.shooter.x + data.shooter.xShootPos
-		o.y = data.shooter.y + data.shooter.yShootPos
 
-		-- direction
-		o.xSpeed = data.direction.x or 0
-		o.ySpeed = data.direction.y or 0
+	---------------
+	-- Graphics
+	---------------
 
-		-- bullet stats
-		o.speed = o.bulletType.speed
-		o.damage = o.bulletType.damage
-		o.lifespan = o.bulletType.lifespan
+	o.SpriteBank = SpriteBank:New
+	{
+		image = data.image,
+		spriteWidth = data.width,
+		spriteHeight = data.height
+	}
 
-	else
+	-- create frames
+	local frames = {}
 
-		-- sprite
-		o.frame = data.frame or nil
-		
-		-- pos
-		o.x = data.shooter.x + data.shooter.xShootPos
-		o.y = data.shooter.y + data.shooter.yShootPos
-
-		-- direction
-		o.xSpeed = data.xSpeed or 0
-		o.ySpeed = data.ySpeed or 0
-
-		-- bullet stats
-		o.speed = data.speed or 10
-		o.damage = data.damage or 1
-		o.lifespan = data.lifespan or -1
+	for i=1, data.frames do
+		frames[#frames+1] = {"frame " .. i, i, 1}
 	end
 
+	local frameNames = {}
+	for i=1, #frames do
+		frameNames[#frameNames+1] = frames[i][1]
+	end 
 
-	---------------
-	-- Collision
-	---------------
+	print(#frameNames)
 
-	o.collision = Collision:New
+	-- add frames to bank
+	o.SpriteBank:Add(frames)
+
+	-- create animation
+	o.SpriteBank:AddAnimation
 	{
-		name = data.shooter.playerColor .. "Bullet",
-		parent = o,
-		width = o.frame.width,
-		height = o.frame.height,
-		collisionList = data.collisionList or nil,
-		oneCollision = true,
-		visible = false
+		name = "shoot",
+		frames = frameNames
 	}
 
+	-- get animation as object
+	o.SpriteBank:CreateAnimation("shoot")
 
-	function o:OnCollision(data)
-		self.lifespan = 0
-	end 
+	o.sprite = o.SpriteBank:GetAnimation("shoot")
 
-	--------------
+	---------------
 	-- Functions
-	--------------
-
-	function o:Move()
-		self.x = self.x + (self.xSpeed * self.speed)
-		self.y = self.y + (self.ySpeed * self.speed)
-	end 
-
-	function o:Life()
-		if(self.lifespan == -1) then
-			return
-		end 
-
-		if(self.lifespan > 0) then
-			self.lifespan = self.lifespan - 1
-		end
-
-		if(self.lifespan == 0) then
-			ObjectManager:Destroy(self)
-		end
-
-	end 
-
-	-->???
-	function o:OutOfBounds()
-	end 
+	---------------
+	
+	o.life = 50
 
 	function o:Update()
-		self:Move()
-		self:Life()
-		self:OutOfBounds()
-	end
+		o.sprite.Pos.x = o.sprite.Pos.x + o.speed
 
-	function o:Draw()
-		self.frame:Draw(self)
-	end
+		o.life = o.life - 1
+		if(o.life < 0) then
+			ObjectManager:Destroy(o)
+		end 
 
-	function o:Destroy()
-		ObjectManager:Destroy(self.Info)
-		ObjectManager:Destroy(self.collision)
 	end 
 
+	function o:Shoot(data)
 
-	----------
+		local shoot = BulletShot:New
+		{
+			bullet = o.SpriteBank:CopyAnimation("shoot"),
+			speed = self.speed,
+			x = data.x,
+			y = data.y
+		}
+
+	end 
+
+	function o:Destroy()
+		ObjectManager:Destroy(o.Info)
+		ObjectManager:Destroy(o.SpriteBank)
+		ObjectManager:Destroy(o.sprite)
+	end 
+
+	-----------
 	-- End
-	----------
-	
-	ObjectManager:Add{o}
+	-----------
 
+	ObjectManager:Add{o}
 	return o
 
 end 
 
 
----------------
+----------------
 -- Static End
----------------
+----------------
 
 ObjectManager:AddStatic(Bullet)
-
-return Bullet
-
+	
+return Bullet 
 
 
 -- Notes
----------------------------------------
--- old game code that needs to be looked over
+-----------------------------------------------------
+
+--[==[
+
+--[[
+		if(o.frameDirection == "x") then
+			frames[#frames+1] = {"frame " .. i, i, 1}
+		else
+			frames[#frames+1] = {"frame " .. i, 1, i}
+		end
+--]]
+
+
+
+--]==]

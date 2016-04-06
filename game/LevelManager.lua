@@ -12,6 +12,7 @@
 local Window = nil
 local Input = nil
 local Text = nil
+local Color = nil
 
 --------------------------------------
 
@@ -36,6 +37,7 @@ LevelManager.printDescriptionOnStart = true
 -- all levels available
 LevelManager.levelNames = 
 {
+	"BulletsStarrMazer",
 	"AudioTestLevel",
 	"DrawLineLevel",
 	"FightingGameLevel",
@@ -108,6 +110,7 @@ function LevelManager:CreateInput()
 		"z", "press", 
 		function()
 			LevelManager:ExitLevel()
+			love.graphics.setBackgroundColor(Color:AsTable(Color:Get("gray")))
 		end 
 	}
 
@@ -241,6 +244,7 @@ function LevelManager:PostRequire()
 	Window = require("Window")
 	Text = require("Text")
 	Input = require("Input")
+	Color = require("Color")
 
 	-- Input
 	self:CreateInput()
