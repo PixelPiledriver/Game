@@ -83,7 +83,10 @@ Input.Info = Info:New
 						parent = data[i][4] or nil,
 						state = false,
 						description = data[i][5] or "?",
-						active = data[i][6] or true
+						active = data[i][6] or true,
+
+						delay = data[i][8] or 0,
+						delayCount = 0
 					}
 
 					self[inputType]["index"][#self[inputType]["index"]+1] = data[i][1]
@@ -96,15 +99,25 @@ Input.Info = Info:New
 
 			local inputType = data.type .. "Keys"
 
-			self[inputType][data.key] = 
+			self[inputType][data.key] = data
+			data.state = false
+			if(data.description == nil) then
+				data.description = "?"
+			end 
+
+			--[[
 			{
 				key = data.key,
 				func = data.func,
 				parent = data.parent or nil,
 				state = false,
 				description = data.description or "?",
-				active = data.active or true
+				active = data.active or true,
+
+				delay = data[i][8] or 0,
+				delayCount = 0
 			}
+			--]]
 
 			self[inputType]["index"][#self[inputType]["index"]+1] = data.key
 
@@ -240,7 +253,6 @@ Input.Info = Info:New
 
 
 
-
 		-- update all holdKeys
 		function o:RepeatedInputUpdate()
 
@@ -260,6 +272,18 @@ Input.Info = Info:New
 
 					if(love.keyboard.isDown(self.holdKeys[keyIndex].key)) then
 
+						-- use delay? --> control interval of running func()
+						if(self.holdKeys[keyIndex].delay > 0) then
+							self.holdKeys[keyIndex].delayCount = self.holdKeys[keyIndex].delayCount + 1
+
+							if(self.holdKeys[keyIndex].delayCount > self.holdKeys[keyIndex].delay) then
+								self.holdKeys[keyIndex].delayCount = 0
+							else 
+								break
+							end 
+
+						end 
+
 						-- key has parent?
 						if(self.holdKeys[keyIndex].parent) then
 							self.holdKeys[keyIndex].func(self.holdKeys[keyIndex].parent)
@@ -272,6 +296,7 @@ Input.Info = Info:New
 						else
 							self.holdKeys[keyIndex].func()
 						end 
+
 					end 
 
 				until true

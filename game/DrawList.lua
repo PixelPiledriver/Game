@@ -300,6 +300,9 @@ function DrawList:New(data)
 						end
 					end 
 
+
+					
+
 				end 
 
 				-- last

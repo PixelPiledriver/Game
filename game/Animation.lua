@@ -121,6 +121,11 @@ function Animation:New(data)
 
 	o.whenDonePlay = data.whenDonePlay or nil
 
+	------------------
+	-- Graphics
+	------------------
+	o.add = Bool:DataOrDefault(data.add, false)
+
 	---------------
 	-- Components
 	---------------
@@ -274,12 +279,24 @@ function Animation:New(data)
 			y = self.Pos.y
 		end 
 
+		-- blend
+		local currentBlend = nil
+		if(self.add) then
+			love.graphics.setBlendMode("additive")
+		else
+			love.graphics.setBlendMode("alpha")
+		end 
+
+
 		love.graphics.draw(self.spriteSheet.image, self.frames[self.currentFrame].sprite, x, y, angle, self.Scale.x, self.Scale.y)
 
 	end 
 
+	function o:PostDrawCall()
+		print("fuck dicks")
+	end 
+
 	function o:Destroy()
-		print("yes!")
 		ObjectManager:Destroy(self.Info)
 		ObjectManager:Destroy(self.Pos)
 		ObjectManager:Destroy(self.Draw)

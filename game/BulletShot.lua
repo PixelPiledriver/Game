@@ -40,14 +40,14 @@ function BulletShot:New(data)
 	--------------
 	o.moveSpeed = data.speed or 1
 	
-	o.life = 0
+	o.life = data.life or 50
 
 	function o:Update()
 		self.bullet.Pos.x = self.bullet.Pos.x + self.moveSpeed
 
-		o.life = o.life + 1
+		o.life = o.life - 1
 		
-		if(o.life >= 20) then
+		if(o.life < 0) then
 			ObjectManager:Destroy(o)
 		end 
 

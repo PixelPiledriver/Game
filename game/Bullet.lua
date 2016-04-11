@@ -43,6 +43,7 @@ function Bullet:New(data)
 
 	o.speed = data.speed or 10
 
+	o.delay = data.delay or 3
 
 	---------------
 	-- Graphics
@@ -76,13 +77,15 @@ function Bullet:New(data)
 	o.SpriteBank:AddAnimation
 	{
 		name = "shoot",
-		frames = frameNames
+		frames = frameNames,
+		add = Bool:DataOrDefault(data.add, false)
 	}
 
 	-- get animation as object
 	o.SpriteBank:CreateAnimation("shoot")
 
 	o.sprite = o.SpriteBank:GetAnimation("shoot")
+
 
 	---------------
 	-- Functions
@@ -109,6 +112,8 @@ function Bullet:New(data)
 			x = data.x,
 			y = data.y
 		}
+
+		shoot.bullet.Scale:SetScale(2)
 
 	end 
 

@@ -151,7 +151,8 @@ function SpriteBank:New(data)
 			frames = frames,
 			spriteSheet = self.spriteSheet,
 			loopMax = self.animations[name].loopMax or nil,
-			whenDonePlay = self.animations[name].whenDonePlay or nil
+			whenDonePlay = self.animations[name].whenDonePlay or nil,
+			add = self.animations[name].add or false
 		}
 
 		return Animation:New(newAnimation)	
