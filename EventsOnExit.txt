@@ -1,0 +1,14 @@
+Start level: GraphicsTestLevel
+Exit level
+Next Level: ScrollTest
+Next Level: PicoImageConvertLevel
+Next Level: TextWriteLevel
+Next Level: BulletsStarrMazer
+Next Level: ShaderLevel
+Next Level: AudioTestLevel
+Next Level: DrawLineLevel
+Next Level: FightingGameLevel
+Next Level: AnimationEditorLevel
+Next Level: MapWorldLevel
+Start level: MapWorldLevel
+Save: EventsOnExit.txt

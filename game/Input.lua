@@ -71,6 +71,9 @@ Input.Info = Info:New
 		-- have new call this if data.keys is passed in
 		-- {key, inputType, function, parent, description, active}
 		function o:AddKeys(data)
+
+			printDebug{"single key added", "Input"}
+
 		-- add keys to input as its created in a shortcut format
 			if(data and #data > 0) then
 				for i=1, #data do
@@ -94,8 +97,34 @@ Input.Info = Info:New
 			end 
 		end 
 
-		-- long hand, add a single key
 		function o:AddKey(data)
+		-- add keys to input as its created in a shortcut format
+			
+			printDebug{"single key added", "Input"}
+
+			local inputType = data[2] .. "Keys"
+			
+			self[inputType][data[1]] =
+			{
+				key = data[1],
+				func = data[3],
+				parent = data[4] or nil,
+				state = false,
+				description = data[5] or "?",
+				active = data[6] or true,
+
+				delay = data[8] or 0,
+				delayCount = 0
+			}
+
+			self[inputType]["index"][#self[inputType]["index"]+1] = data[1]
+			
+			return self[inputType][data[1]]
+			
+		end 
+
+		-- long hand, add a single key
+		function o:AddKeyOld(data)
 
 			local inputType = data.type .. "Keys"
 
@@ -120,6 +149,8 @@ Input.Info = Info:New
 			--]]
 
 			self[inputType]["index"][#self[inputType]["index"]+1] = data.key
+
+			return self[inputType][data.key]
 
 		end
 
@@ -269,7 +300,7 @@ Input.Info = Info:New
 						break
 					end 
 
-
+					-- key is held?
 					if(love.keyboard.isDown(self.holdKeys[keyIndex].key)) then
 
 						-- use delay? --> control interval of running func()

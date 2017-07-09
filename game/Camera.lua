@@ -76,8 +76,14 @@ function Camera:New(data)
 	-- pos
 	o.Pos = Pos:New
 	{
-		x = data.x or 0,
-		y = data.y or 0
+		--x = data.x or -213,
+		--y = data.y or 50
+		--x = data.x or -200,
+		--y = data.y or 100
+		x = 0,
+		y = 0
+
+
 	}
 
 	o.moveSpeed = 2
@@ -87,6 +93,7 @@ function Camera:New(data)
 	o.rotSpeed = 0.01
 
 	-- zoom
+	--o.zoom = {x=2, y=2}
 	o.zoom = {x=1, y=1}
 	o.zoomSpeed = 0.01
 	o.useIncreasingZoom = true
@@ -371,7 +378,7 @@ function Camera:New(data)
 		love.graphics.translate(-self.Pos.x, -self.Pos.y)
 
 		-- translate to set screen to center of view
-		love.graphics.translate( (love.window.getWidth()/2) + self.Pos.x, (love.window.getHeight()/2) + self.Pos.y)
+		love.graphics.translate( (love.graphics.getWidth()/2) + self.Pos.x, (love.graphics.getHeight()/2) + self.Pos.y)
 
 		-- zoom
 		love.graphics.scale(self.zoom.x, self.zoom.y)
@@ -380,7 +387,7 @@ function Camera:New(data)
 		love.graphics.rotate(self.rot)
 
 		-- and then untranslate from center of view
-		love.graphics.translate( (-love.window.getWidth()/2) - self.Pos.x, (-love.window.getHeight()/2) - self.Pos.y)
+		love.graphics.translate( (-love.graphics.getWidth()/2) - self.Pos.x, (-love.graphics.getHeight()/2) - self.Pos.y)
 
 	end 
 

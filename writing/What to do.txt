@@ -1,0 +1,68 @@
+I want to create a clear goal for my game engine.
+What can I use all of this tech for?
+There are many different directions I could head in.
+Some may need to be worked on and tested before deciding if they are a correct way to go.
+But I'd like to have a few clear ideas that make sense.
+So here we go.
+
+Why use a product?
+-------------------------------------------
+
+Fun
+Useful
+Ammusing
+Challenging
+Spectacle
+Pleasing
+Arousing
+Insightful
+Calming
+
+What is something someone would use every day or once a week?
+-------------------------------------------------------------------------
+a toy
+a tool
+a cleaner
+an atmosphere
+a supplement
+a record keeper
+an experience
+
+What are some products that I would like to use and enjoy creating?
+---------------------------------------------------------------------------
+Art Tool
+Vector Art Tool
+Pixel Art Tool
+Color Tool
+Game Asset Tester --> scrolling, jumping, easy to use
+Story Teller
+Digital Comicbook
+Mind Challenge
+Chill Experience
+Weird Experience
+Fun Game
+Engaging Game
+Challenging Game
+Scrolly Polly --> paralax visualizer
+
+What makes a great product?
+-----------------------------------
+easy to use
+fun to use
+useful to use
+deeper complexity revealed over time
+progression
+a sense of mastery
+does one thing really well
+does other supporting things well
+saves user time
+
+What are complex features a user would want?
+---------------------------------------------------
+if user is lost helps them find what they are looking for
+customize features to specific needs and desires
+save preferences
+integrates into pre existing workflow
+
+
+

@@ -25,13 +25,15 @@ Canvas.Info = Info:New
 ----------------
 
 -- check for Canvas support of graphics card
-Canvas.supported = love.graphics.isSupported("canvas")
+Canvas.supported = love.graphics.getSupported("canvas")
 
 -- not supported?
 -- then no need to build the rest of this static
 if(Canvas.supported == false) then
 	return Canvas
-end 
+end
+
+
 
 
 ---------------------

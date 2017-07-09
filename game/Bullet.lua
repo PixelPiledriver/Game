@@ -43,7 +43,8 @@ function Bullet:New(data)
 
 	o.speed = data.speed or 10
 
-	o.delay = data.delay or 3
+	o.shootDelay = data.shootDelay or 3
+	printDebug{"frame delay: " .. (data.frameDelay or "none"), "Bullet"}
 
 	---------------
 	-- Graphics
@@ -68,7 +69,7 @@ function Bullet:New(data)
 		frameNames[#frameNames+1] = frames[i][1]
 	end 
 
-	print(#frameNames)
+	printDebug{#frameNames, "Bullet"}
 
 	-- add frames to bank
 	o.SpriteBank:Add(frames)
@@ -78,13 +79,26 @@ function Bullet:New(data)
 	{
 		name = "shoot",
 		frames = frameNames,
-		add = Bool:DataOrDefault(data.add, false)
+		add = Bool:DataOrDefault(data.add, false),
+		delay = data.frameDelay or nil
 	}
 
 	-- get animation as object
 	o.SpriteBank:CreateAnimation("shoot")
 
 	o.sprite = o.SpriteBank:GetAnimation("shoot")
+
+
+	-- increase start frame each time a bullet is shot
+	o.startFrameAdd = Bool:DataOrDefault(data.startFrameAdd, false)
+	o.startFrameIndex = 1
+
+	-- animation info
+	o.frameTotal = data.frames
+
+	o.randomYOffset = data.randomYOffset or 0
+
+
 
 
 	---------------
@@ -110,10 +124,33 @@ function Bullet:New(data)
 			bullet = o.SpriteBank:CopyAnimation("shoot"),
 			speed = self.speed,
 			x = data.x,
-			y = data.y
+			y = data.y + Random:Number(self.randomYOffset)
 		}
 
 		shoot.bullet.Scale:SetScale(2)
+
+		-- start animation from next frame?
+		-- this is used to create bullet flow
+		if(self.startFrameAdd) then
+
+			self.startFrameIndex = self.startFrameIndex - 1
+
+			-- reset sub
+			if(self.startFrameIndex < 1) then
+				self.startFrameIndex = self.frameTotal
+			end 		
+
+			shoot.bullet.currentFrame = self.startFrameIndex
+
+			-- reset add
+			if(self.startFrameIndex > #shoot.bullet.frames) then
+				self.startFrameIndex = 1
+			end
+
+
+
+		end 
+
 
 	end 
 

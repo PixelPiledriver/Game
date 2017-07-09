@@ -17,7 +17,7 @@ FightCharacter.Sprites = {}
 
 FightCharacter.Sprites.blue = SpriteBank:New
 {
-	image = "Fighters.png",
+	image = "fighters.png",
 	spriteWidth = 64,
 	spriteHeight = 64,
 }
@@ -86,7 +86,7 @@ FightCharacter.Sprites.blue:AddAnimation
 
 FightCharacter.Sprites.red = SpriteBank:New
 {
-	image = "Fighters.png",
+	image = "fighters.png",
 	spriteWidth = 64,
 	spriteHeight = 64,
 }
@@ -152,7 +152,7 @@ FightCharacter.Sprites.red:AddAnimation
 --[[
 FightCharacter.SpriteBank = SpriteBank:New
 {
-	image = "Fighters.png",
+	image = "fighters.png",
 	spriteWidth = 64,
 	spriteHeight = 64,
 }

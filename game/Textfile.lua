@@ -191,7 +191,7 @@ function Textfile:New(data)
 		return love.filesystem.read(self.filename)
 	end 
 	
-	-- reads file into indexed table
+	-- reads file into this object's indexed table
 	function o:ReadLines()
 		for line in love.filesystem.lines(self.filename) do
 			self.textTable[#self.textTable + 1] = line

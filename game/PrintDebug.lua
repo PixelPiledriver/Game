@@ -32,11 +32,15 @@ PrintDebugType.Info = Info:New
 local printList = 
 {
 	mathTest = {false, false},
-	Animation = {true, false},
+	Animation = {false, false},
 	AnimationComponent = {true, false},
+	AudioComponent = {true, false},
 	AnimationEditor = {true, false},
+	Bool = {false, false},
 	Build = {false, false},
-	Button = {true, false},
+	Button = {false, false},
+	Bullet = {false, false},
+	BulletShooter = {false, false},
 	ChatBox = {true, false},
 	Collision = {false, false},
 	Collision2 = {false, false},
@@ -46,45 +50,27 @@ local printList =
 	Controller = {false, false},
 	DrawLine = {true, false},
 	Fail = {true, false},
+	FileManager = {false, false},
 	Health = {false, false},
+	Image = {false, false},
+	Input = {false, true},
 	Line = {false, false},
 	Links = {false, false},
 	LevelManager = {true, false},
 	MapObject = {true, false},
 	MapTable = {false, false},
 	Matrix = {true, false},
-	MemoryManager = {true, false},
+	MemoryManager = {false, false},
 	Mouse = {false, false},
 	ObjectManager = {false, false},
 	stuff = {false, false},
+	Scroller = {false, false},
+	ScrollerSystem = {false, false},
+	SpriteBank = {false, false},
 	Text = {true, false},
 	Textfile = {true, false}
 }
 
--- switches
-printList.mathTest = {false, false}
-printList.Animation = {true, false}
-printList.AnimationComponent = {true, false}
-printList.AudioComponent = {true, false}
-printList.Build = {false, false}
-printList.ChatBox = {true, false}
-printList.Collision = {false, false}
-printList.Collision2 = {false, false}
-printList.Collision3 = {false, false}
-printList.CollisionList = {false, false}
-printList.CollisionManager = {false, false}
-printList.Controller = {false, false}
-printList.Fail = {true, false}
-printList.Health = {false, false}
-printList.Links = {false, false}
-printList.LevelManager = {true, false}
-printList.MapTable = {false, false}
-printList.Matrix = {true, false}
-printList.Mouse = {false, false}
-printList.MapObject = {true, false}
-printList.ObjectManager = {false, false}
-printList.stuff = {false, false}
-printList.Textfile = {true, false}
 
 --------------
 -- Functions

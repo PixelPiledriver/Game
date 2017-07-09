@@ -157,17 +157,17 @@ function Mouse:TrackClicks()
 
 
 	
-	if(love.mouse.isDown("l")) then
+	if(love.mouse.isDown("1")) then
 		self.clickButton.l = true
 		self.holdButton.l = true
 	end
 
-	if(love.mouse.isDown("r")) then
+	if(love.mouse.isDown("2")) then
 		self.clickButton.r = true
 		self.holdButton.r = true
 	end 
 
-	if(love.mouse.isDown("m")) then
+	if(love.mouse.isDown("3")) then
 		self.clickButton.m = true
 		self.holdButton.m = true
 	end
@@ -176,15 +176,15 @@ end
 
 function Mouse:ClearHolds()
 
-	if(love.mouse.isDown("l") == false) then
+	if(love.mouse.isDown("1") == false) then
 		self.holdButton.l = false
 	end 
 
-	if(love.mouse.isDown("r") == false) then
+	if(love.mouse.isDown("2") == false) then
 		self.holdButton.l = false
 	end 
 
-	if(love.mouse.isDown("m") == false) then
+	if(love.mouse.isDown("3") == false) then
 		self.holdButton.l = false
 	end 
 
@@ -260,6 +260,7 @@ function Mouse:New(data)
 	o.lastYView = nil
 
 
+
 	o.updateMouseInfo = true
 
 	--o.line = Line:New{drain = false}
@@ -269,11 +270,16 @@ function Mouse:New(data)
 
 	o.lineTracerActive = Bool:DataOrDefault(data.lineTracerActive, Mouse.default.lineTracerActive)
 
+
+	-- offset for collision
+	o.xOffset = -o.width/2
+	o.yOffset = -o.height/2
+
 	-- collision for mouse cursor
 	o.collision = Collision:New
 	{
-		xOffset = -o.width/2,
-		yOffset = -o.height/2,
+		xOffset = o.xOffset,
+		yOffset = o.yOffset,
 		width = o.width,
 		height = o.height,
 		shape = "rect",
@@ -329,9 +335,19 @@ function Mouse:New(data)
 	end 
 
 	function o:FollowCamera()
-		self.xView = Camera.selectedCamera.Pos.x + self.Pos.x
-		self.yView = Camera.selectedCamera.Pos.y + self.Pos.y
+		--self.xView = Camera.selectedCamera.Pos.x + self.Pos.x
+		--self.yView = Camera.selectedCamera.Pos.y + self.Pos.y
+
+		self.Pos.x = Camera.selectedCamera.Pos.x + self.Pos.x
+		self.Pos.y = Camera.selectedCamera.Pos.y + self.Pos.y
+
+		self.collision.xOffset = self.xOffset + Camera.selectedCamera.Pos.x
+		self.collision.yOffset = self.yOffset + Camera.selectedCamera.Pos.y
+
+
+
 	end 
+
 
 	-- update all information using love.mouse stuff
 	function o:UpdateMouseInfo()

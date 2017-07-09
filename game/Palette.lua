@@ -4,8 +4,6 @@
 ----------------------
 -- color palette
 -- store and do cool stuff with colors
--- I think all of these will be converted colors.... no names...
--- that probly makes the most sense I guess
 
 ------------------
 -- Requires
@@ -484,6 +482,12 @@ end
 return Palette
 
 
+
+
+-- Notes
+----------------------------
+-- I think all of these will be converted colors.... no names...
+-- that probly makes the most sense I guess
 
 
 

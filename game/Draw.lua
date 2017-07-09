@@ -195,11 +195,28 @@ function Draw:New(data)
 	-- but the parent defines a custom draw call :D
 	function o:Draw()
 
+		-- don't draw?
 		if(self.active == false) then
 			return
-		end 
+		end
 
+		-- parent has shader?
+		local shaderUsed = false
+		if(self.parent.shader) then
+			love.graphics.setShader(self.parent.shader.shader)
+			shaderUsed = true
+		end
+
+		
+
+		-- draw
 		self.parent.DrawCall(self.parent)
+
+		-- turn off shader if used
+		-- write code for batching objects with same shader later
+		if(shaderUsed) then
+			love.graphics.setShader()
+		end 
 
 	end 
 
@@ -214,6 +231,7 @@ function Draw:New(data)
 
 	end 
 
+	-- cleanup object on removal
 	function o:Destroy()
 		ObjectManager:Destroy(self.Info)
 	end 

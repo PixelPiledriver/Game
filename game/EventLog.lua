@@ -38,6 +38,8 @@ EventLog.allEvents = {}
 EventLog.maxCount = 5
 EventLog.ySpace = 18
 EventLog.eventIndex = 1
+EventLog.timeSinceNewEvent = 0
+EventLog.fadeTimeMax = 1000
 
 -- this is the rogue object at the start of main
 -- before any objects are loaded
@@ -47,9 +49,9 @@ EventLog.eventIndex = 1
 -- trying to figure out why
 EventLog.Pos = Pos:New
 {
-	--x = love.window.getWidth() * 0.05, 
-	x = love.window.getWidth() * 0.7, 
-	y = love.window.getHeight() * 0.95
+	--x = love.graphics.getWidth() * 0.05, 
+	x = love.graphics.getWidth() * 0.7, 
+	y = love.graphics.getHeight() * 0.95
 }
 
 EventLog.priority =
@@ -123,11 +125,35 @@ function EventLog:Add(data)
 	-- reset level ownership
 	ObjectManager.newObjectsOwnedBy = ObjectManager.newObjectsOwnedBySave
 
+	-- reset time and fade
+	self.timeSinceNewEvent = 0
+	--self:ToggleTextDisplay()
+
 end 
 
 
 
 function EventLog:Update()
+
+	if(self.timeSinceNewEvent < self.fadeTimeMax) then
+		self.timeSinceNewEvent = self.timeSinceNewEvent + 1
+	else
+		--self:ToggleTextDisplay()
+	end 
+
+end 
+
+function EventLog:ToggleTextDisplay()
+	for i=1, #self.eventTexts do
+
+		if(self.eventTexts[i].active) then
+			self.eventTexts[i].active = false
+		else
+			self.eventTexts[i].active = true
+		end 
+	end 
+
+
 end 
 
 -- when App exits
@@ -148,7 +174,7 @@ function EventLog:OnExit()
 	
 end 
 
-
+ObjectManager:AddStatic(EventLog)
 
 
 

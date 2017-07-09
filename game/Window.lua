@@ -76,10 +76,18 @@ love.window.setTitle(Window.title)
 -- Size
 -----------
 -- sets window to full screen of current monitor
--- love.window.setMode(0,0,{display = 1})
+love.window.setMode(854,600,
+{
+	display = 1,
+	vsync = true
+})
 
-Window.width = love.window.getWidth()
-Window.height = love.window.getHeight()
+Window.width = love.graphics.getWidth()
+Window.height = love.graphics.getHeight()
+
+
+-- set position to left side of monitor for streaming
+love.window.setPosition(0, 200, display )
 
 ------------------
 -- Functions
@@ -99,7 +107,7 @@ function Window:IsPosOnScreen(pos)
 		return false
 	end 
 
-	if(pos.x > love.window.getWidth()) then
+	if(pos.x > love.graphics.getWidth()) then
 		return false
 	end 
 
@@ -121,8 +129,8 @@ function Window:PrintDebugText()
 		{text = "", obj = "Window"},
 		{text = "Window"},
 		{text = "-----------"},
-		{text = "Width: " .. love.window.getWidth()},
-		{text = "Height: " .. love.window.getHeight()},
+		{text = "Width: " .. love.graphics.getWidth()},
+		{text = "Height: " .. love.graphics.getHeight()},
 	}
 end
 

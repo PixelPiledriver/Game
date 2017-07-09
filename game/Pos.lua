@@ -149,8 +149,8 @@ function Pos:New(data)
 	-- Update
 	--------------------------
 
-	function o:Update()
-		self:PosSpeedUpdate()
+	function o:Update(dt)
+		self:PosSpeedUpdate(dt)
 		self:LastPosUpdate()
 		self:FollowPosUpdate()
 		self:GravityUpdate()
@@ -191,6 +191,7 @@ function Pos:New(data)
 		self.y = self.y + self.speed.y
 		self.z = self.z + self.speed.z
 	end 
+	
 
 	function o:FollowPosUpdate()
 		if(self.followPos == nil) then

@@ -4,6 +4,214 @@
 		"selected_items":
 		[
 			[
+				"max",
+				"maxPosition"
+			],
+			[
+				"color",
+				"colorIndex"
+			],
+			[
+				"pico",
+				"picoPalette"
+			],
+			[
+				"this",
+				"thisColor"
+			],
+			[
+				"pic",
+				"picoPalette"
+			],
+			[
+				"hatGuy",
+				"hatGuyData"
+			],
+			[
+				"hatGu",
+				"hatGuyFile"
+			],
+			[
+				"fram",
+				"frameTotal"
+			],
+			[
+				"frame",
+				"frameTotal"
+			],
+			[
+				"star",
+				"startFrameIndex"
+			],
+			[
+				"start",
+				"startFrameIndex"
+			],
+			[
+				"sni",
+				"sniperLevel3"
+			],
+			[
+				"sniperLevel",
+				"sniperLevel2"
+			],
+			[
+				"cannon",
+				"cannonNew"
+			],
+			[
+				"file",
+				"filesystem"
+			],
+			[
+				"Even",
+				"EventLog"
+			],
+			[
+				"Object",
+				"ObjectManager"
+			],
+			[
+				"event",
+				"eventTexts"
+			],
+			[
+				"fad",
+				"fadeTimeMax"
+			],
+			[
+				"time",
+				"timeSinceNewEvent"
+			],
+			[
+				"sour",
+				"sourceBase"
+			],
+			[
+				"sou",
+				"sourceBase"
+			],
+			[
+				"source",
+				"sourceBase"
+			],
+			[
+				"V",
+				"value"
+			],
+			[
+				"sourceDir",
+				"sourceDirActive"
+			],
+			[
+				"textu",
+				"texture_coords"
+			],
+			[
+				"syst",
+				"systemLayer"
+			],
+			[
+				"up",
+				"Update"
+			],
+			[
+				"pixel",
+				"pixelShader"
+			],
+			[
+				"vertex",
+				"vertexShader"
+			],
+			[
+				"vert",
+				"vertexShader"
+			],
+			[
+				"ver",
+				"vertexShader"
+			],
+			[
+				"pixe",
+				"pixelShader"
+			],
+			[
+				"shader",
+				"shaderUsed"
+			],
+			[
+				"sh",
+				"shaderUsed"
+			],
+			[
+				"layer",
+				"layers"
+			],
+			[
+				"use",
+				"useGlobalSpeed"
+			],
+			[
+				"Update",
+				"UpdateSpeed"
+			],
+			[
+				"slide",
+				"slideLevel"
+			],
+			[
+				"Obj",
+				"objectPos"
+			],
+			[
+				"object",
+				"objectPos"
+			],
+			[
+				"objec",
+				"objectPos"
+			],
+			[
+				"x",
+				"xActive"
+			],
+			[
+				"sprit",
+				"spriteSheet"
+			],
+			[
+				"Objec",
+				"ObjectManager:Destroy"
+			],
+			[
+				"graphi",
+				"graphicsType"
+			],
+			[
+				"fin",
+				"finish"
+			],
+			[
+				"grp",
+				"graphicType"
+			],
+			[
+				"grap",
+				"graphicType"
+			],
+			[
+				"Scroller",
+				"ScrollerSystem"
+			],
+			[
+				"scro",
+				"scrollType"
+			],
+			[
+				"exit",
+				"exitLevel"
+			],
+			[
 				"de",
 				"description"
 			],
@@ -44,10 +252,6 @@
 				"bulletsIndex"
 			],
 			[
-				"Object",
-				"ObjectManager:Destroy"
-			],
-			[
 				"crea",
 				"createdSprites"
 			],
@@ -76,24 +280,12 @@
 				"animations"
 			],
 			[
-				"Objec",
-				"ObjectManager:Destroy"
-			],
-			[
 				"spri",
 				"SpriteBank"
 			],
 			[
 				"Bullet",
 				"BulletShoot"
-			],
-			[
-				"frame",
-				"frameNames"
-			],
-			[
-				"fram",
-				"frameNames"
 			],
 			[
 				"Sprit",
@@ -192,10 +384,6 @@
 				"sequenceIndex"
 			],
 			[
-				"star",
-				"StartNewRound"
-			],
-			[
 				"gra",
 				"gravity"
 			],
@@ -210,10 +398,6 @@
 			[
 				"grai",
 				"gravityActive"
-			],
-			[
-				"time",
-				"timeMax"
 			],
 			[
 				"Aud",
@@ -288,10 +472,6 @@
 				"RepeatedInputUpdate"
 			],
 			[
-				"x",
-				"xOffset"
-			],
-			[
 				"off",
 				"offsetBySize"
 			],
@@ -334,214 +514,83 @@
 			[
 				"selec",
 				"selectedPoints"
-			],
-			[
-				"sle",
-				"selectedPoints"
-			],
-			[
-				"grid",
-				"gridHeight"
-			],
-			[
-				"line",
-				"lineButton"
-			],
-			[
-				"prei",
-				"previewLine"
-			],
-			[
-				"Update",
-				"UpdatePreviewLine"
-			],
-			[
-				"preview",
-				"previewLine"
-			],
-			[
-				"lin",
-				"lineTool"
-			],
-			[
-				"Spri",
-				"SpriteBank"
-			],
-			[
-				"sprites",
-				"sprites"
-			],
-			[
-				"color",
-				"colorNext"
-			],
-			[
-				"box",
-				"boxColor"
-			],
-			[
-				"colors",
-				"colorsIndex"
-			],
-			[
-				"Draw",
-				"DrawLine"
-			],
-			[
-				"join",
-				"joinPoints"
-			],
-			[
-				"point",
-				"pointsToJoin"
-			],
-			[
-				"re",
-				"resizeBy"
-			],
-			[
-				"resize",
-				"resizeValue"
-			],
-			[
-				"y",
-				"yOffset"
-			],
-			[
-				"presse",
-				"pressedThisFrame"
-			],
-			[
-				"pr",
-				"pressed"
-			],
-			[
-				"Track",
-				"TrackHolds"
-			],
-			[
-				"prese",
-				"pressedThisFrame"
-			],
-			[
-				"pressed",
-				"pressedThisFrame"
-			],
-			[
-				"sel",
-				"selectedPoints"
-			],
-			[
-				"col",
-				"collided"
-			],
-			[
-				"sele",
-				"selectedPoints"
-			],
-			[
-				"Post",
-				"PostUpdate"
-			],
-			[
-				"selte",
-				"selectedPoints"
-			],
-			[
-				"colli",
-				"collision"
-			],
-			[
-				"max",
-				"maxOffset"
-			],
-			[
-				"ma",
-				"maxOffset"
-			],
-			[
-				"DrawLin",
-				"DrawLineLevel"
-			],
-			[
-				"new",
-				"newPoints"
-			],
-			[
-				"spriteSheeP",
-				"spriteSheetPanel"
-			],
-			[
-				"defau",
-				"default"
-			],
-			[
-				"titl",
-				"titleInBar"
-			],
-			[
-				"info",
-				"infoPanel"
-			],
-			[
-				"index",
-				"indexTable"
-			],
-			[
-				"load",
-				"loadedOrc"
-			],
-			[
-				"file",
-				"filesystem"
-			],
-			[
-				"allevent",
-				"allEvents"
-			],
-			[
-				"all",
-				"allEvents"
-			],
-			[
-				"can",
-				"canBeReplayed"
-			],
-			[
-				"loop",
-				"loopCount"
-			],
-			[
-				"when",
-				"whenDonePlay"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "BulletShooter.lua",
+			"file": "levels/GraphicsTestLevel.lua",
 			"settings":
 			{
-				"buffer_size": 3635,
+				"buffer_size": 528,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "levels/ScrollTest.lua",
+			"settings":
+			{
+				"buffer_size": 2247,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Image.lua",
+			"settings":
+			{
+				"buffer_size": 2431,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Notes.lua",
+			"settings":
+			{
+				"buffer_size": 6467,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "MapObject_Sprites.lua",
+			"settings":
+			{
+				"buffer_size": 2987,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ScrollerSystem.lua",
+			"settings":
+			{
+				"buffer_size": 5464,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Slider.lua",
+			"settings":
+			{
+				"buffer_size": 4486,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "LevelManager.lua",
+			"settings":
+			{
+				"buffer_size": 9312,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 222 files for \".math\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Camera.lua:\n  464  \n  465  		-- offset camera\n  466: 		self.shake.xOffset = love.math.random(-self.shake.xMax, self.shake.xMax)\n  467: 		self.shake.yOffset = love.math.random(-self.shake.yMax, self.shake.yMax)\n  468  \n  469  		-- reduce shake\n\nD:\\GitRepos\\Game\\game\\CameraOld.lua:\n  236  \n  237  	-- offset camera\n  238: 	self.shake.xOffset = love.math.random(-self.shake.xMax, self.shake.xMax)\n  239: 	self.shake.yOffset = love.math.random(-self.shake.yMax, self.shake.yMax)\n  240  \n  241  	-- reduce shake\n  ...\n  590  \n  591  		-- offset camera\n  592: 		self.shake.xOffset = love.math.random(-self.shake.xMax, self.shake.xMax)\n  593: 		self.shake.yOffset = love.math.random(-self.shake.yMax, self.shake.yMax)\n  594  \n  595  		-- reduce shake\n  ...\n  792  \n  793  	-- offset camera\n  794: 	self.shake.xOffset = love.math.random(-self.shake.xMax, self.shake.xMax)\n  795: 	self.shake.yOffset = love.math.random(-self.shake.yMax, self.shake.yMax)\n  796  \n  797  	-- reduce shake\n\nD:\\GitRepos\\Game\\game\\Link.lua:\n  106  					if(self.offsets[i].o) then\n  107  \n  108: 						if(self.offsets[i].math == nil) then\n  109  							offset = offset + self.offsets[i].o[self.offsets[i].var]\n  110  \n  111: 						elseif(self.offsets[i].math == \"Add\") then\n  112  							offset = offset + self.offsets[i].o[self.offsets[i].var]\n  113  \n  114: 						elseif(self.offsets[i].math == \"Sub\") then\n  115  							offset = offset - self.offsets[i].o[self.offsets[i].var]\n  116  \n  117: 						elseif(self.offsets[i].math == \"Mul\") then\n  118  							offset = offset * self.offsets[i].o[self.offsets[i].var]\n  119  \n  ...\n  122  					elseif(self.offsets[i].value) then\n  123  						\n  124: 						if(self.offsets[i].math == nil) then\n  125  							offset = offset + self.offsets[i].value\n  126  \n  127: 						elseif(self.offsets[i].math == \"Add\") then\n  128  							offset = offset + self.offsets[i].value\n  129  \n  130: 						elseif(self.offsets[i].math == \"Sub\") then\n  131  							offset = offset - self.offsets[i].value\n  132  \n  133: 						elseif(self.offsets[i].math == \"Mul\") then\n  134  							offset = offset * self.offsets[i].value\n  135  \n  ...\n  478  					if(self.offsets[i].o) then\n  479  \n  480: 						if(self.offsets[i].math == nil) then\n  481  							offset = offset + self.offsets[i].o[self.offsets[i].var]\n  482  \n  483: 						elseif(self.offsets[i].math == \"Add\") then\n  484  							offset = offset + self.offsets[i].o[self.offsets[i].var]\n  485  \n  486: 						elseif(self.offsets[i].math == \"Sub\") then\n  487  							offset = offset - self.offsets[i].o[self.offsets[i].var]\n  488  \n  489: 						elseif(self.offsets[i].math == \"Mul\") then\n  490  							offset = offset * self.offsets[i].o[self.offsets[i].var]\n  491  \n  ...\n  494  					elseif(self.offsets[i].value) then\n  495  						\n  496: 						if(self.offsets[i].math == nil) then\n  497  							offset = offset + self.offsets[i].value\n  498  \n  499: 						elseif(self.offsets[i].math == \"Add\") then\n  500  							offset = offset + self.offsets[i].value\n  501  \n  502: 						elseif(self.offsets[i].math == \"Sub\") then\n  503  							offset = offset - self.offsets[i].value\n  504  \n  505: 						elseif(self.offsets[i].math == \"Mul\") then\n  506  							offset = offset * self.offsets[i].value\n  507  \n\nD:\\GitRepos\\Game\\game\\OldCode.lua:\n   77  	pix:Brush\n   78  	{\n   79: 		x = love.math.random(0,128),\n   80: 		y = love.math.random(0,128),\n   81  		brush = PixelBrush.happyFace,\n   82  	}	\n   ..\n   87  	pix:Slice\n   88  	{\n   89: 		x = {love.math.random(0,128)}, \n   90: 		y = {love.math.random(0,128)}, \n   91  		color=\"black\"\n   92  	}		\n   ..\n  112  	pix:Brush\n  113  	{\n  114: 		x = love.math.random(0, pix.width),\n  115: 		y = love.math.random(0, pix.height),\n  116  		brush = PixelBrush.x8\n  117  	}\n  ...\n  655  		pix:Cluster\n  656  		{\n  657: 			x = 64 + love.math.random(-32, 32),\n  658  			y = 20 + i, \n  659: 			xRange = love.math.random(0,30),\n  660  			yRange = 3,\n  661  			color = pal2.colors,\n\nD:\\GitRepos\\Game\\game\\PixelGenFunctions.lua:\n   55  		pix:Cluster\n   56  		{\n   57: 			x = pix.width/2 + love.math.random(-pix.width/4, pix.width/4),\n   58  			y = pix.height/16 + i, \n   59: 			xRange = love.math.random(0,30),\n   60  			yRange = 3,\n   61  			color = selectedPalette.colors,\n\nD:\\GitRepos\\Game\\game\\PixelTexture.lua:\n  422  			self:Brush\n  423  			{\n  424: 				x = data.x + (-data.xRange + love.math.random(0, data.xRange * 2)),\n  425: 				y = data.y + (-data.yRange + love.math.random(0, data.yRange * 2)),\n  426  				brush = b,\n  427  				color = c\n\nD:\\GitRepos\\Game\\game\\Random.lua:\n   27  -- get a multiple of a number\n   28  function Random:MultipleOf(number, scale)\n   29: 	return number + love.math.random(scale) * number\n   30  end\n   31  \n   ..\n   33  -- this is the most simple random function\n   34  function Random:Number(number)\n   35: 	return love.math.random(number)\n   36  end \n   37  \n   38  -- get a random number within the range given\n   39  function Random:Range(min, max)\n   40: 	return love.math.random(min, max)\n   41  end \n   42  \n   ..\n   45  -- {value, ...}\n   46  function Random:ChooseRandomlyFrom(data)\n   47: 	local index = love.math.random(1, #data)\n   48  	return data[index]\n   49  end\n   ..\n   52  -- Seed\n   53  ------------\n   54: love.math.setRandomSeed(os.time())\n   55  \n   56: -- random seed must be instated by use of love.math.random\n   57  -- which is really weird but thats just the way it is\n   58  Random:ChooseRandomlyFrom{1,2,3}\n\nD:\\GitRepos\\Game\\game\\Value.lua:\n   59  \n   60  	t.Get = function()\n   61: 		return love.math.random(t.min, t.max)\n   62  	end \n   63  \n   ..\n   73  		local min = t.min * 100\n   74  		local max = t.max * 100\n   75: 		local v = love.math.random(min, max)\n   76  		v = v * 0.01\n   77  		return v\n   ..\n  125  \n  126  	t.Get = function()\n  127: 		return Math:AngleToVector(love.math.random(t.min, t.max))\n  128  	end \n  129  \n\n45 matches across 8 files\n\n\nSearching 222 files for \"abs\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Controller.lua:\n  120  	-- check for major difference\n  121  	-- x\n  122: 	if(math.abs(controller.leftStick.x.lastValue - controller.controller:getAxis(controller.leftStick.x.axis)) > minDifference ) then	\n  123  		controller.leftStick.x.lastValue = controller.controller:getAxis(controller.leftStick.x.axis)\n  124  		printDebug{controller.playerName .. \" Left X: \" .. controller.controller:getAxis(controller.leftStick.x.axis), \"Controller\"}\n  ...\n  126  \n  127  	-- y\n  128: 	if(math.abs(controller.leftStick.y.lastValue - controller.controller:getAxis(controller.leftStick.y.axis)) > minDifference ) then	\n  129  		controller.leftStick.y.lastValue = controller.controller:getAxis(controller.leftStick.y.axis)\n  130  		printDebug{controller.playerName .. \" Left Y: \" .. controller.controller:getAxis(controller.leftStick.y.axis), \"Controller\"}\n  ...\n  135  	---------------------\n  136  	-- x\n  137:  	if(math.abs(controller.rightStick.x.lastValue - controller.controller:getAxis(controller.rightStick.x.axis)) > minDifference ) then\n  138  		controller.rightStick.x.lastValue = controller.controller:getAxis(controller.rightStick.x.axis)\n  139  		printDebug{controller.playerName .. \" Right X: \" .. controller.controller:getAxis(controller.rightStick.x.axis), \"Controller\"}\n  ...\n  141  \n  142  	-- y\n  143: 	if(math.abs(controller.rightStick.y.lastValue - controller.controller:getAxis(controller.rightStick.y.axis)) > minDifference ) then	\n  144  		controller.rightStick.y.lastValue = controller.controller:getAxis(controller.rightStick.y.axis)\n  145  		printDebug{controller.playerName .. \" Right Y: \" .. controller.controller:getAxis(controller.rightStick.y.axis), \"Controller\"}\n\nD:\\GitRepos\\Game\\game\\FileManager.lua:\n  166  	local liblove = ffi.os == \"Windows\" and ffi.load(\"love\") or ffi.C\n  167  \n  168: 	-- This grabs your source folder, but you can point it anywhere, \n  169  	-- Look at love.filesystem to see what you can call so that you can keep it multiplatform. \n  170  	local docsdir = love.filesystem.getSourceBaseDirectory()\n\nD:\\GitRepos\\Game\\game\\GameEngineProjectFile.sublime-workspace:\n  749  		\"show_minimap\": false,\n  750  		\"show_open_files\": false,\n  751: 		\"show_tabs\": false,\n  752  		\"side_bar_visible\": false,\n  753  		\"status_bar_visible\": false\n  ...\n 1208  							],\n 1209  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 1210: 							\"translate_tabs_to_spaces\": false\n 1211  						},\n 1212  						\"translation.x\": 0.0,\n ....\n 1246  							],\n 1247  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 1248: 							\"translate_tabs_to_spaces\": false\n 1249  						},\n 1250  						\"translation.x\": 0.0,\n ....\n 1284  							],\n 1285  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 1286: 							\"translate_tabs_to_spaces\": false\n 1287  						},\n 1288  						\"translation.x\": 0.0,\n ....\n 1322  							],\n 1323  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 1324: 							\"translate_tabs_to_spaces\": false\n 1325  						},\n 1326  						\"translation.x\": 0.0,\n ....\n 1360  							],\n 1361  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 1362: 							\"translate_tabs_to_spaces\": false\n 1363  						},\n 1364  						\"translation.x\": 0.0,\n ....\n 1398  							],\n 1399  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 1400: 							\"translate_tabs_to_spaces\": false\n 1401  						},\n 1402  						\"translation.x\": 0.0,\n ....\n 1436  							],\n 1437  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 1438: 							\"translate_tabs_to_spaces\": false\n 1439  						},\n 1440  						\"translation.x\": 0.0,\n ....\n 1511  							],\n 1512  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 1513: 							\"translate_tabs_to_spaces\": false\n 1514  						},\n 1515  						\"translation.x\": 0.0,\n ....\n 1549  							],\n 1550  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 1551: 							\"translate_tabs_to_spaces\": false\n 1552  						},\n 1553  						\"translation.x\": 0.0,\n ....\n 1624  							],\n 1625  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 1626: 							\"translate_tabs_to_spaces\": false\n 1627  						},\n 1628  						\"translation.x\": 0.0,\n ....\n 1977  							],\n 1978  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 1979: 							\"translate_tabs_to_spaces\": false\n 1980  						},\n 1981  						\"translation.x\": 0.0,\n ....\n 2015  							],\n 2016  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 2017: 							\"translate_tabs_to_spaces\": false\n 2018  						},\n 2019  						\"translation.x\": 0.0,\n ....\n 2053  							],\n 2054  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 2055: 							\"translate_tabs_to_spaces\": false\n 2056  						},\n 2057  						\"translation.x\": 0.0,\n ....\n 2091  							],\n 2092  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 2093: 							\"translate_tabs_to_spaces\": false\n 2094  						},\n 2095  						\"translation.x\": 0.0,\n ....\n 2129  							],\n 2130  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 2131: 							\"translate_tabs_to_spaces\": false\n 2132  						},\n 2133  						\"translation.x\": 0.0,\n ....\n 2167  							],\n 2168  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 2169: 							\"translate_tabs_to_spaces\": false\n 2170  						},\n 2171  						\"translation.x\": 0.0,\n ....\n 2205  							],\n 2206  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 2207: 							\"translate_tabs_to_spaces\": false\n 2208  						},\n 2209  						\"translation.x\": 0.0,\n ....\n 2243  							],\n 2244  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 2245: 							\"translate_tabs_to_spaces\": false\n 2246  						},\n 2247  						\"translation.x\": 0.0,\n ....\n 2281  							],\n 2282  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 2283: 							\"translate_tabs_to_spaces\": false\n 2284  						},\n 2285  						\"translation.x\": 0.0,\n ....\n 2319  							],\n 2320  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 2321: 							\"translate_tabs_to_spaces\": false\n 2322  						},\n 2323  						\"translation.x\": 0.0,\n ....\n 2357  							],\n 2358  							\"syntax\": \"Packages/Corona Editor/CoronaSDKLua.tmLanguage\",\n 2359: 							\"translate_tabs_to_spaces\": false\n 2360  						},\n 2361  						\"translation.x\": 0.0,\n ....\n 2430  	\"show_minimap\": true,\n 2431  	\"show_open_files\": true,\n 2432: 	\"show_tabs\": true,\n 2433  	\"side_bar_visible\": true,\n 2434  	\"side_bar_width\": 216.0,\n\nD:\\GitRepos\\Game\\game\\levels\\LerpLevel.lua:\n   69  \n   70  	if(inverse < 0.5) then\n   71: 		lerpSpeed = math.abs(( (xStart - xMid) - (box.Pos.x - xMid)) * 0.0001) * 2\n   72  	else\n   73: 		lerpSpeed = math.abs(( (xEnd - box.Pos.x) * 0.0001))\n   74  	end \n   75  \n   ..\n  126  	if(inverse < 0.5) then\n  127  \n  128: 		lerpSpeed = math.abs( (((xStart - xMid) ) - (box.Pos.x - xMid))  * 0.0001)\n  129  		--lerpSpeed = (box.Pos.x - xMid) * 0.00001\n  130  \n\nD:\\GitRepos\\Game\\game\\MapObject_Action.lua:\n   50  			object.actionTarget = object.mapWorld:Get(object.x + self.targetPos.x, object.y + self.targetPos.y)\n   51  			\n   52: 		-- absolute position?\n   53  		elseif(self.targetAbsPos) then\n   54  			object.actionTarget = object.mapWorld:Get(self.targetAbsPos.x, self.targetAbsPos.y)\n   ..\n   73  		if(self.requireReaction and object:TargetHasReaction(self.name) == false) then\n   74  \n   75: 			-- some action types have something different to do on absence of a reaction\n   76  			if(self.noReactionFunc) then\n   77  				self:noReactionFunc(object)\n\nD:\\GitRepos\\Game\\game\\Mouse.lua:\n  357  	-- how fast is the mouse moving?\n  358  	function o:CalculateSpeed()\n  359: 		self.speed.x = math.abs(self.Pos.x - self.lastX) / 1\n  360: 		self.speed.y = math.abs(self.Pos.y - self.lastY) / 1\n  361  	end\n  362  \n\nD:\\GitRepos\\Game\\game\\Slider.lua:\n  207  			local unit = self.slide.Size.height\n  208  			print(unit)\n  209: 			local slideLevel = love.math:abs(self.objectPos.y - (self.Pos.y))\n  210  \n  211  			self.value = Math:InverseLerp\n\n36 matches across 7 files\n\n\nSearching 225 files for \"Image:New\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Image.lua:\n   21  \n   22  \n   23: function Image:New(data)\n   24  	\n   25  	local o = {}\n   ..\n  136  \n  137  -- create image\n  138: -- local pic = Image:New{filename = \"image.png\"}\n\nD:\\GitRepos\\Game\\game\\levels\\GraphicsTestLevel.lua:\n   13  local Start = function()\n   14  \n   15: 	booty = Image:New{}\n   16  \n   17  \n\nD:\\GitRepos\\Game\\game\\levels\\ShaderLevel.lua:\n   15  local Start = function()\n   16  	--[[\n   17: 	Image:New\n   18  	{\n   19  		filename = \"scroller/\" .. \"woman1.png\",\n   ..\n   24  	}\n   25  \n   26: 	Image:New\n   27  	{\n   28  		filename = \"UserFiles/dog.png\",\n\nD:\\GitRepos\\Game\\game\\Scroller.lua:\n   79  	-- use image?\n   80  	if(data.filename) then\n   81: 		o.image = Image:New\n   82  		{\n   83  			filename = dir .. data.filename,\n\n6 matches across 4 files\n",
+			"settings":
+			{
+				"buffer_size": 15021,
 				"line_ending": "Windows",
-				"name": "--BulletTest.lua"
-			}
-		},
-		{
-			"file": "Input.lua",
-			"settings":
-			{
-				"buffer_size": 8603,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Bullet.lua",
-			"settings":
-			{
-				"buffer_size": 2440,
-				"line_ending": "Windows"
+				"name": "Find Results",
+				"scratch": true
 			}
 		},
 		{
@@ -553,125 +602,10 @@
 			}
 		},
 		{
-			"file": "BulletShot.lua",
+			"file": "MapObject.lua",
 			"settings":
 			{
-				"buffer_size": 1061,
-				"line_ending": "Windows",
-				"name": "-- BulletShoot.lua"
-			}
-		},
-		{
-			"file": "SpriteBank.lua",
-			"settings":
-			{
-				"buffer_size": 4129,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Sprite.lua",
-			"settings":
-			{
-				"buffer_size": 5360,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "FightCharacter_Sprites.lua",
-			"settings":
-			{
-				"buffer_size": 2300,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Life.lua",
-			"settings":
-			{
-				"buffer_size": 2115,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Animation.lua",
-			"settings":
-			{
-				"buffer_size": 7002,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "DrawManager.lua",
-			"settings":
-			{
-				"buffer_size": 1311,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "DrawList.lua",
-			"settings":
-			{
-				"buffer_size": 13095,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Draw.lua",
-			"settings":
-			{
-				"buffer_size": 5041,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Searching 182 files for \"DrawCall\" (case sensitive)\n\nD:\\GitRepos\\Game\\game\\Animation.lua:\n  241  \n  242   	-- render object to screen\n  243: 	function o:DrawCall()\n  244  \n  245  		if(self.draw == false) then\n  ...\n  289  	end \n  290  \n  291: 	function o:PostDrawCall()\n  292: 	function o:PostDrawCall()\n  293  		print(\"fuck dicks\")\n  294  	end \n\nD:\\GitRepos\\Game\\game\\AnimationEditor.lua:\n  250  -- this might not be neccessary\n  251  -- maybe change\n  252: function AnimationEditor:DrawCall()\n  253  	love.graphics.setColor(Color:AsTable(self.color))\n  254  	love.graphics.draw(self.spriteSheet.image, self.spriteSheetQuad, self.spriteSheetPos.x, self.spriteSheetPos.y, angle, xScale, yScale)\n\nD:\\GitRepos\\Game\\game\\Box.lua:\n  195  \n  196  	-- render to screen\n  197: 	function o:DrawCall()\n  198  \n  199  		if(self.draw == false) then\n\nD:\\GitRepos\\Game\\game\\Button.lua:\n  451  \n  452  \n  453: 	function o:DrawCall()\n  454  	end\n  455  \n\nD:\\GitRepos\\Game\\game\\Collision.lua:\n  208  	end \n  209  \n  210: 	function o:DrawCall()\n  211  \n  212  		-- show?\n\nD:\\GitRepos\\Game\\game\\Draw.lua:\n   67  \n   68  	o.parent = data.parent\n   69: 	o.drawCall = data.parent.DrawCall or data.drawFunc\n   70: 	o.useExternalDrawCall = data.useExternalDrawCall or false\n   71  \n   72  	-- other\n   ..\n  191  	end \n  192  \n  193: 	-- calls DrawCall function of the parent\n  194  	-- this allows Draw to do simple management\n  195  	-- but the parent defines a custom draw call :D\n  ...\n  200  		end \n  201  \n  202: 		self.parent.DrawCall(self.parent)\n  203  \n  204  	end \n  ...\n  271  -- Notes\n  272  -----------------\n  273: -- Draw does not have a defined DrawCall\n  274: -- uses the DrawCall function you give it\n  275  -- so that it may be customised for each type of object\n  276  \n\nD:\\GitRepos\\Game\\game\\Line.lua:\n  158  	end \n  159  \n  160: 	function o:DrawCall()\n  161  \n  162  		-- draw this line\n\nD:\\GitRepos\\Game\\game\\MapWorld.lua:\n  125  \n  126  \n  127: 	function o:DrawCall()\n  128  \n  129  		for x=1, self.map.width do\n\nD:\\GitRepos\\Game\\game\\Palette.lua:\n  379  \n  380  \n  381: 	function o:DrawCall()\n  382  		\n  383  		if(self.draw == false) then\n\nD:\\GitRepos\\Game\\game\\Panel.lua:\n  547  \n  548  	-- empty for now\n  549: 	function o:DrawCall()\n  550  \n  551  	end\n\nD:\\GitRepos\\Game\\game\\PixelTexture.lua:\n  151  \n  152  \n  153: 	function o:DrawCall()\n  154  		if(self.draw == false or self.texture == nil) then\n  155  			return\n\nD:\\GitRepos\\Game\\game\\Player.lua:\n  278  	end \n  279  \n  280: 	function o:DrawCall()\n  281  \n  282  		-- what type of graphic does the o have\n\nD:\\GitRepos\\Game\\game\\Point.lua:\n  117  \n  118  \n  119: 	function o:DrawCall()\n  120  		love.graphics.setColor(Color:AsTable(self.color))\n  121  		love.graphics.setPointSize(self.size)\n\nD:\\GitRepos\\Game\\game\\Polygon.lua:\n   92  	-----------------------\n   93  \n   94: 	function o:DrawCall()\n   95  \n   96  		if(self.fill == false) then\n\nD:\\GitRepos\\Game\\game\\Sprite.lua:\n  160  \n  161  	-- draw sprite\n  162: 	function o:DrawCall()\n  163  \n  164  		-- global draw toggle\n\nD:\\GitRepos\\Game\\game\\Text.lua:\n  254  	end \n  255  \n  256: 	function o:DrawCall()\n  257  \n  258  		if(self.active == false) then\n\n24 matches across 16 files\n",
-			"settings":
-			{
-				"buffer_size": 3197,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "ObjectManager.lua",
-			"settings":
-			{
-				"buffer_size": 13275,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "DebugText.lua",
-			"settings":
-			{
-				"buffer_size": 7032,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Scale.lua",
-			"settings":
-			{
-				"buffer_size": 1573,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "FightCharacter.lua",
-			"settings":
-			{
-				"buffer_size": 5432,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "FightPlayer.lua",
-			"settings":
-			{
-				"buffer_size": 675,
+				"buffer_size": 9419,
 				"line_ending": "Windows"
 			}
 		},
@@ -684,15 +618,31 @@
 			}
 		},
 		{
-			"file": "Window.lua",
+			"file": "Animation.lua",
 			"settings":
 			{
-				"buffer_size": 2578,
+				"buffer_size": 7212,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Shape.lua",
+			"settings":
+			{
+				"buffer_size": 2466,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "DrawList.lua",
+			"settings":
+			{
+				"buffer_size": 14138,
 				"line_ending": "Windows"
 			}
 		}
 	],
-	"build_system": "Packages/User/LOVE.sublime-build",
+	"build_system": "Packages/User/LOVEnew.sublime-build",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -732,46 +682,107 @@
 	},
 	"file_history":
 	[
-		"/D/GitRepos/Game/game/Graphics.lua",
-		"/D/GitRepos/Game/game/MapObject.lua",
-		"/D/GitRepos/Game/game/Box.lua",
-		"/D/GitRepos/Game/game/DrawList_Old.lua",
-		"/D/GitRepos/Game/game/Camera.lua",
-		"/D/GitRepos/Game/game/main.lua",
-		"/D/GitRepos/Game/game/Player.lua",
-		"/D/GitRepos/Game/game/Animation.lua",
-		"/D/GitRepos/Game/game/AnimationEditor.lua",
-		"/D/GitRepos/Game/game/levels/BulletsStarrMazer.lua",
-		"/D/GitRepos/Game/game/LevelManager.lua",
+		"/G/PixelPiledriver/Love2D/Giflib/giflib-master/giflib.lua",
+		"/D/GitRepos/Game/game/Notes.lua",
+		"/G/PixelPiledriver/Lua/LuaGD2/README",
+		"/G/PixelPiledriver/Lua/LuaGD2/Makefile",
+		"/G/PixelPiledriver/GifCat/README.md",
+		"/G/PixelPiledriver/Lua/Lua GD 2/lua-gd-2_0_33r2/Makefile",
+		"/G/PixelPiledriver/Gif Cat/GifCat-master/examples/scale/main.lua",
+		"/G/PixelPiledriver/Gif Cat/GifCat-master/gifcat.lua",
+		"/G/PixelPiledriver/Gif Cat/GifCat-master/README.md",
+		"/G/PixelPiledriver/Love2D/Giflib/giflib-master/giflib_demo.lua",
+		"/G/PixelPiledriver/Lua/Lua GD/lua-gd-2_0_33r2/luagd.c",
+		"/D/GitRepos/Game/game/Image.lua",
+		"/G/PixelPiledriver/Lua/Lua GD/lua-gd-2_0_33r2/test_features.lua",
+		"/G/PixelPiledriver/Lua/Lua GD/lua-gd-2_0_33r2/demos/clock.lua",
+		"/D/GitRepos/Game/game/Scroller.lua",
+		"/D/GitRepos/Game/game/DrawList.lua",
+		"/D/GitRepos/Game/game/levels/ShaderLevel.lua",
 		"/D/GitRepos/Game/game/Button.lua",
+		"/D/GitRepos/Game/game/levels/TextWriteLevel.lua",
+		"/D/GitRepos/Game/game/InputText.lua",
+		"/D/GitRepos/Game/game/MemoryManager.lua",
+		"/D/GitRepos/Game/game/PrintDebug.lua",
+		"/D/GitRepos/Game/game/Input.lua",
+		"/D/GitRepos/Game/game/Random.lua",
+		"/D/GitRepos/Game/game/Bullet.lua",
+		"/D/GitRepos/Game/game/levels/PicoImageConvertLevel.lua",
+		"/D/GitRepos/Game/game/Animation.lua",
+		"/D/GitRepos/Game/game/BulletShooter.lua",
+		"/D/GitRepos/Game/game/BulletShot.lua",
+		"/D/GitRepos/Game/game/Color.lua",
+		"/D/GitRepos/Game/game/LevelManager.lua",
+		"/D/GitRepos/Game/game/levels/ScrollTest.lua",
+		"/D/GitRepos/Game/game/Shader.lua",
+		"/D/GitRepos/Game/game/FileManager.lua",
+		"/D/GitRepos/Game/game/Textfile.lua",
+		"/D/GitRepos/Game/game/Camera.lua",
+		"/D/GitRepos/Game/game/EventLog.lua",
+		"/D/GitRepos/Game/game/Text.lua",
+		"/D/GitRepos/Game/game/Window.lua",
+		"/D/GitRepos/Game/game/Name.lua",
+		"/D/GitRepos/Game/game/SpriteBank.lua",
+		"/D/GitRepos/Game/game/Gif.lua",
+		"/D/GitRepos/Game/game/CollisionManager.lua",
+		"/D/GitRepos/Game/game/SinCounter.lua",
+		"/D/GitRepos/Game/game/Math.lua",
+		"/D/GitRepos/Game/game/MapObject.lua",
+		"/D/GitRepos/Game/game/Draw.lua",
+		"/D/GitRepos/Game/game/Box.lua",
+		"/D/GitRepos/Game/game/Slider.lua",
+		"/D/GitRepos/Game/game/main.lua",
+		"/D/Game Builds/Level Scroller/EventLog.lua",
+		"/D/GitRepos/Game/game/lib1.lua",
+		"/D/GitRepos/Game/game/ObjectManager.lua",
+		"/D/GitRepos/Game/game/Link.lua",
+		"/D/GitRepos/Game/game/MouseDrag.lua",
+		"/D/GitRepos/Game/game/Panel.lua",
+		"/D/GitRepos/Game/game/ScrollerSystem.lua",
+		"/D/GitRepos/Game/game/ChatBox.lua",
+		"/D/GitRepos/Game/game/Pos.lua",
+		"/D/GitRepos/Game/game/Palette.lua",
+		"/D/GitRepos/Game/game/Bool.lua",
+		"/D/GitRepos/Game/game/Mouse.lua",
+		"/D/GitRepos/Game/game/Level.lua",
+		"/D/GitRepos/Game/game/StutterExamples.lua",
+		"/C/Users/PixelPiledriver/Downloads/TimeStep/main.lua",
+		"/C/Users/PixelPiledriver/Downloads/Timestep.love",
+		"/D/GitRepos/Game/game/SpriteSheet.lua",
+		"/D/GitRepos/Game/game/FightCharacter_Sprites.lua",
+		"/D/GitRepos/Game/game/DebugText.lua",
+		"/D/GitRepos/Game/game/FileTemplate.lua",
+		"/D/GitRepos/Game/game/Text",
+		"/D/GitRepos/Game/game/MapWorld.lua",
+		"/D/GitRepos/Game/game/Point.lua",
+		"/D/GitRepos/Game/game/Canvas.lua",
+		"/D/GitRepos/Game/game/Graphics.lua",
+		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/User/LOVEnew.sublime-build",
+		"/D/GitRepos/Game/game/DrawManager.lua",
+		"/D/GitRepos/Game/game/Sprite.lua",
+		"/D/GitRepos/Game/game/levels/BulletsStarrMazer.lua",
+		"/D/GitRepos/Game/game/levels/AnimationEditorLevel.lua",
+		"/D/GitRepos/Game/game/Life.lua",
+		"/D/GitRepos/Game/game/AnimationEditor.lua",
+		"/D/GitRepos/Game/game/Scale.lua",
+		"/D/GitRepos/Game/game/FightCharacter.lua",
+		"/D/GitRepos/Game/game/FightPlayer.lua",
+		"/D/GitRepos/Game/game/AnimationComponent.lua",
+		"/D/GitRepos/Game/game/DrawList_Old.lua",
+		"/D/GitRepos/Game/game/Player.lua",
 		"/D/GitRepos/Game/game/BulletOld.lua",
 		"/D/GitRepos/Game/game/FightStage.lua",
 		"/D/GitRepos/Game/game/levels/TestLevel.lua",
 		"/D/GitRepos/Game/game/levels/TemplateLevel.lua",
-		"/D/GitRepos/Game/game/Bullet.lua",
-		"/D/GitRepos/Game/game/Sprite.lua",
-		"/D/GitRepos/Game/game/FightCharacter_Sprites.lua",
 		"/D/GitRepos/Game/game/MapObject_Sprites.lua",
 		"/D/GitRepos/Game/game/Box",
 		"/D/GitRepos/Game/game/Code Tags and Tools.lua",
 		"/D/GitRepos/Game/game/levels/FightingGameLevel.lua",
-		"/D/GitRepos/Game/game/FightPlayer.lua",
-		"/D/GitRepos/Game/game/Input.lua",
-		"/D/GitRepos/Game/game/Scale.lua",
-		"/D/GitRepos/Game/game/AnimationComponent.lua",
-		"/D/GitRepos/Game/game/SpriteBank.lua",
-		"/D/GitRepos/Game/game/FightCharacter.lua",
 		"/D/GitRepos/Game/game/FightManager.lua",
-		"/D/GitRepos/Game/game/Window.lua",
-		"/D/GitRepos/Game/game/Color.lua",
 		"/D/GitRepos/Game/game/Line.lua",
-		"/D/GitRepos/Game/game/Bool.lua",
 		"/D/GitRepos/Game/game/KeySequence.lua",
 		"/D/GitRepos/Game/game/LifeBar.lua",
-		"/D/GitRepos/Game/game/Text.lua",
-		"/D/GitRepos/Game/game/Pos.lua",
 		"/D/GitRepos/Game/game/AudioComponent.lua",
-		"/D/GitRepos/Game/game/Name.lua",
 		"/D/GitRepos/Game/game/FrameCounter.lua",
 		"/D/GitRepos/Game/game/Key.lua",
 		"/D/GitRepos/Game/game/MapObject_Action.lua",
@@ -779,14 +790,8 @@
 		"/D/GitRepos/Game/game/Arrow.lua",
 		"/D/GitRepos/Game/game/levels/DrawLineLevel.lua",
 		"/D/GitRepos/Game/game/DrawLine_UI.lua",
-		"/D/GitRepos/Game/game/Panel.lua",
-		"/D/GitRepos/Game/game/DrawList.lua",
-		"/D/GitRepos/Game/game/PrintDebug.lua",
 		"/D/GitRepos/Game/game/DrawLine.lua",
-		"/D/GitRepos/Game/game/DebugText.lua",
-		"/D/GitRepos/Game/game/ObjectManager.lua",
 		"/D/GitRepos/Game/game/DrawGroup.lua",
-		"/D/GitRepos/Game/game/Math.lua",
 		"/D/GitRepos/Game/game/DrawToolsUI.lua",
 		"/D/GitRepos/Game/game/Collision.lua",
 		"/D/GitRepos/Game/game/MapTable.lua",
@@ -795,71 +800,16 @@
 		"/D/GitRepos/Game/game/Input",
 		"/D/GitRepos/Game/game/InputList.lua",
 		"/D/GitRepos/Game/game/levels/PixelDrawLevel.lua",
-		"/D/GitRepos/Game/game/Mouse.lua",
 		"/C/Users/PixelPiledriver/AppData/Roaming/LOVE/game/orc.lua",
 		"/C/Users/PixelPiledriver/AppData/Roaming/LOVE/game/goblin.lua",
-		"/D/GitRepos/Game/game/FileManager.lua",
 		"/G/PixelPiledriver/Jobs/Starr Mazer/Bar Patreons/Bar Notes_9.txt",
 		"/C/Users/PixelPiledriver/Desktop/Animations broken on blog.txt",
 		"/G/PixelPiledriver/Jobs/Starr Mazer/Bar Patreons/Character Descriptions.txt",
-		"/D/GitRepos/Game/game/SpriteSheet.lua",
 		"/D/GitRepos/Game/game/FailNew.lua",
 		"/D/GitRepos/Game/game/TableSort.lua",
 		"/D/GitRepos/Game/game/Index.lua",
-		"/D/GitRepos/Game/game/Notes.lua",
 		"/D/GitRepos/Game/game/Sprites.lua",
-		"/D/GitRepos/Game/game/Camera_Node.lua",
-		"/D/GitRepos/Game/game/CollisionManager.lua",
-		"/D/GitRepos/Game/game/Controller.lua",
-		"/D/GitRepos/Game/game/MemoryManager.lua",
-		"/D/GitRepos/Game/game/Palette.lua",
-		"/D/GitRepos/Game/game/PixelTexture.lua",
-		"/D/GitRepos/Game/game/Polygon.lua",
-		"/D/GitRepos/Game/game/TestCode.lua",
-		"/D/GitRepos/Game/game/MouseDrag.lua",
-		"/D/GitRepos/Game/game/Keyboard.lua",
-		"/D/GitRepos/Game/game/DrawManager.lua",
-		"/D/GitRepos/Game/game/ObjectCreator.lua",
-		"/D/GitRepos/Game/game/Textfile.lua",
-		"/D/GitRepos/Game/game/levels/AnimationEditorLevel.lua",
-		"/D/GitRepos/Game/game/panel",
-		"/D/GitRepos/Game/game/Draw.lua",
-		"/D/GitRepos/Game/game/Link.lua",
-		"/D/GitRepos/Game/game/Level.lua",
-		"/D/GitRepos/Game/game/EventLog.lua",
-		"/D/GitRepos/Game/game/Mouse",
-		"/D/GitRepos/Game/game/levels/TextWriteLevel.lua",
-		"/D/GitRepos/Game/game/ChatBox.lua",
-		"/D/GitRepos/Game/game/SimplePanel.lua",
-		"/D/GitRepos/Game/game/MapObject_Objects.lua",
-		"/D/GitRepos/Game/game/levels/MapWorldLevel.lua",
-		"/D/GitRepos/Game/game/main",
-		"/C/Users/PixelPiledriver/AppData/Roaming/LOVE/game/bomb/orc.lua",
-		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/User/JSON.sublime-settings",
-		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/C/Users/PixelPiledriver/AppData/Roaming/Sublime Text 2/Packages/User/CoronaSDKLua.sublime-settings",
-		"/D/GitRepos/Game/game/lib1.lua",
-		"/C/Users/PixelPiledriver/AppData/Roaming/LOVE/Mega Cookie/orc.txt",
-		"/C/Users/PixelPiledriver/AppData/Roaming/LOVE/MetanetHunter/config.lua",
-		"/D/GitRepos/Game/game/MapObject_Art.lua",
-		"/D/GitRepos/Game/game/levels/AudioTestLevel.lua",
-		"/D/GitRepos/Game/game/Action.lua",
-		"/D/GitRepos/Game/game/Block.lua",
-		"/D/GitRepos/Game/game/CameraOld.lua",
-		"/D/GitRepos/Game/game/Canvas.lua",
-		"/D/GitRepos/Game/game/DrawTools.lua",
-		"/D/GitRepos/Game/game/Fade.lua",
-		"/D/GitRepos/Game/game/Game.lua",
-		"/D/GitRepos/Game/game/GameEngineProjectFile.sublime-workspace",
-		"/D/GitRepos/Game/game/Health.lua",
-		"/D/GitRepos/Game/game/Info.lua",
-		"/D/GitRepos/Game/game/InputText.lua",
-		"/D/GitRepos/Game/game/Life.lua",
-		"/D/GitRepos/Game/game/Links.lua",
-		"/D/GitRepos/Game/game/Map.lua",
-		"/D/GitRepos/Game/game/MapWorld.lua",
-		"/D/GitRepos/Game/game/MouseHover.lua"
+		"/D/GitRepos/Game/game/Camera_Node.lua"
 	],
 	"find":
 	{
@@ -879,134 +829,134 @@
 		"case_sensitive": true,
 		"find_history":
 		[
-			"DrawCall",
-			"yes!",
-			"Info",
-			"speed",
-			"shit",
-			"BulletShoot",
-			"Info",
-			"true",
-			"speed",
-			"print(",
-			"print",
-			"print(",
-			"print",
-			"Bullet",
-			"Bullet2",
+			"Button",
+			"share",
+			"New",
+			"'",
+			"Graphic",
+			"graphics",
+			"CreateFromGif",
+			"CreateFromGif\\",
+			"CreateFromGif",
+			"Image:New",
+			"abs",
+			".math",
+			"\"Pos\"",
+			"Pos:New",
+			"o.Pos",
+			"Hud",
+			"Draw",
+			"Custom",
+			"control",
+			"scroll",
+			"PicoImageConvertLevel",
+			"Add",
+			"New",
+			"data.frames",
+			"Scale",
 			"scale",
-			"default.draw",
-			"draw",
-			"Sprite:New",
-			"Info",
-			"Get",
-			"local",
-			"gray",
-			"input",
-			"Animation",
-			"Animaiton",
-			"Line:New",
+			"DataOrDefault",
+			"BulletShot:New",
+			"currentFrame",
+			"delay",
+			".bullets",
+			"bullets",
 			"print",
-			"button run func",
-			"Scale",
-			"Flip",
-			"Vars",
-			"parent",
-			"Scale",
-			"self.x",
-			"SpriteBank",
-			"Animation",
-			"Sprite",
-			"Scale",
-			"Component",
-			"Scale",
+			"\"shoot bullet",
+			"print(",
 			"print",
-			"print(\"a\")",
+			"print(",
+			"SpritBank",
+			"Sprit",
 			"print",
-			"Input:New",
-			"Pos",
-			"Functions",
-			"direction",
-			"o.controls",
-			"LifeBar:New",
-			"Life",
-			"normal",
-			".x",
-			".y",
-			"Pos",
-			"stage",
-			"Stage",
+			"delay",
+			"print",
+			"delay",
+			"shootDelay",
+			"delay",
+			"Delay",
+			"delay",
+			"Delay",
+			"delay",
+			"default.",
+			".speed =",
+			"default.",
+			".speed =",
+			"default.delay",
+			"delay",
+			"delays",
 			"speed",
-			"AnimationComponent",
-			"Audio",
-			"AnimationComponent:State",
-			"2",
-			"1",
-			"actions",
-			"action",
-			".Action",
-			"key",
-			"release",
-			"7",
-			"\"press\"",
-			".x",
-			"AudioComponent",
-			"FightManager:AddCharacter",
-			"AudioComponent",
-			"gravity",
-			"FightManager",
-			"Fight",
-			"FightingCharacter",
-			"parent",
-			"parent.sprite",
-			"whenDone",
-			"playing",
-			"PrintSprites",
+			"add",
+			"--",
+			"30",
+			"bullet",
+			"shootKeyRef",
+			"AddKey(",
+			"8",
+			"delay",
+			"shoot",
+			"8",
+			"shoot",
+			"delay",
+			"until",
+			"CustomLayers",
+			"until",
+			"break",
+			"continue",
+			"hide",
+			"Text:New",
+			"setFilter",
+			"Button",
+			"send",
+			"Send",
+			"send",
+			"Send",
+			"send",
+			":\n",
+			"shader",
+			"alpha",
+			"Image",
+			"EventsOnExit",
+			"Print",
 			"print",
-			"AnimationComponent",
-			"next",
-			"Input",
-			"o:Update",
-			"SetAnimation",
-			"State",
-			"animation",
-			"sprite",
-			"o:Destroy",
-			"}\n",
-			"moveLeft",
-			"}\n",
-			"\"Alice\",",
-			"Input",
-			"SpriteBank",
-			"alignment",
-			"alingment",
-			"Vars",
-			"self.fill",
-			"o.fill",
-			"Vars",
-			"line",
-			"\"fill\"",
-			"line",
-			"angle",
-			"self.Pos.x",
-			"o.Pos.x",
-			"data.x",
-			"o.Pos.x",
-			"data.x",
-			"Bool",
-			"boll",
-			"Line",
-			"Line:",
-			"width",
-			"Bound",
-			"Static",
-			"self.optionFunc",
-			"this button",
-			"optionFunc",
-			"optionsFunc",
-			"Panel",
-			"Panel:New",
-			"Option"
+			"directories",
+			"mount",
+			"Set",
+			"mount",
+			"Set",
+			"FileManager",
+			"ffi",
+			"changeDirectory",
+			"shader",
+			"Shader",
+			"shader",
+			"Update",
+			"UpdateShader",
+			"Update",
+			"Pos",
+			"x",
+			"x=",
+			"x =",
+			"file",
+			"Image",
+			"IMage",
+			"Shader",
+			"print",
+			".x",
+			"Pos.x",
+			"loop",
+			"Shader:New",
+			"Shader:NEw",
+			"currentObject",
+			"o.image",
+			"image",
+			"speed",
+			"finish",
+			"start = ",
+			"start",
+			".x",
+			"o.start",
+			"spee"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1014,6 +964,12 @@
 		"regex": false,
 		"replace_history":
 		[
+			"shootDelay",
+			"dir",
+			"currentScroller",
+			"love.graphics.getHeight",
+			"love.graphics.getWidth",
+			"graphicsType",
 			"BulletShot",
 			"BulletOld",
 			"Bullet",
@@ -1135,13 +1091,7 @@
 			".tools",
 			"self.Pos.y",
 			"self.Pos.x",
-			"o",
-			"monkey",
-			"o",
-			"otype",
-			"Pos",
-			"o",
-			"o:"
+			"o"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1152,23 +1102,23 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 12,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "BulletShooter.lua",
+					"file": "levels/GraphicsTestLevel.lua",
 					"settings":
 					{
-						"buffer_size": 3635,
+						"buffer_size": 528,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2676,
-								2676
+								290,
+								290
 							]
 						],
 						"settings":
@@ -1184,30 +1134,28 @@
 									"selector": "source.lua.corona"
 								}
 							],
-							"auto_name": "--BulletTest.lua",
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 3778.0,
+						"translation.y": 864.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "Input.lua",
+					"file": "levels/ScrollTest.lua",
 					"settings":
 					{
-						"buffer_size": 8603,
+						"buffer_size": 2247,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2368,
-								2368
+								898,
+								898
 							]
 						],
 						"settings":
@@ -1227,25 +1175,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4878.0,
+						"translation.y": 1920.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "Bullet.lua",
+					"file": "Image.lua",
 					"settings":
 					{
-						"buffer_size": 2440,
+						"buffer_size": 2431,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								777,
-								777
+								352,
+								352
 							]
 						],
 						"settings":
@@ -1265,25 +1213,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 756.0,
+						"translation.y": 480.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "Box.lua",
+					"file": "Notes.lua",
 					"settings":
 					{
-						"buffer_size": 7587,
+						"buffer_size": 6467,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1190,
-								1190
+								303,
+								303
 							]
 						],
 						"settings":
@@ -1303,25 +1251,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2164.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "BulletShot.lua",
+					"file": "MapObject_Sprites.lua",
 					"settings":
 					{
-						"buffer_size": 1061,
+						"buffer_size": 2987,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								623,
-								623
+								1395,
+								1395
 							]
 						],
 						"settings":
@@ -1337,30 +1285,29 @@
 									"selector": "source.lua.corona"
 								}
 							],
-							"auto_name": "-- BulletShoot.lua",
 							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 252.0,
+						"translation.y": 2016.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "SpriteBank.lua",
+					"file": "ScrollerSystem.lua",
 					"settings":
 					{
-						"buffer_size": 4129,
+						"buffer_size": 5464,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2927,
-								2927
+								3253,
+								3256
 							]
 						],
 						"settings":
@@ -1380,25 +1327,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3926.0,
+						"translation.y": 5414.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 6,
-					"file": "Sprite.lua",
+					"file": "Slider.lua",
 					"settings":
 					{
-						"buffer_size": 5360,
+						"buffer_size": 4486,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2698,
-								2698
+								1163,
+								1163
 							]
 						],
 						"settings":
@@ -1418,25 +1365,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3599.0,
+						"translation.y": 1647.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 7,
-					"file": "FightCharacter_Sprites.lua",
+					"file": "LevelManager.lua",
 					"settings":
 					{
-						"buffer_size": 2300,
+						"buffer_size": 9312,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								724,
-								724
+								5108,
+								5114
 							]
 						],
 						"settings":
@@ -1456,206 +1403,16 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2520.0,
+						"translation.y": 8934.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 8,
-					"file": "Life.lua",
 					"settings":
 					{
-						"buffer_size": 2115,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1932.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "Animation.lua",
-					"settings":
-					{
-						"buffer_size": 7002,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5818,
-								5818
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 7686.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "DrawManager.lua",
-					"settings":
-					{
-						"buffer_size": 1311,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 924.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "DrawList.lua",
-					"settings":
-					{
-						"buffer_size": 13095,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7424,
-								7424
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 7896.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "Draw.lua",
-					"settings":
-					{
-						"buffer_size": 5041,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 5208.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"settings":
-					{
-						"buffer_size": 3197,
+						"buffer_size": 15021,
 						"regions":
 						{
 							"match":
@@ -1664,100 +1421,352 @@
 								"regions":
 								[
 									[
-										153,
-										161
+										152,
+										157
 									],
 									[
-										259,
-										267
+										234,
+										239
 									],
 									[
-										293,
-										301
+										419,
+										424
 									],
 									[
-										484,
-										492
+										500,
+										505
 									],
 									[
-										782,
-										790
+										654,
+										659
 									],
 									[
-										908,
-										916
+										736,
+										741
 									],
 									[
-										1017,
-										1025
+										889,
+										894
 									],
 									[
-										1159,
-										1167
+										970,
+										975
 									],
 									[
-										1206,
-										1214
+										1161,
+										1166
 									],
 									[
-										1233,
-										1241
+										1294,
+										1299
 									],
 									[
-										1320,
-										1328
+										1429,
+										1434
 									],
 									[
-										1509,
-										1517
+										1564,
+										1569
 									],
 									[
-										1638,
-										1646
+										1762,
+										1767
 									],
 									[
-										1666,
-										1674
+										1878,
+										1883
 									],
 									[
-										1840,
-										1848
+										1996,
+										2001
 									],
 									[
-										1958,
-										1966
+										2114,
+										2119
 									],
 									[
-										2084,
-										2092
+										2281,
+										2286
 									],
 									[
-										2228,
-										2236
+										2414,
+										2419
 									],
 									[
-										2335,
-										2343
+										2549,
+										2554
 									],
 									[
-										2498,
-										2506
+										2684,
+										2689
 									],
 									[
-										2635,
-										2643
+										2882,
+										2887
 									],
 									[
-										2847,
-										2855
+										2998,
+										3003
 									],
 									[
-										2988,
-										2996
+										3116,
+										3121
 									],
 									[
-										3111,
-										3119
+										3234,
+										3239
+									],
+									[
+										3398,
+										3403
+									],
+									[
+										3436,
+										3441
+									],
+									[
+										3559,
+										3564
+									],
+									[
+										3600,
+										3605
+									],
+									[
+										3709,
+										3714
+									],
+									[
+										3754,
+										3759
+									],
+									[
+										3885,
+										3890
+									],
+									[
+										3954,
+										3959
+									],
+									[
+										4137,
+										4142
+									],
+									[
+										4235,
+										4240
+									],
+									[
+										4437,
+										4442
+									],
+									[
+										4516,
+										4521
+									],
+									[
+										4743,
+										4748
+									],
+									[
+										4904,
+										4909
+									],
+									[
+										5056,
+										5061
+									],
+									[
+										5202,
+										5207
+									],
+									[
+										5315,
+										5320
+									],
+									[
+										5407,
+										5412
+									],
+									[
+										5610,
+										5615
+									],
+									[
+										5753,
+										5758
+									],
+									[
+										5896,
+										5901
+									],
+									[
+										6127,
+										6130
+									],
+									[
+										6530,
+										6533
+									],
+									[
+										6956,
+										6959
+									],
+									[
+										7364,
+										7367
+									],
+									[
+										7870,
+										7873
+									],
+									[
+										8238,
+										8241
+									],
+									[
+										8447,
+										8450
+									],
+									[
+										8643,
+										8646
+									],
+									[
+										8839,
+										8842
+									],
+									[
+										9035,
+										9038
+									],
+									[
+										9231,
+										9234
+									],
+									[
+										9427,
+										9430
+									],
+									[
+										9623,
+										9626
+									],
+									[
+										9819,
+										9822
+									],
+									[
+										10015,
+										10018
+									],
+									[
+										10211,
+										10214
+									],
+									[
+										10407,
+										10410
+									],
+									[
+										10603,
+										10606
+									],
+									[
+										10799,
+										10802
+									],
+									[
+										10995,
+										10998
+									],
+									[
+										11191,
+										11194
+									],
+									[
+										11387,
+										11390
+									],
+									[
+										11583,
+										11586
+									],
+									[
+										11779,
+										11782
+									],
+									[
+										11975,
+										11978
+									],
+									[
+										12171,
+										12174
+									],
+									[
+										12367,
+										12370
+									],
+									[
+										12524,
+										12527
+									],
+									[
+										12713,
+										12716
+									],
+									[
+										12810,
+										12813
+									],
+									[
+										12938,
+										12941
+									],
+									[
+										13234,
+										13237
+									],
+									[
+										13554,
+										13557
+									],
+									[
+										13794,
+										13797
+									],
+									[
+										13856,
+										13859
+									],
+									[
+										14051,
+										14054
+									],
+									[
+										14284,
+										14293
+									],
+									[
+										14389,
+										14398
+									],
+									[
+										14532,
+										14541
+									],
+									[
+										14660,
+										14669
+									],
+									[
+										14761,
+										14770
+									],
+									[
+										14931,
+										14940
 									]
 								],
 								"scope": ""
@@ -1766,56 +1775,8 @@
 						"selection":
 						[
 							[
-								1976,
-								1976
-							],
-							[
-								2012,
-								2012
-							],
-							[
-								2013,
-								2013
-							],
-							[
-								2048,
-								2048
-							],
-							[
-								2056,
-								2056
-							],
-							[
-								2064,
-								2064
-							],
-							[
-								2094,
-								2094
-							],
-							[
-								2104,
-								2104
-							],
-							[
-								2141,
-								2141
-							],
-							[
-								2142,
-								2142
-							],
-							[
-								2175,
-								2175
-							],
-							[
-								2183,
-								2183
-							],
-							[
-								2208,
-								2208
+								15021,
+								15021
 							]
 						],
 						"settings":
@@ -1832,7 +1793,7 @@
 								}
 							],
 							"detect_indentation": false,
-							"output_tag": 1,
+							"output_tag": 3,
 							"result_base_dir": "",
 							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
 							"result_line_regex": "^ +([0-9]+):",
@@ -1840,25 +1801,25 @@
 							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 819.0,
+						"translation.y": 14400.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 14,
-					"file": "ObjectManager.lua",
+					"buffer": 9,
+					"file": "Box.lua",
 					"settings":
 					{
-						"buffer_size": 13275,
+						"buffer_size": 7587,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								865,
-								865
+								3203,
+								3203
 							]
 						],
 						"settings":
@@ -1878,25 +1839,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 924.0,
+						"translation.y": 3162.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 15,
-					"file": "DebugText.lua",
+					"buffer": 10,
+					"file": "MapObject.lua",
 					"settings":
 					{
-						"buffer_size": 7032,
+						"buffer_size": 9419,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1043,
-								1043
+								208,
+								208
 							]
 						],
 						"settings":
@@ -1916,127 +1877,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2584.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 16,
-					"file": "Scale.lua",
-					"settings":
-					{
-						"buffer_size": 1573,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1303,
-								1303
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1260.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"file": "FightCharacter.lua",
-					"settings":
-					{
-						"buffer_size": 5432,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1456,
-								1456
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1764.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 18,
-					"file": "FightPlayer.lua",
-					"settings":
-					{
-						"buffer_size": 675,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 336.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 19,
+					"buffer": 11,
 					"file": "AnimationComponent.lua",
 					"settings":
 					{
@@ -2047,44 +1894,6 @@
 						"selection":
 						[
 							[
-								477,
-								482
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": "<",
-									"selector": "text.html"
-								},
-								{
-									"characters": ".",
-									"selector": "source.lua.corona"
-								}
-							],
-							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 420.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 20,
-					"file": "Window.lua",
-					"settings":
-					{
-						"buffer_size": 2578,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
 								0,
 								0
 							]
@@ -2106,7 +1915,121 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 756.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "Animation.lua",
+					"settings":
+					{
+						"buffer_size": 7212,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2017,
+								2017
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "Shape.lua",
+					"settings":
+					{
+						"buffer_size": 2466,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1679,
+								1679
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "DrawList.lua",
+					"settings":
+					{
+						"buffer_size": 14138,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1968,
+								1968
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.lua.corona"
+								}
+							],
+							"syntax": "Packages/Corona Editor/CoronaSDKLua.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2362.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -2147,7 +2070,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 187.0
+		"height": 203.0
 	},
 	"replace":
 	{

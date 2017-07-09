@@ -13,6 +13,7 @@ local Window = nil
 local Input = nil
 local Text = nil
 local Color = nil
+local Button = nil
 
 --------------------------------------
 
@@ -37,12 +38,16 @@ LevelManager.printDescriptionOnStart = true
 -- all levels available
 LevelManager.levelNames = 
 {
+	"GraphicsTestLevel",
+	"ScrollTest",
+	"PicoImageConvertLevel",
+	"TextWriteLevel",
 	"BulletsStarrMazer",
+	"ShaderLevel",
 	"AudioTestLevel",
 	"DrawLineLevel",
 	"FightingGameLevel",
 	"AnimationEditorLevel",
-	"TextWriteLevel",
 	"MapWorldLevel",
 	"CameraLevel",
 	"NewLevelTypeTest",
@@ -72,27 +77,14 @@ function LevelManager:CreateInput()
 	local nextLevel =
 	{"b", "press", 
 		function() 
-			LevelManager.levelSelectIndex = LevelManager.levelSelectIndex + 1
-
-			-- index out of range?
-			if(LevelManager.levelSelectIndex > #LevelManager.levelNames) then
-				LevelManager.levelSelectIndex = #LevelManager.levelNames
-			end 
-
-			EventLog:Add{"Next Level: " .. LevelManager.levelNames[LevelManager.levelSelectIndex], LevelManager}
+			LevelManager:NextLevel()
 		end
 	}
 
 	local prevLevel =
 	{"v", "press", 
 		function() 
-			LevelManager.levelSelectIndex = LevelManager.levelSelectIndex - 1
-
-			if(LevelManager.levelSelectIndex < 1) then
-				LevelManager.levelSelectIndex = 1
-			end 
-
-			EventLog:Add{"Prev Level: " .. LevelManager.levelNames[LevelManager.levelSelectIndex], LevelManager}
+			LevelManager:PrevLevel()
 		end
 	}
 
@@ -125,6 +117,29 @@ end
 ---------------
 -- Functions
 ---------------
+
+function LevelManager:NextLevel()
+	LevelManager.levelSelectIndex = LevelManager.levelSelectIndex + 1
+
+	-- index out of range?
+	if(LevelManager.levelSelectIndex > #LevelManager.levelNames) then
+		LevelManager.levelSelectIndex = #LevelManager.levelNames
+	end 
+
+	EventLog:Add{"Next Level: " .. LevelManager.levelNames[LevelManager.levelSelectIndex], LevelManager}
+
+end 
+
+function LevelManager:PrevLevel()
+	LevelManager.levelSelectIndex = LevelManager.levelSelectIndex - 1
+
+	if(LevelManager.levelSelectIndex < 1) then
+		LevelManager.levelSelectIndex = 1
+	end 
+
+	EventLog:Add{"Prev Level: " .. LevelManager.levelNames[LevelManager.levelSelectIndex], LevelManager}
+end 
+
 
 -- set the given level and run it 
 function LevelManager:StartLevel(level)
@@ -245,9 +260,61 @@ function LevelManager:PostRequire()
 	Text = require("Text")
 	Input = require("Input")
 	Color = require("Color")
+	Button = require("Button")
+	Collision = require("Collision")
+
+	local mouse = Mouse:New{name = "mouse"}
 
 	-- Input
 	self:CreateInput()
+
+	-- Buttons
+	---[[
+	self.nextLevelButton = Button:New
+	{
+		text = "Next Level",
+		x = 110,
+		y = 520,
+		
+		func = function()
+			self:NextLevel()
+		end 
+	}
+
+	self.prevLevelButton = Button:New
+	{
+		text = "Prev Level",
+		x = 0,
+		y = 520,
+		
+		func = function()
+			self:PrevLevel()
+		end 
+	}
+	--]]
+
+	self.startLevelButton = Button:New
+	{
+		text = "Start Level",
+		x = 220,
+		y = 520,
+		
+		func = function()
+			LevelManager:StartLevel(LevelManager.levels[LevelManager.levelNames[LevelManager.levelSelectIndex]])
+		end 
+	}
+
+	self.exitLevelButton = Button:New
+	{
+		text = "Exit Level",
+		x = 330,
+		y = 520,
+		
+		func = function()
+			LevelManager:ExitLevel()
+			love.graphics.setBackgroundColor(Color:AsTable(Color:Get("gray")))
+		end 
+	}
 
 end
 
@@ -319,7 +386,25 @@ end
 
 -- Junk
 ---------------------------------
+
 --[[
+LevelManager.levelSelectIndex = LevelManager.levelSelectIndex + 1
+
+-- index out of range?
+if(LevelManager.levelSelectIndex > #LevelManager.levelNames) then
+	LevelManager.levelSelectIndex = #LevelManager.levelNames
+end 
+
+EventLog:Add{"Next Level: " .. LevelManager.levelNames[LevelManager.levelSelectIndex], LevelManager}
+--]]
+
+
+--[[
+
+
+
+
+
 
 
 	-- create table for objects if it doesnt exist

@@ -7,6 +7,7 @@
 --------------
 -- Requires
 --------------
+local Color = require("Color")
 local Textfile = require("Textfile")
 
 -----------------------------------------------
@@ -75,8 +76,74 @@ local Start = function()
 	print(orcTest2.health)
 
 	
+	-- pixels in pairs for pico8 PXDRAW
+	local hatGuy = love.graphics.newImage("graphics/hatGuy.png")
+	print(hatGuy)
+	local hatGuyData = hatGuy:getData()
+
+	local hatGuyFile = Textfile:New
+	{
+		filename = "hatGuyPixels.txt"
+	}
+
+	local picoPalette =
+	{
+		{0,0,0}, -- 1
+		{29,43,83}, -- 2
+		{126,37,83}, -- 3
+		{0,135,81}, -- 4
+		{171,82,54}, -- 5
+		{95,87,79}, -- 6
+		{194,195,199}, -- 7
+		{255,241,232}, -- 8
+
+		{255,0,77}, -- 9
+		{255,163,0}, -- 10
+		{255,236,39}, -- 11
+		{0,228,54}, -- 12
+		{41,173,255}, -- 13
+		{131,118,156}, -- 14
+		{255,119,168}, -- 15
+		{255,204,170}, -- 16
+	}
+
+	local lastColor = {0,0,0,0}
+	local colorLength = 0
+	for y=1, hatGuyData:getHeight() do
+		for x=1, hatGuyData:getWidth() do
+			-- get color of this pixel
+			local thisColor = {hatGuyData:getPixel(x-1,y-1)}
+
+			-- has color changed?
+			if(Color:Equal(thisColor, lastColor)) then
+				colorLength = colorLength + 1
+			else
+				local colorIndex = 0
+
+				for i=1, #picoPalette do
+					if(Color:Equal(lastColor, picoPalette[i])) then
+						colorIndex = i-1
+					end 
+				end 
+
+				hatGuyFile:AddLine(colorIndex .. "," .. colorLength .. ",")
+				colorLength = 1
+			end 
+
+			print(Color:Equal(thisColor, lastColor))
+			print(hatGuyData:getPixel(x-1,y-1))
+
+			-- save this color for next loop
+			lastColor[1], lastColor[2], lastColor[3] = hatGuyData:getPixel(x-1,y-1)
+		end 
+	end 
+
+	hatGuyFile:Save()
+
+
 
 end
+
 
 
 local Update = function()

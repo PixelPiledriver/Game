@@ -128,7 +128,9 @@ function SpriteBank:New(data)
 			frames = frames,
 			spriteSheet = self.spriteSheet,
 			loopMax = self.animations[name].loopMax or nil,
-			whenDonePlay = self.animations[name].whenDonePlay or nil
+			whenDonePlay = self.animations[name].whenDonePlay or nil,
+			delay = self.animations[name].delay or nil,
+			delays = self.animations[name].delays or nil
 		}
 
 		--print(newAnimation.whenDonePlay)
@@ -152,7 +154,9 @@ function SpriteBank:New(data)
 			spriteSheet = self.spriteSheet,
 			loopMax = self.animations[name].loopMax or nil,
 			whenDonePlay = self.animations[name].whenDonePlay or nil,
-			add = self.animations[name].add or false
+			add = self.animations[name].add or false,
+			delay = self.animations[name].delay or nil,
+			delays = self.animations[name].delays or nil
 		}
 
 		return Animation:New(newAnimation)	
@@ -165,7 +169,9 @@ function SpriteBank:New(data)
 			frames = self.createdSprites[name],
 			spriteSheet = self.spriteSheet,
 			loopMax = self.animations[name].loopMax or nil,
-			whenDonePlay = self.animations[name].whenDonePlay or nil
+			whenDonePlay = self.animations[name].whenDonePlay or nil,
+			delay = self.animations[name].delay or nil,
+			delays = self.animations[name].delays or nil
 		}
 
 		return Animation:New(newAnimation)	
@@ -176,19 +182,19 @@ function SpriteBank:New(data)
 	-- print list of sprites in this bank
 	function o:PrintSprites()
 		for i=1, #self.sprites.index do
-			print(self.sprites.index[i])
+			printDebug{self.sprites.index[i], "SpriteBank"}
 		end 
 	end 
 
 	function o:Destroy()
-		print("SPRITE BANK")
+		printDebug{"SPRITE BANK", "SpriteBank"}
 		for i=1, #self.sprites.index do
-			print(self.sprites.index[i])
+			printDebug{self.sprites.index[i], "SpriteBank"}
 			ObjectManager:Destroy(self.sprites[self.sprites.index[i]])
 		end 
 
 		for i=1, #self.animations.index do
-			print(self.animations.index[i])
+			printDebug{self.animations.index[i], "SpriteBank"}
 			ObjectManager:Destroy(self.animations[self.animations.index[i]])
 		end 
 

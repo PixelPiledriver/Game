@@ -39,12 +39,22 @@ function MouseDrag:New(data)
 		structureType = "Component"
 	}
 
+	--------------
+	-- Vars
+	--------------
+
 	o.parent = data.parent or nil
 	o.drag = false
-	o.mouseButton = data.mouseButton or "l"
+	o.mouseButton = data.mouseButton or 1
 
-	self.offsetFromMouseX = 0
-	self.offsetFromMouseY = 0
+	o.offsetFromMouseX = 0
+	o.offsetFromMouseY = 0
+
+	o.xActive = Bool:DataOrDefault(data.xActive, true)
+	o.yActive = Bool:DataOrDefault(data.yActive, true)
+
+
+
 
 	-----------------------
 	-- Functions
@@ -55,8 +65,14 @@ function MouseDrag:New(data)
 			return 
 		end 
 
-		self.parent.Pos.x = love.mouse.getX() - self.offsetFromMouseX
-		self.parent.Pos.y = love.mouse.getY() - self.offsetFromMouseY
+		if(self.xActive) then
+			self.parent.Pos.x = love.mouse.getX() - self.offsetFromMouseX
+		end 
+
+		if(self.yActive) then
+			self.parent.Pos.y = love.mouse.getY() - self.offsetFromMouseY
+		end 
+
 	end 
 
 	function o:Drag()

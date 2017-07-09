@@ -161,6 +161,10 @@ function Sprite:New(data)
 	-- draw sprite
 	function o:DrawCall()
 
+		if(self.sprite == nil or self.spriteSheet.image == nil) then
+			return
+		end 
+
 		-- global draw toggle
 		if(Sprite.drawNone) then
 			return

@@ -187,7 +187,7 @@ function Panel:New(data)
 	if(o.posType == "bottom") then
 		o.Pos:SetPos
 		{
-			x = love.window.getWidth() - 100,
+			x = love.graphics.getWidth() - 100,
 			y = Panel.windowBorderSpace
 		}
 	end

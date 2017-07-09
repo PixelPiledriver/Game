@@ -78,7 +78,7 @@ function BulletShooter:New(data)
 	o.Input = Input:New{}
 
 	-- predefine keys
-	local shoot = {}
+	local shootKeyRef = {}
 
 	local moveUp =
 	{"w", "hold", 
@@ -120,8 +120,10 @@ function BulletShooter:New(data)
 				o.bulletsIndex = #o.bullets
 			end
 
-			shoot[8] = o.bullets[o.bulletsIndex].delay
-			print(shoot[8])
+			shootKeyRef.delay = o.bullets[o.bulletsIndex].shootDelay
+
+			printDebug{"next bullet", "BulletShooter"}
+			
 		end
 	}
 
@@ -134,11 +136,14 @@ function BulletShooter:New(data)
 				o.bulletsIndex = 1
 			end 
 
-			shoot[8] = o.bullets[o.bulletsIndex].delay
+			shootKeyRef.delay = o.bullets[o.bulletsIndex].shootDelay
+
+			printDebug{"prev bullet", "BulletShooter"}
+
 		end
 	}
 
-	shoot =
+	local shoot =
 	{
 		"n", "hold",
 		function()
@@ -147,61 +152,208 @@ function BulletShooter:New(data)
 				x = o.sprite.Pos.x + 50,
 				y = o.sprite.Pos.y
 			}
+
+			printDebug{"shoot bullet", "BulletShooter"}
 		end 
 	}
+
 	shoot[8] = 2
 
 	o.Input:AddKeys
 	{
-		moveUp, moveDown, moveRight, moveLeft, shoot,
+		moveUp, moveDown, moveRight, moveLeft,
 		nextWeapon, prevWeapon
 	}
+
+	shootKeyRef = o.Input:AddKey(shoot)
+
 
 
 	---------------
 	-- Bullets
 	---------------
-	o.bullets = {}
+	
 	o.bulletsIndex = 1
 	
 	-- test
-	o.bullets[1] = Bullet:New
+	local bullet = Bullet:New
 	{
 		image = "bullet.png",
 		width = 20,
 		height = 20,
 		frames = 12,
-		delay = 2
+		shootDelay = 2
 	}
 
 	-- thin laser
-	o.bullets[2] = Bullet:New
+	local laser = Bullet:New
 	{
 		image = "laser.png",
 		width = 80,
 		height = 20,
 		frames = 5,
-		delay = 20
+		shootDelay = 10
 	}
 
-	o.bullets[3] = Bullet:New
+	local cannonOld = Bullet:New
 	{
 		image = "cannonOld.png",
 		width = 31,
 		height = 11, 
 		frames = 1,
 		add = true,
-		delay = 3
+		shootDelay = 25
 	}
 
-	o.bullets[4] = Bullet:New
+	local cannonNew = Bullet:New
 	{
 		image = "cannonNew.png",
 		width = 28,
 		height = 20,
 		frames = 10,
-		delay = 5
+		shootDelay = 6
 	}
+
+	local sniperLevel1 = Bullet:New
+	{
+		image = "SniperLevel1.png",
+		width = 48,
+		height = 8,
+		frames = 8,
+		shootDelay = 40,
+		speed = 30
+	}
+
+	local sniperLevel2 = Bullet:New
+	{
+		image = "SniperLevel2.png",
+		width = 76,
+		height = 18,
+		frames = 10,
+		shootDelay = 40,
+		speed = 30
+	}
+
+	local sniperLevel3 = Bullet:New
+	{
+		image = "SniperLevel3.png",
+		width = 82,
+		height = 23,
+		frames = 10,
+		shootDelay = 40,
+		speed = 30
+	}
+
+	local uzi_thin_3_3 = Bullet:New
+	{
+		image = "uzi_thin_3_3.png",
+		width = 32,
+		height = 3,
+		frames = 6,
+		shootDelay = 3,
+		speed = 18,
+		frameDelay = 1,
+		startFrameAdd = true,
+		randomYOffset = 10
+	}
+
+	local uzi2_1_3 = Bullet:New
+	{
+		image = "uzi2_1_3.png",
+		width = 15,
+		height = 7,
+		frames = 9,
+		shootDelay = 3,
+		speed = 18,
+		frameDelay = 2,
+		startFrameAdd = true,
+		randomYOffset = 10
+	}
+
+	local uzi3_2_5 = Bullet:New
+	{
+		image = "uzi3_2_5.png",
+		width = 18,
+		height = 8,
+		frames = 9,
+		shootDelay = 3,
+		speed = 18,
+		frameDelay = 2,
+		startFrameAdd = true,
+		randomYOffset = 10
+	}
+
+	local uzi3_2_5_simpleColor = Bullet:New
+	{
+		image = "uzi3_2_5_simpleColor.png",
+		width = 18,
+		height = 8,
+		frames = 9,
+		shootDelay = 3,
+		speed = 10,
+		frameDelay = 2,
+		startFrameAdd = true,
+		randomYOffset = 10
+	}
+
+	local uzi4_3_3_1 = Bullet:New
+	{
+		image = "uzi4_3_3_1.png",
+		width = 20,
+		height = 6,
+		frames = 12,
+		shootDelay = 3,
+		speed = 12,
+		frameDelay = 1,
+		startFrameAdd = true,
+		randomYOffset = 10
+	}
+
+	local uzi4_3_3_1_simple = Bullet:New
+	{
+		image = "uzi4_3_3_1_simple.png",
+		width = 20,
+		height = 6,
+		frames = 12,
+		shootDelay = 3,
+		speed = 12,
+		frameDelay = 1,
+		startFrameAdd = true,
+		randomYOffset = 10
+	}
+
+	local uzi4_3_3_2 = Bullet:New
+	{
+		image = "uzi4_3_3_2.png",
+		width = 24,
+		height = 8,
+		frames = 12,
+		shootDelay = 3,
+		speed = 12,
+		frameDelay = 1,
+		startFrameAdd = true,
+		randomYOffset = 10
+	}
+
+	o.bullets = 
+	{
+		uzi4_3_3_1,
+		uzi4_3_3_1_simple,
+		uzi4_3_3_2,
+		uzi3_2_5,
+		uzi3_2_5_simpleColor,
+		uzi2_1_3,
+		uzi_thin_3_3,
+		sniperLevel1,
+		sniperLevel2,
+		sniperLevel3,
+		bullet,
+		laser,
+		cannonOld,
+		cannonNew,
+	}
+
+
 	
 	---------------
 	-- Functions

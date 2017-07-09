@@ -8,6 +8,18 @@
  
 --------------------------------------------------------------------------------
 
+
+-- Micro Book
+-------------------------
+-- engine for sharing pixel animations and comics
+-- pixel art does not share well as video or on the web sometimes 
+--> solved, look at art ideas dog
+--> but yes realtime pixel art is the most crips --> or html/java put together by hand
+-- Micro Book is designed to let people view and possibly create pixel stories in editor
+ 
+
+
+
 -- Sprite Bank
 ----------------------
 -- add and get sprites

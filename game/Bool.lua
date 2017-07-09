@@ -56,6 +56,7 @@ function Bool:DataOrDefault(b, default)
 	if(b == nil) then
 		return default
 	elseif(b == false) then
+		printDebug{"false data given", "Bool"}
 		return false
 	elseif(b == true) then
 		return true

@@ -17,7 +17,7 @@ local Pos = require("Pos")
 -----------
 -- not sure if this should happen here
 -- but whatever for now
-love.graphics.setPointStyle("rough")
+--love.graphics.setPointStyle("rough")
 
 -----------------------------------------------------------
 

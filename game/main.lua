@@ -123,7 +123,7 @@ require("TestCode")
 		DrawList:Update()
 
 		-- objects
-		ObjectManager:Update()
+		ObjectManager:Update(dt)
 		
 		-- input
 		Camera:RepeatedInput()

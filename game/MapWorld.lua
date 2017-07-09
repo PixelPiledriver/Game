@@ -79,7 +79,7 @@ function MapWorld:New(data)
 	-----------
 	-- Vars
 	-----------
-	o.x = data.x or love.window.getWidth() * 0.25
+	o.x = data.x or love.graphics.getWidth() * 0.25
 	o.y = data.y or 100
 
 	o.tileWidth = 32

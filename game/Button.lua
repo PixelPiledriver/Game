@@ -204,7 +204,7 @@ function Button:New(data)
 
 		o.optionFunc = function()
 
-			print("run option func")
+			printDebug{"run option func", "Button"}
 
 			o.options.panel = Panel:New
 			{
@@ -234,7 +234,7 @@ function Button:New(data)
 
 		end 
 
-		print(o.optionFunc)
+		printDebug{o.optionFunc, "Button"}
 
 
 	end 
@@ -253,7 +253,7 @@ function Button:New(data)
 			alignment = "center",
 			displayWidth = o.Size.width,
 			displayHeight = o.Size.height,
-			size = 11
+			size = 12
 		}
 	end 
 
@@ -393,7 +393,7 @@ function Button:New(data)
 	o.drag = MouseDrag:New
 	{
 		parent = o,
-		mouseButton = "r"
+		mouseButton = 2
 	}
 
 	-- active range
@@ -536,7 +536,7 @@ function Button:New(data)
 			
 			if(Mouse:SingleClick("l")) then --> single click fixed
 
-				print(self.options)
+				printDebug{self.options, "Button"}
 				self.clicked = true
 
 				if(self.lastClicked == false) then
@@ -609,7 +609,7 @@ function Button:New(data)
 
 				end
 
-			elseif(love.mouse.isDown("l")) then
+			elseif(love.mouse.isDown(1)) then
 
 				if(self.holdable) then
 
@@ -725,7 +725,7 @@ Button.createPoint =
 		{
 			pos = Value:GetTable
 			{
-				x = Value:Range{min = 0, max = love.window.getWidth()},
+				x = Value:Range{min = 0, max = love.graphics.getWidth()},
 				y = Value:Range{min = 0, max = love.window.getHeight()},
 				z = Value:Value(0),
 				index = {"x", "y", "z"},
@@ -781,7 +781,7 @@ Button.valueTest =
 {
 	text = "Value Test",
 	func = function()
-		print( (Value:Random{values ={1,4,5,44,223,00}}):Get() )
+		printDebug{ (Value:Random{values ={1,4,5,44,223,00}}):Get(), "Button"}
 	end
 }
 
@@ -835,7 +835,7 @@ Button.actionTest =
 	funcObjects = {"a"},
 	func = function(data)
 		data.a = data.a + 5
-		print(data.a)
+		printDebug{data.a, "Button"}
 	end 
 }
 

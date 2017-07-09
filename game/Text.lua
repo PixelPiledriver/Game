@@ -38,7 +38,7 @@ Text.default =
 	fade = false,
 	life = false,
 	color = "white",
-	size = 14,
+	size = 12,
 	boxPad = 4,
 	boxColor = "black",
 	boxAutoContrastColor = true
@@ -74,6 +74,7 @@ function Text:New(data)
 	
 	o.color = data.color or Color:Get(self.default.color)
 	o.font = love.graphics.newFont(data.size or self.default.size)
+	--o.font:setFilter("linear", "linear")
 
 	-- size of area that text is within -> ex: button size
 	o.displayWidth = data.displayWidth or o.font:getWidth(o.text)
@@ -277,8 +278,10 @@ function Text:New(data)
 
 
 		-- text
-		love.graphics.setColor(Color:AsTable(self.color))
 		love.graphics.setFont(self.font)
+		love.graphics.setColor(Color:AsTable(self.color))
+
+		
 
 		local x = 0
 		local y = 0

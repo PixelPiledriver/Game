@@ -68,8 +68,12 @@ function Level:New(data)
 	-- not sure if this is used anymore
 	o.objects = {}
 
-
 	o.description = data.description or "..."
+
+
+	-- Functions
+	
+
 	----------
 	-- End
 	----------

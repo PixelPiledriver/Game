@@ -325,7 +325,7 @@ function ObjectManager:PrintDebugText()
 end 
 
 -- update all objects
-function ObjectManager:Update()
+function ObjectManager:Update(dt)
 
 	-- destroy
 	self:ClearDestroyedObjects()
@@ -376,7 +376,7 @@ function ObjectManager:Update()
 
 		-- update
 		if(self.objects[i].Update) then
-			self.objects[i]:Update()
+			self.objects[i]:Update(dt)
 		end 
 
 		-- debug text per object

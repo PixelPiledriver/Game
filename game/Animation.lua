@@ -63,8 +63,8 @@ function Animation:New(data)
 
 		-- total frames and delays not the same?
 		if(#data.frames ~= #data.delays) then
-			printDebug{"Animation:New FAILED!", "animation"}
-			printDebug{"Delays and Frames count not the same!", "animation"}
+			printDebug{"Animation:New FAILED!", "Animation"}
+			printDebug{"Delays and Frames count not the same!", "Animation"}
 			return 
 		end
 
@@ -95,12 +95,13 @@ function Animation:New(data)
 	--{Sprite, Sprite, ...}
 	o.frames = data.frames or nil 
 
-	o.currentFrame = 1
+	o.currentFrame = data.startFrame or 1
 	
 	o.speedTime = 1
-	o.speed = data.speed or 1
+	o.speed = data.speed or 3
 	o.delayTime = 1
-	o.delays = data.delays
+	o.delay = data.delay or nil
+	o.delays = data.delays or nil
 
 	o.loopMax = data.loopMax or 0
 	o.loopCount = 0
@@ -197,7 +198,7 @@ function Animation:New(data)
 			self.delayTime = self.delayTime + 1
 
 			-- get delay, if none exist use the default from Animation static
-			local delay = self.delays and self.delays[self.currentFrame] or Animation.default.delay
+			local delay = self.delays and self.delays[self.currentFrame] or self.delay or Animation.default.delay
 
 			-- next frame?
 			if(self.delayTime > delay) then
@@ -242,6 +243,10 @@ function Animation:New(data)
  	-- render object to screen
 	function o:DrawCall()
 
+		if(self.frames[self.currentFrame].sprite == nil or self.spriteSheet.image == nil) then
+			return
+		end 
+
 		if(self.draw == false) then
 			return
 		end 
@@ -282,7 +287,7 @@ function Animation:New(data)
 		-- blend
 		local currentBlend = nil
 		if(self.add) then
-			love.graphics.setBlendMode("additive")
+			love.graphics.setBlendMode("add")
 		else
 			love.graphics.setBlendMode("alpha")
 		end 
@@ -290,6 +295,8 @@ function Animation:New(data)
 
 		love.graphics.draw(self.spriteSheet.image, self.frames[self.currentFrame].sprite, x, y, angle, self.Scale.x, self.Scale.y)
 
+
+		love.graphics.setBlendMode("alpha")
 	end 
 
 	function o:PostDrawCall()

@@ -25,28 +25,30 @@ FileManager.Info = Info:New
 --------------------
 -- Vars
 --------------------
+FileManager.sourceActive = false
 
 ------------------
 -- Directories
 ------------------
-FileManager.directories = {}
-FileManager.directories.appData = love.filesystem.getAppdataDirectory()
-FileManager.directories.sourceBase = love.filesystem.getSourceBaseDirectory()
-FileManager.directories.working = love.filesystem.getWorkingDirectory()
-FileManager.directories.user = love.filesystem.getUserDirectory()
-FileManager.directories.save = love.filesystem.getSaveDirectory()
-FileManager.directories.identity = love.filesystem.getIdentity() --> name only, no path
+FileManager.dir = {}
+FileManager.dir.appData = love.filesystem.getAppdataDirectory()
+FileManager.dir.sourceBase = love.filesystem.getSourceBaseDirectory()
+FileManager.dir.working = love.filesystem.getWorkingDirectory()
+FileManager.dir.user = love.filesystem.getUserDirectory()
+FileManager.dir.save = love.filesystem.getSaveDirectory()
+FileManager.dir.defaultSave = love.filesystem.getSaveDirectory()
+FileManager.dir.identity = love.filesystem.getIdentity() --> name only, no path
 
 
 -- Functions
 function FileManager:DoFile(filename)
 	
-	printDebug{dofile(FileManager.directories.save .. [[/]] .. filename), "FileManager"}
+	printDebug{dofile(FileManager.dir.save .. [[/]] .. filename), "FileManager"}
 
 end
 
 function FileManager:LoadFile(filename)
-	return loadfile(FileManager.directories.save .. [[/]] .. filename)
+	return loadfile(FileManager.dir.save .. [[/]] .. filename)
 end 
 
 
@@ -61,8 +63,38 @@ function FileManager:PrintDirectoryItems(folderName)
 
 end 
 
---FileManager:PrintDirectoryItems()
-printDebug{FileManager.directories.save, "FileManager"}
+
+-- redefine directory set functions
+local ffi = require("ffi")
+ffi.cdef[[ int PHYSFS_mount(const char *newDir, const char *mountPoint, int appendToPath); ]]; 
+ffi.cdef[[ int PHYSFS_setWriteDir(const char *newDir); ]]
+local liblove = ffi.os == "Windows" and ffi.load("love") or ffi.C
+
+
+-- run this to read files in folder that contains .love file
+-- this is for user assets placed outside love file 
+-- makes it easy for 
+function FileManager:SaveInSource()
+	liblove.PHYSFS_setWriteDir(FileManager.dir.sourceBase)
+	liblove.PHYSFS_mount(FileManager.dir.sourceBase, nil, 0)
+end
+
+-- set save dir back to AppData/game
+function FileManager:SaveInDefault()
+	liblove.PHYSFS_setWriteDir(FileManager.dir.defaultSave)
+	liblove.PHYSFS_mount(FileManager.dir.defaultSave, nil, 0)
+end 
+
+FileManager:SaveInSource()
+FileManager:PrintDirectoryItems("")
+
+
+
+-- folder game is in
+
+
+printDebug{"fused: ".. Bool:ToString(love.filesystem.isFused), "FileManager"}
+
 
 
 
@@ -72,9 +104,9 @@ printDebug{FileManager.directories.save, "FileManager"}
 
 --love.filesystem.getRealDirectory()) --> This can be used to determine whether a file is inside the save directory or the game's source .love.
 
-print(love.filesystem.getIdentity())
+printDebug{love.filesystem.getIdentity(), "FileManager"}
 --love.filesystem.setIdentity("MonsterGame")
-print(love.filesystem.getIdentity())
+
 
 
 
@@ -111,7 +143,7 @@ print("SourceBase: " .. love.filesystem.getSourceBaseDirectory()) --> path of ex
 
 
 
-
+printDebug{"Save: " .. FileManager.dir.save, "FileManager"}
 
 
 
@@ -141,5 +173,36 @@ function FileManager:SetWriteDirectory()
 	liblove.PHYSFS_mount(docsdir, nil, 0)
 
 end
+
+
+
+
+
+-- THIS DOESNT WORK
+-- written from the example on love docs
+-- fails every time
+-- enables loading files from the folder that the game folder or love file is in
+function FileManager:EnableSourceFolder()
+	if(love.filesystem.isFused) then 
+		print("Identity: " .. love.filesystem.getIdentity())
+
+
+
+		print("SourceBase: " .. love.filesystem.getSourceBaseDirectory())
+
+		local dir = love.filesystem.getSourceBaseDirectory()
+		print("Source: " .. dir)
+    local success = love.filesystem.mount(dir, "coolgame")
+		print("source active:" .. Bool:ToString(success))
+
+		if(success) then
+			--love.window.showMessageBox("Good News!", "Source folder loading works on this computer. :)", {"Cool!"})
+		end
+
+	else
+		printDebug{"cannot use source folder as", "FileManager"}
+		love.window.showMessageBox("Oh Shit!", "Source folder loading not supported on this computer. :(", {"That sucks!"})
+	end 
+end 
 
 --]==]

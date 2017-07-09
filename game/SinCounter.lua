@@ -44,6 +44,8 @@ function SinCounter:New(data)
 	if(o.speed == 0) then
 		o.value = 1
 	end
+
+	o.boundToPi = true
 	
 
 	-----------------
@@ -53,6 +55,13 @@ function SinCounter:New(data)
 	function o:Calculate()
 		self.value = self.value + self.speed
 		--self.sin = math.sin(self.value)
+
+		if(self.boundToPi) then
+			if(self.value > (2 * math.pi)) then
+				self.value = self.value - (2 * math.pi)
+			end 
+		end 
+
 	end 
 
 	function o:Damp()

@@ -1,0 +1,10 @@
+name
+Goblin
+attack
+3
+defense
+6
+speed
+10
+health
+100
